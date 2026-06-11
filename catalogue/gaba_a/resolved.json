@@ -1,0 +1,72 @@
+{
+  "target": "GABA-A receptor",
+  "slug": "gaba_a",
+  "search_date": "2026-06-11",
+  "primary_accessions": [
+    "P14867",
+    "P47870",
+    "P28472",
+    "P18507"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "P14867",
+      "uniprot_id": "GBRA1_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "GABRA1"
+      ],
+      "protein_name": "Gamma-aminobutyric acid receptor subunit alpha-1",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    },
+    {
+      "accession": "P47870",
+      "uniprot_id": "GBRB2_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "GABRB2"
+      ],
+      "protein_name": "Gamma-aminobutyric acid receptor subunit beta-2",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    },
+    {
+      "accession": "P28472",
+      "uniprot_id": "GBRB3_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "GABRB3"
+      ],
+      "protein_name": "Gamma-aminobutyric acid receptor subunit beta-3",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    },
+    {
+      "accession": "P18507",
+      "uniprot_id": "GBRG2_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "GABRG2"
+      ],
+      "protein_name": "Gamma-aminobutyric acid receptor subunit gamma-2",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [
+    "Gene GABRB2 resolved to P47870 (hint listed ['P14867', 'P18507']).",
+    "Gene GABRB3 resolved to P28472 (hint listed ['P14867', 'P18507'])."
+  ],
+  "n_structures_found": 128,
+  "n_unique_ligands_kept": 38
+}

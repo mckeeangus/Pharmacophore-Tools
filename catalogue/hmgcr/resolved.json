@@ -1,0 +1,27 @@
+{
+  "target": "HMG-CoA reductase",
+  "slug": "hmgcr",
+  "search_date": "2026-06-11",
+  "primary_accessions": [
+    "P04035"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "P04035",
+      "uniprot_id": "HMDH_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "HMGCR"
+      ],
+      "protein_name": "3-hydroxy-3-methylglutaryl-coenzyme A reductase",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 24,
+  "n_unique_ligands_kept": 23
+}

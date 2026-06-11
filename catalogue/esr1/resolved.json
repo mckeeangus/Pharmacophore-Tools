@@ -1,0 +1,27 @@
+{
+  "target": "Estrogen receptor alpha",
+  "slug": "esr1",
+  "search_date": "2026-06-11",
+  "primary_accessions": [
+    "P03372"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "P03372",
+      "uniprot_id": "ESR1_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "ESR1"
+      ],
+      "protein_name": "Estrogen receptor",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 479,
+  "n_unique_ligands_kept": 431
+}

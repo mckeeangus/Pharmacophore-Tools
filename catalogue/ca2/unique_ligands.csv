@@ -1,0 +1,736 @@
+het_code,name,category,flagged,n_structures,n_instances,representative_pdb,formula_weight,smiles
+ZN,ZINC ION,metal,True,1153,1302,3K34,65.409,[Zn+2]
+HG,MERCURY (II) ION,metal,True,152,169,6ROB,200.59,[Hg+2]
+MBO,MERCURIBENZOIC ACID,ligand,False,81,86,1LUG,321.703,c1cc(ccc1C(=O)O)[Hg]
+CO2,CARBON DIOXIDE,ligand,False,52,78,5Y2S,44.01,C(=O)=O
+BE7,(4-CARBOXYPHENYL)(CHLORO)MERCURY,ligand,False,51,53,6ROB,357.156,c1cc(ccc1C(=O)O)[Hg]Cl
+BCT,BICARBONATE ION,cofactor,False,38,38,6KM2,61.017,C(=O)(O)[O-]
+NI,NICKEL (II) ION,metal,True,25,49,6LV5,58.693,[Ni+2]
+CO,COBALT (II) ION,metal,True,24,25,6LV1,58.933,[Co+2]
+HGB,4-(HYDROXYMERCURY)BENZOIC ACID,ligand,False,24,24,3K34,338.711,c1cc(ccc1C(=O)O)[Hg]O
+CU,COPPER (II) ION,metal,True,15,26,2FOU,63.546,[Cu+2]
+MNP,2-(3-NITROPHENYL)ACETIC ACID,ligand,False,15,15,7Y2A,181.145,c1cc(cc(c1)[N+](=O)[O-])CC(=O)O
+AZM,"5-ACETAMIDO-1,3,4-THIADIAZOLE-2-SULFONAMIDE",ligand,False,14,16,3HS4,222.245,CC(=O)Nc1nnc(s1)S(=O)(=O)N
+EVF,"1,3-benzothiazole-2-sulfonamide",ligand,False,10,18,5JGS,214.265,c1ccc2c(c1)nc(s2)S(=O)(=O)N
+BEZ,BENZOIC ACID,ligand,False,9,10,6YH5,122.121,c1ccc(cc1)C(=O)O
+FB2,benzenesulfonamide,ligand,False,6,9,4YX4,157.19,c1ccc(cc1)S(=O)(=O)N
+V14,"3-(cyclooctylamino)-2,5,6-trifluoro-4-[(2-hydroxyethyl)sulfonyl]benzenesulfonamide",ligand,False,6,6,4Q07,444.489,C1CCCC(CCC1)Nc2c(c(c(c(c2S(=O)(=O)CCO)F)F)S(=O)(=O)N)F
+ETS,"(4S-TRANS)-4-(ETHYLAMINO)-5,6-DIHYDRO-6-METHYL-4H-THIENO(2,3-B)THIOPYRAN-2-SULFONAMIDE-7,7-DIOXIDE",ligand,False,5,5,1CIL,324.44,CCN[C@H]1C[C@@H](S(=O)(=O)c2c1cc(s2)S(=O)(=O)N)C
+EZL,"6-ethoxy-1,3-benzothiazole-2-sulfonamide",ligand,False,5,5,6QL2,258.317,CCOc1ccc2c(c1)sc(n2)S(=O)(=O)N
+V90,"2-(cyclooctylamino)-3,5,6-trifluoro-4-[(2-hydroxyethyl)sulfanyl]benzenesulfonamide",ligand,False,5,5,4Q08,412.491,C1CCCC(CCC1)Nc2c(c(c(c(c2S(=O)(=O)N)F)F)SCCO)F
+WWO,"3-(benzylamino)-2,5,6-trifluoro-4-[(2-hydroxyethyl)sulfonyl]benzenesulfonamide",ligand,False,5,7,5OGO,424.415,c1ccc(cc1)CNc2c(c(c(c(c2S(=O)(=O)CCO)F)F)S(=O)(=O)N)F
+4MZ,4-METHYLIMIDAZOLE,ligand,False,4,13,1MOO,82.104,Cc1c[nH]cn1
+LSA,"1,2-BENZISOTHIAZOL-3(2H)-ONE 1,1-DIOXIDE",ligand,False,4,6,6FJJ,183.184,c1ccc2c(c1)C(=O)NS2(=O)=O
+MMC,METHYL MERCURY ION,ligand,False,4,4,3PYK,215.625,C[Hg+]
+MZM,"N-(3-methyl-5-sulfamoyl-1,3,4-thiadiazol-2(3H)-ylidene)acetamide",ligand,False,4,4,5C8I,236.272,CC(=O)/N=C\1/N(N=C(S1)S(=O)(=O)N)C
+N7S,4-hydroxy-3-{[(4-hydroxybutyl)carbamoyl]amino}benzene-1-sulfonamide,ligand,False,4,4,6OTK,303.335,c1cc(c(cc1S(=O)(=O)N)NC(=O)NCCCCO)O
+N84,4-hydroxy-3-({[(pyridin-4-yl)methyl]carbamoyl}amino)benzene-1-sulfonamide,ligand,False,4,4,6OTO,322.34,c1cc(c(cc1S(=O)(=O)N)NC(=O)NCc2ccncc2)O
+N8A,4-hydroxy-3-({[2-(pyridin-2-yl)ethyl]carbamoyl}amino)benzene-1-sulfonamide,ligand,False,4,4,6OTM,336.366,c1ccnc(c1)CCNC(=O)Nc2cc(ccc2O)S(=O)(=O)N
+SHH,OCTANEDIOIC ACID HYDROXYAMIDE PHENYLAMIDE,ligand,False,4,4,9O8X,264.32,c1ccc(cc1)NC(=O)CCCCCCC(=O)NO
+V50,"4-[(4,6-dimethylpyrimidin-2-yl)thio]-2,3,5,6-tetrafluorobenzenesulfonamide",ligand,False,4,5,6QL1,367.342,Cc1cc(nc(n1)Sc2c(c(c(c(c2F)F)S(=O)(=O)N)F)F)C
+0VV,"N-[(2E)-3,4-dihydroquinazolin-2(1H)-ylidene]sulfuric diamide",ligand,False,3,4,6SDI,226.256,c1ccc2c(c1)CN/C(=N\S(=O)(=O)N)/N2
+3TV,"2,3,5,6-tetrafluoro-4-(propylsulfanyl)benzenesulfonamide",ligand,False,3,6,4WW6,303.297,CCCSc1c(c(c(c(c1F)F)S(=O)(=O)N)F)F
+4J8,4-methylbenzenesulfonamide,ligand,False,3,5,4YXI,171.217,Cc1ccc(cc1)S(=O)(=O)N
+4WA,4-[(E)-(4-aminophenyl)diazenyl]benzenesulfonamide,ligand,False,3,4,5BYI,276.314,c1cc(ccc1N)N=Nc2ccc(cc2)S(=O)(=O)N
+7Q1,"(5R)-5-phenyl-1,3-oxazolidine-2,4-dione",ligand,False,3,3,6SFQ,177.157,c1ccc(cc1)[C@@H]2C(=O)NC(=O)O2
+A1H15,1-carbamimidoyl-3-[(4-sulfamoylphenyl)methyl]guanidine,ligand,False,3,4,8ROW,270.311,[H]/N=C(\N)/N/C(=N\[H])/NCc1ccc(cc1)S(=O)(=O)N
+A1H9O,"4,4,7,10,10-pentamethyl-3,6,8,11-tetrakis(oxidanylidene)-N-[2-(4-sulfamoylphenyl)ethyl]-2,5,7,9,12-pentazabicyclo[11.4.0]heptadeca-1(13),14,16-triene-15-carboxamide containing iron",ligand,False,3,6,9F2F,639.461,CC1(C(=O)N2c3ccc(cc3N4[Fe]25N1C(=O)N(C(=O)N5C(C4=O)(C)C)C)C(=O)NCCc6ccc(cc6)S(=O)(=O)N)C
+BEW,1-hydroxy-2-sulfanylpyridinium,ligand,False,3,3,3M1K,128.172,c1cc[n+](c(c1)S)O
+BZ1,"(+)-4-ETHYLAMINO-3,4-DIHYDRO-2-(METHOXY)PROPYL-2H-THIENO[3,2-E]-1,2-THIAZINE-6-SULFONAMIDE-1,1-DIOXIDE",ligand,False,3,3,4M2V,383.507,CCN[C@H]1CN(S(=O)(=O)c2c1cc(s2)S(=O)(=O)N)CCCOC
+CO3,CARBONATE ION,ligand,False,3,3,3M5S,60.009,C(=O)([O-])[O-]
+D9Z,"5-(2-chlorophenyl)-1,3,4-thiadiazole-2-sulfonamide",ligand,False,3,3,3DCC,275.735,c1ccc(c(c1)c2nnc(s2)S(=O)(=O)N)Cl
+J3V,4-hydroxy-3-nitro-5-{[4-(trifluoromethyl)phenyl]carbamamido}benzene-1-sulfonamide,ligand,False,3,4,6EEA,420.321,c1cc(ccc1C(F)(F)F)NC(=O)Nc2cc(cc(c2O)[N+](=O)[O-])S(=O)(=O)N
+OE2,PSAMMAPLIN C,ligand,False,3,6,5G03,380.215,c1cc(c(cc1C/C(=N\O)/C(=O)NCCS(=O)(=O)N)Br)O
+OH,HYDROXIDE ION,ligand,False,3,3,4YGK,17.007,[OH-]
+OXY,OXYGEN MOLECULE,ligand,False,3,3,5EOI,31.999,O=O
+PX7,"4-methyl-1lambda~6~,2,4-benzothiadiazine-1,1,3(2H,4H)-trione",ligand,False,3,4,6U4Q,212.226,CN1c2ccccc2S(=O)(=O)NC1=O
+SBR,(R)-N-(3-INDOL-1-YL-2-METHYL-PROPYL)-4-SULFAMOYL-BENZAMIDE,ligand,False,3,3,6SDL,371.453,C[C@H](CNC(=O)c1ccc(cc1)S(=O)(=O)N)Cn2ccc3c2cccc3
+V13,"2,3,5,6-tetrafluoro-4-[(2-hydroxyethyl)sulfonyl]benzenesulfonamide",ligand,False,3,3,4PZH,337.268,C(CS(=O)(=O)c1c(c(c(c(c1F)F)S(=O)(=O)N)F)F)O
+V8I,"2,4-dichloro-5-sulfamoylbenzoic acid",ligand,False,3,3,8QH8,270.09,c1c(c(cc(c1S(=O)(=O)N)Cl)Cl)C(=O)O
+VKZ,"4-[2-(4-azanyl-9-chloranyl-2',3',4',5',6'-pentamethyl-7-oxidanylidene-spiro[1$l^{4},8-diaza-9$l^{8}-iridabicyclo[4.3.0]nona-1,3,5-triene-9,1'-1$l^{8}-iridapentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-8-yl)ethyl]benzenesulfonamide",ligand,False,3,3,7ONV,682.255,CC12C3([Ir]1456(C2(C4(C53C)C)C)([n+]7ccc(cc7C(=O)N6CCc8ccc(cc8)S(=O)(=O)N)N)Cl)C
+ZYX,4-(2-AMINOETHYL)BENZENESULFONAMIDE,ligand,False,3,5,2NNG,200.258,c1cc(ccc1CCN)S(=O)(=O)N
+0NM,cyanic acid,ligand,False,2,2,4QEF,43.025,C(#N)O
+0TR,"2-HYDROXYCYCLOHEPTA-2,4,6-TRIEN-1-ONE",ligand,False,2,2,5THI,122.121,C1=CC=C(C(=O)C=C1)O
+25X,"1-(sulfamoylamino)methyl-1,2-dicarba-closo-dodecaborane",ligand,False,2,2,4Q78,241.259,B1234B567B189B212B33%10B454B656B787B911C232B4%105C7612CNS(=O)(=O)N
+3J4,"(6S)-2,6-anhydro-6-{[(3R)-3-(sulfamoyloxy)pyrrolidin-1-yl]sulfonyl}-D-glucitol",ligand,False,2,2,4R5B,392.403,C1CN(C[C@@H]1OS(=O)(=O)N)S(=O)(=O)[C@H]2[C@H]([C@H]([C@@H](C(O2)CO)O)O)O
+3NT,3-NITROTOLUENE,ligand,False,2,2,7Y2C,137.136,Cc1cccc(c1)[N+](=O)[O-]
+3QR,"[1-(1,1-dioxido-3-oxo-2,3-dihydro-1,2-benzothiazol-6-yl)-1H-1,2,3-triazol-4-yl]methyl alpha-L-idopyranoside",ligand,False,2,2,6GCY,442.401,c1cc2c(cc1n3cc(nn3)CO[C@H]4[C@@H]([C@H]([C@@H]([C@@H](O4)CO)O)O)O)S(=O)(=O)NC2=O
+3W6,4-propoxybenzenesulfonamide,ligand,False,2,3,4RUY,215.269,CCCOc1ccc(cc1)S(=O)(=O)N
+3W8,4-ethoxybenzenesulfonamide,ligand,False,2,4,6I1U,201.243,CCOc1ccc(cc1)S(=O)(=O)N
+42G,4-{(2R)-2-hydroxy-3-[(propan-2-yl)amino]propoxy}-N-[2-(4-sulfamoylphenyl)ethyl]benzamide,ligand,False,2,3,5WLU,435.537,CC(C)NC[C@H](COc1ccc(cc1)C(=O)NCCc2ccc(cc2)S(=O)(=O)N)O
+4JC,4-ethylbenzenesulfonamide,ligand,False,2,4,4YXO,185.243,CCc1ccc(cc1)S(=O)(=O)N
+4JE,4-propylbenzenesulfonamide,ligand,False,2,3,6HR3,199.27,CCCc1ccc(cc1)S(=O)(=O)N
+4SO,4-sulfamoylbenzoic acid,ligand,False,2,7,6RFH,201.2,c1cc(ccc1C(=O)O)S(=O)(=O)N
+5DU,"2-[(1S)-2,3-dihydro-1H-inden-1-ylamino]-3,5,6-trifluoro-4-[(2-hydroxyethyl)sulfanyl]benzenesulfonamide",ligand,False,2,3,5DOH,418.454,c1ccc2c(c1)CC[C@@H]2Nc3c(c(c(c(c3S(=O)(=O)N)F)F)SCCO)F
+5EF,"3-[(1S)-2,3-dihydro-1H-inden-1-ylamino]-2,5,6-trifluoro-4-[(2-hydroxyethyl)sulfonyl]benzenesulfonamide",ligand,False,2,3,5DRS,450.452,c1ccc2c(c1)CC[C@@H]2Nc3c(c(c(c(c3S(=O)(=O)CCO)F)F)S(=O)(=O)N)F
+5O6,(~{E})-3-(4-methoxyphenyl)but-2-enoic acid,ligand,False,2,2,5EH8,192.211,C/C(=C\C(=O)O)/c1ccc(cc1)OC
+5ON,(~{E})-3-[3-[[3-(2-hydroxy-2-oxoethyl)phenyl]methoxy]phenyl]prop-2-enoic acid,ligand,False,2,2,5EHV,312.317,c1cc(cc(c1)COc2cccc(c2)/C=C/C(=O)O)CC(=O)O
+5OO,"(~{E})-3-(2,4-dichlorophenyl)prop-2-enoic acid",ligand,False,2,2,5EHW,217.049,c1cc(c(cc1Cl)Cl)/C=C/C(=O)O
+6IV,"2-[1-(1,1,3-trioxo-2,3-dihydro-1H-1lambda~6~,2-benzothiazol-6-yl)-1H-1,2,3-triazol-4-yl]ethyl beta-L-gulopyranoside",ligand,False,2,3,7RRE,456.427,c1cc2c(cc1n3cc(nn3)CCO[C@@H]4[C@H]([C@H]([C@@H]([C@@H](O4)CO)O)O)O)S(=O)(=O)NC2=O
+6LU,"4-{[(3,5-dimethylphenyl)carbamoyl]amino}benzene-1-sulfonamide",ligand,False,2,2,6UZU,319.379,Cc1cc(cc(c1)NC(=O)Nc2ccc(cc2)S(=O)(=O)N)C
+6M4,"1,1-dihydroxy-1,3-dihydro-2,1-benzoxaborol-1-ium",ligand,False,2,6,5JQT,150.948,[B-]1(c2ccccc2CO1)(O)O
+6YP,4-butylbenzenesulfonamide,ligand,False,2,2,5LL8,213.297,CCCCc1ccc(cc1)S(=O)(=O)N
+72D,4-(phenyl)-benzenesulfonamide,ligand,False,2,2,5SZ4,233.286,c1ccc(cc1)c2ccc(cc2)S(=O)(=O)N
+72E,4-(2-methylphenyl)-benzenesulfonamide,ligand,False,2,2,5SZ5,247.313,Cc1ccccc1c2ccc(cc2)S(=O)(=O)N
+72G,4-(3-formylphenyl)-benzenesulfonamide,ligand,False,2,3,5SZ6,261.296,c1cc(cc(c1)c2ccc(cc2)S(=O)(=O)N)C=O
+72H,4-(3-quinolinyl)-benzenesulfonamide,ligand,False,2,2,5SZ3,284.333,c1ccc2c(c1)cc(cn2)c3ccc(cc3)S(=O)(=O)N
+7CZ,"2-hydroxycyclohepta-2,4,6-triene-1-thione",ligand,False,2,2,5THN,138.187,C1=CC=C(C(=S)C=C1)O
+7QV,"(5R)-5-(2,4-dimethoxyphenyl)-1,3-oxazolidine-2,4-dione",ligand,False,2,2,5TY9,237.209,COc1ccc(c(c1)OC)[C@@H]2C(=O)NC(=O)O2
+86B,4-{(2S)-2-hydroxy-3-[(propan-2-yl)amino]propoxy}benzene-1-sulfonamide,ligand,False,2,6,5WLR,288.363,CC(C)NC[C@@H](COc1ccc(cc1)S(=O)(=O)N)O
+8JS,4-{[(4-fluorophenyl)carbamothioyl]amino}benzene-1-sulfonamide,ligand,False,2,2,5WEX,325.382,c1cc(ccc1NC(=S)Nc2ccc(cc2)S(=O)(=O)N)F
+9TH,pentamethylcyclopentadienyl iridium [N-benzensulfonamide-(2-pyridylmethyl-4-benzensulfonamide)amin] chloride,ligand,False,2,2,3ZP9,765.363,C[C-]12C3(=C4([Ir+3]1356(C2(=C54C)C)([N-](CC7=[N]6C=CC(=C7)c8ccc(cc8)S(=O)(=O)N)S(=O)(=O)c9ccccc9)[Cl-])C)C
+A1H11,"Veralipride, (R)-",ligand,False,2,2,8RLP,383.463,COc1cc(cc(c1OC)C(=O)NC[C@H]2CCCN2CC=C)S(=O)(=O)N
+A1H53,[4-[[(4-sulfamoylphenyl)amino]methyl]phenyl]boronic acid,ligand,False,2,3,9EN8,306.145,B(c1ccc(cc1)CNc2ccc(cc2)S(=O)(=O)N)(O)O
+A1H69,"[(3~{R},5~{R},8~{R},9~{S},10~{S},13~{S},14~{S},17~{S})-17-ethanoyl-10,13-dimethyl-2,3,4,5,6,7,8,9,11,12,14,15,16,17-tetradecahydro-1~{H}-cyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,2,2,8OLA,397.572,CC(=O)[C@H]1CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2CC[C@H]4[C@@]3(CC[C@H](C4)OS(=O)(=O)N)C)C
+A1IKU,(4-methylphenyl)-tris(oxidanyl)boron,ligand,False,2,2,9GFW,152.963,B(c1ccc(cc1)C)(O)(O)O
+ARZ,"(3S,5S,7S)-N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)tricyclo[3.3.1.1~3,7~]decane-1-carboxamide",ligand,False,2,2,7JOC,342.437,C1C2CC3CC1CC(C2)(C3)C(=O)Nc4nnc(s4)S(=O)(=O)N
+AUD,Acesulfame,ligand,False,2,9,5WG7,163.152,CC1=CC(=O)NS(=O)(=O)O1
+AYX,4-{[(3-nitrophenyl)carbamoyl]amino}benzenesulfonamide,ligand,False,2,2,3N2P,336.323,c1cc(cc(c1)[N+](=O)[O-])NC(=O)Nc2ccc(cc2)S(=O)(=O)N
+BBJ,"N-(3-bromo-4-fluorophenyl)-N'-hydroxy-4-{[2-(sulfamoylamino)ethyl]amino}-1,2,5-oxadiazole-3-carboximidamide",ligand,False,2,2,6IC2,438.233,c1cc(c(cc1N/C(=N\O)/c2c(non2)NCCNS(=O)(=O)N)Br)F
+CHD,CHOLIC ACID,ligand,False,2,2,4N16,408.571,C[C@H](CCC(=O)O)[C@H]1CC[C@@H]2[C@@]1([C@H](C[C@H]3[C@H]2[C@@H](C[C@H]4[C@@]3(CC[C@H](C4)O)C)O)O)C
+CQS,2-(6-amino-9H-purin-9-yl)-N-[2-(4-sulfamoylphenyl)ethyl]acetamide,ligand,False,2,2,6B5A,375.406,c1cc(ccc1CCNC(=O)Cn2cnc3c2ncnc3N)S(=O)(=O)N
+D8W,"5-[(phenylsulfonyl)amino]-1,3,4-thiadiazole-2-sulfonamide",ligand,False,2,2,3D8W,320.369,c1ccc(cc1)S(=O)(=O)Nc2nnc(s2)S(=O)(=O)N
+E1F,2-chloro-4-[(pyrimidin-2-ylsulfanyl)acetyl]benzenesulfonamide,ligand,False,2,2,6YH5,343.809,c1cnc(nc1)SCC(=O)c2ccc(c(c2)Cl)S(=O)(=O)N
+EA3,4-chloranyl-2-cyclohexylsulfanyl-~{N}-(2-hydroxyethyl)-5-sulfamoyl-benzamide,ligand,False,2,2,8RBP,392.921,c1c(c(cc(c1S(=O)(=O)N)Cl)SC2CCCCC2)C(=O)NCCO
+EVI,"1,3-thiazole-2-sulfonamide",ligand,False,2,4,5JGT,164.206,c1csc(n1)S(=O)(=O)N
+EVJ,thiophene-2-sulfonamide,ligand,False,2,3,4N0X,163.218,c1cc(sc1)S(=O)(=O)N
+F2B,"N-(2,3-DIFLUORO-BENZYL)-4-SULFAMOYL-BENZAMIDE",ligand,False,2,2,1G52,326.318,c1cc(c(c(c1)F)F)CNC(=O)c2ccc(cc2)S(=O)(=O)N
+F6B,"N-(2,6-DIFLUORO-BENZYL)-4-SULFAMOYL-BENZAMIDE",ligand,False,2,2,1G48,326.318,c1cc(c(c(c1)F)CNC(=O)c2ccc(cc2)S(=O)(=O)N)F
+FBS,4-FLUOROBENZENESULFONAMIDE,ligand,False,2,3,6RKN,175.181,c1cc(ccc1F)S(=O)(=O)N
+FBT,"2,6-DIFLUOROBENZENESULFONAMIDE",ligand,False,2,3,6ROE,193.171,c1cc(c(c(c1)F)S(=O)(=O)N)F
+FBU,"3,5-DIFLUOROBENZENESULFONAMIDE",ligand,False,2,2,6RRG,193.171,c1c(cc(cc1F)S(=O)(=O)N)F
+FBV,2-fluorobenzenesulfonamide,ligand,False,2,3,6RIT,175.181,c1ccc(c(c1)F)S(=O)(=O)N
+FBW,3-fluorobenzenesulfonamide,ligand,False,2,2,6RQI,175.181,c1cc(cc(c1)S(=O)(=O)N)F
+FFB,"N-(2,3,4,5,6-PENTAFLUORO-BENZYL)-4-SULFAMOYL-BENZAMIDE",ligand,False,2,3,1G4J,380.29,c1cc(ccc1C(=O)NCc2c(c(c(c(c2F)F)F)F)F)S(=O)(=O)N
+FSB,N-(2-FLUORO-BENZYL)-4-SULFAMOYL-BENZAMIDE,ligand,False,2,2,1G45,308.328,c1ccc(c(c1)CNC(=O)c2ccc(cc2)S(=O)(=O)N)F
+FUN,5-(AMINOSULFONYL)-4-CHLORO-2-[(2-FURYLMETHYL)AMINO]BENZOIC ACID,ligand,False,2,2,6SG0,330.744,c1cc(oc1)CNc2cc(c(cc2C(=O)O)S(=O)(=O)N)Cl
+GXE,benzeneselenol,ligand,False,2,2,6XWZ,157.072,c1ccc(cc1)[SeH]
+I7B,"4-AMINO-6-CHLOROBENZENE-1,3-DISULFONAMIDE",ligand,False,2,2,3L14,285.728,c1c(c(cc(c1Cl)S(=O)(=O)N)S(=O)(=O)N)N
+J4D,N-[2-hydroxy-3-nitro-5-(nitrosulfonyl)phenyl]-N'-(pentafluorophenyl)urea,ligand,False,2,4,6EEH,472.258,c1c(cc(c(c1NC(=O)Nc2c(c(c(c(c2F)F)F)F)F)O)[N+](=O)[O-])S(=O)(=O)[N+](=O)[O-]
+JKE,2-sulfanylbenzoic acid,ligand,False,2,2,9FAO,154.186,c1ccc(c(c1)C(=O)O)S
+KIX,"1,1-bis(oxidanyl)-3,4-dihydro-2,1$l^{4}-benzoxaborinine",ligand,False,2,2,8QKZ,164.974,B1(c2ccccc2CCO1)(O)O
+KRY,"4-[3-(2,4-difluorophenyl)-2-oxo-2,3-dihydro-1H-imidazol-1-yl]benzene-1-sulfonamide",ligand,False,2,2,6NM0,351.328,c1cc(ccc1N2C=CN(C2=O)c3ccc(cc3F)F)S(=O)(=O)N
+MPX,4-({[(4-METHYLPIPERAZIN-1-YL)AMINO]CARBONOTHIOYL}AMINO)BENZENESULFONAMIDE,ligand,False,2,2,4ITO,329.442,CN1CCN(CC1)NC(=S)Nc2ccc(cc2)S(=O)(=O)N
+N7A,4-{[(4-hydroxybutyl)carbamoyl]amino}benzene-1-sulfonamide,ligand,False,2,4,6OUF,287.335,c1cc(ccc1NC(=O)NCCCCO)S(=O)(=O)N
+N7D,3-{[(4-hydroxybutyl)carbamoyl]amino}benzene-1-sulfonamide,ligand,False,2,4,6OUH,287.335,c1cc(cc(c1)S(=O)(=O)N)NC(=O)NCCCCO
+N7J,"(2Z)-2-(hydroxyimino)-2,3-dihydro-1,3-benzoxazole-5-sulfonamide",ligand,False,2,3,6OUK,229.213,c1cc2c(cc1S(=O)(=O)N)NC(=NO)O2
+N7M,4-{[(2-hydroxyethyl)carbamoyl]amino}benzene-1-sulfonamide,ligand,False,2,4,6OUD,259.282,c1cc(ccc1NC(=O)NCCO)S(=O)(=O)N
+P8B,Para-Carborane propyl-sulfonamide,ligand,False,2,2,8AAE,254.298,B1234B567B189B212B33%10C454B656B433B%1011B353B768C9213CCCS(=O)(=O)N
+Q2Z,Carborane ethyl-sulfonamide,ligand,False,2,2,6YZJ,240.271,B1234B567B189B212B33%10B454B656B787B911C232B4%105C7612CCS(=O)(=O)N
+Q3H,Carborane nido-hexyl-sulfonamide,ligand,False,2,2,6YZX,285.566,B123B45B167B289B31B823B966B744B622C45C321CCCCCCS(=O)(=O)N
+Q3K,Carborane closo-hexyl-sulfonamide,ligand,False,2,2,6YZW,296.377,B1234B567B189B212B33%10B454B656B787B911C232B4%105C7612CCCCCCS(=O)(=O)N
+Q3N,Carborane closo-pentyl-sulfonamide,ligand,False,2,2,6YZK,282.351,B1234B567B189B212B33%10B454B656B787B911C232B4%105C7612CCCCCS(=O)(=O)N
+Q3Q,Carborane closo-butyl-sulfonamide,ligand,False,2,2,6YZN,268.324,B1234B567B189B212B33%10B454B656B787B911C232B4%105C7612CCCCS(=O)(=O)N
+Q3W,Carborane nido-butyl-sulfonamide,ligand,False,2,2,6Z04,257.513,B123B45B167B289B31B823B966B744B622C45C321CCCCS(=O)(=O)N
+Q4B,Carborane nido-pentyl-sulfonamide,ligand,False,2,2,6YZU,271.54,B123B45B167B289B31B823B966B744B622[C@@]45C321CCCCCS(=O)(=O)N
+Q71,"7-fluoro-1lambda~6~,2,4-benzothiadiazine-1,1,3(2H,4H)-trione",ligand,False,2,2,6UGZ,216.19,c1cc2c(cc1F)S(=O)(=O)NC(=O)N2
+Q77,"5,7-dimethyl-1lambda~6~,2,4-benzothiadiazine-1,1,3(2H,4H)-trione",ligand,False,2,5,6UGN,226.252,Cc1cc(c2c(c1)S(=O)(=O)NC(=O)N2)C
+Q7A,"5-chloro-1lambda~6~,2,4-benzothiadiazine-1,1,3(2H,4H)-trione",ligand,False,2,4,6UGQ,232.644,c1cc2c(c(c1)Cl)NC(=O)NS2(=O)=O
+QKO,1-[(3~{R})-1-(6-nitropyridin-2-yl)pyrrolidin-3-yl]-3-(4-sulfamoylphenyl)thiourea,ligand,False,2,2,8BJX,422.482,c1cc(nc(c1)[N+](=O)[O-])N2CC[C@H](C2)NC(=S)Nc3ccc(cc3)S(=O)(=O)N
+S2O,4-(2-hydroxyethyl)benzenesulfonamide,ligand,False,2,8,4YYT,201.243,c1cc(ccc1CCO)S(=O)(=O)N
+SAL,2-HYDROXYBENZOIC ACID,ligand,False,2,5,5M78,138.121,c1ccc(c(c1)C(=O)O)O
+SO3,SULFITE ION,ligand,False,2,2,2CBD,80.063,[O-]S(=O)[O-]
+SUA,(4-SULFAMOYL-PHENYL)-THIOCARBAMIC ACID O-(2-THIOPHEN-3-YL-ETHYL) ESTER,ligand,False,2,2,3K34,342.457,c1cc(ccc1NC(=S)OCCc2ccsc2)S(=O)(=O)N
+TH0,"4-MERCAPTOBENZENE-1,3-DIOL",ligand,False,2,3,4FIK,142.176,c1cc(c(cc1O)O)S
+U6V,N~2~-(3-aminopropyl)-N-[(4-fluorophenyl)methyl]-N~2~-(2-phenylethyl)-N-[2-(4-sulfamoylphenyl)ethyl]glycinamide,ligand,False,2,2,6WQ7,526.666,c1ccc(cc1)CCN(CCCN)CC(=O)N(CCc2ccc(cc2)S(=O)(=O)N)Cc3ccc(cc3)F
+U77,N-(2-{[(furan-2-yl)methyl][2-(4-sulfamoylphenyl)ethyl]amino}-2-oxoethyl)-N-(2-phenylethyl)-beta-alanine,ligand,False,2,3,6WQ8,513.606,c1ccc(cc1)CCN(CCC(=O)O)CC(=O)N(CCc2ccc(cc2)S(=O)(=O)N)Cc3ccco3
+U7J,N-(2-{[(naphthalen-2-yl)methyl][2-(4-sulfamoylphenyl)ethyl]amino}-2-oxoethyl)-N-(2-phenylethyl)-beta-alanine,ligand,False,2,2,6WQ9,573.702,c1ccc(cc1)CCN(CCC(=O)O)CC(=O)N(CCc2ccc(cc2)S(=O)(=O)N)Cc3ccc4ccccc4c3
+V7Z,methanesulfonamide,ligand,False,2,2,8ZWV,95.121,CS(=O)(=O)N
+VFG,"N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)propanamide",ligand,False,2,2,7JNR,236.272,CCC(=O)Nc1nnc(s1)S(=O)(=O)N
+VFJ,"N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)butanamide",ligand,False,2,4,7JNV,250.299,CCCC(=O)Nc1nnc(s1)S(=O)(=O)N
+VFM,"2-methyl-N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)propanamide",ligand,False,2,3,7JNW,250.299,CC(C)C(=O)Nc1nnc(s1)S(=O)(=O)N
+VGS,"2,2-dimethyl-N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)propanamide",ligand,False,2,2,7JNX,264.325,CC(C)(C)C(=O)Nc1nnc(s1)S(=O)(=O)N
+VGV,"N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)cyclohexanecarboxamide",ligand,False,2,2,7JNZ,290.362,C1CCC(CC1)C(=O)Nc2nnc(s2)S(=O)(=O)N
+VQC,"[(3~{S},8~{R},9~{S},10~{R},13~{S},14~{S})-10,13-dimethyl-17-oxidanylidene-1,2,3,4,7,8,9,11,12,14,15,16-dodecahydrocyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,2,2,8OKQ,367.503,C[C@]12CC[C@H]3[C@H]([C@@H]1CCC2=O)CC=C4[C@@]3(CC[C@@H](C4)OS(=O)(=O)N)C
+VQH,"[(3~{S},8~{S},9~{S},10~{R},13~{S},14~{S},17~{S})-17-methanoyl-10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1~{H}-cyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,2,2,8OLK,381.529,C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@@H]2C=O)CC=C4[C@@]3(CC[C@@H](C4)OS(=O)(=O)N)C
+VQW,"[(3~{R},5~{R},8~{R},9~{S},10~{S},13~{S},14~{S},15~{R})-10,13,15-trimethyl-17-oxidanylidene-1,2,3,4,5,6,7,8,9,11,12,14,15,16-tetradecahydrocyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,2,2,8OKP,383.545,C[C@@H]1CC(=O)[C@@]2([C@@H]1[C@@H]3CC[C@@H]4C[C@@H](CC[C@@]4([C@H]3CC2)C)OS(=O)(=O)N)C
+VRI,"[(3~{R},5~{S},8~{R},9~{S},10~{S},13~{S},14~{S},17~{S})-17-ethanoyl-10,13-dimethyl-2,3,4,5,6,7,8,9,11,12,14,15,16,17-tetradecahydro-1~{H}-cyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,2,2,8OKJ,397.572,CC(=O)[C@H]1CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2CC[C@@H]4[C@@]3(CC[C@H](C4)OS(=O)(=O)N)C)C
+VRN,"[(8~{R},9~{S},13~{S},14~{S})-13-methyl-17-oxidanylidene-7,8,9,11,12,14,15,16-octahydro-6~{H}-cyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,2,2,8OMB,349.445,C[C@]12CC[C@@H]3c4ccc(cc4CC[C@H]3[C@@H]1CCC2=O)OS(=O)(=O)N
+VS9,"[(8~{S},9~{S},13~{S},14~{S})-13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,2,2,8OLF,335.461,C[C@@]12CCC[C@H]1[C@@H]3CCc4cc(ccc4[C@H]3CC2)OS(=O)(=O)N
+VYV,4-[({2-[(phenylcarbamoyl)amino]ethyl}sulfonyl)amino]benzene-1-sulfonamide,ligand,False,2,4,7K6I,398.457,c1ccc(cc1)NC(=O)NCCS(=O)(=O)Nc2ccc(cc2)S(=O)(=O)N
+VYY,4-{[(2-{[(4-methylphenyl)carbamoyl]amino}ethyl)sulfonyl]amino}benzene-1-sulfonamide,ligand,False,2,2,7K6U,412.484,Cc1ccc(cc1)NC(=O)NCCS(=O)(=O)Nc2ccc(cc2)S(=O)(=O)N
+VZ1,"4-{[(2-{[(3,5-dimethylphenyl)carbamoyl]amino}ethyl)sulfonyl]amino}benzene-1-sulfonamide",ligand,False,2,2,7K6K,426.51,Cc1cc(cc(c1)NC(=O)NCCS(=O)(=O)Nc2ccc(cc2)S(=O)(=O)N)C
+VZ4,"(9beta)-2-ethyl-17-oxoestra-1(10),2,4-trien-3-yl sulfamate",ligand,False,2,3,3OKU,377.498,CCc1cc2c(cc1OS(=O)(=O)N)CC[C@@H]3[C@@H]2CC[C@]4([C@H]3CCC4=O)C
+VZ5,"(14beta,17alpha)-2-ethyl-17-hydroxyestra-1(10),2,4-trien-3-yl sulfamate",ligand,False,2,2,3OIM,379.514,CCc1cc2c(cc1OS(=O)(=O)N)CC[C@@H]3[C@@H]2CC[C@]4([C@H]3CC[C@@H]4O)C
+VZD,4-{[(2-{[(4-fluorophenyl)carbamoyl]amino}ethyl)sulfonyl]amino}benzene-1-sulfonamide,ligand,False,2,4,7K6L,416.448,c1cc(ccc1NC(=O)NCCS(=O)(=O)Nc2ccc(cc2)S(=O)(=O)N)F
+WJN,4-{[4-(trifluoromethyl)phenyl]carbamamido}benzene-1-sulfonamide,ligand,False,2,2,8UFX,359.324,c1cc(ccc1C(F)(F)F)NC(=O)Nc2ccc(cc2)S(=O)(=O)N
+WWX,"2,3,6-trifluoro-5-{[(1R,2S)-2-hydroxy-1,2-diphenylethyl]amino}-4-[(2-hydroxyethyl)sulfonyl]benzenesulfonamide",ligand,False,2,5,4QIY,530.537,c1ccc(cc1)[C@H]([C@H](c2ccccc2)O)Nc3c(c(c(c(c3S(=O)(=O)CCO)F)F)S(=O)(=O)N)F
+WWZ,4-{[(4-fluorophenyl)carbamoyl]amino}benzenesulfonamide,ligand,False,2,2,3N4B,309.316,c1cc(ccc1NC(=O)Nc2ccc(cc2)S(=O)(=O)N)F
+WZB,"(9BETA,13ALPHA,14BETA,17ALPHA)-2-ETHYLESTRA-1(10),2,4-TRIENE-3,17-DIYL DISULFAMATE",ligand,False,2,2,3OIK,458.592,CCc1cc2c(cc1OS(=O)(=O)N)CC[C@@H]3[C@@H]2CC[C@]4([C@H]3CC[C@@H]4OS(=O)(=O)N)C
+XCZ,1.7.6 4-methylpyrimidine-2-sulfonamide,ligand,False,2,2,5EH5,173.193,Cc1ccnc(n1)S(=O)(=O)N
+YNF,~{N}-butyl-4-chloranyl-2-cyclohexylsulfanyl-5-sulfamoyl-benzamide,ligand,False,2,2,8RJ2,404.975,CCCCNC(=O)c1cc(c(cc1SC2CCCCC2)Cl)S(=O)(=O)N
+010,phenylmethanol,ligand,False,1,1,7BI5,108.138,c1ccc(cc1)CO
+03T,1-benzothiophene-2-sulfonamide,ligand,False,1,2,3S74,213.277,c1ccc2c(c1)cc(s2)S(=O)(=O)N
+067,"p-(4-ruthenocenyl-1H-1,2,3-triazol-1-yl)benzenesulfonamide",ligand,False,1,1,3P44,445.417,c1cc(ccc1n2cc(nn2)C34C5=C6[Ru]5378912(C6=C74)C3C8=C9C1=C23)S(=O)(=O)N
+0CR,"MoMo-2-[4-(2-(4-(methoxy)-1H-1,2,3-triazol-1-yl)ethyl)benzenesulfonamide]-7,12-bis-[3-(4-(methoxy)-1H-1,2,3-triazol-1-y
+l)propanoic acid]-cryptophane-A",ligand,False,1,1,3CYU,1423.501,COc1cc2c3cc1OCCOc4cc5c(cc4OCc6cn(nn6)CCc7ccc(cc7)S(=O)(=O)N)Cc8cc9c(cc8Cc1cc(c(cc1C5)OCc1cn(nn1)CCC(=O)O)OCCOc1cc(c(cc1OC)Cc1cc(c(cc1C3)OC)OCCO9)C2)OCc1cn(nn1)CCC(=O)O
+0F3,4-(sulfamoylamino)benzenesulfonamide,ligand,False,1,3,3V5G,251.283,c1cc(ccc1NS(=O)(=O)N)S(=O)(=O)N
+0FZ,"4-(6-methoxy-3,4-dihydroisoquinolin-1-yl)benzenesulfonamide",ligand,False,1,1,3VBD,316.375,COc1ccc2c(c1)CCN=C2c3ccc(cc3)S(=O)(=O)N
+0I6,"4-[(2R)-2-oxidanyl-3-(3,4,5-trimethylphenyl)tellanyl-propyl]selanylbenzenesulfonamide",ligand,False,1,1,7ORP,588.003,COc1cc(cc(c1OC)OC)[Te]C[C@@H](C[Se]c2ccc(cc2)S(=O)(=O)N)O
+0IC,"4-[(2S)-2-oxidanyl-3-(3,4,5-trimethoxyphenyl)tellanyl-propyl]selanylbenzenesulfonamide",ligand,False,1,1,7ORP,588.003,COc1cc(cc(c1OC)OC)[Te]C[C@H](C[Se]c2ccc(cc2)S(=O)(=O)N)O
+0VW,N-(tetrahydropyrimidin-2(1H)-ylidene)sulfuric diamide,ligand,False,1,1,4FVN,178.213,C1CNC(=NS(=O)(=O)N)NC1
+0VX,"N-[(2Z)-1,3-oxazolidin-2-ylidene]sulfuric diamide",ligand,False,1,1,4FU5,165.171,C1CO/C(=N\S(=O)(=O)N)/N1
+0VY,N'-sulfamoylpyrrolidine-1-carboximidamide,ligand,False,1,1,4FRC,192.239,C1CCN(C1)/C(=N/S(=O)(=O)N)/N
+0VZ,"ethyl (2Z,4R)-2-(sulfamoylimino)-1,3-thiazolidine-4-carboxylate",ligand,False,1,1,4FPT,253.299,CCOC(=O)[C@@H]1CS/C(=N\S(=O)(=O)N)/N1
+1CN,"5-{[(4-AMINO-3-CHLORO-5-FLUOROPHENYL)SULFONYL]AMINO}-1,3,4-THIADIAZOLE-2-SULFONAMIDE",ligand,False,1,2,2HOC,387.819,c1c(cc(c(c1F)N)Cl)S(=O)(=O)Nc2nnc(s2)S(=O)(=O)N
+1CR,"PoPo-2-[4-(2-(4-(methoxy)-1H-1,2,3-triazol-1-yl)ethyl)benzenesulfonamide]-7,12-bis-[3-(4-(methoxy)-1H-1,2,3-triazol-1-yl)propanoic acid]-cryptophane-A",ligand,False,1,1,3CYU,1423.501,COc1cc2c3cc1OCCOc4cc5c(cc4OCc6cn(nn6)CCc7ccc(cc7)S(=O)(=O)N)Cc8cc9c(cc8Cc1cc(c(cc1C5)OCc1cn(nn1)CCC(=O)O)OCCOc1cc(c(cc1OC)Cc1cc(c(cc1C3)OC)OCCO9)C2)OCc1cn(nn1)CCC(=O)O
+1EZ,"N-(4-sulfamoylphenyl)-2-[(3S,5S,7S)-tricyclo[3.3.1.1~3,7~]dec-1-yl]acetamide",ligand,False,1,1,4ILX,348.46,c1cc(ccc1NC(=O)CC23CC4CC(C2)CC(C4)C3)S(=O)(=O)N
+1GD,2-phenyl-N-(4-sulfamoylbenzyl)acetamide,ligand,False,1,1,4ITP,304.364,c1ccc(cc1)CC(=O)NCc2ccc(cc2)S(=O)(=O)N
+1GO,"N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)-2-(thiophen-2-yl)acetamide",ligand,False,1,1,4IWZ,304.369,c1cc(sc1)CC(=O)Nc2nnc(s2)S(=O)(=O)N
+1MZ,1-METHYLIMIDAZOLE,ligand,False,1,7,4HEZ,83.112,Cn1cc[nH+]c1
+1QV,"4,5,6,7-tetrafluoro-1,3-benzothiazole-2-sulfonamide",ligand,False,1,1,4KAP,286.227,c12c(c(c(c(c1sc(n2)S(=O)(=O)N)F)F)F)F
+1SA,"5-AMINO-1,3,4-THIADIAZOLE-2-SULFONAMIDE",ligand,False,1,1,2HNC,180.209,c1(nnc(s1)S(=O)(=O)N)N
+1SD,"(1S)-1,5-anhydro-1-sulfamoyl-D-galactitol",ligand,False,1,1,3HKQ,243.235,C([C@@H]1[C@@H]([C@@H]([C@H]([C@@H](O1)S(=O)(=O)N)O)O)O)O
+1VQ,2-(2-methyl-5-nitro-1H-imidazol-1-yl)ethyl sulfamate,ligand,False,1,1,5O07,250.232,Cc1ncc(n1CCOS(=O)(=O)N)[N+](=O)[O-]
+25Y,"1-(sulfamoylamino)methyl-1,7-dicarba-closo-dodecaborane",ligand,False,1,1,4MDL,241.259,B1234B567B189B212B33%10B454B656B787C911B232B715C4%1062CNS(=O)(=O)N
+26E,"7-(sulfamoylamino)methyl-7,8-dicarba-nido-undecaborane",ligand,False,1,1,4MDM,230.448,B123B45B167B289B31B823B966B744B622[C@]45C321CNS(=O)(=O)N
+2C7,"2-(cycloheptylmethyl)-1,1-dioxido-1-benzothiophen-6-yl sulfamate",ligand,False,1,1,3DD8,371.472,c1cc2c(cc1OS(=O)(=O)N)S(=O)(=O)C(=C2)CC3CCCCCC3
+2HC,(2E)-3-(2-HYDROXYPHENYL)ACRYLIC ACID,ligand,False,1,1,5BNL,164.158,c1ccc(c(c1)\C=C\C(=O)O)O
+2MZ,2-METHYLIMIDAZOLE,ligand,False,1,2,4HEW,82.104,Cc1[nH]ccn1
+2VQ,N-[2-(2-methyl-5-nitro-1H-imidazol-1-yl)ethyl]sulfamide,ligand,False,1,1,4MO8,249.248,Cc1ncc(n1CCNS(=O)(=O)N)[N+](=O)[O-]
+2YU,1-hydroxy-4-methylpyridine-2(1H)-thione,ligand,False,1,1,4Q7S,141.191,CC1=CC(=S)N(C=C1)O
+3BS,"3-chloro-4-{[(1-hydroxy-2,2,6,6-tetramethylpiperidin-4-yl)carbamothioyl]amino}benzenesulfonamide",ligand,False,1,1,3EFT,420.978,CC1(CC(CC(N1O)(C)C)NC(=S)Nc2ccc(cc2Cl)S(=O)(=O)N)C
+3CC,"N-[(2R)-5-(aminosulfonyl)-2,3-dihydro-1H-inden-2-yl]-2-propylpentanamide",ligand,False,1,1,2QO8,338.465,CCCC(CCC)C(=O)N[C@@H]1Cc2ccc(cc2C1)S(=O)(=O)N
+3CO,COBALT (III) ION,metal,True,1,1,3KOI,58.933,[Co+3]
+3FH,1-hydroxy-3-(trifluoromethyl)pyridine-2(1H)-thione,ligand,False,1,1,4Q83,195.162,C1=CN(C(=S)C(=C1)C(F)(F)F)O
+3G1,2-[(S)-benzylsulfinyl]benzoic acid,ligand,False,1,1,4QY3,260.308,c1ccc(cc1)C[S@](=O)c2ccccc2C(=O)O
+3I4,(2S)-3-oxidanyl-2-[2-[(4-sulfamoylphenyl)methoxyamino]ethanoylamino]propanamide,ligand,False,1,1,7OYP,346.36,c1cc(ccc1CONCC(=O)N[C@@H](CO)C(=O)N)S(=O)(=O)N
+3J3,"(1R)-1,5-anhydro-1-{[4-(sulfamoyloxy)piperidin-1-yl]sulfonyl}-D-galactitol",ligand,False,1,1,4R59,406.43,C1CN(CCC1OS(=O)(=O)N)S(=O)(=O)[C@@H]2[C@@H]([C@H]([C@H]([C@H](O2)CO)O)O)O
+3MH,1-hydroxy-3-methylpyridine-2(1H)-thione,ligand,False,1,1,4Q7P,141.191,CC1=CC=CN(C1=S)O
+3O1,tert-butyl 4-(4-sulfamoylphenoxy)butylcarbamate,ligand,False,1,1,4RFC,344.426,CC(C)(C)OC(=O)NCCCCOc1ccc(cc1)S(=O)(=O)N
+3O5,4-(4-sulfamoyl-phenoxy)-butylammonium,ligand,False,1,2,4RFD,244.311,c1cc(ccc1OCCCCN)S(=O)(=O)N
+3T7,"2-({[1-(beta-D-glucopyranosyl)-1H-1,2,3-triazol-4-yl]methyl}[(1-phenyl-1H-1,2,3-triazol-4-yl)methyl]amino)-5-sulfamoyl-1,3,4-thiadiazole",ligand,False,1,1,4RN4,580.597,c1ccc(cc1)n2cc(nn2)CN(Cc3cn(nn3)[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)CO)O)O)O)c5nnc(s5)S(=O)(=O)N
+3W3,4-(allyloxy)benzenesulfonamide,ligand,False,1,2,4RUX,213.254,C=CCOc1ccc(cc1)S(=O)(=O)N
+45I,2-[(2-PHENYLETHYL)SULFAMOYL]-4-SULFAMOYLBENZOIC ACID,ligand,False,1,1,5AMD,384.427,c1ccc(cc1)CCNS(=O)(=O)c2cc(ccc2C(=O)O)S(=O)(=O)N
+45L,3-methylbenzohydrazide,ligand,False,1,1,6RM1,150.178,Cc1cccc(c1)C(=O)NN
+463,N-[3-(aminomethyl)phenyl]acetamide,ligand,False,1,1,6SAS,164.204,CC(=O)Nc1cccc(c1)CN
+47J,"1-(1,3-dimethyl-1H-pyrazol-5-yl)methanamine",ligand,False,1,1,6SAC,125.172,Cc1cc(n(n1)C)CN
+47S,3-(dimethylamino)benzohydrazide,ligand,False,1,1,6RMP,179.219,CN(C)c1cccc(c1)C(=O)NN
+498,"p-(5-ruthenocenyl-1H-1,2,3-triazol-1-yl)benzenesulfonamide",ligand,False,1,1,3P3J,445.417,c1cc(ccc1n2c(cnn2)C34C5=C6[Ru]5378912(C6=C74)C3C8=C9C1=C23)S(=O)(=O)N
+4FH,1-hydroxy-4-(trifluoromethyl)pyridine-2(1H)-thione,ligand,False,1,1,4Q87,195.162,C1=CN(C(=S)C=C1C(F)(F)F)O
+4H2,4-methylpyridine-2(1H)-thione,ligand,False,1,1,4Q90,125.191,CC1=CC(=S)NC=C1
+4HO,1-hydroxy-4-methylpyridin-2(1H)-one,ligand,False,1,1,4Q8Z,125.125,CC1=CC(=O)N(C=C1)O
+4J3,amino(aminooxy)sulfane dioxide,ligand,False,1,1,4YVY,112.108,NOS(=O)(=O)N
+4K9,"4-(3,4-dihydroquinolin-1(2H)-ylcarbonyl)benzenesulfonamide",ligand,False,1,1,4Z0Q,316.375,c1ccc2c(c1)CCCN2C(=O)c3ccc(cc3)S(=O)(=O)N
+4KB,"4-[(6,7-dihydroxy-3,4-dihydroisoquinolin-2(1H)-yl)carbonyl]benzenesulfonamide",ligand,False,1,1,4Z1K,348.374,c1cc(ccc1C(=O)N2CCc3cc(c(cc3C2)O)O)S(=O)(=O)N
+4KC,"4-(3,4-dihydroisoquinolin-2(1H)-ylcarbonyl)benzenesulfonamide",ligand,False,1,1,4Z1J,316.375,c1ccc2c(c1)CCN(C2)C(=O)c3ccc(cc3)S(=O)(=O)N
+4KD,"4-[(6,7-dimethoxy-3,4-dihydro-1H-isoquinolin-2-yl)carbonyl]benzenesulfonamide",ligand,False,1,1,4Z1N,376.427,COc1cc2c(cc1OC)CN(CC2)C(=O)c3ccc(cc3)S(=O)(=O)N
+4NZ,4-nitrobenzenesulfonamide,ligand,False,1,2,6RH4,202.188,c1cc(ccc1[N+](=O)[O-])S(=O)(=O)N
+4SN,"(6S)-1,3,4,5-tetra-O-acetyl-2,6-anhydro-6-{[5-(sulfamoyloxy)pentyl]sulfamoyl}-L-altritol",ligand,False,1,1,4ZWY,576.592,CC(=O)OC[C@H]1[C@H](C([C@H]([C@@H](O1)S(=O)(=O)NCCCCCOS(=O)(=O)N)OC(=O)C)OC(=O)C)OC(=O)C
+4TR,"2-BROMO-4-{[(4-CYANOPHENYL)(4H-1,2,4-TRIAZOL-4-YL)AMINO]METHYL}PHENYL SULFAMATE",ligand,False,1,1,1XQ0,449.282,c1cc(ccc1C#N)N(Cc2ccc(c(c2)Br)OS(=O)(=O)N)n3cnnc3
+4TZ,"4-{[(4-CYANOPHENYL)(4H-1,2,4-TRIAZOL-4-YL)AMINO]METHYL}PHENYL SULFAMATE",ligand,False,1,1,1XPZ,370.386,c1cc(ccc1CN(c2ccc(cc2)C#N)n3cnnc3)OS(=O)(=O)N
+510,"methyl
+(2S,4R)-1-[(2S,3R,4R,5S,6S)-6-(hydroxymethyl)-3,4,5-tris(oxidanyl)oxan-2-yl]sulfonyl-4-sulfamoyloxy-pyrrolidine-2-carbox
+ ylate",ligand,False,1,1,4ZWZ,450.439,COC(=O)[C@@H]1C[C@H](CN1S(=O)(=O)[C@H]2[C@@H]([C@@H]([C@@H]([C@@H](O2)CO)O)O)O)OS(=O)(=O)N
+51J,2-(BUT-2-YN-1-YLSULFAMOYL)-4-SULFAMOYLBENZOIC ACID,ligand,False,1,1,5AML,332.353,CC#CCNS(=O)(=O)c1cc(ccc1C(=O)O)S(=O)(=O)N
+520,4'-(4-aminobenzoyl)biphenyl-4-sulfonamide,ligand,False,1,1,5E2R,352.407,c1cc(ccc1c2ccc(cc2)S(=O)(=O)N)C(=O)c3ccc(cc3)N
+53X,3-(1-ethyl-1H-indol-3-yl)-1-methyl-1H-pyrazole-5-carboxylic acid,ligand,False,1,1,6B4D,269.299,CCn1cc(c2c1cccc2)c3cc(n(n3)C)C(=O)O
+5CX,2'-(propan-2-yl)biphenyl-4-sulfonamide,ligand,False,1,1,5E2S,275.366,CC(C)c1ccccc1c2ccc(cc2)S(=O)(=O)N
+5DS,"(R)-1-AMINO-1-[5-(DIMETHYLAMINO)-1,3,4-THIADIAZOL-2-YL]METHANESULFONAMIDE",ligand,False,1,1,2EU2,237.303,CN(C)c1nnc(s1)[C@H](N)S(=O)(=O)N
+5DT,"2-(benzylamino)-3,5,6-trifluoro-4-[(2-phenylethyl)sulfanyl]benzenesulfonamide",ligand,False,1,1,5DOG,452.513,c1ccc(cc1)CCSc2c(c(c(c(c2F)F)S(=O)(=O)N)NCc3ccccc3)F
+5KZ,"(1S)-2,3,4,6-tetra-O-acetyl-1,5-anhydro-1-{[5-(sulfamoyloxy)pentyl]sulfamoyl}-D-allitol",ligand,False,1,1,4ZWX,576.592,CC(=O)OC[C@@H]1[C@H]([C@H]([C@H]([C@@H](O1)S(=O)(=O)NCCCCCOS(=O)(=O)N)OC(=O)C)OC(=O)C)OC(=O)C
+5L2,"methyl
+(2S,4R)-1-[(2S,3R,4R,5S,6S)-6-(acetyloxymethyl)-3,4,5-tris(oxidanyl)oxan-2-yl]sulfonyl-4-sulfamoyloxy-pyrrolidine-2-carb
+ oxylate",ligand,False,1,1,4ZX0,492.476,CC(=O)OC[C@H]1[C@H]([C@H]([C@H]([C@@H](O1)S(=O)(=O)N2C[C@@H](C[C@H]2C(=O)OC)OS(=O)(=O)N)O)O)O
+5L3,"(6R)-5-O-acetyl-2,6-anhydro-6-{[4-(sulfamoyloxy)piperidin-1-yl]sulfonyl}-L-glucitol",ligand,False,1,1,4ZX1,448.466,CC(=O)O[C@@H]1[C@@H]([C@H]([C@H](O[C@@H]1S(=O)(=O)N2CCC(CC2)OS(=O)(=O)N)CO)O)O
+5MH,1-hydroxy-5-methylpyridine-2(1H)-thione,ligand,False,1,1,4Q7V,141.191,CC1=CN(C(=S)C=C1)O
+5O5,"5-[[3,4-bis(chloranyl)phenoxy]methyl]-1~{H}-1,2,3,4-tetrazole",ligand,False,1,1,5EH7,245.065,c1cc(c(cc1OCc2[nH]nnn2)Cl)Cl
+5OT,1-(3-iodanylphenyl)-3-(4-sulfamoylphenyl)thiourea,ligand,False,1,1,5EIJ,433.288,c1cc(cc(c1)I)NC(=S)Nc2ccc(cc2)S(=O)(=O)N
+5RD,4-(butylaminomethyl)benzenesulfonamide,ligand,False,1,1,5EKH,242.338,CCCCNCc1ccc(cc1)S(=O)(=O)N
+5UM,N-(2-fluoro-4-sulfamoylphenyl)-2-(thiophen-2-yl)acetamide,ligand,False,1,1,3R17,314.356,c1cc(sc1)CC(=O)Nc2ccc(cc2F)S(=O)(=O)N
+5UN,N-(4-sulfamoylphenyl)-2-(thiophen-2-yl)acetamide,ligand,False,1,1,3R16,296.365,c1cc(sc1)CC(=O)Nc2ccc(cc2)S(=O)(=O)N
+5WM,"1,1-bis(oxidanylidene)-3-[(sulfamoylamino)methyl]-1-benzothiophene",ligand,False,1,1,5FDI,274.317,c1ccc2c(c1)C(=CS2(=O)=O)CNS(=O)(=O)N
+5WN,3-[(sulfamoylamino)methyl]-1-benzothiophene,ligand,False,1,1,5FDC,242.318,c1ccc2c(c1)c(cs2)CNS(=O)(=O)N
+62I,"(6R)-1-O-acetyl-2,6-anhydro-6-{[4-(sulfamoyloxy)piperidin-1-yl]sulfonyl}-L-glucitol",ligand,False,1,1,4ZWI,448.466,CC(=O)OC[C@@H]1[C@@H]([C@H]([C@H]([C@H](O1)S(=O)(=O)N2CCC(CC2)OS(=O)(=O)N)O)O)O
+64W,4-[(methylcarbamoyl)amino]benzene-1-sulfonamide,ligand,False,1,1,7RNZ,229.256,CNC(=O)Nc1ccc(cc1)S(=O)(=O)N
+65M,3-{[benzyl(methyl)carbamoyl]amino}benzene-1-sulfonamide,ligand,False,1,1,7RNY,319.379,CN(Cc1ccccc1)C(=O)Nc2cccc(c2)S(=O)(=O)N
+667,"6-OXO-8,9,10,11-TETRAHYDRO-7H-CYCLOHEPTA[C][1]BENZOPYRAN-3-O-SULFAMATE",ligand,False,1,1,1TTM,309.338,c1cc2c(cc1OS(=O)(=O)N)OC(=O)C3=C2CCCCC3
+670,"p-(4-ferrocenyl-1H-1,2,3-triazol-1-yl)benzenesulfonamide",ligand,False,1,1,3P55,400.192,c1cc(ccc1n2cc(nn2)C34C5=C6[Fe]5378912(C6=C74)C3C8=C9C1=C23)S(=O)(=O)N
+6J5,"5-[(2-chloranylphenoxy)methyl]-1H-1,2,3,4-tetrazole",ligand,False,1,2,5FLP,210.62,c1ccc(c(c1)OCc2[nH]nnn2)Cl
+6KE,"(2S)-2-{[4-(4-chlorophenyl)-5-cyano-6-oxo-1,6-dihydropyrimidin-2-yl]sulfanyl}-N-(4-sulfamoylphenyl)propanamide",ligand,False,1,1,5J8Z,489.955,C[C@@H](C(=O)Nc1ccc(cc1)S(=O)(=O)N)SC2=NC(=C(C(=O)N2)C#N)c3ccc(cc3)Cl
+6M9,"2,1-benzoxaborol-1(3H)-ol",ligand,False,1,2,5JQT,133.94,B1(c2ccccc2CO1)O
+6MH,1-hydroxy-6-methylpyridine-2(1H)-thione,ligand,False,1,1,4Q7W,141.191,CC1=CC=CC(=S)N1O
+6YH,4-[2-(benzimidazol-1-yl)ethanoyl]benzenesulfonamide,ligand,False,1,2,5LL4,315.347,c1ccc2c(c1)ncn2CC(=O)c3ccc(cc3)S(=O)(=O)N
+6ZX,(E)-3-(4-chlorophenyl)but-2-enoic acid,ligand,False,1,1,5FLS,196.63,C/C(=C\C(=O)O)/c1ccc(cc1)Cl
+75W,4-[(E)-diazenyl]benzene-1-sulfonamide,ligand,False,1,1,5T71,185.204,[H]/N=N/c1ccc(cc1)S(=O)(=O)N
+75Y,"2-[2,5-bis(oxidanylidene)pyrrol-1-yl]-~{N}-(4-sulfamoylphenyl)ethanamide",ligand,False,1,1,5T74,309.298,c1cc(ccc1NC(=O)CN2C(=O)C=CC2=O)S(=O)(=O)N
+7B1,"N-(5-sulfamoyl-1,3-benzoxazol-2-yl)benzamide",ligand,False,1,1,5TFX,317.32,c1ccc(cc1)C(=O)Nc2nc3cc(ccc3o2)S(=O)(=O)N
+7FH,1-hydroxy-5-(trifluoromethyl)pyridine-2(1H)-thione,ligand,False,1,1,4Q8X,195.162,C1=CC(=S)N(C=C1C(F)(F)F)O
+7MH,"1-hydroxy-4,6-dimethylpyridine-2(1H)-thione",ligand,False,1,1,4Q81,155.217,CC1=CC(=S)N(C(=C1)C)O
+7O8,5-[(4-chlorophenyl)methylsulfanyl]thiophene-2-sulfonamide,ligand,False,1,1,5MJN,319.851,c1cc(ccc1CSc2ccc(s2)S(=O)(=O)N)Cl
+7QS,"(5R)-5-phenyl-1,3-thiazolidine-2,4-dione",ligand,False,1,1,5TYA,193.222,c1ccc(cc1)[C@@H]2C(=O)NC(=O)S2
+7QY,"(5R)-5-[(2,4-dimethoxyphenyl)methyl]-1,3-thiazolidine-2,4-dione",ligand,False,1,1,5U0G,267.301,COc1ccc(c(c1)OC)C[C@@H]2C(=O)NC(=O)S2
+7R1,"(5R)-5-[(2,4-dimethoxyphenyl)methyl]-2-sulfanylidene-1,3-thiazolidin-4-one",ligand,False,1,1,5U0F,283.367,COc1ccc(c(c1)OC)C[C@@H]2C(=O)NC(=S)S2
+7R4,"(5R)-5-benzyl-2-sulfanylidene-1,3-thiazolidin-4-one",ligand,False,1,1,5U0E,223.315,c1ccc(cc1)C[C@@H]2C(=O)NC(=S)S2
+7R7,"(5R)-5-(2,4-dimethoxyphenyl)-2-sulfanylidene-1,3-oxazolidin-4-one",ligand,False,1,1,5U0D,253.274,COc1ccc(c(c1)OC)[C@@H]2C(=O)NC(=S)O2
+7VZ,methyl 2-chloranyl-4-cyclohexylsulfanyl-5-sulfamoyl-benzoate,ligand,False,1,2,7Q0C,363.88,COC(=O)c1cc(c(cc1Cl)SC2CCCCC2)S(=O)(=O)N
+84A,"p-(5-ferrocenyl-1H-1,2,3-triazol-1-yl)benzenesulfonamide",ligand,False,1,1,3P3H,400.192,c1cc(ccc1n2c(cnn2)C34C5=C6[Fe]5378912(C6=C74)C3C8=C9C1=C23)S(=O)(=O)N
+84Z,methyl 4-chloranyl-2-(phenylsulfonyl)-5-sulfamoyl-benzoate,ligand,False,1,1,7Q0E,389.831,COC(=O)c1cc(c(cc1S(=O)(=O)c2ccccc2)Cl)S(=O)(=O)N
+8F2,"(R)-4-(6,7-dihydroxy-1-phenyl-3,4-tetrahydroisoquinoline-1H-2-carbonyl)benzenesulfonamide",ligand,False,1,1,5N0D,424.47,c1ccc(cc1)[C@@H]2c3cc(c(cc3CCN2C(=O)c4ccc(cc4)S(=O)(=O)N)O)O
+8F3,"4-[[(1~{S})-6,7-bis(oxidanyl)-1-phenyl-3,4-dihydro-1~{H}-isoquinolin-2-yl]carbonyl]benzenesulfonamide",ligand,False,1,1,5N0E,424.47,c1ccc(cc1)[C@H]2c3cc(c(cc3CCN2C(=O)c4ccc(cc4)S(=O)(=O)N)O)O
+8GE,4-(1~{H}-indol-2-yl)benzenesulfonamide,ligand,False,1,1,5N1S,272.322,c1ccc2c(c1)cc([nH]2)c3ccc(cc3)S(=O)(=O)N
+8GH,4-[4-(pyrazol-1-ylmethyl)phenyl]benzenesulfonamide,ligand,False,1,1,5N1R,313.374,c1cnn(c1)Cc2ccc(cc2)c3ccc(cc3)S(=O)(=O)N
+8HE,4-(4-cyanophenyl)benzenesulfonamide,ligand,False,1,2,5N24,258.296,c1cc(ccc1C#N)c2ccc(cc2)S(=O)(=O)N
+8HK,4-pyridin-3-ylbenzenesulfonamide,ligand,False,1,2,5N25,234.274,c1cc(cnc1)c2ccc(cc2)S(=O)(=O)N
+8K2,5-chloranylthiophene-2-sulfonamide,ligand,False,1,1,6SB7,197.663,c1cc(sc1S(=O)(=O)N)Cl
+8TH,"chloro[(phenylsulfonyl){[4-(4-sulfamoylphenyl)pyridin-2-yl-kappaN]methyl}azanide-kappaN][(1,2,3,4,5-eta)-1,2,3,4-tetramethyl-5-propylcyclopentadienyl]iridium",ligand,False,1,1,5BRU,793.417,CCCC12C3([Ir]1456(C3(C4(C52C)C)C)(N(CC7=[N]6C=CC(=C7)c8ccc(cc8)S(=O)(=O)N)S(=O)(=O)c9ccccc9)Cl)C
+8V5,"5-(2-morpholin-4-ylcarbonyl-1,3-oxazol-5-yl)thiophene-2-sulfonamide",ligand,False,1,1,5NEE,343.379,c1cc(sc1c2cnc(o2)C(=O)N3CCOCC3)S(=O)(=O)N
+8V8,"4-(2-methyl-1,3-oxazol-5-yl)benzenesulfonamide",ligand,False,1,2,5NEA,238.263,Cc1ncc(o1)c2ccc(cc2)S(=O)(=O)N
+949,"4-[3-(3-fluorophenyl)-5,5-dimethyl-4-oxidanylidene-furan-2-yl]benzenesulfonamide",ligand,False,1,1,5GMN,361.387,CC1(C(=O)C(=C(O1)c2ccc(cc2)S(=O)(=O)N)c3cccc(c3)F)C
+9AA,"(5S)-5-[(2,4-dimethoxyphenyl)methyl]-5-hydroxy-2-sulfanylideneimidazolidin-4-one",ligand,False,1,1,5VGY,282.316,COc1ccc(c(c1)OC)C[C@@]2(C(=O)NC(=S)N2)O
+9DE,4-[(4-bromophenyl)sulfonylamino]benzenesulfonamide,ligand,False,1,1,5NXI,391.261,c1cc(ccc1NS(=O)(=O)c2ccc(cc2)Br)S(=O)(=O)N
+9DH,2-[methyl(phenyl)amino]-~{N}-(4-sulfamoylphenyl)ethanamide,ligand,False,1,1,5NXP,319.379,CN(CC(=O)Nc1ccc(cc1)S(=O)(=O)N)c2ccccc2
+9E2,2-(4-chloranyl-5-methyl-3-nitro-pyrazol-1-yl)-~{N}-(4-sulfamoylphenyl)ethanamide,ligand,False,1,1,5NXV,373.772,Cc1c(c(nn1CC(=O)Nc2ccc(cc2)S(=O)(=O)N)[N+](=O)[O-])Cl
+9E5,"3,6,7-trimethyl-~{N}-[(4-sulfamoylphenyl)methyl]-1-benzofuran-2-carboxamide",ligand,False,1,1,5NY1,372.438,Cc1ccc2c(c(oc2c1C)C(=O)NCc3ccc(cc3)S(=O)(=O)N)C
+9E8,1-(4-chlorophenyl)-3-[2-(4-sulfamoylphenyl)ethyl]urea,ligand,False,1,1,5NY3,353.824,c1cc(ccc1CCNC(=O)Nc2ccc(cc2)Cl)S(=O)(=O)N
+9EB,4-chloranyl-~{N}-[(1~{R})-1-(2-hydroxyphenyl)ethyl]-3-sulfamoyl-benzamide,ligand,False,1,1,5NY6,354.809,C[C@H](c1ccccc1O)NC(=O)c2ccc(c(c2)S(=O)(=O)N)Cl
+9FK,"5-(1-naphthalen-1-yl-1,2,3-triazol-4-yl)thiophene-2-sulfonamide",ligand,False,1,1,4BF1,356.422,c1ccc2c(c1)cccc2n3cc(nn3)c4ccc(s4)S(=O)(=O)N
+9HK,4-[(4-nitrophenyl)methyl]benzenesulfonamide,ligand,False,1,2,5NXO,292.31,c1cc(ccc1Cc2ccc(cc2)S(=O)(=O)N)[N+](=O)[O-]
+9UK,cobaltcarborane,ligand,False,1,1,5OGP,410.702,[B]1B234B5B6[Co]17891%10%11(B2[C@]72C866B55B33B65B432)B2B345B9C11(B33B446B522B%105B242C%1151B623)CNS(=O)(=O)N
+A09,N-hydroxybenzenesulfonamide,ligand,False,1,4,3T5U,173.19,c1ccc(cc1)S(=O)(=O)NO
+A1ADH,"4,4'-[carbonylbis(azanediylethane-2,1-diyl)]di(benzene-1-sulfonamide)",ligand,False,1,1,8VQ5,426.51,c1cc(ccc1CCNC(=O)NCCc2ccc(cc2)S(=O)(=O)N)S(=O)(=O)N
+A1CF5,"3,3,3-trifluoro-2,2-dihydroxy-1-(4-methoxyphenyl)propan-1-one",ligand,False,1,1,9P0W,250.171,COc1ccc(cc1)C(=O)C(C(F)(F)F)(O)O
+A1IBT,2-selanylbenzoic acid,ligand,False,1,1,9FAI,201.081,c1ccc(c(c1)C(=O)O)[SeH]
+A1IDL,"5,7,8-tris(fluoranyl)-1,1-bis(oxidanylidene)-4-(phenylmethyl)-2,3-dihydro-1$l^{6},4-benzothiazine-6-sulfonamide",ligand,False,1,1,9FJQ,406.4,c1ccc(cc1)CN2CCS(=O)(=O)c3c2c(c(c(c3F)F)S(=O)(=O)N)F
+A1IDN,"4-(cyclooctylmethyl)-5,7,8-tris(fluoranyl)-1,1-bis(oxidanylidene)-2,3-dihydro-1$l^{6},4-benzothiazine-6-sulfonamide",ligand,False,1,1,9FJV,440.501,C1CCCC(CCC1)CN2CCS(=O)(=O)c3c2c(c(c(c3F)F)S(=O)(=O)N)F
+A1IEL,methyl 4-(phenylmethylsulfanyl)-3-sulfamoyl-benzoate,ligand,False,1,1,9FPQ,337.414,COC(=O)c1ccc(c(c1)S(=O)(=O)N)SCc2ccccc2
+A1IEM,methyl 4-methylsulfanyl-3-sulfamoyl-benzoate,ligand,False,1,2,9FPS,261.318,COC(=O)c1ccc(c(c1)S(=O)(=O)N)SC
+A1IEN,methyl 4-(2-phenylethylsulfanyl)-3-sulfamoyl-benzoate,ligand,False,1,1,9FPR,351.44,COC(=O)c1ccc(c(c1)S(=O)(=O)N)SCCc2ccccc2
+A1IEO,methyl 4-chloranyl-3-sulfamoyl-benzoate,ligand,False,1,1,9FPT,249.671,COC(=O)c1ccc(c(c1)S(=O)(=O)N)Cl
+A1IEP,~{N}-butyl-4-chloranyl-3-sulfamoyl-benzamide,ligand,False,1,1,9FPU,290.766,CCCCNC(=O)c1ccc(c(c1)S(=O)(=O)N)Cl
+A1IH2,Salvianolic acid P,ligand,False,1,1,9G38,538.456,c1cc(c(cc1C[C@H](C(=O)O)OC(=O)/C=C/c2ccc3c(c2)O[C@H]([C@H](O3)C(=O)O)c4ccc(c(c4)O)O)O)O
+A1IKR,tris(oxidanyl)-[(~{E})-2-phenylethenyl]boron,ligand,False,1,1,9GFX,164.974,B(/C=C/c1ccccc1)(O)(O)O
+A1IO3,N-phenethyl-2-(1H-tetrazol-5-yl)acetamide,ligand,False,1,1,9GUM,231.254,c1ccc(cc1)CCNC(=O)Cc2[nH]nnn2
+A1IOK,PCI-27483,ligand,False,1,1,9GOO,596.569,c1cc2c(cc1C(=N)N)[nH]c(n2)c3cc(cc(c3O)c4cc(ccc4O)S(=O)(=O)N)CC(=O)N[C@@H](CC(=O)O)C(=O)O
+A1IOX,N-phenyl-2-(1H-tetrazol-5-yl)acetamide,ligand,False,1,1,9GU7,203.201,c1ccc(cc1)NC(=O)Cc2[nH]nnn2
+A1IRU,"2-oxidanyl-4-propan-2-yl-cyclohepta-2,4,6-trien-1-one",ligand,False,1,1,9H0W,164.201,CC(C)C1=CC=CC(=O)C(=C1)O
+A1IRV,1-carbamimidoyl-3-[2-(4-sulfamoylphenyl)ethyl]guanidine,ligand,False,1,2,9H0V,284.338,[H]/N=C(/N)\N/C(=N\[H])/NCCc1ccc(cc1)S(=O)(=O)N
+A1IS9,Sonepiprazole,ligand,False,1,1,9HXZ,401.522,c1ccc2c(c1)CCO[C@H]2CCN3CCN(CC3)c4ccc(cc4)S(=O)(=O)N
+A1IT7,4-fluoranyl-1-oxidanyl-pyridine-2-thione,ligand,False,1,1,9HD6,145.155,C1=CN(C(=S)C=C1F)O
+A1IWH,(2~{R})-2-[2-chloranylethanoyl-[2-(4-sulfamoylphenyl)ethyl]amino]-2-phenyl-~{N}-(phenylmethyl)ethanamide,ligand,False,1,1,9HNX,500.01,c1ccc(cc1)CNC(=O)[C@@H](c2ccccc2)N(CCc3ccc(cc3)S(=O)(=O)N)C(=O)CCl
+A1IWX,(2~{R})-2-[2-chloranylethanoyl-(3-chloranyl-4-methoxy-phenyl)amino]-~{N}-[2-(4-sulfamoylphenyl)ethyl]-2-thiophen-2-yl-ethanamide,ligand,False,1,1,9HQG,556.482,COc1ccc(cc1Cl)N([C@@H](c2cccs2)C(=O)NCCc3ccc(cc3)S(=O)(=O)N)C(=O)CCl
+A1IWY,~{N}-(3-chloranyl-4-methoxy-phenyl)-~{N}-[(1~{S})-2-oxidanylidene-2-[(phenylmethyl)amino]-1-(4-sulfamoylphenyl)ethyl]-3-trimethylsilyl-prop-2-ynamide,ligand,False,1,1,9HQ3,584.158,COc1ccc(cc1Cl)N([C@@H](c2ccc(cc2)S(=O)(=O)N)C(=O)NCc3ccccc3)C(=O)C#C[Si](C)(C)C
+A1IX5,methyl 3-[(2-oxidanyl-5-sulfamoyl-phenyl)amino]propanoate,ligand,False,1,1,9HWM,274.294,COC(=O)CCNc1cc(ccc1O)S(=O)(=O)N
+A1IZC,~{N}-(3-chloranyl-4-methoxy-phenyl)-~{N}-[(1~{S})-2-oxidanylidene-2-[(phenylmethyl)amino]-1-(4-sulfamoylphenyl)ethyl]prop-2-ynamide,ligand,False,1,1,9I29,511.977,COc1ccc(cc1Cl)N([C@@H](c2ccc(cc2)S(=O)(=O)N)C(=O)NCc3ccccc3)C(=O)C#C
+A1JD1,N-benzyl-2-(2-chloro-N-(3-chloro-4-methoxyphenyl)acetamido)-2-(4-sulfamoylphenyl)acetamide,ligand,False,1,1,9RAY,536.428,COc1ccc(cc1Cl)N([C@@H](c2ccc(cc2)S(=O)(=O)N)C(=O)NCc3ccccc3)C(=O)CCl
+A1JX9,"7-methoxy-2-oxidanyl-3,4-dihydro-1,2$l^{5}-benzoxaphosphinine 2-oxide",ligand,False,1,1,9TYE,212.139,COc1ccc2c(c1)OP(=O)(C=C2)O
+A57,"1-[2-(1H-imidazol-5-yl)ethyl]-4-methyl-2,6-di(propan-2-yl)pyridin-1-ium",ligand,False,1,1,5W8B,272.408,Cc1cc([n+](c(c1)C(C)C)CCc2cnc[nH]2)C(C)C
+A6N,"4-[[4-[azanyl-bis(oxidanyl)-$l^{4}-sulfanyl]phenoxy]methyl]-1-phenyl-1,2,3-triazole",ligand,False,1,1,5LJT,332.378,c1ccc(cc1)n2cc(nn2)COc3ccc(cc3)S(N)(O)O
+A9J,Hexafluorophosphate anion,ligand,False,1,1,5W8B,144.964,FP(F)(F)(F)(F)F
+AIW,phenylmethaneselenol,ligand,False,1,1,7QBH,171.098,c1ccc(cc1)C[SeH]
+AL1,"3,,4-DIHYDRO-2-(3-METHOXYPHENYL)-2H-THIENO-[3,2-E]-1,2-THIAZINE-6-SULFONAMIDE-1,1-DIOXIDE",ligand,False,1,1,1BNN,374.456,COc1cccc(c1)N2CCc3cc(sc3S2(=O)=O)S(=O)(=O)N
+AL2,"3,4-DIHYDRO-4-HYDROXY-2-(4-METHOXYPHENYL)-2H-THIENO[3,2-E]-1,2-THIAZINE-6-SULFONAMIDE-1,1-DIOXIDE",ligand,False,1,1,1BNT,390.455,COc1ccc(cc1)[N@@]2C[C@@H](c3cc(sc3S2(=O)=O)S(=O)(=O)N)O
+AL3,"3,4-DIHYDRO-4-HYDROXY-2-(2-THIENYMETHYL)-2H-THIENO[3,2-E]-1,2-THIAZINE-6-SULFONAMIDE-1,1-DIOXIDE",ligand,False,1,1,1BNU,380.483,c1cc(sc1)C[N@]2C[C@@H](c3cc(sc3S2(=O)=O)S(=O)(=O)N)O
+AL4,"(R)-4-ETHYLAMINO-3,4-DIHYDRO-2-(2-METHOYLETHYL)-2H-THIENO[3,2-E]-1,2-THIAZINE-6-SULFONAMIDE-1,1-DIOXIDE",ligand,False,1,1,1BNQ,369.481,CCN[C@H]1C[N@](S(=O)(=O)c2c1cc(s2)S(=O)(=O)N)CCOC
+AL5,"THIOPHENE-2,5-DISULFONIC ACID 2-AMIDE-5-(4-METHYL-BENZYLAMIDE)",ligand,False,1,1,1BN1,346.446,Cc1ccc(cc1)CNS(=O)(=O)c2ccc(s2)S(=O)(=O)N
+AL6,"2-(3-METHOXYPHENYL)-2H-THIENO-[3,2-E]-1,2-THIAZINE-6-SULFINAMIDE-1,1-DIOXIDE",ligand,False,1,1,1BN3,372.44,COc1cccc(c1)N2C=Cc3cc(sc3S2(=O)=O)S(=O)(=O)N
+AL7,"(S)-3,4-DIHYDRO-2-(3-METHOXYPHENYL)-4-METHYLAMINO-2H-THIENO[3,2-E]-1,2-THIAZINE-6-SULFONAMIDE-1,1-DIOXIDE",ligand,False,1,1,1BNV,403.497,CN[C@@H]1CN(S(=O)(=O)c2c1cc(s2)S(=O)(=O)N)c3cccc(c3)OC
+AL8,"(R)-3,4-DIHYDRO-2-(3-METHOXYPHENYL)-4-METHYLAMINO-2H-THIENO[3,2-E]-1,2-THIAZINE-6-SULFONAMIDE-1,1-DIOXIDE",ligand,False,1,1,1BNM,403.497,CN[C@H]1C[N@@](S(=O)(=O)c2c1cc(s2)S(=O)(=O)N)c3cccc(c3)OC
+AL9,"N-[(4-METHOXYPHENYL)METHYL]2,5-THIOPHENEDESULFONAMIDE",ligand,False,1,1,1BN4,362.445,COc1ccc(cc1)CNS(=O)(=O)c2ccc(s2)S(=O)(=O)N
+ALE,L-EPINEPHRINE,ligand,False,1,1,2HKK,183.204,CNC[C@@H](c1ccc(c(c1)O)O)O
+AMJ,N~2~-acetyl-N-benzyl-O-methyl-L-serinamide,ligand,False,1,1,3IEO,250.294,CC(=O)N[C@@H](COC)C(=O)NCc1ccccc1
+AMS,3-MERCURI-4-AMINOBENZENESULFONAMIDE,ligand,False,1,1,3CA2,371.787,c1cc(c(cc1S(=O)(=O)N)[Hg])N
+ANV,"1-[4-[azanyl-bis(oxidanyl)-$l^{4}-sulfanyl]phenyl]-4-(phenoxymethyl)-1,2,3-triazole",ligand,False,1,1,5LJQ,332.378,c1ccc(cc1)OCc2cn(nn2)c3ccc(cc3)S(N)(O)O
+B09,N-methoxybenzenesulfonamide,ligand,False,1,1,3T5Z,187.216,CONS(=O)(=O)c1ccccc1
+B15,"[2,2'-({4-[({2-[4-(AMINOSULFONYL)PHENYL]ETHYL}AMINO)CARBONYL]BENZYL}IMINO)DIACETATO(2-)-KAPPAO]COPPER",ligand,False,1,2,2FOQ,511.008,c1cc(ccc1CCNC(=O)c2ccc(cc2)CN3CC(=O)O[Cu]OC(=O)C3)S(=O)(=O)N
+B17,"{1-[4-(AMINOSULFONYL)PHENYL]-11-[(CARBOXY-KAPPAO)METHYL]-1-OXO-5,8-DIOXA-2,11-DIAZATRIDECAN-13-OATO(2-)-KAPPAO~13~}COPPER",ligand,False,1,2,2FOS,508.99,c1cc(ccc1C(=O)NCCOCCOCCN2CC(=O)O[Cu]OC(=O)C2)S(=O)(=O)N
+B19,"N-{[(3AS,5AR,8AR,8BS)-2,2,7,7-TETRAMETHYLTETRAHYDRO-3AH-BIS[1,3]DIOXOLO[4,5-B:4',5'-D]PYRAN-3A-YL]METHYL}SULFAMIDE",ligand,False,1,1,2H15,338.377,CC1(O[C@@H]2CO[C@@]3([C@H]([C@@H]2O1)OC(O3)(C)C)CNS(=O)(=O)N)C
+B1T,"2,2'-sulfanediylbis(4,6-dichlorophenol)",ligand,False,1,2,8QQA,356.052,c1c(cc(c(c1Sc2cc(cc(c2O)Cl)Cl)O)Cl)Cl
+B22,"[2,2'-{[2-({3-[({2-[4-(AMINOSULFONYL)PHENYL]ETHYL}AMINO)CARBONYL]PHENYL}AMINO)-2-OXOETHYL]IMINO}DIACETATO(2-)-KAPPAO]COPPER",ligand,False,1,2,2FOU,554.032,c1cc(cc(c1)NC(=O)CN2CC(=O)O[Cu]OC(=O)C2)C(=O)NCCc3ccc(cc3)S(=O)(=O)N
+B30,"{2,2'-[(2-{[4-(AMINOSULFONYL)BENZOYL]AMINO}ETHYL)IMINO]DIACETATO(2-)-KAPPAO}COPPER",ligand,False,1,2,2FOV,420.885,c1cc(ccc1C(=O)NCCN2CC(=O)O[Cu]OC(=O)C2)S(=O)(=O)N
+B8B,cobaltcarborane,ligand,False,1,2,5OGN,424.728,B1234B567B189B212B33%10B454B656B787B911C232C4%105[Co]76121234B567B118B559B66%10B272B667B%1055B911B565C318C4752CCNS(=O)(=O)N
+BC5,4'-aminobiphenyl-4-sulfonamide,ligand,False,1,1,5E28,248.301,c1cc(ccc1c2ccc(cc2)S(=O)(=O)N)N
+BE0,piperidine-1-sulfonamide,ligand,False,1,2,3M2Y,164.226,C1CCN(CC1)S(=O)(=O)N
+BE9,phenyl N-sulfamoylmorpholine-4-carboximidoate,ligand,False,1,1,3M04,285.32,c1ccc(cc1)O/C(=N\S(=O)(=O)N)/N2CCOCC2
+BEV,"N-[(2Z)-1,3-thiazolidin-2-ylidene]sulfamide",ligand,False,1,1,3M14,181.237,C1CS/C(=N\S(=O)(=O)N)/N1
+BEX,"N-[(R)-[(3,4-dimethoxyphenyl)amino](phenoxy)methyl]sulfamide",ligand,False,1,1,3M2X,353.393,COc1ccc(cc1OC)N[C@H](NS(=O)(=O)N)Oc2ccccc2
+BFE,N-(2-sulfanylethyl)benzamide,ligand,False,1,1,3M2Z,181.255,c1ccc(cc1)C(=O)NCCS
+BFG,"3,3-diphenyl-N-(2-sulfanylethyl)propanamide",ligand,False,1,1,3M5T,285.404,c1ccc(cc1)C(CC(=O)NCCS)c2ccccc2
+BHO,BENZHYDROXAMIC ACID,ligand,False,1,1,4FL7,137.136,c1ccc(cc1)C(=O)NO
+BL0,"1-[5-(dimethylamino)-1,3,4-thiadiazol-2-yl]methanesulfonamide",ligand,False,1,1,3BL0,222.288,CN(C)c1nnc(s1)CS(=O)(=O)N
+BL1,"4-chloro-N-[(2S)-2-methyl-2,3-dihydro-1H-indol-1-yl]-3-sulfamoylbenzamide",ligand,False,1,1,3BL1,365.835,C[C@H]1Cc2ccccc2N1NC(=O)c3ccc(c(c3)S(=O)(=O)N)Cl
+BO1,N-(4-sulfamoylphenyl)-beta-D-glucopyranosylamine,ligand,False,1,1,2HL4,334.346,c1cc(ccc1N[C@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)O)O)S(=O)(=O)N
+BON,"N-[4-(4,4,5,5-tetramethyl-1,3,2-dioxaborolan-2-yl)phenyl]sulfamide",ligand,False,1,1,3MNU,298.166,B1(OC(C(O1)(C)C)(C)C)c2ccc(cc2)NS(=O)(=O)N
+BOS,N-[4-(AMINOSULFONYL)PHENYL]-2-MERCAPTOBENZAMIDE,ligand,False,1,1,2HD6,308.376,c1ccc(c(c1)C(=O)Nc2ccc(cc2)S(=O)(=O)N)S
+BOW,octyl sulfamate,ligand,False,1,1,3IBI,209.306,CCCCCCCCOS(=O)(=O)N
+BSB,N-BENZYL-4-SULFAMOYL-BENZAMIDE,ligand,False,1,1,1G4O,290.338,c1ccc(cc1)CNC(=O)c2ccc(cc2)S(=O)(=O)N
+BVE,"4-[2-(2,4,6-triphenylpyridin-1-ium-1-yl)ethyl]benzenesulfonamide",ligand,False,1,1,6EQU,491.623,c1ccc(cc1)c2cc([n+](c(c2)c3ccccc3)CCc4ccc(cc4)S(=O)(=O)N)c5ccccc5
+BX4,3'-aminobiphenyl-4-sulfonamide,ligand,False,1,2,5E2K,248.301,c1cc(cc(c1)N)c2ccc(cc2)S(=O)(=O)N
+BXH,"ethyl 2-(2~{H}-1,2,3,4-tetrazol-5-yl)ethanoate",ligand,False,1,1,9GUO,156.143,CCOC(=O)Cc1n[nH]nn1
+BZU,"(4R)-2-(2-ethoxyethyl)-4-(ethylamino)-3,4-dihydro-2H-thieno[3,2-e][1,2]thiazine-6-sulfonamide 1,1-dioxide",ligand,False,1,1,1A42,383.507,CCN[C@H]1C[N@](S(=O)(=O)c2c1cc(s2)S(=O)(=O)N)CCOCC
+C1H,"4-(nitrooxy)butyl 3-[(5-sulfamoyl-1,3,4-thiadiazol-2-yl)sulfamoyl]benzoate",ligand,False,1,1,3NI5,481.481,c1cc(cc(c1)S(=O)(=O)Nc2nnc(s2)S(=O)(=O)N)C(=O)OCCCCO[N+](=O)[O-]
+C97,N-[(furan-2-yl)methyl]-N-[2-(4-sulfamoylphenyl)ethyl]glycinamide,ligand,False,1,1,7SUY,337.394,c1cc(oc1)CN(CCc2ccc(cc2)S(=O)(=O)N)C(=O)CN
+CCN,ACETONITRILE,ligand,False,1,1,2FOV,41.052,CC#N
+CEL,4-[5-(4-METHYLPHENYL)-3-(TRIFLUOROMETHYL)-1H-PYRAZOL-1-YL]BENZENESULFONAMIDE,ligand,False,1,1,1OQ5,381.372,Cc1ccc(cc1)c2cc(nn2c3ccc(cc3)S(=O)(=O)N)C(F)(F)F
+CNN,CYANAMIDE,ligand,False,1,1,1F2W,42.04,C(#N)N
+COX,4-(5-METHYL-3-PHENYLISOXAZOL-4-YL)BENZENESULFONAMIDE,ligand,False,1,1,2AW1,314.359,Cc1c(c(no1)c2ccccc2)c3ccc(cc3)S(=O)(=O)N
+CTF,"(17beta)-17-(cyanomethyl)-2-methoxyestra-1(10),2,4-trien-3-yl sulfamate",ligand,False,1,1,3BET,404.523,C[C@]12CC[C@@H]3c4cc(c(cc4CC[C@H]3[C@@H]1CC[C@@H]2CC#N)OS(=O)(=O)N)OC
+D02,"methyl 1-(2,3,5,6-tetrafluoro-4-sulfamoylphenyl)-1H-1,2,3-triazole-4-carboxylate",ligand,False,1,1,4DZ7,354.238,COC(=O)c1cn(nn1)c2c(c(c(c(c2F)F)S(=O)(=O)N)F)F
+D2S,"4,4'-disulfanediyldibenzene-1,3-diol",ligand,False,1,1,4FIK,282.335,c1cc(c(cc1O)O)SSc2ccc(cc2O)O
+D6B,"methyl 3-[(4-methyl-1,3-thiazol-2-yl)-(4-sulfamoylphenyl)amino]propanoate",ligand,False,1,1,7QGZ,355.432,Cc1csc(n1)N(CCC(=O)OC)c2ccc(cc2)S(=O)(=O)N
+D7A,"N-[2-(3,4-dimethoxyphenyl)ethyl]-4-sulfamoylbenzamide",ligand,False,1,1,3V7X,364.416,COc1ccc(cc1OC)CCNC(=O)c2ccc(cc2)S(=O)(=O)N
+D85,"3-[[5-chloranyl-4-(4-chlorophenyl)-1,3-thiazol-2-yl]-(4-sulfamoylphenyl)amino]propanoic acid",ligand,False,1,1,7QGX,472.365,c1cc(ccc1c2c(sc(n2)N(CCC(=O)O)c3ccc(cc3)S(=O)(=O)N)Cl)Cl
+D9H,"4-({4-chloro-6-[(2-hydroxyethyl)amino]-1,3,5-triazin-2-yl}amino)benzenesulfonamide",ligand,False,1,1,3MMF,344.777,c1cc(ccc1Nc2nc(nc(n2)Cl)NCCO)S(=O)(=O)N
+D9I,"3-[(5-ethoxycarbonyl-4-methyl-1,3-thiazol-2-yl)-(4-sulfamoylphenyl)amino]propanoic acid",ligand,False,1,1,7QGY,413.469,CCOC(=O)c1c(nc(s1)N(CCC(=O)O)c2ccc(cc2)S(=O)(=O)N)C
+DA4,3-ethynylbenzenesulfonamide,ligand,False,1,1,3KIG,181.212,C#Cc1cccc(c1)S(=O)(=O)N
+DA9,2-azido-N-(2-sulfanylethyl)ethanamide,ligand,False,1,2,3KIG,160.198,C(CS)NC(=O)CN=[N+]=[N-]
+DAW,"N-[(S)-(1-{2-oxo-2-[(3-sulfanylpropyl)amino]ethyl}-1H-1,2,3-triazol-5-yl)(phenyl)methyl]-4-sulfamoylbenzamide",ligand,False,1,1,3KNE,488.583,c1ccc(cc1)[C@@H](c2cnnn2CC(=O)NCCCS)NC(=O)c3ccc(cc3)S(=O)(=O)N
+DF5,6-methoxy-1-(4-sulfamoylbenzoyl)quinolinium,ligand,False,1,1,4Z1E,343.377,COc1ccc2c(c1)ccc[n+]2C(=O)c3ccc(cc3)S(=O)(=O)N
+DHC,CAFFEIC ACID,ligand,False,1,1,6YRI,180.157,c1cc(c(cc1\C=C\C(=O)O)O)O
+DHI,D-HISTIDINE,ligand,False,1,1,2EZ7,156.162,c1c([nH+]c[nH]1)C[C@H](C(=O)O)N
+DPN,D-PHENYLALANINE,ligand,False,1,1,2FMZ,165.189,c1ccc(cc1)C[C@H](C(=O)O)N
+DT7,"6,7-dimethoxy-3,4-dihydroisoquinoline-2(1H)-sulfonamide",ligand,False,1,2,3IGP,272.321,COc1cc2c(cc1OC)C[N@@](CC2)S(=O)(=O)N
+DT9,"(1S)-6,7-dimethoxy-1-methyl-3,4-dihydroisoquinoline-2(1H)-sulfonamide",ligand,False,1,1,3PO6,286.347,C[C@H]1c2cc(c(cc2CC[N@]1S(=O)(=O)N)OC)OC
+DWH,"methyl N-{4-chloro-6-[(4-sulfamoylphenyl)amino]-1,3,5-triazin-2-yl}glycinate",ligand,False,1,1,3MNA,372.787,COC(=O)CNc1nc(nc(n1)Cl)Nc2ccc(cc2)S(=O)(=O)N
+E02,5-(1H-benzimidazol-1-ylacetyl)-2-chlorobenzenesulfonamide,ligand,False,1,1,3M98,349.792,c1ccc2c(c1)ncn2CC(=O)c3ccc(c(c3)S(=O)(=O)N)Cl
+E1E,"2-chloro-4-{[(4,6-dimethylpyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide",ligand,False,1,1,4KNI,371.862,Cc1cc(nc(n1)SCC(=O)c2ccc(c(c2)Cl)S(=O)(=O)N)C
+E27,"2-chloro-5-[(1H-imidazo[4,5-c]quinolin-2-ylsulfanyl)acetyl]benzenesulfonamide",ligand,False,1,1,3MYQ,432.904,c1ccc2c(c1)c3c(cn2)nc([nH]3)SCC(=O)c4ccc(c(c4)S(=O)(=O)N)Cl
+E2I,4-{[(5-butylpyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide,ligand,False,1,1,3SAP,365.47,CCCCc1cnc(nc1)SCC(=O)c2ccc(cc2)S(=O)(=O)N
+E36,"2-chloro-5-[(6,7-dihydro-1H-[1,4]dioxino[2,3-f]benzimidazol-2-ylsulfanyl)acetyl]benzenesulfonamide",ligand,False,1,1,3M67,439.893,c1cc(c(cc1C(=O)CSc2[nH]c3cc4c(cc3n2)OCCO4)S(=O)(=O)N)Cl
+E38,5-{[(5-bromo-1H-benzimidazol-2-yl)sulfanyl]acetyl}-2-chlorobenzenesulfonamide,ligand,False,1,1,3M96,460.753,c1cc(c(cc1C(=O)CSc2[nH]c3ccc(cc3n2)Br)S(=O)(=O)N)Cl
+E49,"2-chloro-5-{[(4,6-dimethylpyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide",ligand,False,1,1,3S9T,371.862,Cc1cc(nc(n1)SCC(=O)c2ccc(c(c2)S(=O)(=O)N)Cl)C
+E50,2-chloro-5-{[(5-ethylpyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide,ligand,False,1,1,3SAX,371.862,CCc1cnc(nc1)SCC(=O)c2ccc(c(c2)S(=O)(=O)N)Cl
+E59,"4-{[(4-methyl-6-oxo-1,6-dihydropyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide",ligand,False,1,1,3S8X,339.39,CC1=CC(=O)NC(=N1)SCC(=O)c2ccc(cc2)S(=O)(=O)N
+E65,"4-{[(4,6-dimethylpyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide",ligand,False,1,1,3SBH,337.417,Cc1cc(nc(n1)SCC(=O)c2ccc(cc2)S(=O)(=O)N)C
+E6H,3-methylbenzoselenoate,ligand,False,1,2,7QNV,199.109,Cc1cccc(c1)C(=O)[SeH]
+E90,4-[(pyrimidin-2-ylsulfanyl)acetyl]benzenesulfonamide,ligand,False,1,1,3SBI,309.364,c1cnc(nc1)SCC(=O)c2ccc(cc2)S(=O)(=O)N
+EG1,AMINOMETHYLENECARBONYLAMINODI(ETHYLOXY)ETHYLAMINOCARBONYLBENZENESULFONAMIDE,ligand,False,1,1,1CNW,388.439,c1cc(ccc1C(=O)NCCOCCOCCNC(=O)CN)S(=O)(=O)N
+EG2,AMINODI(ETHYLOXY)ETHYLAMINOCARBONYLBENZENESULFONAMIDE,ligand,False,1,1,1CNX,331.388,c1cc(ccc1C(=O)NCCOCCOCCN)S(=O)(=O)N
+EG3,PHENYLALANYLAMINODI(ETHYLOXY)ETHYL BENZENESULFONAMIDEAMINOCARBONYLBENZENESULFONAMIDE,ligand,False,1,1,1CNY,478.562,c1ccc(cc1)C[C@@H](C(=O)NCCOCCOCCNC(=O)c2ccc(cc2)S(=O)(=O)N)N
+EMI,N-(2-aminophenyl)-4-((2-oxo-2-((4-sulfamoylphenethyl)amino)ethyl)amino)benzamide,ligand,False,1,1,7QRK,467.541,c1ccc(c(c1)N)NC(=O)c2ccc(cc2)NCC(=O)NCCc3ccc(cc3)S(=O)(=O)N
+ENN,"~{N}-butyl-2,4-bis(chloranyl)-5-sulfamoyl-benzamide",ligand,False,1,1,6G6T,325.211,CCCCNC(=O)c1cc(c(cc1Cl)Cl)S(=O)(=O)N
+EO7,2-chloro-5'-O-sulfamoyladenosine,ligand,False,1,1,6C7X,380.765,c1nc2c(nc(nc2n1[C@H]3[C@@H]([C@@H]([C@H](O3)COS(=O)(=O)N)O)O)Cl)N
+EUM,~{N}-(2-aminophenyl)-4-[[2-oxidanylidene-2-[(4-sulfamoylphenyl)methylamino]ethyl]amino]benzamide,ligand,False,1,1,7QSE,453.514,c1ccc(c(c1)N)NC(=O)c2ccc(cc2)NCC(=O)NCc3ccc(cc3)S(=O)(=O)N
+EVD,1-benzofuran-2-sulfonamide,ligand,False,1,2,3S71,197.211,c1ccc2c(c1)cc(o2)S(=O)(=O)N
+EVE,1H-benzimidazole-2-sulfonamide,ligand,False,1,1,3S72,197.214,c1ccc2c(c1)[nH]c(n2)S(=O)(=O)N
+EVG,furan-2-sulfonamide,ligand,False,1,2,3S75,147.152,c1cc(oc1)S(=O)(=O)N
+EVH,1H-imidazole-2-sulfonamide,ligand,False,1,1,3S76,147.156,c1cnc([nH]1)S(=O)(=O)N
+EWF,"2,3-dihydroindole-1-sulfonamide",ligand,False,1,1,7QSI,198.242,c1ccc2c(c1)CCN2S(=O)(=O)N
+EWW,"2-chloro-4-{[(4-methyl-6-oxo-1,6-dihydropyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide",ligand,False,1,1,4QSA,373.835,CC1=CC(=O)NC(=N1)SCC(=O)c2ccc(c(c2)Cl)S(=O)(=O)N
+EWY,"3-{[(4-methyl-6-oxo-1,6-dihydropyrimidin-2-yl)sulfanyl]acetyl}benzenesulfonamide",ligand,False,1,1,4QSB,339.39,CC1=CC(=O)NC(=N1)SCC(=O)c2cccc(c2)S(=O)(=O)N
+EWZ,"5-{[(4-tert-butyl-6-oxo-1,6-dihydropyrimidin-2-yl)sulfanyl]acetyl}-2-chlorobenzenesulfonamide",ligand,False,1,1,4QSI,415.915,CC(C)(C)C1=CC(=O)NC(=N1)SCC(=O)c2ccc(c(c2)S(=O)(=O)N)Cl
+EZ1,4-[(prop-2-en-1-yl)selanyl]benzene-1-sulfonamide,ligand,False,1,2,6CEH,276.214,C=CC[Se]c1ccc(cc1)S(=O)(=O)N
+F1A,"2,4,6-trimethylbenzenesulfonamide",ligand,False,1,1,6T4N,199.27,Cc1cc(c(c(c1)C)S(=O)(=O)N)C
+F6W,4-(2-phenylethylsulfanyl)benzenesulfonamide,ligand,False,1,1,6GOT,293.404,c1ccc(cc1)CCSc2ccc(cc2)S(=O)(=O)N
+FB1,2-CHLOROBENZENESULFONAMIDE,ligand,False,1,1,2WEH,191.635,c1ccc(c(c1)S(=O)(=O)N)Cl
+FC4,"(2R)-2-{[4-(4-chlorophenyl)-5-cyano-6-oxo-1,6-dihydropyrimidin-2-yl]sulfanyl}-N-(4-sulfamoylphenyl)propanamide",ligand,False,1,1,5J8Z,489.955,C[C@H](C(=O)Nc1ccc(cc1)S(=O)(=O)N)SC2=NC(=C(C(=O)N2)C#N)c3ccc(cc3)Cl
+FC5,6-hydroxy-2H-chromene-2-thione,ligand,False,1,1,4WL4,178.208,c1cc2c(cc1O)C=CC(=S)O2
+FC9,"2-(6-hydroxy-3-oxo-3H-xanthen-9-yl)-5-[({[1-(4-sulfamoylphenyl)-1H-1,2,3-triazol-4-yl]methyl}carbamothioyl)amino]benzoic acid",ligand,False,1,1,4RH2,642.662,c1cc(ccc1n2cc(nn2)CNC(=S)Nc3ccc(c(c3)C(=O)O)C4=C5C=CC(=O)C=C5Oc6c4ccc(c6)O)S(=O)(=O)N
+FER,3-(4-HYDROXY-3-METHOXYPHENYL)-2-PROPENOIC ACID,ligand,False,1,1,6MBY,194.184,COc1cc(ccc1O)\C=C\C(=O)O
+FF3,"1-(5-AMINO-1,3,4-THIADIAZOL-2-YL)-1,1-DIFLUOROMETHANESULFONAMIDE",ligand,False,1,1,2EU3,230.216,c1(nnc(s1)N)C(F)(F)S(=O)(=O)N
+FF5,~{N}-[4-[4-[(4-sulfamoylphenyl)carbamoylamino]phenoxy]butyl]ethanamide,ligand,False,1,1,6GXB,420.483,CC(=O)NCCCCOc1ccc(cc1)NC(=O)Nc2ccc(cc2)S(=O)(=O)N
+FFH,3-[2-[2-[2-[2-(aminomethyloxy)ethoxy]ethoxy]ethoxy]ethoxy]-~{N}-[4-[4-[(4-sulfamoylphenyl)carbamoylamino]phenoxy]butyl]propanamide,ligand,False,1,2,6GXE,655.76,c1cc(ccc1NC(=O)Nc2ccc(cc2)S(=O)(=O)N)OCCCCNC(=O)CCOCCOCCOCCOCCOCN
+FK8,(phenylmethyl) carbamate,ligand,False,1,1,6H29,151.163,c1ccc(cc1)COC(=O)N
+FKE,4-(4-phenylpiperidin-1-yl)carbonylbenzenesulfonamide,ligand,False,1,1,6H2Z,344.428,c1ccc(cc1)C2CCN(CC2)C(=O)c3ccc(cc3)S(=O)(=O)N
+FKK,4-[4-[(4-fluorophenyl)methyl]piperazin-1-yl]carbonylbenzenesulfonamide,ligand,False,1,1,6H34,377.433,c1cc(ccc1CN2CCN(CC2)C(=O)c3ccc(cc3)S(=O)(=O)N)F
+FKQ,4-(4-oxidanyl-4-phenyl-piperidin-1-yl)carbonylbenzenesulfonamide,ligand,False,1,1,6H33,360.427,c1ccc(cc1)C2(CCN(CC2)C(=O)c3ccc(cc3)S(=O)(=O)N)O
+FL1,5-{[({2-[4-(AMINOSULFONYL)PHENYL]ETHYL}AMINO)CARBONOTHIOYL]AMINO}-2-(6-HYDROXY-3-OXO-3H-XANTHEN-9-YL)BENZOIC ACID,ligand,False,1,1,2F14,589.639,c1cc(ccc1CCNC(=S)Nc2ccc(c(c2)C(=O)O)C3=C4C=CC(=O)C=C4Oc5c3ccc(c5)O)S(=O)(=O)N
+FMH,"4-[5-(chloromethyl)-1,3-selenazol-2-yl]benzenesulfonamide",ligand,False,1,1,6H3Q,335.669,c1cc(ccc1c2ncc([se]2)CCl)S(=O)(=O)N
+FMS,TRIFLUOROMETHANE SULFONAMIDE,ligand,False,1,1,1BCD,149.092,C(F)(F)(F)S(=O)(=O)N
+FO9,famotidine,ligand,False,1,1,6G3Q,339.461,C1C(=NC(=S1)N=C(N)N)CSCC/C(=N/S(=O)(=O)N)/N
+FQV,4-[(but-2-yn-1-yl)selanyl]benzene-1-sulfonamide,ligand,False,1,2,6D1L,288.225,CC#CC[Se]c1ccc(cc1)S(=O)(=O)N
+FQY,4-(cyclohexylselanyl)benzene-1-sulfonamide,ligand,False,1,2,6D1M,318.294,c1cc(ccc1S(=O)(=O)N)[Se]C2CCCCC2
+GRE,"2,6-DIHYDROXYBENZOIC ACID",ligand,False,1,3,4E3F,154.12,c1cc(c(c(c1)O)C(=O)O)O
+GTQ,"2,5-dihydroxybenzoic acid",ligand,False,1,2,4E3D,154.12,c1cc(c(cc1O)C(=O)O)O
+GUA,GLUTARIC ACID,ligand,False,1,1,5NYA,132.115,C(CC(=O)O)CC(=O)O
+H1Z,4-butoxybenzenesulfonamide,ligand,False,1,2,6I3E,229.296,CCCCOc1ccc(cc1)S(=O)(=O)N
+H2S,HYDROSULFURIC ACID,ligand,False,1,1,1CAO,34.081,S
+HAE,ACETOHYDROXAMIC ACID,ligand,False,1,1,1AM6,75.067,CC(=O)NO
+HFF,"4-oxo-N-(4-sulfamoylphenethyl)-1,3,4,6,7,11b-hexahydro-2H-pyrazino[2,1-a]isoquinoline-2-carbothioamide",ligand,False,1,1,7R1X,444.57,c1ccc2c(c1)CCN3[C@H]2CN(CC3=O)C(=S)NCCc4ccc(cc4)S(=O)(=O)N
+HIL,"4-oxo-N-(4-sulfamoylphenethyl)-1,3,4,6,7,11b-hexahydro-2H-pyrazino[2,1-a]isoquinoline-2-carboxamide",ligand,False,1,1,7QZX,428.505,c1ccc2c(c1)CCN3[C@H]2CN(CC3=O)C(=O)NCCc4ccc(cc4)S(=O)(=O)N
+HIS,HISTIDINE,ligand,False,1,1,2ABE,156.162,c1c([nH+]c[nH]1)C[C@@H](C(=O)O)N
+HQE,"benzene-1,4-diol",ligand,False,1,1,4E3H,110.111,c1cc(ccc1O)O
+HQT,2-hydroxyisoquinoline-1(2H)-thione,ligand,False,1,1,4Q8Y,177.223,c1ccc2c(c1)C=CN(C2=S)O
+HSM,HISTAMINE,ligand,False,1,1,1AVN,111.145,c1c(nc[nH]1)CCN
+HSW,N-hydroxysulfamide,ligand,False,1,1,2O4Z,112.108,NS(=O)(=O)NO
+HT4,4-methyl-2-sulfanylphenol,ligand,False,1,1,4Q99,140.203,Cc1ccc(c(c1)S)O
+HTS,2-MERCAPTOPHENOL,ligand,False,1,1,2OSM,126.176,c1ccc(c(c1)O)S
+HZJ,"(14beta,17beta)-estra-1(10),2,4,6,8-pentaene-3,17-diyl disulfamate",ligand,False,1,1,6E8P,426.507,C[C@]12CCc3c4ccc(cc4ccc3[C@H]1CC[C@@H]2OS(=O)(=O)N)OS(=O)(=O)N
+HZY,"6-(sulfamoyloxy)-2-[(3,4,5-trimethoxyphenyl)methyl]isoquinolin-2-ium",ligand,False,1,1,6E92,405.445,COc1cc(cc(c1OC)OC)C[n+]2ccc3cc(ccc3c2)OS(=O)(=O)N
+I6U,"(11~{b}~{R})-4-oxidanylidene-~{N}-(4-sulfamoylphenyl)-3,6,7,11~{b}-tetrahydro-1~{H}-pyrazino[2,1-a]isoquinoline-2-carboxamide",ligand,False,1,1,7YWT,400.452,c1ccc2c(c1)CCN3[C@H]2CN(CC3=O)C(=O)Nc4ccc(cc4)S(=O)(=O)N
+I7A,"4,5-DICHLOROBENZENE-1,3-DISULFONAMIDE",ligand,False,1,1,2POU,305.159,c1c(cc(c(c1S(=O)(=O)N)Cl)Cl)S(=O)(=O)N
+I7C,"4-AMINO-6-(TRIFLUOROMETHYL)BENZENE-1,3-DISULFONAMIDE",ligand,False,1,1,2POW,319.281,c1c(c(cc(c1N)S(=O)(=O)N)S(=O)(=O)N)C(F)(F)F
+ID4,"4-[4-(cyclohexylmethyl)-1H-1,2,3-triazol-1-yl]-2,3,5,6-tetrafluorobenzenesulfonamide",ligand,False,1,1,4DZ9,392.372,c1c(nnn1c2c(c(c(c(c2F)F)S(=O)(=O)N)F)F)CC3CCCCC3
+IE2,"4-(7-methylpyrazolo[3',4':4,5]thiopyrano[2,3-b]pyridin-1(4H)-yl)benzenesulfonamide",ligand,False,1,1,3QYK,358.438,Cc1ccc-2c(n1)SCc3c2n(nc3)c4ccc(cc4)S(=O)(=O)N
+IL3,1-but-2-ynoxy-4-[(sulfamoylamino)methyl]benzene,ligand,False,1,2,4PQ7,254.305,CC#CCOc1ccc(cc1)CNS(=O)(=O)N
+IL5,"3-oxo-2,3-dihydro-1,2-benzothiazole-6-sulfonamide 1,1-dioxide",ligand,False,1,1,4XE1,262.263,c1cc2c(cc1S(=O)(=O)N)S(=O)(=O)NC2=O
+INL,"6-[N-(3-METHOXY-PHENYL)-3-(MORPHOLIN-4-YLMETHYL)-2H-THIENO[3,2-E]-1,2-THIAZINE-1,1,-DIOXIDE]-SULFONAMIDE",ligand,False,1,1,1I8Z,471.571,COc1cccc(c1)N2C(=Cc3cc(sc3S2(=O)=O)S(=O)(=O)N)CN4CCOCC4
+INM,"4-AMINO-6-[N-(3-METHOXYLPROPYL)-2H-THIENO[3,2-E][1,2]THIAZINE 1,1-DIOXIDE]-SULFONAMIDE",ligand,False,1,1,1I90,353.438,COCCC[N@]1C=C(c2cc(sc2S1(=O)=O)S(=O)(=O)N)N
+INQ,"6-[N-(3-HYDROXY-PHENYL)-3-(MORPHOLIN-4-YLMETHYL)-2H-THIENO[3,2-E]-1,2-THIAZINE-1,1,-DIOXIDE]-SULFONAMIDE",ligand,False,1,1,1I91,457.544,c1cc(cc(c1)O)N2C(=Cc3cc(sc3S2(=O)=O)S(=O)(=O)N)CN4CCOCC4
+INV,4-(AMINOSULFONYL)-N-[(4-FLUOROPHENYL)METHYL]-BENZAMIDE,ligand,False,1,2,1I9L,308.328,c1cc(ccc1CNC(=O)c2ccc(cc2)S(=O)(=O)N)F
+INW,"4-(AMINOSULFONYL)-N-[(2,4-DIFLUOROPHENYL)METHYL]-BENZAMIDE",ligand,False,1,2,1I9M,326.318,c1cc(ccc1C(=O)NCc2ccc(cc2F)F)S(=O)(=O)N
+IO2,2-(4-phenylmethoxyphenyl)ethanoic acid,ligand,False,1,1,5FLQ,242.27,c1ccc(cc1)COc2ccc(cc2)CC(=O)O
+IOA,"4-(AMINOSULFONYL)-N-[(2,5-DIFLUOROPHENYL)METHYL]-BENZAMIDE",ligand,False,1,1,1I9N,326.318,c1cc(ccc1C(=O)NCc2cc(ccc2F)F)S(=O)(=O)N
+IOC,"4-(AMINOSULFONYL)-N-[(2,3,4-TRIFLUOROPHENYL)METHYL]-BENZAMIDE",ligand,False,1,2,1I9O,344.309,c1cc(ccc1C(=O)NCc2ccc(c(c2F)F)F)S(=O)(=O)N
+IOE,"4-(AMINOSULFONYL)-N-[(2,4,6-TRIFLUOROPHENYL)METHYL]-BENZAMIDE",ligand,False,1,1,1I9P,344.309,c1cc(ccc1C(=O)NCc2c(cc(cc2F)F)F)S(=O)(=O)N
+IOF,"4-(AMINOSULFONYL)-N-[(3,4,5-TRIFLUOROPHENYL)METHYL]-BENZAMIDE",ligand,False,1,2,1I9Q,344.309,c1cc(ccc1C(=O)NCc2cc(c(c(c2)F)F)F)S(=O)(=O)N
+IR,IRIDIUM ION,metal,True,1,1,6QFW,192.217,[Ir+4]
+IT2,morpholine-4-carbodithioic acid,ligand,False,1,1,3P5A,163.261,C1COCCN1C(=S)S
+IT5,4-cyano-4-phenylpiperidine-1-carbodithioic acid,ligand,False,1,1,3P5L,262.394,c1ccc(cc1)C2(CCN(CC2)C(=S)S)C#N
+IW7,2-(PENTYLSULFAMOYL)-4-SULFAMOYLBENZOIC ACID,ligand,False,1,1,5AMG,350.411,CCCCCNS(=O)(=O)c1cc(ccc1C(=O)O)S(=O)(=O)N
+IWE,Azosemide,ligand,False,1,1,7ZL6,370.838,c1cc(sc1)CNc2cc(c(cc2c3[nH]nnn3)S(=O)(=O)N)Cl
+IZP,(2R)-2-[4-(2-methylpropyl)phenyl]propanoic acid,ligand,False,1,1,8DJ9,206.281,C[C@H](c1ccc(cc1)CC(C)C)C(=O)O
+J04,"7-methoxy-6-(sulfamoyloxy)-2-[(3,4,5-trimethoxyphenyl)methyl]isoquinolin-2-ium",ligand,False,1,1,6E91,435.471,COc1cc(cc(c1OC)OC)C[n+]2ccc3cc(c(cc3c2)OC)OS(=O)(=O)N
+J0A,"(13alpha,17alpha)-2-methoxyestra-1,3,5,7,9,11-hexaene-3,17-diyl disulfamate",ligand,False,1,1,6E8X,454.517,C[C@]12C=Cc3c(ccc4c3cc(c(c4)OS(=O)(=O)N)OC)[C@@H]1CC[C@@H]2OS(=O)(=O)N
+J0K,"4-[2-(9-chloranyl-2',3',4',5',6'-pentamethyl-4-oxidanyl-7-oxidanylidene-spiro[1$l^{4},8-diaza-9$l^{8}-iridabicyclo[4.3.0]nona-1(6),2,4-triene-9,1'-1$l^{8}-iridapentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-8-yl)ethyl]benzenesulfonamide",ligand,False,1,1,6QFU,683.24,CC12C3([Ir]1456(C2(C4(C53C)C)C)([N]7=C(C=C(C=C7)O)C(=O)N6CCc8ccc(cc8)S(=O)(=O)N)Cl)C
+J0N,"4-[2-(9-chloranyl-2',3',4',5',6'-pentamethyl-7-oxidanylidene-spiro[1$l^{4},8-diaza-9$l^{8}-iridabicyclo[4.3.0]nona-1(6),2,4-triene-9,1'-1$l^{8}-iridapentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-8-yl)ethyl]benzenesulfonamide",ligand,False,1,1,6QFV,667.24,CC12C3([Ir]1456(C2(C4(C53C)C)C)([N]7=C(C=CC=C7)C(=O)N6CCc8ccc(cc8)S(=O)(=O)N)Cl)C
+J3K,(2~{R})-1-azanylpropan-2-ol,ligand,False,1,1,6SDJ,75.11,C[C@H](CN)O
+J43,4-{[6-chloro-5-formyl-2-(methylsulfanyl)pyrimidin-4-yl]amino}benzenesulfonamide,ligand,False,1,1,3MHO,358.824,CSc1nc(c(c(n1)Cl)C=O)Nc2ccc(cc2)S(=O)(=O)N
+J45,4-[(6-chloro-5-nitropyrimidin-4-yl)amino]benzenesulfonamide,ligand,False,1,1,3M40,329.72,c1cc(ccc1Nc2c(c(ncn2)Cl)[N+](=O)[O-])S(=O)(=O)N
+J4K,"5-[(4-chloranylphenoxy)methyl]-1H-1,2,3,4-tetrazole",ligand,False,1,1,5FLO,210.62,c1cc(ccc1OCc2[nH]nnn2)Cl
+J6V,3-[(4-fluoro-3-methylphenyl)carbamamido]-4-hydroxy-5-nitrobenzene-1-sulfonamide,ligand,False,1,1,6EEO,384.34,Cc1cc(ccc1F)NC(=O)Nc2cc(cc(c2O)[N+](=O)[O-])S(=O)(=O)N
+J71,4-{[(6-methoxy-5-nitropyrimidin-4-yl)amino]methyl}benzenesulfonamide,ligand,False,1,1,3MHL,339.327,COc1c(c(ncn1)NCc2ccc(cc2)S(=O)(=O)N)[N+](=O)[O-]
+J74,4-{2-[(6-chloro-5-nitropyrimidin-4-yl)amino]ethyl}benzenesulfonamide,ligand,False,1,1,3M2N,357.773,c1cc(ccc1CCNc2c(c(ncn2)Cl)[N+](=O)[O-])S(=O)(=O)N
+J75,4-({[6-(benzylamino)-5-nitropyrimidin-4-yl]amino}methyl)benzenesulfonamide,ligand,False,1,1,3MHM,414.438,c1ccc(cc1)CNc2c(c(ncn2)NCc3ccc(cc3)S(=O)(=O)N)[N+](=O)[O-]
+J90,"4-{[(5-nitro-6-oxo-1,6-dihydropyrimidin-4-yl)amino]methyl}benzenesulfonamide",ligand,False,1,2,3MHI,325.301,c1cc(ccc1CNC2=C(C(=O)NC=N2)[N+](=O)[O-])S(=O)(=O)N
+JDR,4-({[6-chloro-5-formyl-2-(methylsulfanyl)pyrimidin-4-yl]amino}methyl)benzenesulfonamide,ligand,False,1,1,3M5E,372.85,CSc1nc(c(c(n1)Cl)C=O)NCc2ccc(cc2)S(=O)(=O)N
+JR3,"2-(9-chloranyl-2',3',4',5',6'-pentamethyl-4-oxidanyl-7-oxidanylidene-spiro[1$l^{4},8-diaza-9$l^{8}-iridabicyclo[4.3.0]nona-1,3,5-triene-9,1'-1$l^{8}-iridapentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-8-yl)-~{N}-(4-sulfamoylphenyl)ethanamide",ligand,False,1,1,6QFX,712.238,CC12C3([Ir]1456(C2(C4(C53C)C)C)([N]7=CC=C(C=C7C(=O)N6CC(=O)Nc8ccc(cc8)S(=O)(=O)N)O)Cl)C
+JR8,"4-[3-(8-chloranyl-2',3',4',5',6'-pentamethyl-4-oxidanyl-7-oxidanylidene-spiro[1$l^{4},8$l^{4}-diaza-9$l^{7}-iridabicyclo[4.3.0]nona-1,3,5-triene-9,1'-1$l^{7}-iridapentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-8-yl)propyl]benzenesulfonamide",ligand,False,1,1,6QFW,697.266,CC12C3([Ir]1456(C2(C4(C53C)C)C)[N]7=CC=C(C=C7C(=O)[N]6(CCCc8ccc(cc8)S(=O)(=O)N)Cl)O)C
+JS7,4-{2-[(6-methoxy-5-nitropyrimidin-4-yl)amino]ethyl}benzenesulfonamide,ligand,False,1,1,3M3X,353.354,COc1c(c(ncn1)NCCc2ccc(cc2)S(=O)(=O)N)[N+](=O)[O-]
+JTW,4-chloranyl-~{N}-(2-hydroxyethyl)-2-(phenylsulfonyl)-5-sulfamoyl-benzamide,ligand,False,1,1,6R6J,418.872,c1ccc(cc1)S(=O)(=O)c2cc(c(cc2C(=O)NCCO)S(=O)(=O)N)Cl
+K1W,4-[(2~{R})-2-(phenylmethyl)piperazin-1-yl]carbonylbenzenesulfonamide,ligand,False,1,1,6RG3,359.443,c1ccc(cc1)C[C@@H]2CNCCN2C(=O)c3ccc(cc3)S(=O)(=O)N
+K45,4-[(3~{S})-4-methyl-3-(phenylmethyl)piperazin-1-yl]carbonylbenzenesulfonamide,ligand,False,1,1,6RG4,373.469,CN1CCN(C[C@@H]1Cc2ccccc2)C(=O)c3ccc(cc3)S(=O)(=O)N
+K4B,4-[3-(phenylmethyl)imidazolidin-1-yl]carbonylbenzenesulfonamide,ligand,False,1,1,6RHK,345.416,c1ccc(cc1)CN2CCN(C2)C(=O)c3ccc(cc3)S(=O)(=O)N
+K4H,"4-[[4-(phenylmethyl)-1,4-diazepan-1-yl]carbonyl]benzenesulfonamide",ligand,False,1,1,6RHJ,373.469,c1ccc(cc1)CN2CCCN(CC2)C(=O)c3ccc(cc3)S(=O)(=O)N
+K4N,4-oxidanylbenzenesulfonamide,ligand,False,1,3,6RIG,173.19,c1cc(ccc1O)S(=O)(=O)N
+K5W,"2,3-bis(fluoranyl)benzenesulfonamide",ligand,False,1,2,6RJJ,193.171,c1cc(c(c(c1)S(=O)(=O)N)F)F
+K7P,"4-[(2~{S},3~{R},4~{S},5~{S},6~{R})-6-(hydroxymethyl)-3,4,5-tris(oxidanyl)oxan-2-yl]sulfanylbenzenesulfonamide",ligand,False,1,2,7ZWB,351.396,c1cc(ccc1S[C@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)O)O)S(=O)(=O)N
+KBB,"2,5-bis(fluoranyl)benzenesulfonamide",ligand,False,1,2,6RNP,193.171,c1cc(c(cc1F)S(=O)(=O)N)F
+KBZ,4-cyanobenzenesulfonamide,ligand,False,1,2,6ROB,182.2,c1cc(ccc1C#N)S(=O)(=O)N
+KCS,carbonotrithioic acid,ligand,False,1,1,3K7K,110.222,C(=S)(S)S
+KFH,"2,3,5,6-tetrakis(fluoranyl)benzenesulfonamide",ligand,False,1,2,6RRI,229.152,c1c(c(c(c(c1F)F)S(=O)(=O)N)F)F
+KGK,"2,3,5,6-tetrakis(fluoranyl)-4-methyl-benzenesulfonamide",ligand,False,1,2,6RS5,243.179,Cc1c(c(c(c(c1F)F)S(=O)(=O)N)F)F
+KJ5,"4-ethyl-2,3,5,6-tetrakis(fluoranyl)benzenesulfonamide",ligand,False,1,1,6RSZ,257.205,CCc1c(c(c(c(c1F)F)S(=O)(=O)N)F)F
+KKE,"1-[1,1-bis(oxidanyl)-3~{H}-2,1-benzoxaborol-1-ium-6-yl]-3-phenyl-thiourea",ligand,False,1,1,6RVL,301.149,[B+]1(c2cc(ccc2CO1)NC(=S)Nc3ccccc3)(O)O
+KKH,"1-[1,1-bis(oxidanyl)-3~{H}-2,1$l^{4}-benzoxaborol-6-yl]-3-phenyl-urea",ligand,False,1,1,6RVF,285.083,B1(c2cc(ccc2CO1)NC(=O)Nc3ccccc3)(O)O
+KL5,"1-[7,7-bis(oxidanyl)-8-oxa-7-boranuidabicyclo[4.3.0]nona-1(6),2,4-trien-4-yl]-3-(phenylmethyl)thiourea",ligand,False,1,1,6RW1,315.175,[B-]1(c2cc(ccc2CO1)NC(=S)NCc3ccccc3)(O)O
+KLT,2-chloro-5-[(1S)-1-hydroxy-3-oxo-2H-isoindol-1-yl]benzenesulfonamide,ligand,False,1,1,3F4X,338.766,c1ccc2c(c1)C(=O)N[C@@]2(c3ccc(c(c3)S(=O)(=O)N)Cl)O
+KPQ,"1,1,2,2,3,3,4,4,4-nonakis(fluoranyl)butane-1-sulfonamide",ligand,False,1,1,6RZX,299.115,C(C(C(F)(F)S(=O)(=O)N)(F)F)(C(F)(F)F)(F)F
+KPW,"4-[[4-[5,5-dimethyl-2-(6-methylpyridin-2-yl)-4,6-dihydropyrrolo[1,2-b]pyrazol-3-yl]pyridin-2-yl]amino]benzenesulfonamide",ligand,False,1,1,6S03,474.578,Cc1cccc(n1)c2c(c3n(n2)CC(C3)(C)C)c4ccnc(c4)Nc5ccc(cc5)S(=O)(=O)N
+KQU,4-[(2R)-3-butylselanyl-2-oxidanyl-propyl]selanylbenzenesulfonamide,ligand,False,1,1,7ORQ,429.296,CCCC[Se]C[C@H](C[Se]c1ccc(cc1)S(=O)(=O)N)O
+KR5,"4-{[3-(3,5-dimethyl-1H-pyrazol-1-yl)-3-oxopropyl]amino}benzenesulfonamide",ligand,False,1,1,4Q6E,322.383,Cc1cc(n(n1)C(=O)CCNc2ccc(cc2)S(=O)(=O)N)C
+KR6,4-[(2S)-3-butylselanyl-2-oxidanyl-propyl]selanylbenzenesulfonamide,ligand,False,1,1,7ORQ,429.296,CCCC[Se]C[C@@H](C[Se]c1ccc(cc1)S(=O)(=O)N)O
+L1Q,"2,3,5,6-tetrakis(fluoranyl)-4-propyl-benzenesulfonamide",ligand,False,1,2,6S9G,271.232,CCCc1c(c(c(c(c1F)F)S(=O)(=O)N)F)F
+L3Q,"(8~{a}~{S})-1,5,6,7,8,8~{a}-hexahydro-[1,3]oxazolo[3,4-a]pyrazin-3-one",ligand,False,1,1,6SAY,142.156,C1CN2[C@@H](CN1)COC2=O
+L4K,4-pentylbenzenesulfonamide,ligand,False,1,1,6SBH,227.323,CCCCCc1ccc(cc1)S(=O)(=O)N
+L4Q,4-hexylbenzenesulfonamide,ligand,False,1,1,6SBL,241.35,CCCCCCc1ccc(cc1)S(=O)(=O)N
+L4W,4-pentoxybenzenesulfonamide,ligand,False,1,2,6SBM,243.323,CCCCCOc1ccc(cc1)S(=O)(=O)N
+L7T,"2,3,4,5,6-pentafluorobenzenesulfonamide",ligand,False,1,1,6SD7,247.143,c1(c(c(c(c(c1F)F)S(=O)(=O)N)F)F)F
+L8N,phenyl-(4-sulfamoylphenoxy)phosphinic acid,ligand,False,1,1,6SDS,313.266,c1ccc(cc1)P(=O)(O)Oc2ccc(cc2)S(=O)(=O)N
+L9B,4-(4-oxidanylbutyl)benzenesulfonamide,ligand,False,1,2,6SEY,229.296,c1cc(ccc1CCCCO)S(=O)(=O)N
+LBQ,4-(furan-2-ylmethylamino)benzenesulfonamide,ligand,False,1,2,6SFU,252.29,c1cc(oc1)CNc2ccc(cc2)S(=O)(=O)N
+LC1,"2-(1,3-thiazol-4-yl)-1H-benzimidazole-5-sulfonamide",ligand,False,1,1,3FFP,280.326,c1cc2c(cc1S(=O)(=O)N)nc([nH]2)c3cscn3
+LC8,4-(furan-2-ylmethylamino)-3-nitro-benzenesulfonamide,ligand,False,1,1,6SG6,297.287,c1cc(oc1)CNc2ccc(cc2[N+](=O)[O-])S(=O)(=O)N
+LCP,PERCHLORATE ION,ligand,False,1,3,4YGL,99.451,[O-]Cl(=O)(=O)=O
+LD3,meta-carboran-propylsulfonamid,ligand,False,1,1,8AA6,254.298,B1234B567B189B212B33%10B454B656B787C911B232B715C4%1062CCCS(=O)(=O)N
+LGO,4-{5-phenyl-4-[(4-sulfamoylphenyl)carbamamido]-1H-pyrazol-1-yl}benzene-1-sulfonamide,ligand,False,1,1,8TTR,512.561,c1ccc(cc1)c2c(cnn2c3ccc(cc3)S(=O)(=O)N)NC(=O)Nc4ccc(cc4)S(=O)(=O)N
+LML,ISOBUTYL MALONIC ACID,ligand,False,1,1,6YHA,160.168,CC(C)CC(C(=O)O)C(=O)O
+LMS,"[(2R,3S,4R,5R)-5-(6-AMINO-9H-PURIN-9-YL)-3,4-DIHYDROXYTETRAHYDRO-2-FURANYL]METHYL SULFAMATE",ligand,False,1,1,6C7W,346.32,c1nc(c2c(n1)n(cn2)[C@H]3[C@@H]([C@@H]([C@H](O3)COS(=O)(=O)N)O)O)N
+LWT,"4-(2-chlorophenyl)-3a,4,5,9b-tetrahydro-3H-cyclopenta[c]quinoline-8-sulfonamide",ligand,False,1,1,6SX9,362.874,c1ccc(c(c1)[C@@H]2[C@@H]3CCC[C@@H]3c4cc(ccc4N2)S(=O)(=O)N)Cl
+LYQ,"(3~{a}~{R},4~{S},9~{b}~{S})-4-(2-chloranyl-4-oxidanyl-phenyl)-2,3,3~{a},4,5,9~{b}-hexahydro-1~{H}-cyclopenta[c]quinoline-8-sulfonamide",ligand,False,1,1,6SYB,378.873,c1cc(c(cc1O)Cl)[C@@H]2[C@@H]3CCC[C@@H]3c4cc(ccc4N2)S(=O)(=O)N
+LZW,"(4~{S})-4-(4-hydroxyphenyl)-2,3,4,5-tetrahydro-1~{H}-cyclopenta[c]quinoline-8-sulfonamide",ligand,False,1,2,6SYS,342.412,c1cc(ccc1[C@H]2C3=C(CCC3)c4cc(ccc4N2)S(=O)(=O)N)O
+M25,N-{2-[4-(AMINOSULFONYL)PHENYL]ETHYL}ACETAMIDE,ligand,False,1,2,2NNS,242.295,CC(=O)NCCc1ccc(cc1)S(=O)(=O)N
+M28,3-[4-(AMINOSULFONYL)PHENYL]PROPANOIC ACID,ligand,False,1,2,2NNO,229.253,c1cc(ccc1CCC(=O)O)S(=O)(=O)N
+M29,ETHYL 3-[4-(AMINOSULFONYL)PHENYL]PROPANOATE,ligand,False,1,2,2NNV,257.306,CCOC(=O)CCc1ccc(cc1)S(=O)(=O)N
+M3T,3-methylbenzenethiol,ligand,False,1,1,4Q9Y,124.203,Cc1cccc(c1)S
+M4S,4-methoxybenzenesulfonamide,ligand,False,1,2,6I0W,187.216,COc1ccc(cc1)S(=O)(=O)N
+M8J,"2-(2,4-dioxo-1,3-diazaspiro[4.4]nonan-3-yl)-N-(4-sulfamoylphenyl)acetamide",ligand,False,1,2,6ODZ,366.392,c1cc(ccc1NC(=O)CN2C(=O)C3(CCCC3)NC2=O)S(=O)(=O)N
+M8S,"2-(2,4-dioxo-1,3-diazaspiro[4.6]undecan-3-yl)-N-(4-sulfamoylphenyl)acetamide",ligand,False,1,1,6OE0,394.445,c1cc(ccc1NC(=O)CN2C(=O)C3(CCCCCC3)NC2=O)S(=O)(=O)N
+M8V,"2-(2,4-dioxo-1,3-diazaspiro[4.5]decan-3-yl)-N-(4-sulfamoylphenyl)acetamide",ligand,False,1,1,6OE1,380.419,c1cc(ccc1NC(=O)CN2C(=O)C3(CCCCC3)NC2=O)S(=O)(=O)N
+MAJ,indane-5-sulfonamide,ligand,False,1,2,2QOA,197.254,c1cc2c(cc1S(=O)(=O)N)CCC2
+MB1,2-chloro-5-nitrobenzenesulfonamide,ligand,False,1,1,2QP6,236.633,c1cc(c(cc1[N+](=O)[O-])S(=O)(=O)N)Cl
+MB2,5-({[(4-fluorophenyl)sulfonyl]carbamoyl}amino)pyridine-2-sulfonamide,ligand,False,1,1,4KUW,374.368,c1cc(ccc1F)S(=O)(=O)NC(=O)Nc2ccc(nc2)S(=O)(=O)N
+MB4,5-({[(2-methylphenyl)sulfonyl]carbamoyl}amino)pyridine-2-sulfonamide,ligand,False,1,1,4KUY,370.404,Cc1ccccc1S(=O)(=O)NC(=O)Nc2ccc(nc2)S(=O)(=O)N
+MB6,5-({[(4-chlorophenyl)sulfonyl]carbamoyl}amino)pyridine-2-sulfonamide,ligand,False,1,1,4KUV,390.823,c1cc(ccc1S(=O)(=O)NC(=O)Nc2ccc(nc2)S(=O)(=O)N)Cl
+MB7,5-({[(4-methylphenyl)sulfonyl]carbamoyl}amino)pyridine-2-sulfonamide,ligand,False,1,1,4KV0,370.404,Cc1ccc(cc1)S(=O)(=O)NC(=O)Nc2ccc(nc2)S(=O)(=O)N
+MG,MAGNESIUM ION,metal,True,1,1,4PXX,24.305,[Mg+2]
+MG5,"2,3,4-tri-O-propanoyl-6-O-sulfamoyl-beta-D-glucopyranose",ligand,False,1,1,3T83,427.424,CCC(=O)O[C@@H]1[C@H](O[C@H]([C@@H]([C@H]1OC(=O)CC)OC(=O)CC)O)COS(=O)(=O)N
+MHK,naphthalene-1-sulfonamide,ligand,False,1,1,6T4P,207.249,c1ccc2c(c1)cccc2S(=O)(=O)N
+MIZ,"1-[2-(1H-imidazol-4-yl)ethyl]-2,4,6-trimethylpyridinium",ligand,False,1,1,3HFP,216.302,Cc1cc([n+](c(c1)C)CCc2c[nH]cn2)C
+MJ2,"3,5-dimethylbenzenesulfonamide",ligand,False,1,1,6T4O,185.243,Cc1cc(cc(c1)S(=O)(=O)N)C
+MJB,2-piperazin-1-ylethanol,ligand,False,1,1,6T4N,130.188,C1CN(CCN1)CCO
+MJT,anthracene-9-sulfonamide,ligand,False,1,1,6T5C,257.308,c1ccc2c(c1)cc3ccccc3c2S(=O)(=O)N
+MN,MANGANESE (II) ION,metal,True,1,1,1RZD,54.938,[Mn+2]
+MNS,5-(DIMETHYLAMINO)-1-NAPHTHALENESULFONAMIDE,ligand,False,1,1,1OKL,250.317,CN(C)c1cccc2c1cccc2S(=O)(=O)N
+MS4,"3-CHLORO-2'-CYANO-5'-(1H-1,2,4-TRIAZOL-1-YLMETHYL)BIPHENYL-4-YL SULFAMATE",ligand,False,1,2,2WD3,389.816,c1cc(c(cc1Cn2cncn2)c3ccc(c(c3)Cl)OS(=O)(=O)N)C#N
+MS5,"7-methoxy-2-(3-methoxybenzyl)-1,2,3,4-tetrahydroisoquinolin-6-yl sulfamate",ligand,False,1,1,2WD2,378.443,COc1cccc(c1)C[N@]2CCc3cc(c(cc3C2)OC)OS(=O)(=O)N
+MTS,"(4S-TRANS)-4-(METHYLAMINO)-5,6-DIHYDRO-6-METHYL-4H-THIENO(2,3-B)THIOPYRAN-2-SULFONAMIDE-7,7-DIOXIDE",ligand,False,1,1,1CIN,310.413,C[C@H]1C[C@@H](c2cc(sc2S1(=O)=O)S(=O)(=O)N)NC
+MUE,naphthalene-2-sulfonamide,ligand,False,1,1,6T81,207.249,c1ccc2cc(ccc2c1)S(=O)(=O)N
+MYW, Nidocarborane,ligand,False,1,1,6T9Z,243.487,B123B45B167B289B31B823B966B744B622[C@@]45[C+]321CCCS(=O)(=O)N
+MZH,"1,1'-(oxydimethanediyl)dipyrrolidine-2,5-dione",ligand,False,1,1,3PJJ,240.213,C1CC(=O)N(C1=O)COCN2C(=O)CCC2=O
+N7V,"3-[(1S)-1-(4-nitrophenyl)ethyl]-2-oxo-2,3-dihydro-1,3-benzoxazole-5-sulfonamide",ligand,False,1,1,6OUJ,363.345,C[C@@H](c1ccc(cc1)[N+](=O)[O-])N2c3cc(ccc3OC2=O)S(=O)(=O)N
+NHY,N-HYDROXYUREA,ligand,False,1,1,2GEH,76.055,C(=O)(N)NO
+NIO,NICOTINIC ACID,ligand,False,1,1,6MBV,123.109,c1cc(cnc1)C(=O)O
+NKX,"(2S)-2,3-bis(nitrooxy)propyl ethyl[(4S,6S)-6-methyl-7,7-dioxido-2-sulfamoyl-5,6-dihydro-4H-thieno[2,3-b]thiopyran-4-yl]carbamate",ligand,False,1,1,3K2F,532.523,CCN([C@H]1C[C@@H](S(=O)(=O)c2c1cc(s2)S(=O)(=O)N)C)C(=O)OC[C@@H](CO[N+](=O)[O-])O[N+](=O)[O-]
+NR2,N-({[4-(AMINOSULFONYL)PHENYL]AMINO}CARBONYL)-4-METHYLBENZENESULFONAMIDE,ligand,False,1,2,1ZFK,369.416,Cc1ccc(cc1)S(=O)(=O)NC(=O)Nc2ccc(cc2)S(=O)(=O)N
+O3B,(4-sulfamoylphenyl)boronic acid,ligand,False,1,1,6XVH,201.008,B(c1ccc(cc1)S(=O)(=O)N)(O)O
+O42,4-[4-(phenylcarbonyl)piperazin-1-yl]carbonylbenzenesulfonamide,ligand,False,1,1,6XXT,373.426,c1ccc(cc1)C(=O)N2CCN(CC2)C(=O)c3ccc(cc3)S(=O)(=O)N
+O48,decyl sulfamate,ligand,False,1,1,3IBU,237.36,CCCCCCCCCCOS(=O)(=O)N
+O59,"octane-1,8-diyl disulfamate",ligand,False,1,1,3IBL,304.384,C(CCCCOS(=O)(=O)N)CCCOS(=O)(=O)N
+O60,"decane-1,10-diyl disulfamate",ligand,False,1,1,3IBN,332.437,C(CCCCCOS(=O)(=O)N)CCCCOS(=O)(=O)N
+OJ4,4-[(2S)-2-hydroxy-3-{[(2R)-2-hydroxy-3-(4-sulfamoylphenoxy)propyl]tellanyl}propoxy]benzene-1-sulfonamide,ligand,False,1,3,6PGX,588.122,c1cc(ccc1OC[C@H](C[Te]C[C@H](COc2ccc(cc2)S(=O)(=O)N)O)O)S(=O)(=O)N
+OQT,"2-[(1S)-1,2,3,4-Tetrahydronapthalen-1-ylamino)-3,5,6-trifluorobenzenesulfonamide",ligand,False,1,1,6YH8,354.347,c1ccc2c(c1)CC=C[C@@H]2Nc3c(cc(c(c3S(=O)(=O)N)F)F)F
+OQW,"2-(Cyclooctylamino)-3,5,6-trifluorobenzenesulfonamide",ligand,False,1,1,6YH6,336.373,c1c(c(c(c(c1F)F)S(=O)(=O)N)NC2CCCCCCC2)F
+OSP,SULTHIAME,ligand,False,1,1,2Q1Q,290.359,c1cc(ccc1N2CCCCS2(=O)=O)S(=O)(=O)N
+OSW,Metala-Carborane di-propyl-sulfonamide,ligand,False,1,2,6YJ3,545.906,B1234B567B189B212B33%10B454B656B787B911[C+2]232([C+]4%105[Co]76121234B567B118B559B66%10B272B667B%1055B911B565[C+]318[C+2]4752CCCS(=O)(=O)N)CCCS(=O)(=O)N
+OWK,Metala-Carborane di-ethyl-sulfonamide,ligand,False,1,1,6YKH,520.877,[B]1B2B13B4B56B2B578B649[Co]7124567(B9[C+]31(C82)CCS(=O)(=O)N)B1B2B38B229B1B212B93B41(B52)[C+]68(C7)CCS(=O)(=O)N
+OXD,OXALIC ACID,ligand,False,1,1,8PHM,90.035,C(=O)(C(=O)O)O
+OY0,(2S)-2-tert-butyl-N-(4-sulfamoylphenyl)pentanamide,ligand,False,1,1,3OY0,312.428,CCC[C@H](C(=O)Nc1ccc(cc1)S(=O)(=O)N)C(C)(C)C
+OY5,CA IX mimic,ligand,False,1,1,6YKC,517.853,B1234B567B189B212B33%10B454B656B787B911[C+2]232([C+]4%105[Co]76121234B567B118B559B66%10B272B667B%1055B911B565[C+]318[C+2]4752CCS(=O)(=O)N)CCS(=O)(=O)N
+OY7,(4-ethanoylphenyl)boronic acid,ligand,False,1,1,8IGF,163.966,B(c1ccc(cc1)C(=O)C)(O)O
+OY8,Metala-Carborane di-ethyl-sulfonamide,ligand,False,1,1,6YKC,517.853,B1234B567B189B212B33%10B454B656B787B911[C+2]232([C+]4%105[Co]76121234B567B118B559B66%10B272B667B%1055B911B565[C+]318[C+2]4752CCS(=O)(=O)N)CCS(=O)(=O)N
+OYQ,(4S)-4-methyl-N-(4-sulfamoylphenyl)hexanamide,ligand,False,1,1,3OYQ,284.375,CC[C@H](C)CCC(=O)Nc1ccc(cc1)S(=O)(=O)N
+OYS,2-phenyl-N-(4-sulfamoylphenyl)acetamide,ligand,False,1,1,3OYS,290.338,c1ccc(cc1)CC(=O)Nc2ccc(cc2)S(=O)(=O)N
+P1B,"(5R)-5-{4-[2-(5-ethylpyridin-2-yl)ethoxy]benzyl}-1,3-thiazolidine-2,4-dione",ligand,False,1,1,7M26,356.439,CCc1ccc(nc1)CCOc2ccc(cc2)C[C@@H]3C(=O)NC(=O)S3
+P58,benzyl(methyl)carbamodithioic acid,ligand,False,1,1,3P58,197.32,CN(Cc1ccccc1)C(=S)S
+P5T,Meta-Nidocarborane propyl-sulfonamide,ligand,False,1,1,6YOL,243.487,B123B45B167B289B612B744B116B282[C@@]93B21C465CCCS(=O)(=O)N
+P6Q,Meta-Carborane propyl-sulfonamide,ligand,False,1,1,6YO2,254.298,B12B34B156B37B8B79C813B4B12B31C95(B61)CCCS(=O)(=O)N
+P75,"4-[[1-[(2~{S},3~{S},5~{R})-2-(hydroxymethyl)-5-[5-methyl-2,4-bis(oxidanylidene)pyrimidin-1-yl]oxolan-3-yl]-1,2,3-triazol-4-yl]methoxy]benzenesulfonamide",ligand,False,1,1,6YPW,478.479,CC1=CN(C(=O)NC1=O)[C@H]2C[C@@H]([C@H](O2)CO)n3cc(nn3)COc4ccc(cc4)S(=O)(=O)N
+P7H,Meta-Carborane di-propyl-sulfonamide,ligand,False,1,1,6YOI,376.464,B1234B567B189B212B33%10B454B656B787C911(B232B715C4%1062CCCS(=O)(=O)N)CCCS(=O)(=O)N
+P7Z,Ortho-Carborane di-propyl-sulfonamide,ligand,False,1,1,6YO7,376.464,B1234B567B189B212B33%10B454B656B787B911C232(B4%105C7612CCCS(=O)(=O)N)CCCS(=O)(=O)N
+P82,Para-Carborane di-propyl-sulfonamide,ligand,False,1,1,6YOK,376.464,B1234B567B189B212B88%10C955(B669B733C411(B363B218B9%1035)CCCS(=O)(=O)N)CCCS(=O)(=O)N
+P92,"3~{H}-1,3-benzoxazole-2-thione",ligand,False,1,1,6YQU,151.186,c1ccc2c(c1)NC(=S)O2
+P9B,4-{[(pentafluorophenyl)carbamoyl]amino}benzenesulfonamide,ligand,False,1,1,3N0N,381.278,c1cc(ccc1NC(=O)Nc2c(c(c(c(c2F)F)F)F)F)S(=O)(=O)N
+P9E,"2-sulfanylidene-3~{H}-1,3-benzoxazole-5-sulfonamide",ligand,False,1,2,6YQT,230.264,c1cc2c(cc1S(=O)(=O)N)NC(=S)O2
+PHB,P-HYDROXYBENZOIC ACID,ligand,False,1,1,4E3G,138.121,c1cc(ccc1C(=O)O)O
+PHE,PHENYLALANINE,ligand,False,1,1,2FMG,165.189,c1ccc(cc1)C[C@@H](C(=O)O)N
+PIU,"1-{2-[4-(AMINOSULFONYL)PHENYL]ETHYL}-2,4,6-TRIMETHYLPYRIDINIUM",ligand,False,1,1,1ZE8,305.415,Cc1cc([n+](c(c1)C)CCc2ccc(cc2)S(=O)(=O)N)C
+PMX,3-chloro-N-[(2E)-4-methoxy-4-oxobut-2-enoyl]-L-tyrosine,ligand,False,1,1,3P4V,327.717,COC(=O)/C=C/C(=O)N[C@@H](Cc1ccc(c(c1)Cl)O)C(=O)O
+PO1,"(9BETA,13ALPHA,14BETA,17ALPHA)-2-METHOXYESTRA-1,3,5(10)-TRIENE-3,17-DIYL DISULFAMATE",ligand,False,1,2,2GD8,460.565,C[C@]12CC[C@@H]3c4cc(c(cc4CC[C@H]3[C@@H]1CC[C@@H]2OS(=O)(=O)N)OS(=O)(=O)N)OC
+POF,"(4aS,4bR,10bS,12aS)-12a-methyl-1,3-dioxo-2-(pyridin-3-ylmethyl)-1,2,3,4,4a,4b,5,6,10b,11,12,12a-dodecahydronaphtho[2,1-f]isoquinolin-8-yl sulfamate",ligand,False,1,1,3C7P,469.553,C[C@]12CC[C@@H]3c4ccc(cc4CC[C@H]3[C@@H]1CC(=O)N(C2=O)Cc5cccnc5)OS(=O)(=O)N
+PTS,"(4S-TRANS)-4-(AMINO)-5,6-DIHYDRO-6-METHYL-4H-THIENO (2,3-B)THIOPYRAN-2-SULFONAMIDE-7,7-DIOXIDE",ligand,False,1,1,1CIM,296.387,C[C@H]1C[C@@H](c2cc(sc2S1(=O)=O)S(=O)(=O)N)N
+Q38,Carborane nido-pentyl-sulfonamide,ligand,False,1,1,6YZU,271.54,B123B45B167B289B31B823B966B744B622[C@]45C321CCCCCS(=O)(=O)N
+Q3E,Carborane propyl-sulfonamide,ligand,False,1,1,6YZT,254.298,B1234B567B189B212B33%10B454B656B787B911C232B4%105C7612CCCS(=O)(=O)N
+Q3T,Carborane methyl-sulfonamide,ligand,False,1,1,6YZL,226.244,B1234B567B189B212B33%10B454B656B787B911C232B4%105C7612CS(=O)(=O)N
+Q4I,8-({[4-(3-aminopropoxy)-8-({[4-hydroxy-8-({[4-(2-methylpropoxy)-8-({[4-(3-{[(4-sulfamoylbenzoyl)amino]methyl}phenoxy)butyl]carbamoyl}amino)quinolin-2-yl]carbonyl}amino)quinolin-2-yl]carbonyl}amino)quinolin-2-yl]carbonyl}amino)-4-(carboxymethoxy)quinoline-2-carboxylic acid,ligand,False,1,2,4LP6,1337.372,CC(C)COc1cc(nc2c1cccc2NC(=O)NCCCCOc3cccc(c3)CNC(=O)c4ccc(cc4)S(=O)(=O)N)C(=O)Nc5cccc6c5nc(cc6O)C(=O)Nc7cccc8c7nc(cc8OCCCN)C(=O)Nc9cccc1c9nc(cc1OCC(=O)O)C(=O)O
+Q64,(2Z)-2-benzylidene-3-oxo-N-(4-sulfamoylphenyl)butanamide,ligand,False,1,1,6UFB,344.385,CC(=O)/C(=C/c1ccccc1)/C(=O)Nc2ccc(cc2)S(=O)(=O)N
+Q6A,(2Z)-2-[(4-methoxyphenyl)methylidene]-3-oxo-N-(4-sulfamoylphenyl)butanamide,ligand,False,1,1,6UFC,374.411,CC(=O)/C(=C/c1ccc(cc1)OC)/C(=O)Nc2ccc(cc2)S(=O)(=O)N
+Q6D,(2Z)-3-oxo-N-(4-sulfamoylphenyl)-2-[(thiophen-2-yl)methylidene]butanamide,ligand,False,1,1,6UFD,350.413,CC(=O)/C(=C/c1cccs1)/C(=O)Nc2ccc(cc2)S(=O)(=O)N
+QOZ,2-[4-(diphenylmethyl)piperazin-1-yl]-~{N}-(4-sulfamoylphenyl)ethanamide,ligand,False,1,1,6ZR8,464.58,c1ccc(cc1)C(c2ccccc2)N3CCN(CC3)CC(=O)Nc4ccc(cc4)S(=O)(=O)N
+QYA,"2-(2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-N-(4-sulfamoylphenyl)acetamide",ligand,False,1,1,6VJ3,324.312,c1cc(ccc1NC(=O)CN2C=CC(=O)NC2=O)S(=O)(=O)N
+R21,2-(3-chloro-4-hydroxyphenyl)-N-[2-(4-sulfamoylphenyl)ethyl]acetamide,ligand,False,1,1,3NB5,368.835,c1cc(ccc1CCNC(=O)Cc2ccc(c(c2)Cl)O)S(=O)(=O)N
+R29,"1-[7,7-bis(oxidanyl)-8-oxa-7-boranuidabicyclo[4.3.0]nona-1,3,5-trien-4-yl]-3-(phenylmethyl)urea",ligand,False,1,1,6RVK,299.11,[B-]1(c2cc(ccc2CO1)NC(=O)NCc3ccccc3)(O)O
+R2W,4-(3-(3-phenoxypropyl)thioureido)benzenesulfonamide,ligand,False,1,1,7A6V,365.47,c1ccc(cc1)OCCCNC(=S)Nc2ccc(cc2)S(=O)(=O)N
+R8N,"2,3,5,6-tetrakis(fluoranyl)-4-(2-hydroxyethylsulfanyl)-~{N}-methyl-benzenesulfonamide",ligand,False,1,1,7AEQ,319.296,CNS(=O)(=O)c1c(c(c(c(c1F)F)SCCO)F)F
+R8Q,"2,3,5,6-tetrakis(fluoranyl)-~{N}-methyl-4-propylsulfanyl-benzenesulfonamide",ligand,False,1,1,7AES,317.323,CCCSc1c(c(c(c(c1F)F)S(=O)(=O)NC)F)F
+R92,4-chloranyl-~{N}-[(1~{S})-1-(2-hydroxyphenyl)ethyl]-3-sulfamoyl-benzamide,ligand,False,1,1,5NY6,354.809,C[C@@H](c1ccccc1O)NC(=O)c2ccc(c(c2)S(=O)(=O)N)Cl
+RA1,2-chloranyl-4-nitro-~{N}-(4-sulfamoylphenyl)benzamide,ligand,False,1,1,5NXG,355.754,c1cc(ccc1NC(=O)c2ccc(cc2Cl)[N+](=O)[O-])S(=O)(=O)N
+RA5,8-methoxy-2-oxidanylidene-~{N}-(4-sulfamoylphenyl)chromene-3-carboxamide,ligand,False,1,1,5NXM,374.368,COc1cccc2c1OC(=O)C(=C2)C(=O)Nc3ccc(cc3)S(=O)(=O)N
+RA9,"2-[(5-azanyl-1,3,4-thiadiazol-2-yl)sulfanyl]-~{N}-(4-sulfamoylphenyl)ethanamide",ligand,False,1,2,5NXW,345.421,c1cc(ccc1NC(=O)CSc2nnc(s2)N)S(=O)(=O)N
+RAK,"4-(2-azanylethylsulfanyl)-2,3,5,6-tetrakis(fluoranyl)-~{N}-methyl-benzenesulfonamide",ligand,False,1,4,7AGN,318.312,CNS(=O)(=O)c1c(c(c(c(c1F)F)SCCN)F)F
+RC4,"1-[7,7-bis(oxidanyl)-8-oxa-7-boranuidabicyclo[4.3.0]nona-1,3,5-trien-4-yl]-3-(2-methoxy-5-methyl-phenyl)urea",ligand,False,1,1,5LMD,329.136,[B-]1(c2cc(ccc2CO1)NC(=O)Nc3cc(ccc3OC)C)(O)O
+RCO,RESORCINOL,ligand,False,1,4,4E49,110.111,c1cc(cc(c1)O)O
+RCS,triscarbonyl-cyclopentadienyl-carboxy-4-aminomethylbenzene-sulfonamide rhenium(I),ligand,False,1,2,3RJ7,547.556,c1cc(ccc1CNC(=O)C23[CH]4=[CH]5[Re]426([CH]5=[CH]63)(C#O)(C#O)C#O)S(=O)(=O)N
+RDT,"(1R)-6,7-dimethoxy-1-methyl-3,4-dihydroisoquinoline-2(1H)-sulfonamide",ligand,False,1,1,3PO6,286.347,C[C@@H]1c2cc(c(cc2CC[N@]1S(=O)(=O)N)OC)OC
+RGZ,(R)-ROSIGLITAZONE,ligand,False,1,1,7M24,357.427,CN(CCOc1ccc(cc1)C[C@@H]2C(=O)NC(=O)S2)c3ccccn3
+RU,RUTHENIUM ION,metal,True,1,1,3M1J,101.07,[Ru+3]
+RWH,3-(3-methyl-3-phenethylureido)benzenesulfonamide,ligand,False,1,1,7ASJ,333.405,CN(CCc1ccccc1)C(=O)Nc2cccc(c2)S(=O)(=O)N
+RYJ,"4-sulfamoyl-N-(2,2,2-trifluoroethyl)benzamide",ligand,False,1,1,3RYJ,282.24,c1cc(ccc1C(=O)NCC(F)(F)F)S(=O)(=O)N
+RYV,N-ethyl-4-sulfamoylbenzamide,ligand,False,1,1,3RYV,228.268,CCNC(=O)c1ccc(cc1)S(=O)(=O)N
+RYX,"N-(2,2,3,3,3-pentafluoropropyl)-4-sulfamoylbenzamide",ligand,False,1,1,3RYX,332.247,c1cc(ccc1C(=O)NCC(C(F)(F)F)(F)F)S(=O)(=O)N
+RYY,N-propyl-4-sulfamoylbenzamide,ligand,False,1,2,3RYY,242.295,CCCNC(=O)c1ccc(cc1)S(=O)(=O)N
+RYZ,"N-(2,2,3,3,4,4,4-heptafluorobutyl)-4-sulfamoylbenzamide",ligand,False,1,1,3RYZ,382.255,c1cc(ccc1C(=O)NCC(C(C(F)(F)F)(F)F)(F)F)S(=O)(=O)N
+RZ0,N-butyl-4-sulfamoylbenzamide,ligand,False,1,1,3RZ0,256.321,CCCCNC(=O)c1ccc(cc1)S(=O)(=O)N
+RZ1,"N-(2,2,3,3,4,4,5,5,5-nonafluoropentyl)-4-sulfamoylbenzamide",ligand,False,1,1,3RZ1,432.262,c1cc(ccc1C(=O)NCC(C(C(C(F)(F)F)(F)F)(F)F)(F)F)S(=O)(=O)N
+RZ5,N-pentyl-4-sulfamoylbenzamide,ligand,False,1,1,3RZ5,270.348,CCCCCNC(=O)c1ccc(cc1)S(=O)(=O)N
+RZ7,"4-sulfamoyl-N-(2,2,3,3,4,4,5,5,6,6,6-undecafluorohexyl)benzamide",ligand,False,1,1,3RZ7,482.27,c1cc(ccc1C(=O)NCC(C(C(C(C(F)(F)F)(F)F)(F)F)(F)F)(F)F)S(=O)(=O)N
+RZ8,N-hexyl-4-sulfamoylbenzamide,ligand,False,1,1,3RZ8,284.375,CCCCCCNC(=O)c1ccc(cc1)S(=O)(=O)N
+S24,"S-(2,4-dihydroxyphenyl) hydrogen thiocarbonate",ligand,False,1,1,2OSF,186.185,c1cc(c(cc1O)O)SC(=O)O
+S6I,4-[(cyclopentylcarbamoyl)amino]benzenesulfonamide,ligand,False,1,1,3MZC,283.347,c1cc(ccc1NC(=O)NC2CCCC2)S(=O)(=O)N
+S8A,"(1,1-dioxido-3-oxo-1,2-benzothiazol-2(3H)-yl)acetic acid",ligand,False,1,1,5CLU,241.221,c1ccc2c(c1)C(=O)N(S2(=O)=O)CC(=O)O
+SAB,4-SULFONAMIDE-[1-(4-AMINOBUTANE)]BENZAMIDE,ligand,False,1,1,1OKM,271.336,c1cc(ccc1C(=O)NCCCCN)S(=O)(=O)N
+SAN,SULFANILAMIDE,ligand,False,1,3,6RL9,172.205,c1cc(ccc1N)S(=O)(=O)N
+SBB,N-[2-(1H-INDOL-5-YL)-BUTYL]-4-SULFAMOYL-BENZAMIDE,ligand,False,1,1,1IF9,371.453,CC[C@H](CNC(=O)c1ccc(cc1)S(=O)(=O)N)c2ccc3c(c2)cc[nH]3
+SBS,(S)-N-(3-INDOL-1-YL-2-METHYL-PROPYL)-4-SULFAMOYL-BENZAMIDE,ligand,False,1,1,1IF8,371.453,C[C@@H](CNC(=O)c1ccc(cc1)S(=O)(=O)N)Cn2ccc3c2cccc3
+SBW,N-(3-hydroxybenzyl)-4-sulfamoylbenzamide,ligand,False,1,3,4MTY,306.337,c1cc(cc(c1)O)CNC(=O)c2ccc(cc2)S(=O)(=O)N
+SDA,"4-AMINO-3,5-DICHLOROBENZENESULFONAMIDE",ligand,False,1,1,1ZGE,241.095,c1c(cc(c(c1Cl)N)Cl)S(=O)(=O)N
+SG1,3-NITRO-4-(2-OXO-PYRROLIDIN-1-YL)-BENZENESULFONAMIDE,ligand,False,1,1,1KWQ,285.276,c1cc(c(cc1S(=O)(=O)N)[N+](=O)[O-])N2CCCC2=O
+SG2,"1-METHYL-3-OXO-1,3-DIHYDRO-BENZO[C]ISOTHIAZOLE-5-SULFONIC ACID AMIDE",ligand,False,1,1,1KWR,244.291,CN1c2ccc(cc2C(=O)S1)S(=O)(=O)N
+SG4,"3,4-di-O-acetyl-6-O-sulfamoyl-alpha-D-glucopyranose",ligand,False,1,1,3T82,343.308,CC(=O)O[C@@H]1[C@H](O[C@@H]([C@@H]([C@H]1OC(=O)C)O)O)COS(=O)(=O)N
+SG5,"2,3,4-tri-O-propanoyl-6-O-sulfamoyl-alpha-D-glucopyranose",ligand,False,1,1,3T83,427.424,CCC(=O)O[C@@H]1[C@H](O[C@@H]([C@@H]([C@H]1OC(=O)CC)OC(=O)CC)O)COS(=O)(=O)N
+SG6,4-O-acetyl-6-O-sulfamoyl-alpha-D-galactopyranose,ligand,False,1,1,3T84,301.271,CC(=O)O[C@H]1[C@H](O[C@@H]([C@@H]([C@H]1O)O)O)COS(=O)(=O)N
+SG7,"3,4-di-O-acetyl-6-O-sulfamoyl-alpha-D-mannopyranose",ligand,False,1,1,3T85,343.308,CC(=O)O[C@@H]1[C@H](O[C@@H]([C@H]([C@H]1OC(=O)C)O)O)COS(=O)(=O)N
+SMS,"SULFAMIC ACID 2,3-O-(1-METHYLETHYLIDENE)-4,5-O-SULFONYL-BETA-FRUCTOPYRANOSE ESTER",ligand,False,1,1,1EOU,361.346,CC1(O[C@H]2[C@H]3[C@@H](CO[C@]2(O1)COS(=O)(=O)N)OS(=O)(=O)O3)C
+SPM,SPERMINE,ligand,False,1,1,3KWA,202.34,C(CCNCCCN)CNCCCN
+SRX,"chloro{N-[di(pyridin-2-yl-kappaN)methyl]-4-sulfamoylbenzamide}[(1,2,3,4,5,6-eta)-(1R,2R,3R,4S,5S,6S)-1,2,3,4,5,6-hexamethylcyclohexane-1,2,3,4,5,6-hexayl]ruthenium(2+)",ligand,False,1,1,3PYK,667.204,CC12C3([Ru]14567(C2(C4(C5(C63C)C)C)C)([n+]8ccccc8C(c9[n+]7cccc9)NC(=O)c1ccc(cc1)S(=O)(=O)N)Cl)C
+STB,4-SULFONAMIDE-[4-(THIOMETHYLAMINOBUTANE)]BENZAMIDE,ligand,False,1,1,1OKN,317.428,c1cc(ccc1C(=O)NCCCCNCS)S(=O)(=O)N
+SU0,2-(7-methoxy-2-oxo-2H-chromen-4-yl)-N-(4-sulfamoylphenyl)acetamide,ligand,False,1,1,3ML2,388.394,COc1ccc2c(c1)OC(=O)C=C2CC(=O)Nc3ccc(cc3)S(=O)(=O)N
+SVO,4-(dimethylamino)-~{N}-nitro-benzenesulfonamide,ligand,False,1,2,8BZZ,245.256,CN(C)c1ccc(cc1)S(=O)(=O)N[N+](=O)[O-]
+SWU,(4-methyl-2-oxidanylidene-chromen-7-yl)methanesulfonamide,ligand,False,1,1,8C0Q,253.274,CC1=CC(=O)Oc2c1ccc(c2)CS(=O)(=O)N
+SXG,"2,3,4,5,6-pentafluoro-N-(2,3,5,6-tetrafluoro-4-sulfamoylphenyl)benzenesulfonamide",ligand,False,1,1,6SD7,474.279,c1(c(c(c(c(c1F)F)S(=O)(=O)N)F)F)NS(=O)(=O)c2c(c(c(c(c2F)F)F)F)F
+SXL,bis(fluoranyl)-(4-methyl-2-oxidanylidene-chromen-7-yl)methanesulfonamide,ligand,False,1,1,8C0R,289.255,CC1=CC(=O)Oc2c1ccc(c2)C(F)(F)S(=O)(=O)N
+SXS,"6-amino-1,2-benzothiazol-3(2H)-one 1,1-dioxide",ligand,False,1,1,4CQ0,198.199,c1cc2c(cc1N)S(=O)(=O)NC2=O
+TDZ,"(5R)-5-(4-{[(2R)-6-HYDROXY-2,5,7,8-TETRAMETHYL-3,4-DIHYDRO-2H-CHROMEN-2-YL]METHOXY}BENZYL)-1,3-THIAZOLIDINE-2,4-DIONE",ligand,False,1,1,7M23,441.54,Cc1c(c2c(c(c1O)C)CC[C@](O2)(C)COc3ccc(cc3)C[C@@H]4C(=O)NC(=O)S4)C
+TE1,(2Z)-3-{2-hydroxy-5-[(1S)-1-hydroxy-3-methylbutyl]-4-methoxyphenyl}prop-2-enoic acid,ligand,False,1,1,3F8E,280.316,CC(C)C[C@@H](c1cc(c(cc1OC)O)/C=C\C(=O)O)O
+TE2,"3-(4-sulfamoylphenyl)-N-[6-({(6Z)-2-[(2Z)-2-(1,3,3-trimethyl-1,3-dihydro-2H-indol-2-ylidene)ethyl]-6-[(2E)-2-(1,3,3-trimethyl-1,3-dihydro-2H-indol-2-ylidene)ethylidene]cyclohex-1-en-1-yl}amino)hexyl]propanamide",ligand,False,1,1,3NJ9,776.084,CC\1(c2ccccc2N(/C1=C\CC3=C(/C(=C\C=C\4/C(c5ccccc5N4C)(C)C)/CCC3)NCCCCCCNC(=O)CCc6ccc(cc6)S(=O)(=O)N)C)C
+TF9,acetohexamide,ligand,False,1,1,8J2O,324.395,CC(=O)c1ccc(cc1)S(=O)(=O)NC(=O)NC2CCCCC2
+TG4,2-(butylamino)-~{N}-[2-(4-sulfamoylphenyl)ethyl]ethanamide,ligand,False,1,1,5EKJ,313.416,CCCCNCC(=O)NCCc1ccc(cc1)S(=O)(=O)N
+TG5,2-(butylamino)-~{N}-(4-sulfamoylphenyl)ethanamide,ligand,False,1,1,5EKM,285.363,CCCCNCC(=O)Nc1ccc(cc1)S(=O)(=O)N
+TH7,"2,4-dihydroxybenzenesulfenic acid",ligand,False,1,1,4FIK,158.175,c1cc(c(cc1O)O)SO
+TKE,1-(4-iodophenyl)-3-[2-(4-sulfamoylphenyl)ethyl]thiourea,ligand,False,1,1,7BFA,461.341,c1cc(ccc1CCNC(=S)Nc2ccc(cc2)I)S(=O)(=O)N
+TKQ,1-(4-iodophenyl)-3-[2-(4-sulfamoylphenyl)ethyl]urea,ligand,False,1,1,7BG5,445.275,c1cc(ccc1CCNC(=O)Nc2ccc(cc2)I)S(=O)(=O)N
+TKR,"[1-[2-oxidanylidene-2-[2-(4-sulfamoylphenyl)ethylamino]ethyl]-1,2,3-triazolidin-4-yl]methyl hydrogen carbonate",ligand,False,1,1,7OYO,387.411,c1cc(ccc1CCNC(=O)CN2CC(NN2)COC(=O)O)S(=O)(=O)N
+TM4,3-hydroxy-2-methyl-4H-pyran-4-thione,ligand,False,1,1,4MLT,142.176,CC1=C(C(=S)C=CO1)O
+TM7,5-hydroxy-2-methyl-4H-pyran-4-thione,ligand,False,1,1,4MLX,142.176,CC1=CC(=S)C(=CO1)O
+TN8,~{N}'-(4-iodophenyl)-~{N}-[2-(4-sulfamoylphenyl)ethyl]carbamimidoselenoic acid,ligand,False,1,1,7BHH,508.236,c1cc(ccc1CCN/C(=N/c2ccc(cc2)I)/[SeH])S(=O)(=O)N
+TOR,"[(3aS,5aR,8aR,8bS)-2,2,7,7-tetramethyltetrahydro-3aH-bis[1,3]dioxolo[4,5-b:4',5'-d]pyran-3a-yl]methyl sulfamate",ligand,False,1,1,3HKU,339.362,CC1(O[C@@H]2CO[C@@]3([C@H]([C@@H]2O1)OC(O3)(C)C)COS(=O)(=O)N)C
+TPD,"N-(2-THIENYLMETHYL)-2,5-THIOPHENEDISULFONAMIDE",ligand,False,1,1,1BNW,338.447,c1cc(sc1)CNS(=O)(=O)c2ccc(s2)S(=O)(=O)N
+TRI,"1,2,4-TRIAZOLE",ligand,False,1,1,1CRA,69.065,c1[nH]cnn1
+TRP,TRYPTOPHAN,ligand,False,1,1,3EFI,204.225,c1ccc2c(c1)c(c[nH]2)C[C@@H](C(=O)O)N
+TRU,"6-CHLORO-3-(DICHLOROMETHYL)-3,4-DIHYDRO-2H-1,2,4-BENZOTHIADIAZINE-7-SULFONAMIDE 1,1-DIOXIDE",ligand,False,1,1,1ZGF,380.656,c1c2c(cc(c1Cl)S(=O)(=O)N)S(=O)(=O)N[C@@H](N2)C(Cl)Cl
+TU0,(E)-2-(5-BROMO-2-HYDROXYPHENYL)ETHENESULFONIC ACID,ligand,False,1,1,4BCW,279.108,c1cc(c(cc1Br)/C=C/S(=O)(=O)O)O
+TUO,2-(hydrazinocarbonyl)-3-phenyl-1H-indole-5-sulfonamide,ligand,False,1,1,3B4F,330.362,c1ccc(cc1)c2c3cc(ccc3[nH]c2C(=O)NN)S(=O)(=O)N
+U4V,"3'-deoxy-3'-(4-{[(4-sulfamoylphenyl)amino]methyl}-1H-1,2,3-triazol-1-yl)thymidine",ligand,False,1,1,6WKA,477.494,CC1=CN(C(=O)NC1=O)[C@H]2C[C@@H]([C@H](O2)CO)n3cc(nn3)CNc4ccc(cc4)S(=O)(=O)N
+U6X,Levosulpiride,ligand,False,1,1,8JEE,341.426,CCN1CCC[C@H]1CNC(=O)c2cc(ccc2OC)S(=O)(=O)N
+U7A,"N~2~-(2-cyanoethyl)-N,N~2~-bis(2-phenylethyl)-N-[2-(4-sulfamoylphenyl)ethyl]glycinamide",ligand,False,1,1,6WQ4,518.67,c1ccc(cc1)CCN(CCC#N)CC(=O)N(CCc2ccccc2)CCc3ccc(cc3)S(=O)(=O)N
+U7G,N~2~-(3-aminopropyl)-N-[(furan-2-yl)methyl]-N~2~-(2-phenylethyl)-N-[2-(4-sulfamoylphenyl)ethyl]glycinamide,ligand,False,1,1,6WQ5,498.638,c1ccc(cc1)CCN(CCCN)CC(=O)N(CCc2ccc(cc2)S(=O)(=O)N)Cc3ccco3
+UD8,"N-((1-(6-((3aR,7R,7aS)-7-hydroxy-2,2-dimethyltetrahydro-[1,3]dioxolo[4,5-c]pyridin-5(4H)-yl)hexyl)-1H-1,2,3-triazol-4-yl)methyl)-4-sulfamoylbenzamide",ligand,False,1,1,7NH8,536.644,CC1(O[C@H]2CN(C[C@H]([C@@H]2O1)O)CCCCCCn3cc(nn3)CNC(=O)c4ccc(cc4)S(=O)(=O)N)C
+UDE,"3-(3-((1-(2-(hydroxymethyl)-5-(5-methyl-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)tetrahydrofuran-3-yl)-1H-1,2,3-triazol-4-yl)methyl)ureido)benzenesulfonamide",ligand,False,1,1,7NH6,520.519,CC1=CN(C(=O)NC1=O)[C@H]2C[C@@H]([C@H](O2)CO)n3cc(nn3)CNC(=O)Nc4cccc(c4)S(=O)(=O)N
+UHO,2-[[3-[[phenylsulfonyl-[2-(4-sulfamoylphenyl)ethyl]amino]methyl]phenyl]amino]ethanoic acid,ligand,False,1,2,8QF9,503.591,c1ccc(cc1)S(=O)(=O)N(CCc2ccc(cc2)S(=O)(=O)N)Cc3cccc(c3)NCC(=O)O
+UIE,2-[[3-[[phenylsulfonyl-[(4-sulfamoylphenyl)methyl]amino]methyl]phenyl]amino]ethanoic acid,ligand,False,1,1,8QF7,489.565,c1ccc(cc1)S(=O)(=O)N(Cc2ccc(cc2)S(=O)(=O)N)Cc3cccc(c3)NCC(=O)O
+UII,2-[[3-[[methylsulfonyl-[(4-sulfamoylphenyl)methyl]amino]methyl]phenyl]amino]ethanoic acid,ligand,False,1,1,8QFK,427.495,CS(=O)(=O)N(Cc1ccc(cc1)S(=O)(=O)N)Cc2cccc(c2)NCC(=O)O
+URE,UREA,ligand,False,1,1,1BV3,60.055,C(=O)(N)N
+URH,~{N}-[[4-(phenylcarbonyl)phenyl]methyl]-4-sulfamoyl-benzamide,ligand,False,1,1,7NTB,394.444,c1ccc(cc1)C(=O)c2ccc(cc2)CNC(=O)c3ccc(cc3)S(=O)(=O)N
+V1F,"3-(benzylamino)-2,5,6-trifluoro-4-[(2-phenylethyl)sulfonyl]benzenesulfonamide",ligand,False,1,1,4QJM,484.512,c1ccc(cc1)CCS(=O)(=O)c2c(c(c(c(c2F)F)S(=O)(=O)N)F)NCc3ccccc3
+V21,"3-methylthiobenzimidazo[1,2-c][1,2,3]thiadiazol-7-sulfonamide",ligand,False,1,1,3HLJ,300.38,CSC1=S=Nn2c1nc3c2cc(cc3)S(=O)(=O)N
+V26,"2,3,6-tris(fluoranyl)-5-(methylamino)-4-(2-phenylethylsulfonyl)benzenesulfonamide",ligand,False,1,1,5LLC,408.416,CNc1c(c(c(c(c1S(=O)(=O)CCc2ccccc2)F)F)S(=O)(=O)N)F
+V49,"4-(1,3-benzothiazol-2-ylsulfanyl)-2,3,5,6-tetrakis(fluoranyl)benzenesulfonamide",ligand,False,1,1,5LLH,394.388,c1ccc2c(c1)nc(s2)Sc3c(c(c(c(c3F)F)S(=O)(=O)N)F)F
+V51,"4-(1-adamantylamino)-2,3,5,6-tetrakis(fluoranyl)benzenesulfonamide",ligand,False,1,1,5LLE,378.385,C1C2CC3CC1CC(C2)(C3)Nc4c(c(c(c(c4F)F)S(=O)(=O)N)F)F
+VD9,4-(propylsulfanyl)benzenesulfonamide,ligand,False,1,2,5LLG,231.335,CCCSc1ccc(cc1)S(=O)(=O)N
+VGT,4-((2-hydroxy-3-(phenylselanyl)propyl)thio)benzenesulfonamide,ligand,False,1,2,7OK8,402.39,c1ccc(cc1)[Se]C[C@@H](CSc2ccc(cc2)S(=O)(=O)N)O
+VI6,"1-[1,1-bis(oxidanyl)-3~{H}-2,1$l^{4}-benzoxaborol-6-yl]-4-[(4-fluoranylphenoxy)methyl]-1,2,3-triazole",ligand,False,1,1,8CR0,342.109,B1(c2cc(ccc2CO1)n3cc(nn3)COc4ccc(cc4)F)(O)O
+VJJ,3-phenoxybenzoic acid,ligand,False,1,1,5FLT,214.217,c1ccc(cc1)Oc2cccc(c2)C(=O)O
+VKL,"3-[3,4-bis(fluoranyl)phenyl]-5-methyl-1$l^{4},4,5$l^{4},7-tetrazabicyclo[4.3.0]nona-1(6),2,4-triene",ligand,False,1,1,6S9Z,250.247,C[n+]1c2[n+](cc(n1)c3ccc(c(c3)F)F)CCN2
+VL2,"4-[2-(9-chloranyl-2',3',4',5',6'-pentamethyl-4-nitro-7-oxidanylidene-spiro[1$l^{4},8-diaza-9$l^{8}-iridabicyclo[4.3.0]nona-1,3,5-triene-9,1'-1$l^{8}-iridapentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-8-yl)ethyl]benzenesulfonamide",ligand,False,1,1,7ONP,712.238,CC12C3([Ir]1456(C2(C4(C53C)C)C)([n+]7ccc(cc7C(=O)N6CCc8ccc(cc8)S(=O)(=O)N)N(=O)=O)Cl)C
+VMD,"4-[[1-[3-[[(2~{R})-2-oxidanyl-2-[(4~{S},5~{R})-2,2,5-trimethyl-1,3-dioxolan-4-yl]ethyl]amino]propyl]-1,2,3-triazol-4-yl]methylamino]benzenesulfonamide",ligand,False,1,2,8OGF,468.57,C[C@@H]1[C@@H](OC(O1)(C)C)[C@@H](CNCCCn2cc(nn2)CNc3ccc(cc3)S(=O)(=O)N)O
+VR3,"[(3~{S},8~{S},9~{S},10~{R},13~{S},14~{S})-10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1~{H}-cyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,1,1,8OKO,353.519,C[C@@]12CCC[C@H]1[C@@H]3CC=C4C[C@H](CC[C@@]4([C@H]3CC2)C)OS(=O)(=O)N
+VSM,"[(3~{S},5~{S},8~{S},13~{R},14~{R})-5,14-dimethyl-16-oxidanylidene-1,2,3,4,6,7,8,11,12,13,15,17-dodecahydrocyclopenta[a]phenanthren-3-yl] sulfamate",ligand,False,1,1,8OLM,367.503,C[C@@]12CC[C@@H]3C(=C1CC[C@@H](C2)OS(=O)(=O)N)CC[C@H]4[C@]3(CC(=O)C4)C
+VV8,"3-(cyclooctylamino)-4-ethylsulfonyl-2,5,6-tris(fluoranyl)benzenesulfonamide",ligand,False,1,1,8OO8,428.49,CCS(=O)(=O)c1c(c(c(c(c1F)F)S(=O)(=O)N)F)NC2CCCCCCC2
+VZW,1-cyclopropyl-6-fluoranyl-4-oxidanylidene-7-[4-(4-sulfamoylphenyl)carbonylpiperazin-1-yl]quinoline-3-carboxylic acid,ligand,False,1,1,8OTP,514.526,c1cc(ccc1C(=O)N2CCN(CC2)c3cc4c(cc3F)C(=O)C(=CN4C5CC5)C(=O)O)S(=O)(=O)N
+W1O,1-cyclopropyl-6-fluoranyl-4-oxidanylidene-7-[4-[(4-sulfamoylphenyl)methylcarbamoyl]piperazin-1-yl]quinoline-3-carboxylic acid,ligand,False,1,1,8OUB,543.567,c1cc(ccc1CNC(=O)N2CCN(CC2)c3cc4c(cc3F)C(=O)C(=CN4C5CC5)C(=O)O)S(=O)(=O)N
+WLE,4-[(3-methoxyphenyl)carbamamido]benzene-1-sulfonamide,ligand,False,1,1,8EM3,321.352,COc1cccc(c1)NC(=O)Nc2ccc(cc2)S(=O)(=O)N
+WMO,N-(2-methoxyethyl)-4-sulfamoylbenzamide,ligand,False,1,2,8EMU,258.294,COCCNC(=O)c1ccc(cc1)S(=O)(=O)N
+WW3,4-[(E)-azepan-1-yldiazenyl]benzenesulfonamide,ligand,False,1,1,4Q6D,282.362,c1cc(ccc1/N=N/N2CCCCCC2)S(=O)(=O)N
+WWL,5-(phenylsulfonyl)thiophene-2-sulfonamide,ligand,False,1,1,4LHI,303.378,c1ccc(cc1)S(=O)(=O)c2ccc(s2)S(=O)(=O)N
+WWV,4-({[2-(1-methylethyl)phenyl]carbamoyl}amino)benzenesulfonamide,ligand,False,1,1,3N3J,333.405,CC(C)c1ccccc1NC(=O)Nc2ccc(cc2)S(=O)(=O)N
+WYZ,2-[3-[[pyridin-3-ylsulfonyl-[(4-sulfamoylphenyl)methyl]amino]methyl]phenoxy]ethanoic acid,ligand,False,1,2,8QUF,491.537,c1cc(cc(c1)OCC(=O)O)C[N@](Cc2ccc(cc2)S(=O)(=O)N)S(=O)(=O)c3cccnc3
+WZA,"(9BETA,14BETA,17BETA)-17-HYDROXY-2-METHOXYESTRA-1,3,5(10)-TRIEN-3-YL SULFAMATE",ligand,False,1,1,2X7U,381.486,C[C@]12CC[C@@H]3c4cc(c(cc4CC[C@H]3[C@@H]1CC[C@@H]2O)OS(=O)(=O)N)OC
+WZC,"(13ALPHA,14BETA,17ALPHA)-3-HYDROXY-2-METHOXYESTRA-1,3,5(10)-TRIEN-17-YL SULFAMATE",ligand,False,1,2,2X7S,381.486,C[C@]12CC[C@@H]3c4cc(c(cc4CC[C@H]3[C@@H]1CC[C@@H]2OS(=O)(=O)N)O)OC
+X0Q,"5-[1-(3-cyanophenyl)-1,2,3-triazol-4-yl]thiophene-2-sulfonamide",ligand,False,1,1,4BF6,331.373,c1cc(cc(c1)n2cc(nn2)c3ccc(s3)S(=O)(=O)N)C#N
+X2U,"N-(3-{4-[3-({2-[(3R)-2,6-dioxopiperidin-3-yl]-1,3-dioxo-2,3-dihydro-1H-isoindol-4-yl}amino)propoxy]butoxy}propyl)-4-sulfamoylbenzamide",ligand,False,1,1,8EXC,643.708,c1cc2c(c(c1)NCCCOCCCCOCCCNC(=O)c3ccc(cc3)S(=O)(=O)N)C(=O)N(C2=O)[C@@H]4CCC(=O)NC4=O
+X33,Carborane inhibitor,ligand,False,1,1,6T7U,254.298,B1234B567B189B212B33%10B454B656B787B911[C+]232B4%105[C+2]7612CCCS(=O)(=O)N
+X38,"(4S)-5-amino-4-{1,3-dioxo-4-[(2-{2-[2-(4-sulfamoylbenzamido)ethoxy]ethoxy}ethyl)amino]-1,3-dihydro-2H-isoindol-2-yl}-5-oxopentanoic acid",ligand,False,1,1,8EXG,605.617,c1cc2c(c(c1)NCCOCCOCCNC(=O)c3ccc(cc3)S(=O)(=O)N)C(=O)N(C2=O)[C@@H](CCC(=O)O)C(=O)N
+X5F,"2-[[(2~{R})-1-azanyl-5-oxidanyl-1,5-bis(oxidanylidene)pentan-2-yl]carbamoyl]-6-[2-[2-[(4-sulfamoylphenyl)carbonylamino]ethoxy]ethylamino]benzoic acid",ligand,False,1,2,8EYL,579.58,c1cc(c(c(c1)NCCOCCNC(=O)c2ccc(cc2)S(=O)(=O)N)C(=O)O)C(=O)N[C@H](CCC(=O)O)C(=O)N
+XE,XENON,ligand,False,1,2,3CYU,131.293,[Xe]
+XNF,4-[[(~{S})-dimethoxyphosphoryl-[4-[(~{S})-dimethoxyphosphoryl-[(4-sulfamoylphenyl)amino]methyl]phenyl]methyl]amino]benzenesulfonamide,ligand,False,1,1,8R2F,662.609,COP(=O)([C@@H](c1ccc(cc1)[C@@H](Nc2ccc(cc2)S(=O)(=O)N)P(=O)(OC)OC)Nc3ccc(cc3)S(=O)(=O)N)OC
+XO9,"1,3-benzothiazole-2(3H)-thione",ligand,False,1,1,8FAL,167.251,c1ccc2c(c1)NC(=S)S2
+XPI,"4-[[(2~{R})-5-oxidanylidene-2-(2,4,5-trimethoxyphenyl)-2~{H}-furan-4-yl]amino]benzenesulfonamide",ligand,False,1,1,8R2K,420.436,COc1cc(c(cc1OC)OC)[C@H]2C=C(C(=O)O2)Nc3ccc(cc3)S(=O)(=O)N
+Y3E,"4-phenyl-1,3-thiazole-2(3H)-thione",ligand,False,1,1,8FAU,193.289,c1ccc(cc1)C2=CSC(=S)N2
+YI6,2-(4-ethoxyphenyl)ethanoic acid,ligand,False,1,2,5FNJ,180.2,CCOc1ccc(cc1)CC(=O)O
+YIE,"5-[(4-chlorophenyl)methyl]-1,2,3-triaza-4-azanidacyclopenta-2,5-diene",ligand,False,1,1,5FNG,193.613,c1cc(ccc1Cc2[n-]nnn2)Cl
+YIH,"5-[[3,4-bis(chloranyl)phenoxy]methyl]-1,2,4-triaza-3-azanidacyclopenta-1,4-diene",ligand,False,1,1,5FNI,244.057,c1cc(c(cc1OCc2n[n-]nn2)Cl)Cl
+YIP,"5-[(3-chloranylphenoxy)methyl]-1,2,4-triaza-3-azanidacyclopenta-1,4-diene",ligand,False,1,2,5FNH,209.612,c1cc(cc(c1)Cl)OCc2n[n-]nn2
+ZEC,"6-HYDROXY-1,3-BENZOTHIAZOLE-2-SULFONAMIDE",ligand,False,1,2,1ZFQ,230.264,c1cc2c(cc1O)sc(n2)S(=O)(=O)N
+ZOA,"ethyl (8R)-7-methyl-3-({[(4-sulfamoylphenyl)methyl]carbamothioyl}amino)pyrazolo[1,5-a]pyrimidine-6-carboxylate",ligand,False,1,1,7MU3,448.519,CCOC(=O)c1cnc2c(cnn2c1C)NC(=S)NCc3ccc(cc3)S(=O)(=O)N
+ZUJ,"2-[(2-oxo-3,4-dihydro-2H-1-benzopyran-7-yl)oxy]-N-(4-sulfamoylphenyl)acetamide",ligand,False,1,1,8SAF,376.384,c1cc(ccc1NC(=O)COc2ccc3c(c2)OC(=O)CC3)S(=O)(=O)N
+ZUS,2-[(2-oxo-2H-1-benzopyran-7-yl)oxy]-N-[(4-sulfamoylphenyl)methyl]acetamide,ligand,False,1,1,8SAG,388.394,c1cc(ccc1CNC(=O)COc2ccc3c(c2)OC(=O)C=C3)S(=O)(=O)N

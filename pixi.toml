@@ -1,0 +1,50 @@
+[workspace]
+authors = ["Angus McKee <u7457676@anu.edu.au>"]
+channels = ["conda-forge"]
+name = "Pharmacophore_Construction"
+# linux-64 kept alongside win-64 so the environment is reproducible on Gadi.
+platforms = ["win-64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+# Network-heavy: run on a login/data-mover node on Gadi (compute nodes have no internet).
+# Extra args pass through, e.g. `pixi run scrape-pdb-ligands --config config/targets.yaml`.
+scrape-pdb-ligands = "python scripts/scrape_pdb_ligands.py"
+test = { cmd = "pytest -q", depends-on = [] }
+lint = "ruff check ."
+
+# --- Common, lightweight dependencies shared by every environment ---
+[dependencies]
+python = "3.12.*"
+
+# --- core: networking, config, tabular IO (light, rarely breaks) ---
+[feature.core.dependencies]
+requests = ">=2.31"
+pyyaml = ">=6.0"
+pandas = ">=2.0"
+tqdm = ">=4.66"
+
+# Note: we query the RCSB Search + Data APIs directly via `requests` (plain JSON)
+# rather than via `rcsbsearchapi`. That package builds its query schema from RCSB
+# at import time and is brittle/network-coupled; a direct client is more robust
+# and HPC-portable (no import-time network dependency on Gadi login nodes).
+
+# Editable install of this project so `import pharmpipe` works everywhere.
+[feature.core.pypi-dependencies]
+pharmpipe = { path = ".", editable = true }
+
+# --- chem: heavy/brittle cheminformatics & structure parsing, isolated ---
+[feature.chem.dependencies]
+rdkit = ">=2024.03"
+openbabel = ">=3.1"
+gemmi = ">=0.6"
+openpyxl = ">=3.1"
+
+# --- dev: testing & linting ---
+[feature.dev.dependencies]
+pytest = ">=8.0"
+ruff = ">=0.5"
+
+[environments]
+default = { features = ["core", "chem"], solve-group = "main" }
+dev = { features = ["core", "chem", "dev"], solve-group = "main" }

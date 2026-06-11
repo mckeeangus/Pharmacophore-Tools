@@ -1,0 +1,27 @@
+{
+  "target": "HIV-1 protease",
+  "slug": "hiv1_protease",
+  "search_date": "2026-06-11",
+  "primary_accessions": [
+    "P04585"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "P04585",
+      "uniprot_id": "POL_HV1H2",
+      "taxonomy_id": 11706,
+      "organism_name": "Human immunodeficiency virus type 1 group M subtype B (isolate HXB2)",
+      "genes": [
+        "gag-pol"
+      ],
+      "protein_name": "Gag-Pol polyprotein",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 277,
+  "n_unique_ligands_kept": 144
+}

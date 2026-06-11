@@ -1,0 +1,66 @@
+{
+  "target": "Nicotinic acetylcholine receptor (alpha4beta2)",
+  "slug": "nachr_a4b2",
+  "search_date": "2026-06-11",
+  "primary_accessions": [
+    "P43681",
+    "P17787"
+  ],
+  "surrogate_accessions": [
+    "P58154",
+    "Q8WSF8"
+  ],
+  "accessions": [
+    {
+      "accession": "P43681",
+      "uniprot_id": "ACHA4_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "CHRNA4"
+      ],
+      "protein_name": "Neuronal acetylcholine receptor subunit alpha-4",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    },
+    {
+      "accession": "P17787",
+      "uniprot_id": "ACHB2_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "CHRNB2"
+      ],
+      "protein_name": "Neuronal acetylcholine receptor subunit beta-2",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    },
+    {
+      "accession": "P58154",
+      "uniprot_id": "ACHP_LYMST",
+      "taxonomy_id": 6523,
+      "organism_name": "Lymnaea stagnalis",
+      "genes": [],
+      "protein_name": "Acetylcholine-binding protein",
+      "reviewed": true,
+      "role": "surrogate",
+      "surrogate_name": "AChBP (Lymnaea stagnalis)"
+    },
+    {
+      "accession": "Q8WSF8",
+      "uniprot_id": "Q8WSF8_APLCA",
+      "taxonomy_id": 6500,
+      "organism_name": "Aplysia californica",
+      "genes": [],
+      "protein_name": "Soluble acetylcholine receptor",
+      "reviewed": true,
+      "role": "surrogate",
+      "surrogate_name": "AChBP (Aplysia californica)"
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 169,
+  "n_unique_ligands_kept": 111
+}

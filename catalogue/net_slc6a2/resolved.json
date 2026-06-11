@@ -1,0 +1,42 @@
+{
+  "target": "Norepinephrine transporter (NET, SLC6A2)",
+  "slug": "net_slc6a2",
+  "search_date": "2026-06-11",
+  "primary_accessions": [
+    "P23975"
+  ],
+  "surrogate_accessions": [
+    "Q7K4Y6"
+  ],
+  "accessions": [
+    {
+      "accession": "P23975",
+      "uniprot_id": "SC6A2_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "SLC6A2"
+      ],
+      "protein_name": "Sodium-dependent noradrenaline transporter",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    },
+    {
+      "accession": "Q7K4Y6",
+      "uniprot_id": "DAT_DROME",
+      "taxonomy_id": 7227,
+      "organism_name": "Drosophila melanogaster",
+      "genes": [
+        "DAT"
+      ],
+      "protein_name": "Sodium-dependent dopamine transporter",
+      "reviewed": true,
+      "role": "surrogate",
+      "surrogate_name": "Drosophila dopamine transporter (dDAT)"
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 61,
+  "n_unique_ligands_kept": 42
+}

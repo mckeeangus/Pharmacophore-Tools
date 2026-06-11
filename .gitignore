@@ -1,0 +1,22 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+
+# Large / generated data (the downloaded structures and extracted ligands).
+# catalogue/ is intentionally NOT ignored — it is the tracked deliverable.
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Local Claude Code settings & runtime locks (not project state)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock

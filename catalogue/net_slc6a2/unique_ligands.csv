@@ -1,0 +1,43 @@
+het_code,name,category,flagged,n_structures,n_instances,representative_pdb,formula_weight,smiles
+P4G,1-ETHOXY-2-(2-ETHOXYETHOXY)ETHANE,ligand,False,7,9,4XP4,162.227,CCOCCOCCOCC
+LNR,L-NOREPINEPHRINE,ligand,False,6,8,8ZOY,169.178,c1cc(c(cc1[C@H](CN)O)O)O
+DMU,DECYL-BETA-D-MALTOPYRANOSIDE,ligand,False,5,5,6M2R,482.562,CCCCCCCCCCO[C@H]1[C@@H]([C@H]([C@@H]([C@H](O1)CO)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)O)O)O)O
+A1EFM,"[(2~{R})-1-[[(2~{S})-2,3-bis(oxidanyl)propoxy]-oxidanyl-phosphoryl]oxy-3-nonanoyloxy-propan-2-yl] decanoate",ligand,False,4,8,9KDA,540.624,CCCCCCCCCC(=O)O[C@H](COC(=O)CCCCCCCC)COP(=O)(O)OC[C@H](CO)O
+PTY,PHOSPHATIDYLETHANOLAMINE,ligand,False,4,4,8ZP2,734.039,CCCCCCCCCCCCCCCCCCCC(=O)O[C@H](COC(=O)CCCCCCCCCCCCCC)CO[P@@](=O)(O)OCCN
+42J,"2-(3,4-dichlorophenyl)ethanamine",ligand,False,3,3,4XPH,190.07,c1cc(c(cc1CCN)Cl)Cl
+A1LX4,(3R)-N-methyl-3-(2-methylphenoxy)-3-phenyl-propan-1-amine,ligand,False,3,4,8ZP2,255.355,Cc1ccccc1O[C@H](CCNC)c2ccccc2
+41U,nisoxetine,ligand,False,2,3,8YR2,271.354,CNCC[C@@H](c1ccccc1)Oc2ccccc2OC
+42F,"methyl (1R,2S,3S,5S)-3-(4-iodophenyl)-8-methyl-8-azabicyclo[3.2.1]octane-2-carboxylate",ligand,False,2,2,4XPF,385.24,CN1[C@H]2CC[C@@H]1[C@H]([C@H](C2)c3ccc(cc3)I)C(=O)OC
+COC,COCAINE,ligand,False,2,2,4XP4,303.353,C[N@]1[C@H]2CC[C@@H]1[C@H]([C@H](C2)OC(=O)c3ccccc3)C(=O)OC
+DSM,"3-(10,11-DIHYDRO-5H-DIBENZO[B,F]AZEPIN-5-YL)-N-METHYLPROPAN-1-AMINE",ligand,False,2,3,8HFI,266.381,CNCCCN1c2ccccc2CCc3c1cccc3
+E5E,Noradrenaline,ligand,False,2,4,8WTV,170.186,c1cc(c(cc1[C@H](C[NH3+])O)O)O
+F0F,"(1R,2S)-2-(aminomethyl)-N,N-diethyl-1-phenyl-cyclopropane-1-carboxamide",ligand,False,2,3,9KDM,246.348,CCN(CC)C(=O)[C@@]1(C[C@@H]1CN)c2ccccc2
+LDP,L-DOPAMINE,ligand,False,2,3,4XP1,153.178,c1cc(c(cc1CCN)O)O
+1WE,(2S)-1-phenylpropan-2-amine,ligand,False,1,1,4XP9,135.206,C[C@@H](Cc1ccccc1)N
+1WR,"(3S)-1-(4,4-diphenylbut-3-enyl)piperidine-3-carboxylic acid",ligand,False,1,2,7WLW,335.439,c1ccc(cc1)C(=CCCN2CCC[C@@H](C2)C(=O)O)c3ccccc3
+1XR,Bupropion,ligand,False,1,1,8HFL,239.741,C[C@@H](C(=O)c1cccc(c1)Cl)NC(C)(C)C
+21B,Nortriptyline,ligand,False,1,1,4M48,263.377,CNCCC=C1c2ccccc2CCc3c1cccc3
+29E,(3S)-N-methyl-3-(naphthalen-1-yloxy)-3-(thiophen-2-yl)propan-1-amine,ligand,False,1,1,6M38,297.415,CNCC[C@@H](c1cccs1)Oc2cccc3c2cccc3
+41X,(2R)-2-[(R)-(2-ethoxyphenoxy)(phenyl)methyl]morpholine,ligand,False,1,1,4XNX,313.391,CCOc1ccccc1O[C@H](c2ccccc2)[C@H]3CNCCO3
+42L,"methyl (1R,2S,3S,5S)-3-(4-fluorophenyl)-8-methyl-8-azabicyclo[3.2.1]octane-2-carboxylate",ligand,False,1,1,4XPG,277.334,CN1[C@H]2CC[C@@H]1[C@H]([C@H](C2)c3ccc(cc3)F)C(=O)OC
+68P,"(1S)-1-[3-(dimethylamino)propyl]-1-(4-fluorophenyl)-1,3-dihydro-2-benzofuran-5-carbonitrile",ligand,False,1,1,8I3V,324.392,CN(C)CCC[C@@]1(c2ccc(cc2CO1)C#N)c3ccc(cc3)F
+9BC,"1-(2-{[(diphenylmethylidene)amino]oxy}ethyl)-1,2,5,6-tetrahydropyridine-3-carboxylic acid",ligand,False,1,1,7WGT,350.411,c1ccc(cc1)C(=NOCCN2CCC=C(C2)C(=O)O)c3ccccc3
+A1D5S,Vanoxerine,ligand,False,1,2,9KDH,450.563,c1ccc(cc1)CCCN2CCN(CC2)CCOC(c3ccc(cc3)F)c4ccc(cc4)F
+A1D9Y,(2~{S})-2-[(~{S})-(2-ethoxyphenoxy)-phenyl-methyl]morpholine,ligand,False,1,1,8ZP1,313.391,CCOc1ccccc1O[C@@H](c2ccccc2)[C@@H]3CNCCO3
+A1EBN,"3-(4-chlorophenyl)-5,6-dihydro-[1,3]thiazolo[2,3-b][1,3]thiazol-4-ium",ligand,False,1,1,9JEL,254.779,c1cc(ccc1c2csc3[n+]2CCS3)Cl
+A1EBO,2-isoquinolin-2-ium-2-yl-1-phenyl-ethanone,ligand,False,1,1,9JF3,248.299,c1ccc(cc1)C(=O)C[n+]2ccc3ccccc3c2
+A1EET,"[(2~{R})-3-[[(2~{S})-2,3-bis(oxidanyl)propoxy]-oxidanyl-phosphoryl]oxy-2-oxidanyl-propyl] (9~{Z},12~{Z})-octadeca-9,12-dienoate",ligand,False,1,2,9K6X,508.582,CCCCC/C=C\C/C=C\CCCCCCCC(=O)OC[C@H](COP(=O)(O)OC[C@H](CO)O)O
+A1EFR,(2~{S})-1-[2-methoxy-4-[(~{E})-prop-1-enyl]phenoxy]-3-[4-(phenylmethyl)piperazin-1-yl]propan-2-ol,ligand,False,1,2,9KE3,396.522,C/C=C/c1ccc(c(c1)OC)OC[C@H](CN2CCN(CC2)Cc3ccccc3)O
+A1H8F,"N-[3-(6-chloranyl-1,3,4,9-tetrahydropyrido[3,4-b]indol-2-yl)propyl]butanamide",ligand,False,1,1,9EUO,333.856,CCCC(=O)NCCCN1CCc2c3cc(ccc3[nH]c2C1)Cl
+A1LX3,"~{N}-methyl-3-(1-tetracyclo[6.6.2.0^{2,7}.0^{9,14}]hexadeca-2(7),3,5,9,11,13-hexaenyl)propan-1-amine",ligand,False,1,2,8Y8Z,277.403,CNCCCC12CCC(c3c1cccc3)c4c2cccc4
+A1LX5,"(4S)-2-methyl-4-phenyl-3,4-dihydro-1H-isoquinolin-8-amine",ligand,False,1,2,8Y91,238.328,CN1Cc2c(cccc2N)[C@@H](C1)c3ccccc3
+A1LX6,"(1S)-5-methyl-1-phenyl-1,3,4,6-tetrahydro-2,5-benzoxazocine",ligand,False,1,1,8Y90,253.339,CN1CCO[C@H](c2ccccc2C1)c3ccccc3
+A1LX7,"[(2R)-2-octanoyloxy-3-[oxidanyl-[(2R,3R,5S,6R)-2,3,4,5,6-pentakis(oxidanyl)cyclohexyl]oxy-phosphoryl]oxy-propyl] octanoate",ligand,False,1,4,8YR2,586.607,CCCCCCCC(=O)OC[C@H](COP(=O)(O)OC1[C@@H]([C@H](C([C@H]([C@H]1O)O)O)O)O)OC(=O)CCCCCCC
+B40,(2S)-N-methyl-1-phenylpropan-2-amine,ligand,False,1,1,4XP6,149.233,C[C@@H](Cc1ccccc1)NC
+F1U,"(1S,2S)-2-[(dimethylamino)methyl]-1-(3-methoxyphenyl)cyclohexan-1-ol",ligand,False,1,1,6M47,263.375,CN(C)C[C@@H]1CCCC[C@]1(c2cccc(c2)OC)O
+TP0,Amitriptyline,ligand,False,1,1,8Y93,277.403,CN(C)CCC=C1c2ccccc2CCc3c1cccc3
+XEF,Ziprasidone,ligand,False,1,1,8WTY,412.936,c1ccc2c(c1)c(ns2)N3CCN(CC3)CCc4cc5c(cc4Cl)NC(=O)C5
+Y60,(2~{R})-2-(~{tert}-butylamino)-1-(3-chlorophenyl)propan-1-one,ligand,False,1,1,8WTX,239.741,C[C@H](C(=O)c1cccc(c1)Cl)NC(C)(C)C
+YG7,5-{4-[4-(5-cyano-1H-indol-3-yl)butyl]piperazin-1-yl}-1-benzofuran-2-carboxamide,ligand,False,1,2,9KDA,441.525,c1cc2c(cc1C#N)c(c[nH]2)CCCCN3CCN(CC3)c4ccc5c(c4)cc(o5)C(=O)N
+YMN,Iobenguane,ligand,False,1,1,8XB3,275.09,[H]/N=C(/N)\NCc1cccc(c1)I
+YNT,Radafaxine,ligand,False,1,1,8XB2,255.741,C[C@H]1[C@@](OCC(N1)(C)C)(c2cccc(c2)Cl)O

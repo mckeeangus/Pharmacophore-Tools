@@ -1,0 +1,114 @@
+# config/targets.yaml
+# Target list + per-target options for the PDB ligand scrape & catalogue stage.
+#
+# UniProt accessions under `uniprot_hint` are STARTING POINTS to verify, not
+# authoritative. The scraper resolves & verifies each target programmatically
+# against UniProt/RCSB and records the accession(s) actually used plus the
+# search date into the catalogue outputs (catalogue/<slug>/resolved.json).
+
+search:
+  # Organism policy: use HUMAN structures where possible. Surrogates are used
+  # only for targets with no usable human structure, and are always labelled.
+  organism_policy: human_preferred      # human_preferred | human_only | any
+  human_taxonomy_id: 9606
+  include_surrogates: true              # surrogates only fill gaps; always flagged
+  extract_mode: all_instances          # all_instances | representative
+  # Politeness / robustness for the network stage (login node on Gadi).
+  max_parallel_downloads: 4
+  request_retries: 4
+  request_backoff_seconds: 2.0
+  cache_offline_ok: true
+
+targets:
+  - name: Nicotinic acetylcholine receptor (alpha4beta2)
+    slug: nachr_a4b2
+    genes: [CHRNA4, CHRNB2]
+    organism: human
+    uniprot_hint: [P43681, P17787]
+    surrogates:
+      # Pharmacophore ground truth often derives from AChBP co-crystals.
+      - { name: "AChBP (Lymnaea stagnalis)", uniprot: P58154, kind: surrogate }
+      - { name: "AChBP (Aplysia californica)", uniprot: Q8WSF8, kind: surrogate }
+    notes: "Acetylcholine receptor disambiguated to neuronal nicotinic a4b2."
+
+  - name: Estrogen receptor alpha
+    slug: esr1
+    genes: [ESR1]
+    organism: human
+    uniprot_hint: [P03372]
+    notes: "Mostly ligand-binding-domain structures; large set."
+
+  - name: HIV-1 protease
+    slug: hiv1_protease
+    genes: [gag-pol]
+    organism: virus
+    uniprot_hint: [P04585]
+    notes: "Cleaved from Gag-Pol polyprotein; very large set. Bridging/structural waters functionally important — note in catalogue."
+
+  - name: Beta-2 adrenoceptor
+    slug: adrb2
+    genes: [ADRB2]
+    organism: human
+    uniprot_hint: [P07550]
+    notes: "GPCR; many constructs use fusion partners (T4 lysozyme, BRIL) and thermostabilising mutations — do not catalogue fusion-partner ligands as target ligands."
+
+  - name: Cyclin-dependent kinase 2 (CDK2)
+    slug: cdk2
+    genes: [CDK2]
+    organism: human
+    uniprot_hint: [P24941]
+    notes: "With and without cyclin A; bridging water in hinge/ATP site is a known caveat."
+
+  - name: Carbonic anhydrase II
+    slug: ca2
+    genes: [CA2]
+    organism: human
+    uniprot_hint: [P00918]
+    notes: "Isoform II (human). Catalytic Zn2+ is a cofactor — KEEP."
+
+  - name: Acetylcholinesterase
+    slug: ache
+    genes: [ACHE]
+    organism: human
+    uniprot_hint: [P22303]
+    notes: "Human-only per scope decision (2026-06-11). Torpedo/mouse surrogates excluded unless re-enabled."
+
+  - name: CavAb (Ca2+-selective NavAb mutant)
+    slug: cavab
+    genes: []
+    organism: bacteria
+    uniprot_hint: [A8EVM5]
+    surrogates:
+      - { name: "NavAb (Arcobacter butzleri), CavAb engineered mutant", uniprot: A8EVM5, kind: surrogate }
+    notes: "Engineered bacterial surrogate; no human equivalent. Small set; flag as surrogate."
+
+  - name: Cyclooxygenase-2 (PTGS2)
+    slug: cox2
+    genes: [PTGS2]
+    organism: human
+    uniprot_hint: [P35354]
+    notes: "Human-only per scope decision (2026-06-11). Murine/ovine excluded unless re-enabled. Heme is a cofactor — KEEP."
+
+  - name: HMG-CoA reductase
+    slug: hmgcr
+    genes: [HMGCR]
+    organism: human
+    uniprot_hint: [P04035]
+    notes: "Statin/inhibitor complexes."
+
+  - name: GABA-A receptor
+    slug: gaba_a
+    genes: [GABRA1, GABRB2, GABRB3, GABRG2]
+    organism: human
+    uniprot_hint: [P14867, P18507]
+    notes: "Human GABA-A-subunit-mapped structures (scope: human where possible). Pentameric, many compositions, mostly cryo-EM; many lipids/detergents to filter."
+
+  - name: Norepinephrine transporter (NET, SLC6A2)
+    slug: net_slc6a2
+    genes: [SLC6A2]
+    organism: human
+    uniprot_hint: [P23975]
+    surrogates:
+      # dDAT historically used as a structural surrogate for SLC6 transporters.
+      - { name: "Drosophila dopamine transporter (dDAT)", uniprot: Q7K4Y6, kind: surrogate }
+    notes: "SLC6 transporter (NOT an adrenergic receptor). Human structures are recent cryo-EM. dDAT surrogate included only as gap-filler, labelled."

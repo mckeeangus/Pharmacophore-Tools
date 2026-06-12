@@ -36,7 +36,7 @@ sites:
 
   hiv1_protease:
     reference_pdb: 1DMP
-    anchor_het: DMP            # DMP323 cyclic-urea protease inhibitor (active site)
+    anchor_het: DMQ            # cyclic-urea protease inhibitor bound in 1DMP (active site)
     notes: >-
       The P04585 (Gag-Pol) search also returns reverse-transcriptase structures;
       anchoring on a protease active-site inhibitor rejects RT-bound poses

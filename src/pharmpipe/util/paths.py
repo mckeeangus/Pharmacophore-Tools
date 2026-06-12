@@ -48,12 +48,13 @@ def target_session_pml(slug: str) -> Path:
     return target_data_dir(slug) / f"{slug}_aligned.pml"
 
 
-def target_session_pse(slug: str) -> Path:
-    return target_data_dir(slug) / f"{slug}_aligned.pse"
-
-
 def target_catalogue_dir(slug: str) -> Path:
     return CATALOGUE_DIR / slug
+
+
+def target_session_pse(slug: str) -> Path:
+    """The PyMOL session is a tracked deliverable -> lives under catalogue/."""
+    return target_catalogue_dir(slug) / f"{slug}_aligned.pse"
 
 
 def ensure_dir(path: Path) -> Path:

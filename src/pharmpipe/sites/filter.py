@@ -40,6 +40,9 @@ class AlignTargetResult:
     rows: list[dict] = field(default_factory=list)
     aligned_files: list[Path] = field(default_factory=list)
     status_counts: Counter = field(default_factory=Counter)
+    structures_total: int = 0
+    structures_processed: int = 0
+    capped: bool = False
 
     @property
     def n_candidates(self) -> int:
@@ -47,11 +50,21 @@ class AlignTargetResult:
 
     @property
     def n_kept(self) -> int:
-        return self.status_counts.get("kept", 0)
+        # Distinct poses written to the overlay (symmetry-deduplicated representatives).
+        return len(self.aligned_files)
+
+    @property
+    def n_at_site(self) -> int:
+        # All instances at the site, including symmetry mates.
+        return self.status_counts.get("kept", 0) + self.status_counts.get("symmetry_dup", 0)
 
 
 def _kept_instances_by_pdb(tr: TargetResult) -> dict[str, list]:
-    keep = {c for c, d in tr.curation.decisions.items() if d.keep}
+    # Overlay organic ligands/cofactors only. Single metal ions are kept+flagged by
+    # curation but are not comparable pharmacophore poses — and when the anchor is a
+    # catalytic metal (e.g. Zn in carbonic anhydrase) they would otherwise flood the
+    # cap with identical ions. They still mark the site via the reference anchor.
+    keep = {c for c, d in tr.curation.decisions.items() if d.keep and d.category != "metal"}
     by_pdb: dict[str, list] = defaultdict(list)
     for hit in tr.hits:
         for inst in hit.instances:
@@ -65,7 +78,13 @@ def _resolution_of(tr: TargetResult) -> dict[str, float]:
 
 
 def align_target(tr: TargetResult, site: SiteDef, cfg: http.HttpConfig,
-                 max_structures: int | None = None, progress=None) -> AlignTargetResult:
+                 max_ligands: int | None = 100, max_structures: int | None = None,
+                 progress=None) -> AlignTargetResult:
+    """Align kept instances into the reference frame, keeping one representative
+    pose per (structure, ligand) — symmetry-equivalent copies in a structure are
+    collapsed — and stopping once ``max_ligands`` distinct poses are collected.
+    Structures are processed best-resolution first so the cap keeps the best data.
+    """
     slug = tr.slug
     out = AlignTargetResult(slug=slug, site=site, reference=None)
 
@@ -86,21 +105,29 @@ def align_target(tr: TargetResult, site: SiteDef, cfg: http.HttpConfig,
     ref_st.write_pdb(str(ref_pdb_path))
 
     aligned_dir = ensure_dir(target_aligned_mol2_dir(slug))
+    # Start clean so a re-run with a different cap does not leave stale poses.
+    for old in aligned_dir.glob("*.mol2"):
+        old.unlink()
     smiles = {c: cc.smiles for c, cc in tr.chem_comps.items()}
 
     by_pdb = _kept_instances_by_pdb(tr)
-    pdb_ids = sorted(by_pdb)
-    if max_structures is not None and len(pdb_ids) > max_structures:
-        res = _resolution_of(tr)
-        pdb_ids = sorted(pdb_ids, key=lambda p: res.get(p, 1e9))[:max_structures]
+    res_of = _resolution_of(tr)
+    pdb_ids = sorted(by_pdb, key=lambda p: (res_of.get(p, 1e9), p))
+    if max_structures is not None:
+        pdb_ids = pdb_ids[:max_structures]
+    out.structures_total = len(by_pdb)
 
     for pdb_id in pdb_ids:
+        if max_ligands is not None and len(out.aligned_files) >= max_ligands:
+            out.capped = True
+            break
+        out.structures_processed += 1
+
         path = structures.download_mmcif(pdb_id, slug, cfg)
         if path is None:
             for inst in by_pdb[pdb_id]:
                 out.rows.append(_row(inst, AlignedInstance(inst, "not_found",
                                                            message="mmCIF unavailable")))
-                out.status_counts["not_found"] += 1
             if progress is not None:
                 progress.update(1)
             continue
@@ -110,44 +137,65 @@ def align_target(tr: TargetResult, site: SiteDef, cfg: http.HttpConfig,
             for inst in by_pdb[pdb_id]:
                 out.rows.append(_row(inst, AlignedInstance(inst, "align_error",
                                                            message=f"parse error: {exc}")))
-                out.status_counts["align_error"] += 1
             if progress is not None:
                 progress.update(1)
             continue
 
-        model = st[0]
+        # Align every candidate; group the at-site ones by ligand for symmetry dedup.
+        aligned: list[tuple] = []                       # (AlignedInstance, inst)
+        kept_by_comp: dict[str, tuple] = {}             # comp_id -> best (AlignedInstance, inst)
         for inst in by_pdb[pdb_id]:
-            res_align = align.align_instance(st, inst, reference)
+            a = align.align_instance(st, inst, reference)
+            aligned.append((a, inst))
+            if a.kept:
+                c = inst.comp_id.upper()
+                best = kept_by_comp.get(c)
+                if best is None or (a.pocket_rmsd or 1e9) < (best[0].pocket_rmsd or 1e9):
+                    kept_by_comp[c] = (a, inst)
+
+        # Write one representative pose per ligand; mark symmetry mates.
+        model = st[0]
+        written: dict[str, str] = {}
+        for a, inst in kept_by_comp.values():
+            res = align.find_residue(model, inst)
+            if res is None:
+                continue
+            align.transform_residue(res, a.transform)
+            er = mol2.extract_instance(st, inst, aligned_dir, cfg,
+                                       smiles.get(inst.comp_id.upper(), ""))
+            if er.ok and er.out_path is not None:
+                out.aligned_files.append(er.out_path)
+                written[inst.comp_id.upper()] = er.out_path.name
+            else:
+                a.message = f"mol2 write failed: {er.message}"
+
+        for a, inst in aligned:
+            is_rep = (a.kept and kept_by_comp.get(inst.comp_id.upper(), (None,))[0] is a)
+            status = a.status
             mol2_name = ""
-            if res_align.kept:
-                res = align.find_residue(model, inst)
-                if res is not None:
-                    align.transform_residue(res, res_align.transform)
-                    er = mol2.extract_instance(st, inst, aligned_dir, cfg,
-                                               smiles.get(inst.comp_id.upper(), ""))
-                    if er.ok and er.out_path is not None:
-                        mol2_name = er.out_path.name
-                        out.aligned_files.append(er.out_path)
-                    else:
-                        # Alignment succeeded; only the mol2 write failed. Keep the
-                        # true alignment status, flag the write problem separately.
-                        res_align.message = f"mol2 write failed: {er.message}"
-            out.rows.append(_row(inst, res_align, mol2_name))
-            out.status_counts[res_align.status] += 1
+            if a.kept and not is_rep:
+                status = "symmetry_dup"          # at the site but a symmetry mate of the rep
+            elif is_rep:
+                mol2_name = written.get(inst.comp_id.upper(), "")
+            out.rows.append(_row(inst, a, mol2_name, representative=is_rep, status=status))
+
         if progress is not None:
             progress.update(1)
 
+    out.status_counts = Counter(r["status"] for r in out.rows)
     _write_csv(out)
     return out
 
 
-def _row(inst, a: AlignedInstance, mol2_name: str = "") -> dict:
+def _row(inst, a: AlignedInstance, mol2_name: str = "", representative: bool = False,
+         status: str | None = None) -> dict:
     return {
         "pdb_id": inst.pdb_id,
         "het_code": inst.comp_id,
         "chain": inst.auth_asym_id,
         "seqid": inst.auth_seq_id,
-        "status": a.status,
+        "status": status or a.status,
+        "representative": representative,
         "centroid_distance": None if a.centroid_distance is None else round(a.centroid_distance, 2),
         "pocket_rmsd": None if a.pocket_rmsd is None else round(a.pocket_rmsd, 2),
         "n_pocket": a.n_pocket,
@@ -157,8 +205,8 @@ def _row(inst, a: AlignedInstance, mol2_name: str = "") -> dict:
 
 
 def _write_csv(out: AlignTargetResult) -> Path:
-    cols = ["pdb_id", "het_code", "chain", "seqid", "status", "centroid_distance",
-            "pocket_rmsd", "n_pocket", "aligned_mol2", "message"]
+    cols = ["pdb_id", "het_code", "chain", "seqid", "status", "representative",
+            "centroid_distance", "pocket_rmsd", "n_pocket", "aligned_mol2", "message"]
     df = pd.DataFrame(out.rows, columns=cols)
     df = df.sort_values(["status", "het_code", "pdb_id"], kind="stable")
     path = ensure_dir(target_catalogue_dir(out.slug)) / "site_filter.csv"

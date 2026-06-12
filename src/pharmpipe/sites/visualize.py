@@ -15,6 +15,7 @@ import logging
 from pathlib import Path
 
 from ..util.paths import (
+    ensure_dir,
     target_aligned_mol2_dir,
     target_reference_pdb,
     target_session_pml,
@@ -119,6 +120,7 @@ def build_pse(out: AlignTargetResult) -> Path | None:
     cmd.zoom("anchor", 12)
 
     pse = target_session_pse(slug)
+    ensure_dir(pse.parent)
     cmd.save(str(pse))
     log.info("[%s] wrote session %s (%d poses)", slug, pse.name, len(out.aligned_files))
     return pse

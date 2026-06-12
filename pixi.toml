@@ -10,6 +10,11 @@ version = "0.1.0"
 # Network-heavy: run on a login/data-mover node on Gadi (compute nodes have no internet).
 # Extra args pass through, e.g. `pixi run scrape-pdb-ligands --config config/targets.yaml`.
 scrape-pdb-ligands = "python scripts/scrape_pdb_ligands.py"
+# Align kept ligands into a per-target reference frame + write PyMOL .pml sessions.
+# Network-heavy (downloads every structure holding a kept ligand) -> login node on Gadi.
+align-sites = "python scripts/align_sites.py"
+# Bake .pml sessions into .pse files (needs PyMOL): pixi run -e viz build-sessions
+build-sessions = "python scripts/align_sites.py --sessions-only"
 test = { cmd = "pytest -q", depends-on = [] }
 lint = "ruff check ."
 
@@ -45,6 +50,13 @@ openpyxl = ">=3.1"
 pytest = ">=8.0"
 ruff = ">=0.5"
 
+# --- viz: PyMOL, isolated so its heavy Qt/GL stack never blocks core/chem.
+# Only needed to bake .pse session files; the align stage always writes portable
+# .pml scripts using gemmi (in `chem`) without PyMOL.
+[feature.viz.dependencies]
+pymol-open-source = ">=2.5"
+
 [environments]
 default = { features = ["core", "chem"], solve-group = "main" }
 dev = { features = ["core", "chem", "dev"], solve-group = "main" }
+viz = { features = ["core", "chem", "viz"], solve-group = "main" }

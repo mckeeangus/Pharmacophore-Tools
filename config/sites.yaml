@@ -1,0 +1,96 @@
+# config/sites.yaml
+# Binding-site definitions for the alignment / visualisation stage.
+#
+# For each model system we pick ONE reference structure and an "anchor" — the
+# HET code of the ligand or ion that marks the binding site of interest (e.g.
+# acetylcholine for the nAChR orthosteric site, the catalytic Zn for carbonic
+# anhydrase). Every kept ligand instance is superposed into that reference's
+# frame using a *binding-site-local* fit (pocket Calpha atoms only); an instance
+# is kept only if, after superposition, its centroid lands within `cutoff` of
+# the anchor — i.e. it really binds where the reference ligand binds.
+#
+# All reference PDBs + anchors below are drawn from structures that are already
+# in our catalogue (catalogue/<slug>/), so they are guaranteed in-scope.
+
+defaults:
+  pocket_shell_angstrom: 10.0   # Calpha atoms within this of the anchor define the local superposition selection
+  cutoff_angstrom: 8.0          # an instance is "at the site" if its centroid is within this of the anchor (ref frame)
+  match_distance_angstrom: 2.5  # after a global fit, ref/candidate Calpha within this are treated as corresponding
+  max_pocket_rmsd_angstrom: 3.0 # reject instances whose pocket superposition is worse than this (no matching pocket)
+  min_pocket_atoms: 8           # need at least this many matched pocket Calpha to trust the fit
+
+sites:
+  nachr_a4b2:
+    reference_pdb: 8ST4
+    anchor_het: ACH            # acetylcholine — the orthosteric site itself
+    notes: >-
+      Orthosteric ACh site (aromatic box). The receptor has several equivalent
+      alpha/beta interfaces; per-instance local superposition overlays each copy
+      onto the canonical pocket. Multi-interface symmetry handling is a known
+      follow-up (instances at a non-canonical interface may be dropped for now).
+
+  esr1:
+    reference_pdb: 7NEL
+    anchor_het: EST            # 17-beta-estradiol in the LBD hormone pocket
+    notes: Estrogen-receptor ligand-binding-domain pocket.
+
+  hiv1_protease:
+    reference_pdb: 1DMP
+    anchor_het: DMP            # DMP323 cyclic-urea protease inhibitor (active site)
+    notes: >-
+      The P04585 (Gag-Pol) search also returns reverse-transcriptase structures;
+      anchoring on a protease active-site inhibitor rejects RT-bound poses
+      (e.g. nevirapine/efavirenz) that do not belong to the protease site.
+
+  adrb2:
+    reference_pdb: 2RH1
+    anchor_het: CAU            # carazolol — orthosteric catecholamine pocket
+    notes: Excludes T4L/BRIL fusion-partner and lipid ligands away from the pocket.
+
+  cdk2:
+    reference_pdb: 4EOJ
+    anchor_het: ATP            # ATP / hinge catalytic site
+    notes: ATP-site anchor; drops cryo-additives (e.g. SGM) and any allosteric binders.
+
+  ca2:
+    reference_pdb: 3K34
+    anchor_het: ZN             # catalytic zinc — the active site itself (1153 structures)
+    notes: >-
+      Anchored on the catalytic Zn2+ rather than any one inhibitor (all active-site
+      inhibitors coordinate it). Surface mercury adducts (MBO/BE7) fall outside cutoff.
+
+  ache:
+    reference_pdb: 6O4W
+    anchor_het: E20            # donepezil — spans the catalytic gorge
+    notes: Catalytic gorge / active site.
+
+  cavab:
+    reference_pdb: 6KE5
+    anchor_het: 6UB            # amlodipine — central-cavity drug site
+    notes: >-
+      Engineered surrogate. Central-cavity drug site on the pore axis (the Ca2+
+      ions sit in the selectivity filter, a different location).
+
+  cox2:
+    reference_pdb: 5KIR
+    anchor_het: RCX            # rofecoxib in the cyclooxygenase channel
+    notes: COX channel (the heme cofactor COH is a separate site). Only 7 human structures.
+
+  hmgcr:
+    reference_pdb: 1HWK
+    anchor_het: "117"          # atorvastatin — HMG/statin site
+    notes: Statin site (ADP/CoA bind the separate NADPH cofactor site).
+
+  gaba_a:
+    reference_pdb: 9EQG
+    anchor_het: ABU            # GABA — orthosteric agonist site
+    notes: >-
+      Orthosteric GABA (agonist) site at the beta(+)/alpha(-) interface — the
+      direct analogue of "where acetylcholine binds" for nAChR. Excludes the
+      benzodiazepine site, anaesthetic sites, and membrane lipids. Multi-interface
+      symmetry handling is the same known follow-up as nAChR.
+
+  net_slc6a2:
+    reference_pdb: 8ZOY
+    anchor_het: LNR            # L-noradrenaline — central S1 substrate site
+    notes: Central S1 substrate/inhibitor site; excludes detergents/lipids.

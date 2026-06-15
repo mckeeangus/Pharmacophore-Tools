@@ -1,0 +1,214 @@
+# config/efficacy.yaml
+# Stage 3 — efficacy-sign annotation and reference-state routing.
+#
+# A co-crystal is SILENT on functional direction, so efficacy is external
+# pharmacology and must be curated, not inferred. This file is the single place
+# that knowledge lives; the pipeline only reads it (no efficacy is guessed from
+# structure or ligand names in code).
+#
+# Provenance & honesty:
+#   * The calls below are curator assignments from standard pharmacology
+#     (textbook drug class / IUPHAR-BPS / primary literature) for ligands whose
+#     identity is unambiguous. They MUST be verified against ChEMBL / IUPHAR-BPS
+#     at the relevant subtype before any publication. No database IDs are
+#     fabricated here; `source: curated` denotes a curator assertion.
+#   * Anything not listed (and with no target `default_efficacy`) is reported as
+#     `unknown` and sent to a review list — never silently bucketed.
+#
+# efficacy: positive | neutral | negative
+#   positive  agonist / PAM / activator / transporter substrate-releaser
+#   neutral   neutral antagonist / silent binder
+#   negative  inverse agonist / NAM / enzyme inhibitor / reuptake inhibitor
+#
+# track: separate_state  routes a ligand OUT of the reversible-binder cells
+#   (covalent/irreversible, reactivator of an adducted enzyme, degrader, or a
+#   catalytic substrate/product/cofactor). Requires a `reason`.
+#
+# default_efficacy (optional): applies to every reversible ligand of a target
+#   that has no explicit entry. Use ONLY for single-mechanism (control) targets
+#   where one documented effect dominates the site; exceptions are overridden.
+
+defaults:
+  source: curated
+
+targets:
+
+  # --- control / single-mechanism targets (documented default) -------------
+
+  cox2:
+    class: control
+    default_efficacy: negative          # COX-channel inhibitor (NSAID/coxib)
+    notes: >-
+      Reversible/time-dependent kinetics are a sub-mode, not an effect split.
+      Aspirin (covalent, HET AIN) is absent from the kept poses — its
+      separate-state cell is empty here.
+    ligands:
+      SAL: {efficacy: negative, note: "salicylic acid, reversible COX inhibitor"}
+
+  hiv1_protease:
+    class: control
+    default_efficacy: negative          # active-site protease inhibitor
+    notes: Non-human / resistance-mutant variants kept in metadata.
+
+  hmgcr:
+    class: control
+    default_efficacy: negative          # statin / HMG-site inhibitor
+    ligands:
+      HMG: {track: separate_state, reason: "HMG-CoA substrate/cofactor, not an inhibitor"}
+      MAH: {track: separate_state, reason: "HMG substrate/product analogue"}
+
+  cdk2:
+    class: control
+    default_efficacy: negative          # ATP-competitive CDK2 inhibitor
+    notes: Multiplicity here should be pocket/mode, never an efficacy split.
+    ligands:
+      ATP: {track: separate_state, reason: "ATP cofactor/substrate, not an inhibitor"}
+      SGM: {efficacy: unknown, note: "monothioglycerol cryo-additive (curation slip)"}
+
+  ache:
+    class: multi_site
+    default_efficacy: negative          # reversible AChE inhibitor
+    notes: >-
+      Two separate-state tracks routed out: organophosphyl-serine covalent
+      adducts (the OP-inhibited enzyme) and oxime reactivators (defined against
+      that adducted state, not the native enzyme).
+    ligands:
+      # organophosphyl-serine covalent adducts
+      VX:  {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      DEP: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      EFS: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      ELT: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      GD8: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      L0S: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      L1M: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      L2Y: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      UCJ: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      UCY: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      WW2: {track: separate_state, reason: "organophosphyl-serine covalent adduct"}
+      # oxime reactivators (act on the OP-adducted enzyme)
+      HI6:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      LND:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      3VI:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      HLO:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      PQV:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      PQY:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      FP1:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      LWL:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      LWU:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      4IX:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      4J1:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      QRH:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      CVZ:   {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      A1CD5: {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      A1CDA: {track: separate_state, reason: "oxime reactivator (OP-adducted enzyme)"}
+      # representative reversible inhibitors (covered by default; listed for clarity)
+      E20: {efficacy: negative, note: "donepezil"}
+      THA: {efficacy: negative, note: "tacrine"}
+      GNT: {efficacy: negative, note: "galantamine"}
+      HUP: {efficacy: negative, note: "huperzine A"}
+
+  cavab:
+    class: control
+    default_efficacy: negative          # Cav-channel blocker / DHP-site antagonist
+    notes: >-
+      Agonist (Bay K 8644) is absent from CavAb structures, so the activator cell
+      is empty — admitting a Cav homolog to supply it is a separate decision.
+    ligands:
+      G3P: {efficacy: unknown, note: "sn-glycerol-3-phosphate lipid fragment"}
+
+  # --- multi-effect / stress-test targets (no default; seeded per ligand) ---
+
+  esr1:
+    class: multi_effect
+    notes: >-
+      Agonist vs antagonist (SERM) at one pocket. SERDs are degraders and should
+      be routed to separate_state once individually identified; the SERD-chemotype
+      acrylates/bicyclics here are left `unknown` rather than mis-routed.
+    ligands:
+      EST: {efficacy: positive, note: "17-beta-estradiol, agonist"}
+      GEN: {efficacy: positive, note: "genistein, phytoestrogen agonist"}
+      17M: {efficacy: positive, note: "17-methyl-dihydroequilenin, estrogen"}
+      27J: {efficacy: positive, note: "alpha-zearalanol, estrogenic"}
+      RAL: {efficacy: negative, note: "raloxifene, SERM antagonist"}
+      OHT: {efficacy: negative, note: "4-hydroxytamoxifen, SERM antagonist"}
+      53Q: {efficacy: negative, note: "clomifene, SERM"}
+      29S: {efficacy: negative, note: "bazedoxifene, SERM"}
+      9XY: {efficacy: negative, note: "endoxifen, SERM antagonist"}
+
+  adrb2:
+    class: multi_effect
+    notes: >-
+      Agonist / antagonist / inverse-agonist spectrum at the orthosteric pocket.
+      Where neutral-antagonist vs inverse-agonist cannot be separated from the
+      available labels the binder is left `unknown` rather than guessed.
+    ligands:
+      ALE: {efficacy: positive, note: "epinephrine, agonist"}
+      E5E: {efficacy: positive, note: "noradrenaline, agonist"}
+      LDP: {efficacy: positive, note: "dopamine, agonist"}
+      "68H": {efficacy: positive, note: "salbutamol, agonist"}
+      K5Y: {efficacy: positive, note: "salmeterol, agonist"}
+      DZQ: {efficacy: positive, note: "olodaterol, agonist"}
+      CAU: {efficacy: negative, note: "carazolol, inverse agonist"}
+
+  nachr_a4b2:
+    class: multi_effect
+    notes: >-
+      Orthosteric agonist vs antagonist. Lobeline (partial agonist/antagonist)
+      and other ambiguous ligands are left `unknown`. Efficacy can flip across
+      nAChR subtypes, so the subtype/species is recorded per pose.
+    ligands:
+      ACH: {efficacy: positive, note: "acetylcholine, agonist"}
+      CCE: {efficacy: positive, note: "carbamoylcholine, agonist"}
+      NCT: {efficacy: positive, note: "nicotine, agonist"}
+      FN1: {efficacy: positive, note: "5-fluoronicotine, agonist"}
+      QMR: {efficacy: positive, note: "varenicline, partial agonist"}
+      C5E: {efficacy: positive, note: "cytisine, partial agonist"}
+      SY9: {efficacy: neutral,  note: "strychnine, competitive antagonist"}
+      MLK: {efficacy: neutral,  note: "methyllycaconitine, antagonist"}
+      TC9: {efficacy: neutral,  note: "d-tubocurarine, antagonist"}
+      PHN: {efficacy: neutral,  note: "1,10-phenanthroline, antagonist"}
+
+  gaba_a:
+    class: multi_effect
+    notes: >-
+      Orthosteric agonists and the benzodiazepine-site PAM / neutral antagonist /
+      inverse-agonist switch (the centrepiece split).
+    ligands:
+      ABU: {efficacy: positive, note: "GABA, agonist"}
+      EI7: {efficacy: positive, note: "gaboxadol/THIP, agonist"}
+      DZP: {efficacy: positive, note: "diazepam, BZ-site PAM"}
+      "08H": {efficacy: positive, note: "triazolo-benzodiazepine, BZ-site PAM"}
+      A1ADG: {efficacy: positive, note: "methaqualone, positive modulator"}
+      EIE: {efficacy: neutral,  note: "flumazenil-type, BZ-site neutral antagonist"}
+      R63: {efficacy: negative, note: "beta-carboline ester, BZ-site inverse agonist"}
+
+  ca2:
+    class: multi_effect
+    default_efficacy: negative          # active-site sulfonamide/inhibitor dominates
+    notes: >-
+      Inhibitor (sulfonamide etc.) dominates the active site; CO2/bicarbonate are
+      the catalytic substrate/product (routed out). No confident CA *activator*
+      (amino-acid/amine class) is present, so the activator cell is empty here.
+    ligands:
+      CO2: {track: separate_state, reason: "catalytic substrate (CO2)"}
+      BCT: {track: separate_state, reason: "catalytic product (bicarbonate)"}
+
+  net_slc6a2:
+    class: multi_effect
+    notes: >-
+      Transporter vocabulary: reuptake inhibitor (negative) vs substrate/releaser
+      (positive) — NOT agonist/antagonist. Surrogate dDAT recorded per pose.
+    ligands:
+      LNR: {efficacy: positive, note: "L-noradrenaline, substrate"}
+      E5E: {efficacy: positive, note: "noradrenaline, substrate"}
+      LDP: {efficacy: positive, note: "dopamine, substrate"}
+      "1WE": {efficacy: positive, note: "amphetamine, substrate-releaser"}
+      B40: {efficacy: positive, note: "methamphetamine, substrate-releaser"}
+      YMN: {efficacy: positive, note: "iobenguane (MIBG), substrate"}
+      COC: {efficacy: negative, note: "cocaine, reuptake inhibitor"}
+      DSM: {efficacy: negative, note: "desipramine, reuptake inhibitor"}
+      TP0: {efficacy: negative, note: "amitriptyline, reuptake inhibitor"}
+      "21B": {efficacy: negative, note: "nortriptyline, reuptake inhibitor"}
+      "1XR": {efficacy: negative, note: "bupropion, reuptake inhibitor"}
+      "41U": {efficacy: negative, note: "nisoxetine, reuptake inhibitor"}
+      A1LX4: {efficacy: negative, note: "atomoxetine, reuptake inhibitor"}

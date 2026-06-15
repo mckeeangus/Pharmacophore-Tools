@@ -1,0 +1,155 @@
+{
+  "slug": "cox2",
+  "primary_pocket": "cox_channel",
+  "expected_pockets": [
+    "cox_channel"
+  ],
+  "pockets_found": [
+    "cox_channel"
+  ],
+  "cells": {
+    "cox_channel__negative": [
+      "5IKV_FLF_B601",
+      "5IKR_ID8_A601",
+      "5KIR_RCX_A601",
+      "5F1A_SAL_B601",
+      "5IKT_TLF_B601"
+    ]
+  },
+  "counts": {
+    "poses": 6,
+    "in_cells": 5,
+    "cells": 1,
+    "separate_state": 0,
+    "unknown": 0,
+    "quarantined": 1
+  },
+  "poses": [
+    {
+      "pdb_id": "5IKV",
+      "ligand_id": "FLF",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "cox_channel",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "cox_channel__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P35354"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IKV_FLF_B601.mol2"
+    },
+    {
+      "pdb_id": "5IKR",
+      "ligand_id": "ID8",
+      "chain": "A",
+      "seqid": "601",
+      "pocket": "cox_channel",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "cox_channel__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P35354"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IKR_ID8_A601.mol2"
+    },
+    {
+      "pdb_id": "5IKQ",
+      "ligand_id": "JMS",
+      "chain": "B",
+      "seqid": "602",
+      "pocket": null,
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P35354"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IKQ_JMS_B602.mol2"
+    },
+    {
+      "pdb_id": "5KIR",
+      "ligand_id": "RCX",
+      "chain": "A",
+      "seqid": "601",
+      "pocket": "cox_channel",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "cox_channel__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P35354"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5KIR_RCX_A601.mol2"
+    },
+    {
+      "pdb_id": "5F1A",
+      "ligand_id": "SAL",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "cox_channel",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "cox_channel__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "salicylic acid, reversible COX inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P35354"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5F1A_SAL_B601.mol2"
+    },
+    {
+      "pdb_id": "5IKT",
+      "ligand_id": "TLF",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "cox_channel",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "cox_channel__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P35354"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IKT_TLF_B601.mol2"
+    }
+  ]
+}

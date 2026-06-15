@@ -57,6 +57,35 @@ def target_session_pse(slug: str) -> Path:
     return target_catalogue_dir(slug) / f"{slug}_aligned.pse"
 
 
+# --- Stage 3: effect-based grouping (tracked, under catalogue/) --------------
+
+def target_groups_dir(slug: str) -> Path:
+    """Partition cells: catalogue/<slug>/groups/<pocket>__<efficacy>/."""
+    return target_catalogue_dir(slug) / "groups"
+
+
+def target_review_dir(slug: str) -> Path:
+    """First-class review tracks: separate_state / unknown / quarantine."""
+    return target_catalogue_dir(slug) / "review"
+
+
+def target_effect_groups_json(slug: str) -> Path:
+    return target_catalogue_dir(slug) / "effect_groups.json"
+
+
+def target_grouped_pse(slug: str) -> Path:
+    """Combined Stage-2 frame recoloured by cell (reference + all poses)."""
+    return target_catalogue_dir(slug) / f"{slug}_grouped.pse"
+
+
+def target_grouped_pml(slug: str) -> Path:
+    return target_catalogue_dir(slug) / f"{slug}_grouped.pml"
+
+
+def target_stage3_report(slug: str) -> Path:
+    return target_catalogue_dir(slug) / f"{slug}_stage3_report.md"
+
+
 def ensure_dir(path: Path) -> Path:
     path.mkdir(parents=True, exist_ok=True)
     return path

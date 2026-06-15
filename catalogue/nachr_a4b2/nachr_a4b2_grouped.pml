@@ -1,0 +1,45 @@
+# nachr_a4b2 — Stage 3 cells overlay (2 cells)
+# Open from catalogue/nachr_a4b2/:  pymol nachr_a4b2_grouped.pml
+reinitialize
+bg_color white
+set valence, 1
+
+load groups/orthosteric__neutral/2BYR_MLK_C301.mol2, orthosteric__neutral__2BYR_MLK_C301
+load groups/orthosteric__neutral/3SH1_MLK_E301.mol2, orthosteric__neutral__3SH1_MLK_E301
+load groups/orthosteric__neutral/3SIO_MLK_A260.mol2, orthosteric__neutral__3SIO_MLK_A260
+load groups/orthosteric__neutral/9SG3_PHN_A302.mol2, orthosteric__neutral__9SG3_PHN_A302
+load groups/orthosteric__neutral/2XYS_SY9_C1206.mol2, orthosteric__neutral__2XYS_SY9_C1206
+load groups/orthosteric__neutral/5O8T_SY9_E601.mol2, orthosteric__neutral__5O8T_SY9_E601
+load groups/orthosteric__neutral/5OA0_SY9_C601.mol2, orthosteric__neutral__5OA0_SY9_C601
+load groups/orthosteric__neutral/5OAL_SY9_C402.mol2, orthosteric__neutral__5OAL_SY9_C402
+load groups/orthosteric__neutral/5OBG_SY9_E601.mol2, orthosteric__neutral__5OBG_SY9_E601
+load groups/orthosteric__neutral/2XYT_TC9_F1206.mol2, orthosteric__neutral__2XYT_TC9_F1206
+group orthosteric__neutral, orthosteric__neutral__*
+color yellow, orthosteric__neutral and elem C
+load groups/orthosteric__positive/2XZ5_ACH_B1210.mol2, orthosteric__positive__2XZ5_ACH_B1210
+load groups/orthosteric__positive/3WIP_ACH_J301.mol2, orthosteric__positive__3WIP_ACH_J301
+load groups/orthosteric__positive/8SSZ_ACH_D704.mol2, orthosteric__positive__8SSZ_ACH_D704
+load groups/orthosteric__positive/8ST0_ACH_D702.mol2, orthosteric__positive__8ST0_ACH_D702
+load groups/orthosteric__positive/8ST1_ACH_B703.mol2, orthosteric__positive__8ST1_ACH_B703
+load groups/orthosteric__positive/8ST2_ACH_D704.mol2, orthosteric__positive__8ST2_ACH_D704
+load groups/orthosteric__positive/8ST3_ACH_D704.mol2, orthosteric__positive__8ST3_ACH_D704
+load groups/orthosteric__positive/8ST4_ACH_D704.mol2, orthosteric__positive__8ST4_ACH_D704
+load groups/orthosteric__positive/4BQT_C5E_C301.mol2, orthosteric__positive__4BQT_C5E_C301
+load groups/orthosteric__positive/5SYO_C5E_C301.mol2, orthosteric__positive__5SYO_C5E_C301
+load groups/orthosteric__positive/1UV6_CCE_J1206.mol2, orthosteric__positive__1UV6_CCE_J1206
+load groups/orthosteric__positive/5BP0_FN1_E301.mol2, orthosteric__positive__5BP0_FN1_E301
+load groups/orthosteric__positive/1UW6_NCT_E1206.mol2, orthosteric__positive__1UW6_NCT_E1206
+load groups/orthosteric__positive/5KXI_NCT_D402.mol2, orthosteric__positive__5KXI_NCT_D402
+load groups/orthosteric__positive/5O87_NCT_B601.mol2, orthosteric__positive__5O87_NCT_B601
+load groups/orthosteric__positive/6CNJ_NCT_A402.mol2, orthosteric__positive__6CNJ_NCT_A402
+load groups/orthosteric__positive/6CNK_NCT_B402.mol2, orthosteric__positive__6CNK_NCT_B402
+load groups/orthosteric__positive/4AFT_QMR_B301.mol2, orthosteric__positive__4AFT_QMR_B301
+load groups/orthosteric__positive/5AIN_QMR_A1207.mol2, orthosteric__positive__5AIN_QMR_A1207
+load groups/orthosteric__positive/6UR8_QMR_A702.mol2, orthosteric__positive__6UR8_QMR_A702
+load groups/orthosteric__positive/6USF_QMR_A502.mol2, orthosteric__positive__6USF_QMR_A502
+group orthosteric__positive, orthosteric__positive__*
+color green, orthosteric__positive and elem C
+show sticks
+hide everything, hydro
+set stick_radius, 0.15
+orient

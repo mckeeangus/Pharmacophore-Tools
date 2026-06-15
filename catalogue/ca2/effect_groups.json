@@ -1,0 +1,2211 @@
+{
+  "slug": "ca2",
+  "primary_pocket": "active_site",
+  "expected_pockets": [
+    "active_site"
+  ],
+  "pockets_found": [
+    "active_site"
+  ],
+  "cells": {
+    "active_site__negative": [
+      "4FVO_0VV_A303",
+      "6SDH_0VV_A305",
+      "6SDI_0VV_A305",
+      "4FVN_0VW_A303",
+      "4FU5_0VX_A303",
+      "4FRC_0VY_A303",
+      "4FPT_0VZ_A303",
+      "4Q78_25X_A302",
+      "4WW6_3TV_A306",
+      "6I1U_3W8_A307",
+      "4YXI_4J8_A303",
+      "6GM9_4J8_A305",
+      "4YXO_4JC_A305",
+      "6HQX_4JC_A305",
+      "4YXU_4JE_A305",
+      "6HR3_4JE_A305",
+      "6RH4_4NZ_A308",
+      "6RFH_4SO_A305",
+      "5DOH_5DU_B304",
+      "5DRS_5EF_A305",
+      "5LL8_6YP_A306",
+      "6SFQ_7Q1_A304",
+      "6SB7_8K2_A310",
+      "5NY6_9EB_A302",
+      "5OGP_9UK_A302",
+      "8ROU_A1H15_A302",
+      "8ROW_A1H15_A302",
+      "9FJQ_A1IDL_A303",
+      "9GFW_A1IKU_A302",
+      "3HS4_AZM_A701",
+      "2FOS_B17_A301",
+      "5OGN_B8B_A302",
+      "3SAX_E50_A263",
+      "5JGS_EVF_B301",
+      "5JGT_EVI_B303",
+      "4YX4_FB2_A303",
+      "6GDC_FB2_A305",
+      "6RKN_FBS_A304",
+      "6ROE_FBT_A307",
+      "2WEG_FBV_A1263",
+      "6RIT_FBV_A306",
+      "6RQI_FBW_A307",
+      "4WL4_FC5_A302",
+      "6G3Q_FO9_A302",
+      "6I3E_H1Z_A309",
+      "6SDJ_J3K_A302",
+      "6RIG_K4N_A308",
+      "6RJJ_K5W_A305",
+      "6RNP_KBB_A303",
+      "6ROB_KBZ_A306",
+      "6RRI_KFH_A304",
+      "6RS5_KGK_A306",
+      "6RSZ_KJ5_A305",
+      "6RZX_KPQ_A302",
+      "6SBH_L4K_A304",
+      "6SBL_L4Q_A306",
+      "6SBM_L4W_A306",
+      "6SD7_L7T_A304",
+      "6SFU_LBQ_A308",
+      "6SG6_LC8_A304",
+      "2NNS_M25_A301",
+      "2NNO_M28_A301",
+      "2NNV_M29_A301",
+      "6I0W_M4S_A308",
+      "6T81_MUE_A302",
+      "6YKH_OWK_A302",
+      "6YZU_Q38_A302",
+      "6YZX_Q3H_A302",
+      "6YZK_Q3N_A302",
+      "6YZN_Q3Q_A302",
+      "6YZQ_Q3Q_A302",
+      "6Z04_Q3W_A302",
+      "4YYT_S2O_A305",
+      "6RG5_S2O_A304",
+      "5M78_SAL_A304",
+      "6RL9_SAN_A304",
+      "4MTY_SBW_A302",
+      "1LUG_SUA_A1002",
+      "3K34_SUA_A1003",
+      "8BZZ_SVO_AAA303",
+      "7OYO_TKR_A302",
+      "8QFK_UII_AAA301",
+      "4PZH_V13_A305",
+      "5LLC_V26_A308",
+      "8QH8_V8I_A302",
+      "4Q08_V90_A305",
+      "5OGO_WWO_A302"
+    ]
+  },
+  "counts": {
+    "poses": 100,
+    "in_cells": 87,
+    "cells": 1,
+    "separate_state": 12,
+    "unknown": 0,
+    "quarantined": 1
+  },
+  "poses": [
+    {
+      "pdb_id": "4FVO",
+      "ligand_id": "0VV",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4FVO_0VV_A303.mol2"
+    },
+    {
+      "pdb_id": "6SDH",
+      "ligand_id": "0VV",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SDH_0VV_A305.mol2"
+    },
+    {
+      "pdb_id": "6SDI",
+      "ligand_id": "0VV",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SDI_0VV_A305.mol2"
+    },
+    {
+      "pdb_id": "4FVN",
+      "ligand_id": "0VW",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4FVN_0VW_A303.mol2"
+    },
+    {
+      "pdb_id": "4FU5",
+      "ligand_id": "0VX",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4FU5_0VX_A303.mol2"
+    },
+    {
+      "pdb_id": "4FRC",
+      "ligand_id": "0VY",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4FRC_0VY_A303.mol2"
+    },
+    {
+      "pdb_id": "4FPT",
+      "ligand_id": "0VZ",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4FPT_0VZ_A303.mol2"
+    },
+    {
+      "pdb_id": "4Q78",
+      "ligand_id": "25X",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4Q78_25X_A302.mol2"
+    },
+    {
+      "pdb_id": "4WW6",
+      "ligand_id": "3TV",
+      "chain": "A",
+      "seqid": "306",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4WW6_3TV_A306.mol2"
+    },
+    {
+      "pdb_id": "6I1U",
+      "ligand_id": "3W8",
+      "chain": "A",
+      "seqid": "307",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6I1U_3W8_A307.mol2"
+    },
+    {
+      "pdb_id": "4YXI",
+      "ligand_id": "4J8",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4YXI_4J8_A303.mol2"
+    },
+    {
+      "pdb_id": "6GM9",
+      "ligand_id": "4J8",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6GM9_4J8_A305.mol2"
+    },
+    {
+      "pdb_id": "4YXO",
+      "ligand_id": "4JC",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4YXO_4JC_A305.mol2"
+    },
+    {
+      "pdb_id": "6HQX",
+      "ligand_id": "4JC",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6HQX_4JC_A305.mol2"
+    },
+    {
+      "pdb_id": "4YXU",
+      "ligand_id": "4JE",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4YXU_4JE_A305.mol2"
+    },
+    {
+      "pdb_id": "6HR3",
+      "ligand_id": "4JE",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6HR3_4JE_A305.mol2"
+    },
+    {
+      "pdb_id": "6RH4",
+      "ligand_id": "4NZ",
+      "chain": "A",
+      "seqid": "308",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RH4_4NZ_A308.mol2"
+    },
+    {
+      "pdb_id": "6RFH",
+      "ligand_id": "4SO",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RFH_4SO_A305.mol2"
+    },
+    {
+      "pdb_id": "5DOH",
+      "ligand_id": "5DU",
+      "chain": "B",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5DOH_5DU_B304.mol2"
+    },
+    {
+      "pdb_id": "5DRS",
+      "ligand_id": "5EF",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5DRS_5EF_A305.mol2"
+    },
+    {
+      "pdb_id": "5LL8",
+      "ligand_id": "6YP",
+      "chain": "A",
+      "seqid": "306",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5LL8_6YP_A306.mol2"
+    },
+    {
+      "pdb_id": "6SFQ",
+      "ligand_id": "7Q1",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SFQ_7Q1_A304.mol2"
+    },
+    {
+      "pdb_id": "6SB7",
+      "ligand_id": "8K2",
+      "chain": "A",
+      "seqid": "310",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SB7_8K2_A310.mol2"
+    },
+    {
+      "pdb_id": "5NY6",
+      "ligand_id": "9EB",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5NY6_9EB_A302.mol2"
+    },
+    {
+      "pdb_id": "5OGP",
+      "ligand_id": "9UK",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OGP_9UK_A302.mol2"
+    },
+    {
+      "pdb_id": "8ROU",
+      "ligand_id": "A1H15",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ROU_A1H15_A302.mol2"
+    },
+    {
+      "pdb_id": "8ROW",
+      "ligand_id": "A1H15",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ROW_A1H15_A302.mol2"
+    },
+    {
+      "pdb_id": "9FJQ",
+      "ligand_id": "A1IDL",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FJQ_A1IDL_A303.mol2"
+    },
+    {
+      "pdb_id": "9GFW",
+      "ligand_id": "A1IKU",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9GFW_A1IKU_A302.mol2"
+    },
+    {
+      "pdb_id": "3HS4",
+      "ligand_id": "AZM",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3HS4_AZM_A701.mol2"
+    },
+    {
+      "pdb_id": "2FOS",
+      "ligand_id": "B17",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2FOS_B17_A301.mol2"
+    },
+    {
+      "pdb_id": "5OGN",
+      "ligand_id": "B8B",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OGN_B8B_A302.mol2"
+    },
+    {
+      "pdb_id": "3U7C",
+      "ligand_id": "BCT",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic product (bicarbonate)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3U7C_BCT_A303.mol2"
+    },
+    {
+      "pdb_id": "6KLZ",
+      "ligand_id": "BCT",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic product (bicarbonate)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6KLZ_BCT_A303.mol2"
+    },
+    {
+      "pdb_id": "6KM0",
+      "ligand_id": "BCT",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic product (bicarbonate)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6KM0_BCT_A303.mol2"
+    },
+    {
+      "pdb_id": "6KM1",
+      "ligand_id": "BCT",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic product (bicarbonate)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6KM1_BCT_A304.mol2"
+    },
+    {
+      "pdb_id": "6KM2",
+      "ligand_id": "BCT",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic product (bicarbonate)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6KM2_BCT_A304.mol2"
+    },
+    {
+      "pdb_id": "3D92",
+      "ligand_id": "CO2",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic substrate (CO2)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3D92_CO2_A301.mol2"
+    },
+    {
+      "pdb_id": "3D93",
+      "ligand_id": "CO2",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic substrate (CO2)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3D93_CO2_A301.mol2"
+    },
+    {
+      "pdb_id": "3U7C",
+      "ligand_id": "CO2",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic substrate (CO2)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3U7C_CO2_A301.mol2"
+    },
+    {
+      "pdb_id": "5Y2R",
+      "ligand_id": "CO2",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic substrate (CO2)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5Y2R_CO2_A302.mol2"
+    },
+    {
+      "pdb_id": "5Y2S",
+      "ligand_id": "CO2",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic substrate (CO2)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5Y2S_CO2_A302.mol2"
+    },
+    {
+      "pdb_id": "6KM1",
+      "ligand_id": "CO2",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic substrate (CO2)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6KM1_CO2_A305.mol2"
+    },
+    {
+      "pdb_id": "6KM2",
+      "ligand_id": "CO2",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "catalytic substrate (CO2)",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6KM2_CO2_A305.mol2"
+    },
+    {
+      "pdb_id": "3SAX",
+      "ligand_id": "E50",
+      "chain": "A",
+      "seqid": "263",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3SAX_E50_A263.mol2"
+    },
+    {
+      "pdb_id": "5JGS",
+      "ligand_id": "EVF",
+      "chain": "B",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5JGS_EVF_B301.mol2"
+    },
+    {
+      "pdb_id": "5JGT",
+      "ligand_id": "EVI",
+      "chain": "B",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5JGT_EVI_B303.mol2"
+    },
+    {
+      "pdb_id": "4YX4",
+      "ligand_id": "FB2",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4YX4_FB2_A303.mol2"
+    },
+    {
+      "pdb_id": "6GDC",
+      "ligand_id": "FB2",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6GDC_FB2_A305.mol2"
+    },
+    {
+      "pdb_id": "6RKN",
+      "ligand_id": "FBS",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RKN_FBS_A304.mol2"
+    },
+    {
+      "pdb_id": "6ROE",
+      "ligand_id": "FBT",
+      "chain": "A",
+      "seqid": "307",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6ROE_FBT_A307.mol2"
+    },
+    {
+      "pdb_id": "2WEG",
+      "ligand_id": "FBV",
+      "chain": "A",
+      "seqid": "1263",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2WEG_FBV_A1263.mol2"
+    },
+    {
+      "pdb_id": "6RIT",
+      "ligand_id": "FBV",
+      "chain": "A",
+      "seqid": "306",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RIT_FBV_A306.mol2"
+    },
+    {
+      "pdb_id": "6RQI",
+      "ligand_id": "FBW",
+      "chain": "A",
+      "seqid": "307",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RQI_FBW_A307.mol2"
+    },
+    {
+      "pdb_id": "4WL4",
+      "ligand_id": "FC5",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4WL4_FC5_A302.mol2"
+    },
+    {
+      "pdb_id": "6G3Q",
+      "ligand_id": "FO9",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6G3Q_FO9_A302.mol2"
+    },
+    {
+      "pdb_id": "6I3E",
+      "ligand_id": "H1Z",
+      "chain": "A",
+      "seqid": "309",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6I3E_H1Z_A309.mol2"
+    },
+    {
+      "pdb_id": "6SDJ",
+      "ligand_id": "J3K",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SDJ_J3K_A302.mol2"
+    },
+    {
+      "pdb_id": "6RIG",
+      "ligand_id": "K4N",
+      "chain": "A",
+      "seqid": "308",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RIG_K4N_A308.mol2"
+    },
+    {
+      "pdb_id": "6RJJ",
+      "ligand_id": "K5W",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RJJ_K5W_A305.mol2"
+    },
+    {
+      "pdb_id": "6RNP",
+      "ligand_id": "KBB",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RNP_KBB_A303.mol2"
+    },
+    {
+      "pdb_id": "6ROB",
+      "ligand_id": "KBZ",
+      "chain": "A",
+      "seqid": "306",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6ROB_KBZ_A306.mol2"
+    },
+    {
+      "pdb_id": "6RRI",
+      "ligand_id": "KFH",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RRI_KFH_A304.mol2"
+    },
+    {
+      "pdb_id": "6RS5",
+      "ligand_id": "KGK",
+      "chain": "A",
+      "seqid": "306",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RS5_KGK_A306.mol2"
+    },
+    {
+      "pdb_id": "6RSZ",
+      "ligand_id": "KJ5",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RSZ_KJ5_A305.mol2"
+    },
+    {
+      "pdb_id": "6RZX",
+      "ligand_id": "KPQ",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RZX_KPQ_A302.mol2"
+    },
+    {
+      "pdb_id": "6SBH",
+      "ligand_id": "L4K",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SBH_L4K_A304.mol2"
+    },
+    {
+      "pdb_id": "6SBL",
+      "ligand_id": "L4Q",
+      "chain": "A",
+      "seqid": "306",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SBL_L4Q_A306.mol2"
+    },
+    {
+      "pdb_id": "6SBM",
+      "ligand_id": "L4W",
+      "chain": "A",
+      "seqid": "306",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SBM_L4W_A306.mol2"
+    },
+    {
+      "pdb_id": "6SD7",
+      "ligand_id": "L7T",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SD7_L7T_A304.mol2"
+    },
+    {
+      "pdb_id": "6SFU",
+      "ligand_id": "LBQ",
+      "chain": "A",
+      "seqid": "308",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SFU_LBQ_A308.mol2"
+    },
+    {
+      "pdb_id": "6SG6",
+      "ligand_id": "LC8",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6SG6_LC8_A304.mol2"
+    },
+    {
+      "pdb_id": "2NNS",
+      "ligand_id": "M25",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2NNS_M25_A301.mol2"
+    },
+    {
+      "pdb_id": "2NNO",
+      "ligand_id": "M28",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2NNO_M28_A301.mol2"
+    },
+    {
+      "pdb_id": "2NNV",
+      "ligand_id": "M29",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2NNV_M29_A301.mol2"
+    },
+    {
+      "pdb_id": "6I0W",
+      "ligand_id": "M4S",
+      "chain": "A",
+      "seqid": "308",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6I0W_M4S_A308.mol2"
+    },
+    {
+      "pdb_id": "6T81",
+      "ligand_id": "MUE",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6T81_MUE_A302.mol2"
+    },
+    {
+      "pdb_id": "6YKH",
+      "ligand_id": "OWK",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6YKH_OWK_A302.mol2"
+    },
+    {
+      "pdb_id": "6YZU",
+      "ligand_id": "Q38",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6YZU_Q38_A302.mol2"
+    },
+    {
+      "pdb_id": "6YZT",
+      "ligand_id": "Q3E",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": null,
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6YZT_Q3E_A302.mol2"
+    },
+    {
+      "pdb_id": "6YZX",
+      "ligand_id": "Q3H",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6YZX_Q3H_A302.mol2"
+    },
+    {
+      "pdb_id": "6YZK",
+      "ligand_id": "Q3N",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6YZK_Q3N_A302.mol2"
+    },
+    {
+      "pdb_id": "6YZN",
+      "ligand_id": "Q3Q",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6YZN_Q3Q_A302.mol2"
+    },
+    {
+      "pdb_id": "6YZQ",
+      "ligand_id": "Q3Q",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6YZQ_Q3Q_A302.mol2"
+    },
+    {
+      "pdb_id": "6Z04",
+      "ligand_id": "Q3W",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6Z04_Q3W_A302.mol2"
+    },
+    {
+      "pdb_id": "4YYT",
+      "ligand_id": "S2O",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4YYT_S2O_A305.mol2"
+    },
+    {
+      "pdb_id": "6RG5",
+      "ligand_id": "S2O",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RG5_S2O_A304.mol2"
+    },
+    {
+      "pdb_id": "5M78",
+      "ligand_id": "SAL",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5M78_SAL_A304.mol2"
+    },
+    {
+      "pdb_id": "6RL9",
+      "ligand_id": "SAN",
+      "chain": "A",
+      "seqid": "304",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6RL9_SAN_A304.mol2"
+    },
+    {
+      "pdb_id": "4MTY",
+      "ligand_id": "SBW",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4MTY_SBW_A302.mol2"
+    },
+    {
+      "pdb_id": "1LUG",
+      "ligand_id": "SUA",
+      "chain": "A",
+      "seqid": "1002",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1LUG_SUA_A1002.mol2"
+    },
+    {
+      "pdb_id": "3K34",
+      "ligand_id": "SUA",
+      "chain": "A",
+      "seqid": "1003",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3K34_SUA_A1003.mol2"
+    },
+    {
+      "pdb_id": "8BZZ",
+      "ligand_id": "SVO",
+      "chain": "AAA",
+      "seqid": "303",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8BZZ_SVO_AAA303.mol2"
+    },
+    {
+      "pdb_id": "7OYO",
+      "ligand_id": "TKR",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7OYO_TKR_A302.mol2"
+    },
+    {
+      "pdb_id": "8QFK",
+      "ligand_id": "UII",
+      "chain": "AAA",
+      "seqid": "301",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8QFK_UII_AAA301.mol2"
+    },
+    {
+      "pdb_id": "4PZH",
+      "ligand_id": "V13",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4PZH_V13_A305.mol2"
+    },
+    {
+      "pdb_id": "5LLC",
+      "ligand_id": "V26",
+      "chain": "A",
+      "seqid": "308",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5LLC_V26_A308.mol2"
+    },
+    {
+      "pdb_id": "8QH8",
+      "ligand_id": "V8I",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8QH8_V8I_A302.mol2"
+    },
+    {
+      "pdb_id": "4Q08",
+      "ligand_id": "V90",
+      "chain": "A",
+      "seqid": "305",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4Q08_V90_A305.mol2"
+    },
+    {
+      "pdb_id": "5OGO",
+      "ligand_id": "WWO",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "active_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "active_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_effect target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00918"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OGO_WWO_A302.mol2"
+    }
+  ]
+}

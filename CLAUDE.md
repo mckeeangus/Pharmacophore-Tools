@@ -10,6 +10,35 @@ The intended downstream data-generation flow is: **DrugCLIP** virtual screening 
 
 Compute is intended to run downstream on **Gadi (NCI supercomputer)**, so all setup must stay HPC-portable and reproducible (see operating rules).
 
+## Code quality
+
+Hold all pipeline code to these standards. They override convenience; a reviewer
+should be able to read a module top-to-bottom and understand its contract.
+
+**Prefer:**
+
+- **Low cyclomatic complexity** — small functions, early returns, flat control flow.
+- **Low duplication / high reusability** — factor shared logic into one place; reuse
+  the existing IO/parse/path helpers rather than re-implementing them.
+- **Explicit contracts** — typed dataclasses and signatures; say what goes in and
+  what comes out. No surprising side effects.
+- **Testability** — pure functions where possible; keep IO/network at the edges so
+  the core logic can be unit-tested offline.
+- **Modularity** — one module = one responsibility; geometry, scientific annotation,
+  orchestration, and visualisation stay separable.
+- **Pythonic structures** — dataclasses, comprehensions, `pathlib`, context managers,
+  standard library idioms.
+
+**Avoid:**
+
+- **Hidden assumptions** — no silent defaults that encode a scientific decision; no
+  inferring meaning from incidental cues (e.g. guessing efficacy from a name substring).
+- **Hardcoded scientific knowledge** — domain facts (efficacy signs, pocket/site
+  identities, exclusion lists, anchors) live in versioned **config data files**, not
+  in code logic, so they can be reviewed and corrected without touching the pipeline.
+- **Unnecessary coupling** — modules depend on narrow interfaces, not on each other's
+  internals; a heavy/brittle dependency must not block unrelated code.
+
 ## Environment & operating rules
 
 This project uses **pixi** for dependency management. These rules apply in every session:
@@ -51,6 +80,16 @@ This project uses **pixi** for dependency management. These rules apply in every
 │       └── ligands/mol2/      # extracted bound-pose ligands for PyMOL
 └── tests/
 ```
+
+---
+
+## Pipeline stages (status)
+
+The "known actives" work is built in stages; each writes tracked deliverables under `catalogue/<slug>/`. The downstream DrugCLIP→GNINA→features→model pipeline remains **out of scope**.
+
+1. **Scrape & catalogue** (`scripts/scrape_pdb_ligands.py`, `src/pharmpipe/{pdb,catalogue}/`) — verified UniProt accessions, dated RCSB search, curated ligands, bound-pose mol2. Outputs: `unique_ligands.csv`, `per_structure.csv`, `resolved.json`, `ligand_catalogue.md`. **Done.**
+2. **Site filtering & alignment** (`scripts/align_sites.py`, `src/pharmpipe/sites/`, `config/sites.yaml`) — keep only poses at each system's relevant site, superpose into one reference frame, per-target `.pse`. Output: `site_filter.csv`. **Done.**
+3. **Effect-based grouping with pocket verification** (`scripts/group_effects.py`, `src/pharmpipe/groups/`, `config/pockets.yaml` + `config/efficacy.yaml`) — geometry-verified pockets (native contact fingerprints), efficacy signs from curated external pharmacology, partitioned into **cells = (pocket × efficacy)**. Outputs: `effect_groups.json`, `<slug>_stage3_report.md`, `groups/<pocket>__<efficacy>/` mol2 sets + per-cell sessions, `<slug>_grouped.pse`, `review/{separate_state,unknown,quarantine}/`. Three-stage report in `catalogue/run_summary.md`. **Done.** Stage 3 is offline (cached structures + catalogue); efficacy/pocket-naming knowledge lives in config, never in code. Quarantined poses, separate-state ligands, and `unknown` efficacy are first-class review outputs — not force-bucketed.
 
 ---
 

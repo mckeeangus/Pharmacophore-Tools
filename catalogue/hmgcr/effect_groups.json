@@ -1,0 +1,505 @@
+{
+  "slug": "hmgcr",
+  "primary_pocket": "hmg_site",
+  "expected_pockets": [
+    "hmg_site"
+  ],
+  "pockets_found": [
+    "hmg_site"
+  ],
+  "cells": {
+    "hmg_site__negative": [
+      "1HW8_114_C4",
+      "1HWI_115_A2",
+      "1HWJ_116_C4",
+      "1HWK_117_A2",
+      "3CCT_3HI_D3",
+      "3CCW_4HI_C4",
+      "3CCZ_5HI_B876",
+      "3CD0_6HI_D3",
+      "3CD5_7HI_B1",
+      "2Q1L_882_A876",
+      "3CD7_882_A1",
+      "3CDA_8HI_C4",
+      "3CDB_9HI_D3",
+      "1HWL_FBI_A2",
+      "2Q6C_HR1_A3002",
+      "2Q6B_HR2_A3001",
+      "3BGL_RID_A2",
+      "2R4F_RIE_B876",
+      "1HW9_SIM_C1"
+    ]
+  },
+  "counts": {
+    "poses": 22,
+    "in_cells": 19,
+    "cells": 1,
+    "separate_state": 3,
+    "unknown": 0,
+    "quarantined": 0
+  },
+  "poses": [
+    {
+      "pdb_id": "1HW8",
+      "ligand_id": "114",
+      "chain": "C",
+      "seqid": "4",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1HW8_114_C4.mol2"
+    },
+    {
+      "pdb_id": "1HWI",
+      "ligand_id": "115",
+      "chain": "A",
+      "seqid": "2",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1HWI_115_A2.mol2"
+    },
+    {
+      "pdb_id": "1HWJ",
+      "ligand_id": "116",
+      "chain": "C",
+      "seqid": "4",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1HWJ_116_C4.mol2"
+    },
+    {
+      "pdb_id": "1HWK",
+      "ligand_id": "117",
+      "chain": "A",
+      "seqid": "2",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1HWK_117_A2.mol2"
+    },
+    {
+      "pdb_id": "3CCT",
+      "ligand_id": "3HI",
+      "chain": "D",
+      "seqid": "3",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CCT_3HI_D3.mol2"
+    },
+    {
+      "pdb_id": "3CCW",
+      "ligand_id": "4HI",
+      "chain": "C",
+      "seqid": "4",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CCW_4HI_C4.mol2"
+    },
+    {
+      "pdb_id": "3CCZ",
+      "ligand_id": "5HI",
+      "chain": "B",
+      "seqid": "876",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CCZ_5HI_B876.mol2"
+    },
+    {
+      "pdb_id": "3CD0",
+      "ligand_id": "6HI",
+      "chain": "D",
+      "seqid": "3",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CD0_6HI_D3.mol2"
+    },
+    {
+      "pdb_id": "3CD5",
+      "ligand_id": "7HI",
+      "chain": "B",
+      "seqid": "1",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CD5_7HI_B1.mol2"
+    },
+    {
+      "pdb_id": "2Q1L",
+      "ligand_id": "882",
+      "chain": "A",
+      "seqid": "876",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2Q1L_882_A876.mol2"
+    },
+    {
+      "pdb_id": "3CD7",
+      "ligand_id": "882",
+      "chain": "A",
+      "seqid": "1",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CD7_882_A1.mol2"
+    },
+    {
+      "pdb_id": "3CDA",
+      "ligand_id": "8HI",
+      "chain": "C",
+      "seqid": "4",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CDA_8HI_C4.mol2"
+    },
+    {
+      "pdb_id": "3CDB",
+      "ligand_id": "9HI",
+      "chain": "D",
+      "seqid": "3",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CDB_9HI_D3.mol2"
+    },
+    {
+      "pdb_id": "1HWL",
+      "ligand_id": "FBI",
+      "chain": "A",
+      "seqid": "2",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1HWL_FBI_A2.mol2"
+    },
+    {
+      "pdb_id": "1DQ9",
+      "ligand_id": "HMG",
+      "chain": "D",
+      "seqid": "104",
+      "pocket": "hmg_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "HMG-CoA substrate/cofactor, not an inhibitor",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1DQ9_HMG_D104.mol2"
+    },
+    {
+      "pdb_id": "2Q6C",
+      "ligand_id": "HR1",
+      "chain": "A",
+      "seqid": "3002",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2Q6C_HR1_A3002.mol2"
+    },
+    {
+      "pdb_id": "2Q6B",
+      "ligand_id": "HR2",
+      "chain": "A",
+      "seqid": "3001",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2Q6B_HR2_A3001.mol2"
+    },
+    {
+      "pdb_id": "1DQ8",
+      "ligand_id": "MAH",
+      "chain": "A",
+      "seqid": "200",
+      "pocket": "hmg_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "HMG substrate/product analogue",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1DQ8_MAH_A200.mol2"
+    },
+    {
+      "pdb_id": "1DQA",
+      "ligand_id": "MAH",
+      "chain": "B",
+      "seqid": "202",
+      "pocket": "hmg_site",
+      "efficacy": "n/a",
+      "track": "separate_state",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "",
+      "separate_state_reason": "HMG substrate/product analogue",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1DQA_MAH_B202.mol2"
+    },
+    {
+      "pdb_id": "3BGL",
+      "ligand_id": "RID",
+      "chain": "A",
+      "seqid": "2",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3BGL_RID_A2.mol2"
+    },
+    {
+      "pdb_id": "2R4F",
+      "ligand_id": "RIE",
+      "chain": "B",
+      "seqid": "876",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2R4F_RIE_B876.mol2"
+    },
+    {
+      "pdb_id": "1HW9",
+      "ligand_id": "SIM",
+      "chain": "C",
+      "seqid": "1",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "1HW9_SIM_C1.mol2"
+    }
+  ]
+}

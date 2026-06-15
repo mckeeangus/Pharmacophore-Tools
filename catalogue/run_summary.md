@@ -38,4 +38,25 @@ Poses per session capped at **100** (best-resolution first). Symmetry-equivalent
 | gaba_a | 9EQG | ABU | 102/102 | 97 | 198 | 171 | 0 | — |
 | net_slc6a2 | 8ZOY | LNR | 54/54 | 50 | 57 | 42 | 0 | — |
 
-Per-target detail: `catalogue/<slug>/site_filter.csv` (every instance, its status, distance-to-anchor and pocket RMSD) and the session `catalogue/<slug>/<slug>_aligned.pse`.
+Per-target detail: `catalogue/<slug>/site_filter.csv` (every instance, its status, distance-to-anchor and pocket RMSD). The Stage-2 overlay session is superseded by the Stage-3 `catalogue/<slug>/<slug>_grouped.pse` (same reference frame, recoloured by cell).
+
+## Stage 3 — effect-based grouping (pocket-verified)
+
+_Stage 3 run 2026-06-15._ Each pose is assigned a **geometry-verified pocket** (native contact fingerprints, not the coarse Stage-2 distance) and an **efficacy sign** from curated external pharmacology (`config/efficacy.yaml`). A cell = (pocket × efficacy). Covalent/reactivator/degrader/substrate ligands are routed to a separate-state track; unconfident efficacy and out-of-pocket poses are first-class review outputs, never force-bucketed.
+
+| Target | Pockets found | Cells | In cells | Separate-state | Unknown eff. | Quarantined |
+|--------|---------------|------:|---------:|---------------:|-------------:|------------:|
+| nachr_a4b2 | orthosteric | 2 | 31 | 0 | 64 | 0 |
+| esr1 | lbp | 2 | 19 | 0 | 81 | 0 |
+| hiv1_protease | active_site | 1 | 48 | 0 | 0 | 0 |
+| adrb2 | orthosteric, secondary_1 | 4 | 11 | 0 | 84 | 5 |
+| cdk2 | atp_site | 1 | 95 | 3 | 0 | 2 |
+| ca2 | active_site | 1 | 87 | 12 | 0 | 1 |
+| ache | gorge | 1 | 18 | 66 | 0 | 0 |
+| cavab | dhp_site | 1 | 5 | 0 | 0 | 1 |
+| cox2 | cox_channel | 1 | 5 | 0 | 0 | 1 |
+| hmgcr | hmg_site | 1 | 19 | 3 | 0 | 0 |
+| gaba_a | bzd_site, orthosteric | 4 | 75 | 0 | 21 | 1 |
+| net_slc6a2 | central_s1 | 2 | 25 | 0 | 25 | 0 |
+
+Per-target detail: `catalogue/<slug>/<slug>_stage3_report.md`, the cell mol2 in `catalogue/<slug>/groups/`, `effect_groups.json`, and the recoloured session `catalogue/<slug>/<slug>_grouped.pse`.

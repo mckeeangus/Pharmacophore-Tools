@@ -1,0 +1,2075 @@
+{
+  "slug": "nachr_a4b2",
+  "primary_pocket": "orthosteric",
+  "expected_pockets": [
+    "orthosteric"
+  ],
+  "pockets_found": [
+    "orthosteric"
+  ],
+  "cells": {
+    "orthosteric__neutral": [
+      "2BYR_MLK_C301",
+      "3SH1_MLK_E301",
+      "3SIO_MLK_A260",
+      "9SG3_PHN_A302",
+      "2XYS_SY9_C1206",
+      "5O8T_SY9_E601",
+      "5OA0_SY9_C601",
+      "5OAL_SY9_C402",
+      "5OBG_SY9_E601",
+      "2XYT_TC9_F1206"
+    ],
+    "orthosteric__positive": [
+      "2XZ5_ACH_B1210",
+      "3WIP_ACH_J301",
+      "8SSZ_ACH_D704",
+      "8ST0_ACH_D702",
+      "8ST1_ACH_B703",
+      "8ST2_ACH_D704",
+      "8ST3_ACH_D704",
+      "8ST4_ACH_D704",
+      "4BQT_C5E_C301",
+      "5SYO_C5E_C301",
+      "1UV6_CCE_J1206",
+      "5BP0_FN1_E301",
+      "1UW6_NCT_E1206",
+      "5KXI_NCT_D402",
+      "5O87_NCT_B601",
+      "6CNJ_NCT_A402",
+      "6CNK_NCT_B402",
+      "4AFT_QMR_B301",
+      "5AIN_QMR_A1207",
+      "6UR8_QMR_A702",
+      "6USF_QMR_A502"
+    ]
+  },
+  "counts": {
+    "poses": 95,
+    "in_cells": 31,
+    "cells": 2,
+    "separate_state": 0,
+    "unknown": 64,
+    "quarantined": 0
+  },
+  "poses": [
+    {
+      "pdb_id": "4BFQ",
+      "ligand_id": "083",
+      "chain": "E",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "4BFQ_083_E302.mol2"
+    },
+    {
+      "pdb_id": "3U8J",
+      "ligand_id": "09O",
+      "chain": "D",
+      "seqid": "211",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3U8J_09O_D211.mol2"
+    },
+    {
+      "pdb_id": "3U8K",
+      "ligand_id": "09P",
+      "chain": "G",
+      "seqid": "211",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3U8K_09P_G211.mol2"
+    },
+    {
+      "pdb_id": "4UM1",
+      "ligand_id": "09P",
+      "chain": "B",
+      "seqid": "211",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "4UM1_09P_B211.mol2"
+    },
+    {
+      "pdb_id": "3U8L",
+      "ligand_id": "09Q",
+      "chain": "I",
+      "seqid": "211",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3U8L_09Q_I211.mol2"
+    },
+    {
+      "pdb_id": "3U8M",
+      "ligand_id": "09R",
+      "chain": "G",
+      "seqid": "211",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3U8M_09R_G211.mol2"
+    },
+    {
+      "pdb_id": "4UM3",
+      "ligand_id": "09R",
+      "chain": "S",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "4UM3_09R_S301.mol2"
+    },
+    {
+      "pdb_id": "3U8N",
+      "ligand_id": "09S",
+      "chain": "R",
+      "seqid": "211",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3U8N_09S_R211.mol2"
+    },
+    {
+      "pdb_id": "4FRR",
+      "ligand_id": "0VC",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "4FRR_0VC_A301.mol2"
+    },
+    {
+      "pdb_id": "4ZJS",
+      "ligand_id": "4P0",
+      "chain": "D",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P02708",
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "4ZJS_4P0_D301.mol2"
+    },
+    {
+      "pdb_id": "6SH0",
+      "ligand_id": "4P0",
+      "chain": "E",
+      "seqid": "303",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "6SH0_4P0_E303.mol2"
+    },
+    {
+      "pdb_id": "4ZK1",
+      "ligand_id": "4P7",
+      "chain": "A",
+      "seqid": "303",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "4ZK1_4P7_A303.mol2"
+    },
+    {
+      "pdb_id": "4ZR6",
+      "ligand_id": "4QW",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "4ZR6_4QW_A301.mol2"
+    },
+    {
+      "pdb_id": "5BW2",
+      "ligand_id": "4VU",
+      "chain": "C",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5BW2_4VU_C301.mol2"
+    },
+    {
+      "pdb_id": "7PD6",
+      "ligand_id": "7II",
+      "chain": "FaF",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "7PD6_7II_FaF302.mol2"
+    },
+    {
+      "pdb_id": "5TVC",
+      "ligand_id": "7LB",
+      "chain": "E",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P32297",
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5TVC_7LB_E302.mol2"
+    },
+    {
+      "pdb_id": "5Y2Q",
+      "ligand_id": "8L3",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5Y2Q_8L3_A301.mol2"
+    },
+    {
+      "pdb_id": "2XZ5",
+      "ligand_id": "ACH",
+      "chain": "B",
+      "seqid": "1210",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2XZ5_ACH_B1210.mol2"
+    },
+    {
+      "pdb_id": "3WIP",
+      "ligand_id": "ACH",
+      "chain": "J",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3WIP_ACH_J301.mol2"
+    },
+    {
+      "pdb_id": "8SSZ",
+      "ligand_id": "ACH",
+      "chain": "D",
+      "seqid": "704",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8SSZ_ACH_D704.mol2"
+    },
+    {
+      "pdb_id": "8ST0",
+      "ligand_id": "ACH",
+      "chain": "D",
+      "seqid": "702",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ST0_ACH_D702.mol2"
+    },
+    {
+      "pdb_id": "8ST1",
+      "ligand_id": "ACH",
+      "chain": "B",
+      "seqid": "703",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ST1_ACH_B703.mol2"
+    },
+    {
+      "pdb_id": "8ST2",
+      "ligand_id": "ACH",
+      "chain": "D",
+      "seqid": "704",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ST2_ACH_D704.mol2"
+    },
+    {
+      "pdb_id": "8ST3",
+      "ligand_id": "ACH",
+      "chain": "D",
+      "seqid": "704",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ST3_ACH_D704.mol2"
+    },
+    {
+      "pdb_id": "8ST4",
+      "ligand_id": "ACH",
+      "chain": "D",
+      "seqid": "704",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "acetylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ST4_ACH_D704.mol2"
+    },
+    {
+      "pdb_id": "2WNL",
+      "ligand_id": "AN4",
+      "chain": "J",
+      "seqid": "300",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2WNL_AN4_J300.mol2"
+    },
+    {
+      "pdb_id": "2WNL",
+      "ligand_id": "AN5",
+      "chain": "D",
+      "seqid": "300",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2WNL_AN5_D300.mol2"
+    },
+    {
+      "pdb_id": "2W8F",
+      "ligand_id": "BS1",
+      "chain": "F",
+      "seqid": "1206",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2W8F_BS1_F1206.mol2"
+    },
+    {
+      "pdb_id": "2W8G",
+      "ligand_id": "BS2",
+      "chain": "A",
+      "seqid": "1206",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2W8G_BS2_A1206.mol2"
+    },
+    {
+      "pdb_id": "4BQT",
+      "ligand_id": "C5E",
+      "chain": "C",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "cytisine, partial agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "4BQT_C5E_C301.mol2"
+    },
+    {
+      "pdb_id": "5SYO",
+      "ligand_id": "C5E",
+      "chain": "C",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "cytisine, partial agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P32297",
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5SYO_C5E_C301.mol2"
+    },
+    {
+      "pdb_id": "1UV6",
+      "ligand_id": "CCE",
+      "chain": "J",
+      "seqid": "1206",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "carbamoylcholine, agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "1UV6_CCE_J1206.mol2"
+    },
+    {
+      "pdb_id": "2YME",
+      "ligand_id": "CWB",
+      "chain": "A",
+      "seqid": "1207",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2YME_CWB_A1207.mol2"
+    },
+    {
+      "pdb_id": "5BP0",
+      "ligand_id": "FN1",
+      "chain": "E",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "5-fluoronicotine, agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5BP0_FN1_E301.mol2"
+    },
+    {
+      "pdb_id": "5OAN",
+      "ligand_id": "GLY",
+      "chain": "D",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5OAN_GLY_D601.mol2"
+    },
+    {
+      "pdb_id": "2PH9",
+      "ligand_id": "GNT",
+      "chain": "D",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2PH9_GNT_D301.mol2"
+    },
+    {
+      "pdb_id": "2X00",
+      "ligand_id": "GYN",
+      "chain": "E",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2X00_GYN_E301.mol2"
+    },
+    {
+      "pdb_id": "7DJI",
+      "ligand_id": "H8U",
+      "chain": "D",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "7DJI_H8U_D401.mol2"
+    },
+    {
+      "pdb_id": "8Q1M",
+      "ligand_id": "ILR",
+      "chain": "C",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "8Q1M_ILR_C301.mol2"
+    },
+    {
+      "pdb_id": "8QX2",
+      "ligand_id": "ILR",
+      "chain": "B",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "8QX2_ILR_B301.mol2"
+    },
+    {
+      "pdb_id": "5OBH",
+      "ligand_id": "J94",
+      "chain": "A",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5OBH_J94_A601.mol2"
+    },
+    {
+      "pdb_id": "4QAA",
+      "ligand_id": "KK1",
+      "chain": "F",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "4QAA_KK1_F301.mol2"
+    },
+    {
+      "pdb_id": "5AFH",
+      "ligand_id": "L0B",
+      "chain": "B",
+      "seqid": "1205",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P36544",
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5AFH_L0B_B1205.mol2"
+    },
+    {
+      "pdb_id": "5AFJ",
+      "ligand_id": "L0B",
+      "chain": "E",
+      "seqid": "1207",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P36544",
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5AFJ_L0B_E1207.mol2"
+    },
+    {
+      "pdb_id": "5AFK",
+      "ligand_id": "L0B",
+      "chain": "B",
+      "seqid": "1205",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P36544",
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5AFK_L0B_B1205.mol2"
+    },
+    {
+      "pdb_id": "5AFL",
+      "ligand_id": "L0B",
+      "chain": "D",
+      "seqid": "1205",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P36544",
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5AFL_L0B_D1205.mol2"
+    },
+    {
+      "pdb_id": "5AFM",
+      "ligand_id": "L0B",
+      "chain": "B",
+      "seqid": "1207",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P36544",
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5AFM_L0B_B1207.mol2"
+    },
+    {
+      "pdb_id": "5AFN",
+      "ligand_id": "L0B",
+      "chain": "D",
+      "seqid": "1205",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P36544",
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5AFN_L0B_D1205.mol2"
+    },
+    {
+      "pdb_id": "6SGV",
+      "ligand_id": "LDQ",
+      "chain": "D",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "6SGV_LDQ_D601.mol2"
+    },
+    {
+      "pdb_id": "2BYS",
+      "ligand_id": "LOB",
+      "chain": "B",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2BYS_LOB_B301.mol2"
+    },
+    {
+      "pdb_id": "4WV9",
+      "ligand_id": "MD4",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "4WV9_MD4_A301.mol2"
+    },
+    {
+      "pdb_id": "2BYR",
+      "ligand_id": "MLK",
+      "chain": "C",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "methyllycaconitine, antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2BYR_MLK_C301.mol2"
+    },
+    {
+      "pdb_id": "3SH1",
+      "ligand_id": "MLK",
+      "chain": "E",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "methyllycaconitine, antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "3SH1_MLK_E301.mol2"
+    },
+    {
+      "pdb_id": "3SIO",
+      "ligand_id": "MLK",
+      "chain": "A",
+      "seqid": "260",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "methyllycaconitine, antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "3SIO_MLK_A260.mol2"
+    },
+    {
+      "pdb_id": "3WTN",
+      "ligand_id": "N2Y",
+      "chain": "H",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3WTN_N2Y_H301.mol2"
+    },
+    {
+      "pdb_id": "3WTO",
+      "ligand_id": "N2Y",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3WTO_N2Y_A301.mol2"
+    },
+    {
+      "pdb_id": "1UW6",
+      "ligand_id": "NCT",
+      "chain": "E",
+      "seqid": "1206",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "nicotine, agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "1UW6_NCT_E1206.mol2"
+    },
+    {
+      "pdb_id": "5KXI",
+      "ligand_id": "NCT",
+      "chain": "D",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "nicotine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5KXI_NCT_D402.mol2"
+    },
+    {
+      "pdb_id": "5O87",
+      "ligand_id": "NCT",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "nicotine, agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5O87_NCT_B601.mol2"
+    },
+    {
+      "pdb_id": "6CNJ",
+      "ligand_id": "NCT",
+      "chain": "A",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "nicotine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6CNJ_NCT_A402.mol2"
+    },
+    {
+      "pdb_id": "6CNK",
+      "ligand_id": "NCT",
+      "chain": "B",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "nicotine, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6CNK_NCT_B402.mol2"
+    },
+    {
+      "pdb_id": "4NZB",
+      "ligand_id": "NSE",
+      "chain": "B",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "4NZB_NSE_B301.mol2"
+    },
+    {
+      "pdb_id": "9SG3",
+      "ligand_id": "PHN",
+      "chain": "A",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "1,10-phenanthroline, antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "9SG3_PHN_A302.mol2"
+    },
+    {
+      "pdb_id": "4AFT",
+      "ligand_id": "QMR",
+      "chain": "B",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "varenicline, partial agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "4AFT_QMR_B301.mol2"
+    },
+    {
+      "pdb_id": "5AIN",
+      "ligand_id": "QMR",
+      "chain": "A",
+      "seqid": "1207",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "varenicline, partial agonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5AIN_QMR_A1207.mol2"
+    },
+    {
+      "pdb_id": "6UR8",
+      "ligand_id": "QMR",
+      "chain": "A",
+      "seqid": "702",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "varenicline, partial agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6UR8_QMR_A702.mol2"
+    },
+    {
+      "pdb_id": "6USF",
+      "ligand_id": "QMR",
+      "chain": "A",
+      "seqid": "502",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "varenicline, partial agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P17787",
+        "P43681"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6USF_QMR_A502.mol2"
+    },
+    {
+      "pdb_id": "2WZY",
+      "ligand_id": "SQX",
+      "chain": "F",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2WZY_SQX_F301.mol2"
+    },
+    {
+      "pdb_id": "2XYS",
+      "ligand_id": "SY9",
+      "chain": "C",
+      "seqid": "1206",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "strychnine, competitive antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2XYS_SY9_C1206.mol2"
+    },
+    {
+      "pdb_id": "5O8T",
+      "ligand_id": "SY9",
+      "chain": "E",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "strychnine, competitive antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5O8T_SY9_E601.mol2"
+    },
+    {
+      "pdb_id": "5OA0",
+      "ligand_id": "SY9",
+      "chain": "C",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "strychnine, competitive antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5OA0_SY9_C601.mol2"
+    },
+    {
+      "pdb_id": "5OAL",
+      "ligand_id": "SY9",
+      "chain": "C",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "strychnine, competitive antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5OAL_SY9_C402.mol2"
+    },
+    {
+      "pdb_id": "5OBG",
+      "ligand_id": "SY9",
+      "chain": "E",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "strychnine, competitive antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5OBG_SY9_E601.mol2"
+    },
+    {
+      "pdb_id": "2XYT",
+      "ligand_id": "TC9",
+      "chain": "F",
+      "seqid": "1206",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "d-tubocurarine, antagonist",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2XYT_TC9_F1206.mol2"
+    },
+    {
+      "pdb_id": "3WTJ",
+      "ligand_id": "TH4",
+      "chain": "D",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3WTJ_TH4_D301.mol2"
+    },
+    {
+      "pdb_id": "5BRX",
+      "ligand_id": "TI4",
+      "chain": "D",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5BRX_TI4_D302.mol2"
+    },
+    {
+      "pdb_id": "4ZRU",
+      "ligand_id": "TI9",
+      "chain": "C",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "4ZRU_TI9_C302.mol2"
+    },
+    {
+      "pdb_id": "4ZK4",
+      "ligand_id": "TII",
+      "chain": "E",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P32297",
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "4ZK4_TII_E301.mol2"
+    },
+    {
+      "pdb_id": "2WNC",
+      "ligand_id": "TKT",
+      "chain": "C",
+      "seqid": "300",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2WNC_TKT_C300.mol2"
+    },
+    {
+      "pdb_id": "5OAJ",
+      "ligand_id": "TKT",
+      "chain": "E",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "5OAJ_TKT_E601.mol2"
+    },
+    {
+      "pdb_id": "7NDV",
+      "ligand_id": "U8Q",
+      "chain": "C",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "7NDV_U8Q_C301.mol2"
+    },
+    {
+      "pdb_id": "7NDP",
+      "ligand_id": "U8T",
+      "chain": "J",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "7NDP_U8T_J302.mol2"
+    },
+    {
+      "pdb_id": "2Y56",
+      "ligand_id": "V11",
+      "chain": "D",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2Y56_V11_D301.mol2"
+    },
+    {
+      "pdb_id": "2Y57",
+      "ligand_id": "V37",
+      "chain": "D",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2Y57_V37_D301.mol2"
+    },
+    {
+      "pdb_id": "2Y58",
+      "ligand_id": "V38",
+      "chain": "C",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2Y58_V38_C301.mol2"
+    },
+    {
+      "pdb_id": "2Y54",
+      "ligand_id": "V63",
+      "chain": "D",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2Y54_V63_D301.mol2"
+    },
+    {
+      "pdb_id": "2XNT",
+      "ligand_id": "VU2",
+      "chain": "B",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2XNT_VU2_B301.mol2"
+    },
+    {
+      "pdb_id": "2XNU",
+      "ligand_id": "VU3",
+      "chain": "C",
+      "seqid": "1206",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2XNU_VU3_C1206.mol2"
+    },
+    {
+      "pdb_id": "2XNV",
+      "ligand_id": "VU3",
+      "chain": "D",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2XNV_VU3_D301.mol2"
+    },
+    {
+      "pdb_id": "8P1F",
+      "ligand_id": "WCW",
+      "chain": "G",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "8P1F_WCW_G301.mol2"
+    },
+    {
+      "pdb_id": "8P11",
+      "ligand_id": "WD5",
+      "chain": "H",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "8P11_WD5_H301.mol2"
+    },
+    {
+      "pdb_id": "8P22",
+      "ligand_id": "WNO",
+      "chain": "C",
+      "seqid": "302",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "8P22_WNO_C302.mol2"
+    },
+    {
+      "pdb_id": "8QTL",
+      "ligand_id": "WSP",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "8QTL_WSP_A301.mol2"
+    },
+    {
+      "pdb_id": "3ZDH",
+      "ligand_id": "XRS",
+      "chain": "A",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3ZDH_XRS_A301.mol2"
+    },
+    {
+      "pdb_id": "3ZDG",
+      "ligand_id": "XRX",
+      "chain": "O",
+      "seqid": "301",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "3ZDG_XRX_O301.mol2"
+    }
+  ]
+}

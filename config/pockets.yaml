@@ -1,0 +1,114 @@
+# config/pockets.yaml
+# Stage 3 — pocket verification & naming.
+#
+# Pocket *discovery* is geometric and lives in code (contact fingerprints +
+# overlap clustering, src/pharmpipe/groups/pocket.py). This file only supplies
+# the curator knowledge needed to *name* the geometric clusters and to state what
+# we expect, so departures from expectation surface as findings.
+#
+# Per target:
+#   primary_label        name for the main site (the cluster holding the anchor /
+#                        the largest cluster).
+#   collapse_to_primary  true  -> merge every (non-singleton) geometric cluster
+#                        into the primary label. Use ONLY where the Stage-2
+#                        distance filter already restricts kept poses to a single
+#                        functional site but cross-structure residue numbering
+#                        fragments it (cross-species surrogates).
+#   pockets.<label>.marker_hets
+#                        HET codes diagnostic of a secondary site; a geometric
+#                        cluster containing any marker takes that label.
+#   expected_pockets     pockets we expect to see (sanity check, reported).
+#
+# A sizable cluster matching no marker and not the primary is labelled
+# `secondary_<n>` and flagged for review; clusters smaller than
+# `min_pocket_poses` are quarantined as outliers (they survived the coarse
+# Stage-2 filter but are not a populated pocket).
+
+defaults:
+  contact_angstrom: 4.5
+  jaccard_min: 0.30
+  overlap_min: 0.60
+  min_shared_residues: 5
+  min_pocket_poses: 3
+
+targets:
+  nachr_a4b2:
+    primary_label: orthosteric
+    collapse_to_primary: true
+    expected_pockets: [orthosteric]
+    notes: >-
+      The Stage-2 8 A filter keeps only orthosteric-site poses; native numbering
+      then fragments that single site across human alpha4/beta2 and the AChBP
+      surrogates (Lymnaea/Aplysia), so geometric clusters are merged to one
+      orthosteric label. Species/subtype is recorded per pose. A TMD allosteric
+      site, if ever kept, would need its own marker here.
+
+  esr1:
+    primary_label: lbp
+    expected_pockets: [lbp]
+    notes: Ligand-binding-domain hormone pocket.
+
+  hiv1_protease:
+    primary_label: active_site
+    expected_pockets: [active_site]
+
+  adrb2:
+    primary_label: orthosteric
+    expected_pockets: [orthosteric]
+    notes: >-
+      A single orthosteric catecholamine pocket is expected; a distinct secondary
+      cluster (e.g. a long-acting agonist exosite) is a finding to review, not to
+      force into the orthosteric label.
+
+  cdk2:
+    primary_label: atp_site
+    expected_pockets: [atp_site]
+    notes: ATP/hinge site. Allosteric binders were dropped by the Stage-2 filter.
+
+  ca2:
+    primary_label: active_site
+    expected_pockets: [active_site]
+    notes: Catalytic zinc / active-site funnel.
+
+  ache:
+    primary_label: gorge
+    expected_pockets: [gorge]
+    notes: >-
+      Catalytic gorge (catalytic-anionic site + mid-gorge). Peripheral-anionic-
+      site-only binders were dropped by the Stage-2 filter, so a single gorge
+      pocket is expected here.
+
+  cavab:
+    primary_label: dhp_site
+    expected_pockets: [dhp_site]
+    notes: Central-cavity dihydropyridine drug site on the pore axis.
+
+  cox2:
+    primary_label: cox_channel
+    expected_pockets: [cox_channel]
+    notes: Cyclooxygenase channel (the heme site is separate and was filtered out).
+
+  hmgcr:
+    primary_label: hmg_site
+    expected_pockets: [hmg_site]
+    notes: Statin / HMG site (the NADPH cofactor site is separate).
+
+  gaba_a:
+    primary_label: orthosteric
+    expected_pockets: [orthosteric, bzd_site]
+    pockets:
+      bzd_site:
+        marker_hets: [DZP, "08H", EIE, R63, A1ADG, IYJ]
+    notes: >-
+      Orthosteric GABA site (beta(+)/alpha(-)) vs the benzodiazepine site
+      (alpha(+)/gamma(-)). The BZ site is the stress-test split: PAM vs neutral
+      antagonist vs inverse agonist.
+
+  net_slc6a2:
+    primary_label: central_s1
+    collapse_to_primary: true
+    expected_pockets: [central_s1]
+    notes: >-
+      Central S1 substrate/inhibitor site. Human NET and the dDAT surrogate use
+      different numbering, so geometric clusters are merged to one S1 label;
+      species/subtype is recorded per pose.

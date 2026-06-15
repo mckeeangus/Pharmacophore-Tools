@@ -1,0 +1,1103 @@
+{
+  "slug": "net_slc6a2",
+  "primary_pocket": "central_s1",
+  "expected_pockets": [
+    "central_s1"
+  ],
+  "pockets_found": [
+    "central_s1"
+  ],
+  "cells": {
+    "central_s1__negative": [
+      "8HFL_1XR_A701",
+      "4M48_21B_A704",
+      "4XNU_41U_A605",
+      "8YR2_41U_A701",
+      "8Y92_A1LX4_B701",
+      "8Z1L_A1LX4_A702",
+      "8ZP2_A1LX4_A701",
+      "4XP4_COC_A706",
+      "4XPB_COC_A702",
+      "8HFI_DSM_A701",
+      "8WGR_DSM_A701",
+      "8Y93_TP0_A701"
+    ],
+    "central_s1__positive": [
+      "4XP9_1WE_C706",
+      "4XP6_B40_A601",
+      "8WTV_E5E_A704",
+      "8Y95_E5E_A701",
+      "4XP1_LDP_A708",
+      "8HFG_LDP_A701",
+      "6M0Z_LNR_A707",
+      "6M2R_LNR_A704",
+      "8HFF_LNR_A701",
+      "8WGX_LNR_A701",
+      "8ZOY_LNR_A701",
+      "8ZPB_LNR_A701",
+      "8XB3_YMN_A701"
+    ]
+  },
+  "counts": {
+    "poses": 50,
+    "in_cells": 25,
+    "cells": 2,
+    "separate_state": 0,
+    "unknown": 25,
+    "quarantined": 0
+  },
+  "poses": [
+    {
+      "pdb_id": "4XP9",
+      "ligand_id": "1WE",
+      "chain": "C",
+      "seqid": "706",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "amphetamine, substrate-releaser",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XP9_1WE_C706.mol2"
+    },
+    {
+      "pdb_id": "7WLW",
+      "ligand_id": "1WR",
+      "chain": "A",
+      "seqid": "704",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "7WLW_1WR_A704.mol2"
+    },
+    {
+      "pdb_id": "8HFL",
+      "ligand_id": "1XR",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "bupropion, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8HFL_1XR_A701.mol2"
+    },
+    {
+      "pdb_id": "4M48",
+      "ligand_id": "21B",
+      "chain": "A",
+      "seqid": "704",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "nortriptyline, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4M48_21B_A704.mol2"
+    },
+    {
+      "pdb_id": "6M38",
+      "ligand_id": "29E",
+      "chain": "A",
+      "seqid": "601",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "6M38_29E_A601.mol2"
+    },
+    {
+      "pdb_id": "4XNU",
+      "ligand_id": "41U",
+      "chain": "A",
+      "seqid": "605",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "nisoxetine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XNU_41U_A605.mol2"
+    },
+    {
+      "pdb_id": "8YR2",
+      "ligand_id": "41U",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "nisoxetine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8YR2_41U_A701.mol2"
+    },
+    {
+      "pdb_id": "4XNX",
+      "ligand_id": "41X",
+      "chain": "A",
+      "seqid": "707",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XNX_41X_A707.mol2"
+    },
+    {
+      "pdb_id": "4XP5",
+      "ligand_id": "42F",
+      "chain": "A",
+      "seqid": "602",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XP5_42F_A602.mol2"
+    },
+    {
+      "pdb_id": "4XPF",
+      "ligand_id": "42F",
+      "chain": "A",
+      "seqid": "703",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XPF_42F_A703.mol2"
+    },
+    {
+      "pdb_id": "4XPA",
+      "ligand_id": "42J",
+      "chain": "A",
+      "seqid": "703",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XPA_42J_A703.mol2"
+    },
+    {
+      "pdb_id": "4XPH",
+      "ligand_id": "42J",
+      "chain": "A",
+      "seqid": "602",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XPH_42J_A602.mol2"
+    },
+    {
+      "pdb_id": "4XPT",
+      "ligand_id": "42J",
+      "chain": "A",
+      "seqid": "602",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XPT_42J_A602.mol2"
+    },
+    {
+      "pdb_id": "4XPG",
+      "ligand_id": "42L",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XPG_42L_A701.mol2"
+    },
+    {
+      "pdb_id": "8I3V",
+      "ligand_id": "68P",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8I3V_68P_A701.mol2"
+    },
+    {
+      "pdb_id": "7WGT",
+      "ligand_id": "9BC",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "7WGT_9BC_A701.mol2"
+    },
+    {
+      "pdb_id": "9KDH",
+      "ligand_id": "A1D5S",
+      "chain": "B",
+      "seqid": "709",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9KDH_A1D5S_B709.mol2"
+    },
+    {
+      "pdb_id": "8ZP1",
+      "ligand_id": "A1D9Y",
+      "chain": "A",
+      "seqid": "702",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ZP1_A1D9Y_A702.mol2"
+    },
+    {
+      "pdb_id": "9JEL",
+      "ligand_id": "A1EBN",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9JEL_A1EBN_A701.mol2"
+    },
+    {
+      "pdb_id": "9JF3",
+      "ligand_id": "A1EBO",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9JF3_A1EBO_A701.mol2"
+    },
+    {
+      "pdb_id": "9KE3",
+      "ligand_id": "A1EFR",
+      "chain": "B",
+      "seqid": "707",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9KE3_A1EFR_B707.mol2"
+    },
+    {
+      "pdb_id": "9EUO",
+      "ligand_id": "A1H8F",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "9EUO_A1H8F_A701.mol2"
+    },
+    {
+      "pdb_id": "8Y8Z",
+      "ligand_id": "A1LX3",
+      "chain": "E",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8Y8Z_A1LX3_E701.mol2"
+    },
+    {
+      "pdb_id": "8Y92",
+      "ligand_id": "A1LX4",
+      "chain": "B",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "atomoxetine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8Y92_A1LX4_B701.mol2"
+    },
+    {
+      "pdb_id": "8Z1L",
+      "ligand_id": "A1LX4",
+      "chain": "A",
+      "seqid": "702",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "atomoxetine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8Z1L_A1LX4_A702.mol2"
+    },
+    {
+      "pdb_id": "8ZP2",
+      "ligand_id": "A1LX4",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "atomoxetine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ZP2_A1LX4_A701.mol2"
+    },
+    {
+      "pdb_id": "8Y91",
+      "ligand_id": "A1LX5",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8Y91_A1LX5_A701.mol2"
+    },
+    {
+      "pdb_id": "8Y90",
+      "ligand_id": "A1LX6",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8Y90_A1LX6_A701.mol2"
+    },
+    {
+      "pdb_id": "4XP6",
+      "ligand_id": "B40",
+      "chain": "A",
+      "seqid": "601",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "methamphetamine, substrate-releaser",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XP6_B40_A601.mol2"
+    },
+    {
+      "pdb_id": "4XP4",
+      "ligand_id": "COC",
+      "chain": "A",
+      "seqid": "706",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "cocaine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XP4_COC_A706.mol2"
+    },
+    {
+      "pdb_id": "4XPB",
+      "ligand_id": "COC",
+      "chain": "A",
+      "seqid": "702",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "cocaine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XPB_COC_A702.mol2"
+    },
+    {
+      "pdb_id": "8HFI",
+      "ligand_id": "DSM",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "desipramine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8HFI_DSM_A701.mol2"
+    },
+    {
+      "pdb_id": "8WGR",
+      "ligand_id": "DSM",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "desipramine, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8WGR_DSM_A701.mol2"
+    },
+    {
+      "pdb_id": "8WTV",
+      "ligand_id": "E5E",
+      "chain": "A",
+      "seqid": "704",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8WTV_E5E_A704.mol2"
+    },
+    {
+      "pdb_id": "8Y95",
+      "ligand_id": "E5E",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8Y95_E5E_A701.mol2"
+    },
+    {
+      "pdb_id": "6M3Z",
+      "ligand_id": "F0F",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "6M3Z_F0F_A701.mol2"
+    },
+    {
+      "pdb_id": "6M47",
+      "ligand_id": "F1U",
+      "chain": "A",
+      "seqid": "608",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "6M47_F1U_A608.mol2"
+    },
+    {
+      "pdb_id": "4XP1",
+      "ligand_id": "LDP",
+      "chain": "A",
+      "seqid": "708",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "dopamine, substrate",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "4XP1_LDP_A708.mol2"
+    },
+    {
+      "pdb_id": "8HFG",
+      "ligand_id": "LDP",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "dopamine, substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8HFG_LDP_A701.mol2"
+    },
+    {
+      "pdb_id": "6M0Z",
+      "ligand_id": "LNR",
+      "chain": "A",
+      "seqid": "707",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "L-noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "6M0Z_LNR_A707.mol2"
+    },
+    {
+      "pdb_id": "6M2R",
+      "ligand_id": "LNR",
+      "chain": "A",
+      "seqid": "704",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "L-noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q7K4Y6"
+      ],
+      "subtype_organisms": [
+        "Drosophila melanogaster"
+      ],
+      "mol2": "6M2R_LNR_A704.mol2"
+    },
+    {
+      "pdb_id": "8HFF",
+      "ligand_id": "LNR",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "L-noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8HFF_LNR_A701.mol2"
+    },
+    {
+      "pdb_id": "8WGX",
+      "ligand_id": "LNR",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "L-noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8WGX_LNR_A701.mol2"
+    },
+    {
+      "pdb_id": "8ZOY",
+      "ligand_id": "LNR",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "L-noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ZOY_LNR_A701.mol2"
+    },
+    {
+      "pdb_id": "8ZPB",
+      "ligand_id": "LNR",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "L-noradrenaline, substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8ZPB_LNR_A701.mol2"
+    },
+    {
+      "pdb_id": "8Y93",
+      "ligand_id": "TP0",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "central_s1__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "amitriptyline, reuptake inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8Y93_TP0_A701.mol2"
+    },
+    {
+      "pdb_id": "8WTY",
+      "ligand_id": "XEF",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8WTY_XEF_A701.mol2"
+    },
+    {
+      "pdb_id": "8WTX",
+      "ligand_id": "Y60",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8WTX_Y60_A701.mol2"
+    },
+    {
+      "pdb_id": "8XB3",
+      "ligand_id": "YMN",
+      "chain": "A",
+      "seqid": "701",
+      "pocket": "central_s1",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "central_s1__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "iobenguane (MIBG), substrate",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0AEX9",
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8XB3_YMN_A701.mol2"
+    },
+    {
+      "pdb_id": "8XB2",
+      "ligand_id": "YNT",
+      "chain": "A",
+      "seqid": "702",
+      "pocket": "central_s1",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0AEX9",
+        "P23975"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8XB2_YNT_A702.mol2"
+    }
+  ]
+}

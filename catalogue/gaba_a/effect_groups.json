@@ -1,0 +1,2321 @@
+{
+  "slug": "gaba_a",
+  "primary_pocket": "orthosteric",
+  "expected_pockets": [
+    "orthosteric",
+    "bzd_site"
+  ],
+  "pockets_found": [
+    "bzd_site",
+    "orthosteric"
+  ],
+  "cells": {
+    "bzd_site__negative": [
+      "8DD3_R63_D701"
+    ],
+    "bzd_site__neutral": [
+      "7QNE_EIE_D502"
+    ],
+    "bzd_site__positive": [
+      "6HUO_08H_D501",
+      "8VQY_A1ADG_E401",
+      "6HUP_DZP_D2001",
+      "6X3X_DZP_D404"
+    ],
+    "orthosteric__positive": [
+      "6A96_ABU_B501",
+      "6D6T_ABU_A405",
+      "6HUJ_ABU_D507",
+      "6HUO_ABU_A501",
+      "6HUP_ABU_E501",
+      "6X3T_ABU_C405",
+      "6X3U_ABU_A405",
+      "6X3V_ABU_A402",
+      "6X3W_ABU_A405",
+      "6X3X_ABU_A405",
+      "6X3Z_ABU_A405",
+      "6X40_ABU_A405",
+      "7PBD_ABU_D501",
+      "7PBZ_ABU_B501",
+      "7QN7_ABU_B501",
+      "7QNA_ABU_B501",
+      "7QNB_ABU_B501",
+      "7T0Z_ABU_C401",
+      "8DD2_ABU_C403",
+      "8DD3_ABU_A402",
+      "8SGO_ABU_C402",
+      "8SI9_ABU_B401",
+      "8SID_ABU_C402",
+      "8VQY_ABU_A401",
+      "8VRN_ABU_A401",
+      "9CRS_ABU_C501",
+      "9CRV_ABU_A501",
+      "9CT0_ABU_A501",
+      "9CX7_ABU_A501",
+      "9CXA_ABU_A501",
+      "9CXB_ABU_A501",
+      "9CXC_ABU_D501",
+      "9CXD_ABU_A501",
+      "9DRX_ABU_A402",
+      "9EQG_ABU_B3505",
+      "9FAJ_ABU_A3907",
+      "9FAK_ABU_B1601",
+      "9FAM_ABU_A3902",
+      "9FFL_ABU_E501",
+      "9FFN_ABU_B501",
+      "9FFO_ABU_B501",
+      "9FFP_ABU_B501",
+      "9FFQ_ABU_B501",
+      "9FFR_ABU_B501",
+      "9FFS_ABU_A501",
+      "9FFT_ABU_B501",
+      "9FFU_ABU_B501",
+      "9FFW_ABU_A501",
+      "9FFY_ABU_B501",
+      "9FFZ_ABU_A501",
+      "9FG0_ABU_B501",
+      "9FG1_ABU_B501",
+      "9FG2_ABU_B501",
+      "9FG3_ABU_D501",
+      "9FG5_ABU_C501",
+      "9FG6_ABU_C501",
+      "9FG7_ABU_E501",
+      "9FG8_ABU_B501",
+      "9FG9_ABU_E502",
+      "9FGG_ABU_B1601",
+      "9FGH_ABU_B1601",
+      "9HNQ_ABU_B601",
+      "9HNR_ABU_B601",
+      "9HNS_ABU_B601",
+      "9HNT_ABU_E602",
+      "9HUM_ABU_B601",
+      "9RL5_ABU_B601",
+      "9RPB_ABU_B601",
+      "7QNC_EI7_B503"
+    ]
+  },
+  "counts": {
+    "poses": 97,
+    "in_cells": 75,
+    "cells": 4,
+    "separate_state": 0,
+    "unknown": 21,
+    "quarantined": 1
+  },
+  "poses": [
+    {
+      "pdb_id": "6HUO",
+      "ligand_id": "08H",
+      "chain": "D",
+      "seqid": "501",
+      "pocket": "bzd_site",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "bzd_site__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "triazolo-benzodiazepine, BZ-site PAM",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08219",
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6HUO_08H_D501.mol2"
+    },
+    {
+      "pdb_id": "8VQY",
+      "ligand_id": "A1ADG",
+      "chain": "E",
+      "seqid": "401",
+      "pocket": "bzd_site",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "bzd_site__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "methaqualone, positive modulator",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8VQY_A1ADG_E401.mol2"
+    },
+    {
+      "pdb_id": "6A96",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6A96_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "6D6T",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "405",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6D6T_ABU_A405.mol2"
+    },
+    {
+      "pdb_id": "6HUJ",
+      "ligand_id": "ABU",
+      "chain": "D",
+      "seqid": "507",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08219",
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6HUJ_ABU_D507.mol2"
+    },
+    {
+      "pdb_id": "6HUO",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08219",
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6HUO_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "6HUP",
+      "ligand_id": "ABU",
+      "chain": "E",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08219",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6HUP_ABU_E501.mol2"
+    },
+    {
+      "pdb_id": "6X3T",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "405",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X3T_ABU_C405.mol2"
+    },
+    {
+      "pdb_id": "6X3U",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "405",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X3U_ABU_A405.mol2"
+    },
+    {
+      "pdb_id": "6X3V",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X3V_ABU_A402.mol2"
+    },
+    {
+      "pdb_id": "6X3W",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "405",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X3W_ABU_A405.mol2"
+    },
+    {
+      "pdb_id": "6X3X",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "405",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X3X_ABU_A405.mol2"
+    },
+    {
+      "pdb_id": "6X3Z",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "405",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X3Z_ABU_A405.mol2"
+    },
+    {
+      "pdb_id": "6X40",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "405",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X40_ABU_A405.mol2"
+    },
+    {
+      "pdb_id": "7PBD",
+      "ligand_id": "ABU",
+      "chain": "D",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7PBD_ABU_D501.mol2"
+    },
+    {
+      "pdb_id": "7PBZ",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7PBZ_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "7QN7",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472",
+        "P48169"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QN7_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "7QNA",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P18507",
+        "P28472",
+        "P48169"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QNA_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "7QNB",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QNB_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "7T0Z",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7T0Z_ABU_C401.mol2"
+    },
+    {
+      "pdb_id": "8DD2",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "403",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8DD2_ABU_C403.mol2"
+    },
+    {
+      "pdb_id": "8DD3",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8DD3_ABU_A402.mol2"
+    },
+    {
+      "pdb_id": "8SGO",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8SGO_ABU_C402.mol2"
+    },
+    {
+      "pdb_id": "8SI9",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8SI9_ABU_B401.mol2"
+    },
+    {
+      "pdb_id": "8SID",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8SID_ABU_C402.mol2"
+    },
+    {
+      "pdb_id": "8VQY",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8VQY_ABU_A401.mol2"
+    },
+    {
+      "pdb_id": "8VRN",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8VRN_ABU_A401.mol2"
+    },
+    {
+      "pdb_id": "9CRS",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CRS_ABU_C501.mol2"
+    },
+    {
+      "pdb_id": "9CRV",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47869",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CRV_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9CT0",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47869",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CT0_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9CX7",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472",
+        "P47869"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CX7_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9CXA",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CXA_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9CXB",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18505",
+        "P18507",
+        "P47869",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CXB_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9CXC",
+      "ligand_id": "ABU",
+      "chain": "D",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472",
+        "P47869",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CXC_ABU_D501.mol2"
+    },
+    {
+      "pdb_id": "9CXD",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18505",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9CXD_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9DRX",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9DRX_ABU_A402.mol2"
+    },
+    {
+      "pdb_id": "9EQG",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "3505",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9EQG_ABU_B3505.mol2"
+    },
+    {
+      "pdb_id": "9FAJ",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "3907",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P18507",
+        "P28472",
+        "Q7Z7J7",
+        "Q8NFZ4"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FAJ_ABU_A3907.mol2"
+    },
+    {
+      "pdb_id": "9FAK",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "1601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472",
+        "Q7Z7J7",
+        "Q8NFZ4"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FAK_ABU_B1601.mol2"
+    },
+    {
+      "pdb_id": "9FAM",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "3902",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472",
+        "Q7Z7J7",
+        "Q8NFZ4"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FAM_ABU_A3902.mol2"
+    },
+    {
+      "pdb_id": "9FFL",
+      "ligand_id": "ABU",
+      "chain": "E",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFL_ABU_E501.mol2"
+    },
+    {
+      "pdb_id": "9FFN",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFN_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFO",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFO_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFP",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFP_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFQ",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFQ_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFR",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFR_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFS",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFS_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9FFT",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFT_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFU",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFU_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFW",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFW_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9FFY",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFY_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FFZ",
+      "ligand_id": "ABU",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FFZ_ABU_A501.mol2"
+    },
+    {
+      "pdb_id": "9FG0",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG0_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FG1",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG1_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FG2",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG2_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FG3",
+      "ligand_id": "ABU",
+      "chain": "D",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG3_ABU_D501.mol2"
+    },
+    {
+      "pdb_id": "9FG5",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG5_ABU_C501.mol2"
+    },
+    {
+      "pdb_id": "9FG6",
+      "ligand_id": "ABU",
+      "chain": "C",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG6_ABU_C501.mol2"
+    },
+    {
+      "pdb_id": "9FG7",
+      "ligand_id": "ABU",
+      "chain": "E",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG7_ABU_E501.mol2"
+    },
+    {
+      "pdb_id": "9FG8",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG8_ABU_B501.mol2"
+    },
+    {
+      "pdb_id": "9FG9",
+      "ligand_id": "ABU",
+      "chain": "E",
+      "seqid": "502",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG9_ABU_E502.mol2"
+    },
+    {
+      "pdb_id": "9FGG",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "1601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FGG_ABU_B1601.mol2"
+    },
+    {
+      "pdb_id": "9FGH",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "1601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FGH_ABU_B1601.mol2"
+    },
+    {
+      "pdb_id": "9HNQ",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9HNQ_ABU_B601.mol2"
+    },
+    {
+      "pdb_id": "9HNR",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9HNR_ABU_B601.mol2"
+    },
+    {
+      "pdb_id": "9HNS",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9HNS_ABU_B601.mol2"
+    },
+    {
+      "pdb_id": "9HNT",
+      "ligand_id": "ABU",
+      "chain": "E",
+      "seqid": "602",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9HNT_ABU_E602.mol2"
+    },
+    {
+      "pdb_id": "9HUM",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644",
+        "P42212"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9HUM_ABU_B601.mol2"
+    },
+    {
+      "pdb_id": "9RL5",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644",
+        "P42212"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9RL5_ABU_B601.mol2"
+    },
+    {
+      "pdb_id": "9RPB",
+      "ligand_id": "ABU",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "GABA, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P28472",
+        "P31644",
+        "P42212"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9RPB_ABU_B601.mol2"
+    },
+    {
+      "pdb_id": "4COF",
+      "ligand_id": "BEN",
+      "chain": "E",
+      "seqid": "500",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4COF_BEN_E500.mol2"
+    },
+    {
+      "pdb_id": "9HAA",
+      "ligand_id": "BUA",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472",
+        "P31644",
+        "P42212"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9HAA_BUA_B601.mol2"
+    },
+    {
+      "pdb_id": "6HUP",
+      "ligand_id": "DZP",
+      "chain": "D",
+      "seqid": "2001",
+      "pocket": "bzd_site",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "bzd_site__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "diazepam, BZ-site PAM",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08219",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6HUP_DZP_D2001.mol2"
+    },
+    {
+      "pdb_id": "6X3X",
+      "ligand_id": "DZP",
+      "chain": "D",
+      "seqid": "404",
+      "pocket": "bzd_site",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "bzd_site__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "diazepam, BZ-site PAM",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6X3X_DZP_D404.mol2"
+    },
+    {
+      "pdb_id": "7QNC",
+      "ligand_id": "EI7",
+      "chain": "B",
+      "seqid": "503",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "gaboxadol/THIP, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472",
+        "P48169"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QNC_EI7_B503.mol2"
+    },
+    {
+      "pdb_id": "7QND",
+      "ligand_id": "EI7",
+      "chain": "E",
+      "seqid": "501",
+      "pocket": null,
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "gaboxadol/THIP, agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QND_EI7_E501.mol2"
+    },
+    {
+      "pdb_id": "7QNE",
+      "ligand_id": "EIE",
+      "chain": "D",
+      "seqid": "502",
+      "pocket": "bzd_site",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "bzd_site__neutral",
+      "efficacy_source": "curated",
+      "efficacy_note": "flumazenil-type, BZ-site neutral antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QNE_EIE_D502.mol2"
+    },
+    {
+      "pdb_id": "6QFA",
+      "ligand_id": "HSM",
+      "chain": "E",
+      "seqid": "502",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "B5Z8H1",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6QFA_HSM_E502.mol2"
+    },
+    {
+      "pdb_id": "7A5V",
+      "ligand_id": "HSM",
+      "chain": "A",
+      "seqid": "5408",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7A5V_HSM_A5408.mol2"
+    },
+    {
+      "pdb_id": "7PBD",
+      "ligand_id": "HSM",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7PBD_HSM_B601.mol2"
+    },
+    {
+      "pdb_id": "7PBZ",
+      "ligand_id": "HSM",
+      "chain": "C",
+      "seqid": "601",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7PBZ_HSM_C601.mol2"
+    },
+    {
+      "pdb_id": "7QN7",
+      "ligand_id": "HSM",
+      "chain": "C",
+      "seqid": "503",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472",
+        "P48169"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QN7_HSM_C503.mol2"
+    },
+    {
+      "pdb_id": "7QN8",
+      "ligand_id": "HSM",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QN8_HSM_B501.mol2"
+    },
+    {
+      "pdb_id": "7QN9",
+      "ligand_id": "HSM",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472",
+        "P48169"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QN9_HSM_B501.mol2"
+    },
+    {
+      "pdb_id": "7QNC",
+      "ligand_id": "HSM",
+      "chain": "C",
+      "seqid": "503",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472",
+        "P48169"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QNC_HSM_C503.mol2"
+    },
+    {
+      "pdb_id": "7QND",
+      "ligand_id": "HSM",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O14764",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7QND_HSM_B501.mol2"
+    },
+    {
+      "pdb_id": "8PVB",
+      "ligand_id": "HSM",
+      "chain": "A",
+      "seqid": "5406",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8PVB_HSM_A5406.mol2"
+    },
+    {
+      "pdb_id": "9FEU",
+      "ligand_id": "HSM",
+      "chain": "E",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FEU_HSM_E501.mol2"
+    },
+    {
+      "pdb_id": "9FEX",
+      "ligand_id": "HSM",
+      "chain": "A",
+      "seqid": "502",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FEX_HSM_A502.mol2"
+    },
+    {
+      "pdb_id": "9FEY",
+      "ligand_id": "HSM",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FEY_HSM_B501.mol2"
+    },
+    {
+      "pdb_id": "9FEZ",
+      "ligand_id": "HSM",
+      "chain": "B",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FEZ_HSM_B501.mol2"
+    },
+    {
+      "pdb_id": "9FF0",
+      "ligand_id": "HSM",
+      "chain": "C",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FF0_HSM_C501.mol2"
+    },
+    {
+      "pdb_id": "9FF1",
+      "ligand_id": "HSM",
+      "chain": "D",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FF1_HSM_D501.mol2"
+    },
+    {
+      "pdb_id": "9FF2",
+      "ligand_id": "HSM",
+      "chain": "E",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FF2_HSM_E501.mol2"
+    },
+    {
+      "pdb_id": "9FG6",
+      "ligand_id": "HSM",
+      "chain": "E",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P28472"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FG6_HSM_E501.mol2"
+    },
+    {
+      "pdb_id": "9DRX",
+      "ligand_id": "IYJ",
+      "chain": "D",
+      "seqid": "402",
+      "pocket": "bzd_site",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9DRX_IYJ_D402.mol2"
+    },
+    {
+      "pdb_id": "8DD3",
+      "ligand_id": "R63",
+      "chain": "D",
+      "seqid": "701",
+      "pocket": "bzd_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "bzd_site__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "beta-carboline ester, BZ-site inverse agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P14867",
+        "P18507",
+        "P47870"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8DD3_R63_D701.mol2"
+    }
+  ]
+}

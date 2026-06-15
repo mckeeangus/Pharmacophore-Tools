@@ -1,0 +1,20 @@
+@<TRIPOS>MOLECULE
+6KM1_BCT_A304
+ 5 4 0 0 0
+SMALL
+GASTEIGER
+
+@<TRIPOS>ATOM
+      1 C          -5.5360    0.6320   16.6860 C.2     1  UNL1        0.2305
+      2 O          -6.3670    1.3790   15.9940 O.co2   1  UNL1       -0.5152
+      3 O          -4.6640    1.2870   17.3400 O.co2   1  UNL1       -0.5152
+      4 O          -5.6040   -0.5620   16.5720 O.3     1  UNL1       -0.4935
+      5 H          -5.0290   -0.9890   17.1160 H       1  UNL1        0.2934
+@<TRIPOS>UNITY_ATOM_ATTR
+3 1
+charge -1
+@<TRIPOS>BOND
+     1     2     1   ar
+     2     3     1   ar
+     3     4     1    1
+     4     5     4    1

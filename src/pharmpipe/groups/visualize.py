@@ -78,7 +78,8 @@ def write_grouped_pml(res: GroupResult, pose_folders: dict[str, list[Path]]) -> 
     return path
 
 
-def build_grouped_pse(res: GroupResult, anchor_het: str | None) -> Path | None:
+def build_grouped_pse(res: GroupResult, pose_folders: dict[str, list[Path]],
+                      anchor_het: str | None) -> Path | None:
     pm = _try_pymol()
     if pm is None:
         return None
@@ -100,14 +101,15 @@ def build_grouped_pse(res: GroupResult, anchor_het: str | None) -> Path | None:
         cmd.show("sticks", "anchor")
         cmd.color("yellow", "anchor")
 
-    for i, (cell, poses) in enumerate(res.cells.items()):
+    # Load the de-duplicated, reference-frame poses already copied per cell.
+    for i, (cell, paths) in enumerate(sorted(pose_folders.items())):
+        if cell not in res.cells:
+            continue
         colour = _cell_colour(cell, i)
         members = []
-        for p in poses:
-            if not p.aligned_mol2.exists():
-                continue
-            obj = f"{cell}__{p.aligned_mol2.stem}"
-            cmd.load(str(p.aligned_mol2), obj)
+        for p in paths:
+            obj = f"{cell}__{p.stem}"
+            cmd.load(str(p), obj)
             members.append(obj)
         if members:
             cmd.group(cell, " ".join(members))
@@ -179,11 +181,25 @@ def build_cell_sessions(res: GroupResult, pose_folders: dict[str, list[Path]],
     return n
 
 
+def build_set_sessions(pose_folders: dict[str, list[Path]],
+                       make_pse: bool = True) -> int:
+    """One ligand-only .pml (+ .pse) per dataset folder (element-coloured)."""
+    n = 0
+    for _name, paths in sorted(pose_folders.items()):
+        if not paths:
+            continue
+        _write_set_pml(paths[0].parent, paths, colour=None)
+        if make_pse:
+            _build_set_pse(paths[0].parent, paths, colour=None)
+        n += 1
+    return n
+
+
 def build_sessions(res: GroupResult, pose_folders: dict[str, list[Path]],
                    anchor_het: str | None = None, make_pse: bool = True) -> dict:
     artifacts = {"grouped_pml": write_grouped_pml(res, pose_folders)}
     if make_pse:
-        pse = build_grouped_pse(res, anchor_het)
+        pse = build_grouped_pse(res, pose_folders, anchor_het)
         if pse is not None:
             artifacts["grouped_pse"] = pse
     artifacts["cell_sessions"] = build_cell_sessions(res, pose_folders, make_pse=make_pse)

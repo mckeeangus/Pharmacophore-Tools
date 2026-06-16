@@ -1,11 +1,11 @@
 # Stage 3 — effect groups: esr1
 
-_Generated 2026-06-15. Cell = (verified pocket) × (efficacy sign)._
+_Generated 2026-06-16. Cell = (verified pocket) × (efficacy sign)._
 
 - Poses carried from Stage 2: **100**
-- In partition cells: **19** across **2** cells
-- Routed to separate-state track: **0**
-- Efficacy unknown (review): **81**
+- In partition cells: **23** across **2** cells
+- Routed to separate-state track: **3**
+- Efficacy unknown (review): **74**
 - Quarantined (not in pocket of interest): **0**
 
 ## Pocket verification
@@ -22,16 +22,20 @@ _Notes: Ligand-binding-domain hormone pocket._
 
 | Cell (pocket × efficacy) | Poses | Distinct ligands | Example HETs |
 |---|--:|--:|---|
-| `lbp__negative` | 8 | 5 | 29S, 53Q, 9XY, OHT, RAL |
+| `lbp__negative` | 12 | 9 | 29S, 53Q, 9XY, AIH, AIJ, AIT … |
 | `lbp__positive` | 11 | 4 | 17M, 27J, EST, GEN |
 
 ## Separate-state ligands (routed out of cells)
 
-**Separate-state:** none.
+**Separate-state** (3):
+
+- `7I0` (7RS4_7I0_C601, primary) — degrader/SERD — separate state
+- `I0V` (7TE7_I0V_A601, primary) — degrader/SERD — separate state
+- `L5B` (6SBO_L5B_A4000, primary) — degrader/SERD — separate state
 
 ## Efficacy review list
 
-**Unknown efficacy** (81):
+**Unknown efficacy** (74):
 
 - `1HP` (2QSE_1HP_B1, primary)
 - `27L` (4MGA_27L_B601, primary)
@@ -46,7 +50,6 @@ _Notes: Ligand-binding-domain hormone pocket._
 - `7EI` (7RS8_7EI_C601, primary)
 - `7FZ` (5TN4_7FZ_A601, primary)
 - `7G0` (5TN5_7G0_B601, primary)
-- `7I0` (7RS4_7I0_C601, primary)
 - `7I5` (7RS2_7I5_C601, primary)
 - `7I9` (7RS0_7I9_C601, primary)
 - `7OI` (7RS9_7OI_C601, primary)
@@ -65,10 +68,6 @@ _Notes: Ligand-binding-domain hormone pocket._
 - `A1AIZ` (9B25_A1AIZ_A600, primary)
 - `A1ASN` (9BU1_A1ASN_B601, primary)
 - `A1ET8` (9W12_A1ET8_A701, primary)
-- `AIH` (1XP1_AIH_A600, primary)
-- `AIJ` (1XP9_AIJ_A600, primary)
-- `AIT` (1XPC_AIT_A600, primary)
-- `AIU` (1XP6_AIU_A600, primary)
 - `C3D` (6VJD_C3D_C601, primary)
 - `EI1` (2QAB_EI1_B1, primary)
 - `F3D` (6CHW_F3D_A601, primary)
@@ -76,11 +75,9 @@ _Notes: Ligand-binding-domain hormone pocket._
 - `GQD` (5FQP_GQD_A1549, primary)
 - `H09` (7QVJ_H09_B601, primary)
 - `H8W` (6IAR_H8W_A601, primary)
-- `I0V` (7TE7_I0V_A601, primary)
 - `IOG` (2IOG_IOG_A600, primary)
 - `KE9` (5ACC_KE9_A1546, primary)
 - `KN1` (2QZO_KN1_B1, primary)
-- `L5B` (6SBO_L5B_A4000, primary)
 - `L84` (7RRY_L84_B601, primary)
 - `LRQ` (6SQ0_LRQ_A601, primary)
 - `LVH` (6SUO_LVH_B601, primary)
@@ -121,4 +118,4 @@ _Notes: Ligand-binding-domain hormone pocket._
 
 ---
 
-Cell mol2 sets: `groups/<pocket>__<efficacy>/`. Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `esr1_grouped.pse` (all cells) and per-cell `.pse` in each folder.
+Cell mol2 sets: `groups/<pocket>__<efficacy>/` (one representative pose per ligand). Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `esr1_grouped.pse` (all cells) and per-cell `.pse`. Pose pools: `datasets/all_poses/` (every kept pose) and `datasets/representative/` (one per ligand), each with a `.pml` + `.pse`.

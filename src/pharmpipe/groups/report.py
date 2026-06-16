@@ -16,13 +16,15 @@ from pathlib import Path
 
 from ..util.paths import (
     CATALOGUE_DIR,
+    combined_datasets_dir,
     ensure_dir,
+    target_datasets_dir,
     target_effect_groups_json,
     target_groups_dir,
     target_review_dir,
     target_stage3_report,
 )
-from .group import GroupResult, Pose, status_counts
+from .group import GroupResult, Pose, representative_poses, status_counts
 
 _SAFE = re.compile(r"[^A-Za-z0-9_.-]+")
 
@@ -60,11 +62,24 @@ def candidate_pocket(pose: Pose, res: GroupResult) -> str | None:
 
 # --- mol2 cell folders -------------------------------------------------------
 
-def write_pose_folders(res: GroupResult) -> dict[str, list[Path]]:
-    """Copy each pose's aligned mol2 into its cell / review folder.
+def _copy_poses(dest_dir: Path, poses: list[Pose], prefix: str = "") -> list[Path]:
+    paths: list[Path] = []
+    for p in poses:
+        if not p.aligned_mol2.exists():
+            continue
+        dest = dest_dir / f"{prefix}{p.aligned_mol2.name}"
+        shutil.copy2(p.aligned_mol2, dest)
+        paths.append(dest)
+    return paths
 
-    Returns ``{group_name: [mol2 paths]}`` for the session writer. ``groups/``
-    and ``review/`` are cleared first so re-runs don't leave stale poses.
+
+def write_pose_folders(res: GroupResult) -> dict[str, list[Path]]:
+    """Copy a representative pose per ligand into its cell / review folder.
+
+    Cells and review sets are de-duplicated to one pose per HET code (the
+    visualisations should not stack redundant copies of the same ligand); the
+    exhaustive pools live under ``datasets/``. Returns ``{group_name: [mol2]}``
+    for the session writer. ``groups/`` and ``review/`` are cleared first.
     """
     groups_dir = target_groups_dir(res.slug)
     review_dir = target_review_dir(res.slug)
@@ -78,19 +93,49 @@ def write_pose_folders(res: GroupResult) -> dict[str, list[Path]]:
         if not poses:
             return
         dest_dir = ensure_dir(base / _safe(name))
-        paths = []
-        for p in poses:
-            if p.aligned_mol2.exists():
-                dest = dest_dir / p.aligned_mol2.name
-                shutil.copy2(p.aligned_mol2, dest)
-                paths.append(dest)
-        out[name] = paths
+        out[name] = _copy_poses(dest_dir, representative_poses(poses))
 
     for cell, poses in res.cells.items():
         place(cell, groups_dir, poses)
     place("separate_state", review_dir, res.separate_state)
     place("unknown", review_dir, res.unknown)
     place("quarantine", review_dir, res.quarantined)
+    return out
+
+
+# --- all-poses / representative datasets -------------------------------------
+
+def write_datasets(res: GroupResult) -> dict[str, list[Path]]:
+    """Two per-target pools: every kept pose, and one representative per ligand.
+
+    Returns ``{folder_name: [mol2]}`` for the session writer.
+    """
+    base = target_datasets_dir(res.slug)
+    if base.exists():
+        shutil.rmtree(base)
+    out: dict[str, list[Path]] = {}
+    out["all_poses"] = _copy_poses(ensure_dir(base / "all_poses"), res.poses)
+    out["representative"] = _copy_poses(
+        ensure_dir(base / "representative"), representative_poses(res.poses))
+    return out
+
+
+def write_combined_datasets(results: list[GroupResult]) -> dict[str, list[Path]]:
+    """Cross-target master pools (filenames target-prefixed for provenance).
+
+    ``all_poses`` = every kept pose of every target; ``representative`` = one pose
+    per (target, ligand).
+    """
+    base = combined_datasets_dir()
+    if base.exists():
+        shutil.rmtree(base)
+    all_dir = ensure_dir(base / "all_poses")
+    rep_dir = ensure_dir(base / "representative")
+    out: dict[str, list[Path]] = {"all_poses": [], "representative": []}
+    for res in results:
+        out["all_poses"] += _copy_poses(all_dir, res.poses, prefix=f"{res.slug}__")
+        out["representative"] += _copy_poses(
+            rep_dir, representative_poses(res.poses), prefix=f"{res.slug}__")
     return out
 
 
@@ -220,9 +265,11 @@ def write_stage3_report(res: GroupResult, search_date: str) -> Path:
         *(_review_section("Quarantined", res.quarantined, None, res=res)),
         "---",
         "",
-        "Cell mol2 sets: `groups/<pocket>__<efficacy>/`. Review sets: "
-        "`review/{separate_state,unknown,quarantine}/`. Sessions: "
-        f"`{res.slug}_grouped.pse` (all cells) and per-cell `.pse` in each folder.",
+        "Cell mol2 sets: `groups/<pocket>__<efficacy>/` (one representative pose "
+        "per ligand). Review sets: `review/{separate_state,unknown,quarantine}/`. "
+        f"Sessions: `{res.slug}_grouped.pse` (all cells) and per-cell `.pse`. "
+        "Pose pools: `datasets/all_poses/` (every kept pose) and "
+        "`datasets/representative/` (one per ligand), each with a `.pml` + `.pse`.",
         "",
     ]
     path = target_stage3_report(res.slug)
@@ -245,6 +292,8 @@ def update_run_summary(results: list[GroupResult], search_date: str) -> Path:
     path = ensure_dir(CATALOGUE_DIR) / "run_summary.md"
     existing = path.read_text(encoding="utf-8") if path.exists() else ""
     head = existing.split(_STAGE3_HEADER, 1)[0].rstrip() if existing else ""
+    _total_all = sum(len(res.poses) for res in results)
+    _total_rep = sum(len({p.het_code.upper() for p in res.poses}) for res in results)
 
     lines = [
         head,
@@ -257,7 +306,13 @@ def update_run_summary(results: list[GroupResult], search_date: str) -> Path:
         "(`config/efficacy.yaml`). A cell = (pocket × efficacy). Covalent/"
         "reactivator/degrader/substrate ligands are routed to a separate-state "
         "track; unconfident efficacy and out-of-pocket poses are first-class "
-        "review outputs, never force-bucketed.",
+        "review outputs, never force-bucketed. **Stage 3.3** folds in efficacy "
+        "resolved from ChEMBL for previously-`unknown` ligands "
+        "(`catalogue/stage3_efficacy_resolved.csv`, used only below curated "
+        "config). Pseudo-symmetric multi-pocket targets (GABA-A) are re-aligned "
+        "onto the reference at their true subunit interface so the benzodiazepine "
+        "and orthosteric sites are spatially distinct in the session. Cell/grouped "
+        "sessions show one representative pose per ligand.",
         "",
         "| Target | Pockets found | Cells | In cells | Separate-state | Unknown eff. | Quarantined |",  # noqa: E501
         "|--------|---------------|------:|---------:|---------------:|-------------:|------------:|",  # noqa: E501
@@ -273,6 +328,12 @@ def update_run_summary(results: list[GroupResult], search_date: str) -> Path:
         "Per-target detail: `catalogue/<slug>/<slug>_stage3_report.md`, the cell "
         "mol2 in `catalogue/<slug>/groups/`, `effect_groups.json`, and the "
         "recoloured session `catalogue/<slug>/<slug>_grouped.pse`.",
+        "",
+        "**Pose datasets** (pharmacophore inputs): each target carries "
+        "`catalogue/<slug>/datasets/{all_poses,representative}/` (every kept pose "
+        "vs one per ligand), with a cross-target master under "
+        f"`catalogue/datasets/` ({_total_all} poses / {_total_rep} representative)."
+        " Each set ships a `.pml` + baked `.pse`.",
         "",
     ]
     path.write_text("\n".join(lines), encoding="utf-8")

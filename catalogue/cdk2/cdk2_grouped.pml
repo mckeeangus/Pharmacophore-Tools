@@ -12,7 +12,6 @@ load groups/atp_site__negative/4EK8_16K_A301.mol2, atp_site__negative__4EK8_16K_
 load groups/atp_site__negative/3SW4_18K_A299.mol2, atp_site__negative__3SW4_18K_A299
 load groups/atp_site__negative/3RM6_18Z_A478.mol2, atp_site__negative__3RM6_18Z_A478
 load groups/atp_site__negative/4EK4_1CK_A301.mol2, atp_site__negative__4EK4_1CK_A301
-load groups/atp_site__negative/4KD1_1QK_A302.mol2, atp_site__negative__4KD1_1QK_A302
 load groups/atp_site__negative/8FOW_1QK_A303.mol2, atp_site__negative__8FOW_1QK_A303
 load groups/atp_site__negative/4FKO_20K_A301.mol2, atp_site__negative__4FKO_20K_A301
 load groups/atp_site__negative/6Q4F_26D_A301.mol2, atp_site__negative__6Q4F_26D_A301
@@ -86,7 +85,6 @@ load groups/atp_site__negative/3QQF_X07_A543.mol2, atp_site__negative__3QQF_X07_
 load groups/atp_site__negative/3QQJ_X11_A300.mol2, atp_site__negative__3QQJ_X11_A300
 load groups/atp_site__negative/3QRT_X14_A535.mol2, atp_site__negative__3QRT_X14_A535
 load groups/atp_site__negative/3QX2_X63_A300.mol2, atp_site__negative__3QX2_X63_A300
-load groups/atp_site__negative/3QXP_X64_A300.mol2, atp_site__negative__3QXP_X64_A300
 load groups/atp_site__negative/4GCJ_X64_A305.mol2, atp_site__negative__4GCJ_X64_A305
 load groups/atp_site__negative/3QXO_X65_A668.mol2, atp_site__negative__3QXO_X65_A668
 load groups/atp_site__negative/3QZG_X67_A471.mol2, atp_site__negative__3QZG_X67_A471

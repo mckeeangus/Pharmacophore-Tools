@@ -1,6 +1,6 @@
 # Stage 3 — effect groups: hiv1_protease
 
-_Generated 2026-06-15. Cell = (verified pocket) × (efficacy sign)._
+_Generated 2026-06-16. Cell = (verified pocket) × (efficacy sign)._
 
 - Poses carried from Stage 2: **48**
 - In partition cells: **48** across **1** cells
@@ -38,4 +38,4 @@ _Generated 2026-06-15. Cell = (verified pocket) × (efficacy sign)._
 
 ---
 
-Cell mol2 sets: `groups/<pocket>__<efficacy>/`. Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `hiv1_protease_grouped.pse` (all cells) and per-cell `.pse` in each folder.
+Cell mol2 sets: `groups/<pocket>__<efficacy>/` (one representative pose per ligand). Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `hiv1_protease_grouped.pse` (all cells) and per-cell `.pse`. Pose pools: `datasets/all_poses/` (every kept pose) and `datasets/representative/` (one per ligand), each with a `.pml` + `.pse`.

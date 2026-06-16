@@ -15,6 +15,9 @@ scrape-pdb-ligands = "python scripts/scrape_pdb_ligands.py"
 align-sites = "python scripts/align_sites.py"
 # Bake .pml sessions into .pse files (needs PyMOL): pixi run -e viz build-sessions
 build-sessions = "python scripts/align_sites.py --sessions-only"
+# Stage 3.3: resolve `unknown` ligand efficacy via ChEMBL (network -> login node).
+# Caches responses under data/_cache/chembl; output feeds the offline grouping.
+resolve-efficacy = "python scripts/resolve_efficacy.py"
 # Stage 3: pocket-verified, effect-based grouping of the site-aligned poses.
 # Offline (cached structures + catalogue). Bake .pse with: pixi run -e viz group-effects
 group-effects = "python scripts/group_effects.py"

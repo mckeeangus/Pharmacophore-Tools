@@ -77,22 +77,33 @@ def main(argv: list[str] | None = None) -> int:
         folders = report.write_pose_folders(res)
         report.write_effect_groups_json(res)
         report.write_stage3_report(res, search_date)
+        datasets = report.write_datasets(res)
         site = sites.get(slug)
         arts = visualize.build_sessions(res, folders,
                                         anchor_het=site.anchor_het if site else None,
                                         make_pse=not args.no_pse)
+        visualize.build_set_sessions(datasets, make_pse=not args.no_pse)
 
         sc = group.status_counts(res)
         pse = "pse" if "grouped_pse" in arts else "pml-only"
         print(f"[{slug}] pockets={res.pockets_found} | {sc['cells']} cells "
               f"({sc['in_cells']} poses) | sep-state {sc['separate_state']} | "
               f"unknown {sc['unknown']} | quarantined {sc['quarantined']} | "
-              f"{arts['cell_sessions']} cell sessions [{pse}]", flush=True)
+              f"{arts['cell_sessions']} cell sessions [{pse}] | "
+              f"datasets: {len(datasets['all_poses'])} all / "
+              f"{len(datasets['representative'])} representative", flush=True)
         results.append(res)
 
+    if results and not wanted:
+        # Only rebuild the cross-target master pools on a full run, so a targeted
+        # re-run doesn't wipe the other targets' contributions.
+        combined = report.write_combined_datasets(results)
+        visualize.build_set_sessions(combined, make_pse=not args.no_pse)
+        print(f"\nCombined master datasets: {len(combined['all_poses'])} poses / "
+              f"{len(combined['representative'])} representative", flush=True)
     if results:
         path = report.update_run_summary(results, search_date)
-        print(f"\nRun summary updated: {path}", flush=True)
+        print(f"Run summary updated: {path}", flush=True)
     return 0
 
 

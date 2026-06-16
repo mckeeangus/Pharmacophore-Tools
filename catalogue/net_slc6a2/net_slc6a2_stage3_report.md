@@ -1,11 +1,11 @@
 # Stage 3 — effect groups: net_slc6a2
 
-_Generated 2026-06-15. Cell = (verified pocket) × (efficacy sign)._
+_Generated 2026-06-16. Cell = (verified pocket) × (efficacy sign)._
 
 - Poses carried from Stage 2: **50**
-- In partition cells: **25** across **2** cells
+- In partition cells: **29** across **2** cells
 - Routed to separate-state track: **0**
-- Efficacy unknown (review): **25**
+- Efficacy unknown (review): **21**
 - Quarantined (not in pocket of interest): **0**
 
 ## Pocket verification
@@ -23,7 +23,7 @@ _Notes: Central S1 substrate/inhibitor site. Human NET and the dDAT surrogate us
 
 | Cell (pocket × efficacy) | Poses | Distinct ligands | Example HETs |
 |---|--:|--:|---|
-| `central_s1__negative` | 12 | 7 | 1XR, 21B, 41U, A1LX4, COC, DSM … |
+| `central_s1__negative` | 16 | 11 | 1XR, 21B, 29E, 41U, A1D9Y, A1LX4 … |
 | `central_s1__positive` | 13 | 6 | 1WE, B40, E5E, LDP, LNR, YMN |
 
 ## Separate-state ligands (routed out of cells)
@@ -32,10 +32,9 @@ _Notes: Central S1 substrate/inhibitor site. Human NET and the dDAT surrogate us
 
 ## Efficacy review list
 
-**Unknown efficacy** (25):
+**Unknown efficacy** (21):
 
 - `1WR` (7WLW_1WR_A704, surrogate)
-- `29E` (6M38_29E_A601, surrogate)
 - `41X` (4XNX_41X_A707, surrogate)
 - `42F` (4XP5_42F_A602, surrogate)
 - `42F` (4XPF_42F_A703, surrogate)
@@ -46,7 +45,6 @@ _Notes: Central S1 substrate/inhibitor site. Human NET and the dDAT surrogate us
 - `68P` (8I3V_68P_A701, primary)
 - `9BC` (7WGT_9BC_A701, surrogate)
 - `A1D5S` (9KDH_A1D5S_B709, primary)
-- `A1D9Y` (8ZP1_A1D9Y_A702, primary)
 - `A1EBN` (9JEL_A1EBN_A701, primary)
 - `A1EBO` (9JF3_A1EBO_A701, primary)
 - `A1EFR` (9KE3_A1EFR_B707, primary)
@@ -56,8 +54,6 @@ _Notes: Central S1 substrate/inhibitor site. Human NET and the dDAT surrogate us
 - `A1LX6` (8Y90_A1LX6_A701, primary)
 - `F0F` (6M3Z_F0F_A701, surrogate)
 - `F1U` (6M47_F1U_A608, surrogate)
-- `XEF` (8WTY_XEF_A701, primary)
-- `Y60` (8WTX_Y60_A701, primary)
 - `YNT` (8XB2_YNT_A702, primary)
 
 ## Quarantined poses
@@ -66,4 +62,4 @@ _Notes: Central S1 substrate/inhibitor site. Human NET and the dDAT surrogate us
 
 ---
 
-Cell mol2 sets: `groups/<pocket>__<efficacy>/`. Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `net_slc6a2_grouped.pse` (all cells) and per-cell `.pse` in each folder.
+Cell mol2 sets: `groups/<pocket>__<efficacy>/` (one representative pose per ligand). Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `net_slc6a2_grouped.pse` (all cells) and per-cell `.pse`. Pose pools: `datasets/all_poses/` (every kept pose) and `datasets/representative/` (one per ligand), each with a `.pml` + `.pse`.

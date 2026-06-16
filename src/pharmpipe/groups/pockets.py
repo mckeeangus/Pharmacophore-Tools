@@ -28,6 +28,11 @@ class PocketDef:
     slug: str
     primary_label: str = "active_site"
     collapse_to_primary: bool = False
+    # When true, re-superpose each pose's *whole native assembly* onto the
+    # reference (instead of the Stage-2 local pocket fit) so distinct pockets land
+    # at their true subunit interfaces. Use only for genuine multi-pocket targets;
+    # a global fit degrades low-identity cross-species surrogate overlays.
+    realign_global: bool = False
     expected_pockets: list[str] = field(default_factory=list)
     # secondary label -> diagnostic HET codes
     markers: dict[str, list[str]] = field(default_factory=dict)
@@ -63,6 +68,7 @@ def load_pockets(path: str | Path | None = None) -> PocketsConfig:
             slug=slug,
             primary_label=str(body.get("primary_label", "active_site")),
             collapse_to_primary=bool(body.get("collapse_to_primary", False)),
+            realign_global=bool(body.get("realign_global", False)),
             expected_pockets=list(body.get("expected_pockets", [])),
             markers=markers,
             notes=str(body.get("notes", "") or ""),

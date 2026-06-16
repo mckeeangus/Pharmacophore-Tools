@@ -1,0 +1,13 @@
+@<TRIPOS>MOLECULE
+3D93_CO2_A301
+ 3 2 0 0 0
+SMALL
+GASTEIGER
+
+@<TRIPOS>ATOM
+      1 C          -6.6590    1.1330   17.4000 C.1     1  UNL1        0.3722
+      2 O          -7.5050    1.3540   16.5480 O.2     1  UNL1       -0.1861
+      3 O          -5.8160    0.9120   18.2530 O.2     1  UNL1       -0.1861
+@<TRIPOS>BOND
+     1     2     1    2
+     2     3     1    2

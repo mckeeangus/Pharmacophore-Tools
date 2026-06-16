@@ -785,8 +785,8 @@
       "efficacy": "unknown",
       "track": "reversible",
       "cell": null,
-      "efficacy_source": "",
-      "efficacy_note": "no annotation",
+      "efficacy_source": "prelabelled",
+      "efficacy_note": "glycine additive \u2014 exclude from cells",
       "separate_state_reason": "",
       "mapping": "surrogate",
       "subtype_accessions": [

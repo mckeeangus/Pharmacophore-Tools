@@ -1,4 +1,4 @@
-# hmg_site__negative — 19 molecules (reference frame; protein omitted)
+# hmg_site__negative — 18 molecules (reference frame; protein omitted)
 reinitialize
 bg_color white
 set valence, 1
@@ -13,7 +13,6 @@ load 3CCZ_5HI_B876.mol2, 3CCZ_5HI_B876
 load 3CD0_6HI_D3.mol2, 3CD0_6HI_D3
 load 3CD5_7HI_B1.mol2, 3CD5_7HI_B1
 load 2Q1L_882_A876.mol2, 2Q1L_882_A876
-load 3CD7_882_A1.mol2, 3CD7_882_A1
 load 3CDA_8HI_C4.mol2, 3CDA_8HI_C4
 load 3CDB_9HI_D3.mol2, 3CDB_9HI_D3
 load 1HWL_FBI_A2.mol2, 1HWL_FBI_A2

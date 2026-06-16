@@ -39,6 +39,11 @@ def target_aligned_mol2_dir(slug: str) -> Path:
     return target_data_dir(slug) / "ligands" / "aligned_mol2"
 
 
+def target_grouped_mol2_dir(slug: str) -> Path:
+    """Stage-3 faithfully re-aligned poses (whole-assembly fit; multi-pocket targets)."""
+    return target_data_dir(slug) / "ligands" / "grouped_mol2"
+
+
 def target_reference_pdb(slug: str) -> Path:
     """The site reference protein (scaffold the aligned ligands overlay onto)."""
     return target_data_dir(slug) / "reference.pdb"
@@ -67,6 +72,16 @@ def target_groups_dir(slug: str) -> Path:
 def target_review_dir(slug: str) -> Path:
     """First-class review tracks: separate_state / unknown / quarantine."""
     return target_catalogue_dir(slug) / "review"
+
+
+def target_datasets_dir(slug: str) -> Path:
+    """Per-target pose pools: datasets/{all_poses,representative}/."""
+    return target_catalogue_dir(slug) / "datasets"
+
+
+def combined_datasets_dir() -> Path:
+    """Cross-target master pools: catalogue/datasets/{all_poses,representative}/."""
+    return CATALOGUE_DIR / "datasets"
 
 
 def target_effect_groups_json(slug: str) -> Path:

@@ -2,8 +2,12 @@
 
 from __future__ import annotations
 
-from pharmpipe.groups import pocket
-from pharmpipe.groups.efficacy import load_efficacy
+import json
+from pathlib import Path
+
+from pharmpipe.groups import pocket, resolve
+from pharmpipe.groups.efficacy import EfficacyCall, load_efficacy
+from pharmpipe.groups.group import Pose, representative_poses
 from pharmpipe.groups.pockets import load_pockets
 
 # --- geometry / clustering ---------------------------------------------------
@@ -83,3 +87,61 @@ def test_every_target_has_pocket_and_efficacy_config():
     for slug in slugs:
         assert pc.get(slug).primary_label              # defined (non-empty)
         assert ec.get(slug).slug == slug
+
+
+def test_adrb2_collapsed_gaba_realign_flags():
+    pc = load_pockets()
+    assert pc.get("adrb2").collapse_to_primary is True
+    assert pc.get("gaba_a").realign_global is True
+    assert pc.get("nachr_a4b2").realign_global is False
+
+
+# --- Stage 3.3: ChEMBL resolution (pure logic) -------------------------------
+
+def test_action_type_to_sign():
+    assert resolve._sign_from_actions({"AGONIST"}) == ("positive", "high")
+    assert resolve._sign_from_actions({"ANTAGONIST"}) == ("neutral", "high")
+    assert resolve._sign_from_actions({"INHIBITOR"}) == ("negative", "high")
+    # conflicting subtype mechanisms -> unknown, never crossed
+    assert resolve._sign_from_actions({"AGONIST", "ANTAGONIST"})[0] == "unknown"
+    # unmapped action -> unknown
+    assert resolve._sign_from_actions({"MODULATOR (UNSPECIFIED)"})[0] == "unknown"
+
+
+def test_het_inchikey_index_offline(tmp_path):
+    base = tmp_path / "rcsb_chemcomp"
+    base.mkdir()
+    (base / "x.json").write_text(json.dumps({
+        "chem_comp": {"id": "ABC"},
+        "rcsb_chem_comp_descriptor": {"InChIKey": "AAAAAAAAAAAAAA-BBBBBBBBBB-N"},
+    }), encoding="utf-8")
+    idx = resolve.build_het_inchikey_index(cache_dir=tmp_path)
+    assert idx["ABC"] == "AAAAAAAAAAAAAA-BBBBBBBBBB-N"
+
+
+# --- representative de-duplication -------------------------------------------
+
+def _pose(pdb, het, res, rmsd=1.0):
+    return Pose(pdb_id=pdb, het_code=het, chain="A", seqid="1",
+                aligned_mol2=Path(f"{pdb}_{het}.mol2"), resolution=res, pocket_rmsd=rmsd)
+
+
+def test_representative_poses_picks_best_resolution():
+    poses = [_pose("AAAA", "LIG", 2.5), _pose("BBBB", "LIG", 1.4), _pose("CCCC", "OTH", 3.0)]
+    reps = representative_poses(poses)
+    by_het = {p.het_code: p for p in reps}
+    assert len(reps) == 2                       # one per HET
+    assert by_het["LIG"].pdb_id == "BBBB"       # best (lowest) resolution wins
+
+
+# --- resolved CSV merge (fallback below curated config) ----------------------
+
+def test_resolved_fallback_below_config():
+    ec = load_efficacy()
+    teff = ec.get("net_slc6a2")
+    teff.resolved = {"ZZZ": EfficacyCall("negative", "reversible", source="chembl (high)")}
+    # curated entry still wins
+    assert teff.call("COC").efficacy == "negative" and "chembl" not in teff.call("COC").source
+    # an otherwise-unknown het is filled from the resolved map
+    assert teff.call("ZZZ").efficacy == "negative"
+    assert "chembl" in teff.call("ZZZ").source

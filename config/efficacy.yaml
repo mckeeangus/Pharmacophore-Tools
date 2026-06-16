@@ -134,6 +134,11 @@ targets:
       53Q: {efficacy: negative, note: "clomifene, SERM"}
       29S: {efficacy: negative, note: "bazedoxifene, SERM"}
       9XY: {efficacy: negative, note: "endoxifen, SERM antagonist"}
+      # Stage 3.3 — dihydrobenzoxathiin SERM series (literature; medium confidence).
+      AIH: {efficacy: negative, source: prelabelled, note: "dihydrobenzoxathiin SERM (verify)"}
+      AIJ: {efficacy: negative, source: prelabelled, note: "dihydrobenzoxathiin SERM (verify)"}
+      AIT: {efficacy: negative, source: prelabelled, note: "dihydrobenzoxathiin SERM (verify)"}
+      AIU: {efficacy: negative, source: prelabelled, note: "dihydrobenzoxathiin SERM (verify)"}
 
   adrb2:
     class: multi_effect
@@ -149,6 +154,16 @@ targets:
       K5Y: {efficacy: positive, note: "salmeterol, agonist"}
       DZQ: {efficacy: positive, note: "olodaterol, agonist"}
       CAU: {efficacy: negative, note: "carazolol, inverse agonist"}
+      # Stage 3.3 — verified (literature / RCSB), source=prelabelled.
+      P0G: {efficacy: positive, source: prelabelled, note: "BI-167107, full agonist"}
+      G1I: {efficacy: positive, source: prelabelled, note: "constrained epinephrine, agonist"}
+      JRZ: {efficacy: negative, source: prelabelled, note: "ICI-118,551, inverse agonist"}
+      JSZ: {efficacy: negative, source: prelabelled, note: "Kolb cpd 2, inverse agonist"}
+      JTZ: {efficacy: neutral,  source: prelabelled, note: "alprenolol, neutral antagonist"}
+      TIM: {efficacy: negative, source: prelabelled, note: "timolol, partial inverse agonist"}
+      CVD: {efficacy: negative, source: prelabelled, note: "carvedilol, Gs inverse agonist (arrestin-biased)"}
+      SNP: {efficacy: negative, source: prelabelled, note: "propranolol (likely) — verify HET-code identity"}
+      ERC: {track: separate_state, source: prelabelled, reason: "covalent tethered agonist (covalent)"}
 
   nachr_a4b2:
     class: multi_effect
@@ -167,6 +182,8 @@ targets:
       MLK: {efficacy: neutral,  note: "methyllycaconitine, antagonist"}
       TC9: {efficacy: neutral,  note: "d-tubocurarine, antagonist"}
       PHN: {efficacy: neutral,  note: "1,10-phenanthroline, antagonist"}
+      # Stage 3.3 — crystallographic additive, not a functional ligand: exclude.
+      GLY: {efficacy: unknown, source: prelabelled, note: "glycine additive — exclude from cells"}
 
   gaba_a:
     class: multi_effect
@@ -181,6 +198,9 @@ targets:
       A1ADG: {efficacy: positive, note: "methaqualone, positive modulator"}
       EIE: {efficacy: neutral,  note: "flumazenil-type, BZ-site neutral antagonist"}
       R63: {efficacy: negative, note: "beta-carboline ester, BZ-site inverse agonist"}
+      # Stage 3.3 — verified (literature), source=prelabelled.
+      HSM: {efficacy: positive, source: prelabelled, note: "histamine, PAM"}
+      BEN: {efficacy: unknown, source: prelabelled, note: "benzamidine additive — review/exclude"}
 
   ca2:
     class: multi_effect
@@ -212,3 +232,7 @@ targets:
       "1XR": {efficacy: negative, note: "bupropion, reuptake inhibitor"}
       "41U": {efficacy: negative, note: "nisoxetine, reuptake inhibitor"}
       A1LX4: {efficacy: negative, note: "atomoxetine, reuptake inhibitor"}
+      # Stage 3.3 — verified (literature), source=prelabelled.
+      XEF:   {efficacy: negative, source: prelabelled, note: "ziprasidone, reuptake inhibitor"}
+      Y60:   {efficacy: negative, source: prelabelled, note: "bupropion, reuptake inhibitor"}
+      A1D9Y: {efficacy: negative, source: prelabelled, note: "reboxetine, reuptake inhibitor"}

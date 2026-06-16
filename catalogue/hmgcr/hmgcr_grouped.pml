@@ -14,7 +14,6 @@ load groups/hmg_site__negative/3CCZ_5HI_B876.mol2, hmg_site__negative__3CCZ_5HI_
 load groups/hmg_site__negative/3CD0_6HI_D3.mol2, hmg_site__negative__3CD0_6HI_D3
 load groups/hmg_site__negative/3CD5_7HI_B1.mol2, hmg_site__negative__3CD5_7HI_B1
 load groups/hmg_site__negative/2Q1L_882_A876.mol2, hmg_site__negative__2Q1L_882_A876
-load groups/hmg_site__negative/3CD7_882_A1.mol2, hmg_site__negative__3CD7_882_A1
 load groups/hmg_site__negative/3CDA_8HI_C4.mol2, hmg_site__negative__3CDA_8HI_C4
 load groups/hmg_site__negative/3CDB_9HI_D3.mol2, hmg_site__negative__3CDB_9HI_D3
 load groups/hmg_site__negative/1HWL_FBI_A2.mol2, hmg_site__negative__1HWL_FBI_A2

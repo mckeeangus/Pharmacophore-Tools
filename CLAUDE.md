@@ -90,21 +90,18 @@ The "known actives" work is built in stages; each writes tracked deliverables un
 1. **Scrape & catalogue** (`scripts/scrape_pdb_ligands.py`, `src/pharmpipe/{pdb,catalogue}/`) — verified UniProt accessions, dated RCSB search, curated ligands, bound-pose mol2. Outputs: `unique_ligands.csv`, `per_structure.csv`, `resolved.json`, `ligand_catalogue.md`. **Done.**
 2. **Site filtering & alignment** (`scripts/align_sites.py`, `src/pharmpipe/sites/`, `config/sites.yaml`) — keep only poses at each system's relevant site, superpose into one reference frame, per-target `.pse`. Output: `site_filter.csv`. **Done.**
 3. **Effect-based grouping with pocket verification** (`scripts/group_effects.py`, `src/pharmpipe/groups/`, `config/pockets.yaml` + `config/efficacy.yaml`) — geometry-verified pockets (native contact fingerprints), efficacy signs from curated external pharmacology, partitioned into **cells = (pocket × efficacy)**. Outputs: `effect_groups.json`, `<slug>_stage3_report.md`, `groups/<pocket>__<efficacy>/` mol2 sets + per-cell sessions, `<slug>_grouped.pse`, `review/{separate_state,unknown,quarantine}/`. Three-stage report in `catalogue/run_summary.md`. **Done.** Stage 3 is offline (cached structures + catalogue); efficacy/pocket-naming knowledge lives in config, never in code. Quarantined poses, separate-state ligands, and `unknown` efficacy are first-class review outputs — not force-bucketed.
+   - **3.3 — efficacy resolution + datasets** (`scripts/resolve_efficacy.py`, `src/pharmpipe/groups/{resolve,realign}.py`). `resolve-efficacy` (network → login node; caches `data/_cache/chembl/`) resolves previously-`unknown` ligands via HET→InChIKey (offline, from cached RCSB chem-comp) → ChEMBL parent → subtype-specific mechanism → action_type → sign, writing `catalogue/stage3_efficacy_resolved.csv` (consumed by the loader **below** curated config; SERDs/degraders auto-route to separate-state; conflicting subtypes stay `unknown`). adrb2 is collapsed to one orthosteric pocket; GABA-A uses `realign_global` to place the benzodiazepine vs orthosteric sites at their true subunit interfaces on the pentamer reference. Cell/grouped sessions show one representative pose per ligand; pose pools live under `catalogue/<slug>/datasets/{all_poses,representative}/` and the cross-target master `catalogue/datasets/`. **Done.**
 
 ---
 
-## CURRENT OBJECTIVE — PDB ligand scrape & catalogue
+## Known-actives reference (Stages 1–3.3 complete)
 
-(Trim this section once complete; everything above is durable.)
-
-Scaffold the project directory per the layout above, then build and run a reproducible scraper that, for each target below:
-
-1. **Resolve the target to verified UniProt accession(s).** Do not trust the hints in the table below — confirm each programmatically against UniProt/RCSB and record the accession(s) used. Record the **search date** alongside results (structure counts must be reproducible from dated, UniProt-keyed RCSB advanced searches).
-2. **Query RCSB for all ligand-bound structures** mapped to those accession(s), using the RCSB Search API (consider the `rcsbsearchapi` package). Capture per structure: PDB ID, resolution, method (X-ray/cryo-EM/etc.), bound ligand HET codes, and the UniProt mapping.
-3. **Curate ligands.** Filter out crystallographic additives, buffers, cryoprotectants, and waters using a maintained exclusion list (e.g. HOH, GOL, EDO, PEG/PG4, SO4, PO4, ACT, DMS, MES, TRS, FMT, CL, NA, K, etc.). **Keep genuine catalytic cofactors** (e.g. the Zn²⁺ in carbonic anhydrase, heme in COX-2) — do not blanket-drop all metals/ions; treat cofactors as ligands and flag borderline cases in a report rather than silently dropping.
-4. **Build the catalogue document.** Per target, produce (a) a **unique-ligand** table — HET code, chemical name, SMILES, count of structures it appears in, a representative PDB ID — and (b) a **per-structure** table mapping PDB ID → ligand(s). Output machine-readable CSV (tracked, under `catalogue/`) **and** a neat combined human-readable summary (`catalogue/ligand_catalogue.md`, one section per target). An optional `.xlsx` workbook (one sheet per target) is welcome.
-5. **Extract bound ligands as mol2** for PyMOL. Extract the **actual bound-pose instance coordinates** from each structure (these are what matter for pharmacophore work — NOT the idealised CCD coordinates). Assign correct bond orders using the RCSB Chemical Component Dictionary entry for each HET code as a template (RDKit `AssignBondOrdersFromTemplate`), falling back to OpenBabel perception only when no template applies; log fallbacks. Write one mol2 per bound instance, named `<PDBID>_<HET>_<chain><resseq>.mol2`, under `data/targets/<slug>/ligands/mol2/`. Make "all instances" vs "one representative per unique ligand" a config switch (default: all instances).
-6. **Organise & report.** Per-target subdirectories as in the layout. Emit a run summary: structures found, ligands kept vs excluded, mol2 files written, and any failures.
+The known-actives assembly (scrape → site-filter/align → effect grouping → efficacy
+resolution + datasets) is **done** for all targets below; see the stages list above.
+The downstream DrugCLIP→GNINA→features→model pipeline remains **out of scope** — do
+not build it. The target table is retained as durable reference (organism scope,
+surrogate caveats); UniProt hints were verified at scrape time and recorded in each
+`catalogue/<slug>/resolved.json`.
 
 ### Targets
 
@@ -125,9 +122,13 @@ UniProt hints below are **starting points to VERIFY**, not authoritative. Resolv
 | GABA-A receptor | GABRA1 P14867, GABRG2 P18507, + β subunits | Pentameric, **many subunit compositions**, mostly cryo-EM; lots of lipids/detergents to filter. Decide subunit scope (e.g. all human GABA-A-subunit-mapped structures, or a specific αβγ composition). |
 | Norepinephrine transporter (NET) | SLC6A2 P23975 | Confirmed target: the **norepinephrine/noradrenaline transporter (NET, gene SLC6A2)** — the SLC6 transporter, *not* an adrenergic receptor. Human NET structures are recent cryo-EM (often inhibitor-bound). Note the **surrogate caveat**: *Drosophila* dopamine transporter (dDAT) has historically been used as a structural surrogate for SLC6 transporters including NET — include dDAT-/surrogate-mapped structures only if explicitly wanted, and label them as surrogates (cf. AChBP for nAChR). |
 
-### Definition of done
+### Resolved scope decisions (durable)
 
-- `pixi install` succeeds (core/dev); scraper runs via `pixi run scrape-pdb-ligands --config config/targets.yaml`.
-- For each confirmed target: verified UniProt accession(s) + dated search recorded; CSV + markdown catalogue produced under `catalogue/`; bound-pose mol2 files written under `data/targets/<slug>/ligands/mol2/` and openable in PyMOL.
-- `data/` is gitignored; `catalogue/` is tracked. Run summary printed and logged.
-- Before any bulk download, **confirm the remaining ambiguous targets** (AChE/COX-2 species, carbonic anhydrase isoform, GABA-A subunit scope) with the user. What needs to be achieved next: Do not move forward with implementing the pipeline, we are still looking at known actives. Organise those structures that we have found such that only ligands that bind at the relevant location on the protein are included. For instance, for nAChR, we should only include ligands that bind where acetycholine binds. Furthermore, the mol2 files should be aligned with a structure (one for each model system) which can then be used to compare each one relative to one another. Organise each model system into a pymol visualisation file, for ease of visual comparison.
+- **Organism scope:** human where possible; surrogates included only as labelled
+  gap-fillers (AChBP for nAChR, dDAT for NET) — see config + `resolved.json`.
+- Species/isoform/subunit ambiguities (AChE, COX-2, carbonic anhydrase isoform,
+  GABA-A composition) were resolved at scrape time and are recorded per target.
+- `pixi install` succeeds (core/dev/viz); the three stages run via
+  `pixi run scrape-pdb-ligands` → `align-sites` → `resolve-efficacy` (network) →
+  `group-effects` (offline; `-e viz` to bake `.pse`). `data/` is gitignored,
+  `catalogue/` is the tracked deliverable.

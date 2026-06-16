@@ -1,4 +1,4 @@
-# atp_site__negative — 95 molecules (reference frame; protein omitted)
+# atp_site__negative — 93 molecules (reference frame; protein omitted)
 reinitialize
 bg_color white
 set valence, 1
@@ -11,7 +11,6 @@ load 4EK8_16K_A301.mol2, 4EK8_16K_A301
 load 3SW4_18K_A299.mol2, 3SW4_18K_A299
 load 3RM6_18Z_A478.mol2, 3RM6_18Z_A478
 load 4EK4_1CK_A301.mol2, 4EK4_1CK_A301
-load 4KD1_1QK_A302.mol2, 4KD1_1QK_A302
 load 8FOW_1QK_A303.mol2, 8FOW_1QK_A303
 load 4FKO_20K_A301.mol2, 4FKO_20K_A301
 load 6Q4F_26D_A301.mol2, 6Q4F_26D_A301
@@ -85,7 +84,6 @@ load 3QQF_X07_A543.mol2, 3QQF_X07_A543
 load 3QQJ_X11_A300.mol2, 3QQJ_X11_A300
 load 3QRT_X14_A535.mol2, 3QRT_X14_A535
 load 3QX2_X63_A300.mol2, 3QX2_X63_A300
-load 3QXP_X64_A300.mol2, 3QXP_X64_A300
 load 4GCJ_X64_A305.mol2, 4GCJ_X64_A305
 load 3QXO_X65_A668.mol2, 3QXO_X65_A668
 load 3QZG_X67_A471.mol2, 3QZG_X67_A471

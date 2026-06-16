@@ -54,11 +54,14 @@ targets:
 
   adrb2:
     primary_label: orthosteric
+    collapse_to_primary: true
     expected_pockets: [orthosteric]
     notes: >-
-      A single orthosteric catecholamine pocket is expected; a distinct secondary
-      cluster (e.g. a long-acting agonist exosite) is a finding to review, not to
-      force into the orthosteric label.
+      All kept poses bind the single orthosteric catecholamine pocket; fusion-
+      construct renumbering (T4L/BRIL) and long-acting-agonist exosite reach
+      fragment the geometric clusters across structures, so they are merged to one
+      orthosteric label. The Stage-2 distance filter already restricts kept poses
+      to this site.
 
   cdk2:
     primary_label: atp_site
@@ -95,6 +98,7 @@ targets:
 
   gaba_a:
     primary_label: orthosteric
+    realign_global: true
     expected_pockets: [orthosteric, bzd_site]
     pockets:
       bzd_site:
@@ -102,7 +106,9 @@ targets:
     notes: >-
       Orthosteric GABA site (beta(+)/alpha(-)) vs the benzodiazepine site
       (alpha(+)/gamma(-)). The BZ site is the stress-test split: PAM vs neutral
-      antagonist vs inverse agonist.
+      antagonist vs inverse agonist. realign_global places each pose at its true
+      subunit interface on the pentamer reference (the Stage-2 local fit stacks
+      the BZ site onto the orthosteric one).
 
   net_slc6a2:
     primary_label: central_s1

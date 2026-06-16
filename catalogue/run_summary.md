@@ -42,21 +42,23 @@ Per-target detail: `catalogue/<slug>/site_filter.csv` (every instance, its statu
 
 ## Stage 3 — effect-based grouping (pocket-verified)
 
-_Stage 3 run 2026-06-15._ Each pose is assigned a **geometry-verified pocket** (native contact fingerprints, not the coarse Stage-2 distance) and an **efficacy sign** from curated external pharmacology (`config/efficacy.yaml`). A cell = (pocket × efficacy). Covalent/reactivator/degrader/substrate ligands are routed to a separate-state track; unconfident efficacy and out-of-pocket poses are first-class review outputs, never force-bucketed.
+_Stage 3 run 2026-06-16._ Each pose is assigned a **geometry-verified pocket** (native contact fingerprints, not the coarse Stage-2 distance) and an **efficacy sign** from curated external pharmacology (`config/efficacy.yaml`). A cell = (pocket × efficacy). Covalent/reactivator/degrader/substrate ligands are routed to a separate-state track; unconfident efficacy and out-of-pocket poses are first-class review outputs, never force-bucketed. **Stage 3.3** folds in efficacy resolved from ChEMBL for previously-`unknown` ligands (`catalogue/stage3_efficacy_resolved.csv`, used only below curated config). Pseudo-symmetric multi-pocket targets (GABA-A) are re-aligned onto the reference at their true subunit interface so the benzodiazepine and orthosteric sites are spatially distinct in the session. Cell/grouped sessions show one representative pose per ligand.
 
 | Target | Pockets found | Cells | In cells | Separate-state | Unknown eff. | Quarantined |
 |--------|---------------|------:|---------:|---------------:|-------------:|------------:|
 | nachr_a4b2 | orthosteric | 2 | 31 | 0 | 64 | 0 |
-| esr1 | lbp | 2 | 19 | 0 | 81 | 0 |
+| esr1 | lbp | 2 | 23 | 3 | 74 | 0 |
 | hiv1_protease | active_site | 1 | 48 | 0 | 0 | 0 |
-| adrb2 | orthosteric, secondary_1 | 4 | 11 | 0 | 84 | 5 |
+| adrb2 | orthosteric | 3 | 85 | 1 | 11 | 3 |
 | cdk2 | atp_site | 1 | 95 | 3 | 0 | 2 |
 | ca2 | active_site | 1 | 87 | 12 | 0 | 1 |
 | ache | gorge | 1 | 18 | 66 | 0 | 0 |
 | cavab | dhp_site | 1 | 5 | 0 | 0 | 1 |
 | cox2 | cox_channel | 1 | 5 | 0 | 0 | 1 |
 | hmgcr | hmg_site | 1 | 19 | 3 | 0 | 0 |
-| gaba_a | bzd_site, orthosteric | 4 | 75 | 0 | 21 | 1 |
-| net_slc6a2 | central_s1 | 2 | 25 | 0 | 25 | 0 |
+| gaba_a | bzd_site, orthosteric | 4 | 93 | 0 | 3 | 1 |
+| net_slc6a2 | central_s1 | 2 | 29 | 0 | 21 | 0 |
 
 Per-target detail: `catalogue/<slug>/<slug>_stage3_report.md`, the cell mol2 in `catalogue/<slug>/groups/`, `effect_groups.json`, and the recoloured session `catalogue/<slug>/<slug>_grouped.pse`.
+
+**Pose datasets** (pharmacophore inputs): each target carries `catalogue/<slug>/datasets/{all_poses,representative}/` (every kept pose vs one per ligand), with a cross-target master under `catalogue/datasets/` (808 poses / 500 representative). Each set ships a `.pml` + baked `.pse`.

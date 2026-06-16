@@ -1,11 +1,11 @@
 # Stage 3 — effect groups: gaba_a
 
-_Generated 2026-06-15. Cell = (verified pocket) × (efficacy sign)._
+_Generated 2026-06-16. Cell = (verified pocket) × (efficacy sign)._
 
 - Poses carried from Stage 2: **97**
-- In partition cells: **75** across **4** cells
+- In partition cells: **93** across **4** cells
 - Routed to separate-state track: **0**
-- Efficacy unknown (review): **21**
+- Efficacy unknown (review): **3**
 - Quarantined (not in pocket of interest): **1**
 
 ## Pocket verification
@@ -18,7 +18,7 @@ _Generated 2026-06-15. Cell = (verified pocket) × (efficacy sign)._
 | 1 | bzd_site | 7 | assigned | ASN60, GLN204, HIS102, PHE100, PHE77, SER159, SER205, SER206 |
 | 2 | _quarantined_ | 1 | quarantined | ASP43, GLN64, GLU183, LYS229, PHE125, PHE234, SER184, SER230 |
 
-_Notes: Orthosteric GABA site (beta(+)/alpha(-)) vs the benzodiazepine site (alpha(+)/gamma(-)). The BZ site is the stress-test split: PAM vs neutral antagonist vs inverse agonist._
+_Notes: Orthosteric GABA site (beta(+)/alpha(-)) vs the benzodiazepine site (alpha(+)/gamma(-)). The BZ site is the stress-test split: PAM vs neutral antagonist vs inverse agonist. realign_global places each pose at its true subunit interface on the pentamer reference (the Stage-2 local fit stacks the BZ site onto the orthosteric one)._
 
 ## Partition cells
 
@@ -27,7 +27,7 @@ _Notes: Orthosteric GABA site (beta(+)/alpha(-)) vs the benzodiazepine site (alp
 | `bzd_site__negative` | 1 | 1 | R63 |
 | `bzd_site__neutral` | 1 | 1 | EIE |
 | `bzd_site__positive` | 4 | 3 | 08H, A1ADG, DZP |
-| `orthosteric__positive` | 69 | 2 | ABU, EI7 |
+| `orthosteric__positive` | 87 | 3 | ABU, EI7, HSM |
 
 ## Separate-state ligands (routed out of cells)
 
@@ -35,28 +35,10 @@ _Notes: Orthosteric GABA site (beta(+)/alpha(-)) vs the benzodiazepine site (alp
 
 ## Efficacy review list
 
-**Unknown efficacy** (21):
+**Unknown efficacy** (3):
 
 - `BEN` (4COF_BEN_E500, primary)
 - `BUA` (9HAA_BUA_B601, primary)
-- `HSM` (6QFA_HSM_E502, primary)
-- `HSM` (7A5V_HSM_A5408, primary)
-- `HSM` (7PBD_HSM_B601, primary)
-- `HSM` (7PBZ_HSM_C601, primary)
-- `HSM` (7QN7_HSM_C503, primary)
-- `HSM` (7QN8_HSM_B501, primary)
-- `HSM` (7QN9_HSM_B501, primary)
-- `HSM` (7QNC_HSM_C503, primary)
-- `HSM` (7QND_HSM_B501, primary)
-- `HSM` (8PVB_HSM_A5406, primary)
-- `HSM` (9FEU_HSM_E501, primary)
-- `HSM` (9FEX_HSM_A502, primary)
-- `HSM` (9FEY_HSM_B501, primary)
-- `HSM` (9FEZ_HSM_B501, primary)
-- `HSM` (9FF0_HSM_C501, primary)
-- `HSM` (9FF1_HSM_D501, primary)
-- `HSM` (9FF2_HSM_E501, primary)
-- `HSM` (9FG6_HSM_E501, primary)
 - `IYJ` (9DRX_IYJ_D402, primary)
 
 ## Quarantined poses
@@ -67,4 +49,4 @@ _Notes: Orthosteric GABA site (beta(+)/alpha(-)) vs the benzodiazepine site (alp
 
 ---
 
-Cell mol2 sets: `groups/<pocket>__<efficacy>/`. Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `gaba_a_grouped.pse` (all cells) and per-cell `.pse` in each folder.
+Cell mol2 sets: `groups/<pocket>__<efficacy>/` (one representative pose per ligand). Review sets: `review/{separate_state,unknown,quarantine}/`. Sessions: `gaba_a_grouped.pse` (all cells) and per-cell `.pse`. Pose pools: `datasets/all_poses/` (every kept pose) and `datasets/representative/` (one per ligand), each with a `.pml` + `.pse`.

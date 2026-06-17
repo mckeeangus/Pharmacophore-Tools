@@ -4,6 +4,7 @@ reinitialize
 bg_color white
 set valence, 1
 
+load groups/orthosteric__negative/9RKF_A1JHU_A520.mol2, orthosteric__negative__9RKF_A1JHU_A520
 load groups/orthosteric__negative/2RH1_CAU_A408.mol2, orthosteric__negative__2RH1_CAU_A408
 load groups/orthosteric__negative/6PS3_CVD_A1201.mol2, orthosteric__negative__6PS3_CVD_A1201
 load groups/orthosteric__negative/6PS4_JRZ_A1201.mol2, orthosteric__negative__6PS4_JRZ_A1201
@@ -12,17 +13,22 @@ load groups/orthosteric__negative/6PS5_SNP_A1201.mol2, orthosteric__negative__6P
 load groups/orthosteric__negative/6PS6_TIM_A1201.mol2, orthosteric__negative__6PS6_TIM_A1201
 group orthosteric__negative, orthosteric__negative__*
 color salmon, orthosteric__negative and elem C
+load groups/orthosteric__neutral/8W1V_A1AE2_A1201.mol2, orthosteric__neutral__8W1V_A1AE2_A1201
+load groups/orthosteric__neutral/9W3F_BER_A1201.mol2, orthosteric__neutral__9W3F_BER_A1201
 load groups/orthosteric__neutral/6PS2_JTZ_A1201.mol2, orthosteric__neutral__6PS2_JTZ_A1201
 group orthosteric__neutral, orthosteric__neutral__*
 color yellow, orthosteric__neutral and elem C
 load groups/orthosteric__positive/7DHI_68H_R401.mol2, orthosteric__positive__7DHI_68H_R401
+load groups/orthosteric__positive/9BUY_A1ASM_R504.mol2, orthosteric__positive__9BUY_A1ASM_R504
 load groups/orthosteric__positive/4LDO_ALE_A1402.mol2, orthosteric__positive__4LDO_ALE_A1402
 load groups/orthosteric__positive/8JJL_DZQ_A501.mol2, orthosteric__positive__8JJL_DZQ_A501
 load groups/orthosteric__positive/8GG0_G1I_R501.mol2, orthosteric__positive__8GG0_G1I_R501
+load groups/orthosteric__positive/7XK9_GJ6_A1401.mol2, orthosteric__positive__7XK9_GJ6_A1401
 load groups/orthosteric__positive/8JJ8_H98_F501.mol2, orthosteric__positive__8JJ8_H98_F501
 load groups/orthosteric__positive/6MXT_K5Y_A1401.mol2, orthosteric__positive__6MXT_K5Y_A1401
 load groups/orthosteric__positive/9LW5_LDP_R401.mol2, orthosteric__positive__9LW5_LDP_R401
 load groups/orthosteric__positive/4LDE_P0G_A1401.mol2, orthosteric__positive__4LDE_P0G_A1401
+load groups/orthosteric__positive/4LDL_XQC_A1401.mol2, orthosteric__positive__4LDL_XQC_A1401
 group orthosteric__positive, orthosteric__positive__*
 color green, orthosteric__positive and elem C
 show sticks

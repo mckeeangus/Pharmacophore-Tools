@@ -1,6 +1,6 @@
 # Stage 3 — effect groups: ca2
 
-_Generated 2026-06-16. Cell = (verified pocket) × (efficacy sign)._
+_Generated 2026-06-18. Cell = (verified pocket) × (efficacy sign)._
 
 - Poses carried from Stage 2: **100**
 - In partition cells: **87** across **1** cells

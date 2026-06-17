@@ -1,6 +1,6 @@
 # Stage 3 — effect groups: gaba_a
 
-_Generated 2026-06-16. Cell = (verified pocket) × (efficacy sign)._
+_Generated 2026-06-18. Cell = (verified pocket) × (efficacy sign)._
 
 - Poses carried from Stage 2: **97**
 - In partition cells: **93** across **4** cells

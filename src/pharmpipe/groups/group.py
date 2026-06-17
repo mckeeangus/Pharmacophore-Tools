@@ -288,7 +288,42 @@ def _assign_clusters(poses: list[Pose], pdef: PocketDef,
             poses[i].pocket = label
             poses[i].pocket_status = status
         clusters.append(PocketCluster(cid, label, status, idx, consensus, review))
+    _apply_marker_overrides(poses, clusters, pdef, fps)
     return clusters
+
+
+def _apply_marker_overrides(poses: list[Pose], clusters: list[PocketCluster],
+                            pdef: PocketDef, fps: list[frozenset[str]]) -> None:
+    """Place a pose at a curated secondary site when geometry cannot separate it.
+
+    A HET listed as a ``marker_het`` for a secondary pocket is, by curator
+    knowledge, a diagnostic of that site. Usually the site is also a distinct
+    geometric cluster and is named at the cluster level. But some secondary sites
+    share their contact residues with the primary pocket (e.g. the nAChR accessory
+    alpha4(+)/alpha4(-) interface reuses the orthosteric aromatic box), so contact
+    fingerprints merge them; under ``collapse_to_primary`` the pose would then be
+    mislabelled as primary. This per-pose override reassigns only such marker poses
+    (those whose current label differs from their marker label) into a dedicated
+    cluster, leaving non-marker poses — and already-correct marker clusters — alone.
+    """
+    moved: dict[str, list[int]] = defaultdict(list)
+    for i, p in enumerate(poses):
+        mlabel = pdef.label_for_markers({p.het_code.upper()})
+        if mlabel and p.pocket != mlabel:
+            p.pocket = mlabel
+            p.pocket_status = ASSIGNED
+            moved[mlabel].append(i)
+    if not moved:
+        return
+    moved_all = {i for idx in moved.values() for i in idx}
+    for c in clusters:
+        c.pose_indices = [i for i in c.pose_indices if i not in moved_all]
+    clusters[:] = [c for c in clusters if c.pose_indices]
+    next_id = max((c.cluster_id for c in clusters), default=-1) + 1
+    for label, idx in sorted(moved.items()):
+        consensus = pocket.consensus_residues(fps, idx)
+        clusters.append(PocketCluster(next_id, label, ASSIGNED, idx, consensus, review=False))
+        next_id += 1
 
 
 # --- top-level ---------------------------------------------------------------

@@ -35,13 +35,19 @@ targets:
   nachr_a4b2:
     primary_label: orthosteric
     collapse_to_primary: true
-    expected_pockets: [orthosteric]
+    expected_pockets: [orthosteric, accessory]
+    pockets:
+      accessory:
+        marker_hets: [NSE]      # NS9283 PAM at the alpha4(+)/alpha4(-) interface
     notes: >-
-      The Stage-2 8 A filter keeps only orthosteric-site poses; native numbering
-      then fragments that single site across human alpha4/beta2 and the AChBP
+      The Stage-2 8 A filter keeps only subunit-interface poses; native numbering
+      then fragments the orthosteric site across human alpha4/beta2 and the AChBP
       surrogates (Lymnaea/Aplysia), so geometric clusters are merged to one
-      orthosteric label. Species/subtype is recorded per pose. A TMD allosteric
-      site, if ever kept, would need its own marker here.
+      orthosteric label. Species/subtype is recorded per pose. The accessory
+      alpha4(+)/alpha4(-) PAM site (NS9283) reuses the orthosteric aromatic box, so
+      contact fingerprints cannot separate it; the NSE marker overrides its label
+      to `accessory` per pose so the allosteric modulator is never pooled with the
+      orthosteric agonists.
 
   esr1:
     primary_label: lbp

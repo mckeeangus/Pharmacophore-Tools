@@ -1771,8 +1771,8 @@
       "efficacy": "unknown",
       "track": "reversible",
       "cell": null,
-      "efficacy_source": "",
-      "efficacy_note": "no annotation",
+      "efficacy_source": "literature",
+      "efficacy_note": "butanoic acid additive \u2014 review/exclude; deposit title",
       "separate_state_reason": "",
       "mapping": "primary",
       "subtype_accessions": [
@@ -2298,8 +2298,8 @@
       "efficacy": "unknown",
       "track": "reversible",
       "cell": null,
-      "efficacy_source": "",
-      "efficacy_note": "no annotation",
+      "efficacy_source": "literature",
+      "efficacy_note": "lamotrigine; allosteric site resolved but no stated direction; PMID 39843743",
       "separate_state_reason": "",
       "mapping": "primary",
       "subtype_accessions": [

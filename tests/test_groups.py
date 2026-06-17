@@ -79,6 +79,39 @@ def test_pockets_markers_and_collapse():
     assert nachr.collapse_to_primary is True
 
 
+def test_nachr_accessory_marker_defined():
+    nachr = load_pockets().get("nachr_a4b2")
+    # NS9283 (NSE) is the diagnostic marker of the accessory PAM site.
+    assert nachr.label_for_markers({"NSE"}) == "accessory"
+    assert "accessory" in nachr.expected_pockets
+
+
+def test_marker_override_pulls_pose_from_collapsed_primary():
+    """A marker HET whose geometry merges with the primary pocket is still placed
+    at its curated secondary site (the nAChR accessory-vs-orthosteric case)."""
+    from pharmpipe.groups.group import _assign_clusters
+    from pharmpipe.groups.pockets import PocketDef, PocketDefaults
+
+    shared = {f"R{i}" for i in range(8)}                    # one geometric cluster
+    poses = [
+        Pose("1AAA", "ACH", "A", "1", Path("a.mol2"), fingerprint=frozenset(shared)),
+        Pose("2BBB", "NCT", "A", "1", Path("b.mol2"), fingerprint=frozenset(shared)),
+        Pose("3CCC", "XRS", "A", "1", Path("c.mol2"), fingerprint=frozenset(shared)),
+        # NS9283 shares the orthosteric aromatic box, so it merges into cluster 0…
+        Pose("4NZB", "NSE", "A", "1", Path("d.mol2"), fingerprint=frozenset(shared)),
+    ]
+    pdef = PocketDef(slug="nachr_a4b2", primary_label="orthosteric",
+                     collapse_to_primary=True, expected_pockets=["orthosteric", "accessory"],
+                     markers={"accessory": ["NSE"]})
+    clusters = _assign_clusters(poses, pdef, PocketDefaults())
+    by_het = {p.het_code: p.pocket for p in poses}
+    assert by_het["ACH"] == "orthosteric"
+    assert by_het["NCT"] == "orthosteric"
+    # …but the curator marker overrides it back out of the primary pocket.
+    assert by_het["NSE"] == "accessory"
+    assert {c.label for c in clusters} == {"orthosteric", "accessory"}
+
+
 def test_every_target_has_pocket_and_efficacy_config():
     pc = load_pockets()
     ec = load_efficacy()

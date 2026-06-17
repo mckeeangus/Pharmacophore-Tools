@@ -91,10 +91,11 @@ The "known actives" work is built in stages; each writes tracked deliverables un
 2. **Site filtering & alignment** (`scripts/align_sites.py`, `src/pharmpipe/sites/`, `config/sites.yaml`) — keep only poses at each system's relevant site, superpose into one reference frame, per-target `.pse`. Output: `site_filter.csv`. **Done.**
 3. **Effect-based grouping with pocket verification** (`scripts/group_effects.py`, `src/pharmpipe/groups/`, `config/pockets.yaml` + `config/efficacy.yaml`) — geometry-verified pockets (native contact fingerprints), efficacy signs from curated external pharmacology, partitioned into **cells = (pocket × efficacy)**. Outputs: `effect_groups.json`, `<slug>_stage3_report.md`, `groups/<pocket>__<efficacy>/` mol2 sets + per-cell sessions, `<slug>_grouped.pse`, `review/{separate_state,unknown,quarantine}/`. Three-stage report in `catalogue/run_summary.md`. **Done.** Stage 3 is offline (cached structures + catalogue); efficacy/pocket-naming knowledge lives in config, never in code. Quarantined poses, separate-state ligands, and `unknown` efficacy are first-class review outputs — not force-bucketed.
    - **3.3 — efficacy resolution + datasets** (`scripts/resolve_efficacy.py`, `src/pharmpipe/groups/{resolve,realign}.py`). `resolve-efficacy` (network → login node; caches `data/_cache/chembl/`) resolves previously-`unknown` ligands via HET→InChIKey (offline, from cached RCSB chem-comp) → ChEMBL parent → subtype-specific mechanism → action_type → sign, writing `catalogue/stage3_efficacy_resolved.csv` (consumed by the loader **below** curated config; SERDs/degraders auto-route to separate-state; conflicting subtypes stay `unknown`). adrb2 is collapsed to one orthosteric pocket; GABA-A uses `realign_global` to place the benzodiazepine vs orthosteric sites at their true subunit interfaces on the pentamer reference. Cell/grouped sessions show one representative pose per ligand; pose pools live under `catalogue/<slug>/datasets/{all_poses,representative}/` and the cross-target master `catalogue/datasets/`. **Done.**
+   - **3.4 — literature efficacy curation** (manual, in a separate Claude session; offline merge back into config). The ChEMBL pass left most structural-biology ligands `unknown` (novel chemotypes with no curated MoA), so their efficacy *direction* was read from each structure's **primary publication** (worklist built by `scripts/make_literature_worklist.py`). 98/158 worklist ligands were resolved and merged into `config/efficacy.yaml` as `source: literature` — the **top** provenance tier (above `prelabelled`/`curated`, then the ChEMBL CSV fallback); PMID + confidence are recorded in each note, and full per-ligand `site`/`pose_source`/PMID provenance lives in `catalogue/{efficacy_curation_README.md,literature_curation_traceability.csv}`. The subtype rule is enforced: ligands characterised only at a different subtype (e.g. α7 not α4β2) stay `unknown`; wrong-target "mismatch" structures (C3aR/TAAR1/D1-D5/DAT pulled into adrb2/net) and additives stay `unknown` and so never enter cells. **Allosteric vs orthosteric is separated geometrically**, not from the `site` field: NS9283 (NSE) is an α4(+)/α4(−) PAM whose contacts merge with the orthosteric aromatic box, so a per-pose **marker override** (`config/pockets.yaml` `accessory.marker_hets: [NSE]`; `group._apply_marker_overrides`) places it in its own `accessory__positive` cell instead of pooling it with orthosteric agonists. Re-run `group-effects` (offline) to propagate; no new pipeline code beyond the marker override + worklist generator. **Done.**
 
 ---
 
-## Known-actives reference (Stages 1–3.3 complete)
+## Known-actives reference (Stages 1–3.4 complete)
 
 The known-actives assembly (scrape → site-filter/align → effect grouping → efficacy
 resolution + datasets) is **done** for all targets below; see the stages list above.
@@ -128,7 +129,9 @@ UniProt hints below are **starting points to VERIFY**, not authoritative. Resolv
   gap-fillers (AChBP for nAChR, dDAT for NET) — see config + `resolved.json`.
 - Species/isoform/subunit ambiguities (AChE, COX-2, carbonic anhydrase isoform,
   GABA-A composition) were resolved at scrape time and are recorded per target.
-- `pixi install` succeeds (core/dev/viz); the three stages run via
+- `pixi install` succeeds (core/dev/viz); the stages run via
   `pixi run scrape-pdb-ligands` → `align-sites` → `resolve-efficacy` (network) →
-  `group-effects` (offline; `-e viz` to bake `.pse`). `data/` is gitignored,
-  `catalogue/` is the tracked deliverable.
+  `group-effects` (offline; `-e viz` to bake `.pse`). Efficacy knowledge in
+  `config/efficacy.yaml` is layered `literature` > `prelabelled` > `curated` >
+  ChEMBL-CSV fallback (Stage 3.4). `data/` is gitignored, `catalogue/` is the
+  tracked deliverable.

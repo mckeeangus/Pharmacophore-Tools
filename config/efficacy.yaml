@@ -6,14 +6,22 @@
 # that knowledge lives; the pipeline only reads it (no efficacy is guessed from
 # structure or ligand names in code).
 #
-# Provenance & honesty:
-#   * The calls below are curator assignments from standard pharmacology
-#     (textbook drug class / IUPHAR-BPS / primary literature) for ligands whose
-#     identity is unambiguous. They MUST be verified against ChEMBL / IUPHAR-BPS
-#     at the relevant subtype before any publication. No database IDs are
-#     fabricated here; `source: curated` denotes a curator assertion.
+# Provenance & honesty (`source:`, highest-confidence first):
+#   * `literature` — Stage 3.4 manual curation: the efficacy direction was read
+#     from the structure's PRIMARY publication (PMID + confidence recorded in the
+#     note). This is the top tier; per-ligand site / pose_source / PMID for every
+#     curated ligand live in `catalogue/literature_curation_traceability.csv`.
+#   * `prelabelled` — verified against RCSB / a known drug identity at scrape time.
+#   * `curated` — curator assignment from standard pharmacology (textbook drug
+#     class / IUPHAR-BPS). MUST be verified at the relevant subtype before
+#     publication. No database IDs are fabricated; `source` denotes the assertion.
+#   * Below all of the above sits the ChEMBL-resolved fallback
+#     (`catalogue/stage3_efficacy_resolved.csv`); an explicit entry here always
+#     wins over it.
 #   * Anything not listed (and with no target `default_efficacy`) is reported as
-#     `unknown` and sent to a review list — never silently bucketed.
+#     `unknown` and sent to a review list — never silently bucketed. Subtype rule:
+#     a sign is never transferred across a subtype/system boundary, so ligands
+#     characterised only at a different subtype stay `unknown`.
 #
 # efficacy: positive | neutral | negative
 #   positive  agonist / PAM / activator / transporter substrate-releaser
@@ -139,6 +147,68 @@ targets:
       AIJ: {efficacy: negative, source: prelabelled, note: "dihydrobenzoxathiin SERM (verify)"}
       AIT: {efficacy: negative, source: prelabelled, note: "dihydrobenzoxathiin SERM (verify)"}
       AIU: {efficacy: negative, source: prelabelled, note: "dihydrobenzoxathiin SERM (verify)"}
+      # Stage 3.4 — literature curation (primary-citation reading; PMID + conf in note).
+      # agonists (estrogenic; no basic side chain)
+      "1HP": {efficacy: positive, source: literature, note: "phenolic estrogen, no side chain; PMID 18344977 (conf: medium)"}
+      EI1:   {efficacy: positive, source: literature, note: "indazolol phenol estrogen; PMID 18344977 (conf: medium)"}
+      KN1:   {efficacy: positive, source: literature, note: "graded estrogenic agonist; PMID 20924370 (conf: medium)"}
+      "458": {efficacy: positive, source: literature, note: "bicyclic phenol estrogen; PMID 16648639 (conf: medium)"}
+      "27L": {efficacy: positive, source: literature, note: "4-tert-octylphenol xenoestrogen; PMID 25260197 (conf: medium)"}
+      "36M": {efficacy: positive, source: literature, note: "propylparaben weak estrogen; PMID 25500867 (conf: medium)"}
+      XDH:   {efficacy: positive, source: literature, note: "tetrachlorobisphenol-A estrogen; PMID 25260197 (conf: medium)"}
+      "5VP": {efficacy: positive, source: literature, note: "thienopyrimidine nonsteroidal estrogen; PMID 35859859 (conf: high)"}
+      "7FZ": {efficacy: positive, source: literature, note: "phenolic environmental-estrogen mimic; PMID 28042045 (conf: medium)"}
+      "7G0": {efficacy: positive, source: literature, note: "phenolic environmental-estrogen mimic; PMID 28042045 (conf: medium)"}
+      ZHB:   {efficacy: positive, source: literature, note: "beta-zearalenol mycoestrogen; deposit title (conf: medium)"}
+      A1ET8: {efficacy: positive, source: literature, note: "zearalenone-type macrolactone estrogen; deposit title (conf: low)"}
+      # antagonists (SERM / antiestrogen, reversible)
+      IOG:   {efficacy: negative, source: literature, note: "2-arylindole SERM; PMID 17289385 (conf: medium)"}
+      C3D:   {efficacy: negative, source: literature, note: "lasofoxifene SERM; deposit title (conf: medium)"}
+      "4Q7": {efficacy: negative, source: literature, note: "OBHS sulfonate-ester antagonist; PMID 27107013 (conf: medium)"}
+      OFB:   {efficacy: negative, source: literature, note: "OBHS sulfonate-ester antagonist; PMID 27107013 (conf: medium)"}
+      OBH:   {efficacy: negative, source: literature, note: "OBHS sulfonate-ester antagonist; PMID 28306507 (conf: medium)"}
+      OB2:   {efficacy: negative, source: literature, note: "OBHS-sulfonamide full antagonist; PMID 27870835 (conf: high)"}
+      OB3:   {efficacy: negative, source: literature, note: "OBHS-sulfonamide full antagonist; PMID 27870835 (conf: high)"}
+      OB6:   {efficacy: negative, source: literature, note: "OBHS-sulfonamide full antagonist; PMID 27870835 (conf: high)"}
+      OB7:   {efficacy: negative, source: literature, note: "OBHS-sulfonamide full antagonist; PMID 27870835 (conf: high)"}
+      OBT:   {efficacy: negative, source: literature, note: "OBHS-sulfonamide full antagonist; PMID 27870835 (conf: high)"}
+      "73I": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "77I": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "7AI": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "7EI": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "7I5": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "7I9": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "7OI": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "7OR": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      "7Q5": {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      L84:   {efficacy: negative, source: literature, note: "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)"}
+      NYU:   {efficacy: negative, source: literature, note: "11b-aminoalkoxyphenyl antiestrogen; PMID 35575456 (conf: medium)"}
+      QYM:   {efficacy: negative, source: literature, note: "11b-aminoalkoxyphenyl antiestrogen; PMID 35575456 (conf: medium)"}
+      R3V:   {efficacy: negative, source: literature, note: "lasofoxifene-derivative SERM; PMID 35575456 (conf: medium)"}
+      RL4:   {efficacy: negative, source: literature, note: "lasofoxifene-derivative SERM; PMID 35575456 (conf: medium)"}
+      TS7:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      TTU:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      TU9:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      TV3:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      TW6:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      TX9:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      TXK:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      TZ3:   {efficacy: negative, source: literature, note: "isoquinoline SERM antagonist; PMID 36517522 (conf: high)"}
+      A1ASN: {efficacy: negative, source: literature, note: "spiro-isoquinoline antiestrogen; PMID 39825366 (conf: medium)"}
+      # degraders / covalent -> separate_state (non-equilibrium geometry)
+      "3YJ": {track: separate_state, source: literature, reason: "ICI164384/fulvestrant-class SERD; deposit title (conf: medium)"}
+      "86V": {track: separate_state, source: literature, reason: "OP-1074 pure antiestrogen / SERD; PMID 29915250 (conf: medium)"}
+      F3D:   {track: separate_state, source: literature, reason: "selective ER covalent antagonist; PMID 29991605 (conf: high)"}
+      ND1:   {track: separate_state, source: literature, reason: "H3B-6545 covalent antagonist (Y537S); deposit title (conf: high)"}
+      GQD:   {track: separate_state, source: literature, reason: "SERD (selective ER downregulator); PMID 26819673 (conf: high)"}
+      QHG:   {track: separate_state, source: literature, reason: "SERD (selective ER downregulator); PMID 26819673 (conf: high)"}
+      VQI:   {track: separate_state, source: literature, reason: "SERD (selective ER downregulator); PMID 26819673 (conf: high)"}
+      H09:   {track: separate_state, source: literature, reason: "zwitterionic SERD-antagonist (degrader); PMID 36727211 (conf: high)"}
+      H8W:   {track: separate_state, source: literature, reason: "tricyclic-indazole SERD-antagonist (degrader); PMID 30640465 (conf: high)"}
+      KE9:   {track: separate_state, source: literature, reason: "AZD9496 SERD (degrader); PMID 26407012 (conf: high)"}
+      QNE:   {track: separate_state, source: literature, reason: "AZD9833/camizestrant SERD (degrader); PMID 32910656 (conf: high)"}
+      LRQ:   {track: separate_state, source: literature, reason: "ER degrader (SERD); PMID 31620239 (conf: high)"}
+      LVH:   {track: separate_state, source: literature, reason: "ER degrader (SERD); PMID 31620239 (conf: high)"}
 
   adrb2:
     class: multi_effect
@@ -164,6 +234,15 @@ targets:
       CVD: {efficacy: negative, source: prelabelled, note: "carvedilol, Gs inverse agonist (arrestin-biased)"}
       SNP: {efficacy: negative, source: prelabelled, note: "propranolol (likely) — verify HET-code identity"}
       ERC: {track: separate_state, source: prelabelled, reason: "covalent tethered agonist (covalent)"}
+      # Stage 3.4 — literature curation (PMID + conf in note). Mismatched structures
+      # (C3aR/D1/D5/TAAR1) and methamphetamine left `unknown` — see traceability CSV.
+      A1ASM: {efficacy: positive, source: literature, note: "catecholamine agonist (salmeterol-like), active state; PMID 40106559 (conf: medium)"}
+      GJ6:   {efficacy: positive, source: literature, note: "constrained catecholamine agonist, beta2-selective; PMID 37059717 (conf: medium)"}
+      XQC:   {efficacy: positive, source: literature, note: "catecholamine agonist, active-state structure; PMID 24056936 (conf: high)"}
+      A1JHU: {efficacy: negative, source: literature, note: "photoazolol-1; dark/trans state inverse agonist; PMID 41848496 (conf: high)"}
+      A1AE2: {efficacy: neutral,  source: literature, note: "homobivalent bitopic ligand from (S)-alprenolol; PMID 38952152 (conf: medium)"}
+      BER:   {efficacy: neutral,  source: literature, note: "berberine, beta2AR antagonist in screen; PMID 42129146 (conf: medium)"}
+      "35V": {track: separate_state, source: literature, reason: "covalent thiol-tethered catechol agonist; PMID 25006259 (conf: high)"}
 
   nachr_a4b2:
     class: multi_effect
@@ -184,6 +263,30 @@ targets:
       PHN: {efficacy: neutral,  note: "1,10-phenanthroline, antagonist"}
       # Stage 3.3 — crystallographic additive, not a functional ligand: exclude.
       GLY: {efficacy: unknown, source: prelabelled, note: "glycine additive — exclude from cells"}
+      # Stage 3.4 — literature curation at the alpha4beta2 subtype (PMID + conf in note).
+      # alpha7-only / fragment / mismatch ligands stay `unknown` — see traceability CSV.
+      # orthosteric agonists
+      "09O": {efficacy: positive, source: literature, note: "diazepane-pyridine a4b2 agonist; PMID 22170047 (conf: high)"}
+      "09P": {efficacy: positive, source: literature, note: "diazepane-pyridine a4b2 agonist; PMID 22170047 (conf: high)"}
+      "09Q": {efficacy: positive, source: literature, note: "diazepane-pyridine a4b2 agonist; PMID 22170047 (conf: high)"}
+      "09R": {efficacy: positive, source: literature, note: "diazepane-pyridine a4b2 agonist; PMID 22170047 (conf: high)"}
+      "09S": {efficacy: positive, source: literature, note: "diazepane-pyridine a4b2 agonist; PMID 22170047 (conf: high)"}
+      "0VC": {efficacy: positive, source: literature, note: "azetidinylmethoxypyridine a4b2 agonist; deposit title (conf: medium)"}
+      "4P0": {efficacy: positive, source: literature, note: "anatoxin-a ketone analog nAChR agonist; PMID 19890000 (conf: medium)"}
+      AN4:   {efficacy: positive, source: literature, note: "anabasine a4b2 agonist; PMID 19696737 (conf: medium)"}
+      LDQ:   {efficacy: positive, source: literature, note: "hosieine-A potent a4b2 agonist; deposit DOI 10.1107 (conf: high)"}
+      N2Y:   {efficacy: positive, source: literature, note: "imidacloprid neonicotinoid agonist (weak at vertebrate a4b2); PMID 25267717 (conf: low)"}
+      TH4:   {efficacy: positive, source: literature, note: "thiacloprid neonicotinoid agonist (weak at vertebrate a4b2); PMID 25267717 (conf: low)"}
+      XRS:   {efficacy: positive, source: literature, note: "novel a4b2 nAChR agonist; PMID 23256554 (conf: high)"}
+      XRX:   {efficacy: positive, source: literature, note: "novel a4b2 nAChR agonist; PMID 23256554 (conf: high)"}
+      # allosteric PAM (binds the accessory alpha4(+)/alpha4(-) interface, NOT orthosteric)
+      NSE:   {efficacy: positive, source: literature, note: "NS9283 a4b2 positive allosteric modulator (accessory site); PMID 24982426 (conf: high)"}
+      # orthosteric competitive antagonists (cyclic-imine / spiroimine toxins, tropisetron)
+      GYN:   {efficacy: neutral, source: literature, note: "gymnodimine-A cyclic-imine competitive antagonist; PMID 20224036 (conf: high)"}
+      SQX:   {efficacy: neutral, source: literature, note: "13-desmethyl spirolide-C antagonist; PMID 20224036 (conf: high)"}
+      ILR:   {efficacy: neutral, source: literature, note: "spiroimine cyclic-imine antagonist; PMID 38667766 (conf: high)"}
+      WSP:   {efficacy: neutral, source: literature, note: "spiroimine cyclic-imine antagonist; PMID 38667766 (conf: high)"}
+      TKT:   {efficacy: neutral, source: literature, note: "tropisetron-class competitive antagonist; PMID 19696737 (conf: medium)"}
 
   gaba_a:
     class: multi_effect
@@ -201,6 +304,9 @@ targets:
       # Stage 3.3 — verified (literature), source=prelabelled.
       HSM: {efficacy: positive, source: prelabelled, note: "histamine, PAM"}
       BEN: {efficacy: unknown, source: prelabelled, note: "benzamidine additive — review/exclude"}
+      # Stage 3.4 — literature curation: documented unknowns (no functional direction).
+      BUA: {efficacy: unknown, source: literature, note: "butanoic acid additive — review/exclude; deposit title"}
+      IYJ: {efficacy: unknown, source: literature, note: "lamotrigine; allosteric site resolved but no stated direction; PMID 39843743"}
 
   ca2:
     class: multi_effect
@@ -236,3 +342,19 @@ targets:
       XEF:   {efficacy: negative, source: prelabelled, note: "ziprasidone, reuptake inhibitor"}
       Y60:   {efficacy: negative, source: prelabelled, note: "bupropion, reuptake inhibitor"}
       A1D9Y: {efficacy: negative, source: prelabelled, note: "reboxetine, reuptake inhibitor"}
+      # Stage 3.4 — literature curation (all reuptake inhibitors -> negative; PMID + conf).
+      # dDAT surrogate + chimera/DAT-only structures left `unknown` — see traceability CSV.
+      "41X": {efficacy: negative, source: literature, note: "reboxetine selective NET reuptake inhibitor; PMID 25961798 (conf: high)"}
+      "42F": {efficacy: negative, source: literature, note: "RTI-55/beta-CIT cocaine-analog inhibitor; PMID 25970245 (conf: medium)"}
+      "42L": {efficacy: negative, source: literature, note: "CFT/WIN-35428 cocaine-analog inhibitor; PMID 25970245 (conf: medium)"}
+      "68P": {efficacy: negative, source: literature, note: "escitalopram occupies S1, obstructs transport; PMID 39048818 (conf: high)"}
+      A1D5S: {efficacy: negative, source: literature, note: "vanoxerine (GBR-12909) DAT/NET inhibitor; PMID 41138730 (conf: high)"}
+      A1EBN: {efficacy: negative, source: literature, note: "DrugCLIP-identified novel NET inhibitor; PMID 41505557 (conf: high)"}
+      A1EBO: {efficacy: negative, source: literature, note: "DrugCLIP-identified novel NET inhibitor; PMID 41505557 (conf: high)"}
+      A1EFR: {efficacy: negative, source: literature, note: "aryloxypropanolamine-piperazine NET inhibitor; PMID 41138730 (conf: low)"}
+      A1LX3: {efficacy: negative, source: literature, note: "maprotiline NET reuptake inhibitor; PMID 38750358 (conf: high)"}
+      A1LX5: {efficacy: negative, source: literature, note: "nomifensine NE/DA reuptake inhibitor; PMID 38750358 (conf: high)"}
+      A1LX6: {efficacy: negative, source: literature, note: "nefopam monoamine reuptake inhibitor; PMID 38750358 (conf: high)"}
+      F0F:   {efficacy: negative, source: literature, note: "milnacipran SNRI NET inhibitor; PMID 33850134 (conf: high)"}
+      F1U:   {efficacy: negative, source: literature, note: "venlafaxine-class SNRI NET inhibitor; PMID 33850134 (conf: high)"}
+      YNT:   {efficacy: negative, source: literature, note: "radafaxine (hydroxybupropion) reuptake inhibitor; PMID 39143211 (conf: high)"}

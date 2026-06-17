@@ -1,26 +1,12 @@
-# unknown — 18 molecules (reference frame; protein omitted)
+# unknown — 4 molecules (reference frame; protein omitted)
 reinitialize
 bg_color white
 set valence, 1
 
 load 7WLW_1WR_A704.mol2, 7WLW_1WR_A704
-load 4XNX_41X_A707.mol2, 4XNX_41X_A707
-load 4XPF_42F_A703.mol2, 4XPF_42F_A703
 load 4XPH_42J_A602.mol2, 4XPH_42J_A602
-load 4XPG_42L_A701.mol2, 4XPG_42L_A701
-load 8I3V_68P_A701.mol2, 8I3V_68P_A701
 load 7WGT_9BC_A701.mol2, 7WGT_9BC_A701
-load 9KDH_A1D5S_B709.mol2, 9KDH_A1D5S_B709
-load 9JEL_A1EBN_A701.mol2, 9JEL_A1EBN_A701
-load 9JF3_A1EBO_A701.mol2, 9JF3_A1EBO_A701
-load 9KE3_A1EFR_B707.mol2, 9KE3_A1EFR_B707
 load 9EUO_A1H8F_A701.mol2, 9EUO_A1H8F_A701
-load 8Y8Z_A1LX3_E701.mol2, 8Y8Z_A1LX3_E701
-load 8Y91_A1LX5_A701.mol2, 8Y91_A1LX5_A701
-load 8Y90_A1LX6_A701.mol2, 8Y90_A1LX6_A701
-load 6M3Z_F0F_A701.mol2, 6M3Z_F0F_A701
-load 6M47_F1U_A608.mol2, 6M47_F1U_A608
-load 8XB2_YNT_A702.mol2, 8XB2_YNT_A702
 show sticks
 hide everything, hydro
 util.cbag *

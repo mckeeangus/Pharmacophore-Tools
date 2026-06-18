@@ -1,1 +1,1 @@
-"""Downstream stage (scaffold only): RDKit pharmacophore-feature extraction."""
+"""Next stage (scaffold): RDKit pharmacophore-feature extraction from grouped poses."""

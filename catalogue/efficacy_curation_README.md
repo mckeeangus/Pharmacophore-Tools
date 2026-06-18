@@ -2,8 +2,9 @@
 
 ## What this is
 
-Per-ligand **efficacy direction** for 158 co-crystallised ligands drawn from
-`catalogue/literature_worklist.csv`, assigned by reading each structure's primary
+Per-ligand **efficacy direction** for 158 co-crystallised ligands (the Stage 3.3
+worklist of still-`unknown` actives, regenerable with
+`scripts/make_literature_worklist.py`), assigned by reading each structure's primary
 citation. This is the manual `efficacy-sign` curation step that feeds the Stage 3
 `(subtype × site/mode × efficacy-sign)` partition key. It answers one question per
 ligand — *which way does this molecule push the target?* — and records two

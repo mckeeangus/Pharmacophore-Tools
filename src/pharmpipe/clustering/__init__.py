@@ -1,1 +1,1 @@
-"""Downstream stage (scaffold only): feature/pose clustering."""
+"""Next stage (scaffold): feature/pose clustering within each (pocket x efficacy) cell."""

@@ -1,1 +1,1 @@
-"""Downstream stage (scaffold only): pharmacophore-model assembly."""
+"""Next stage (scaffold): pharmacophore-model assembly from clustered features."""

@@ -4,7 +4,7 @@ bg_color white
 set valence, 1
 
 load 9FR2_A1IE9_A301.mol2, 9FR2_A1IE9_A301
-load 7QHL_SGM_B503.mol2, 7QHL_SGM_B503
+load 4EOJ_SGM_B502.mol2, 4EOJ_SGM_B502
 show sticks
 hide everything, hydro
 util.cbag *

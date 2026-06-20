@@ -13,7 +13,7 @@
       "4M48_21B_A704",
       "6M38_29E_A601",
       "4XNU_41U_A605",
-      "8YR2_41U_A701",
+      "8YR2_41U_B701",
       "4XNX_41X_A707",
       "4XP5_42F_A602",
       "4XPF_42F_A703",
@@ -25,10 +25,10 @@
       "9JF3_A1EBO_A701",
       "9KE3_A1EFR_B707",
       "8Y8Z_A1LX3_E701",
-      "8Y92_A1LX4_B701",
+      "8Y92_A1LX4_A701",
       "8Z1L_A1LX4_A702",
       "8ZP2_A1LX4_A701",
-      "8Y91_A1LX5_A701",
+      "8Y91_A1LX5_D703",
       "8Y90_A1LX6_A701",
       "4XP4_COC_A706",
       "4XPB_COC_A702",
@@ -45,7 +45,7 @@
       "4XP9_1WE_C706",
       "4XP6_B40_A601",
       "8WTV_E5E_A704",
-      "8Y95_E5E_A701",
+      "8Y95_E5E_D701",
       "4XP1_LDP_A708",
       "8HFG_LDP_A701",
       "6M0Z_LNR_A707",
@@ -195,7 +195,7 @@
     {
       "pdb_id": "8YR2",
       "ligand_id": "41U",
-      "chain": "A",
+      "chain": "B",
       "seqid": "701",
       "pocket": "central_s1",
       "efficacy": "negative",
@@ -211,7 +211,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8YR2_41U_A701.mol2"
+      "mol2": "8YR2_41U_B701.mol2"
     },
     {
       "pdb_id": "4XNX",
@@ -552,7 +552,7 @@
     {
       "pdb_id": "8Y92",
       "ligand_id": "A1LX4",
-      "chain": "B",
+      "chain": "A",
       "seqid": "701",
       "pocket": "central_s1",
       "efficacy": "negative",
@@ -568,7 +568,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8Y92_A1LX4_B701.mol2"
+      "mol2": "8Y92_A1LX4_A701.mol2"
     },
     {
       "pdb_id": "8Z1L",
@@ -615,8 +615,8 @@
     {
       "pdb_id": "8Y91",
       "ligand_id": "A1LX5",
-      "chain": "A",
-      "seqid": "701",
+      "chain": "D",
+      "seqid": "703",
       "pocket": "central_s1",
       "efficacy": "negative",
       "track": "reversible",
@@ -631,7 +631,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8Y91_A1LX5_A701.mol2"
+      "mol2": "8Y91_A1LX5_D703.mol2"
     },
     {
       "pdb_id": "8Y90",
@@ -783,7 +783,7 @@
     {
       "pdb_id": "8Y95",
       "ligand_id": "E5E",
-      "chain": "A",
+      "chain": "D",
       "seqid": "701",
       "pocket": "central_s1",
       "efficacy": "positive",
@@ -799,7 +799,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8Y95_E5E_A701.mol2"
+      "mol2": "8Y95_E5E_D701.mol2"
     },
     {
       "pdb_id": "6M3Z",

@@ -15,7 +15,7 @@ _Generated 2026-06-20. Cell = (verified pocket) × (efficacy sign)._
 | Cluster | Label | Poses | Status | Consensus residues (sample) |
 |--:|---|--:|---|---|
 | 0 | lbp | 32 | assigned | ALA605, ARG611, ASN564, CYS643, CYS736, GLN570, GLN642, GLY567 |
-| 1 | _quarantined_ | 1 | quarantined | ARG41, ASN38, ASN42, ASP213, GLU113, GLY169, HIS164, ILE166 |
+| 1 | _quarantined_ | 1 | quarantined | ARG41, ASN38, ASN42, ASP213, GLN527, GLU113, GLY169, HIS164 |
 
 _Notes: Ligand-binding-domain steroid pocket (the GR analogue of the ESR1 LBP). One soluble human NR3C1 numbering, so no collapse is needed._
 
@@ -38,7 +38,7 @@ _Notes: Ligand-binding-domain steroid pocket (the GR analogue of the ESR1 LBP). 
 
 **Quarantined** (1):
 
-- `QJK` (8A9G_QJK_B303, primary) — no pocket match
+- `QJK` (8A9G_QJK_A302, primary) — candidate pocket: lbp
 
 ---
 

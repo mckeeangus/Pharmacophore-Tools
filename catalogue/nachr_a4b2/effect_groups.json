@@ -14,79 +14,79 @@
       "4NZB_NSE_B301"
     ],
     "orthosteric__neutral": [
-      "2X00_GYN_E301",
-      "8Q1M_ILR_C301",
-      "8QX2_ILR_B301",
-      "2BYR_MLK_C301",
-      "3SH1_MLK_E301",
-      "3SIO_MLK_A260",
+      "2X00_GYN_B301",
+      "8Q1M_ILR_A301",
+      "8QX2_ILR_A301",
+      "2BYR_MLK_H301",
+      "3SH1_MLK_B301",
+      "3SIO_MLK_D260",
       "9SG3_PHN_A302",
-      "2WZY_SQX_F301",
-      "2XYS_SY9_C1206",
-      "5O8T_SY9_E601",
-      "5OA0_SY9_C601",
-      "5OAL_SY9_C402",
-      "5OBG_SY9_E601",
+      "2WZY_SQX_A301",
+      "2XYS_SY9_E1206",
+      "5O8T_SY9_A601",
+      "5OA0_SY9_D601",
+      "5OAL_SY9_I301",
+      "5OBG_SY9_B601",
       "2XYT_TC9_F1206",
       "2WNC_TKT_C300",
       "5OAJ_TKT_E601",
       "8QTL_WSP_A301"
     ],
     "orthosteric__positive": [
-      "3U8J_09O_D211",
-      "3U8K_09P_G211",
-      "4UM1_09P_B211",
-      "3U8L_09Q_I211",
-      "3U8M_09R_G211",
-      "4UM3_09R_S301",
-      "3U8N_09S_R211",
-      "4FRR_0VC_A301",
+      "3U8J_09O_A211",
+      "3U8K_09P_F211",
+      "4UM1_09P_E211",
+      "3U8L_09Q_J211",
+      "3U8M_09R_L211",
+      "4UM3_09R_d301",
+      "3U8N_09S_Q211",
+      "4FRR_0VC_F301",
       "4ZJS_4P0_D301",
-      "6SH0_4P0_E303",
-      "2XZ5_ACH_B1210",
-      "3WIP_ACH_J301",
-      "8SSZ_ACH_D704",
+      "6SH0_4P0_J302",
+      "2XZ5_ACH_C1210",
+      "3WIP_ACH_A301",
+      "8SSZ_ACH_A704",
       "8ST0_ACH_D702",
-      "8ST1_ACH_B703",
+      "8ST1_ACH_D703",
       "8ST2_ACH_D704",
       "8ST3_ACH_D704",
-      "8ST4_ACH_D704",
-      "2WNL_AN4_J300",
-      "4BQT_C5E_C301",
-      "5SYO_C5E_C301",
+      "8ST4_ACH_A704",
+      "2WNL_AN4_G300",
+      "4BQT_C5E_B301",
+      "5SYO_C5E_E301",
       "1UV6_CCE_J1206",
-      "5BP0_FN1_E301",
-      "6SGV_LDQ_D601",
+      "5BP0_FN1_D302",
+      "6SGV_LDQ_G601",
       "3WTN_N2Y_H301",
       "3WTO_N2Y_A301",
-      "1UW6_NCT_E1206",
+      "1UW6_NCT_D1208",
       "5KXI_NCT_D402",
-      "5O87_NCT_B601",
+      "5O87_NCT_A601",
       "6CNJ_NCT_A402",
       "6CNK_NCT_B402",
       "4AFT_QMR_B301",
       "5AIN_QMR_A1207",
       "6UR8_QMR_A702",
       "6USF_QMR_A502",
-      "3WTJ_TH4_D301",
+      "3WTJ_TH4_B301",
       "3ZDH_XRS_A301",
-      "3ZDG_XRX_O301"
+      "3ZDG_XRX_I301"
     ]
   },
   "counts": {
-    "poses": 95,
+    "poses": 97,
     "in_cells": 56,
     "cells": 3,
     "separate_state": 0,
-    "unknown": 39,
-    "quarantined": 0
+    "unknown": 40,
+    "quarantined": 1
   },
   "poses": [
     {
       "pdb_id": "4BFQ",
       "ligand_id": "083",
-      "chain": "E",
-      "seqid": "302",
+      "chain": "B",
+      "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
       "track": "reversible",
@@ -101,12 +101,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "4BFQ_083_E302.mol2"
+      "mol2": "4BFQ_083_B301.mol2"
     },
     {
       "pdb_id": "3U8J",
       "ligand_id": "09O",
-      "chain": "D",
+      "chain": "A",
       "seqid": "211",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -122,12 +122,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3U8J_09O_D211.mol2"
+      "mol2": "3U8J_09O_A211.mol2"
     },
     {
       "pdb_id": "3U8K",
       "ligand_id": "09P",
-      "chain": "G",
+      "chain": "F",
       "seqid": "211",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -143,12 +143,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3U8K_09P_G211.mol2"
+      "mol2": "3U8K_09P_F211.mol2"
     },
     {
       "pdb_id": "4UM1",
       "ligand_id": "09P",
-      "chain": "B",
+      "chain": "E",
       "seqid": "211",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -164,12 +164,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "4UM1_09P_B211.mol2"
+      "mol2": "4UM1_09P_E211.mol2"
     },
     {
       "pdb_id": "3U8L",
       "ligand_id": "09Q",
-      "chain": "I",
+      "chain": "J",
       "seqid": "211",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -185,12 +185,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3U8L_09Q_I211.mol2"
+      "mol2": "3U8L_09Q_J211.mol2"
     },
     {
       "pdb_id": "3U8M",
       "ligand_id": "09R",
-      "chain": "G",
+      "chain": "L",
       "seqid": "211",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -206,12 +206,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3U8M_09R_G211.mol2"
+      "mol2": "3U8M_09R_L211.mol2"
     },
     {
       "pdb_id": "4UM3",
       "ligand_id": "09R",
-      "chain": "S",
+      "chain": "d",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -227,12 +227,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "4UM3_09R_S301.mol2"
+      "mol2": "4UM3_09R_d301.mol2"
     },
     {
       "pdb_id": "3U8N",
       "ligand_id": "09S",
-      "chain": "R",
+      "chain": "Q",
       "seqid": "211",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -248,12 +248,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3U8N_09S_R211.mol2"
+      "mol2": "3U8N_09S_Q211.mol2"
     },
     {
       "pdb_id": "4FRR",
       "ligand_id": "0VC",
-      "chain": "A",
+      "chain": "F",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -269,7 +269,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "4FRR_0VC_A301.mol2"
+      "mol2": "4FRR_0VC_F301.mol2"
     },
     {
       "pdb_id": "4ZJS",
@@ -296,8 +296,8 @@
     {
       "pdb_id": "6SH0",
       "ligand_id": "4P0",
-      "chain": "E",
-      "seqid": "303",
+      "chain": "J",
+      "seqid": "302",
       "pocket": "orthosteric",
       "efficacy": "positive",
       "track": "reversible",
@@ -312,7 +312,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "6SH0_4P0_E303.mol2"
+      "mol2": "6SH0_4P0_J302.mol2"
     },
     {
       "pdb_id": "4ZK1",
@@ -359,7 +359,7 @@
     {
       "pdb_id": "5BW2",
       "ligand_id": "4VU",
-      "chain": "C",
+      "chain": "D",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -375,13 +375,13 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5BW2_4VU_C301.mol2"
+      "mol2": "5BW2_4VU_D301.mol2"
     },
     {
       "pdb_id": "7PD6",
       "ligand_id": "7II",
-      "chain": "FaF",
-      "seqid": "302",
+      "chain": "BaB",
+      "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
       "track": "reversible",
@@ -396,7 +396,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "7PD6_7II_FaF302.mol2"
+      "mol2": "7PD6_7II_BaB301.mol2"
     },
     {
       "pdb_id": "5TVC",
@@ -444,7 +444,7 @@
     {
       "pdb_id": "2XZ5",
       "ligand_id": "ACH",
-      "chain": "B",
+      "chain": "C",
       "seqid": "1210",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -460,12 +460,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2XZ5_ACH_B1210.mol2"
+      "mol2": "2XZ5_ACH_C1210.mol2"
     },
     {
       "pdb_id": "3WIP",
       "ligand_id": "ACH",
-      "chain": "J",
+      "chain": "A",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -481,12 +481,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3WIP_ACH_J301.mol2"
+      "mol2": "3WIP_ACH_A301.mol2"
     },
     {
       "pdb_id": "8SSZ",
       "ligand_id": "ACH",
-      "chain": "D",
+      "chain": "A",
       "seqid": "704",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -503,7 +503,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8SSZ_ACH_D704.mol2"
+      "mol2": "8SSZ_ACH_A704.mol2"
     },
     {
       "pdb_id": "8ST0",
@@ -530,7 +530,7 @@
     {
       "pdb_id": "8ST1",
       "ligand_id": "ACH",
-      "chain": "B",
+      "chain": "D",
       "seqid": "703",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -547,7 +547,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8ST1_ACH_B703.mol2"
+      "mol2": "8ST1_ACH_D703.mol2"
     },
     {
       "pdb_id": "8ST2",
@@ -596,7 +596,7 @@
     {
       "pdb_id": "8ST4",
       "ligand_id": "ACH",
-      "chain": "D",
+      "chain": "A",
       "seqid": "704",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -613,12 +613,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8ST4_ACH_D704.mol2"
+      "mol2": "8ST4_ACH_A704.mol2"
     },
     {
       "pdb_id": "2WNL",
       "ligand_id": "AN4",
-      "chain": "J",
+      "chain": "G",
       "seqid": "300",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -634,12 +634,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2WNL_AN4_J300.mol2"
+      "mol2": "2WNL_AN4_G300.mol2"
     },
     {
       "pdb_id": "2WNL",
       "ligand_id": "AN5",
-      "chain": "D",
+      "chain": "F",
       "seqid": "300",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -655,12 +655,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2WNL_AN5_D300.mol2"
+      "mol2": "2WNL_AN5_F300.mol2"
     },
     {
       "pdb_id": "2W8F",
       "ligand_id": "BS1",
-      "chain": "F",
+      "chain": "A",
       "seqid": "1206",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -676,7 +676,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2W8F_BS1_F1206.mol2"
+      "mol2": "2W8F_BS1_A1206.mol2"
     },
     {
       "pdb_id": "2W8G",
@@ -702,7 +702,7 @@
     {
       "pdb_id": "4BQT",
       "ligand_id": "C5E",
-      "chain": "C",
+      "chain": "B",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -718,12 +718,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "4BQT_C5E_C301.mol2"
+      "mol2": "4BQT_C5E_B301.mol2"
     },
     {
       "pdb_id": "5SYO",
       "ligand_id": "C5E",
-      "chain": "C",
+      "chain": "E",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -740,7 +740,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5SYO_C5E_C301.mol2"
+      "mol2": "5SYO_C5E_E301.mol2"
     },
     {
       "pdb_id": "1UV6",
@@ -764,10 +764,10 @@
       "mol2": "1UV6_CCE_J1206.mol2"
     },
     {
-      "pdb_id": "2YME",
-      "ligand_id": "CWB",
-      "chain": "A",
-      "seqid": "1207",
+      "pdb_id": "3PEO",
+      "ligand_id": "CU9",
+      "chain": "F",
+      "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
       "track": "reversible",
@@ -782,13 +782,34 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2YME_CWB_A1207.mol2"
+      "mol2": "3PEO_CU9_F301.mol2"
+    },
+    {
+      "pdb_id": "2YME",
+      "ligand_id": "CWB",
+      "chain": "J",
+      "seqid": "1207",
+      "pocket": null,
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "2YME_CWB_J1207.mol2"
     },
     {
       "pdb_id": "5BP0",
       "ligand_id": "FN1",
-      "chain": "E",
-      "seqid": "301",
+      "chain": "D",
+      "seqid": "302",
       "pocket": "orthosteric",
       "efficacy": "positive",
       "track": "reversible",
@@ -803,7 +824,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "5BP0_FN1_E301.mol2"
+      "mol2": "5BP0_FN1_D302.mol2"
     },
     {
       "pdb_id": "5OAN",
@@ -829,7 +850,7 @@
     {
       "pdb_id": "2PH9",
       "ligand_id": "GNT",
-      "chain": "D",
+      "chain": "A",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -845,12 +866,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2PH9_GNT_D301.mol2"
+      "mol2": "2PH9_GNT_A301.mol2"
     },
     {
       "pdb_id": "2X00",
       "ligand_id": "GYN",
-      "chain": "E",
+      "chain": "B",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -866,7 +887,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2X00_GYN_E301.mol2"
+      "mol2": "2X00_GYN_B301.mol2"
     },
     {
       "pdb_id": "7DJI",
@@ -892,7 +913,7 @@
     {
       "pdb_id": "8Q1M",
       "ligand_id": "ILR",
-      "chain": "C",
+      "chain": "A",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -908,12 +929,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "8Q1M_ILR_C301.mol2"
+      "mol2": "8Q1M_ILR_A301.mol2"
     },
     {
       "pdb_id": "8QX2",
       "ligand_id": "ILR",
-      "chain": "B",
+      "chain": "A",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -929,12 +950,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "8QX2_ILR_B301.mol2"
+      "mol2": "8QX2_ILR_A301.mol2"
     },
     {
       "pdb_id": "5OBH",
       "ligand_id": "J94",
-      "chain": "A",
+      "chain": "D",
       "seqid": "601",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -950,12 +971,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5OBH_J94_A601.mol2"
+      "mol2": "5OBH_J94_D601.mol2"
     },
     {
       "pdb_id": "4QAA",
       "ligand_id": "KK1",
-      "chain": "F",
+      "chain": "H",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -971,12 +992,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "4QAA_KK1_F301.mol2"
+      "mol2": "4QAA_KK1_H301.mol2"
     },
     {
       "pdb_id": "5AFH",
       "ligand_id": "L0B",
-      "chain": "B",
+      "chain": "E",
       "seqid": "1205",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -993,7 +1014,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "5AFH_L0B_B1205.mol2"
+      "mol2": "5AFH_L0B_E1205.mol2"
     },
     {
       "pdb_id": "5AFJ",
@@ -1020,7 +1041,7 @@
     {
       "pdb_id": "5AFK",
       "ligand_id": "L0B",
-      "chain": "B",
+      "chain": "E",
       "seqid": "1205",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1037,13 +1058,13 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "5AFK_L0B_B1205.mol2"
+      "mol2": "5AFK_L0B_E1205.mol2"
     },
     {
       "pdb_id": "5AFL",
       "ligand_id": "L0B",
-      "chain": "D",
-      "seqid": "1205",
+      "chain": "C",
+      "seqid": "1206",
       "pocket": "orthosteric",
       "efficacy": "unknown",
       "track": "reversible",
@@ -1059,33 +1080,11 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "5AFL_L0B_D1205.mol2"
+      "mol2": "5AFL_L0B_C1206.mol2"
     },
     {
       "pdb_id": "5AFM",
       "ligand_id": "L0B",
-      "chain": "B",
-      "seqid": "1207",
-      "pocket": "orthosteric",
-      "efficacy": "unknown",
-      "track": "reversible",
-      "cell": null,
-      "efficacy_source": "",
-      "efficacy_note": "no annotation",
-      "separate_state_reason": "",
-      "mapping": "surrogate",
-      "subtype_accessions": [
-        "P36544",
-        "P58154"
-      ],
-      "subtype_organisms": [
-        "Lymnaea stagnalis"
-      ],
-      "mol2": "5AFM_L0B_B1207.mol2"
-    },
-    {
-      "pdb_id": "5AFN",
-      "ligand_id": "L0B",
       "chain": "D",
       "seqid": "1205",
       "pocket": "orthosteric",
@@ -1103,12 +1102,34 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "5AFN_L0B_D1205.mol2"
+      "mol2": "5AFM_L0B_D1205.mol2"
+    },
+    {
+      "pdb_id": "5AFN",
+      "ligand_id": "L0B",
+      "chain": "E",
+      "seqid": "1205",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "P36544",
+        "P58154"
+      ],
+      "subtype_organisms": [
+        "Lymnaea stagnalis"
+      ],
+      "mol2": "5AFN_L0B_E1205.mol2"
     },
     {
       "pdb_id": "6SGV",
       "ligand_id": "LDQ",
-      "chain": "D",
+      "chain": "G",
       "seqid": "601",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -1124,7 +1145,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "6SGV_LDQ_D601.mol2"
+      "mol2": "6SGV_LDQ_G601.mol2"
     },
     {
       "pdb_id": "2BYS",
@@ -1171,7 +1192,7 @@
     {
       "pdb_id": "2BYR",
       "ligand_id": "MLK",
-      "chain": "C",
+      "chain": "H",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1187,12 +1208,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2BYR_MLK_C301.mol2"
+      "mol2": "2BYR_MLK_H301.mol2"
     },
     {
       "pdb_id": "3SH1",
       "ligand_id": "MLK",
-      "chain": "E",
+      "chain": "B",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1208,12 +1229,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "3SH1_MLK_E301.mol2"
+      "mol2": "3SH1_MLK_B301.mol2"
     },
     {
       "pdb_id": "3SIO",
       "ligand_id": "MLK",
-      "chain": "A",
+      "chain": "D",
       "seqid": "260",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1229,7 +1250,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "3SIO_MLK_A260.mol2"
+      "mol2": "3SIO_MLK_D260.mol2"
     },
     {
       "pdb_id": "3WTN",
@@ -1276,8 +1297,8 @@
     {
       "pdb_id": "1UW6",
       "ligand_id": "NCT",
-      "chain": "E",
-      "seqid": "1206",
+      "chain": "D",
+      "seqid": "1208",
       "pocket": "orthosteric",
       "efficacy": "positive",
       "track": "reversible",
@@ -1292,7 +1313,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "1UW6_NCT_E1206.mol2"
+      "mol2": "1UW6_NCT_D1208.mol2"
     },
     {
       "pdb_id": "5KXI",
@@ -1319,7 +1340,7 @@
     {
       "pdb_id": "5O87",
       "ligand_id": "NCT",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -1335,7 +1356,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5O87_NCT_B601.mol2"
+      "mol2": "5O87_NCT_A601.mol2"
     },
     {
       "pdb_id": "6CNJ",
@@ -1514,7 +1535,7 @@
     {
       "pdb_id": "2WZY",
       "ligand_id": "SQX",
-      "chain": "F",
+      "chain": "A",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1530,12 +1551,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2WZY_SQX_F301.mol2"
+      "mol2": "2WZY_SQX_A301.mol2"
     },
     {
       "pdb_id": "2XYS",
       "ligand_id": "SY9",
-      "chain": "C",
+      "chain": "E",
       "seqid": "1206",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1551,12 +1572,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2XYS_SY9_C1206.mol2"
+      "mol2": "2XYS_SY9_E1206.mol2"
     },
     {
       "pdb_id": "5O8T",
       "ligand_id": "SY9",
-      "chain": "E",
+      "chain": "A",
       "seqid": "601",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1572,12 +1593,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5O8T_SY9_E601.mol2"
+      "mol2": "5O8T_SY9_A601.mol2"
     },
     {
       "pdb_id": "5OA0",
       "ligand_id": "SY9",
-      "chain": "C",
+      "chain": "D",
       "seqid": "601",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1593,13 +1614,13 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5OA0_SY9_C601.mol2"
+      "mol2": "5OA0_SY9_D601.mol2"
     },
     {
       "pdb_id": "5OAL",
       "ligand_id": "SY9",
-      "chain": "C",
-      "seqid": "402",
+      "chain": "I",
+      "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "neutral",
       "track": "reversible",
@@ -1614,12 +1635,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5OAL_SY9_C402.mol2"
+      "mol2": "5OAL_SY9_I301.mol2"
     },
     {
       "pdb_id": "5OBG",
       "ligand_id": "SY9",
-      "chain": "E",
+      "chain": "B",
       "seqid": "601",
       "pocket": "orthosteric",
       "efficacy": "neutral",
@@ -1635,7 +1656,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "5OBG_SY9_E601.mol2"
+      "mol2": "5OBG_SY9_B601.mol2"
     },
     {
       "pdb_id": "2XYT",
@@ -1661,7 +1682,7 @@
     {
       "pdb_id": "3WTJ",
       "ligand_id": "TH4",
-      "chain": "D",
+      "chain": "B",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -1677,7 +1698,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3WTJ_TH4_D301.mol2"
+      "mol2": "3WTJ_TH4_B301.mol2"
     },
     {
       "pdb_id": "5BRX",
@@ -1703,8 +1724,8 @@
     {
       "pdb_id": "4ZRU",
       "ligand_id": "TI9",
-      "chain": "C",
-      "seqid": "302",
+      "chain": "E",
+      "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
       "track": "reversible",
@@ -1719,7 +1740,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "4ZRU_TI9_C302.mol2"
+      "mol2": "4ZRU_TI9_E301.mol2"
     },
     {
       "pdb_id": "4ZK4",
@@ -1786,9 +1807,30 @@
       "mol2": "5OAJ_TKT_E601.mol2"
     },
     {
+      "pdb_id": "3PMZ",
+      "ligand_id": "TUB",
+      "chain": "E",
+      "seqid": "220",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "surrogate",
+      "subtype_accessions": [
+        "Q8WSF8"
+      ],
+      "subtype_organisms": [
+        "Aplysia californica"
+      ],
+      "mol2": "3PMZ_TUB_E220.mol2"
+    },
+    {
       "pdb_id": "7NDV",
       "ligand_id": "U8Q",
-      "chain": "C",
+      "chain": "A",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1804,12 +1846,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "7NDV_U8Q_C301.mol2"
+      "mol2": "7NDV_U8Q_A301.mol2"
     },
     {
       "pdb_id": "7NDP",
       "ligand_id": "U8T",
-      "chain": "J",
+      "chain": "G",
       "seqid": "302",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1825,12 +1867,12 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "7NDP_U8T_J302.mol2"
+      "mol2": "7NDP_U8T_G302.mol2"
     },
     {
       "pdb_id": "2Y56",
       "ligand_id": "V11",
-      "chain": "D",
+      "chain": "B",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1846,12 +1888,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2Y56_V11_D301.mol2"
+      "mol2": "2Y56_V11_B301.mol2"
     },
     {
       "pdb_id": "2Y57",
       "ligand_id": "V37",
-      "chain": "D",
+      "chain": "E",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1867,7 +1909,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2Y57_V37_D301.mol2"
+      "mol2": "2Y57_V37_E301.mol2"
     },
     {
       "pdb_id": "2Y58",
@@ -1893,7 +1935,7 @@
     {
       "pdb_id": "2Y54",
       "ligand_id": "V63",
-      "chain": "D",
+      "chain": "A",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1909,12 +1951,12 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2Y54_V63_D301.mol2"
+      "mol2": "2Y54_V63_A301.mol2"
     },
     {
       "pdb_id": "2XNT",
       "ligand_id": "VU2",
-      "chain": "B",
+      "chain": "G",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1930,7 +1972,7 @@
       "subtype_organisms": [
         "Aplysia californica"
       ],
-      "mol2": "2XNT_VU2_B301.mol2"
+      "mol2": "2XNT_VU2_G301.mol2"
     },
     {
       "pdb_id": "2XNU",
@@ -1977,7 +2019,7 @@
     {
       "pdb_id": "8P1F",
       "ligand_id": "WCW",
-      "chain": "G",
+      "chain": "I",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
@@ -1993,7 +2035,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "8P1F_WCW_G301.mol2"
+      "mol2": "8P1F_WCW_I301.mol2"
     },
     {
       "pdb_id": "8P11",
@@ -2019,8 +2061,8 @@
     {
       "pdb_id": "8P22",
       "ligand_id": "WNO",
-      "chain": "C",
-      "seqid": "302",
+      "chain": "H",
+      "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "unknown",
       "track": "reversible",
@@ -2035,7 +2077,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "8P22_WNO_C302.mol2"
+      "mol2": "8P22_WNO_H301.mol2"
     },
     {
       "pdb_id": "8QTL",
@@ -2082,7 +2124,7 @@
     {
       "pdb_id": "3ZDG",
       "ligand_id": "XRX",
-      "chain": "O",
+      "chain": "I",
       "seqid": "301",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -2098,7 +2140,7 @@
       "subtype_organisms": [
         "Lymnaea stagnalis"
       ],
-      "mol2": "3ZDG_XRX_O301.mol2"
+      "mol2": "3ZDG_XRX_I301.mol2"
     }
   ]
 }

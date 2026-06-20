@@ -24,6 +24,18 @@ _Stage 3 run 2026-06-20._ Each pose is assigned a **geometry-verified pocket** (
 
 | Target | Pockets found | Cells | In cells | Separate-state | Unknown eff. | Quarantined |
 |--------|---------------|------:|---------:|---------------:|-------------:|------------:|
+| nachr_a4b2 | accessory, orthosteric | 3 | 56 | 0 | 40 | 1 |
+| esr1 | lbp | 2 | 70 | 17 | 13 | 0 |
+| hiv1_protease | active_site | 1 | 48 | 0 | 0 | 0 |
+| adrb2 | orthosteric | 3 | 92 | 2 | 3 | 3 |
+| cdk2 | atp_site | 1 | 94 | 3 | 0 | 3 |
+| ca2 | active_site | 1 | 87 | 12 | 0 | 1 |
+| ache | gorge | 1 | 18 | 66 | 0 | 0 |
+| cavab | dhp_site | 1 | 5 | 0 | 0 | 1 |
+| cox2 | cox_channel | 1 | 5 | 0 | 0 | 1 |
+| hmgcr | hmg_site | 1 | 19 | 3 | 0 | 0 |
+| gaba_a | bzd_site, orthosteric | 4 | 93 | 0 | 3 | 1 |
+| net_slc6a2 | central_s1 | 2 | 44 | 0 | 6 | 0 |
 | nav1_7_vsd4 | vsd4_site | 1 | 3 | 0 | 0 | 2 |
 | nav1_7_pore | pore_site | 1 | 13 | 0 | 0 | 0 |
 | gr_nr3c1 | lbp | 2 | 32 | 0 | 0 | 1 |
@@ -32,4 +44,4 @@ _Stage 3 run 2026-06-20._ Each pose is assigned a **geometry-verified pocket** (
 
 Per-target detail: `catalogue/<slug>/<slug>_stage3_report.md`, the cell mol2 in `catalogue/<slug>/groups/`, `effect_groups.json`, and the recoloured session `catalogue/<slug>/<slug>_grouped.pse`.
 
-**Pose datasets** (pharmacophore inputs): each target carries `catalogue/<slug>/datasets/{all_poses,representative}/` (every kept pose vs one per ligand), with a cross-target master under `catalogue/datasets/` (243 poses / 83 representative). Each set ships a `.pml` + baked `.pse`.
+**Pose datasets** (pharmacophore inputs): each target carries `catalogue/<slug>/datasets/{all_poses,representative}/` (every kept pose vs one per ligand), with a cross-target master under `catalogue/datasets/` (1053 poses / 584 representative). Each set ships a `.pml` + baked `.pse`.

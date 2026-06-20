@@ -13,7 +13,7 @@ load groups/orthosteric__negative/6PS5_SNP_A1201.mol2, orthosteric__negative__6P
 load groups/orthosteric__negative/6PS6_TIM_A1201.mol2, orthosteric__negative__6PS6_TIM_A1201
 group orthosteric__negative, orthosteric__negative__*
 color salmon, orthosteric__negative and elem C
-load groups/orthosteric__neutral/8W1V_A1AE2_A1201.mol2, orthosteric__neutral__8W1V_A1AE2_A1201
+load groups/orthosteric__neutral/8W1V_A1AE2_B1201.mol2, orthosteric__neutral__8W1V_A1AE2_B1201
 load groups/orthosteric__neutral/9W3F_BER_A1201.mol2, orthosteric__neutral__9W3F_BER_A1201
 load groups/orthosteric__neutral/6PS2_JTZ_A1201.mol2, orthosteric__neutral__6PS2_JTZ_A1201
 group orthosteric__neutral, orthosteric__neutral__*

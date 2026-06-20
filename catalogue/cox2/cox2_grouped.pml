@@ -7,7 +7,7 @@ set valence, 1
 load groups/cox_channel__negative/5IKV_FLF_B601.mol2, cox_channel__negative__5IKV_FLF_B601
 load groups/cox_channel__negative/5IKR_ID8_A601.mol2, cox_channel__negative__5IKR_ID8_A601
 load groups/cox_channel__negative/5KIR_RCX_A601.mol2, cox_channel__negative__5KIR_RCX_A601
-load groups/cox_channel__negative/5F1A_SAL_B601.mol2, cox_channel__negative__5F1A_SAL_B601
+load groups/cox_channel__negative/5F1A_SAL_A601.mol2, cox_channel__negative__5F1A_SAL_A601
 load groups/cox_channel__negative/5IKT_TLF_B601.mol2, cox_channel__negative__5IKT_TLF_B601
 group cox_channel__negative, cox_channel__negative__*
 color salmon, cox_channel__negative and elem C

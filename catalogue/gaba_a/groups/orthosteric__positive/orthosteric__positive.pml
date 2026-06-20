@@ -3,7 +3,7 @@ reinitialize
 bg_color white
 set valence, 1
 
-load 9EQG_ABU_B3505.mol2, 9EQG_ABU_B3505
+load 9EQG_ABU_E3205.mol2, 9EQG_ABU_E3205
 load 7QNC_EI7_B503.mol2, 7QNC_EI7_B503
 load 7A5V_HSM_A5408.mol2, 7A5V_HSM_A5408
 show sticks

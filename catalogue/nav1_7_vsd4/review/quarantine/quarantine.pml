@@ -3,7 +3,7 @@ reinitialize
 bg_color white
 set valence, 1
 
-load 5EK0_5P2_A1808.mol2, 5EK0_5P2_A1808
+load 5EK0_5P2_C1805.mol2, 5EK0_5P2_C1805
 load 8I5G_T70_A2005.mol2, 8I5G_T70_A2005
 show sticks
 hide everything, hydro

@@ -47,7 +47,7 @@
       "9GNO_A1INI_A301",
       "6Q3C_BYZ_A302",
       "4FKL_CK2_A300",
-      "7QHL_D5P_A301",
+      "7QHL_D5P_C301",
       "1H00_FAP_A1300",
       "6GUH_FB8_A301",
       "6GUK_FC8_A301",
@@ -97,7 +97,6 @@
       "3QZG_X67_A471",
       "3QWJ_X6A_A483",
       "3QZI_X72_A512",
-      "3R6X_X84_A778",
       "3RAI_X85_A923",
       "3R73_X87_A920",
       "3R28_XA0_A782",
@@ -108,11 +107,11 @@
   },
   "counts": {
     "poses": 100,
-    "in_cells": 95,
+    "in_cells": 94,
     "cells": 1,
     "separate_state": 3,
     "unknown": 0,
-    "quarantined": 2
+    "quarantined": 3
   },
   "poses": [
     {
@@ -1003,7 +1002,7 @@
     {
       "pdb_id": "7QHL",
       "ligand_id": "D5P",
-      "chain": "A",
+      "chain": "C",
       "seqid": "301",
       "pocket": "atp_site",
       "efficacy": "negative",
@@ -1020,7 +1019,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7QHL_D5P_A301.mol2"
+      "mol2": "7QHL_D5P_C301.mol2"
     },
     {
       "pdb_id": "1H00",
@@ -1758,6 +1757,28 @@
       "mol2": "2R3N_SCZ_A501.mol2"
     },
     {
+      "pdb_id": "4EOJ",
+      "ligand_id": "SGM",
+      "chain": "B",
+      "seqid": "502",
+      "pocket": null,
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "monothioglycerol cryo-additive (curation slip)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P20248",
+        "P24941"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4EOJ_SGM_B502.mol2"
+    },
+    {
       "pdb_id": "7QHL",
       "ligand_id": "SGM",
       "chain": "B",
@@ -2072,27 +2093,6 @@
         "Homo sapiens"
       ],
       "mol2": "3QZI_X72_A512.mol2"
-    },
-    {
-      "pdb_id": "3R6X",
-      "ligand_id": "X84",
-      "chain": "A",
-      "seqid": "778",
-      "pocket": "atp_site",
-      "efficacy": "negative",
-      "track": "reversible",
-      "cell": "atp_site__negative",
-      "efficacy_source": "curated (target default)",
-      "efficacy_note": "control target default",
-      "separate_state_reason": "",
-      "mapping": "primary",
-      "subtype_accessions": [
-        "P24941"
-      ],
-      "subtype_organisms": [
-        "Homo sapiens"
-      ],
-      "mol2": "3R6X_X84_A778.mol2"
     },
     {
       "pdb_id": "3RAI",

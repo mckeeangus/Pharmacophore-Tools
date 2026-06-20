@@ -43,7 +43,7 @@
       "7T0Z_ABU_C401",
       "8DD2_ABU_C403",
       "8DD3_ABU_A402",
-      "8SGO_ABU_C402",
+      "8SGO_ABU_A402",
       "8SI9_ABU_B401",
       "8SID_ABU_C402",
       "8VQY_ABU_A401",
@@ -57,7 +57,7 @@
       "9CXC_ABU_D501",
       "9CXD_ABU_A501",
       "9DRX_ABU_A402",
-      "9EQG_ABU_B3505",
+      "9EQG_ABU_E3205",
       "9FAJ_ABU_A3907",
       "9FAK_ABU_B1601",
       "9FAM_ABU_A3902",
@@ -77,11 +77,11 @@
       "9FG1_ABU_B501",
       "9FG2_ABU_B501",
       "9FG3_ABU_D501",
-      "9FG5_ABU_C501",
+      "9FG5_ABU_B501",
       "9FG6_ABU_C501",
       "9FG7_ABU_E501",
       "9FG8_ABU_B501",
-      "9FG9_ABU_E502",
+      "9FG9_ABU_B503",
       "9FGG_ABU_B1601",
       "9FGH_ABU_B1601",
       "9HNQ_ABU_B601",
@@ -629,7 +629,7 @@
     {
       "pdb_id": "8SGO",
       "ligand_id": "ABU",
-      "chain": "C",
+      "chain": "A",
       "seqid": "402",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -647,7 +647,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8SGO_ABU_C402.mol2"
+      "mol2": "8SGO_ABU_A402.mol2"
     },
     {
       "pdb_id": "8SI9",
@@ -960,8 +960,8 @@
     {
       "pdb_id": "9EQG",
       "ligand_id": "ABU",
-      "chain": "B",
-      "seqid": "3505",
+      "chain": "E",
+      "seqid": "3205",
       "pocket": "orthosteric",
       "efficacy": "positive",
       "track": "reversible",
@@ -978,7 +978,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "9EQG_ABU_B3505.mol2"
+      "mol2": "9EQG_ABU_E3205.mol2"
     },
     {
       "pdb_id": "9FAJ",
@@ -1427,7 +1427,7 @@
     {
       "pdb_id": "9FG5",
       "ligand_id": "ABU",
-      "chain": "C",
+      "chain": "B",
       "seqid": "501",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -1444,7 +1444,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "9FG5_ABU_C501.mol2"
+      "mol2": "9FG5_ABU_B501.mol2"
     },
     {
       "pdb_id": "9FG6",
@@ -1517,8 +1517,8 @@
     {
       "pdb_id": "9FG9",
       "ligand_id": "ABU",
-      "chain": "E",
-      "seqid": "502",
+      "chain": "B",
+      "seqid": "503",
       "pocket": "orthosteric",
       "efficacy": "positive",
       "track": "reversible",
@@ -1535,7 +1535,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "9FG9_ABU_E502.mol2"
+      "mol2": "9FG9_ABU_B503.mol2"
     },
     {
       "pdb_id": "9FGG",

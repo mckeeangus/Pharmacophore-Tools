@@ -1,6 +1,6 @@
 # Stage 3 — effect groups: cavab
 
-_Generated 2026-06-18. Cell = (verified pocket) × (efficacy sign)._
+_Generated 2026-06-20. Cell = (verified pocket) × (efficacy sign)._
 
 - Poses carried from Stage 2: **6**
 - In partition cells: **5** across **1** cells

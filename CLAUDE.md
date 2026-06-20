@@ -109,7 +109,13 @@ Each stage writes tracked deliverables under `catalogue/`. Run via pixi tasks
    `ligand_catalogue.{md,xlsx}`. **Done.**
 2. **Site filtering & alignment** (`sites/`, `config/sites.yaml`) — keep only poses at
    each system's relevant site, superpose into one reference frame, per-target `.pse`.
-   Output: `site_filter.csv`. **Done.**
+   Output: `site_filter.csv`. **Done.** The superposition is a sequence-aware global
+   fit used only as an initialiser, then an **iterative pocket-local ICP refinement**
+   (re-pair pocket residues each iteration; fit on anchor-weighted backbone atoms) so
+   the geometry of the residues lining the pocket stays constant across structures —
+   essential for low-identity surrogates. Knobs are in `config/sites.yaml` `defaults`
+   (`refine_*`, `anchor_weight_sigma`, `use_backbone`); QC the overlay with
+   `scripts/diag_alignment.py`. Rationale + before/after: `catalogue/realignment_report.md`.
 3. **Effect grouping with pocket verification** (`groups/`, `config/{pockets,efficacy}.yaml`).
    **Done, offline** (cached structures + catalogue). Pocket identity is **geometric**
    (native contact fingerprints, chain-agnostic `RESNAME+authseqnum`, union-find

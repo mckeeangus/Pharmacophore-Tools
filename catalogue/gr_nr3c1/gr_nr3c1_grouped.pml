@@ -4,8 +4,8 @@ reinitialize
 bg_color white
 set valence, 1
 
-load groups/lbp__negative/4MDD_29M_A801.mol2, lbp__negative__4MDD_29M_A801
-load groups/lbp__negative/5UC3_486_A801.mol2, lbp__negative__5UC3_486_A801
+load groups/lbp__negative/4MDD_29M_B801.mol2, lbp__negative__4MDD_29M_B801
+load groups/lbp__negative/5UC3_486_B801.mol2, lbp__negative__5UC3_486_B801
 load groups/lbp__negative/6DXK_HJ4_A801.mol2, lbp__negative__6DXK_HJ4_A801
 group lbp__negative, lbp__negative__*
 color salmon, lbp__negative and elem C
@@ -22,7 +22,7 @@ load groups/lbp__positive/3BQD_DAY_A301.mol2, lbp__positive__3BQD_DAY_A301
 load groups/lbp__positive/1M2Z_DEX_A301.mol2, lbp__positive__1M2Z_DEX_A301
 load groups/lbp__positive/5G3J_E7T_A1779.mol2, lbp__positive__5G3J_E7T_A1779
 load groups/lbp__positive/7PRV_GW6_A805.mol2, lbp__positive__7PRV_GW6_A805
-load groups/lbp__positive/4P6X_HCY_G900.mol2, lbp__positive__4P6X_HCY_G900
+load groups/lbp__positive/4P6X_HCY_C900.mol2, lbp__positive__4P6X_HCY_C900
 load groups/lbp__positive/3K23_JZN_B2.mol2, lbp__positive__3K23_JZN_B2
 load groups/lbp__positive/3K22_JZS_B1.mol2, lbp__positive__3K22_JZS_B1
 load groups/lbp__positive/4LSJ_LSJ_A801.mol2, lbp__positive__4LSJ_LSJ_A801

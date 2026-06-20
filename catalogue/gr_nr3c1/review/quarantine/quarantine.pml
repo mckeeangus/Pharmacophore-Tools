@@ -3,7 +3,7 @@ reinitialize
 bg_color white
 set valence, 1
 
-load 8A9G_QJK_B303.mol2, 8A9G_QJK_B303
+load 8A9G_QJK_A302.mol2, 8A9G_QJK_A302
 show sticks
 hide everything, hydro
 util.cbag *

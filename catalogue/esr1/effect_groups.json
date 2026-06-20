@@ -11,17 +11,17 @@
     "lbp__negative": [
       "6PSJ_29S_B601",
       "4ZNV_4Q7_B601",
-      "6VPF_53Q_A601",
+      "6VPF_53Q_B601",
       "7RS7_73I_A601",
-      "7RRZ_77I_B601",
-      "7RRX_7AI_D601",
+      "7RRZ_77I_C601",
+      "7RRX_7AI_B601",
       "7RS8_7EI_C601",
       "7RS2_7I5_C601",
       "7RS0_7I9_C601",
       "7RS9_7OI_C601",
       "7RS3_7OR_B604",
       "7RS1_7Q5_C601",
-      "5W9D_9XY_B601",
+      "5W9D_9XY_A601",
       "9BU1_A1ASN_B601",
       "1XP1_AIH_A600",
       "1XP9_AIJ_A600",
@@ -29,7 +29,7 @@
       "1XP6_AIU_A600",
       "6VJD_C3D_C601",
       "2IOG_IOG_A600",
-      "7RRY_L84_B601",
+      "7RRY_L84_C601",
       "7UJ7_NYU_C901",
       "5KCD_OB2_A601",
       "5KCE_OB3_A602",
@@ -37,24 +37,24 @@
       "5KCT_OB7_A601",
       "5U2D_OBH_A601",
       "5KD9_OBT_A601",
-      "8W03_OBT_D600",
+      "8W03_OBT_C600",
       "4ZNS_OFB_B601",
-      "5W9C_OHT_C601",
+      "5W9C_OHT_D601",
       "7UJO_QYM_C601",
-      "7UJF_R3V_D601",
-      "2QXS_RAL_A600",
+      "7UJF_R3V_C601",
+      "2QXS_RAL_B600",
       "7KBS_RAL_B601",
-      "7NDO_RAL_A601",
+      "7NDO_RAL_B601",
       "7UJC_RAL_B601",
-      "7UJM_RL4_A601",
-      "7UJY_RL4_A601",
+      "7UJM_RL4_C601",
+      "7UJY_RL4_C601",
       "8DU8_TS7_B601",
       "8DUB_TTU_B601",
       "8DUC_TU9_A601",
       "8DUD_TV3_A601",
-      "8DUK_TW6_D601",
-      "8DV5_TX9_B601",
-      "8DV7_TXK_A601",
+      "8DUK_TW6_C601",
+      "8DV5_TX9_A601",
+      "8DV7_TXK_B601",
       "8DV8_TZ3_A601"
     ],
     "lbp__positive": [
@@ -291,7 +291,7 @@
     {
       "pdb_id": "6VPF",
       "ligand_id": "53Q",
-      "chain": "A",
+      "chain": "B",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -307,7 +307,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "6VPF_53Q_A601.mol2"
+      "mol2": "6VPF_53Q_B601.mol2"
     },
     {
       "pdb_id": "7RKE",
@@ -355,6 +355,27 @@
     {
       "pdb_id": "7RRZ",
       "ligand_id": "77I",
+      "chain": "C",
+      "seqid": "601",
+      "pocket": "lbp",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "lbp__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P03372"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7RRZ_77I_C601.mol2"
+    },
+    {
+      "pdb_id": "7RRX",
+      "ligand_id": "7AI",
       "chain": "B",
       "seqid": "601",
       "pocket": "lbp",
@@ -371,28 +392,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7RRZ_77I_B601.mol2"
-    },
-    {
-      "pdb_id": "7RRX",
-      "ligand_id": "7AI",
-      "chain": "D",
-      "seqid": "601",
-      "pocket": "lbp",
-      "efficacy": "negative",
-      "track": "reversible",
-      "cell": "lbp__negative",
-      "efficacy_source": "literature",
-      "efficacy_note": "dual-mechanism OBHS-N full antagonist; PMID 34452998 (conf: medium)",
-      "separate_state_reason": "",
-      "mapping": "primary",
-      "subtype_accessions": [
-        "P03372"
-      ],
-      "subtype_organisms": [
-        "Homo sapiens"
-      ],
-      "mol2": "7RRX_7AI_D601.mol2"
+      "mol2": "7RRX_7AI_B601.mol2"
     },
     {
       "pdb_id": "7RS8",
@@ -630,7 +630,7 @@
     {
       "pdb_id": "5W9D",
       "ligand_id": "9XY",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -646,12 +646,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "5W9D_9XY_B601.mol2"
+      "mol2": "5W9D_9XY_A601.mol2"
     },
     {
       "pdb_id": "8VZ0",
       "ligand_id": "A1AHO",
-      "chain": "D",
+      "chain": "A",
       "seqid": "600",
       "pocket": "lbp",
       "efficacy": "unknown",
@@ -667,7 +667,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8VZ0_A1AHO_D600.mol2"
+      "mol2": "8VZ0_A1AHO_A600.mol2"
     },
     {
       "pdb_id": "8VZ1",
@@ -714,7 +714,7 @@
     {
       "pdb_id": "8VYT",
       "ligand_id": "A1AHV",
-      "chain": "A",
+      "chain": "D",
       "seqid": "600",
       "pocket": "lbp",
       "efficacy": "unknown",
@@ -730,12 +730,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8VYT_A1AHV_A600.mol2"
+      "mol2": "8VYT_A1AHV_D600.mol2"
     },
     {
       "pdb_id": "8VZP",
       "ligand_id": "A1AHW",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "unknown",
@@ -751,13 +751,13 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8VZP_A1AHW_B601.mol2"
+      "mol2": "8VZP_A1AHW_A601.mol2"
     },
     {
       "pdb_id": "8VZQ",
       "ligand_id": "A1AHX",
-      "chain": "B",
-      "seqid": "600",
+      "chain": "A",
+      "seqid": "601",
       "pocket": "lbp",
       "efficacy": "unknown",
       "track": "reversible",
@@ -772,7 +772,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8VZQ_A1AHX_B600.mol2"
+      "mol2": "8VZQ_A1AHX_A601.mol2"
     },
     {
       "pdb_id": "8W07",
@@ -798,7 +798,7 @@
     {
       "pdb_id": "8W07",
       "ligand_id": "A1AHZ",
-      "chain": "B",
+      "chain": "C",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "unknown",
@@ -814,12 +814,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8W07_A1AHZ_B601.mol2"
+      "mol2": "8W07_A1AHZ_C601.mol2"
     },
     {
       "pdb_id": "9B25",
       "ligand_id": "A1AIZ",
-      "chain": "A",
+      "chain": "B",
       "seqid": "600",
       "pocket": "lbp",
       "efficacy": "unknown",
@@ -835,7 +835,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "9B25_A1AIZ_A600.mol2"
+      "mol2": "9B25_A1AIZ_B600.mol2"
     },
     {
       "pdb_id": "9BU1",
@@ -1267,7 +1267,7 @@
     {
       "pdb_id": "7QVJ",
       "ligand_id": "H09",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "n/a",
@@ -1283,7 +1283,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7QVJ_H09_B601.mol2"
+      "mol2": "7QVJ_H09_A601.mol2"
     },
     {
       "pdb_id": "6IAR",
@@ -1415,7 +1415,7 @@
     {
       "pdb_id": "7RRY",
       "ligand_id": "L84",
-      "chain": "B",
+      "chain": "C",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1431,7 +1431,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7RRY_L84_B601.mol2"
+      "mol2": "7RRY_L84_C601.mol2"
     },
     {
       "pdb_id": "6SQ0",
@@ -1478,7 +1478,7 @@
     {
       "pdb_id": "6OWC",
       "ligand_id": "ND1",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "n/a",
@@ -1494,7 +1494,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "6OWC_ND1_B601.mol2"
+      "mol2": "6OWC_ND1_A601.mol2"
     },
     {
       "pdb_id": "7UJ7",
@@ -1652,7 +1652,7 @@
     {
       "pdb_id": "8W03",
       "ligand_id": "OBT",
-      "chain": "D",
+      "chain": "C",
       "seqid": "600",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1668,7 +1668,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8W03_OBT_D600.mol2"
+      "mol2": "8W03_OBT_C600.mol2"
     },
     {
       "pdb_id": "4ZNS",
@@ -1695,7 +1695,7 @@
     {
       "pdb_id": "5W9C",
       "ligand_id": "OHT",
-      "chain": "C",
+      "chain": "D",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1711,7 +1711,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "5W9C_OHT_C601.mol2"
+      "mol2": "5W9C_OHT_D601.mol2"
     },
     {
       "pdb_id": "5FQR",
@@ -1779,7 +1779,7 @@
     {
       "pdb_id": "7UJF",
       "ligand_id": "R3V",
-      "chain": "D",
+      "chain": "C",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1795,12 +1795,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7UJF_R3V_D601.mol2"
+      "mol2": "7UJF_R3V_C601.mol2"
     },
     {
       "pdb_id": "2QXS",
       "ligand_id": "RAL",
-      "chain": "A",
+      "chain": "B",
       "seqid": "600",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1816,7 +1816,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "2QXS_RAL_A600.mol2"
+      "mol2": "2QXS_RAL_B600.mol2"
     },
     {
       "pdb_id": "7KBS",
@@ -1842,7 +1842,7 @@
     {
       "pdb_id": "7NDO",
       "ligand_id": "RAL",
-      "chain": "A",
+      "chain": "B",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1858,7 +1858,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7NDO_RAL_A601.mol2"
+      "mol2": "7NDO_RAL_B601.mol2"
     },
     {
       "pdb_id": "7UJC",
@@ -1884,7 +1884,7 @@
     {
       "pdb_id": "7UJM",
       "ligand_id": "RL4",
-      "chain": "A",
+      "chain": "C",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1900,12 +1900,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7UJM_RL4_A601.mol2"
+      "mol2": "7UJM_RL4_C601.mol2"
     },
     {
       "pdb_id": "7UJY",
       "ligand_id": "RL4",
-      "chain": "A",
+      "chain": "C",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -1921,7 +1921,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7UJY_RL4_A601.mol2"
+      "mol2": "7UJY_RL4_C601.mol2"
     },
     {
       "pdb_id": "8DU8",
@@ -2010,7 +2010,7 @@
     {
       "pdb_id": "8DUK",
       "ligand_id": "TW6",
-      "chain": "D",
+      "chain": "C",
       "seqid": "601",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -2026,32 +2026,11 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8DUK_TW6_D601.mol2"
+      "mol2": "8DUK_TW6_C601.mol2"
     },
     {
       "pdb_id": "8DV5",
       "ligand_id": "TX9",
-      "chain": "B",
-      "seqid": "601",
-      "pocket": "lbp",
-      "efficacy": "negative",
-      "track": "reversible",
-      "cell": "lbp__negative",
-      "efficacy_source": "literature",
-      "efficacy_note": "isoquinoline SERM antagonist; PMID 36517522 (conf: high)",
-      "separate_state_reason": "",
-      "mapping": "primary",
-      "subtype_accessions": [
-        "P03372"
-      ],
-      "subtype_organisms": [
-        "Homo sapiens"
-      ],
-      "mol2": "8DV5_TX9_B601.mol2"
-    },
-    {
-      "pdb_id": "8DV7",
-      "ligand_id": "TXK",
       "chain": "A",
       "seqid": "601",
       "pocket": "lbp",
@@ -2068,7 +2047,28 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8DV7_TXK_A601.mol2"
+      "mol2": "8DV5_TX9_A601.mol2"
+    },
+    {
+      "pdb_id": "8DV7",
+      "ligand_id": "TXK",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "lbp",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "lbp__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "isoquinoline SERM antagonist; PMID 36517522 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P03372"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8DV7_TXK_B601.mol2"
     },
     {
       "pdb_id": "8DV8",
@@ -2115,8 +2115,8 @@
     {
       "pdb_id": "2POG",
       "ligand_id": "WST",
-      "chain": "B",
-      "seqid": "301",
+      "chain": "A",
+      "seqid": "201",
       "pocket": "lbp",
       "efficacy": "unknown",
       "track": "reversible",
@@ -2131,7 +2131,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "2POG_WST_B301.mol2"
+      "mol2": "2POG_WST_A201.mol2"
     },
     {
       "pdb_id": "8EV1",

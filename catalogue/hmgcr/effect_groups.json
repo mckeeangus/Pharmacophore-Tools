@@ -9,25 +9,25 @@
   ],
   "cells": {
     "hmg_site__negative": [
-      "1HW8_114_C4",
+      "1HW8_114_A2",
       "1HWI_115_A2",
-      "1HWJ_116_C4",
+      "1HWJ_116_A2",
       "1HWK_117_A2",
       "3CCT_3HI_D3",
       "3CCW_4HI_C4",
       "3CCZ_5HI_B876",
       "3CD0_6HI_D3",
       "3CD5_7HI_B1",
-      "2Q1L_882_A876",
-      "3CD7_882_A1",
-      "3CDA_8HI_C4",
+      "2Q1L_882_A877",
+      "3CD7_882_A2",
+      "3CDA_8HI_B1",
       "3CDB_9HI_D3",
       "1HWL_FBI_A2",
       "2Q6C_HR1_A3002",
       "2Q6B_HR2_A3001",
       "3BGL_RID_A2",
       "2R4F_RIE_B876",
-      "1HW9_SIM_C1"
+      "1HW9_SIM_C2"
     ]
   },
   "counts": {
@@ -42,8 +42,8 @@
     {
       "pdb_id": "1HW8",
       "ligand_id": "114",
-      "chain": "C",
-      "seqid": "4",
+      "chain": "A",
+      "seqid": "2",
       "pocket": "hmg_site",
       "efficacy": "negative",
       "track": "reversible",
@@ -58,7 +58,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "1HW8_114_C4.mol2"
+      "mol2": "1HW8_114_A2.mol2"
     },
     {
       "pdb_id": "1HWI",
@@ -84,8 +84,8 @@
     {
       "pdb_id": "1HWJ",
       "ligand_id": "116",
-      "chain": "C",
-      "seqid": "4",
+      "chain": "A",
+      "seqid": "2",
       "pocket": "hmg_site",
       "efficacy": "negative",
       "track": "reversible",
@@ -100,7 +100,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "1HWJ_116_C4.mol2"
+      "mol2": "1HWJ_116_A2.mol2"
     },
     {
       "pdb_id": "1HWK",
@@ -232,7 +232,7 @@
       "pdb_id": "2Q1L",
       "ligand_id": "882",
       "chain": "A",
-      "seqid": "876",
+      "seqid": "877",
       "pocket": "hmg_site",
       "efficacy": "negative",
       "track": "reversible",
@@ -247,12 +247,33 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "2Q1L_882_A876.mol2"
+      "mol2": "2Q1L_882_A877.mol2"
     },
     {
       "pdb_id": "3CD7",
       "ligand_id": "882",
       "chain": "A",
+      "seqid": "2",
+      "pocket": "hmg_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "hmg_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P04035"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3CD7_882_A2.mol2"
+    },
+    {
+      "pdb_id": "3CDA",
+      "ligand_id": "8HI",
+      "chain": "B",
       "seqid": "1",
       "pocket": "hmg_site",
       "efficacy": "negative",
@@ -268,28 +289,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "3CD7_882_A1.mol2"
-    },
-    {
-      "pdb_id": "3CDA",
-      "ligand_id": "8HI",
-      "chain": "C",
-      "seqid": "4",
-      "pocket": "hmg_site",
-      "efficacy": "negative",
-      "track": "reversible",
-      "cell": "hmg_site__negative",
-      "efficacy_source": "curated (target default)",
-      "efficacy_note": "control target default",
-      "separate_state_reason": "",
-      "mapping": "primary",
-      "subtype_accessions": [
-        "P04035"
-      ],
-      "subtype_organisms": [
-        "Homo sapiens"
-      ],
-      "mol2": "3CDA_8HI_C4.mol2"
+      "mol2": "3CDA_8HI_B1.mol2"
     },
     {
       "pdb_id": "3CDB",
@@ -484,7 +484,7 @@
       "pdb_id": "1HW9",
       "ligand_id": "SIM",
       "chain": "C",
-      "seqid": "1",
+      "seqid": "2",
       "pocket": "hmg_site",
       "efficacy": "negative",
       "track": "reversible",
@@ -499,7 +499,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "1HW9_SIM_C1.mol2"
+      "mol2": "1HW9_SIM_C2.mol2"
     }
   ]
 }

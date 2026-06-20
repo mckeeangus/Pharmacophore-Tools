@@ -1,18 +1,26 @@
 """Superpose bound-ligand instances into a per-target reference frame.
 
-Strategy (per CLAUDE.md decision: *binding-site-local* superposition):
+Strategy (per CLAUDE.md decision: *binding-site-local* superposition). The fit is
+optimised for the geometry of the residues that actually line the pocket — that
+constancy is what makes overlaid poses comparable for pharmacophore building, and
+it is where naive single-pass fits drift on low-identity surrogates.
 
   1. A reference structure defines the site via an ``anchor`` residue (the
-     reference ligand or catalytic ion). Reference pocket = polymer Calpha atoms
-     within ``pocket_shell`` of the anchor.
+     reference ligand or catalytic ion). Reference pocket = polymer residues whose
+     Calpha lies within ``pocket_shell`` of the anchor; we keep their backbone
+     atoms and each residue's Calpha distance to the anchor.
   2. For each candidate instance we first do a sequence-aware *global* fit of the
-     candidate's principal pocket chain onto the reference chain (gemmi), which
-     establishes a rough frame + correspondence even across mutants/surrogates.
-  3. We then *refine* using only pocket atoms: reference pocket Calpha are paired
-     by spatial proximity (post-global) to candidate Calpha, and we re-superpose
-     on just those pairs. This yields the tightest possible overlay of the actual
-     binding site, which is what matters for comparing poses.
-  4. An instance is kept only if the pocket fit is good (enough matched atoms,
+     candidate's principal pocket chain onto the reference chain (gemmi). This is
+     only an initialiser: it fixes the gross orientation and the right subunit even
+     across mutants/surrogates.
+  3. We then run an *iterative pocket-local refinement* (ICP). Each iteration
+     re-pairs reference pocket residues to the nearest candidate residue (capture
+     radius ``refine_pair_radius``), then re-superposes on the paired backbone
+     atoms (N, CA, C, O) — weighting each residue by a Gaussian on its Calpha
+     distance to the anchor (``anchor_weight_sigma``) so the *immediate* binding
+     site dominates. Re-pairing + re-fitting converges to the locally-optimal
+     binding-site overlay even when the backbone genuinely differs (surrogates).
+  4. An instance is kept only if the pocket fit is good (enough matched residues,
      low RMSD) AND, after transformation, the ligand centroid lands within
      ``cutoff`` of the anchor — i.e. it genuinely binds where the reference
      ligand binds. Off-site poses (wrong site, wrong protein, allosteric) fail
@@ -22,6 +30,7 @@ Strategy (per CLAUDE.md decision: *binding-site-local* superposition):
 from __future__ import annotations
 
 import logging
+import math
 from dataclasses import dataclass
 
 import gemmi
@@ -30,6 +39,8 @@ from ..pdb.rcsb import LigandInstance
 from .config import SiteDef
 
 log = logging.getLogger("pharmpipe.sites.align")
+
+_BACKBONE = ("N", "CA", "C", "O")
 
 
 # --- small geometry helpers ----------------------------------------------
@@ -58,7 +69,16 @@ def _min_dist(p: gemmi.Position, others: list[gemmi.Position]) -> float:
 # --- reference --------------------------------------------------------------
 
 @dataclass
-class PocketCA:
+class PocketResidue:
+    chain: str
+    seqid: int
+    ca: gemmi.Position
+    backbone: dict[str, gemmi.Position]   # name -> pos for present N, CA, C, O
+    dist_anchor: float                    # CA distance to the anchor centroid
+
+
+@dataclass
+class PocketCA:                           # kept for backward-compatible callers
     chain: str
     seqid: int
     pos: gemmi.Position
@@ -70,8 +90,20 @@ class SiteReference:
     structure: gemmi.Structure
     anchor_atoms: list[gemmi.Position]
     anchor_centroid: gemmi.Position
-    pocket: list[PocketCA]          # reference pocket Calpha (any chain) near anchor
-    ref_chain: str                  # chain richest in pocket Calpha (for global fit)
+    pocket_res: list[PocketResidue]   # reference pocket residues (backbone) near anchor
+    ref_chain: str                    # chain richest in pocket Calpha (for global fit)
+
+    @property
+    def pocket(self) -> list[PocketCA]:
+        return [PocketCA(pr.chain, pr.seqid, pr.ca) for pr in self.pocket_res]
+
+
+def _backbone(res: gemmi.Residue) -> dict[str, gemmi.Position]:
+    out: dict[str, gemmi.Position] = {}
+    for atom in res:
+        if atom.name in _BACKBONE and atom.name not in out:
+            out[atom.name] = atom.pos
+    return out
 
 
 def _find_anchor_residues(model: gemmi.Model, anchor_het: str) -> list[gemmi.Residue]:
@@ -84,17 +116,17 @@ def _find_anchor_residues(model: gemmi.Model, anchor_het: str) -> list[gemmi.Res
 
 
 def _pocket_near(model: gemmi.Model, ref_atoms: list[gemmi.Position],
-                 shell: float) -> list[PocketCA]:
-    """Polymer Calpha atoms within `shell` of any of `ref_atoms`."""
-    pocket: list[PocketCA] = []
+                 anchor_centroid: gemmi.Position, shell: float) -> list[PocketResidue]:
+    """Polymer residues whose Calpha is within `shell` of any of `ref_atoms`."""
+    pocket: list[PocketResidue] = []
     for chain in model:
-        poly = chain.get_polymer()
-        for res in poly:
+        for res in chain.get_polymer():
             ca = res.get_ca()
             if ca is None:
                 continue
             if _min_dist(ca.pos, ref_atoms) <= shell:
-                pocket.append(PocketCA(chain.name, res.seqid.num, ca.pos))
+                pocket.append(PocketResidue(chain.name, res.seqid.num, ca.pos,
+                                            _backbone(res), ca.pos.dist(anchor_centroid)))
     return pocket
 
 
@@ -109,30 +141,29 @@ def build_reference(st: gemmi.Structure, site: SiteDef) -> SiteReference | None:
         return None
 
     # Pick the anchor copy with the richest surrounding pocket (the canonical site).
-    best_res, best_pocket = None, []
+    best_pocket: list[PocketResidue] = []
     for res in candidates:
         atoms = _positions(res)
-        pocket = _pocket_near(model, atoms, site.pocket_shell_angstrom)
+        pocket = _pocket_near(model, atoms, _centroid(atoms), site.pocket_shell_angstrom)
         if len(pocket) > len(best_pocket):
-            best_res, best_pocket = res, pocket
-    if best_res is None or not best_pocket:
+            best_res_atoms, best_pocket = atoms, pocket
+    if not best_pocket:
         log.warning("[%s] anchor %s in %s has no protein pocket",
                     site.slug, site.anchor_het, site.reference_pdb)
         return None
 
-    anchor_atoms = _positions(best_res)
     # Chain contributing the most pocket Calpha -> reference chain for the global fit.
     counts: dict[str, int] = {}
-    for pc in best_pocket:
-        counts[pc.chain] = counts.get(pc.chain, 0) + 1
+    for pr in best_pocket:
+        counts[pr.chain] = counts.get(pr.chain, 0) + 1
     ref_chain = max(counts, key=counts.get)
 
     return SiteReference(
         site=site,
         structure=st,
-        anchor_atoms=anchor_atoms,
-        anchor_centroid=_centroid(anchor_atoms),
-        pocket=best_pocket,
+        anchor_atoms=best_res_atoms,
+        anchor_centroid=_centroid(best_res_atoms),
+        pocket_res=best_pocket,
         ref_chain=ref_chain,
     )
 
@@ -185,6 +216,83 @@ def find_residue(model: gemmi.Model, inst: LigandInstance) -> gemmi.Residue | No
     return matches[0] if len(matches) == 1 else None
 
 
+def _candidate_pocket_residues(model: gemmi.Model, t_global: gemmi.Transform,
+                               ref: SiteReference, site: SiteDef
+                               ) -> list[tuple[gemmi.Residue, gemmi.Position]]:
+    """Candidate polymer residues whose Calpha (under the global fit) lands near the
+    pocket — the working set for ICP, so distant chains cannot mis-pair."""
+    limit = site.pocket_shell_angstrom + site.refine_pair_radius_angstrom
+    out: list[tuple[gemmi.Residue, gemmi.Position]] = []
+    for chain in model:
+        for r in chain.get_polymer():
+            ca = r.get_ca()
+            if ca is not None and _apply(t_global, ca.pos).dist(ref.anchor_centroid) <= limit:
+                out.append((r, ca.pos))
+    return out
+
+
+def _pocket_ca_rmsd(ref: SiteReference, cand_ca: list[gemmi.Position],
+                    t: gemmi.Transform, site: SiteDef) -> tuple[float | None, int]:
+    """Unweighted Calpha RMSD over reference pocket residues that have a candidate
+    Calpha within ``match_distance`` after transform `t` (comparable to the old
+    metric, used for the keep/reject thresholds)."""
+    moved = [_apply(t, ca) for ca in cand_ca]
+    sq, n = 0.0, 0
+    for pr in ref.pocket_res:
+        d = min((pr.ca.dist(m) for m in moved), default=1e9)
+        if d <= site.match_distance_angstrom:
+            sq += d * d
+            n += 1
+    return ((sq / n) ** 0.5 if n else None), n
+
+
+def _refine_local(ref: SiteReference,
+                  cand_res: list[tuple[gemmi.Residue, gemmi.Position]],
+                  t_init: gemmi.Transform, site: SiteDef
+                  ) -> tuple[gemmi.Transform | None, float | None, int]:
+    """Iterative closest-point refinement of the binding-site overlay (see module
+    docstring): re-pair pocket residues each iteration, then re-superpose on
+    anchor-weighted backbone atoms. Returns (transform, pocket RMSD, n_pocket) or
+    (None, None, 0) if correspondence is too thin to fit."""
+    if not cand_res:
+        return None, None, 0
+    sigma = site.anchor_weight_sigma_angstrom
+    cand_ca = [ca for _, ca in cand_res]
+    t = t_init
+    for _ in range(max(1, site.refine_iterations)):
+        moved = [_apply(t, ca) for ca in cand_ca]
+        fixed: list[gemmi.Position] = []
+        moving: list[gemmi.Position] = []
+        weights: list[float] = []
+        for pr in ref.pocket_res:
+            best_i, best_d = -1, site.refine_pair_radius_angstrom
+            for i, mp in enumerate(moved):
+                d = pr.ca.dist(mp)
+                if d < best_d:
+                    best_d, best_i = d, i
+            if best_i < 0:
+                continue
+            w = math.exp(-(pr.dist_anchor / sigma) ** 2) if sigma > 0 else 1.0
+            cres = cand_res[best_i][0]
+            if site.use_backbone:
+                cand_bb = _backbone(cres)
+                for name, pos in pr.backbone.items():
+                    q = cand_bb.get(name)
+                    if q is not None:
+                        fixed.append(pos)
+                        moving.append(q)
+                        weights.append(w)
+            else:
+                fixed.append(pr.ca)
+                moving.append(cand_ca[best_i])
+                weights.append(w)
+        if len(fixed) < 3:                       # degenerate -> let caller fall back
+            return None, None, 0
+        t = gemmi.superpose_positions(fixed, moving, weights).transform
+    rmsd, n_pocket = _pocket_ca_rmsd(ref, cand_ca, t, site)
+    return t, rmsd, n_pocket
+
+
 def align_instance(st: gemmi.Structure, inst: LigandInstance,
                    ref: SiteReference) -> AlignedInstance:
     site = ref.site
@@ -214,43 +322,20 @@ def align_instance(st: gemmi.Structure, inst: LigandInstance,
         return AlignedInstance(inst, "align_error", message=f"global fit failed: {exc}")
     t_global = glob.transform
 
-    # 2) Pair reference pocket Calpha to candidate Calpha by proximity (post-global),
-    #    then refine the fit on just those pocket atoms.
-    cand_ca: list[gemmi.Position] = []           # original (pre-transform) candidate Calpha
-    cand_ca_in_ref: list[gemmi.Position] = []    # same atoms moved into the reference frame
-    for chain in model:
-        for r in chain.get_polymer():
-            ca = r.get_ca()
-            if ca is not None:
-                cand_ca.append(ca.pos)
-                cand_ca_in_ref.append(_apply(t_global, ca.pos))
-
-    fixed: list[gemmi.Position] = []
-    moving: list[gemmi.Position] = []
-    for pc in ref.pocket:
-        best_i, best_d = -1, site.match_distance_angstrom
-        for i, q in enumerate(cand_ca_in_ref):
-            d = pc.pos.dist(q)
-            if d <= best_d:
-                best_d, best_i = d, i
-        if best_i >= 0:
-            fixed.append(pc.pos)
-            moving.append(cand_ca[best_i])
-
-    n_pocket = len(fixed)
-    if n_pocket >= site.min_pocket_atoms:
-        local = gemmi.superpose_positions(fixed, moving)
-        transform, rmsd = local.transform, local.rmsd
-    else:
-        # Not enough pocket correspondence -> fall back to the global fit, low confidence.
-        transform, rmsd = t_global, glob.rmsd
+    # 2) Iterative pocket-local refinement (ICP) seeded by the global fit. Restrict
+    #    the working set to candidate residues near the pocket so distant chains
+    #    cannot accidentally pair, then re-pair + re-fit on weighted backbone atoms.
+    cand_res = _candidate_pocket_residues(model, t_global, ref, site)
+    transform, rmsd, n_pocket = _refine_local(ref, cand_res, t_global, site)
+    if transform is None:                       # too little pocket correspondence
+        transform, rmsd, n_pocket = t_global, glob.rmsd, 0
 
     lig_in_ref = [_apply(transform, p) for p in lig_atoms]
     centroid_dist = _centroid(lig_in_ref).dist(ref.anchor_centroid)
 
     if n_pocket < site.min_pocket_atoms:
         status = "no_pocket"
-    elif rmsd > site.max_pocket_rmsd_angstrom:
+    elif rmsd is None or rmsd > site.max_pocket_rmsd_angstrom:
         status = "poor_fit"
     elif centroid_dist > site.cutoff_angstrom:
         status = "off_site"

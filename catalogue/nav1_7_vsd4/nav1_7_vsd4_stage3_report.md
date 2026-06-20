@@ -38,7 +38,7 @@ _Notes: Single VSD4 aryl-sulfonamide site (the Stage-2 anchor already isolates i
 
 **Quarantined** (2):
 
-- `5P2` (5EK0_5P2_A1808, primary) — candidate pocket: vsd4_site
+- `5P2` (5EK0_5P2_C1805, primary) — candidate pocket: vsd4_site
 - `T70` (8I5G_T70_A2005, primary) — candidate pocket: vsd4_site
 
 ---

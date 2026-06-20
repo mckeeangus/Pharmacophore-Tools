@@ -1,4 +1,4 @@
-# representative — 96 molecules (reference frame; protein omitted)
+# representative — 95 molecules (reference frame; protein omitted)
 reinitialize
 bg_color white
 set valence, 1
@@ -42,7 +42,7 @@ load 9GNO_A1INI_A301.mol2, 9GNO_A1INI_A301
 load 4EOJ_ATP_A301.mol2, 4EOJ_ATP_A301
 load 6Q3C_BYZ_A302.mol2, 6Q3C_BYZ_A302
 load 4FKL_CK2_A300.mol2, 4FKL_CK2_A300
-load 7QHL_D5P_A301.mol2, 7QHL_D5P_A301
+load 7QHL_D5P_C301.mol2, 7QHL_D5P_C301
 load 1H00_FAP_A1300.mol2, 1H00_FAP_A1300
 load 6GUH_FB8_A301.mol2, 6GUH_FB8_A301
 load 6GUK_FC8_A301.mol2, 6GUK_FC8_A301
@@ -78,7 +78,7 @@ load 2R3K_SCQ_A501.mol2, 2R3K_SCQ_A501
 load 2R3L_SCW_A501.mol2, 2R3L_SCW_A501
 load 2R3M_SCX_A501.mol2, 2R3M_SCX_A501
 load 2R3N_SCZ_A501.mol2, 2R3N_SCZ_A501
-load 7QHL_SGM_B503.mol2, 7QHL_SGM_B503
+load 4EOJ_SGM_B502.mol2, 4EOJ_SGM_B502
 load 3PY0_SU9_A301.mol2, 3PY0_SU9_A301
 load 5ANE_SZL_A1299.mol2, 5ANE_SZL_A1299
 load 8ERD_WQ6_A301.mol2, 8ERD_WQ6_A301
@@ -92,7 +92,6 @@ load 3QXO_X65_A668.mol2, 3QXO_X65_A668
 load 3QZG_X67_A471.mol2, 3QZG_X67_A471
 load 3QWJ_X6A_A483.mol2, 3QWJ_X6A_A483
 load 3QZI_X72_A512.mol2, 3QZI_X72_A512
-load 3R6X_X84_A778.mol2, 3R6X_X84_A778
 load 3RAI_X85_A923.mol2, 3RAI_X85_A923
 load 3R73_X87_A920.mol2, 3R73_X87_A920
 load 3R28_XA0_A782.mol2, 3R28_XA0_A782

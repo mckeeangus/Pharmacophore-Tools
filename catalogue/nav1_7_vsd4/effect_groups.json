@@ -26,8 +26,8 @@
     {
       "pdb_id": "5EK0",
       "ligand_id": "5P2",
-      "chain": "A",
-      "seqid": "1808",
+      "chain": "C",
+      "seqid": "1805",
       "pocket": null,
       "efficacy": "negative",
       "track": "reversible",
@@ -43,7 +43,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "5EK0_5P2_A1808.mol2"
+      "mol2": "5EK0_5P2_C1805.mol2"
     },
     {
       "pdb_id": "8I5G",

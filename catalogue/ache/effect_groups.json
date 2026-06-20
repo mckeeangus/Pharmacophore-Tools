@@ -16,15 +16,15 @@
       "6O4W_E20_A604",
       "7E3H_E20_B601",
       "6O50_EBW_A601",
-      "6O52_EBW_A601",
+      "6O52_EBW_B601",
       "4EY6_GNT_A604",
       "7D9O_H0L_B601",
-      "7D9P_H0R_B601",
-      "7D9Q_H1R_A601",
+      "7D9P_H0R_A601",
+      "7D9Q_H1R_B601",
       "4EY5_HUP_A604",
       "4BDT_HUW_A701",
       "7RB5_NWA_A601",
-      "7RB6_NWA_B601",
+      "7RB6_NWA_A601",
       "7RB7_NWA_B601",
       "7XN1_THA_A601"
     ]
@@ -104,7 +104,7 @@
     {
       "pdb_id": "8DT4",
       "ligand_id": "3VI",
-      "chain": "B",
+      "chain": "A",
       "seqid": "602",
       "pocket": "gorge",
       "efficacy": "n/a",
@@ -120,12 +120,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8DT4_3VI_B602.mol2"
+      "mol2": "8DT4_3VI_A602.mol2"
     },
     {
       "pdb_id": "8DT7",
       "ligand_id": "3VI",
-      "chain": "A",
+      "chain": "B",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "n/a",
@@ -141,7 +141,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8DT7_3VI_A601.mol2"
+      "mol2": "8DT7_3VI_B601.mol2"
     },
     {
       "pdb_id": "7P1P",
@@ -209,8 +209,8 @@
     {
       "pdb_id": "9OMT",
       "ligand_id": "A1CDA",
-      "chain": "A",
-      "seqid": "604",
+      "chain": "B",
+      "seqid": "603",
       "pocket": "gorge",
       "efficacy": "n/a",
       "track": "separate_state",
@@ -225,7 +225,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "9OMT_A1CDA_A604.mol2"
+      "mol2": "9OMT_A1CDA_B603.mol2"
     },
     {
       "pdb_id": "6O4X",
@@ -272,8 +272,8 @@
     {
       "pdb_id": "5HF5",
       "ligand_id": "DEP",
-      "chain": "A",
-      "seqid": "604",
+      "chain": "B",
+      "seqid": "606",
       "pocket": "gorge",
       "efficacy": "n/a",
       "track": "separate_state",
@@ -288,7 +288,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "5HF5_DEP_A604.mol2"
+      "mol2": "5HF5_DEP_B606.mol2"
     },
     {
       "pdb_id": "5HF8",
@@ -377,7 +377,7 @@
     {
       "pdb_id": "8DT4",
       "ligand_id": "DEP",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "n/a",
@@ -393,7 +393,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8DT4_DEP_B601.mol2"
+      "mol2": "8DT4_DEP_A601.mol2"
     },
     {
       "pdb_id": "8DT5",
@@ -419,7 +419,7 @@
     {
       "pdb_id": "9OMT",
       "ligand_id": "DEP",
-      "chain": "A",
+      "chain": "B",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "n/a",
@@ -435,7 +435,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "9OMT_DEP_A601.mol2"
+      "mol2": "9OMT_DEP_B601.mol2"
     },
     {
       "pdb_id": "4EY7",
@@ -524,7 +524,7 @@
     {
       "pdb_id": "6O52",
       "ligand_id": "EBW",
-      "chain": "A",
+      "chain": "B",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "negative",
@@ -540,13 +540,13 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "6O52_EBW_A601.mol2"
+      "mol2": "6O52_EBW_B601.mol2"
     },
     {
       "pdb_id": "5HF6",
       "ligand_id": "EFS",
-      "chain": "A",
-      "seqid": "604",
+      "chain": "B",
+      "seqid": "605",
       "pocket": "gorge",
       "efficacy": "n/a",
       "track": "separate_state",
@@ -561,7 +561,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "5HF6_EFS_A604.mol2"
+      "mol2": "5HF6_EFS_B605.mol2"
     },
     {
       "pdb_id": "5HF8",
@@ -713,27 +713,6 @@
     {
       "pdb_id": "7D9P",
       "ligand_id": "H0R",
-      "chain": "B",
-      "seqid": "601",
-      "pocket": "gorge",
-      "efficacy": "negative",
-      "track": "reversible",
-      "cell": "gorge__negative",
-      "efficacy_source": "curated (target default)",
-      "efficacy_note": "multi_site target default",
-      "separate_state_reason": "",
-      "mapping": "primary",
-      "subtype_accessions": [
-        "P22303"
-      ],
-      "subtype_organisms": [
-        "Homo sapiens"
-      ],
-      "mol2": "7D9P_H0R_B601.mol2"
-    },
-    {
-      "pdb_id": "7D9Q",
-      "ligand_id": "H1R",
       "chain": "A",
       "seqid": "601",
       "pocket": "gorge",
@@ -750,7 +729,28 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7D9Q_H1R_A601.mol2"
+      "mol2": "7D9P_H0R_A601.mol2"
+    },
+    {
+      "pdb_id": "7D9Q",
+      "ligand_id": "H1R",
+      "chain": "B",
+      "seqid": "601",
+      "pocket": "gorge",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "gorge__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "multi_site target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P22303"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7D9Q_H1R_B601.mol2"
     },
     {
       "pdb_id": "5HF9",
@@ -776,7 +776,7 @@
     {
       "pdb_id": "6CQU",
       "ligand_id": "HI6",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "n/a",
@@ -792,7 +792,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "6CQU_HI6_B601.mol2"
+      "mol2": "6CQU_HI6_A601.mol2"
     },
     {
       "pdb_id": "6CQV",
@@ -1302,7 +1302,7 @@
     {
       "pdb_id": "8AEN",
       "ligand_id": "LWL",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "n/a",
@@ -1318,7 +1318,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8AEN_LWL_B601.mol2"
+      "mol2": "8AEN_LWL_A601.mol2"
     },
     {
       "pdb_id": "8AEV",
@@ -1365,7 +1365,7 @@
     {
       "pdb_id": "7RB6",
       "ligand_id": "NWA",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "negative",
@@ -1381,7 +1381,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7RB6_NWA_B601.mol2"
+      "mol2": "7RB6_NWA_A601.mol2"
     },
     {
       "pdb_id": "7RB7",
@@ -1680,7 +1680,7 @@
     {
       "pdb_id": "6CQX",
       "ligand_id": "VX",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "gorge",
       "efficacy": "n/a",
@@ -1696,7 +1696,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "6CQX_VX_B601.mol2"
+      "mol2": "6CQX_VX_A601.mol2"
     },
     {
       "pdb_id": "6CQY",
@@ -1722,8 +1722,8 @@
     {
       "pdb_id": "6CQZ",
       "ligand_id": "VX",
-      "chain": "B",
-      "seqid": "601",
+      "chain": "A",
+      "seqid": "605",
       "pocket": "gorge",
       "efficacy": "n/a",
       "track": "separate_state",
@@ -1738,7 +1738,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "6CQZ_VX_B601.mol2"
+      "mol2": "6CQZ_VX_A605.mol2"
     },
     {
       "pdb_id": "6O5S",

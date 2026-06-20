@@ -18,6 +18,16 @@ defaults:
   match_distance_angstrom: 2.5  # after a global fit, ref/candidate Calpha within this are treated as corresponding
   max_pocket_rmsd_angstrom: 3.0 # reject instances whose pocket superposition is worse than this (no matching pocket)
   min_pocket_atoms: 8           # need at least this many matched pocket Calpha to trust the fit
+  # Iterative pocket-local refinement (ICP) of the binding-site overlay. The global
+  # sequence fit only initialises; these knobs drive the refinement that keeps the
+  # geometry of pocket-lining residues constant across structures (critical for
+  # low-identity surrogates such as AChBP/dDAT). See src/pharmpipe/sites/align.py.
+  refine_iterations: 10              # max ICP iterations (re-pair + re-fit); converges fast
+  refine_pair_radius_angstrom: 4.0  # capture radius when re-pairing a pocket residue to a candidate
+  anchor_weight_sigma_angstrom: 6.0 # Gaussian weight on each residue's Calpha-anchor distance
+                                    #   (smaller -> tighter focus on the immediate site; 6.0 balances
+                                    #    surrogate inner-site RMSD vs worst-case stability)
+  use_backbone: true                # superpose on N,CA,C,O (constrains orientation) vs Calpha only
 
 sites:
   nachr_a4b2:

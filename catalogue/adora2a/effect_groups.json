@@ -183,7 +183,7 @@
       "3QAK_UKA_A1200",
       "5WF5_UKA_A1201",
       "5WF6_UKA_A1201",
-      "7EZC_UKA_A1200",
+      "7EZC_UKA_B1200",
       "8WDT_WCH_A1000"
     ]
   },
@@ -3289,7 +3289,7 @@
     {
       "pdb_id": "7EZC",
       "ligand_id": "UKA",
-      "chain": "A",
+      "chain": "B",
       "seqid": "1200",
       "pocket": "orthosteric",
       "efficacy": "positive",
@@ -3306,7 +3306,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "7EZC_UKA_A1200.mol2"
+      "mol2": "7EZC_UKA_B1200.mol2"
     },
     {
       "pdb_id": "8JWY",

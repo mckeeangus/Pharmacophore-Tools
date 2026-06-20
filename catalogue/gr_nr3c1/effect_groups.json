@@ -9,10 +9,10 @@
   ],
   "cells": {
     "lbp__negative": [
-      "4MDD_29M_A801",
+      "4MDD_29M_B801",
       "1NHZ_486_A800",
-      "3H52_486_C4",
-      "5UC3_486_A801",
+      "3H52_486_D2",
+      "5UC3_486_B801",
       "6DXK_HJ4_A801"
     ],
     "lbp__positive": [
@@ -36,7 +36,7 @@
       "5G3J_E7T_A1779",
       "3CLD_GW6_A1",
       "7PRV_GW6_A805",
-      "4P6X_HCY_G900",
+      "4P6X_HCY_C900",
       "3K23_JZN_B2",
       "3K22_JZS_B1",
       "4LSJ_LSJ_A801",
@@ -57,7 +57,7 @@
     {
       "pdb_id": "4MDD",
       "ligand_id": "29M",
-      "chain": "A",
+      "chain": "B",
       "seqid": "801",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -74,7 +74,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "4MDD_29M_A801.mol2"
+      "mol2": "4MDD_29M_B801.mol2"
     },
     {
       "pdb_id": "1NHZ",
@@ -100,8 +100,8 @@
     {
       "pdb_id": "3H52",
       "ligand_id": "486",
-      "chain": "C",
-      "seqid": "4",
+      "chain": "D",
+      "seqid": "2",
       "pocket": "lbp",
       "efficacy": "negative",
       "track": "reversible",
@@ -117,12 +117,12 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "3H52_486_C4.mol2"
+      "mol2": "3H52_486_D2.mol2"
     },
     {
       "pdb_id": "5UC3",
       "ligand_id": "486",
-      "chain": "A",
+      "chain": "B",
       "seqid": "801",
       "pocket": "lbp",
       "efficacy": "negative",
@@ -138,7 +138,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "5UC3_486_A801.mol2"
+      "mol2": "5UC3_486_B801.mol2"
     },
     {
       "pdb_id": "7PRW",
@@ -586,7 +586,7 @@
     {
       "pdb_id": "4P6X",
       "ligand_id": "HCY",
-      "chain": "G",
+      "chain": "C",
       "seqid": "900",
       "pocket": "lbp",
       "efficacy": "positive",
@@ -603,7 +603,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "4P6X_HCY_G900.mol2"
+      "mol2": "4P6X_HCY_C900.mol2"
     },
     {
       "pdb_id": "6DXK",
@@ -738,8 +738,8 @@
     {
       "pdb_id": "8A9G",
       "ligand_id": "QJK",
-      "chain": "B",
-      "seqid": "303",
+      "chain": "A",
+      "seqid": "302",
       "pocket": null,
       "efficacy": "n/a",
       "track": "separate_state",
@@ -755,7 +755,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "8A9G_QJK_B303.mol2"
+      "mol2": "8A9G_QJK_A302.mol2"
     },
     {
       "pdb_id": "5G5W",

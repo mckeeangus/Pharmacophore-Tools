@@ -12,7 +12,7 @@
       "5IKV_FLF_B601",
       "5IKR_ID8_A601",
       "5KIR_RCX_A601",
-      "5F1A_SAL_B601",
+      "5F1A_SAL_A601",
       "5IKT_TLF_B601"
     ]
   },
@@ -112,7 +112,7 @@
     {
       "pdb_id": "5F1A",
       "ligand_id": "SAL",
-      "chain": "B",
+      "chain": "A",
       "seqid": "601",
       "pocket": "cox_channel",
       "efficacy": "negative",
@@ -128,7 +128,7 @@
       "subtype_organisms": [
         "Homo sapiens"
       ],
-      "mol2": "5F1A_SAL_B601.mol2"
+      "mol2": "5F1A_SAL_A601.mol2"
     },
     {
       "pdb_id": "5IKT",

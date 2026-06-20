@@ -7,7 +7,7 @@ set valence, 1
 load groups/central_s1__negative/8HFL_1XR_A701.mol2, central_s1__negative__8HFL_1XR_A701
 load groups/central_s1__negative/4M48_21B_A704.mol2, central_s1__negative__4M48_21B_A704
 load groups/central_s1__negative/6M38_29E_A601.mol2, central_s1__negative__6M38_29E_A601
-load groups/central_s1__negative/8YR2_41U_A701.mol2, central_s1__negative__8YR2_41U_A701
+load groups/central_s1__negative/8YR2_41U_B701.mol2, central_s1__negative__8YR2_41U_B701
 load groups/central_s1__negative/4XNX_41X_A707.mol2, central_s1__negative__4XNX_41X_A707
 load groups/central_s1__negative/4XPF_42F_A703.mol2, central_s1__negative__4XPF_42F_A703
 load groups/central_s1__negative/4XPG_42L_A701.mol2, central_s1__negative__4XPG_42L_A701
@@ -19,7 +19,7 @@ load groups/central_s1__negative/9JF3_A1EBO_A701.mol2, central_s1__negative__9JF
 load groups/central_s1__negative/9KE3_A1EFR_B707.mol2, central_s1__negative__9KE3_A1EFR_B707
 load groups/central_s1__negative/8Y8Z_A1LX3_E701.mol2, central_s1__negative__8Y8Z_A1LX3_E701
 load groups/central_s1__negative/8ZP2_A1LX4_A701.mol2, central_s1__negative__8ZP2_A1LX4_A701
-load groups/central_s1__negative/8Y91_A1LX5_A701.mol2, central_s1__negative__8Y91_A1LX5_A701
+load groups/central_s1__negative/8Y91_A1LX5_D703.mol2, central_s1__negative__8Y91_A1LX5_D703
 load groups/central_s1__negative/8Y90_A1LX6_A701.mol2, central_s1__negative__8Y90_A1LX6_A701
 load groups/central_s1__negative/4XP4_COC_A706.mol2, central_s1__negative__4XP4_COC_A706
 load groups/central_s1__negative/8HFI_DSM_A701.mol2, central_s1__negative__8HFI_DSM_A701

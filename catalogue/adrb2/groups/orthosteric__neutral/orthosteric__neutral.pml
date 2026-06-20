@@ -3,7 +3,7 @@ reinitialize
 bg_color white
 set valence, 1
 
-load 8W1V_A1AE2_A1201.mol2, 8W1V_A1AE2_A1201
+load 8W1V_A1AE2_B1201.mol2, 8W1V_A1AE2_B1201
 load 9W3F_BER_A1201.mol2, 9W3F_BER_A1201
 load 6PS2_JTZ_A1201.mol2, 6PS2_JTZ_A1201
 show sticks

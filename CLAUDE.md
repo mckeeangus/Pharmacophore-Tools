@@ -13,6 +13,17 @@ experimentally-bound PDB ligands, filtered to each system's relevant site, align
 into one reference frame, and partitioned into **cells = (verified pocket × efficacy
 sign)**. The tracked deliverable is `catalogue/` (start at `catalogue/DATASETS.md`).
 
+A **second target batch** (2026-06-19) ran the full Stages 1–3.4 for Nav1.7
+(`nav1_7_vsd4`, `nav1_7_pore`), the glucocorticoid receptor (`gr_nr3c1`), adenosine
+A₂ₐ (`adora2a`) and muscarinic M2 (`chrm2`): data, visualisations, and the Stage-3.4
+literature efficacy curation are **complete** (56 of 61 worklist ligands resolved from
+primary citations and merged into `config/efficacy.yaml` as `source: literature`;
+provenance in `catalogue/efficacy_batch2_traceability.csv` + `efficacy_batch2_notes.md`,
+prompt in `literature_curation_prompt_batch2.md`). Cells: `gr_nr3c1` lbp positive/
+negative; `adora2a` orthosteric positive/neutral/negative; `chrm2` orthosteric
+positive/negative; both Nav1.7 slugs are blocker-only (`negative`). The 5 left
+`unknown` are screening fragments / a mispaired detergent — correctly excluded.
+
 **The current stage is pharmacophore construction** from those grouped active poses
 (see "Next stage" below). The longer-term flow — **DrugCLIP** virtual screening →
 ligand prep → **GNINA** docking → score filtering — remains **out of scope**; do not
@@ -169,6 +180,10 @@ live in each `resolved.json`.
 | HMG-CoA reductase | HMGCR P04035 | Statin/inhibitor complexes. |
 | GABA-A receptor | GABRA1 P14867, GABRG2 P18507, + β | Pentameric, many compositions, mostly cryo-EM; lipids/detergents filtered. |
 | Norepinephrine transporter | SLC6A2 P23975 | SLC6 transporter (**not** an adrenergic receptor). **dDAT** surrogate poses included only where wanted and labelled. |
+| Nav1.7 (sodium channel) | SCN9A Q15858 | **Two drug sites, two slugs**: `nav1_7_vsd4` (VSD4 aryl-sulfonamide) + `nav1_7_pore` (central-cavity local-anaesthetic). Sites sit in different domains so they don't co-superpose — each anchored separately. Channel block = `negative`. |
+| Glucocorticoid receptor | NR3C1 P04150 | Steroid LBD (nuclear-receptor analogue of ESR1). Some deposits are GR–Hsp90–p23 complexes — **Hsp90 ATP/ADP routed out**, not GR ligands. |
+| Adenosine A₂ₐ receptor | ADORA2A P29274 | GPCR; **fusion partners** (BRIL/T4L) + thermostabilising mutations — don't catalogue fusion-partner ligands. Large set; **run uncapped** (the default 100-pose, best-resolution-first cap dropped the entire lower-resolution agonist class, emptying the `positive` cell). |
+| Muscarinic M2 | CHRM2 P08172 | GPCR; acetylcholine receptor disambiguated to **muscarinic M2**. Distinct **extracellular allosteric vestibule** above the orthosteric site (geometric marker split). |
 
 ### Resolved scope decisions (durable)
 

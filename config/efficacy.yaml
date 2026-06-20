@@ -358,3 +358,145 @@ targets:
       F0F:   {efficacy: negative, source: literature, note: "milnacipran SNRI NET inhibitor; PMID 33850134 (conf: high)"}
       F1U:   {efficacy: negative, source: literature, note: "venlafaxine-class SNRI NET inhibitor; PMID 33850134 (conf: high)"}
       YNT:   {efficacy: negative, source: literature, note: "radafaxine (hydroxybupropion) reuptake inhibitor; PMID 39143211 (conf: high)"}
+
+  # --- 2026-06-19 target expansion (batch 2) --------------------------------
+  # Only textbook-certain drugs are seeded here (source: curated); every other
+  # ligand is left to the ChEMBL fallback and the literature worklist, exactly as
+  # the first batch was seeded. `unknown` is never defaulted away.
+
+  # Nav1.7 — two channel drug sites. Use-/state-dependent Na-channel block is the
+  # dominant pharmacology at both (negative), mirroring the cavab channel control.
+  nav1_7_vsd4:
+    class: control
+    default_efficacy: negative          # VSD4 aryl-sulfonamide Nav1.7 inhibitor (blocker)
+    notes: >-
+      Selective aryl-sulfonamide inhibitors trap the DIV voltage sensor in the
+      down state — functional channel block (negative). No activator chemotype is
+      expected at this site.
+    ligands:
+      T70: {efficacy: negative, note: "PF-05089771, Nav1.7 VSD4 inhibitor"}
+      # Stage 3.4 — literature curation (batch 2); PMID + conf in note.
+      "5P2": {efficacy: negative, source: literature, note: "GX-936 aryl-sulfonamide VSD4 inhibitor (voltage-sensor trapping); PMID 26680203 (conf: high)"}
+      X7L:   {efficacy: negative, source: literature, note: "sulfonamide Nav1.7 VSD4 inhibitor (hybrid series); PMID 36975198 (conf: high)"}
+      X7W:   {efficacy: negative, source: literature, note: "sulfonamide Nav1.7 VSD4 inhibitor (hybrid series); PMID 36975198 (conf: high)"}
+      X80:   {efficacy: negative, source: literature, note: "acylsulfonamide Nav1.7 VSD4 inhibitor (hybrid series); PMID 36975198 (conf: high)"}
+
+  nav1_7_pore:
+    class: control
+    default_efficacy: negative          # central-pore use-dependent Na-channel blocker
+    notes: >-
+      Local anaesthetics / anticonvulsant Na-channel blockers dominate the central
+      cavity (negative). Pore-acting channel ACTIVATORS (e.g. veratridine, a
+      neurotoxin-site opener) are the exception and are left `unknown` rather than
+      defaulted, so they never enter the blocker pharmacophore.
+    ligands:
+      OJ0:   {efficacy: negative, source: literature, note: "levobupivacaine, local-anaesthetic pore blocker (site BIG); PMID 37270609 (conf: high)"}
+      TB4:   {efficacy: negative, note: "vixotrigine, use-dependent Na-channel blocker"}
+      LQO:   {efficacy: negative, note: "lacosamide, enhances slow inactivation (blocker)"}
+      A1E26: {efficacy: unknown,  note: "veratridine — Nav ACTIVATOR (neurotoxin site), not a pore blocker; left unknown, not defaulted"}
+      # 9Z9 (7W9K) is a GDN-type detergent/sterol mispaired into the pore worklist
+      # (toxin-gating paper, not a pore blocker) — stays unknown, never a cell.
+
+  # Glucocorticoid receptor — steroidal/nonsteroidal agonists vs antagonists at one
+  # LBD pocket (the nuclear-receptor analogue of ESR1). SGRMs / research modulators
+  # left to literature; chaperone-complex ATP/ADP routed out.
+  gr_nr3c1:
+    class: multi_effect
+    notes: >-
+      Corticosteroid agonists (positive) vs mifepristone-class antagonists
+      (negative). Several deposits are GR-Hsp90-p23 chaperone complexes, so ATP/ADP
+      are Hsp90 cofactors, not GR ligands.
+    ligands:
+      DEX:   {efficacy: positive, note: "dexamethasone, GR agonist"}
+      HCY:   {efficacy: positive, note: "cortisol/hydrocortisone, endogenous agonist"}
+      MOF:   {efficacy: positive, note: "mometasone furoate, corticosteroid agonist"}
+      GW6:   {efficacy: positive, note: "fluticasone-furoate-class corticosteroid agonist"}
+      "486": {efficacy: negative, note: "mifepristone (RU-486), GR antagonist"}
+      ATP:   {track: separate_state, reason: "Hsp90 cofactor in GR-chaperone complex, not a GR ligand"}
+      ADP:   {track: separate_state, reason: "Hsp90 cofactor in GR-chaperone complex, not a GR ligand"}
+      # Stage 3.4 — literature curation (batch 2); PMID + conf in note.
+      # agonists (steroidal + non-steroidal SGRM)
+      CV7:   {efficacy: positive, source: literature, note: "desisobutyryl-ciclesonide, active glucocorticoid agonist metabolite; PMID 26602186 (conf: high)"}
+      "82H": {efficacy: positive, source: literature, note: "velsecorat (AZD7594), selective GR agonist/SGRM; PMID 36747092 (conf: high)"}
+      "866": {efficacy: positive, source: literature, note: "amino-pyrazole benzamide, selective non-steroidal GR agonist; PMID 18952422 (conf: high)"}
+      "8W5": {efficacy: positive, source: literature, note: "steroidal glucocorticoid agonist (16,17-acetal); PMID 28937774 (conf: medium)"}
+      "8W8": {efficacy: positive, source: literature, note: "indazole-ether SGRM (velsecorat-class) agonist; PMID 28937774 (conf: medium)"}
+      A1ACE: {efficacy: positive, source: literature, note: "steroidal GR-agonist ADC payload (ABBV-3373/154); PMID 38516584 (conf: medium)"}
+      B9Q:   {efficacy: positive, source: literature, note: "AZD9567-series non-steroidal GR partial agonist; PMID 29424542 (conf: high)"}
+      B9T:   {efficacy: positive, source: literature, note: "AZD9567-series non-steroidal GR partial agonist; PMID 29424542 (conf: high)"}
+      B9W:   {efficacy: positive, source: literature, note: "AZD9567-series non-steroidal GR partial agonist; PMID 29424542 (conf: high)"}
+      DAY:   {efficacy: positive, source: literature, note: "deacylcortivazol, extremely potent GR agonist; PMID 18160712 (conf: high)"}
+      E7T:   {efficacy: positive, source: literature, note: "tetrahydronaphthalene selective GR agonist lead; PMID 28043796 (conf: high)"}
+      JZN:   {efficacy: positive, source: literature, note: "indazole D-prolinamide, high-potency non-steroidal GR agonist; PMID 19822747 (conf: high)"}
+      JZS:   {efficacy: positive, source: literature, note: "indazole D-alaninamide, high-potency non-steroidal GR agonist; PMID 19822747 (conf: high)"}
+      LSJ:   {efficacy: positive, source: literature, note: "dibenzoxepine sulfonamide dissociated GR agonist; PMID 24446728 (conf: medium)"}
+      NN7:   {efficacy: positive, source: literature, note: "indazole sulfonamide inhaled SGRM agonist; PMID 24755427 (conf: medium)"}
+      R8C:   {efficacy: positive, source: literature, note: "indazole-ether SGRM agonist (TNF-a suppression); PMID 27810243 (conf: medium)"}
+      # antagonists
+      "29M": {efficacy: negative, source: literature, note: "non-steroidal GR antagonist, AF-2 H12 disordering; PDB 4MDD primary citation (conf: high)"}
+      HJ4:   {efficacy: negative, source: literature, note: "ORIC-101, potent steroidal GR antagonist (mifepristone-derived); PMID 30091920 (conf: high)"}
+      # degrader / molecular glue -> separate_state (not an LBD-efficacy ligand)
+      QJK:   {track: separate_state, source: literature, reason: "GR/14-3-3 molecular glue (PPI stabiliser, not steroid-LBD efficacy); PMID 36484727 (conf: high)"}
+
+  # Adenosine A2A receptor — adenosine/NECA-type agonists vs xanthine &
+  # triazolotriazine antagonists at one orthosteric pocket.
+  adora2a:
+    class: multi_effect
+    notes: >-
+      Agonists (positive) and antagonists (negative) share the orthosteric pocket —
+      the agonist/antagonist split we want. Research tool compounds and fragments
+      left to the ChEMBL fallback / literature worklist.
+    ligands:
+      ADN: {efficacy: positive, note: "adenosine, endogenous agonist"}
+      NEC: {efficacy: positive, note: "NECA, non-selective agonist"}
+      NGI: {efficacy: positive, note: "CGS-21680, A2A-selective agonist"}
+      ZMA: {efficacy: negative, note: "ZM-241385, antagonist"}
+      TEP: {efficacy: negative, note: "theophylline, xanthine antagonist"}
+      CFF: {efficacy: negative, note: "caffeine, xanthine antagonist"}
+      # Stage 3.4 — literature curation (batch 2); PMID + conf in note.
+      # partial agonists (positive)
+      A1H1S: {efficacy: positive, source: literature, note: "LUF5834 dicyanopyridine partial agonist (G-protein dissociation); PMID 38751633 (conf: high)"}
+      RVZ:   {efficacy: positive, source: literature, note: "nonriboside dicyanopyridine partial agonist; PMID 33764785 (conf: high)"}
+      WCH:   {efficacy: positive, source: literature, note: "photoNECA, 2-substituted NECA/adenosine agonist scaffold; PMID 38171234 (conf: medium)"}
+      # antagonists (negative)
+      "6DV": {efficacy: negative, source: literature, note: "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)"}
+      "6DX": {efficacy: negative, source: literature, note: "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)"}
+      "6DY": {efficacy: negative, source: literature, note: "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)"}
+      "6DZ": {efficacy: negative, source: literature, note: "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)"}
+      "8D1": {efficacy: negative, source: literature, note: "Cmpd-1 A2A/NR2B dual antagonist; PMID 28167788 (conf: high)"}
+      "8E2": {efficacy: negative, source: literature, note: "PEGylated preladenant conjugate PSB-2113, antagonist; PMID 35174942 (conf: high)"}
+      "8IM": {efficacy: negative, source: literature, note: "fluorophore preladenant conjugate PSB-2115, antagonist; PMID 35174942 (conf: high)"}
+      "8JN": {efficacy: negative, source: literature, note: "8-substituted xanthine A2A antagonist; PMID 28712806 (conf: medium)"}
+      A1C5S: {efficacy: negative, source: literature, note: "MK-1088 A2A/A2B dual antagonist; PMID 42084562 (conf: high)"}
+      A1H3H: {efficacy: negative, source: literature, note: "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)"}
+      A1H3I: {efficacy: negative, source: literature, note: "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)"}
+      A1H3J: {efficacy: negative, source: literature, note: "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)"}
+      A1H3K: {efficacy: negative, source: literature, note: "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)"}
+      A1H3L: {efficacy: negative, source: literature, note: "istradefylline-derived azobenzene xanthine photoswitch, antagonist; PMID 39738009 (conf: high)"}
+      A1IR0: {efficacy: negative, source: literature, note: "furyl-pyrrolopyrimidine A2A antagonist (SBDD); PMID 40592852 (conf: medium)"}
+      A1IR1: {efficacy: negative, source: literature, note: "furyl-triazine A2A antagonist (SBDD); PMID 40592852 (conf: medium)"}
+      LJX:   {efficacy: negative, source: literature, note: "LJ-4517, C8-thiophene nucleoside switched to A2A antagonist (Ki 18 nM); PMID 35977382 (conf: high)"}
+      QGE:   {efficacy: negative, source: literature, note: "chromene A2A antagonist; PMID 32542862 (conf: high)"}
+      QGW:   {efficacy: negative, source: literature, note: "chromene A2A antagonist; PMID 32542862 (conf: high)"}
+      T4E:   {efficacy: negative, source: literature, note: "1,2,4-triazine A2A antagonist; PMID 22220592 (conf: high)"}
+      T4G:   {efficacy: negative, source: literature, note: "1,2,4-triazine A2A antagonist; PMID 22220592 (conf: high)"}
+      TKO:   {efficacy: negative, source: literature, note: "quinazoline A2A antagonist; PMID 35933788 (conf: high)"}
+      VBF:   {efficacy: negative, source: literature, note: "AB928 (etrumadenant) A2A/A2B dual antagonist; PMID 38319473 (conf: high)"}
+      XAC:   {efficacy: negative, source: literature, note: "xanthine amine congener (XAC), A2A antagonist; PMID 21885291 (conf: high)"}
+
+  # Muscarinic M2 — orthosteric ACh-site agonists vs antagonists. The extracellular
+  # allosteric vestibule is a separate pocket (pockets.yaml); modulator direction
+  # is left to literature.
+  chrm2:
+    class: multi_effect
+    notes: >-
+      Orthosteric agonists (positive) vs antagonists (negative). Extracellular
+      allosteric modulators are split out geometrically and their sign curated
+      separately.
+    ligands:
+      # Stage 3.4 — literature curation (batch 2); PMID + conf in note.
+      ACH:   {efficacy: positive, source: literature, note: "acetylcholine, physiological M2 agonist; PMID 36690613 (conf: high)"}
+      IXO:   {efficacy: positive, source: literature, note: "iperoxo, orthosteric M2 superagonist; PMID 24256733 (conf: high)"}
+      QNB:   {efficacy: negative, source: literature, note: "3-quinuclidinyl benzilate, orthosteric M2 antagonist; PMID 22278061 (conf: high)"}
+      "3C0": {efficacy: negative, source: literature, note: "N-methylscopolamine, orthosteric M2 antagonist; PMID 30420692 (conf: high)"}
+      "82F": {efficacy: negative, source: literature, note: "pyrido-benzodiazepine subtype-selective M2 antagonist; PMID 30420692 (conf: high)"}

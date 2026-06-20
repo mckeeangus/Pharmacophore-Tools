@@ -124,3 +124,52 @@ targets:
       Central S1 substrate/inhibitor site. Human NET and the dDAT surrogate use
       different numbering, so geometric clusters are merged to one S1 label;
       species/subtype is recorded per pose.
+
+  # --- 2026-06-19 target expansion (batch 2) -------------------------------
+  nav1_7_vsd4:
+    primary_label: vsd4_site
+    collapse_to_primary: true
+    expected_pockets: [vsd4_site]
+    notes: >-
+      Single VSD4 aryl-sulfonamide site (the Stage-2 anchor already isolates it).
+      Cryo-EM constructs differ in beta-subunit content and numbering, so geometric
+      clusters are merged to one label.
+
+  nav1_7_pore:
+    primary_label: pore_site
+    collapse_to_primary: true
+    expected_pockets: [pore_site]
+    notes: >-
+      Single central-cavity / local-anaesthetic pore site. As with the VSD4 slug,
+      cross-construct numbering fragments the clusters, so they are merged.
+
+  gr_nr3c1:
+    primary_label: lbp
+    expected_pockets: [lbp]
+    notes: >-
+      Ligand-binding-domain steroid pocket (the GR analogue of the ESR1 LBP). One
+      soluble human NR3C1 numbering, so no collapse is needed.
+
+  adora2a:
+    primary_label: orthosteric
+    collapse_to_primary: true
+    expected_pockets: [orthosteric]
+    notes: >-
+      Single orthosteric adenosine pocket. GPCR fusion-construct renumbering
+      (BRIL/T4L) fragments the geometric clusters across structures, so they are
+      merged to one orthosteric label (as with adrb2).
+
+  chrm2:
+    primary_label: orthosteric
+    collapse_to_primary: true
+    expected_pockets: [orthosteric, allosteric]
+    pockets:
+      allosteric:
+        marker_hets: [2CU]    # thienopyridine PAM in the extracellular vestibule (co-bound with ACh)
+    notes: >-
+      Orthosteric ACh pocket vs the extracellular-vestibule allosteric site. The
+      allosteric modulator (2CU) is co-crystallised with orthosteric ACh in the same
+      structure, so its HET marker overrides the label per pose (like the nAChR NSE
+      accessory marker); GPCR renumbering otherwise collapses to the orthosteric
+      label. If the allosteric poses fall outside the Stage-2 cutoff they simply do
+      not appear — the marker only acts on poses that survive the filter.

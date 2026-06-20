@@ -162,3 +162,80 @@ net_slc6a2,A1LX6,8Y90,RGPDEAGGEXEMMM-KRWDZBQOSA-N,CHEMBL4748805,,unknown,cell,ch
 net_slc6a2,F0F,6M3Z,GJJFMKBJSRMPLA-HIFRSBDPSA-N,CHEMBL252923,,unknown,cell,chembl,none,no subtype-specific mechanism
 net_slc6a2,F1U,6M47,TVYLLZQTGLZFBW-GOEBONIOSA-N,CHEMBL4059722,,unknown,cell,chembl,none,no subtype-specific mechanism
 net_slc6a2,YNT,8XB2,RCOBKSKAZMVBHT-TVQRCGJNSA-N,CHEMBL1172928,,unknown,cell,chembl,none,no subtype-specific mechanism
+nav1_7_vsd4,5P2,5EK0,UCAVSLIXTXZSRD-UHFFFAOYSA-N,CHEMBL2325630,,unknown,cell,chembl,none,no subtype-specific mechanism
+nav1_7_vsd4,T70,8I5G,ZYSCOUXLBXGGIM-UHFFFAOYSA-N,CHEMBL2325014,BLOCKER,neutral,cell,chembl,high,
+nav1_7_vsd4,X7L,8F0P,DYROPBGPVFEZHO-UPVQGACJSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+nav1_7_vsd4,X7W,8F0R,SIZNYQOMIBVCNQ-BUKVSMQUSA-N,CHEMBL5989730,,unknown,cell,chembl,none,no subtype-specific mechanism
+nav1_7_vsd4,X80,8F0S,ONUSAXHNRAIZSE-ZEQRLZLVSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+nav1_7_pore,9Z9,7W9K,CEEBZAXXSRFQIC-GZSGZGDASA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+nav1_7_pore,IYJ,8THH,PYZRQGJRPPTADH-UHFFFAOYSA-N,CHEMBL741,BLOCKER,neutral,cell,chembl,high,
+nav1_7_pore,LQO,8S9B,VPPJLAIAVCUEMN-GFCCVEGCSA-N,CHEMBL58323,BLOCKER,neutral,cell,chembl,high,
+nav1_7_pore,N6W,8S9C,FFGPTBGBLSHEPO-UHFFFAOYSA-N,CHEMBL108,BLOCKER,neutral,cell,chembl,high,
+nav1_7_pore,OJ0,8I5B,LEBVLXFERQHONN-INIZCTEOSA-N,CHEMBL1201193,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,29M,4MDD,MFAGIEMFDDDLMT-UHFFFAOYSA-N,CHEMBL3605919,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,486,1NHZ,VKHAHZOOUSRJNA-GCNJZUOMSA-N,CHEMBL1276308,ANTAGONIST,neutral,cell,chembl,high,
+gr_nr3c1,82H,7PRW,ZZWJKLGCDHYVMB-BWGXUDETSA-N,CHEMBL3666807,MODULATOR,unknown,cell,chembl,low,unmapped or conflicting subtype mechanisms
+gr_nr3c1,866,3E7C,LKQMULLPLYLIGW-QFIPXVFZSA-N,CHEMBL1230603,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,8W5,5NFP,VOVIALXJUBGFJZ-VXKMTNQYSA-N,CHEMBL2110662,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,8W8,5NFT,FCNQMDSJHADDFT-WNSKOXEYSA-N,CHEMBL4072756,MODULATOR,unknown,cell,chembl,low,unmapped or conflicting subtype mechanisms
+gr_nr3c1,A1ACE,8VKZ,MPEPSOPXQDGEHP-XSZYCUJUSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+gr_nr3c1,B9Q,6EL6,YDRQCGICZKAGCQ-LMKMVOKYSA-N,CHEMBL3937635,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,B9T,6EL7,LQEPRVHNDMBUPF-GTNSWQLSSA-N,CHEMBL4213734,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,B9W,6EL9,ZQFNDBISEYQVRR-LOSJGSFVSA-N,CHEMBL4207852,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,CV7,4UDD,OXPLANUPKBHPMS-ZXBNPROVSA-N,CHEMBL4594374,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,DAY,3BQD,FKAINCOIINXAOK-UFVJYOHBSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+gr_nr3c1,DEX,1M2Z,UREBDLICKHMUKA-CXSFZGCWSA-N,CHEMBL384467,AGONIST,positive,cell,chembl,high,
+gr_nr3c1,E7T,5G3J,VZPLUSXTJULLCS-SYQZRHMFSA-N,CHEMBL3962413,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,GW6,3CLD,XTULMSXFIHGYFS-VLSRWLAYSA-N,CHEMBL1676,AGONIST,positive,cell,chembl,high,
+gr_nr3c1,HCY,4P6X,JYGXADMDTFJGBT-VWUMJDOOSA-N,CHEMBL389621,AGONIST,positive,cell,chembl,high,
+gr_nr3c1,HJ4,6DXK,MKYOYWSMPLRHDW-SSKMXYOESA-N,CHEMBL4163069,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,JZN,3K23,AKJCJJOQRAGWOW-ZORMNXRFSA-N,CHEMBL1233786,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,JZS,3K22,SDBGIXABAWIVLY-GFCCVEGCSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+gr_nr3c1,LSJ,4LSJ,PHIKAOOZNGLKDI-QQTULTPQSA-N,CHEMBL3120317,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,MOF,4P6W,WOFMFGQZHJDGCX-ZULDAHANSA-N,CHEMBL1161,AGONIST,positive,cell,chembl,high,
+gr_nr3c1,NN7,4CSJ,NMWIJNGJMPMFQG-IBGZPJMESA-N,CHEMBL3261407,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,QJK,8A9G,JNIFVXVQHFKKPJ-HXUWFJFHSA-N,CHEMBL5276523,,unknown,cell,chembl,none,no subtype-specific mechanism
+gr_nr3c1,R8C,5G5W,UITKQZZSZUEHEA-NYHFZMIOSA-N,CHEMBL3915997,,unknown,cell,chembl,none,no subtype-specific mechanism
+chrm2,3C0,5YC8,LZCOQTDXKCNBEE-IKIFYQGPSA-N,CHEMBL376897,,unknown,cell,chembl,none,no subtype-specific mechanism
+chrm2,82F,5ZKB,MZDYABXXPZNUCT-NRFANRHFSA-N,CHEMBL1318307,,unknown,cell,chembl,none,no subtype-specific mechanism
+chrm2,ACH,7T8X,OIPILFWXSMYKGL-UHFFFAOYSA-N,CHEMBL667,,unknown,cell,chembl,none,no subtype-specific mechanism
+chrm2,IXO,4MQS,WXXOCGISBCTWPW-UHFFFAOYSA-N,CHEMBL3121473,,unknown,cell,chembl,none,no subtype-specific mechanism
+chrm2,QNB,3UON,HGMITUYOCPPQLE-IBGZPJMESA-N,CHEMBL558910,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,6DV,5IUB,NJQVZARFMYPNOT-UHFFFAOYSA-N,CHEMBL184061,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,6DX,5IUA,ATLUGIZVRICDDK-UHFFFAOYSA-N,CHEMBL187810,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,6DY,5IU7,WUOOFKSGLYZAKD-UHFFFAOYSA-N,CHEMBL3937413,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,6DZ,5IU8,NLHRMBTYEDTOKC-UHFFFAOYSA-N,CHEMBL3934661,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,8D1,5UIG,UJHUYWLZLDBDSR-UHFFFAOYSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,8E2,7PX4,BIWDHFUPTSCUTC-UHFFFAOYSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,8IM,7PYR,QJNAIOWKPALGIV-UHFFFAOYSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,8JN,5N2R,BPTHCTUXQADTJT-ZKQWZTGNSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,9XT,5OLH,HQSBCDPYXDGTCL-UHFFFAOYSA-N,CHEMBL447664,ANTAGONIST,neutral,cell,chembl,high,
+adora2a,9XW,5OLO,XNBRWUQWSKXMPW-UHFFFAOYSA-N,CHEMBL2105747,ANTAGONIST,neutral,cell,chembl,high,
+adora2a,9Y2,5OLV,KEUJAGGJGBWRFC-UHFFFAOYSA-N,CHEMBL1671936,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,A1C5S,10KT,MTTLXYSEKMZHFP-UONOGXRCSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,A1COM,7IN9,PVUGYBMZXNBOPD-UHFFFAOYSA-N,CHEMBL2164538,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,A1COV,7INI,MONJTOUXCWKOFS-UHFFFAOYSA-N,CHEMBL1502567,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,A1COY,7INL,FACDYZJWOVXDHC-UHFFFAOYSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,A1H1S,8RLN,OFHKDLYFKPBXER-UHFFFAOYSA-N,CHEMBL122622,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,A1H3H,8RVW,NQIVNUMNTIZJFG-CSKARUKUSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,A1H3I,8RWC,GFRYELUTTBEJFS-VQHVLOKHSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,A1H3J,8RW7,IZFYJVITWLNDJA-CSKARUKUSA-N,CHEMBL3736368,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,A1H3K,8RWE,OHGCYFOMTIEDMR-CSKARUKUSA-N,CHEMBL2381766,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,A1H3L,8RW4,TYEZEUMXOIFILL-QZQOTICOSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,A1IR0,9H37,WXVIBIODIRHTBI-UHFFFAOYSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,A1IR1,9H2X,PZPYYFUYDDSXJF-UHFFFAOYSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,F9Q,6GT3,NCWQLHHDGDXIJN-UHFFFAOYSA-N,CHEMBL4594442,ANTAGONIST,neutral,cell,chembl,high,
+adora2a,JQ9,8GNG,IQVRBWUUXZMOPW-PKNBQFBNSA-N,CHEMBL431770,ANTAGONIST,neutral,cell,chembl,high,
+adora2a,JQR,8GNE,KMFLQPJJHQNKKF-UHFFFAOYSA-N,CHEMBL5314441,INVERSE AGONIST,negative,cell,chembl,high,
+adora2a,LJX,8CU6,MUHXGASCCALSAJ-PRIMNGNOSA-N,CHEMBL5203469,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,QGE,6ZDR,FVMKJEVPLWCLMC-UHFFFAOYSA-N,CHEMBL2030687,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,QGW,6ZDV,NVGMNXGIQPMJSN-UHFFFAOYSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,RVZ,7ARO,MUJWBVGOOQHTTJ-UHFFFAOYSA-N,CHEMBL124345,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,T4E,3UZC,ZHUZHTHIEMXLRA-UHFFFAOYSA-N,CHEMBL2024114,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,T4G,3UZA,SORFNYWLKDSNNF-UHFFFAOYSA-N,CHEMBL2024115,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,TKO,8DU3,XDIROSBRBKJBMH-UHFFFAOYSA-N,CHEMBL5206530,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,U30,8C9W,BUXIAWLTBSXYSW-UHFFFAOYSA-N,CHEMBL4740383,ANTAGONIST,neutral,cell,chembl,high,
+adora2a,UKA,3QAK,ZOTHAEBAWXWVID-HXEFRTELSA-N,CHEMBL1096896,AGONIST,positive,cell,chembl,high,
+adora2a,VBF,8JWY,LMPHIHXCTONPFG-UHFFFAOYSA-N,CHEMBL5440290,,unknown,cell,chembl,none,no subtype-specific mechanism
+adora2a,WCH,8WDT,TWQRPAGBMNXURX-APJVYBOUSA-N,,,unknown,cell,none,none,no ChEMBL molecule for InChIKey
+adora2a,XAC,3REY,FIQGIOAELHTLHM-UHFFFAOYSA-N,CHEMBL273094,,unknown,cell,chembl,none,no subtype-specific mechanism

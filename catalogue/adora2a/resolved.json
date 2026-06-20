@@ -1,0 +1,27 @@
+{
+  "target": "Adenosine A2A receptor",
+  "slug": "adora2a",
+  "search_date": "2026-06-19",
+  "primary_accessions": [
+    "P29274"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "P29274",
+      "uniprot_id": "AA2AR_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "ADORA2A"
+      ],
+      "protein_name": "Adenosine receptor A2a",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 188,
+  "n_unique_ligands_kept": 133
+}

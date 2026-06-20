@@ -1,0 +1,27 @@
+{
+  "target": "Voltage-gated sodium channel Nav1.7 (VSD4 site)",
+  "slug": "nav1_7_vsd4",
+  "search_date": "2026-06-19",
+  "primary_accessions": [
+    "Q15858"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "Q15858",
+      "uniprot_id": "SCN9A_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "SCN9A"
+      ],
+      "protein_name": "Sodium channel protein type 9 subunit alpha",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 43,
+  "n_unique_ligands_kept": 28
+}

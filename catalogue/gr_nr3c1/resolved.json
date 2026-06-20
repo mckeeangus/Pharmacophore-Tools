@@ -1,0 +1,27 @@
+{
+  "target": "Glucocorticoid receptor",
+  "slug": "gr_nr3c1",
+  "search_date": "2026-06-19",
+  "primary_accessions": [
+    "P04150"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "P04150",
+      "uniprot_id": "GCR_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "NR3C1"
+      ],
+      "protein_name": "Glucocorticoid receptor",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 57,
+  "n_unique_ligands_kept": 30
+}

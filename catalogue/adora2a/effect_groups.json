@@ -1,0 +1,4120 @@
+{
+  "slug": "adora2a",
+  "primary_pocket": "orthosteric",
+  "expected_pockets": [
+    "orthosteric"
+  ],
+  "pockets_found": [
+    "orthosteric"
+  ],
+  "cells": {
+    "orthosteric__negative": [
+      "5IUB_6DV_A2401",
+      "5IUA_6DX_A2401",
+      "5IU7_6DY_A2401",
+      "5IU8_6DZ_A2401",
+      "5UIG_8D1_A503",
+      "7PX4_8E2_A2404",
+      "7PYR_8IM_A2404",
+      "5N2R_8JN_A2401",
+      "10KT_A1C5S_A1202",
+      "8RVW_A1H3H_A1205",
+      "8RWD_A1H3H_A1201",
+      "8RWX_A1H3H_A1201",
+      "8RWC_A1H3I_A1201",
+      "8RWH_A1H3I_A1201",
+      "8RWI_A1H3I_A1201",
+      "8RW7_A1H3J_A1201",
+      "8RWE_A1H3K_A1201",
+      "8RW4_A1H3L_A1201",
+      "9H37_A1IR0_A1226",
+      "9H2X_A1IR1_A1226",
+      "3RFM_CFF_A330",
+      "5MZP_CFF_A2401",
+      "8GNE_JQR_A1201",
+      "8CU6_LJX_A1208",
+      "8CU7_LJX_A1202",
+      "6ZDR_QGE_A1201",
+      "6ZDV_QGW_A1201",
+      "3UZC_T4E_A330",
+      "5OLZ_T4E_A1201",
+      "5OM1_T4E_A1201",
+      "5OM4_T4E_A1201",
+      "3UZA_T4G_A330",
+      "5MZJ_TEP_A2401",
+      "7INA_TEP_A1235",
+      "7INB_TEP_A1235",
+      "7INC_TEP_A1235",
+      "7IND_TEP_A1235",
+      "7INE_TEP_A1235",
+      "7INF_TEP_A1235",
+      "7ING_TEP_A1235",
+      "7INH_TEP_A1235",
+      "7INJ_TEP_A1235",
+      "7INK_TEP_A1235",
+      "7INM_TEP_A1235",
+      "7INN_TEP_A1235",
+      "7INO_TEP_A1235",
+      "7INP_TEP_A1235",
+      "7INQ_TEP_A1235",
+      "7INR_TEP_A1235",
+      "7INT_TEP_A1235",
+      "7INU_TEP_A1235",
+      "7INV_TEP_A1235",
+      "7INW_TEP_A2401",
+      "7INX_TEP_A2401",
+      "7INY_TEP_A2401",
+      "7INZ_TEP_A2401",
+      "7IO0_TEP_A2401",
+      "7IO1_TEP_A2401",
+      "7IO2_TEP_A2401",
+      "7IO3_TEP_A2401",
+      "7IO4_TEP_A2401",
+      "7IO5_TEP_A1202",
+      "7IO6_TEP_A2401",
+      "7IO7_TEP_A2401",
+      "7IO8_TEP_A2401",
+      "7IO9_TEP_A2401",
+      "7IOA_TEP_A2401",
+      "7IOB_TEP_A2401",
+      "7IOC_TEP_A1202",
+      "7IOD_TEP_A2401",
+      "7IOE_TEP_A1202",
+      "7IOF_TEP_A2401",
+      "7IOG_TEP_A2401",
+      "7IOH_TEP_A2401",
+      "7IOI_TEP_A2401",
+      "7IOJ_TEP_A2401",
+      "7IOK_TEP_A2401",
+      "7IOL_TEP_A2401",
+      "7IOM_TEP_A2401",
+      "7ION_TEP_A1202",
+      "7IOO_TEP_A2401",
+      "7IOP_TEP_A1202",
+      "7IOQ_TEP_A2401",
+      "7IOR_TEP_A2401",
+      "7IOS_TEP_A2401",
+      "7IOT_TEP_A2401",
+      "7IOU_TEP_A2401",
+      "7IOV_TEP_A2401",
+      "7IOW_TEP_A2401",
+      "7IOX_TEP_A2401",
+      "7IOY_TEP_A1202",
+      "7IOZ_TEP_A1202",
+      "7IP0_TEP_A2401",
+      "7IP1_TEP_A2401",
+      "7IP2_TEP_A2401",
+      "7IP3_TEP_A2401",
+      "7IP4_TEP_A2401",
+      "7IP5_TEP_A2401",
+      "7IP6_TEP_A2401",
+      "7IP7_TEP_A1202",
+      "7IP8_TEP_A1202",
+      "7IP9_TEP_A2401",
+      "7IPA_TEP_A2401",
+      "7IPB_TEP_A1202",
+      "7IPC_TEP_A1202",
+      "7IPD_TEP_A2401",
+      "7IPE_TEP_A2401",
+      "7IPF_TEP_A2401",
+      "7IPG_TEP_A2401",
+      "8A2O_TEP_A2401",
+      "8DU3_TKO_A3001",
+      "8JWY_VBF_A1201",
+      "3REY_XAC_A999",
+      "3EML_ZMA_A401",
+      "3PWH_ZMA_A401",
+      "3VG9_ZMA_A401",
+      "3VGA_ZMA_A401",
+      "4EIY_ZMA_A2401",
+      "5IU4_ZMA_A2401",
+      "5JTB_ZMA_A1201",
+      "5K2A_ZMA_A1201",
+      "5K2B_ZMA_A1201",
+      "5K2C_ZMA_A1201",
+      "5K2D_ZMA_A1201",
+      "5NLX_ZMA_A505",
+      "5NM2_ZMA_A1202",
+      "5NM4_ZMA_A507",
+      "5OLG_ZMA_A1201",
+      "5UVI_ZMA_A1201",
+      "5VRA_ZMA_A2401",
+      "6AQF_ZMA_A1201",
+      "6JZH_ZMA_A2002",
+      "6LPJ_ZMA_A2401",
+      "6LPK_ZMA_A2401",
+      "6LPL_ZMA_A2401",
+      "6MH8_ZMA_A1201",
+      "6PS7_ZMA_A1201",
+      "6S0L_ZMA_A1201",
+      "6S0Q_ZMA_A1201",
+      "6WQA_ZMA_A1202",
+      "7RM5_ZMA_A1201",
+      "7T32_ZMA_A1201",
+      "8FYN_ZMA_A2401",
+      "8RQQ_ZMA_A1201",
+      "9P1S_ZMA_A502",
+      "9P1T_ZMA_A502"
+    ],
+    "orthosteric__neutral": [
+      "5OLH_9XT_A1201",
+      "5OLO_9XW_A1201",
+      "6GT3_F9Q_A2401",
+      "8GNG_JQ9_X402",
+      "8RW0_JQ9_A1201",
+      "9FUP_JQ9_A1220",
+      "8C9W_U30_A1201",
+      "8CIC_U30_A1202",
+      "8JWZ_U30_A520"
+    ],
+    "orthosteric__positive": [
+      "8RLN_A1H1S_A1211",
+      "2YDO_ADN_A400",
+      "9EE8_ADN_A400",
+      "9EE9_ADN_A400",
+      "9EEA_ADN_A400",
+      "2YDV_NEC_A400",
+      "5G53_NEC_A400",
+      "6GDG_NEC_A400",
+      "4UG2_NGI_A1311",
+      "4UHR_NGI_A1320",
+      "8UGW_NGI_A1601",
+      "7ARO_RVZ_A1201",
+      "3QAK_UKA_A1200",
+      "5WF5_UKA_A1201",
+      "5WF6_UKA_A1201",
+      "7EZC_UKA_A1200",
+      "8WDT_WCH_A1000"
+    ]
+  },
+  "counts": {
+    "poses": 179,
+    "in_cells": 172,
+    "cells": 3,
+    "separate_state": 0,
+    "unknown": 5,
+    "quarantined": 2
+  },
+  "poses": [
+    {
+      "pdb_id": "5IUB",
+      "ligand_id": "6DV",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IUB_6DV_A2401.mol2"
+    },
+    {
+      "pdb_id": "5IUA",
+      "ligand_id": "6DX",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IUA_6DX_A2401.mol2"
+    },
+    {
+      "pdb_id": "5IU7",
+      "ligand_id": "6DY",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IU7_6DY_A2401.mol2"
+    },
+    {
+      "pdb_id": "5IU8",
+      "ligand_id": "6DZ",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "ZM241385-class triazolotriazine antagonist; PMID 27312113 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IU8_6DZ_A2401.mol2"
+    },
+    {
+      "pdb_id": "5UIG",
+      "ligand_id": "8D1",
+      "chain": "A",
+      "seqid": "503",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "Cmpd-1 A2A/NR2B dual antagonist; PMID 28167788 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5UIG_8D1_A503.mol2"
+    },
+    {
+      "pdb_id": "7PX4",
+      "ligand_id": "8E2",
+      "chain": "A",
+      "seqid": "2404",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "PEGylated preladenant conjugate PSB-2113, antagonist; PMID 35174942 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7PX4_8E2_A2404.mol2"
+    },
+    {
+      "pdb_id": "7PYR",
+      "ligand_id": "8IM",
+      "chain": "A",
+      "seqid": "2404",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "fluorophore preladenant conjugate PSB-2115, antagonist; PMID 35174942 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7PYR_8IM_A2404.mol2"
+    },
+    {
+      "pdb_id": "5N2R",
+      "ligand_id": "8JN",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "8-substituted xanthine A2A antagonist; PMID 28712806 (conf: medium)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5N2R_8JN_A2401.mol2"
+    },
+    {
+      "pdb_id": "5OLH",
+      "ligand_id": "9XT",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OLH_9XT_A1201.mol2"
+    },
+    {
+      "pdb_id": "5OLO",
+      "ligand_id": "9XW",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OLO_9XW_A1201.mol2"
+    },
+    {
+      "pdb_id": "5OLV",
+      "ligand_id": "9Y2",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OLV_9Y2_A1201.mol2"
+    },
+    {
+      "pdb_id": "8A2P",
+      "ligand_id": "9Y2",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8A2P_9Y2_A1201.mol2"
+    },
+    {
+      "pdb_id": "10KT",
+      "ligand_id": "A1C5S",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "MK-1088 A2A/A2B dual antagonist; PMID 42084562 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "10KT_A1C5S_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IN9",
+      "ligand_id": "A1COM",
+      "chain": "A",
+      "seqid": "1234",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IN9_A1COM_A1234.mol2"
+    },
+    {
+      "pdb_id": "7INI",
+      "ligand_id": "A1COV",
+      "chain": "A",
+      "seqid": "1234",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INI_A1COV_A1234.mol2"
+    },
+    {
+      "pdb_id": "7INL",
+      "ligand_id": "A1COY",
+      "chain": "A",
+      "seqid": "1234",
+      "pocket": "orthosteric",
+      "efficacy": "unknown",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "",
+      "efficacy_note": "no annotation",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INL_A1COY_A1234.mol2"
+    },
+    {
+      "pdb_id": "8RLN",
+      "ligand_id": "A1H1S",
+      "chain": "A",
+      "seqid": "1211",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "LUF5834 dicyanopyridine partial agonist (G-protein dissociation); PMID 38751633 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RLN_A1H1S_A1211.mol2"
+    },
+    {
+      "pdb_id": "8RVW",
+      "ligand_id": "A1H3H",
+      "chain": "A",
+      "seqid": "1205",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RVW_A1H3H_A1205.mol2"
+    },
+    {
+      "pdb_id": "8RWD",
+      "ligand_id": "A1H3H",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RWD_A1H3H_A1201.mol2"
+    },
+    {
+      "pdb_id": "8RWX",
+      "ligand_id": "A1H3H",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RWX_A1H3H_A1201.mol2"
+    },
+    {
+      "pdb_id": "8RWC",
+      "ligand_id": "A1H3I",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RWC_A1H3I_A1201.mol2"
+    },
+    {
+      "pdb_id": "8RWH",
+      "ligand_id": "A1H3I",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RWH_A1H3I_A1201.mol2"
+    },
+    {
+      "pdb_id": "8RWI",
+      "ligand_id": "A1H3I",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RWI_A1H3I_A1201.mol2"
+    },
+    {
+      "pdb_id": "8RW7",
+      "ligand_id": "A1H3J",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RW7_A1H3J_A1201.mol2"
+    },
+    {
+      "pdb_id": "8RWE",
+      "ligand_id": "A1H3K",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RWE_A1H3K_A1201.mol2"
+    },
+    {
+      "pdb_id": "8RW4",
+      "ligand_id": "A1H3L",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "istradefylline-derived azobenzene xanthine photoswitch, antagonist; PMID 39738009 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RW4_A1H3L_A1201.mol2"
+    },
+    {
+      "pdb_id": "9H37",
+      "ligand_id": "A1IR0",
+      "chain": "A",
+      "seqid": "1226",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "furyl-pyrrolopyrimidine A2A antagonist (SBDD); PMID 40592852 (conf: medium)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9H37_A1IR0_A1226.mol2"
+    },
+    {
+      "pdb_id": "9H2X",
+      "ligand_id": "A1IR1",
+      "chain": "A",
+      "seqid": "1226",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "furyl-triazine A2A antagonist (SBDD); PMID 40592852 (conf: medium)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9H2X_A1IR1_A1226.mol2"
+    },
+    {
+      "pdb_id": "2YDO",
+      "ligand_id": "ADN",
+      "chain": "A",
+      "seqid": "400",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "adenosine, endogenous agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2YDO_ADN_A400.mol2"
+    },
+    {
+      "pdb_id": "9EE8",
+      "ligand_id": "ADN",
+      "chain": "A",
+      "seqid": "400",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "adenosine, endogenous agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274",
+        "P59768",
+        "P62873",
+        "P63092"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9EE8_ADN_A400.mol2"
+    },
+    {
+      "pdb_id": "9EE9",
+      "ligand_id": "ADN",
+      "chain": "A",
+      "seqid": "400",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "adenosine, endogenous agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274",
+        "P59768",
+        "P62873",
+        "P63092"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9EE9_ADN_A400.mol2"
+    },
+    {
+      "pdb_id": "9EEA",
+      "ligand_id": "ADN",
+      "chain": "A",
+      "seqid": "400",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "adenosine, endogenous agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274",
+        "P59768",
+        "P62873",
+        "P63092"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9EEA_ADN_A400.mol2"
+    },
+    {
+      "pdb_id": "3RFM",
+      "ligand_id": "CFF",
+      "chain": "A",
+      "seqid": "330",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "caffeine, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3RFM_CFF_A330.mol2"
+    },
+    {
+      "pdb_id": "5MZP",
+      "ligand_id": "CFF",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "caffeine, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5MZP_CFF_A2401.mol2"
+    },
+    {
+      "pdb_id": "6GT3",
+      "ligand_id": "F9Q",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6GT3_F9Q_A2401.mol2"
+    },
+    {
+      "pdb_id": "8GNG",
+      "ligand_id": "JQ9",
+      "chain": "X",
+      "seqid": "402",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8GNG_JQ9_X402.mol2"
+    },
+    {
+      "pdb_id": "8RW0",
+      "ligand_id": "JQ9",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RW0_JQ9_A1201.mol2"
+    },
+    {
+      "pdb_id": "9FUP",
+      "ligand_id": "JQ9",
+      "chain": "A",
+      "seqid": "1220",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9FUP_JQ9_A1220.mol2"
+    },
+    {
+      "pdb_id": "8GNE",
+      "ligand_id": "JQR",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8GNE_JQR_A1201.mol2"
+    },
+    {
+      "pdb_id": "8CU6",
+      "ligand_id": "LJX",
+      "chain": "A",
+      "seqid": "1208",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "LJ-4517, C8-thiophene nucleoside switched to A2A antagonist (Ki 18 nM); PMID 35977382 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8CU6_LJX_A1208.mol2"
+    },
+    {
+      "pdb_id": "8CU7",
+      "ligand_id": "LJX",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "LJ-4517, C8-thiophene nucleoside switched to A2A antagonist (Ki 18 nM); PMID 35977382 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8CU7_LJX_A1202.mol2"
+    },
+    {
+      "pdb_id": "2YDV",
+      "ligand_id": "NEC",
+      "chain": "A",
+      "seqid": "400",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "NECA, non-selective agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "2YDV_NEC_A400.mol2"
+    },
+    {
+      "pdb_id": "5G53",
+      "ligand_id": "NEC",
+      "chain": "A",
+      "seqid": "400",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "NECA, non-selective agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274",
+        "P63092"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5G53_NEC_A400.mol2"
+    },
+    {
+      "pdb_id": "6GDG",
+      "ligand_id": "NEC",
+      "chain": "A",
+      "seqid": "400",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "NECA, non-selective agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0AA25",
+        "P29274",
+        "P59768",
+        "P62873",
+        "P63092"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6GDG_NEC_A400.mol2"
+    },
+    {
+      "pdb_id": "4UG2",
+      "ligand_id": "NGI",
+      "chain": "A",
+      "seqid": "1311",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "CGS-21680, A2A-selective agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4UG2_NGI_A1311.mol2"
+    },
+    {
+      "pdb_id": "4UHR",
+      "ligand_id": "NGI",
+      "chain": "A",
+      "seqid": "1320",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "CGS-21680, A2A-selective agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4UHR_NGI_A1320.mol2"
+    },
+    {
+      "pdb_id": "8UGW",
+      "ligand_id": "NGI",
+      "chain": "A",
+      "seqid": "1601",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "curated",
+      "efficacy_note": "CGS-21680, A2A-selective agonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00720",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8UGW_NGI_A1601.mol2"
+    },
+    {
+      "pdb_id": "6ZDR",
+      "ligand_id": "QGE",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "chromene A2A antagonist; PMID 32542862 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6ZDR_QGE_A1201.mol2"
+    },
+    {
+      "pdb_id": "6ZDV",
+      "ligand_id": "QGW",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "chromene A2A antagonist; PMID 32542862 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6ZDV_QGW_A1201.mol2"
+    },
+    {
+      "pdb_id": "7ARO",
+      "ligand_id": "RVZ",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "nonriboside dicyanopyridine partial agonist; PMID 33764785 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7ARO_RVZ_A1201.mol2"
+    },
+    {
+      "pdb_id": "3UZC",
+      "ligand_id": "T4E",
+      "chain": "A",
+      "seqid": "330",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "1,2,4-triazine A2A antagonist; PMID 22220592 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3UZC_T4E_A330.mol2"
+    },
+    {
+      "pdb_id": "5OLZ",
+      "ligand_id": "T4E",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "1,2,4-triazine A2A antagonist; PMID 22220592 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OLZ_T4E_A1201.mol2"
+    },
+    {
+      "pdb_id": "5OM1",
+      "ligand_id": "T4E",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "1,2,4-triazine A2A antagonist; PMID 22220592 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OM1_T4E_A1201.mol2"
+    },
+    {
+      "pdb_id": "5OM4",
+      "ligand_id": "T4E",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "1,2,4-triazine A2A antagonist; PMID 22220592 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OM4_T4E_A1201.mol2"
+    },
+    {
+      "pdb_id": "3UZA",
+      "ligand_id": "T4G",
+      "chain": "A",
+      "seqid": "330",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "1,2,4-triazine A2A antagonist; PMID 22220592 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3UZA_T4G_A330.mol2"
+    },
+    {
+      "pdb_id": "5MZJ",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5MZJ_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7INA",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INA_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INB",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INB_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INC",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INC_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7IND",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IND_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INE",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INE_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INF",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INF_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7ING",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7ING_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INH",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INH_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INJ",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INJ_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INK",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INK_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INM",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INM_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INN",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INN_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INO",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INO_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INP",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INP_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INQ",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INQ_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INR",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INR_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INT",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INT_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INU",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INU_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INV",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1235",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INV_TEP_A1235.mol2"
+    },
+    {
+      "pdb_id": "7INW",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INW_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7INX",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INX_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7INY",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INY_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7INZ",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7INZ_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO0",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO0_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO1",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO1_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO2",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO2_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO3",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO3_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO4",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO4_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO5",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO5_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IO6",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO6_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO7",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO7_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO8",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO8_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IO9",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IO9_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOA",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOA_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOB",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOB_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOC",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOC_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IOD",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOD_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOE",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOE_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IOF",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOF_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOG",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOG_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOH",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOH_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOI",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOI_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOJ",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOJ_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOK",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOK_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOL",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOL_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOM",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOM_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7ION",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7ION_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IOO",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOO_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOP",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOP_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IOQ",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOQ_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOR",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOR_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOS",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOS_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOT",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOT_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOU",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOU_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOV",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOV_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOW",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOW_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOX",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOX_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IOY",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOY_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IOZ",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IOZ_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IP0",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP0_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IP1",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP1_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IP2",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP2_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IP3",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP3_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IP4",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP4_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IP5",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP5_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IP6",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP6_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IP7",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP7_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IP8",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP8_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IP9",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IP9_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IPA",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IPA_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IPB",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IPB_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IPC",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IPC_TEP_A1202.mol2"
+    },
+    {
+      "pdb_id": "7IPD",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IPD_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IPE",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IPE_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IPF",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IPF_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "7IPG",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7IPG_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "8A2O",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8A2O_TEP_A2401.mol2"
+    },
+    {
+      "pdb_id": "8PWN",
+      "ligand_id": "TEP",
+      "chain": "A",
+      "seqid": "500",
+      "pocket": null,
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "theophylline, xanthine antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8PWN_TEP_A500.mol2"
+    },
+    {
+      "pdb_id": "8DU3",
+      "ligand_id": "TKO",
+      "chain": "A",
+      "seqid": "3001",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "quinazoline A2A antagonist; PMID 35933788 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8DU3_TKO_A3001.mol2"
+    },
+    {
+      "pdb_id": "8C9W",
+      "ligand_id": "U30",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8C9W_U30_A1201.mol2"
+    },
+    {
+      "pdb_id": "8CIC",
+      "ligand_id": "U30",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8CIC_U30_A1202.mol2"
+    },
+    {
+      "pdb_id": "8JWZ",
+      "ligand_id": "U30",
+      "chain": "A",
+      "seqid": "520",
+      "pocket": "orthosteric",
+      "efficacy": "neutral",
+      "track": "reversible",
+      "cell": "orthosteric__neutral",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "D9IEF7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8JWZ_U30_A520.mol2"
+    },
+    {
+      "pdb_id": "3QAK",
+      "ligand_id": "UKA",
+      "chain": "A",
+      "seqid": "1200",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00720",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3QAK_UKA_A1200.mol2"
+    },
+    {
+      "pdb_id": "5WF5",
+      "ligand_id": "UKA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00720",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5WF5_UKA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5WF6",
+      "ligand_id": "UKA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00720",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5WF6_UKA_A1201.mol2"
+    },
+    {
+      "pdb_id": "7EZC",
+      "ligand_id": "UKA",
+      "chain": "A",
+      "seqid": "1200",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "chembl (high)",
+      "efficacy_note": "",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7EZC_UKA_A1200.mol2"
+    },
+    {
+      "pdb_id": "8JWY",
+      "ligand_id": "VBF",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "AB928 (etrumadenant) A2A/A2B dual antagonist; PMID 38319473 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "D9IEF7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8JWY_VBF_A1201.mol2"
+    },
+    {
+      "pdb_id": "8WDT",
+      "ligand_id": "WCH",
+      "chain": "A",
+      "seqid": "1000",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "photoNECA, 2-substituted NECA/adenosine agonist scaffold; PMID 38171234 (conf: medium)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8WDT_WCH_A1000.mol2"
+    },
+    {
+      "pdb_id": "3REY",
+      "ligand_id": "XAC",
+      "chain": "A",
+      "seqid": "999",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "xanthine amine congener (XAC), A2A antagonist; PMID 21885291 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3REY_XAC_A999.mol2"
+    },
+    {
+      "pdb_id": "3EML",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00720",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3EML_ZMA_A401.mol2"
+    },
+    {
+      "pdb_id": "3PWH",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3PWH_ZMA_A401.mol2"
+    },
+    {
+      "pdb_id": "3VG9",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3VG9_ZMA_A401.mol2"
+    },
+    {
+      "pdb_id": "3VGA",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3VGA_ZMA_A401.mol2"
+    },
+    {
+      "pdb_id": "4EIY",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4EIY_ZMA_A2401.mol2"
+    },
+    {
+      "pdb_id": "5IU4",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5IU4_ZMA_A2401.mol2"
+    },
+    {
+      "pdb_id": "5JTB",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5JTB_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5K2A",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5K2A_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5K2B",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5K2B_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5K2C",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5K2C_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5K2D",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5K2D_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5NLX",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "505",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5NLX_ZMA_A505.mol2"
+    },
+    {
+      "pdb_id": "5NM2",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5NM2_ZMA_A1202.mol2"
+    },
+    {
+      "pdb_id": "5NM4",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "507",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5NM4_ZMA_A507.mol2"
+    },
+    {
+      "pdb_id": "5OLG",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5OLG_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5UVI",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5UVI_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "5VRA",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5VRA_ZMA_A2401.mol2"
+    },
+    {
+      "pdb_id": "6AQF",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6AQF_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "6JZH",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2002",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6JZH_ZMA_A2002.mol2"
+    },
+    {
+      "pdb_id": "6LPJ",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6LPJ_ZMA_A2401.mol2"
+    },
+    {
+      "pdb_id": "6LPK",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6LPK_ZMA_A2401.mol2"
+    },
+    {
+      "pdb_id": "6LPL",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6LPL_ZMA_A2401.mol2"
+    },
+    {
+      "pdb_id": "6MH8",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6MH8_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "6PS7",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6PS7_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "6S0L",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6S0L_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "6S0Q",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6S0Q_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "6WQA",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1202",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6WQA_ZMA_A1202.mol2"
+    },
+    {
+      "pdb_id": "7RM5",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7RM5_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "7T32",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7T32_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "8FYN",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "2401",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8FYN_ZMA_A2401.mol2"
+    },
+    {
+      "pdb_id": "8RQQ",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P0ABE7",
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8RQQ_ZMA_A1201.mol2"
+    },
+    {
+      "pdb_id": "9P1S",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "502",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9P1S_ZMA_A502.mol2"
+    },
+    {
+      "pdb_id": "9P1T",
+      "ligand_id": "ZMA",
+      "chain": "A",
+      "seqid": "502",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P29274"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9P1T_ZMA_A502.mol2"
+    },
+    {
+      "pdb_id": "9T9P",
+      "ligand_id": "ZMA",
+      "chain": "B",
+      "seqid": "901",
+      "pocket": null,
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "ZM-241385, antagonist",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O87916",
+        "P00808",
+        "P29274",
+        "P42212"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9T9P_ZMA_B901.mol2"
+    }
+  ]
+}

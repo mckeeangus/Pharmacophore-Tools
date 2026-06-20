@@ -31,6 +31,18 @@ by Stage 3 pocket verification (NS9283/NSE carries an `accessory` pocket marker 
 | `literature_curation_traceability.csv` | Standalone table, **all 158 rows** (resolved + unknown), one row per ligand, with `site` / `pose_source` / `pmid` / `confidence`. |
 | `efficacy_curation_README.md` | This file. |
 
+### Batch 2 (2026-06-19) — Nav1.7, GR, A2A, M2
+
+The four-target expansion was curated the same way; its calls are merged into
+`config/efficacy.yaml` (`source: literature`). Provenance is kept separately:
+
+| File | Contents |
+|---|---|
+| `efficacy_batch2_traceability.csv` | 56 resolved rows (`het,target,sign_or_track,confidence,pmid,evidence`). |
+| `efficacy_batch2_notes.md` | The 5 left-`unknown` (with reasons), calls worth a second glance, and the PubMed/DOI source list. |
+| `literature_worklist_batch2.csv` | The 61-ligand hand-off worklist (regenerable via `scripts/make_literature_worklist.py`). |
+| `literature_curation_prompt_batch2.md` | The prompt used for the normal-Claude curation session. |
+
 ## Per-ligand schema
 
 YAML keys (and the matching CSV columns):

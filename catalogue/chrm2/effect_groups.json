@@ -1,0 +1,334 @@
+{
+  "slug": "chrm2",
+  "primary_pocket": "orthosteric",
+  "expected_pockets": [
+    "orthosteric",
+    "allosteric"
+  ],
+  "pockets_found": [
+    "orthosteric"
+  ],
+  "cells": {
+    "orthosteric__negative": [
+      "5YC8_3C0_A501",
+      "5ZK8_3C0_A501",
+      "5ZKC_3C0_A501",
+      "5ZKB_82F_A1201",
+      "3UON_QNB_A1162",
+      "5ZK3_QNB_A501"
+    ],
+    "orthosteric__positive": [
+      "7T8X_ACH_A501",
+      "7T90_ACH_A501",
+      "7T94_ACH_A501",
+      "7T96_ACH_A501",
+      "4MQS_IXO_A501",
+      "4MQT_IXO_A501",
+      "6OIK_IXO_R501"
+    ]
+  },
+  "counts": {
+    "poses": 13,
+    "in_cells": 13,
+    "cells": 2,
+    "separate_state": 0,
+    "unknown": 0,
+    "quarantined": 0
+  },
+  "poses": [
+    {
+      "pdb_id": "5YC8",
+      "ligand_id": "3C0",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "N-methylscopolamine, orthosteric M2 antagonist; PMID 30420692 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P0ABE7"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5YC8_3C0_A501.mol2"
+    },
+    {
+      "pdb_id": "5ZK8",
+      "ligand_id": "3C0",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "N-methylscopolamine, orthosteric M2 antagonist; PMID 30420692 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P0ABE7"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5ZK8_3C0_A501.mol2"
+    },
+    {
+      "pdb_id": "5ZKC",
+      "ligand_id": "3C0",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "N-methylscopolamine, orthosteric M2 antagonist; PMID 30420692 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P0ABE7"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5ZKC_3C0_A501.mol2"
+    },
+    {
+      "pdb_id": "5ZKB",
+      "ligand_id": "82F",
+      "chain": "A",
+      "seqid": "1201",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "pyrido-benzodiazepine subtype-selective M2 antagonist; PMID 30420692 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P0ABE7"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5ZKB_82F_A1201.mol2"
+    },
+    {
+      "pdb_id": "7T8X",
+      "ligand_id": "ACH",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "acetylcholine, physiological M2 agonist; PMID 36690613 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P09471",
+        "P59768",
+        "P62873"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7T8X_ACH_A501.mol2"
+    },
+    {
+      "pdb_id": "7T90",
+      "ligand_id": "ACH",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "acetylcholine, physiological M2 agonist; PMID 36690613 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P09471",
+        "P59768",
+        "P62873"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7T90_ACH_A501.mol2"
+    },
+    {
+      "pdb_id": "7T94",
+      "ligand_id": "ACH",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "acetylcholine, physiological M2 agonist; PMID 36690613 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P09471",
+        "P59768",
+        "P62873"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7T94_ACH_A501.mol2"
+    },
+    {
+      "pdb_id": "7T96",
+      "ligand_id": "ACH",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "acetylcholine, physiological M2 agonist; PMID 36690613 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P09471",
+        "P59768",
+        "P62873"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7T96_ACH_A501.mol2"
+    },
+    {
+      "pdb_id": "4MQS",
+      "ligand_id": "IXO",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "iperoxo, orthosteric M2 superagonist; PMID 24256733 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4MQS_IXO_A501.mol2"
+    },
+    {
+      "pdb_id": "4MQT",
+      "ligand_id": "IXO",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "iperoxo, orthosteric M2 superagonist; PMID 24256733 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "4MQT_IXO_A501.mol2"
+    },
+    {
+      "pdb_id": "6OIK",
+      "ligand_id": "IXO",
+      "chain": "R",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "positive",
+      "track": "reversible",
+      "cell": "orthosteric__positive",
+      "efficacy_source": "literature",
+      "efficacy_note": "iperoxo, orthosteric M2 superagonist; PMID 24256733 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P09471",
+        "P59768",
+        "P62873"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "6OIK_IXO_R501.mol2"
+    },
+    {
+      "pdb_id": "3UON",
+      "ligand_id": "QNB",
+      "chain": "A",
+      "seqid": "1162",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "3-quinuclidinyl benzilate, orthosteric M2 antagonist; PMID 22278061 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P00720",
+        "P08172"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "3UON_QNB_A1162.mol2"
+    },
+    {
+      "pdb_id": "5ZK3",
+      "ligand_id": "QNB",
+      "chain": "A",
+      "seqid": "501",
+      "pocket": "orthosteric",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "orthosteric__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "3-quinuclidinyl benzilate, orthosteric M2 antagonist; PMID 22278061 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "P08172",
+        "P0ABE7"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5ZK3_QNB_A501.mol2"
+    }
+  ]
+}

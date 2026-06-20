@@ -1,0 +1,139 @@
+{
+  "slug": "nav1_7_vsd4",
+  "primary_pocket": "vsd4_site",
+  "expected_pockets": [
+    "vsd4_site"
+  ],
+  "pockets_found": [
+    "vsd4_site"
+  ],
+  "cells": {
+    "vsd4_site__negative": [
+      "8F0P_X7L_A1610",
+      "8F0R_X7W_A1606",
+      "8F0S_X80_A1605"
+    ]
+  },
+  "counts": {
+    "poses": 5,
+    "in_cells": 3,
+    "cells": 1,
+    "separate_state": 0,
+    "unknown": 0,
+    "quarantined": 2
+  },
+  "poses": [
+    {
+      "pdb_id": "5EK0",
+      "ligand_id": "5P2",
+      "chain": "A",
+      "seqid": "1808",
+      "pocket": null,
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "literature",
+      "efficacy_note": "GX-936 aryl-sulfonamide VSD4 inhibitor (voltage-sensor trapping); PMID 26680203 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "A8EVM5",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "5EK0_5P2_A1808.mol2"
+    },
+    {
+      "pdb_id": "8I5G",
+      "ligand_id": "T70",
+      "chain": "A",
+      "seqid": "2005",
+      "pocket": null,
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": null,
+      "efficacy_source": "curated",
+      "efficacy_note": "PF-05089771, Nav1.7 VSD4 inhibitor",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8I5G_T70_A2005.mol2"
+    },
+    {
+      "pdb_id": "8F0P",
+      "ligand_id": "X7L",
+      "chain": "A",
+      "seqid": "1610",
+      "pocket": "vsd4_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "vsd4_site__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "sulfonamide Nav1.7 VSD4 inhibitor (hybrid series); PMID 36975198 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "D0E0C2",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8F0P_X7L_A1610.mol2"
+    },
+    {
+      "pdb_id": "8F0R",
+      "ligand_id": "X7W",
+      "chain": "A",
+      "seqid": "1606",
+      "pocket": "vsd4_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "vsd4_site__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "sulfonamide Nav1.7 VSD4 inhibitor (hybrid series); PMID 36975198 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "D0E0C2",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8F0R_X7W_A1606.mol2"
+    },
+    {
+      "pdb_id": "8F0S",
+      "ligand_id": "X80",
+      "chain": "A",
+      "seqid": "1605",
+      "pocket": "vsd4_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "vsd4_site__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "acylsulfonamide Nav1.7 VSD4 inhibitor (hybrid series); PMID 36975198 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "D0E0C2",
+        "P49126",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8F0S_X80_A1605.mol2"
+    }
+  ]
+}

@@ -37,11 +37,20 @@ All poses for a target share one superposed reference frame (Stage 2 / Stage 3 a
 A cell is the unit a single pharmacophore hypothesis is built from: a geometry-verified
 pocket crossed with a curated efficacy sign. Pockets are named in `config/pockets.yaml`;
 efficacy signs come from `config/efficacy.yaml` (provenance: literature > prelabelled >
-curated > ChEMBL-CSV fallback). Cells present across the 12 targets:
+curated > ChEMBL-CSV fallback). Cells present across the 17 site-slugs (16 biological
+targets; Nav1.7 is split into a VSD4 and a pore slug):
 
 `orthosteric`/`lbp`/`active_site`/`atp_site`/`gorge`/`cox_channel`/`hmg_site`/`dhp_site`/
-`central_s1` × `{positive, negative, neutral}`, plus the nAChR `accessory__positive` PAM
-site and the GABA-A `bzd_site__{positive,neutral,negative}` benzodiazepine split.
+`central_s1`/`vsd4_site`/`pore_site` × `{positive, negative, neutral}`, plus the nAChR
+`accessory__positive` PAM site and the GABA-A `bzd_site__{positive,neutral,negative}`
+benzodiazepine split. The muscarinic-M2 extracellular `allosteric` marker is configured
+but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff).
+
+> **Batch-2 (2026-06-19) — complete.** `nav1_7_vsd4`, `nav1_7_pore`, `gr_nr3c1`,
+> `adora2a`, `chrm2` are built through Stage 3.4 with literature efficacy curation
+> merged (provenance: `efficacy_batch2_traceability.csv`, `efficacy_batch2_notes.md`).
+> Populated cells: `gr_nr3c1` lbp+/−; `adora2a` orthosteric +/neutral/−; `chrm2`
+> orthosteric +/−; `nav1_7_vsd4`/`nav1_7_pore` blocker-only (−).
 
 ## Review tracks — `review/`
 

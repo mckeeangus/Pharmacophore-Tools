@@ -1,0 +1,57 @@
+het,target,sign_or_track,confidence,pmid,evidence
+6DV,adora2a,negative,high,27312113,ZM241385-class triazolotriazine antagonist
+6DX,adora2a,negative,high,27312113,ZM241385-class triazolotriazine antagonist
+6DY,adora2a,negative,high,27312113,ZM241385-class triazolotriazine antagonist
+6DZ,adora2a,negative,high,27312113,ZM241385-class triazolotriazine antagonist
+8D1,adora2a,negative,high,28167788,Cmpd-1 A2A/NR2B dual antagonist
+8E2,adora2a,negative,high,35174942,PEGylated preladenant conjugate antagonist
+8IM,adora2a,negative,high,35174942,fluorophore preladenant conjugate antagonist
+8JN,adora2a,negative,medium,28712806,8-substituted xanthine antagonist
+A1C5S,adora2a,negative,high,42084562,MK-1088 A2A/A2B dual antagonist
+A1H1S,adora2a,positive,high,38751633,LUF5834 partial agonist (G-protein dissociation)
+A1H3H,adora2a,negative,high,39738009,istradefylline-derived xanthine photoswitch antagonist
+A1H3I,adora2a,negative,high,39738009,istradefylline-derived xanthine photoswitch antagonist
+A1H3J,adora2a,negative,high,39738009,istradefylline-derived xanthine photoswitch antagonist
+A1H3K,adora2a,negative,high,39738009,istradefylline-derived xanthine photoswitch antagonist
+A1H3L,adora2a,negative,high,39738009,istradefylline-derived azo xanthine photoswitch antagonist
+A1IR0,adora2a,negative,medium,40592852,furyl-pyrrolopyrimidine antagonist (RL/SBDD; MeSH antagonist)
+A1IR1,adora2a,negative,medium,40592852,furyl-triazine antagonist (RL/SBDD; MeSH antagonist)
+LJX,adora2a,negative,high,35977382,LJ-4517 C8-thiophene nucleoside antagonist (Ki 18 nM)
+QGE,adora2a,negative,high,32542862,chromene A2A antagonist
+QGW,adora2a,negative,high,32542862,chromene A2A antagonist
+RVZ,adora2a,positive,high,33764785,nonriboside dicyanopyridine partial agonist
+T4E,adora2a,negative,high,22220592,"1,2,4-triazine antagonist"
+T4G,adora2a,negative,high,22220592,"1,2,4-triazine antagonist"
+TKO,adora2a,negative,high,35933788,quinazoline antagonist
+VBF,adora2a,negative,high,38319473,AB928 (etrumadenant) dual antagonist
+WCH,adora2a,positive,medium,38171234,photoNECA 2-substituted NECA agonist scaffold
+XAC,adora2a,negative,high,21885291,xanthine amine congener antagonist
+82F,chrm2,negative,high,30420692,subtype-selective M2 antagonist
+3C0,chrm2,negative,high,30420692,N-methylscopolamine antagonist
+ACH,chrm2,positive,high,36690613,acetylcholine physiological agonist
+IXO,chrm2,positive,high,24256733,iperoxo orthosteric superagonist
+QNB,chrm2,negative,high,22278061,3-quinuclidinyl benzilate antagonist
+29M,gr_nr3c1,negative,high,PDB:4MDD,"non-steroidal antagonist, helix-12 disordering"
+82H,gr_nr3c1,positive,high,36747092,velsecorat selective GR agonist
+866,gr_nr3c1,positive,high,18952422,amino-pyrazole selective GR agonist
+8W5,gr_nr3c1,positive,medium,28937774,"steroidal glucocorticoid agonist (16,17-acetal)"
+8W8,gr_nr3c1,positive,medium,28937774,indazole-ether SGRM agonist
+A1ACE,gr_nr3c1,positive,medium,38516584,steroidal GR agonist ADC payload (ABBV-3373/154)
+B9Q,gr_nr3c1,positive,high,29424542,AZD9567-series partial agonist
+B9T,gr_nr3c1,positive,high,29424542,AZD9567-series partial agonist
+B9W,gr_nr3c1,positive,high,29424542,AZD9567-series partial agonist
+CV7,gr_nr3c1,positive,high,26602186,desisobutyryl-ciclesonide glucocorticoid agonist
+DAY,gr_nr3c1,positive,high,18160712,deacylcortivazol potent GR agonist
+E7T,gr_nr3c1,positive,high,28043796,selective GR agonist lead
+HJ4,gr_nr3c1,negative,high,30091920,ORIC-101 steroidal GR antagonist
+JZN,gr_nr3c1,positive,high,19822747,non-steroidal GR agonist (D-prolinamide)
+JZS,gr_nr3c1,positive,high,19822747,non-steroidal GR agonist (D-alaninamide)
+LSJ,gr_nr3c1,positive,medium,24446728,dibenzoxepine dissociated GR agonist
+NN7,gr_nr3c1,positive,medium,24755427,indazole inhaled SGRM agonist
+QJK,gr_nr3c1,separate_state,high,36484727,GR/14-3-3 molecular glue (PPI stabiliser)
+R8C,gr_nr3c1,positive,medium,27810243,indazole-ether SGRM agonist
+OJ0,nav1_7_pore,negative,high,37270609,levobupivacaine local-anaesthetic pore blocker
+5P2,nav1_7_vsd4,negative,high,26680203,GX-936 aryl-sulfonamide VSD4 inhibitor
+X7L,nav1_7_vsd4,negative,high,36975198,sulfonamide VSD4 inhibitor
+X7W,nav1_7_vsd4,negative,high,36975198,sulfonamide VSD4 inhibitor
+X80,nav1_7_vsd4,negative,high,36975198,acylsulfonamide VSD4 inhibitor

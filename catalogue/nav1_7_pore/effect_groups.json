@@ -1,0 +1,333 @@
+{
+  "slug": "nav1_7_pore",
+  "primary_pocket": "pore_site",
+  "expected_pockets": [
+    "pore_site"
+  ],
+  "pockets_found": [
+    "pore_site"
+  ],
+  "cells": {
+    "pore_site__negative": [
+      "7W9K_9Z9_A2006",
+      "7W9L_9Z9_A2006",
+      "7W9T_9Z9_A2007",
+      "8G1A_9Z9_A2009",
+      "8I5G_9Z9_A2003",
+      "8I5X_9Z9_A2006",
+      "8I5Y_9Z9_A2005",
+      "8J4F_9Z9_A2006",
+      "9ITI_9Z9_A2024",
+      "8THH_IYJ_A2004",
+      "8S9B_LQO_A2003",
+      "8S9C_N6W_A2003",
+      "8I5B_OJ0_A2021"
+    ]
+  },
+  "counts": {
+    "poses": 13,
+    "in_cells": 13,
+    "cells": 1,
+    "separate_state": 0,
+    "unknown": 0,
+    "quarantined": 0
+  },
+  "poses": [
+    {
+      "pdb_id": "7W9K",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2006",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7W9K_9Z9_A2006.mol2"
+    },
+    {
+      "pdb_id": "7W9L",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2006",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7W9L_9Z9_A2006.mol2"
+    },
+    {
+      "pdb_id": "7W9T",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2007",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "7W9T_9Z9_A2007.mol2"
+    },
+    {
+      "pdb_id": "8G1A",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2009",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8G1A_9Z9_A2009.mol2"
+    },
+    {
+      "pdb_id": "8I5G",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2003",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8I5G_9Z9_A2003.mol2"
+    },
+    {
+      "pdb_id": "8I5X",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2006",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8I5X_9Z9_A2006.mol2"
+    },
+    {
+      "pdb_id": "8I5Y",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2005",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8I5Y_9Z9_A2005.mol2"
+    },
+    {
+      "pdb_id": "8J4F",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2006",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8J4F_9Z9_A2006.mol2"
+    },
+    {
+      "pdb_id": "9ITI",
+      "ligand_id": "9Z9",
+      "chain": "A",
+      "seqid": "2024",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "9ITI_9Z9_A2024.mol2"
+    },
+    {
+      "pdb_id": "8THH",
+      "ligand_id": "IYJ",
+      "chain": "A",
+      "seqid": "2004",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8THH_IYJ_A2004.mol2"
+    },
+    {
+      "pdb_id": "8S9B",
+      "ligand_id": "LQO",
+      "chain": "A",
+      "seqid": "2003",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated",
+      "efficacy_note": "lacosamide, enhances slow inactivation (blocker)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8S9B_LQO_A2003.mol2"
+    },
+    {
+      "pdb_id": "8S9C",
+      "ligand_id": "N6W",
+      "chain": "A",
+      "seqid": "2003",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "curated (target default)",
+      "efficacy_note": "control target default",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8S9C_N6W_A2003.mol2"
+    },
+    {
+      "pdb_id": "8I5B",
+      "ligand_id": "OJ0",
+      "chain": "A",
+      "seqid": "2021",
+      "pocket": "pore_site",
+      "efficacy": "negative",
+      "track": "reversible",
+      "cell": "pore_site__negative",
+      "efficacy_source": "literature",
+      "efficacy_note": "levobupivacaine, local-anaesthetic pore blocker (site BIG); PMID 37270609 (conf: high)",
+      "separate_state_reason": "",
+      "mapping": "primary",
+      "subtype_accessions": [
+        "O60939",
+        "Q07699",
+        "Q15858"
+      ],
+      "subtype_organisms": [
+        "Homo sapiens"
+      ],
+      "mol2": "8I5B_OJ0_A2021.mol2"
+    }
+  ]
+}

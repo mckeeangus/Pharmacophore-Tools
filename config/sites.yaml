@@ -94,3 +94,47 @@ sites:
     reference_pdb: 8ZOY
     anchor_het: LNR            # L-noradrenaline — central S1 substrate site
     notes: Central S1 substrate/inhibitor site; excludes detergents/lipids.
+
+  # --- 2026-06-19 target expansion (batch 2) -------------------------------
+  nav1_7_vsd4:
+    reference_pdb: 8I5G
+    anchor_het: T70            # PF-05089771 — VSD4 aryl-sulfonamide drug site
+    notes: >-
+      Voltage-sensor-domain-4 (DIV-S4) aryl-sulfonamide site, the Nav1.7-selective
+      drug pocket. Anchored on PF-05089771 (T70); the central-pore local-anaesthetic
+      poses sit in a different channel domain and fall outside the cutoff (they are
+      modelled separately as nav1_7_pore). Bound lipids/detergents are excluded.
+
+  nav1_7_pore:
+    reference_pdb: 8I5B
+    anchor_het: OJ0            # levobupivacaine — central-cavity local-anaesthetic site
+    notes: >-
+      Central-cavity / local-anaesthetic pore site on the channel axis. Anchored on
+      levobupivacaine (OJ0); VSD4 sulfonamide poses fall outside the cutoff (modelled
+      as nav1_7_vsd4). Membrane lipids/detergents excluded.
+
+  gr_nr3c1:
+    reference_pdb: 1M2Z
+    anchor_het: DEX            # dexamethasone — steroid ligand-binding-domain pocket
+    notes: >-
+      Glucocorticoid-receptor LBD steroid pocket (the nuclear-receptor analogue of
+      the ESR1 hormone pocket). Anchored on dexamethasone; surface Zn/Mg ions and
+      crystallisation additives fall outside the cutoff.
+
+  adora2a:
+    reference_pdb: 5NM4
+    anchor_het: ZMA            # ZM-241385 — orthosteric adenosine pocket
+    notes: >-
+      Orthosteric adenosine pocket. Anchored on ZM-241385 (ZMA); this one site holds
+      both the xanthine/triazolotriazine antagonists and the adenosine/NECA agonists,
+      which is exactly the agonist-vs-antagonist split we want. Excludes T4L/BRIL
+      fusion-partner ligands and the many bound lipids/detergents/alkanes.
+
+  chrm2:
+    reference_pdb: 7T94
+    anchor_het: ACH            # acetylcholine — orthosteric muscarinic pocket
+    notes: >-
+      Orthosteric acetylcholine pocket. Anchored on ACh; the extracellular-vestibule
+      allosteric modulator site sits just above it — if its poses survive the cutoff
+      they are split out geometrically in Stage 3 (allosteric marker in pockets.yaml),
+      never pooled with the orthosteric agonists/antagonists.

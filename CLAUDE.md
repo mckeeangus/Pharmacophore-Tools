@@ -8,24 +8,16 @@ start of every session before acting.
 This project builds an **automated pharmacophore-model construction pipeline**,
 generalised across diverse protein classes (work targeting a JCIM publication).
 
-The **known-actives assembly is complete** (Stages 1–3.4 below): a curated set of
+The **known-actives assembly is complete** (Stages 1–3.4 below) for all **16 targets
+/ 17 site-slugs** (Nav1.7 splits into a VSD4 and a pore slug): a curated set of
 experimentally-bound PDB ligands, filtered to each system's relevant site, aligned
 into one reference frame, and partitioned into **cells = (verified pocket × efficacy
-sign)**. The tracked deliverable is `catalogue/` (start at `catalogue/DATASETS.md`).
-
-A **second target batch** (2026-06-19) ran the full Stages 1–3.4 for Nav1.7
-(`nav1_7_vsd4`, `nav1_7_pore`), the glucocorticoid receptor (`gr_nr3c1`), adenosine
-A₂ₐ (`adora2a`) and muscarinic M2 (`chrm2`): data, visualisations, and the Stage-3.4
-literature efficacy curation are **complete** (56 of 61 worklist ligands resolved from
-primary citations and merged into `config/efficacy.yaml` as `source: literature`;
-provenance in `catalogue/efficacy_batch2_traceability.csv` + `efficacy_batch2_notes.md`,
-prompt in `literature_curation_prompt_batch2.md`). Cells: `gr_nr3c1` lbp positive/
-negative; `adora2a` orthosteric positive/neutral/negative; `chrm2` orthosteric
-positive/negative; both Nav1.7 slugs are blocker-only (`negative`). The 5 left
-`unknown` are screening fragments / a mispaired detergent — correctly excluded.
+sign)**. The tracked deliverable is `catalogue/` (start at `catalogue/DATASETS.md`);
+the full target list with per-target flags is "Known-actives reference" below, and
+the per-target counts are in `catalogue/run_summary.md`.
 
 **The current stage is pharmacophore construction** from those grouped active poses
-(see "Next stage" below). The longer-term flow — **DrugCLIP** virtual screening →
+(see "Current stage" below). The longer-term flow — **DrugCLIP** virtual screening →
 ligand prep → **GNINA** docking → score filtering — remains **out of scope**; do not
 build or invoke DrugCLIP/GNINA.
 
@@ -90,7 +82,7 @@ Dependency management is **pixi**. Every session:
 │   ├── groups/                # pocket verification + effect grouping (Stage 3)
 │   ├── util/                  # http, paths
 │   ├── config.py  pipeline.py # config dataclasses + Stage-1 orchestration
-│   └── features/ clustering/ pharmacophore/   # NEXT STAGE — scaffold, being built
+│   └── features/ clustering/ pharmacophore/   # CURRENT STAGE — scaffold to build out
 ├── scripts/                   # thin CLI wrappers (one per stage)
 ├── catalogue/                 # TRACKED deliverable (see catalogue/DATASETS.md)
 ├── data/                      # GITIGNORED, large (cached mmCIF + intermediate mol2)
@@ -142,25 +134,45 @@ Each stage writes tracked deliverables under `catalogue/`. Run via pixi tasks
      cells. Allosteric vs orthosteric is separated **geometrically**, not from the
      `site` field — NS9283 (NSE) reuses the orthosteric aromatic box, so a per-pose
      marker override (`config/pockets.yaml` `accessory.marker_hets: [NSE]`) gives it
-     its own `accessory__positive` cell. Provenance: `catalogue/efficacy_curation_README.md`
-     + `literature_curation_traceability.csv`; the worklist is regenerable with
-     `scripts/make_literature_worklist.py`.
+     its own `accessory__positive` cell. Provenance lives under `catalogue/curation/`
+     (`efficacy_curation_README.md` + the batch-1/batch-2 traceability tables); the
+     worklist is regenerable with `scripts/make_literature_worklist.py`.
 
 **Efficacy provenance tiers** (highest first): `literature` > `prelabelled` >
 `curated` > the `stage3_efficacy_resolved.csv` ChEMBL fallback. An explicit ligand
 entry always beats the CSV; `unknown` is never defaulted away.
 
-## Next stage — pharmacophore construction
+## Current stage — pharmacophore construction
 
-Build pharmacophore models **from the grouped active poses**, working per cell
-(`catalogue/<slug>/groups/<pocket>__<efficacy>/`) — the unit a single hypothesis is
-built from. Target modules: `pharmpipe/features` (RDKit feature extraction),
-`pharmpipe/clustering` (cluster features/poses within a cell), `pharmpipe/pharmacophore`
-(assemble + score the model). Same rules apply: geometry/logic in code, scientific
-choices (feature definitions, tolerances, which cells to model) in `config/`; keep IO
-at the edges and unit-test the core offline. Respect the review tracks — do not pull
-`separate_state`, `unknown`, or `quarantine` poses into a model; gate `surrogate`/
-`mismatch` poses per the curation README before pooling.
+Build pharmacophore models **from the grouped active poses**. The build unit is one
+**cell** — `catalogue/<slug>/groups/<pocket>__<efficacy>/`, a set of mol2 poses
+already superposed in a common frame, same pocket, same efficacy sign. One hypothesis
+per cell.
+
+**Input contract (what a cell guarantees, so the model code need not re-derive it):**
+poses share a reference frame (Stage 2 ICP alignment); pocket identity is
+geometry-verified; efficacy sign is curated. So feature extraction can assume the
+coordinates are directly comparable.
+
+**Build modules** (currently 1-line scaffolds — flesh out, one responsibility each):
+- `pharmpipe/features` — RDKit pharmacophore-feature extraction per pose (H-bond
+  donor/acceptor, aromatic, hydrophobe, charge), feature definitions in `config/`.
+- `pharmpipe/clustering` — cluster features/poses within a cell to find conserved,
+  recurrent feature positions (the consensus the model is built on).
+- `pharmpipe/pharmacophore` — assemble the consensus features into a tolerance-ed
+  model and score it; write the model artefact + a session per cell.
+
+**Rules (unchanged):** geometry/logic in code, scientific choices (feature SMARTS,
+tolerances, min-support, which cells to model) in `config/`, never inferred from names.
+IO at the edges; unit-test the core offline. Add a `pixi run` task + a thin
+`scripts/` wrapper for the new stage, mirroring the existing stages.
+
+**Respect the review tracks** — never pull `separate_state`, `unknown`, or
+`quarantine` poses into a model. Gate `surrogate`/`chimera`/`mismatch` poses per the
+caveats in `catalogue/curation/efficacy_curation_README.md` before pooling: a
+surrogate pose carries the surrogate's pocket geometry, and `mismatch` poses are
+wrong-target structures that the labels exclude but a geometry pipeline must drop
+explicitly.
 
 ## Known-actives reference (Stages 1–3.4 complete)
 

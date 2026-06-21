@@ -10,7 +10,7 @@
 #   * `literature` — Stage 3.4 manual curation: the efficacy direction was read
 #     from the structure's PRIMARY publication (PMID + confidence recorded in the
 #     note). This is the top tier; per-ligand site / pose_source / PMID for every
-#     curated ligand live in `catalogue/literature_curation_traceability.csv`.
+#     curated ligand live in `catalogue/curation/literature_curation_traceability.csv`.
 #   * `prelabelled` — verified against RCSB / a known drug identity at scrape time.
 #   * `curated` — curator assignment from standard pharmacology (textbook drug
 #     class / IUPHAR-BPS). MUST be verified at the relevant subtype before

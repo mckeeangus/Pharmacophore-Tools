@@ -48,9 +48,9 @@ but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff
 
 > **Batch-2 (2026-06-19) — complete.** `nav1_7_vsd4`, `nav1_7_pore`, `gr_nr3c1`,
 > `adora2a`, `chrm2` are built through Stage 3.4 with literature efficacy curation
-> merged (provenance: `efficacy_batch2_traceability.csv`, `efficacy_batch2_notes.md`).
-> Populated cells: `gr_nr3c1` lbp+/−; `adora2a` orthosteric +/neutral/−; `chrm2`
-> orthosteric +/−; `nav1_7_vsd4`/`nav1_7_pore` blocker-only (−).
+> merged (provenance under `curation/`). Populated cells: `gr_nr3c1` lbp+/−;
+> `adora2a` orthosteric +/neutral/−; `chrm2` orthosteric +/−;
+> `nav1_7_vsd4`/`nav1_7_pore` blocker-only (−).
 
 ## Review tracks — `review/`
 
@@ -69,8 +69,10 @@ but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff
 ## Other tracked files
 
 - `ligand_catalogue.md` / `ligand_catalogue.xlsx` — Stage 1 cross-target ligand catalogue.
-- `run_summary.md` — per-stage run record (counts per target).
-- `stage3_efficacy_resolved.csv` — ChEMBL efficacy resolution (the fallback tier).
-- `efficacy_curation_README.md` + `literature_curation_traceability.csv` — Stage 3.4
-  literature curation: per-ligand efficacy direction, site/pose-source qualifiers, and
-  PMID provenance for all 158 worklist ligands.
+- `run_summary.md` — per-stage run record (counts per target, all 17 site-slugs).
+- `realignment_report.md` — Stage 2 binding-site alignment method + before/after QC.
+- `stage3_efficacy_resolved.csv` — ChEMBL efficacy resolution (the fallback tier; read by the Stage-3 loader).
+- `curation/` — Stage 3.4 literature efficacy provenance: `efficacy_curation_README.md`
+  (start here), `literature_curation_traceability.csv` (batch 1, 158 ligands) and the
+  batch-2 `efficacy_batch2_{traceability.csv,notes.md}`. Per-ligand efficacy direction,
+  site/pose-source qualifiers, and PMID provenance.

@@ -1,0 +1,132 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "adora2a/orthosteric__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\adora2a\\groups\\orthosteric__positive",
+      "n_ligands": 6,
+      "load": {
+        "template": 6
+      },
+      "skipped": [
+        [
+          "8RLN_A1H1S_A1211",
+          "fail"
+        ]
+      ]
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 9
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": -1.3771666666666667,
+      "y": 98.05366666666667,
+      "z": 52.0785,
+      "radius": 1.0,
+      "n_points": 6,
+      "n_ligands": 6,
+      "support": 1.0
+    },
+    {
+      "family": "Donor",
+      "x": 2.4774000000000003,
+      "y": 90.36180000000002,
+      "z": 53.873599999999996,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333
+    },
+    {
+      "family": "Donor",
+      "x": 1.6792000000000002,
+      "y": 89.9564,
+      "z": 49.9356,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333
+    },
+    {
+      "family": "Donor",
+      "x": 4.0598,
+      "y": 92.51340000000002,
+      "z": 53.928200000000004,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333
+    },
+    {
+      "family": "Acceptor",
+      "x": 1.7956756756756749,
+      "y": 93.99791891891894,
+      "z": 52.555270270270256,
+      "radius": 3.0,
+      "n_points": 37,
+      "n_ligands": 6,
+      "support": 1.0
+    },
+    {
+      "family": "Acceptor",
+      "x": 0.6519999999999999,
+      "y": 105.64059999999999,
+      "z": 56.233000000000004,
+      "radius": 3.0,
+      "n_points": 5,
+      "n_ligands": 3,
+      "support": 0.5
+    },
+    {
+      "family": "PosIonizable",
+      "x": 0.63468,
+      "y": 95.06652000000001,
+      "z": 51.80456,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333
+    },
+    {
+      "family": "Aromatic",
+      "x": 0.9417277777777778,
+      "y": 95.88229999999999,
+      "z": 52.37209444444445,
+      "radius": 1.4035989437650138,
+      "n_points": 12,
+      "n_ligands": 6,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 1.1775916666666668,
+      "y": 101.199275,
+      "z": 56.41149166666666,
+      "radius": 2.2266481379125524,
+      "n_points": 4,
+      "n_ligands": 4,
+      "support": 0.6667
+    }
+  ]
+}

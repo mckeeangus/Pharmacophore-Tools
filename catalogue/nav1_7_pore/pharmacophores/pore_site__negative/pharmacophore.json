@@ -1,0 +1,87 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "nav1_7_pore/pore_site__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\nav1_7_pore\\groups\\pore_site__negative",
+      "n_ligands": 5,
+      "load": {
+        "template": 5
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 5
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": 122.63949999999998,
+      "y": 123.53787500000001,
+      "z": 104.518625,
+      "radius": 2.4129218996374493,
+      "n_points": 8,
+      "n_ligands": 5,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 122.379,
+      "y": 125.38587499999998,
+      "z": 107.38287499999998,
+      "radius": 1.9167081073418575,
+      "n_points": 8,
+      "n_ligands": 3,
+      "support": 0.6
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 121.96985714285714,
+      "y": 123.68728571428572,
+      "z": 101.4542857142857,
+      "radius": 1.999138161247265,
+      "n_points": 7,
+      "n_ligands": 3,
+      "support": 0.6
+    },
+    {
+      "family": "Donor",
+      "x": 121.59760000000001,
+      "y": 124.59859999999999,
+      "z": 104.07480000000001,
+      "radius": 1.797682018600619,
+      "n_points": 5,
+      "n_ligands": 4,
+      "support": 0.8
+    },
+    {
+      "family": "Aromatic",
+      "x": 123.17283333333332,
+      "y": 124.81261111111111,
+      "z": 107.11427777777776,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 0.6
+    }
+  ]
+}

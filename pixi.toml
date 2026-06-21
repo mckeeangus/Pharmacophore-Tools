@@ -21,6 +21,9 @@ resolve-efficacy = "python scripts/resolve_efficacy.py"
 # Stage 3: pocket-verified, effect-based grouping of the site-aligned poses.
 # Offline (cached structures + catalogue). Bake .pse with: pixi run -e viz group-effects
 group-effects = "python scripts/group_effects.py"
+# Stage 4: build ligand-based ensemble pharmacophores from the grouped cells.
+# Offline (uses the tracked catalogue). e.g. pixi run build-pharmacophores --catalogue
+build-pharmacophores = "python scripts/build_pharmacophores.py"
 test = { cmd = "pytest -q", depends-on = [] }
 lint = "ruff check ."
 
@@ -62,7 +65,14 @@ ruff = ">=0.5"
 [feature.viz.dependencies]
 pymol-open-source = ">=2.5"
 
+# --- ph4: pharmacophore construction (Stage 4) — clustering + raw-data plots.
+# scikit-learn (k-means + silhouette) and matplotlib (offline 3D feature scatter).
+# Feature extraction itself uses rdkit (in `chem`); these add the clustering/plot side.
+[feature.ph4.dependencies]
+scikit-learn = "*"
+matplotlib = "*"
+
 [environments]
-default = { features = ["core", "chem"], solve-group = "main" }
-dev = { features = ["core", "chem", "dev"], solve-group = "main" }
-viz = { features = ["core", "chem", "viz"], solve-group = "main" }
+default = { features = ["core", "chem", "ph4"], solve-group = "main" }
+dev = { features = ["core", "chem", "ph4", "dev"], solve-group = "main" }
+viz = { features = ["core", "chem", "ph4", "viz"], solve-group = "main" }

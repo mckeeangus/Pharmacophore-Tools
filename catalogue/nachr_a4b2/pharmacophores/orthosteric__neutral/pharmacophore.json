@@ -1,0 +1,87 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "nachr_a4b2/orthosteric__neutral",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\nachr_a4b2\\groups\\orthosteric__neutral",
+      "n_ligands": 9,
+      "load": {
+        "template": 9
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 5
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 170.40833333333333,
+      "y": 119.39916666666666,
+      "z": 182.05683333333332,
+      "radius": 2.7848825528796217,
+      "n_points": 6,
+      "n_ligands": 5,
+      "support": 0.5556
+    },
+    {
+      "family": "Acceptor",
+      "x": 169.61366666666666,
+      "y": 120.20050000000002,
+      "z": 184.9765,
+      "radius": 3.0,
+      "n_points": 24,
+      "n_ligands": 9,
+      "support": 1.0
+    },
+    {
+      "family": "Acceptor",
+      "x": 163.22946153846155,
+      "y": 124.03015384615385,
+      "z": 181.11069230769232,
+      "radius": 2.4741858286702914,
+      "n_points": 13,
+      "n_ligands": 6,
+      "support": 0.6667
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 166.1209090909091,
+      "y": 123.03636363636362,
+      "z": 184.3890909090909,
+      "radius": 1.3527344818967215,
+      "n_points": 11,
+      "n_ligands": 6,
+      "support": 0.6667
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 168.18644444444442,
+      "y": 121.09633333333333,
+      "z": 184.01977777777776,
+      "radius": 1.4567419422875652,
+      "n_points": 9,
+      "n_ligands": 6,
+      "support": 0.6667
+    }
+  ]
+}

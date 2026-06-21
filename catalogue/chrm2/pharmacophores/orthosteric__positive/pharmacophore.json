@@ -1,0 +1,67 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "chrm2/orthosteric__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\chrm2\\groups\\orthosteric__positive",
+      "n_ligands": 2,
+      "load": {
+        "template": 2
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 3
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": 136.7976666666667,
+      "y": 146.012,
+      "z": 104.766,
+      "radius": 1.2545029117365796,
+      "n_points": 3,
+      "n_ligands": 2,
+      "support": 1.0
+    },
+    {
+      "family": "PosIonizable",
+      "x": 132.86,
+      "y": 144.78199999999998,
+      "z": 102.184,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 134.5805,
+      "y": 146.00400000000002,
+      "z": 104.344,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 0.5
+    }
+  ]
+}

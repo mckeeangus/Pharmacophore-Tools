@@ -1,0 +1,118 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "esr1/lbp__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\esr1\\groups\\lbp__negative",
+      "n_ligands": 42,
+      "load": {
+        "template": 31,
+        "direct": 11
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 8
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 20.808906249999996,
+      "y": -10.921125,
+      "z": 1.9432500000000004,
+      "radius": 1.0,
+      "n_points": 32,
+      "n_ligands": 32,
+      "support": 0.7619
+    },
+    {
+      "family": "Donor",
+      "x": 28.29676,
+      "y": -4.010999999999999,
+      "z": 5.973,
+      "radius": 1.0,
+      "n_points": 25,
+      "n_ligands": 25,
+      "support": 0.5952
+    },
+    {
+      "family": "Acceptor",
+      "x": 24.564316455696208,
+      "y": -13.510075949367087,
+      "z": 9.985683544303797,
+      "radius": 2.5846464531177498,
+      "n_points": 79,
+      "n_ligands": 36,
+      "support": 0.8571
+    },
+    {
+      "family": "Acceptor",
+      "x": 27.485394736842096,
+      "y": -7.309289473684209,
+      "z": 7.120684210526314,
+      "radius": 1.3466786932190182,
+      "n_points": 38,
+      "n_ligands": 35,
+      "support": 0.8333
+    },
+    {
+      "family": "Acceptor",
+      "x": 21.24536111111111,
+      "y": -11.1255,
+      "z": 2.2740833333333335,
+      "radius": 1.675955465925462,
+      "n_points": 36,
+      "n_ligands": 32,
+      "support": 0.7619
+    },
+    {
+      "family": "Aromatic",
+      "x": 22.43688712121212,
+      "y": -11.630143939393939,
+      "z": 4.100003030303031,
+      "radius": 1.0,
+      "n_points": 44,
+      "n_ligands": 42,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 26.252083333333335,
+      "y": -9.704436507936506,
+      "z": 6.731952380952383,
+      "radius": 1.0,
+      "n_points": 42,
+      "n_ligands": 42,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 24.22803734439834,
+      "y": -12.08055186721991,
+      "z": 6.95201244813278,
+      "radius": 2.5147397555793627,
+      "n_points": 241,
+      "n_ligands": 42,
+      "support": 1.0
+    }
+  ]
+}

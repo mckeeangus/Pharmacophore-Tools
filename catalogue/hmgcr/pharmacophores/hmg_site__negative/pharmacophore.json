@@ -1,0 +1,247 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "hmgcr/hmg_site__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\hmgcr\\groups\\hmg_site__negative",
+      "n_ligands": 18,
+      "load": {
+        "template": 18
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 21
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 13.527055555555556,
+      "y": 4.700555555555557,
+      "z": 14.440777777777779,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Donor",
+      "x": 14.838555555555558,
+      "y": 6.577055555555556,
+      "z": 11.02288888888889,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Donor",
+      "x": 21.606416666666664,
+      "y": 11.423,
+      "z": 14.701999999999998,
+      "radius": 1.264837305633504,
+      "n_points": 12,
+      "n_ligands": 10,
+      "support": 0.5556
+    },
+    {
+      "family": "Donor",
+      "x": 14.01811111111111,
+      "y": 1.8005555555555555,
+      "z": 16.112777777777776,
+      "radius": 1.0,
+      "n_points": 9,
+      "n_ligands": 9,
+      "support": 0.5
+    },
+    {
+      "family": "Donor",
+      "x": 16.183999999999997,
+      "y": 2.602444444444445,
+      "z": 16.215,
+      "radius": 1.0,
+      "n_points": 9,
+      "n_ligands": 9,
+      "support": 0.5
+    },
+    {
+      "family": "Acceptor",
+      "x": 15.10063888888889,
+      "y": 2.2208611111111116,
+      "z": 16.15561111111111,
+      "radius": 1.1227423416531244,
+      "n_points": 36,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Acceptor",
+      "x": 13.527055555555556,
+      "y": 4.700555555555557,
+      "z": 14.440777777777779,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Acceptor",
+      "x": 14.838555555555558,
+      "y": 6.577055555555556,
+      "z": 11.02288888888889,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Acceptor",
+      "x": 21.573526315789476,
+      "y": 9.516315789473685,
+      "z": 13.91605263157895,
+      "radius": 1.3631232671887186,
+      "n_points": 19,
+      "n_ligands": 15,
+      "support": 0.8333
+    },
+    {
+      "family": "Acceptor",
+      "x": 13.79486666666667,
+      "y": 7.670333333333334,
+      "z": 19.144933333333334,
+      "radius": 1.0,
+      "n_points": 15,
+      "n_ligands": 15,
+      "support": 0.8333
+    },
+    {
+      "family": "Acceptor",
+      "x": 18.279500000000002,
+      "y": 9.988416666666666,
+      "z": 16.762083333333333,
+      "radius": 2.5841943753217262,
+      "n_points": 12,
+      "n_ligands": 10,
+      "support": 0.5556
+    },
+    {
+      "family": "NegIonizable",
+      "x": 15.15621212121212,
+      "y": 2.3006363636363636,
+      "z": 15.974878787878787,
+      "radius": 1.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 0.6111
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 16.353,
+      "y": 7.454032258064514,
+      "z": 13.079129032258068,
+      "radius": 1.0,
+      "n_points": 31,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 15.003722222222219,
+      "y": 4.776777777777777,
+      "z": 12.566166666666668,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 14.97877777777778,
+      "y": 2.8237222222222225,
+      "z": 14.125666666666667,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 16.897583333333333,
+      "y": 8.696,
+      "z": 16.304375,
+      "radius": 1.01351030783965,
+      "n_points": 24,
+      "n_ligands": 16,
+      "support": 0.8889
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 18.991950000000003,
+      "y": 9.219650000000001,
+      "z": 12.5577,
+      "radius": 1.203973249287541,
+      "n_points": 20,
+      "n_ligands": 12,
+      "support": 0.6667
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 19.143086956521735,
+      "y": 9.598869565217393,
+      "z": 15.822000000000001,
+      "radius": 1.0671630093236968,
+      "n_points": 23,
+      "n_ligands": 11,
+      "support": 0.6111
+    },
+    {
+      "family": "Aromatic",
+      "x": 18.61241296296296,
+      "y": 9.309761111111111,
+      "z": 14.56575925925926,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 16,
+      "support": 0.8889
+    },
+    {
+      "family": "Aromatic",
+      "x": 15.649511111111112,
+      "y": 8.319244444444445,
+      "z": 17.263155555555556,
+      "radius": 1.0,
+      "n_points": 15,
+      "n_ligands": 15,
+      "support": 0.8333
+    },
+    {
+      "family": "Aromatic",
+      "x": 24.37311111111111,
+      "y": 12.416222222222222,
+      "z": 13.584249999999999,
+      "radius": 1.3476661001295052,
+      "n_points": 12,
+      "n_ligands": 11,
+      "support": 0.6111
+    }
+  ]
+}

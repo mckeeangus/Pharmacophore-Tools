@@ -1,0 +1,117 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "cox2/cox_channel__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\cox2\\groups\\cox_channel__negative",
+      "n_ligands": 5,
+      "load": {
+        "template": 5
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 8
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 27.91075,
+      "y": 4.5905000000000005,
+      "z": 32.772,
+      "radius": 1.0,
+      "n_points": 4,
+      "n_ligands": 4,
+      "support": 0.8
+    },
+    {
+      "family": "Donor",
+      "x": 24.75425,
+      "y": 3.5895,
+      "z": 32.88525,
+      "radius": 1.0,
+      "n_points": 4,
+      "n_ligands": 4,
+      "support": 0.8
+    },
+    {
+      "family": "Acceptor",
+      "x": 26.683727272727275,
+      "y": 4.277636363636363,
+      "z": 32.469545454545454,
+      "radius": 2.442409269824022,
+      "n_points": 11,
+      "n_ligands": 5,
+      "support": 1.0
+    },
+    {
+      "family": "NegIonizable",
+      "x": 28.031222222222222,
+      "y": 4.7382222222222214,
+      "z": 32.94333333333333,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 0.6
+    },
+    {
+      "family": "Aromatic",
+      "x": 25.682899999999997,
+      "y": 4.574833333333333,
+      "z": 35.18606666666666,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 22.876666666666665,
+      "y": 2.2482777777777776,
+      "z": 31.851777777777773,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 0.6
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 25.617588235294118,
+      "y": 4.664823529411764,
+      "z": 35.291999999999994,
+      "radius": 1.403869873897638,
+      "n_points": 17,
+      "n_ligands": 5,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 22.776863636363636,
+      "y": 2.1077272727272724,
+      "z": 31.825,
+      "radius": 1.9882003620742215,
+      "n_points": 22,
+      "n_ligands": 4,
+      "support": 0.8
+    }
+  ]
+}

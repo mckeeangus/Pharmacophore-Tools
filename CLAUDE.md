@@ -73,16 +73,17 @@ Dependency management is **pixi**. Every session:
 │   ├── targets.yaml           #   targets + verified UniProt accessions + options
 │   ├── sites.yaml             #   per-target relevant site (anchor, references)
 │   ├── pockets.yaml           #   pocket naming, clustering thresholds, markers
-│   └── efficacy.yaml          #   efficacy signs + provenance, keyed by HET
+│   ├── efficacy.yaml          #   efficacy signs + provenance, keyed by HET
+│   └── pharmacophore.yaml     #   Stage-4 feature families, clustering, selection
 ├── src/pharmpipe/
 │   ├── io/                    # structure & ligand parse/write (mmCIF, mol2)
 │   ├── pdb/                   # RCSB/UniProt querying, ligand extraction
 │   ├── catalogue/             # cataloguing/reporting (Stage 1)
 │   ├── sites/                 # site filtering + alignment (Stage 2)
 │   ├── groups/                # pocket verification + effect grouping (Stage 3)
+│   ├── features/ clustering/ pharmacophore/   # pharmacophore construction (Stage 4)
 │   ├── util/                  # http, paths
-│   ├── config.py  pipeline.py # config dataclasses + Stage-1 orchestration
-│   └── features/ clustering/ pharmacophore/   # CURRENT STAGE — scaffold to build out
+│   └── config.py  pipeline.py # config dataclasses + Stage-1 orchestration
 ├── scripts/                   # thin CLI wrappers (one per stage)
 ├── catalogue/                 # TRACKED deliverable (see catalogue/DATASETS.md)
 ├── data/                      # GITIGNORED, large (cached mmCIF + intermediate mol2)
@@ -92,8 +93,9 @@ Dependency management is **pixi**. Every session:
 ## Pipeline stages (status)
 
 Each stage writes tracked deliverables under `catalogue/`. Run via pixi tasks
-(`scrape-pdb-ligands` → `align-sites` → `resolve-efficacy` → `group-effects`; add
-`-e viz` to bake `.pse`). The downstream DrugCLIP→GNINA flow stays out of scope.
+(`scrape-pdb-ligands` → `align-sites` → `resolve-efficacy` → `group-effects` →
+`build-pharmacophores`; add `-e viz` to bake `.pse`). The downstream DrugCLIP→GNINA
+flow stays out of scope.
 
 1. **Scrape & catalogue** (`pdb/`, `catalogue/`) — verified UniProt accessions, dated
    RCSB search, curated ligands (drop additives/buffers; keep cofactors), bound-pose
@@ -138,40 +140,61 @@ Each stage writes tracked deliverables under `catalogue/`. Run via pixi tasks
      (`efficacy_curation_README.md` + the batch-1/batch-2 traceability tables); the
      worklist is regenerable with `scripts/make_literature_worklist.py`.
 
+4. **Pharmacophore construction** (`features/`, `clustering/`, `pharmacophore/`,
+   `config/pharmacophore.yaml`) — ligand-based ensemble pharmacophore per cell.
+   **Current stage**; see the dedicated section below. Output:
+   `catalogue/<slug>/pharmacophores/<cell>/`.
+
 **Efficacy provenance tiers** (highest first): `literature` > `prelabelled` >
 `curated` > the `stage3_efficacy_resolved.csv` ChEMBL fallback. An explicit ligand
 entry always beats the CSV; `unknown` is never defaulted away.
 
-## Current stage — pharmacophore construction
+## Stage 4 — pharmacophore construction (current)
 
-Build pharmacophore models **from the grouped active poses**. The build unit is one
-**cell** — `catalogue/<slug>/groups/<pocket>__<efficacy>/`, a set of mol2 poses
-already superposed in a common frame, same pocket, same efficacy sign. One hypothesis
-per cell.
+Builds a **ligand-based ensemble pharmacophore** per cell, adapting the TeachOpenCADD
+T009 workflow (extract RDKit features → cluster per family → cluster centres become
+the model). The build unit is one **cell** —
+`catalogue/<slug>/groups/<pocket>__<efficacy>/`, mol2 poses already superposed in a
+common frame, same pocket, same efficacy sign. One hypothesis per cell. The pipeline
+is **general**: its real entry point takes *any* directory of aligned mol2 and emits a
+model; the catalogue batch mode is a convenience over that.
 
-**Input contract (what a cell guarantees, so the model code need not re-derive it):**
-poses share a reference frame (Stage 2 ICP alignment); pocket identity is
-geometry-verified; efficacy sign is curated. So feature extraction can assume the
-coordinates are directly comparable.
+Run: `pixi run build-pharmacophores --catalogue` (or `--target <slug>`, or
+`--input DIR --out DIR`). Offline.
 
-**Build modules** (currently 1-line scaffolds — flesh out, one responsibility each):
-- `pharmpipe/features` — RDKit pharmacophore-feature extraction per pose (H-bond
-  donor/acceptor, aromatic, hydrophobe, charge), feature definitions in `config/`.
-- `pharmpipe/clustering` — cluster features/poses within a cell to find conserved,
-  recurrent feature positions (the consensus the model is built on).
-- `pharmpipe/pharmacophore` — assemble the consensus features into a tolerance-ed
-  model and score it; write the model artefact + a session per cell.
+**Modules** (pure core, IO at the edges):
+- `pharmpipe/features` — `extract.py` (pure: feature factory → `FeaturePoint`/
+  `FeatureTable`) + `load.py` (IO). The loader is the critical bit: our mol2 are
+  heavy-atom-only, so RDKit's direct read misses donors / fails to kekulize. It
+  prefers **SMILES-template** bond assignment (`AssignBondOrdersFromTemplate` on a
+  connectivity-only graph; SMILES from the target's `unique_ligands.csv` keyed by HET)
+  → falls back to a direct read → skips+logs. Per-pose coverage is recorded.
+- `pharmpipe/clustering` — a `Clusterer` Protocol (`fit_predict(coords)->labels`) is
+  the **only** contract the builder depends on, so methods are drop-in. `kmeans.py`
+  is `KMeansSilhouette` — k chosen by **silhouette score**, not the tutorial's
+  `k=n/kq` heuristic. Add a method in `registry.py`; output format is unchanged, so
+  methods stay comparable.
+- `pharmpipe/pharmacophore` — `build.py` (pure assembly: cluster→centre→support→
+  tolerance→select), `model.py` (`Pharmacophore`, schema `pharmpipe.pharmacophore/v1`,
+  JSON round-trip), `io.py`, `viz.py` (matplotlib raw-feature 3D plots), `config.py`,
+  `run.py` (orchestration).
 
-**Rules (unchanged):** geometry/logic in code, scientific choices (feature SMARTS,
-tolerances, min-support, which cells to model) in `config/`, never inferred from names.
-IO at the edges; unit-test the core offline. Add a `pixi run` task + a thin
-`scripts/` wrapper for the new stage, mirroring the existing stages.
+**Config** `config/pharmacophore.yaml` — feature families/colours, clustering
+method+params, selection (min support fraction, min size, top-N), tolerance model.
+All scientific choices; none in code.
 
-**Respect the review tracks** — never pull `separate_state`, `unknown`, or
-`quarantine` poses into a model. Gate `surrogate`/`chimera`/`mismatch` poses per the
-caveats in `catalogue/curation/efficacy_curation_README.md` before pooling: a
-surrogate pose carries the surrogate's pocket geometry, and `mismatch` poses are
-wrong-target structures that the labels exclude but a geometry pipeline must drop
+**Outputs** per model dir (`catalogue/<slug>/pharmacophores/<cell>/`):
+`pharmacophore.json` (canonical, method-stable), `features.csv` (every raw point +
+cluster id + kept flag), `raw_features_<family>.png` (per-family 3D scatter — the
+"sense of the data" view for judging clustering quality), `pharmacophore.pml`,
+`model_summary.md`. Inspect a model in PyMOL with
+`pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- --pharmacophore … --compounds … [--features … --out …]`.
+
+**Respect the review tracks** — the batch modes build only `groups/` cells, never
+`separate_state` / `unknown` / `quarantine`. Gate `surrogate`/`chimera`/`mismatch`
+poses per the caveats in `catalogue/curation/efficacy_curation_README.md` before
+pooling: a surrogate pose carries the surrogate's pocket geometry, and `mismatch`
+poses are wrong-target structures the labels exclude but a geometry pipeline must drop
 explicitly.
 
 ## Known-actives reference (Stages 1–3.4 complete)

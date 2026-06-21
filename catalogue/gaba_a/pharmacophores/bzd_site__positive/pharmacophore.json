@@ -1,0 +1,107 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "gaba_a/bzd_site__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\gaba_a\\groups\\bzd_site__positive",
+      "n_ligands": 3,
+      "load": {
+        "template": 3
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 7
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": 240.062,
+      "y": 218.26733333333334,
+      "z": 240.19733333333332,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 2,
+      "support": 0.6667
+    },
+    {
+      "family": "Aromatic",
+      "x": 236.805625,
+      "y": 214.10404166666666,
+      "z": 243.42450000000002,
+      "radius": 1.0056858200998888,
+      "n_points": 4,
+      "n_ligands": 3,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 237.0505,
+      "y": 214.80741666666665,
+      "z": 238.52174999999994,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667
+    },
+    {
+      "family": "Aromatic",
+      "x": 239.37295,
+      "y": 216.65583333333333,
+      "z": 239.29671666666667,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 236.88766666666666,
+      "y": 214.76700000000002,
+      "z": 242.68533333333335,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 237.43433333333334,
+      "y": 215.17733333333334,
+      "z": 239.51533333333336,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 236.05349999999999,
+      "y": 213.9035,
+      "z": 238.109,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667
+    }
+  ]
+}

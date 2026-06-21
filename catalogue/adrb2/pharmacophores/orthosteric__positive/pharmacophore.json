@@ -1,0 +1,148 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "adrb2/orthosteric__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\adrb2\\groups\\orthosteric__positive",
+      "n_ligands": 11,
+      "load": {
+        "template": 10,
+        "direct": 1
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 11
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": -32.30527272727273,
+      "y": 10.727090909090908,
+      "z": 7.5108181818181805,
+      "radius": 1.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 1.0
+    },
+    {
+      "family": "Donor",
+      "x": -26.45563636363637,
+      "y": 8.96409090909091,
+      "z": 6.1468181818181815,
+      "radius": 1.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 1.0
+    },
+    {
+      "family": "Donor",
+      "x": -26.537636363636363,
+      "y": 11.707454545454544,
+      "z": 5.394363636363637,
+      "radius": 1.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 1.0
+    },
+    {
+      "family": "Donor",
+      "x": -32.9708,
+      "y": 8.11,
+      "z": 7.359499999999999,
+      "radius": 1.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091
+    },
+    {
+      "family": "Acceptor",
+      "x": -32.2367,
+      "y": 10.7654,
+      "z": 7.450999999999999,
+      "radius": 1.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091
+    },
+    {
+      "family": "Acceptor",
+      "x": -26.371799999999997,
+      "y": 11.519499999999999,
+      "z": 5.401700000000001,
+      "radius": 1.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091
+    },
+    {
+      "family": "Acceptor",
+      "x": -26.438,
+      "y": 8.901375000000002,
+      "z": 6.143374999999999,
+      "radius": 1.0,
+      "n_points": 8,
+      "n_ligands": 8,
+      "support": 0.7273
+    },
+    {
+      "family": "PosIonizable",
+      "x": -32.9708,
+      "y": 8.11,
+      "z": 7.359499999999999,
+      "radius": 1.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091
+    },
+    {
+      "family": "Aromatic",
+      "x": -28.73024242424242,
+      "y": 10.706621212121213,
+      "z": 6.4574848484848495,
+      "radius": 1.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": -29.57,
+      "y": 10.02555,
+      "z": 6.95655,
+      "radius": 1.3295511629869683,
+      "n_points": 20,
+      "n_ligands": 11,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": -34.848368421052626,
+      "y": 5.37642105263158,
+      "z": 7.806684210526316,
+      "radius": 1.4935109669199789,
+      "n_points": 19,
+      "n_ligands": 7,
+      "support": 0.6364
+    }
+  ]
+}

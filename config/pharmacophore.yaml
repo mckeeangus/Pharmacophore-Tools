@@ -1,0 +1,53 @@
+# config/pharmacophore.yaml
+# Stage 4 — ligand-based ensemble pharmacophore construction.
+#
+# All SCIENTIFIC choices live here, never in code: which feature families to use,
+# how to cluster their points into consensus positions, which clusters to keep, and
+# how the tolerance radius is derived. Swapping `clustering.method` (see
+# pharmpipe/clustering/registry.py) changes only the feature positions — the output
+# file format is identical, so methods are directly comparable.
+
+# --- Feature extraction (RDKit) ---------------------------------------------
+features:
+  # `base` = RDKit's BaseFeatures.fdef (RDConfig.RDDataDir). A path to a custom
+  # .fdef file may be given instead to change the chemistry definitions.
+  fdef: base
+  # Pharmacophore feature families to extract and model. The TeachOpenCADD T009
+  # tutorial uses Donor/Acceptor/Hydrophobe; the others are included because our
+  # binding sites are more diverse (charged and aromatic contacts matter).
+  families: [Donor, Acceptor, Hydrophobe, Aromatic, PosIonizable, NegIonizable]
+  # Display colours (RGB 0–1) shared by the matplotlib raw-data plots and the
+  # PyMOL session, so a family looks the same everywhere. Greens/reds/yellow follow
+  # the usual donor/acceptor/hydrophobe convention.
+  colors:
+    Donor:        [0.00, 0.85, 0.00]   # green
+    Acceptor:     [0.90, 0.00, 0.00]   # red
+    Hydrophobe:   [1.00, 0.85, 0.00]   # yellow
+    Aromatic:     [0.60, 0.30, 0.90]   # purple
+    PosIonizable: [0.15, 0.45, 1.00]   # blue
+    NegIonizable: [1.00, 0.45, 0.00]   # orange
+
+# --- Clustering (swappable) -------------------------------------------------
+# method must be registered in pharmpipe/clustering/registry.py. params are passed
+# straight to that clusterer's constructor.
+clustering:
+  method: kmeans_silhouette
+  params:
+    k_min: 2            # smallest k considered
+    k_max: 8            # largest k considered (clamped to n_points - 1)
+    n_init: 10          # k-means restarts per k
+    random_state: 0     # determinism
+
+# --- Cluster -> kept feature selection --------------------------------------
+selection:
+  # Keep a cluster only if it draws features from at least this fraction of the
+  # ligands in the set (the T009 "present in most molecules" idea, made relative).
+  min_support_fraction: 0.5
+  min_cluster_size: 2          # and at least this many feature points
+  top_n_per_family: null       # optional cap on kept clusters per family (null = all)
+
+# --- Tolerance (kept feature sphere radius, Angstrom) -----------------------
+tolerance:
+  method: rmsd                 # root-mean-square distance of cluster points to centre
+  min: 1.0                     # clamp so a tight cluster still has a usable radius
+  max: 3.0                     # and a diffuse cluster does not balloon

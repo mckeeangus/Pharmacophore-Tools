@@ -1,0 +1,67 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "nachr_a4b2/accessory__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\nachr_a4b2\\groups\\accessory__positive",
+      "n_ligands": 1,
+      "load": {
+        "template": 1
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 3
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": 167.98250000000002,
+      "y": 124.2425,
+      "z": 185.1385,
+      "radius": 1.1393132800068624,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 166.562,
+      "y": 123.97186666666667,
+      "z": 184.48213333333334,
+      "radius": 1.9561003303057338,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 170.4305,
+      "y": 122.564,
+      "z": 187.74599999999998,
+      "radius": 1.2113468743510225,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    }
+  ]
+}

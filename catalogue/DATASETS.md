@@ -31,6 +31,7 @@ All poses for a target share one superposed reference frame (Stage 2 / Stage 3 a
 | `review/{separate_state,unknown,quarantine}/` | First-class review tracks, never force-bucketed (see below). |
 | `datasets/all_poses/` | Every kept pose for the target (one mol2 each) + a combined `.pml`/`.pse`. |
 | `datasets/representative/` | One pose per ligand (best resolution) + a combined `.pml`/`.pse`. |
+| `pharmacophores/<pocket>__<efficacy>/` | Stage 4 — the ensemble pharmacophore built from that cell (see below). |
 
 ## Cells — `groups/<pocket>__<efficacy>/`
 
@@ -65,6 +66,20 @@ but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff
 `all_poses/` and `representative/` pool every target into one frame-agnostic set
 (per-target frames are independent), each with a baked `.pse`. Use the per-target
 `groups/` cells as pharmacophore inputs; the master sets are for cross-target overview.
+
+## Pharmacophores (Stage 4) — `pharmacophores/<pocket>__<efficacy>/`
+
+One ligand-based ensemble pharmacophore per cell, built by clustering the RDKit
+features of that cell's poses (see `config/pharmacophore.yaml`; method/params recorded
+in each model). Files per model:
+
+| File | What it is |
+|---|---|
+| `pharmacophore.json` | Canonical, schema-versioned model (`pharmpipe.pharmacophore/v1`): each feature's family, centre, tolerance radius, point count, ligand support, plus a provenance block. Format is method-stable — swapping the clustering method changes positions, not structure. |
+| `features.csv` | Every raw extracted feature point (family, source ligand, x/y/z, cluster id, kept flag) — the data behind the model. |
+| `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster with kept-cluster centres marked — to eyeball the distribution and judge clustering quality. |
+| `pharmacophore.pml` | Lightweight PyMOL script (compounds + feature spheres). The richer `scripts/pymol_pharmacophore.py` reads the JSON and adds a raw-point overlay. |
+| `model_summary.md` | Human-readable summary: load coverage, features kept per family, mean support. |
 
 ## Other tracked files
 

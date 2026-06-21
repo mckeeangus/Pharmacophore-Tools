@@ -1,0 +1,93 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "nachr_a4b2/orthosteric__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\nachr_a4b2\\groups\\orthosteric__positive",
+      "n_ligands": 18,
+      "load": {
+        "template": 16,
+        "direct": 2
+      },
+      "skipped": [
+        [
+          "3WTN_N2Y_H301",
+          "fail"
+        ]
+      ]
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 5
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 166.8782857142857,
+      "y": 123.39357142857143,
+      "z": 186.2275714285714,
+      "radius": 1.0,
+      "n_points": 14,
+      "n_ligands": 14,
+      "support": 0.7778
+    },
+    {
+      "family": "Acceptor",
+      "x": 171.48035294117645,
+      "y": 124.13364705882353,
+      "z": 188.4515882352941,
+      "radius": 1.0,
+      "n_points": 17,
+      "n_ligands": 17,
+      "support": 0.9444
+    },
+    {
+      "family": "PosIonizable",
+      "x": 166.88639999999998,
+      "y": 123.37866666666667,
+      "z": 186.1807333333333,
+      "radius": 1.0,
+      "n_points": 15,
+      "n_ligands": 15,
+      "support": 0.8333
+    },
+    {
+      "family": "Aromatic",
+      "x": 170.8501571428571,
+      "y": 122.80076904761904,
+      "z": 188.26559285714285,
+      "radius": 1.0,
+      "n_points": 14,
+      "n_ligands": 14,
+      "support": 0.7778
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 168.96161904761905,
+      "y": 122.97090476190476,
+      "z": 185.66019047619045,
+      "radius": 1.5351863854578813,
+      "n_points": 21,
+      "n_ligands": 10,
+      "support": 0.5556
+    }
+  ]
+}

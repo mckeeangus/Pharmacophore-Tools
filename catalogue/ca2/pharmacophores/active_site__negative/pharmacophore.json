@@ -1,0 +1,98 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "ca2/active_site__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\ca2\\groups\\active_site__negative",
+      "n_ligands": 76,
+      "load": {
+        "direct": 13,
+        "template": 63
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 6
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": -5.2715000000000005,
+      "y": 1.1529594594594594,
+      "z": 17.993175675675673,
+      "radius": 1.0,
+      "n_points": 74,
+      "n_ligands": 73,
+      "support": 0.9605
+    },
+    {
+      "family": "Acceptor",
+      "x": -7.2245833333333325,
+      "y": 1.0980833333333333,
+      "z": 16.563125,
+      "radius": 1.0,
+      "n_points": 72,
+      "n_ligands": 72,
+      "support": 0.9474
+    },
+    {
+      "family": "Aromatic",
+      "x": -4.761405913978496,
+      "y": 3.5254860215053756,
+      "z": 15.031267204301072,
+      "radius": 1.0,
+      "n_points": 62,
+      "n_ligands": 59,
+      "support": 0.7763
+    },
+    {
+      "family": "Hydrophobe",
+      "x": -5.313142857142856,
+      "y": 2.4761142857142864,
+      "z": 15.735442857142857,
+      "radius": 1.0,
+      "n_points": 70,
+      "n_ligands": 61,
+      "support": 0.8026
+    },
+    {
+      "family": "Hydrophobe",
+      "x": -4.4893125000000005,
+      "y": 4.405921875000001,
+      "z": 14.270546874999997,
+      "radius": 1.1318030017047882,
+      "n_points": 64,
+      "n_ligands": 48,
+      "support": 0.6316
+    },
+    {
+      "family": "Donor",
+      "x": -5.359540983606555,
+      "y": -0.3771803278688523,
+      "z": 16.079213114754097,
+      "radius": 1.0,
+      "n_points": 61,
+      "n_ligands": 61,
+      "support": 0.8026
+    }
+  ]
+}

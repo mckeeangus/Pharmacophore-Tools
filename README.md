@@ -43,10 +43,11 @@ Each stage writes tracked deliverables under `catalogue/`. Run via pixi tasks:
 | 2 — site filter & align | `pixi run align-sites` (`build-sessions` to bake `.pse`) | yes (login node) |
 | 3.3 — efficacy resolution | `pixi run resolve-efficacy` | yes (login node) |
 | 3 — effect grouping | `pixi run -e viz group-effects` | no (offline) |
+| 4 — pharmacophore construction | `pixi run build-pharmacophores --catalogue` | no (offline) |
 
 Curated scientific knowledge lives in `config/` (`targets.yaml`, `sites.yaml`,
-`pockets.yaml`, `efficacy.yaml`), never in code. See `CLAUDE.md` for the
-authoritative project rules, the target table, and per-stage detail.
+`pockets.yaml`, `efficacy.yaml`, `pharmacophore.yaml`), never in code. See `CLAUDE.md`
+for the authoritative project rules, the target table, and per-stage detail.
 
 ## Outputs
 

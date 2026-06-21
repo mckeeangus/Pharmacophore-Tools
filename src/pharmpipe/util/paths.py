@@ -101,6 +101,13 @@ def target_stage3_report(slug: str) -> Path:
     return target_catalogue_dir(slug) / f"{slug}_stage3_report.md"
 
 
+# --- Stage 4: pharmacophore models (tracked, under catalogue/) ---------------
+
+def target_pharmacophores_dir(slug: str) -> Path:
+    """Per-cell pharmacophore models: catalogue/<slug>/pharmacophores/<cell>/."""
+    return target_catalogue_dir(slug) / "pharmacophores"
+
+
 def ensure_dir(path: Path) -> Path:
     path.mkdir(parents=True, exist_ok=True)
     return path

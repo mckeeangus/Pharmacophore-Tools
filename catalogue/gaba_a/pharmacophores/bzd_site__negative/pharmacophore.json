@@ -1,0 +1,87 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "gaba_a/bzd_site__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\gaba_a\\groups\\bzd_site__negative",
+      "n_ligands": 1,
+      "load": {
+        "template": 1
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-21",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 5
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": 235.55033333333336,
+      "y": 219.952,
+      "z": 244.70666666666668,
+      "radius": 1.6456801363299975,
+      "n_points": 3,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Acceptor",
+      "x": 238.25,
+      "y": 211.96249999999998,
+      "z": 242.2285,
+      "radius": 1.2661925209066793,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 236.76045,
+      "y": 214.51420000000002,
+      "z": 244.21611666666666,
+      "radius": 1.087618402494409,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 236.6285,
+      "y": 215.72899999999998,
+      "z": 244.039,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 236.67450000000002,
+      "y": 217.8945,
+      "z": 243.16950000000003,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    }
+  ]
+}

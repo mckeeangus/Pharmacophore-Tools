@@ -91,10 +91,11 @@ in each model). Files per model:
 ## Other tracked files
 
 - `ligand_catalogue.md` / `ligand_catalogue.xlsx` — Stage 1 cross-target ligand catalogue.
-- `run_summary.md` — per-stage run record (counts per target, all 17 site-slugs).
+- `run_summary.md` — per-stage run record (counts per target, all 18 site-slugs).
 - `realignment_report.md` — Stage 2 binding-site alignment method + before/after QC.
 - `stage3_efficacy_resolved.csv` — ChEMBL efficacy resolution (the fallback tier; read by the Stage-3 loader).
 - `curation/` — Stage 3.4 literature efficacy provenance: `efficacy_curation_README.md`
-  (start here), `literature_curation_traceability.csv` (batch 1, 158 ligands) and the
-  batch-2 `efficacy_batch2_{traceability.csv,notes.md}`. Per-ligand efficacy direction,
+  (start here), `literature_curation_traceability.csv` (batch 1, 158 ligands), the
+  batch-2 `efficacy_batch2_{traceability.csv,notes.md}`, and the batch-3
+  `efficacy_batch3_{traceability.csv,notes.md}` (drd1). Per-ligand efficacy direction,
   site/pose-source qualifiers, and PMID provenance.

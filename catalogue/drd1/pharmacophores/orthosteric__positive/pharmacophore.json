@@ -1,0 +1,128 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "drd1/orthosteric__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\drd1\\groups\\orthosteric__positive",
+      "n_ligands": 16,
+      "load": {
+        "template": 15,
+        "direct": 1
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-23",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 9
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 122.20566666666666,
+      "y": 119.0692777777778,
+      "z": 144.0271111111111,
+      "radius": 1.7312809867084755,
+      "n_points": 18,
+      "n_ligands": 10,
+      "support": 0.625
+    },
+    {
+      "family": "Donor",
+      "x": 127.754,
+      "y": 121.95190909090911,
+      "z": 142.26772727272726,
+      "radius": 1.2180516144799358,
+      "n_points": 11,
+      "n_ligands": 10,
+      "support": 0.625
+    },
+    {
+      "family": "Acceptor",
+      "x": 123.58467741935485,
+      "y": 119.9717741935484,
+      "z": 143.9174193548387,
+      "radius": 2.4969758466537293,
+      "n_points": 31,
+      "n_ligands": 15,
+      "support": 0.9375
+    },
+    {
+      "family": "Acceptor",
+      "x": 130.03225,
+      "y": 124.46343750000001,
+      "z": 148.30656249999998,
+      "radius": 2.9336635679108634,
+      "n_points": 16,
+      "n_ligands": 8,
+      "support": 0.5
+    },
+    {
+      "family": "PosIonizable",
+      "x": 127.55043636363638,
+      "y": 121.80887272727273,
+      "z": 142.23054545454545,
+      "radius": 1.5633624210349029,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 0.6875
+    },
+    {
+      "family": "Aromatic",
+      "x": 123.91391904761903,
+      "y": 120.21712857142859,
+      "z": 142.8304714285714,
+      "radius": 1.0131522076608848,
+      "n_points": 21,
+      "n_ligands": 16,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 126.91278787878787,
+      "y": 122.33918181818184,
+      "z": 146.32649999999998,
+      "radius": 1.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 0.6875
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 124.99611111111115,
+      "y": 120.75842222222222,
+      "z": 143.1304888888889,
+      "radius": 1.9361436394525569,
+      "n_points": 45,
+      "n_ligands": 15,
+      "support": 0.9375
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 128.4455625,
+      "y": 122.75140625,
+      "z": 146.48368750000003,
+      "radius": 1.909644604278096,
+      "n_points": 32,
+      "n_ligands": 14,
+      "support": 0.875
+    }
+  ]
+}

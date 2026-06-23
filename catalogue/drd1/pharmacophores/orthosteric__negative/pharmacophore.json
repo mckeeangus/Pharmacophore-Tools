@@ -1,0 +1,97 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "drd1/orthosteric__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\drd1\\groups\\orthosteric__negative",
+      "n_ligands": 1,
+      "load": {
+        "template": 1
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-23",
+    "clustering": {
+      "method": "kmeans_silhouette",
+      "params": {
+        "k_min": 2,
+        "k_max": 8,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    "n_features": 6
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 128.4765,
+      "y": 122.0145,
+      "z": 144.659,
+      "radius": 1.3879980187305732,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "PosIonizable",
+      "x": 128.4765,
+      "y": 122.0145,
+      "z": 144.659,
+      "radius": 1.3879980187305732,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Aromatic",
+      "x": 123.20499999999998,
+      "y": 119.02616666666667,
+      "z": 140.81258333333332,
+      "radius": 2.532648231101188,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 125.496,
+      "y": 120.77666666666669,
+      "z": 141.225,
+      "radius": 1.0965513617195017,
+      "n_points": 3,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 123.04133333333334,
+      "y": 119.60333333333334,
+      "z": 142.89466666666667,
+      "radius": 1.3140060882659599,
+      "n_points": 3,
+      "n_ligands": 1,
+      "support": 1.0
+    },
+    {
+      "family": "Hydrophobe",
+      "x": 123.41550000000001,
+      "y": 119.12799999999999,
+      "z": 139.405,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 1,
+      "support": 1.0
+    }
+  ]
+}

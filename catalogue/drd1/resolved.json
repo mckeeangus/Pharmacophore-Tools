@@ -1,0 +1,27 @@
+{
+  "target": "Dopamine receptor D1",
+  "slug": "drd1",
+  "search_date": "2026-06-23",
+  "primary_accessions": [
+    "P21728"
+  ],
+  "surrogate_accessions": [],
+  "accessions": [
+    {
+      "accession": "P21728",
+      "uniprot_id": "DRD1_HUMAN",
+      "taxonomy_id": 9606,
+      "organism_name": "Homo sapiens",
+      "genes": [
+        "DRD1"
+      ],
+      "protein_name": "D(1A) dopamine receptor",
+      "reviewed": true,
+      "role": "primary",
+      "surrogate_name": null
+    }
+  ],
+  "warnings": [],
+  "n_structures_found": 31,
+  "n_unique_ligands_kept": 21
+}

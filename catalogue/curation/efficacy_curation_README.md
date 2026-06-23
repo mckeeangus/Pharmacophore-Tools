@@ -45,6 +45,21 @@ The 61-ligand hand-off worklist and the curation prompt were consumed once the c
 were merged into `config/efficacy.yaml`; the worklist is regenerable at any time with
 `scripts/make_literature_worklist.py`.
 
+### Batch 3 (2026-06-23) — dopamine receptor D1 (drd1)
+
+The single-target expansion was curated the same way (hand-off to a delegated
+literature session with PubMed access); its calls are merged into
+`config/efficacy.yaml` (`source: literature`). Provenance is kept separately:
+
+| File | Contents |
+|---|---|
+| `efficacy_batch3_traceability.csv` | 15 resolved rows (`het,pdb,pmid,site,efficacy_or_track,confidence,rationale`). |
+| `efficacy_batch3_notes.md` | The agonist-dominated finding, the two no-PMID calls (flupentixol, epinephrine), and the PubMed source list. |
+
+All 15 D1 unknowns resolved (14 `positive`, 1 `negative`); none left `unknown`. The
+hand-off worklist was consumed and is regenerable with
+`scripts/make_literature_worklist.py`.
+
 ## Per-ligand schema
 
 YAML keys (and the matching CSV columns):

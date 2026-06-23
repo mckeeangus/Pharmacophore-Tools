@@ -8,8 +8,8 @@ start of every session before acting.
 This project builds an **automated pharmacophore-model construction pipeline**,
 generalised across diverse protein classes (work targeting a JCIM publication).
 
-The **known-actives assembly is complete** (Stages 1–3.4 below) for all **16 targets
-/ 17 site-slugs** (Nav1.7 splits into a VSD4 and a pore slug): a curated set of
+The **known-actives assembly is complete** (Stages 1–3.4 below) for all **17 targets
+/ 18 site-slugs** (Nav1.7 splits into a VSD4 and a pore slug): a curated set of
 experimentally-bound PDB ligands, filtered to each system's relevant site, aligned
 into one reference frame, and partitioned into **cells = (verified pocket × efficacy
 sign)**. The tracked deliverable is `catalogue/` (start at `catalogue/DATASETS.md`);
@@ -202,6 +202,7 @@ live in each `resolved.json`.
 | Glucocorticoid receptor | NR3C1 P04150 | Steroid LBD (nuclear-receptor analogue of ESR1). Some deposits are GR–Hsp90–p23 complexes — **Hsp90 ATP/ADP routed out**, not GR ligands. |
 | Adenosine A₂ₐ receptor | ADORA2A P29274 | GPCR; **fusion partners** (BRIL/T4L) + thermostabilising mutations — don't catalogue fusion-partner ligands. Large set; **run uncapped** (the default 100-pose, best-resolution-first cap dropped the entire lower-resolution agonist class, emptying the `positive` cell). |
 | Muscarinic M2 | CHRM2 P08172 | GPCR; acetylcholine receptor disambiguated to **muscarinic M2**. Distinct **extracellular allosteric vestibule** above the orthosteric site (geometric marker split). |
+| Dopamine receptor D1 | DRD1 P21728 | GPCR; dopamine receptor disambiguated to **D1** (most structurally covered of D1–D5). Mostly **active-state Gs complexes** — **G-protein GDP/GTP/Mg routed out**, not receptor ligands; **fusion partners** (BRIL/T4L) — don't catalogue fusion-partner ligands. Structurally **agonist-dominated**: the `orthosteric__positive` cell is large; `orthosteric__negative` is one ligand (flupentixol). |
 
 ### Resolved scope decisions (durable)
 

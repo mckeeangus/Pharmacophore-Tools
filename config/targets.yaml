@@ -169,3 +169,20 @@ targets:
       distinct extracellular allosteric (modulator) site above the orthosteric ACh
       pocket — the orthosteric/allosteric split is a known second pocket here.
       Constructs may use T4L/BRIL fusions and nanobody/G-protein mimetics.
+
+  # --- 2026-06-23 target expansion (batch 3) -------------------------------
+  - name: Dopamine receptor D1
+    slug: drd1
+    genes: [DRD1]
+    organism: human
+    uniprot_hint: [P21728]
+    notes: >-
+      Class-A GPCR; dopamine receptor disambiguated to the D1 subtype — the most
+      structurally covered of D1-D5 (31 PDB entries / 21 unique kept ligands at
+      scrape-survey time vs <=11 entries for any other subtype), so it gives the
+      best-defined pharmacophore. Mostly recent active-state cryo-EM Gs-protein
+      complexes, so GDP/GTP/Mg are G-protein cofactors (routed to separate_state,
+      not receptor ligands), and constructs may use BRIL/T4L fusions and
+      thermostabilising mutations — do not catalogue fusion-partner ligands as
+      target ligands. The orthosteric pocket holds both catecholamine and
+      non-catechol agonists plus antagonists (the agonist/antagonist split we want).

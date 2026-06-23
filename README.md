@@ -3,8 +3,8 @@
 Automated pharmacophore-model construction, generalised across diverse protein
 classes (work targeting a JCIM publication).
 
-**Where we are:** the **known-actives assembly is complete** for all 16 benchmark
-targets (17 site-slugs — Nav1.7 is split into a VSD4 and a pore site) — every
+**Where we are:** the **known-actives assembly is complete** for all 17 benchmark
+targets (18 site-slugs — Nav1.7 is split into a VSD4 and a pore site) — every
 experimentally-bound ligand is scraped from the PDB, filtered to the relevant site,
 aligned, and partitioned into **cells = (verified pocket × efficacy sign)** with
 curated provenance. The tracked result is `catalogue/` (see `catalogue/DATASETS.md`).

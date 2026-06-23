@@ -173,3 +173,16 @@ targets:
       accessory marker); GPCR renumbering otherwise collapses to the orthosteric
       label. If the allosteric poses fall outside the Stage-2 cutoff they simply do
       not appear — the marker only acts on poses that survive the filter.
+
+  # --- 2026-06-23 target expansion (batch 3) -------------------------------
+  drd1:
+    primary_label: orthosteric
+    collapse_to_primary: true
+    expected_pockets: [orthosteric]
+    notes: >-
+      Single orthosteric dopamine pocket. GPCR fusion-construct renumbering
+      (BRIL/T4L) and active-state Gs-protein complexes fragment the geometric
+      clusters across structures, so they are merged to one orthosteric label (as
+      with adrb2/adora2a). G-protein nucleotides (GDP/GTP) and Mg are routed to
+      separate_state in efficacy.yaml and in any case fall outside the Stage-2
+      orthosteric cutoff.

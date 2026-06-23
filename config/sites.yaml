@@ -148,3 +148,15 @@ sites:
       allosteric modulator site sits just above it — if its poses survive the cutoff
       they are split out geometrically in Stage 3 (allosteric marker in pockets.yaml),
       never pooled with the orthosteric agonists/antagonists.
+
+  # --- 2026-06-23 target expansion (batch 3) -------------------------------
+  drd1:
+    reference_pdb: 9LLJ
+    anchor_het: LDP            # dopamine — orthosteric catecholamine pocket
+    notes: >-
+      Orthosteric dopamine pocket. Anchored on dopamine (LDP), the endogenous
+      agonist and the most widely bound ligand (12 of 31 structures); this single
+      site holds the catecholamine and non-catechol agonists and the antagonists,
+      giving the agonist-vs-antagonist split. Excludes BRIL/T4L fusion-partner
+      ligands and the active-state G-protein nucleotides (GDP/GTP/Mg), which sit far
+      from the pocket and fall outside the cutoff.

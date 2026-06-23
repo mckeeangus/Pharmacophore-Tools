@@ -500,3 +500,41 @@ targets:
       QNB:   {efficacy: negative, source: literature, note: "3-quinuclidinyl benzilate, orthosteric M2 antagonist; PMID 22278061 (conf: high)"}
       "3C0": {efficacy: negative, source: literature, note: "N-methylscopolamine, orthosteric M2 antagonist; PMID 30420692 (conf: high)"}
       "82F": {efficacy: negative, source: literature, note: "pyrido-benzodiazepine subtype-selective M2 antagonist; PMID 30420692 (conf: high)"}
+
+  # --- 2026-06-23 target expansion (batch 3) --------------------------------
+  # Dopamine receptor D1 — orthosteric dopamine-pocket agonists vs antagonists.
+  # Only textbook-certain drugs are seeded here (source: curated); every other
+  # ligand (non-catechol agonists, research tool compounds) is left to the ChEMBL
+  # fallback + literature worklist. `unknown` is never defaulted away.
+  drd1:
+    class: multi_effect
+    notes: >-
+      Orthosteric dopamine-pocket agonists (positive) vs antagonists (negative).
+      Most deposits are active-state Gs-protein complexes, so GDP/GTP/Mg are
+      G-protein cofactors, not D1 ligands (routed to separate_state; they also
+      fall outside the Stage-2 orthosteric cutoff). Non-catechol agonists and
+      research tool compounds are left to the literature worklist.
+    ligands:
+      LDP: {efficacy: positive, note: "dopamine, endogenous D1 agonist"}
+      GTP: {track: separate_state, reason: "Galpha-s cofactor in the active-state complex, not a D1 ligand"}
+      GDP: {track: separate_state, reason: "Galpha-s cofactor in the active-state complex, not a D1 ligand"}
+      # Stage 3.4 — literature curation (batch 3, delegated session); PMID + conf in note.
+      # Nearly every D1 deposit is an active-state Gs complex (captures agonists), so the
+      # set is agonist-dominated; Flupentixol is the sole antagonist. See curation/.
+      # agonists (orthosteric; catechol, benzazepine, aporphine, and non-catechol classes)
+      "7LD":   {efficacy: positive, source: literature, note: "LSD (ergoline) D1 agonist, active-state legobody/Gs complex 8JXR; PMID 39094559 (conf: high)"}
+      A1IZU:   {efficacy: positive, source: literature, note: "compound 19B, non-catechol D1/D5 G-protein-biased agonist, active-state Gs complex 9I52; PMID 40552668 (conf: high)"}
+      A1IZV:   {efficacy: positive, source: literature, note: "compound 24, D1/D5 biased agonist, active-state Gs complex 9I54; PMID 40552668 (conf: high)"}
+      ALE:     {efficacy: positive, source: literature, note: "L-epinephrine catecholamine agonist in D1 active-state miniGs complex 9LWC; deposit title (conf: medium)"}
+      G3C:     {efficacy: positive, source: literature, note: "fenoldopam, catechol D1 agonist, D1-Gs complex 7CKW; PMID 33571432 (conf: high)"}
+      G3O:     {efficacy: positive, source: literature, note: "A77636, catechol D1 full agonist, D1-Gs complex 7CKX; PMID 33571432 (conf: high)"}
+      G3U:     {efficacy: positive, source: literature, note: "PW0464, non-catechol Gs-biased D1 agonist, D1-Gs complex 7CKY; PMID 33571432 (conf: high)"}
+      GBU:     {efficacy: positive, source: literature, note: "SKF-type 6-chloro-benzazepine D1-selective agonist, D1-Gs complex 7CRH; PMID 33571432 (conf: high)"}
+      OR9:     {efficacy: positive, source: literature, note: "apomorphine, aporphine D1 agonist, agonist-bound D1-Gs complex 7JVQ; PMID 33571431 (conf: high)"}
+      R5F:     {efficacy: positive, source: literature, note: "rotigotine, pan-dopamine agonist incl. D1, D1-Gs complex 8IRR; PMID 37221270 (conf: high)"}
+      SK0:     {efficacy: positive, source: literature, note: "SKF-81297-class 6-chloro-1-phenyl-benzazepine D1 agonist, agonist-bound D1-Gs complex 7JV5; PMID 33571431 (conf: high)"}
+      SK9:     {efficacy: positive, source: literature, note: "SKF-type 6-chloro-1-(3-methylphenyl)-benzazepine D1 agonist, agonist-bound D1-Gs complex 7JVP; PMID 33571431 (conf: high)"}
+      V6X:     {efficacy: positive, source: literature, note: "PF-6142, non-catecholamine D1 agonist, active-state legobody/Gs complex 8JXS; PMID 39094559 (conf: high)"}
+      VFP:     {efficacy: positive, source: literature, note: "non-catechol selective D1 agonist (compound 1), D1-Gs crystal complex 7JOZ; PMID 34083522 (conf: high)"}
+      # antagonist (the sole non-agonist in the set)
+      A1EKL:   {efficacy: negative, source: literature, note: "flupentixol, D1/D2 thioxanthene antagonist 9LLG; no PMID, established pharmacology (conf: high)"}

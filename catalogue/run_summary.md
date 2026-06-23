@@ -1,6 +1,8 @@
-# Run summary — 2026-06-21
+# Run summary — 2026-06-23
 
 Two-stage pipeline. **Stage 1** scrapes every ligand-bound PDB structure mapped to each verified UniProt accession and curates the bound ligands (drop additives/buffers/cryo/waters; keep cofactors; flag metals). **Stage 2** keeps only ligands bound at the *relevant site* of each model system, superposes their poses into one reference frame (binding-site-local fit with iterative pocket-local ICP refinement), and writes a PyMOL session.
+
+> **Note on Nav1.7.** `nav1_7_vsd4` and `nav1_7_pore` are one biological target (SCN9A, Q15858) modelled as two single-site slugs. They share the *same scrape*, so their **Stage 1 counts are identical by construction** (Stage 1 has no concept of site); the two drug sites are separated only at Stage 2 (anchor) and Stage 3, where their numbers correctly diverge. Do not sum the per-slug Stage 1 rows — Nav1.7's ligands would be double-counted.
 
 ## Stage 1 — scrape & curate
 
@@ -23,6 +25,7 @@ Two-stage pipeline. **Stage 1** scrapes every ligand-bound PDB structure mapped 
 | Glucocorticoid receptor | P04150 | 57 | 30 | 11 | 2 |
 | Adenosine A2A receptor | P29274 | 188 | 133 | 25 | 0 |
 | Muscarinic acetylcholine receptor  | P08172 | 17 | 7 | 2 | 1 |
+| Dopamine receptor D1 | P21728 | 31 | 21 | 3 | 1 |
 
 ## Stage 2 — site filtering & alignment
 
@@ -47,12 +50,13 @@ Poses per session capped at **100** (best-resolution first), except adenosine A2
 | gr_nr3c1 | 1M2Z | DEX | 35/57 | 33 | 56 | 14 | 0 | — |
 | adora2a | 5NM4 | ZMA | 179/179 | 179 | 183 | 152 | 3 | — |
 | chrm2 | 7T94 | ACH | 14/17 | 13 | 13 | 5 | 0 | — |
+| drd1 | 9LLJ | LDP | 31/31 | 35 | 35 | 5 | 0 | — |
 
 Per-target detail: `catalogue/<slug>/site_filter.csv` (every instance, its status, distance-to-anchor and pocket RMSD). The Stage-2 overlay is superseded by the Stage-3 `catalogue/<slug>/<slug>_grouped.pse` (same frame, recoloured by cell).
 
 ## Stage 3 — effect-based grouping (pocket-verified)
 
-_Stage 3 run 2026-06-20._ Each pose is assigned a **geometry-verified pocket** (native contact fingerprints, not the coarse Stage-2 distance) and an **efficacy sign** from curated external pharmacology (`config/efficacy.yaml`). A cell = (pocket × efficacy). Covalent/reactivator/degrader/substrate ligands are routed to a separate-state track; unconfident efficacy and out-of-pocket poses are first-class review outputs, never force-bucketed. **Stage 3.3** folds in efficacy resolved from ChEMBL for previously-`unknown` ligands (`catalogue/stage3_efficacy_resolved.csv`, used only below curated config). Pseudo-symmetric multi-pocket targets (GABA-A) are re-aligned onto the reference at their true subunit interface so the benzodiazepine and orthosteric sites are spatially distinct in the session. Cell/grouped sessions show one representative pose per ligand.
+_Stage 3 run 2026-06-20 (batch 1–2), 2026-06-23 (drd1)._ Each pose is assigned a **geometry-verified pocket** (native contact fingerprints, not the coarse Stage-2 distance) and an **efficacy sign** from curated external pharmacology (`config/efficacy.yaml`). A cell = (pocket × efficacy). Covalent/reactivator/degrader/substrate ligands are routed to a separate-state track; unconfident efficacy and out-of-pocket poses are first-class review outputs, never force-bucketed. **Stage 3.3** folds in efficacy resolved from ChEMBL for previously-`unknown` ligands (`catalogue/stage3_efficacy_resolved.csv`, used only below curated config). Pseudo-symmetric multi-pocket targets (GABA-A) are re-aligned onto the reference at their true subunit interface so the benzodiazepine and orthosteric sites are spatially distinct in the session. Cell/grouped sessions show one representative pose per ligand.
 
 | Target | Pockets found | Cells | In cells | Separate-state | Unknown eff. | Quarantined |
 |--------|---------------|------:|---------:|---------------:|-------------:|------------:|
@@ -73,7 +77,8 @@ _Stage 3 run 2026-06-20._ Each pose is assigned a **geometry-verified pocket** (
 | gr_nr3c1 | lbp | 2 | 32 | 0 | 0 | 1 |
 | adora2a | orthosteric | 3 | 172 | 0 | 5 | 2 |
 | chrm2 | orthosteric | 2 | 13 | 0 | 0 | 0 |
+| drd1 | orthosteric | 2 | 31 | 4 | 0 | 0 |
 
 Per-target detail: `catalogue/<slug>/<slug>_stage3_report.md`, the cell mol2 in `catalogue/<slug>/groups/`, `effect_groups.json`, and the recoloured session `catalogue/<slug>/<slug>_grouped.pse`.
 
-**Pose datasets** (pharmacophore inputs): each target carries `catalogue/<slug>/datasets/{all_poses,representative}/` (every kept pose vs one per ligand), with a cross-target master under `catalogue/datasets/` (808 poses / 500 representative). Each set ships a `.pml` + baked `.pse`.
+**Pose datasets** (pharmacophore inputs): each target carries `catalogue/<slug>/datasets/{all_poses,representative}/` (every kept pose vs one per ligand), with a cross-target master under `catalogue/datasets/` (843 poses / 519 representative). Each set ships a `.pml` + baked `.pse`.

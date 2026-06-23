@@ -38,7 +38,7 @@ All poses for a target share one superposed reference frame (Stage 2 / Stage 3 a
 A cell is the unit a single pharmacophore hypothesis is built from: a geometry-verified
 pocket crossed with a curated efficacy sign. Pockets are named in `config/pockets.yaml`;
 efficacy signs come from `config/efficacy.yaml` (provenance: literature > prelabelled >
-curated > ChEMBL-CSV fallback). Cells present across the 17 site-slugs (16 biological
+curated > ChEMBL-CSV fallback). Cells present across the 18 site-slugs (17 biological
 targets; Nav1.7 is split into a VSD4 and a pore slug):
 
 `orthosteric`/`lbp`/`active_site`/`atp_site`/`gorge`/`cox_channel`/`hmg_site`/`dhp_site`/
@@ -52,6 +52,13 @@ but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff
 > merged (provenance under `curation/`). Populated cells: `gr_nr3c1` lbp+/−;
 > `adora2a` orthosteric +/neutral/−; `chrm2` orthosteric +/−;
 > `nav1_7_vsd4`/`nav1_7_pore` blocker-only (−).
+>
+> **Batch-3 (2026-06-23) — complete.** `drd1` (dopamine receptor D1) built through
+> Stage 3.4 with literature efficacy curation merged (provenance under `curation/`,
+> batch-3 files). D1 structural coverage is **agonist-dominated** (almost every
+> deposit is an active-state Gs complex): populated cells `orthosteric__positive`
+> (16 ligands) and `orthosteric__negative` (one ligand, flupentixol); G-protein
+> GDP/GTP routed to `separate_state`.
 
 ## Review tracks — `review/`
 

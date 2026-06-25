@@ -6,9 +6,13 @@ import numpy as np
 
 from pharmpipe.clustering import KMeansSilhouette
 from pharmpipe.features.extract import FeaturePoint, FeatureTable
-from pharmpipe.pharmacophore.build import build_pharmacophore
+from pharmpipe.pharmacophore.build import (
+    _merge_overlapping,
+    best_representative,
+    build_pharmacophore,
+)
 from pharmpipe.pharmacophore.config import SelectionConfig, ToleranceConfig
-from pharmpipe.pharmacophore.model import Pharmacophore
+from pharmpipe.pharmacophore.model import Pharmacophore, PharmacophoreFeature
 
 
 def _table_two_donor_clusters() -> FeatureTable:
@@ -71,6 +75,44 @@ def test_json_round_trip():
     assert back.name == "rt"
     assert len(back.features) == len(res.pharmacophore.features)
     assert back.features[0].family == res.pharmacophore.features[0].family
+
+
+def _feat(family: str, x: float, n_points: int, radius: float = 1.0) -> PharmacophoreFeature:
+    return PharmacophoreFeature(family=family, x=x, y=0.0, z=0.0, radius=radius,
+                                n_points=n_points, n_ligands=n_points, support=1.0)
+
+
+def test_merge_overlapping_keeps_largest_geometric():
+    # Two donors 0.5 A apart (< the 1.0 radius -> overlap); the bigger one wins.
+    a = _feat("Donor", 0.0, n_points=8, radius=1.0)
+    b = _feat("Donor", 0.5, n_points=3, radius=1.0)
+    kept = _merge_overlapping([(a, 0), (b, 1)], merge_radius=None)
+    assert [f.n_points for f, _ in kept] == [8]
+
+
+def test_merge_overlapping_spares_distinct_lobes():
+    a = _feat("Donor", 0.0, n_points=8, radius=1.0)
+    b = _feat("Donor", 10.0, n_points=6, radius=1.0)   # well separated
+    kept = _merge_overlapping([(a, 0), (b, 1)], merge_radius=None)
+    assert len(kept) == 2
+
+
+def test_merge_overlapping_absolute_radius():
+    a = _feat("Donor", 0.0, n_points=8, radius=1.0)
+    b = _feat("Donor", 0.6, n_points=3, radius=1.0)
+    # 0.6 A apart: merged under the geometric rule, spared under a 0.5 A cutoff.
+    assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=None)) == 1
+    assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=0.5)) == 2
+
+
+def test_best_representative_prefers_the_fitting_ligand():
+    # Model wants a Donor at the origin. L_fit has one there; L_off does not.
+    table = FeatureTable(
+        points=[FeaturePoint("Donor", 0.1, 0.0, 0.0, "L_fit"),
+                FeaturePoint("Donor", 9.0, 0.0, 0.0, "L_off")],
+        ligand_ids=["L_off", "L_fit"])  # L_off first, so order can't decide it
+    ph = Pharmacophore(name="t", features=[_feat("Donor", 0.0, n_points=2, radius=1.0)])
+    assert best_representative(table, ph) == "L_fit"
 
 
 def test_bad_schema_rejected():

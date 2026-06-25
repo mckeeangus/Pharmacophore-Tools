@@ -12,16 +12,19 @@
       "skipped": []
     },
     "selection": {
+      "min_ligands": 3,
       "min_support_fraction": 0.5,
       "min_cluster_size": 2,
-      "top_n_per_family": null
+      "top_n_per_family": null,
+      "merge_overlapping": true,
+      "merge_radius": null
     },
     "tolerance": {
       "method": "rmsd",
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-21",
+    "created": "2026-06-25",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -31,7 +34,8 @@
         "random_state": 0
       }
     },
-    "n_features": 16
+    "n_features": 16,
+    "representative_ligand": "1BWB_146_B641"
   },
   "features": [
     {
@@ -86,13 +90,13 @@
     },
     {
       "family": "Acceptor",
-      "x": -7.995749999999998,
-      "y": 17.96846875,
-      "z": 20.765249999999995,
-      "radius": 1.63884341809199,
-      "n_points": 32,
-      "n_ligands": 24,
-      "support": 0.75
+      "x": -9.270828571428572,
+      "y": 15.54442857142857,
+      "z": 30.65831428571429,
+      "radius": 1.4178941234472069,
+      "n_points": 35,
+      "n_ligands": 21,
+      "support": 0.6562
     },
     {
       "family": "Acceptor",
@@ -106,13 +110,13 @@
     },
     {
       "family": "Acceptor",
-      "x": -9.270828571428572,
-      "y": 15.54442857142857,
-      "z": 30.65831428571429,
-      "radius": 1.4178941234472069,
-      "n_points": 35,
-      "n_ligands": 21,
-      "support": 0.6562
+      "x": -7.995749999999998,
+      "y": 17.96846875,
+      "z": 20.765249999999995,
+      "radius": 1.63884341809199,
+      "n_points": 32,
+      "n_ligands": 24,
+      "support": 0.75
     },
     {
       "family": "Aromatic",
@@ -155,44 +159,44 @@
       "support": 0.5312
     },
     {
-      "family": "Hydrophobe",
-      "x": -6.366911764705881,
-      "y": 18.36107352941176,
-      "z": 27.03160294117647,
-      "radius": 1.9674264482191575,
-      "n_points": 68,
-      "n_ligands": 31,
-      "support": 0.9688
-    },
-    {
-      "family": "Hydrophobe",
-      "x": -12.334103448275863,
-      "y": 15.23058620689655,
-      "z": 28.382379310344838,
-      "radius": 1.228527974668144,
-      "n_points": 58,
+      "family": "LumpedHydrophobe",
+      "x": -5.25743888888889,
+      "y": 18.247283333333336,
+      "z": 26.716549999999998,
+      "radius": 1.154522318876491,
+      "n_points": 30,
       "n_ligands": 30,
       "support": 0.9375
     },
     {
-      "family": "Hydrophobe",
-      "x": -8.571755555555553,
-      "y": 16.399022222222225,
-      "z": 23.099466666666668,
-      "radius": 1.292658677032975,
-      "n_points": 45,
-      "n_ligands": 28,
-      "support": 0.875
+      "family": "LumpedHydrophobe",
+      "x": -12.912775862068964,
+      "y": 13.698126436781608,
+      "z": 28.862086206896553,
+      "radius": 1.0,
+      "n_points": 29,
+      "n_ligands": 29,
+      "support": 0.9062
     },
     {
-      "family": "Hydrophobe",
-      "x": -10.060767441860463,
-      "y": 15.534627906976743,
-      "z": 32.927860465116275,
-      "radius": 1.5204827942230703,
-      "n_points": 43,
-      "n_ligands": 27,
-      "support": 0.8438
+      "family": "LumpedHydrophobe",
+      "x": -8.824378787878787,
+      "y": 16.495015151515155,
+      "z": 22.53415151515151,
+      "radius": 1.0,
+      "n_points": 22,
+      "n_ligands": 21,
+      "support": 0.6562
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": -9.828675,
+      "y": 15.970241666666663,
+      "z": 33.322399999999995,
+      "radius": 1.0,
+      "n_points": 20,
+      "n_ligands": 19,
+      "support": 0.5938
     }
   ]
 }

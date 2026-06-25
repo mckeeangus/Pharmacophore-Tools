@@ -4,20 +4,16 @@ reinitialize
 bg_color white
 set valence, 1
 
-load ../../groups/orthosteric__neutral/5OLH_9XT_A1201.mol2, compounds
-load ../../groups/orthosteric__neutral/5OLO_9XW_A1201.mol2, compounds
-load ../../groups/orthosteric__neutral/6GT3_F9Q_A2401.mol2, compounds
-load ../../groups/orthosteric__neutral/8CIC_U30_A1202.mol2, compounds
-load ../../groups/orthosteric__neutral/8RW0_JQ9_A1201.mol2, compounds
-hide everything, compounds
-show lines, compounds
-color grey70, compounds and elem C
+load representative_ligand.sdf, ligand
+hide everything, ligand
+show sticks, ligand
+color grey70, ligand and elem C
 
-set_color ph4_Donor, [0.0, 0.85, 0.0]
-set_color ph4_Acceptor, [0.9, 0.0, 0.0]
-set_color ph4_Hydrophobe, [1.0, 0.85, 0.0]
-set_color ph4_Aromatic, [0.6, 0.3, 0.9]
-set_color ph4_PosIonizable, [0.15, 0.45, 1.0]
+set_color ph4_Donor, [1.0, 0.4, 0.7]
+set_color ph4_Acceptor, [0.0, 0.8, 0.0]
+set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
+set_color ph4_Aromatic, [1.0, 0.85, 0.0]
+set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 
 pseudoatom Donor_0, pos=[-2.377, 99.329, 52.024], vdw=2.239
@@ -38,9 +34,9 @@ group ph4_Aromatic, Aromatic_4
 pseudoatom Aromatic_5, pos=[3.191, 99.138, 56.062], vdw=2.968
 color ph4_Aromatic, Aromatic_5
 group ph4_Aromatic, Aromatic_5
-pseudoatom Hydrophobe_6, pos=[0.665, 93.510, 51.553], vdw=1.968
-color ph4_Hydrophobe, Hydrophobe_6
-group ph4_Hydrophobe, Hydrophobe_6
+pseudoatom LumpedHydrophobe_6, pos=[-0.020, 92.865, 51.182], vdw=1.138
+color ph4_LumpedHydrophobe, LumpedHydrophobe_6
+group ph4_LumpedHydrophobe, LumpedHydrophobe_6
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

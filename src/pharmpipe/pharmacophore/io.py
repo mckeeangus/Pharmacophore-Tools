@@ -40,27 +40,43 @@ def write_features_csv(result: BuildResult, path: Path) -> Path:
     return path
 
 
-def write_pml(ph: Pharmacophore, compounds_dir: Path, path: Path,
-              colors: dict[str, list[float]]) -> Path:
-    """Portable PyMOL script: load the cell's compounds + feature spheres.
+def write_representative_sdf(mol, ligand_id: str, path: Path) -> Path:
+    """Write one representative ligand to SDF (bond orders + 3D coords intact).
 
-    Self-contained (no pharmpipe import needed to run it). Compound paths are
+    The catalogue mol2 are heavy-atom-only and render with spurious bonds in PyMOL;
+    this is the RDKit molecule the loader already perceived (correct bond orders via
+    the SMILES template), so the SDF displays cleanly. ``ligand_id`` becomes the
+    molecule title.
+    """
+    from rdkit import Chem  # local import keeps RDKit at this IO edge
+
+    m = Chem.Mol(mol)
+    m.SetProp("_Name", ligand_id)
+    with Chem.SDWriter(str(path)) as w:
+        w.write(m)
+    return path
+
+
+def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
+              ligand_file: Path | None = None) -> Path:
+    """Portable PyMOL script: load the representative ligand + feature spheres.
+
+    Self-contained (no pharmpipe import needed to run it). The ligand path is
     written relative to the script, so the session is reproducible wherever the
     files are copied. The richer ``scripts/pymol_pharmacophore.py`` reads the JSON
     directly and adds a raw-feature overlay; this ``.pml`` is the lightweight,
     always-written companion.
     """
-    rel_dir = os.path.relpath(compounds_dir, path.parent)
     lines = [
         f"# {ph.name} — ensemble pharmacophore ({len(ph.features)} features)",
         f"# run from this file's directory:  pymol {path.name}",
         "reinitialize", "bg_color white", "set valence, 1", "",
     ]
-    for mol2 in sorted(compounds_dir.glob("*.mol2")):
-        rel = Path(rel_dir, mol2.name).as_posix()
-        lines.append(f"load {rel}, compounds")
-    lines += ["hide everything, compounds", "show lines, compounds",
-              "color grey70, compounds and elem C", ""]
+    if ligand_file is not None:
+        rel = os.path.relpath(ligand_file, path.parent).replace(os.sep, "/")
+        lines += [f"load {rel}, ligand",
+                  "hide everything, ligand", "show sticks, ligand",
+                  "color grey70, ligand and elem C", ""]
     for fam, col in colors.items():
         lines.append(f"set_color ph4_{fam}, [{col[0]}, {col[1]}, {col[2]}]")
     lines.append("")

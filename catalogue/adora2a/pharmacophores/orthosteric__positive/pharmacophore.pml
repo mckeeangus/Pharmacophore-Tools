@@ -1,25 +1,19 @@
-# adora2a/orthosteric__positive — ensemble pharmacophore (9 features)
+# adora2a/orthosteric__positive — ensemble pharmacophore (10 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
 set valence, 1
 
-load ../../groups/orthosteric__positive/2YDV_NEC_A400.mol2, compounds
-load ../../groups/orthosteric__positive/4UHR_NGI_A1320.mol2, compounds
-load ../../groups/orthosteric__positive/5WF5_UKA_A1201.mol2, compounds
-load ../../groups/orthosteric__positive/7ARO_RVZ_A1201.mol2, compounds
-load ../../groups/orthosteric__positive/8RLN_A1H1S_A1211.mol2, compounds
-load ../../groups/orthosteric__positive/8WDT_WCH_A1000.mol2, compounds
-load ../../groups/orthosteric__positive/9EE8_ADN_A400.mol2, compounds
-hide everything, compounds
-show lines, compounds
-color grey70, compounds and elem C
+load representative_ligand.sdf, ligand
+hide everything, ligand
+show sticks, ligand
+color grey70, ligand and elem C
 
-set_color ph4_Donor, [0.0, 0.85, 0.0]
-set_color ph4_Acceptor, [0.9, 0.0, 0.0]
-set_color ph4_Hydrophobe, [1.0, 0.85, 0.0]
-set_color ph4_Aromatic, [0.6, 0.3, 0.9]
-set_color ph4_PosIonizable, [0.15, 0.45, 1.0]
+set_color ph4_Donor, [1.0, 0.4, 0.7]
+set_color ph4_Acceptor, [0.0, 0.8, 0.0]
+set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
+set_color ph4_Aromatic, [1.0, 0.85, 0.0]
+set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 
 pseudoatom Donor_0, pos=[-1.377, 98.054, 52.078], vdw=1.000
@@ -49,6 +43,9 @@ group ph4_Aromatic, Aromatic_7
 pseudoatom Aromatic_8, pos=[1.178, 101.199, 56.411], vdw=2.227
 color ph4_Aromatic, Aromatic_8
 group ph4_Aromatic, Aromatic_8
+pseudoatom LumpedHydrophobe_9, pos=[-0.202, 101.766, 55.317], vdw=3.000
+color ph4_LumpedHydrophobe, LumpedHydrophobe_9
+group ph4_LumpedHydrophobe, LumpedHydrophobe_9
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

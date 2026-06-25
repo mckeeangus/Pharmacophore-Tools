@@ -1,21 +1,19 @@
-# gaba_a/orthosteric__positive — ensemble pharmacophore (5 features)
+# gaba_a/orthosteric__positive — ensemble pharmacophore (4 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
 set valence, 1
 
-load ../../groups/orthosteric__positive/7A5V_HSM_A5408.mol2, compounds
-load ../../groups/orthosteric__positive/7QNC_EI7_B503.mol2, compounds
-load ../../groups/orthosteric__positive/9EQG_ABU_E3205.mol2, compounds
-hide everything, compounds
-show lines, compounds
-color grey70, compounds and elem C
+load representative_ligand.sdf, ligand
+hide everything, ligand
+show sticks, ligand
+color grey70, ligand and elem C
 
-set_color ph4_Donor, [0.0, 0.85, 0.0]
-set_color ph4_Acceptor, [0.9, 0.0, 0.0]
-set_color ph4_Hydrophobe, [1.0, 0.85, 0.0]
-set_color ph4_Aromatic, [0.6, 0.3, 0.9]
-set_color ph4_PosIonizable, [0.15, 0.45, 1.0]
+set_color ph4_Donor, [1.0, 0.4, 0.7]
+set_color ph4_Acceptor, [0.0, 0.8, 0.0]
+set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
+set_color ph4_Aromatic, [1.0, 0.85, 0.0]
+set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 
 pseudoatom Donor_0, pos=[187.423, 221.793, 241.900], vdw=2.772
@@ -30,9 +28,6 @@ group ph4_PosIonizable, PosIonizable_2
 pseudoatom Aromatic_3, pos=[186.728, 220.685, 241.310], vdw=1.015
 color ph4_Aromatic, Aromatic_3
 group ph4_Aromatic, Aromatic_3
-pseudoatom Hydrophobe_4, pos=[187.556, 221.762, 241.560], vdw=2.248
-color ph4_Hydrophobe, Hydrophobe_4
-group ph4_Hydrophobe, Hydrophobe_4
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

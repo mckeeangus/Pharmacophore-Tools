@@ -13,7 +13,8 @@ from ..util.paths import CONFIG_DIR
 @dataclass
 class FeatureConfig:
     fdef: str = "base"
-    families: list[str] = field(default_factory=lambda: ["Donor", "Acceptor", "Hydrophobe"])
+    families: list[str] = field(
+        default_factory=lambda: ["Donor", "Acceptor", "LumpedHydrophobe"])
     colors: dict[str, list[float]] = field(default_factory=dict)
 
 
@@ -25,9 +26,12 @@ class ClusteringConfig:
 
 @dataclass
 class SelectionConfig:
+    min_ligands: int = 3
     min_support_fraction: float = 0.5
     min_cluster_size: int = 2
     top_n_per_family: int | None = None
+    merge_overlapping: bool = True
+    merge_radius: float | None = None
 
 
 @dataclass

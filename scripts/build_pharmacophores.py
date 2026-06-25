@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -62,16 +63,25 @@ def _targets() -> list[str]:
                   if d.is_dir() and target_groups_dir(d.name).is_dir())
 
 
-def _build_target(slug: str, cfg) -> int:
+def _build_target(slug: str, cfg) -> tuple[int, int]:
+    """Build every buildable cell of a target; returns (built, skipped)."""
     uniq = CATALOGUE_DIR / slug / "unique_ligands.csv"
-    n = 0
+    built = skipped = 0
     for cell in _cells(slug):
         out = target_pharmacophores_dir(slug) / cell.name
         res = build_for_cell(cell, out, cfg, uniq, name=f"{slug}/{cell.name}")
+        if res is None:
+            # Too few ligands: drop any model left over from a previous run.
+            if out.exists():
+                shutil.rmtree(out)
+            print(f"  {slug}/{cell.name}: skipped (< {cfg.selection.min_ligands} "
+                  f"ligands); removed stale output")
+            skipped += 1
+            continue
         print(f"  {slug}/{cell.name}: {len(res.pharmacophore.features)} features "
               f"from {res.pharmacophore.metadata['source']['n_ligands']} ligands")
-        n += 1
-    return n
+        built += 1
+    return built, skipped
 
 
 def main(argv=None) -> int:
@@ -98,15 +108,21 @@ def main(argv=None) -> int:
             ap.error("--out is required with --input")
         smiles = read_smiles_map(args.smiles) if args.smiles else None
         res = build_from_directory(args.input, args.out, cfg, smiles_map=smiles)
+        if res is None:
+            print(f"{args.input.name}: skipped (< {cfg.selection.min_ligands} ligands)")
+            return 0
         print(f"{res.name}: {len(res.pharmacophore.features)} features -> {res.model_dir}")
         return 0
 
     slugs = [args.target] if args.target else _targets()
-    total_cells = 0
+    total_built = total_skipped = 0
     for slug in slugs:
         print(f"{slug}:")
-        total_cells += _build_target(slug, cfg)
-    print(f"\nBuilt {total_cells} pharmacophore model(s) across {len(slugs)} target(s).")
+        built, skipped = _build_target(slug, cfg)
+        total_built += built
+        total_skipped += skipped
+    print(f"\nBuilt {total_built} pharmacophore model(s) across {len(slugs)} target(s); "
+          f"{total_skipped} cell(s) skipped (< {cfg.selection.min_ligands} ligands).")
     return 0
 
 

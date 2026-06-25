@@ -11,16 +11,19 @@
       "skipped": []
     },
     "selection": {
+      "min_ligands": 3,
       "min_support_fraction": 0.5,
       "min_cluster_size": 2,
-      "top_n_per_family": null
+      "top_n_per_family": null,
+      "merge_overlapping": true,
+      "merge_radius": null
     },
     "tolerance": {
       "method": "rmsd",
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-21",
+    "created": "2026-06-25",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -30,7 +33,8 @@
         "random_state": 0
       }
     },
-    "n_features": 7
+    "n_features": 6,
+    "representative_ligand": "6HUO_08H_D501"
   },
   "features": [
     {
@@ -74,34 +78,24 @@
       "support": 0.6667
     },
     {
-      "family": "Hydrophobe",
-      "x": 236.88766666666666,
-      "y": 214.76700000000002,
-      "z": 242.68533333333335,
-      "radius": 1.0,
+      "family": "LumpedHydrophobe",
+      "x": 237.7408333333333,
+      "y": 215.20116666666664,
+      "z": 238.62711111111108,
+      "radius": 1.1535370190509517,
       "n_points": 3,
       "n_ligands": 3,
       "support": 1.0
     },
     {
-      "family": "Hydrophobe",
-      "x": 237.43433333333334,
-      "y": 215.17733333333334,
-      "z": 239.51533333333336,
+      "family": "LumpedHydrophobe",
+      "x": 236.49605555555556,
+      "y": 213.98883333333333,
+      "z": 243.76811111111112,
       "radius": 1.0,
       "n_points": 3,
       "n_ligands": 3,
       "support": 1.0
-    },
-    {
-      "family": "Hydrophobe",
-      "x": 236.05349999999999,
-      "y": 213.9035,
-      "z": 238.109,
-      "radius": 1.0,
-      "n_points": 2,
-      "n_ligands": 2,
-      "support": 0.6667
     }
   ]
 }

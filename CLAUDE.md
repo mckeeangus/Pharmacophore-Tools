@@ -183,12 +183,26 @@ Run: `pixi run build-pharmacophores --catalogue` (or `--target <slug>`, or
 method+params, selection (min support fraction, min size, top-N), tolerance model.
 All scientific choices; none in code.
 
+**Method choices** (all in `config/pharmacophore.yaml`; full write-up in
+`catalogue/pharmacophore_method.md`): features use RDKit **`LumpedHydrophobe`** (one
+centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (3)**
+ligands is **skipped and its output removed** (too few for an ensemble); after
+selection, **overlapping same-family clusters are merged keeping the largest**
+(`merge_overlapping`; geometric threshold = one centre inside the other's sphere, or an
+absolute `merge_radius`); each feature's **tolerance radius = cluster-point RMSD** and
+is the sphere size in the viz (spread, not density). Family colours: HBD/Donor pink,
+HBA/Acceptor green, hydrophobic cyan, Aromatic yellow, PosIonizable red, NegIonizable
+orange.
+
 **Outputs** per model dir (`catalogue/<slug>/pharmacophores/<cell>/`):
-`pharmacophore.json` (canonical, method-stable), `features.csv` (every raw point +
-cluster id + kept flag), `raw_features_<family>.png` (per-family 3D scatter — the
-"sense of the data" view for judging clustering quality), `pharmacophore.pml`,
-`model_summary.md`. Inspect a model in PyMOL with
-`pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- --pharmacophore … --compounds … [--features … --out …]`.
+`pharmacophore.json` (canonical, method-stable; provenance includes the representative
+ligand), `features.csv` (every raw point + cluster id + kept flag),
+`representative_ligand.sdf` (a real cell ligand, clean bond orders, best fit to the
+model — the visual scaffold), `raw_features_<family>.png` (per-family 3D scatter;
+centre-marker area ∝ cluster population), `pharmacophore.pml`, `model_summary.md`.
+Inspect a model in PyMOL with `pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py
+-- --pharmacophore … [--features … --compounds … --out …]` (defaults to the
+representative ligand when `--compounds` is omitted).
 
 **Respect the review tracks** — the batch modes build only `groups/` cells, never
 `separate_state` / `unknown` / `quarantine`. Gate `surrogate`/`chimera`/`mismatch`

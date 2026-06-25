@@ -28,9 +28,14 @@ def _scatter_axes(ax, coords: np.ndarray, labels: np.ndarray, centers: dict,
     if len(coords):
         ax.scatter(coords[:, 0], coords[:, 1], coords[:, 2], c=labels,
                    cmap=_CLUSTER_CMAP, s=25, alpha=0.7, depthshade=True)
+    # Centre marker AREA scales with the cluster's point count (its population /
+    # local density): a bigger marker = more feature points collapsed into that
+    # centre. Kept clusters are drawn as a filled "X", dropped ones a thin "x".
+    counts = {int(lbl): int((labels == lbl).sum()) for lbl in centers}
     for label, center in centers.items():
-        marker = "X" if label in kept else "x"
-        size = 160 if label in kept else 60
+        is_kept = label in kept
+        marker = "X" if is_kept else "x"
+        size = 40 + counts[label] * (24 if is_kept else 8)
         ax.scatter(*center, c="black", marker=marker, s=size)
     ax.set_xlabel("x")
     ax.set_ylabel("y")

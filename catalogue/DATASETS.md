@@ -78,21 +78,39 @@ but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff
 
 One ligand-based ensemble pharmacophore per cell, built by clustering the RDKit
 features of that cell's poses (see `config/pharmacophore.yaml`; method/params recorded
-in each model). Files per model:
+in each model). **The full method — feature families, clustering, selection, overlap
+merging, tolerance, the visualisation, and what "cluster size" means — is documented in
+[`pharmacophore_method.md`](pharmacophore_method.md).** Headline choices:
+
+- features use RDKit's **`LumpedHydrophobe`** (one centroid per hydrophobic group) so
+  hydrophobes don't swamp the model;
+- a cell with **fewer than 3 ligands is skipped** (no output written/kept) — too few
+  for an ensemble hypothesis;
+- overlapping same-family clusters are **merged, keeping the largest** (threshold is
+  geometric: one centre inside the other's sphere);
+- the visualisation uses a **real representative ligand** from the cell (clean SDF),
+  not the heavy-atom raw poses;
+- family colours: HBD/Donor **pink**, HBA/Acceptor **green**, hydrophobic **cyan**,
+  Aromatic **yellow**, PosIonizable **red**, NegIonizable orange.
+
+Files per model:
 
 | File | What it is |
 |---|---|
-| `pharmacophore.json` | Canonical, schema-versioned model (`pharmpipe.pharmacophore/v1`): each feature's family, centre, tolerance radius, point count, ligand support, plus a provenance block. Format is method-stable — swapping the clustering method changes positions, not structure. |
+| `pharmacophore.json` | Canonical, schema-versioned model (`pharmpipe.pharmacophore/v1`): each feature's family, centre, tolerance radius, point count, ligand support, plus a provenance block (incl. the representative ligand). Format is method-stable — swapping the clustering method changes positions, not structure. |
 | `features.csv` | Every raw extracted feature point (family, source ligand, x/y/z, cluster id, kept flag) — the data behind the model. |
-| `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster with kept-cluster centres marked — to eyeball the distribution and judge clustering quality. |
-| `pharmacophore.pml` | Lightweight PyMOL script (compounds + feature spheres). The richer `scripts/pymol_pharmacophore.py` reads the JSON and adds a raw-point overlay. |
-| `model_summary.md` | Human-readable summary: load coverage, features kept per family, mean support. |
+| `representative_ligand.sdf` | One real cell ligand (correct bond orders + 3D coords) chosen as the best fit to the model; the clean visual scaffold. |
+| `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster; centre-marker area scales with cluster population, kept centres a filled "X". |
+| `pharmacophore.pml` | Lightweight PyMOL script (representative ligand + feature spheres). The richer `scripts/pymol_pharmacophore.py` reads the JSON and adds a raw-point overlay. |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, features kept per family, mean support. |
 
 ## Other tracked files
 
 - `ligand_catalogue.md` / `ligand_catalogue.xlsx` — Stage 1 cross-target ligand catalogue.
 - `run_summary.md` — per-stage run record (counts per target, all 18 site-slugs).
 - `realignment_report.md` — Stage 2 binding-site alignment method + before/after QC.
+- `pharmacophore_method.md` — Stage 4 pharmacophore-construction method (feature
+  families, clustering, selection, overlap merging, tolerance, visualisation).
 - `stage3_efficacy_resolved.csv` — ChEMBL efficacy resolution (the fallback tier; read by the Stage-3 loader).
 - `curation/` — Stage 3.4 literature efficacy provenance: `efficacy_curation_README.md`
   (start here), `literature_curation_traceability.csv` (batch 1, 158 ligands), the

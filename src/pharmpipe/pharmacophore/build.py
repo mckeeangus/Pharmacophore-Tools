@@ -43,6 +43,36 @@ def _radius(coords: np.ndarray, center: np.ndarray, tol: ToleranceConfig) -> flo
     return float(min(max(rms, tol.min), tol.max))
 
 
+def _overlaps(a: PharmacophoreFeature, b: PharmacophoreFeature,
+              merge_radius: float | None) -> bool:
+    """True if two same-family features sit in the same region of space.
+
+    With an explicit ``merge_radius`` the test is a fixed centre-to-centre cutoff.
+    Otherwise it is geometric: the centres are closer than the larger of the two
+    tolerance radii, i.e. one centre lies inside the other's sphere — a threshold
+    that scales with each cluster's own spread rather than a hand-picked number.
+    """
+    dist = float(np.linalg.norm(np.array(a.position) - np.array(b.position)))
+    thresh = merge_radius if merge_radius is not None else max(a.radius, b.radius)
+    return dist < thresh
+
+
+def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, int]],
+                       merge_radius: float | None,
+                       ) -> list[tuple[PharmacophoreFeature, int]]:
+    """Greedily drop overlapping features, keeping the largest in each region.
+
+    ``candidates`` must already be sorted strongest-first (more points, then more
+    support), so the first feature accepted for a region is the one we keep.
+    """
+    accepted: list[tuple[PharmacophoreFeature, int]] = []
+    for feat, label in candidates:
+        if any(_overlaps(feat, kept, merge_radius) for kept, _ in accepted):
+            continue
+        accepted.append((feat, label))
+    return accepted
+
+
 def _family_features(family: str, coords: np.ndarray, labels: np.ndarray,
                      ligands: list[str], n_ligands: int, sel: SelectionConfig,
                      tol: ToleranceConfig) -> tuple[list[PharmacophoreFeature], set[int]]:
@@ -63,8 +93,11 @@ def _family_features(family: str, coords: np.ndarray, labels: np.ndarray,
             n_ligands=n_lig, support=round(support, 4),
         )
         candidates.append((feat, label))
-    # Strongest support first; optionally cap to the top N per family.
-    candidates.sort(key=lambda fl: (fl[0].support, fl[0].n_points), reverse=True)
+    # Largest first (more points, then more support): the head of each overlap
+    # region is the one kept, and this also drives the optional top-N cap.
+    candidates.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
+    if sel.merge_overlapping:
+        candidates = _merge_overlapping(candidates, sel.merge_radius)
     if sel.top_n_per_family is not None:
         candidates = candidates[: sel.top_n_per_family]
     return [f for f, _ in candidates], {lbl for _, lbl in candidates}
@@ -95,3 +128,35 @@ def build_pharmacophore(table: FeatureTable, clusterer: Clusterer, sel: Selectio
     meta["n_features"] = len(features)
     ph = Pharmacophore(name=name, features=features, metadata=meta)
     return BuildResult(pharmacophore=ph, assignments=assignments)
+
+
+def best_representative(table: FeatureTable, ph: Pharmacophore) -> str | None:
+    """Pick the ligand that best fits the model, for the visualisation overlay.
+
+    Score = fraction of kept features for which the ligand has a feature point of
+    the same family inside that feature's tolerance sphere. Ties break toward the
+    richer ligand (more feature points). Returns the ligand_id, or ``None`` for an
+    empty set. With no kept features (no model) the first loaded ligand is returned.
+    """
+    if not table.ligand_ids:
+        return None
+    if not ph.features:
+        return table.ligand_ids[0]
+    by_lig: dict[str, list] = {}
+    for p in table.points:
+        by_lig.setdefault(p.ligand_id, []).append(p)
+    best_id: str | None = None
+    best_key = (-1.0, -1)
+    for lig in table.ligand_ids:
+        pts = by_lig.get(lig, [])
+        matched = 0
+        for f in ph.features:
+            c = np.array(f.position)
+            if any(p.family == f.family
+                   and float(np.linalg.norm(np.array(p.position) - c)) <= f.radius
+                   for p in pts):
+                matched += 1
+        key = (matched / len(ph.features), len(pts))
+        if key > best_key:
+            best_key, best_id = key, lig
+    return best_id

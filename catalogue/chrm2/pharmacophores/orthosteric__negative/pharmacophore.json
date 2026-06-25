@@ -11,16 +11,19 @@
       "skipped": []
     },
     "selection": {
+      "min_ligands": 3,
       "min_support_fraction": 0.5,
       "min_cluster_size": 2,
-      "top_n_per_family": null
+      "top_n_per_family": null,
+      "merge_overlapping": true,
+      "merge_radius": null
     },
     "tolerance": {
       "method": "rmsd",
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-21",
+    "created": "2026-06-25",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -30,19 +33,10 @@
         "random_state": 0
       }
     },
-    "n_features": 8
+    "n_features": 8,
+    "representative_ligand": "5ZK3_QNB_A501"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 139.691,
-      "y": 145.65166666666667,
-      "z": 102.10066666666667,
-      "radius": 1.0,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0
-    },
     {
       "family": "Donor",
       "x": 132.554,
@@ -52,6 +46,16 @@
       "n_points": 4,
       "n_ligands": 2,
       "support": 0.6667
+    },
+    {
+      "family": "Donor",
+      "x": 139.691,
+      "y": 145.65166666666667,
+      "z": 102.10066666666667,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 1.0
     },
     {
       "family": "Acceptor",
@@ -104,12 +108,12 @@
       "support": 0.6667
     },
     {
-      "family": "Hydrophobe",
-      "x": 137.611,
-      "y": 146.13,
-      "z": 103.1245,
-      "radius": 2.119985514887622,
-      "n_points": 6,
+      "family": "LumpedHydrophobe",
+      "x": 137.85299999999995,
+      "y": 146.58083333333332,
+      "z": 105.62444444444442,
+      "radius": 1.0,
+      "n_points": 3,
       "n_ligands": 3,
       "support": 1.0
     }

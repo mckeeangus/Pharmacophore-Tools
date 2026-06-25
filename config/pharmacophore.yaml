@@ -15,17 +15,20 @@ features:
   # Pharmacophore feature families to extract and model. The TeachOpenCADD T009
   # tutorial uses Donor/Acceptor/Hydrophobe; the others are included because our
   # binding sites are more diverse (charged and aromatic contacts matter).
-  families: [Donor, Acceptor, Hydrophobe, Aromatic, PosIonizable, NegIonizable]
-  # Display colours (RGB 0–1) shared by the matplotlib raw-data plots and the
-  # PyMOL session, so a family looks the same everywhere. Greens/reds/yellow follow
-  # the usual donor/acceptor/hydrophobe convention.
+  # We use RDKit's `LumpedHydrophobe` rather than the per-atom `Hydrophobe`: the
+  # lumped family collapses a contiguous hydrophobic group (e.g. a whole alkyl
+  # chain or ring face) into a single centroid feature, instead of emitting one
+  # point per carbon. That stops hydrophobes swamping the model.
+  families: [Donor, Acceptor, LumpedHydrophobe, Aromatic, PosIonizable, NegIonizable]
+  # Display colours (RGB 0–1) shared by the PyMOL session/`.pml` and the
+  # matplotlib raw-data plots, so a family looks the same everywhere.
   colors:
-    Donor:        [0.00, 0.85, 0.00]   # green
-    Acceptor:     [0.90, 0.00, 0.00]   # red
-    Hydrophobe:   [1.00, 0.85, 0.00]   # yellow
-    Aromatic:     [0.60, 0.30, 0.90]   # purple
-    PosIonizable: [0.15, 0.45, 1.00]   # blue
-    NegIonizable: [1.00, 0.45, 0.00]   # orange
+    Donor:            [1.00, 0.40, 0.70]   # pink   — H-bond donor (HBD)
+    Acceptor:         [0.00, 0.80, 0.00]   # green  — H-bond acceptor (HBA)
+    LumpedHydrophobe: [0.00, 0.90, 0.90]   # cyan   — hydrophobic
+    Aromatic:         [1.00, 0.85, 0.00]   # yellow — aromatic ring
+    PosIonizable:     [1.00, 0.00, 0.00]   # red    — positive ionisable
+    NegIonizable:     [1.00, 0.45, 0.00]   # orange — negative ionisable (uncoloured by request; kept distinct)
 
 # --- Clustering (swappable) -------------------------------------------------
 # method must be registered in pharmpipe/clustering/registry.py. params are passed
@@ -40,11 +43,25 @@ clustering:
 
 # --- Cluster -> kept feature selection --------------------------------------
 selection:
+  # Skip a cell entirely if it has fewer than this many ligands (poses) — too few
+  # to define an ensemble hypothesis. The cell's pharmacophore output is removed.
+  min_ligands: 3
   # Keep a cluster only if it draws features from at least this fraction of the
   # ligands in the set (the T009 "present in most molecules" idea, made relative).
   min_support_fraction: 0.5
   min_cluster_size: 2          # and at least this many feature points
   top_n_per_family: null       # optional cap on kept clusters per family (null = all)
+  # Collapse near-coincident kept features of the SAME family: if two kept clusters
+  # sit on top of each other in space, keep only the larger (more points, then more
+  # support). This removes the duplicate spheres that appear when k-means oversplits
+  # a single dense lobe.
+  merge_overlapping: true
+  # Centre-to-centre distance (Angstrom) below which two same-family kept features
+  # are merged. `null` -> geometric rule: merge when the centres are closer than the
+  # larger of the two tolerance radii (i.e. one centre lies inside the other's
+  # sphere) — a non-arbitrary threshold that scales with each cluster's own spread.
+  # Set a number (e.g. 0.75) to force an absolute cutoff instead.
+  merge_radius: null
 
 # --- Tolerance (kept feature sphere radius, Angstrom) -----------------------
 tolerance:

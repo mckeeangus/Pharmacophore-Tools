@@ -4,18 +4,16 @@ reinitialize
 bg_color white
 set valence, 1
 
-load ../../groups/vsd4_site__negative/8F0P_X7L_A1610.mol2, compounds
-load ../../groups/vsd4_site__negative/8F0R_X7W_A1606.mol2, compounds
-load ../../groups/vsd4_site__negative/8F0S_X80_A1605.mol2, compounds
-hide everything, compounds
-show lines, compounds
-color grey70, compounds and elem C
+load representative_ligand.sdf, ligand
+hide everything, ligand
+show sticks, ligand
+color grey70, ligand and elem C
 
-set_color ph4_Donor, [0.0, 0.85, 0.0]
-set_color ph4_Acceptor, [0.9, 0.0, 0.0]
-set_color ph4_Hydrophobe, [1.0, 0.85, 0.0]
-set_color ph4_Aromatic, [0.6, 0.3, 0.9]
-set_color ph4_PosIonizable, [0.15, 0.45, 1.0]
+set_color ph4_Donor, [1.0, 0.4, 0.7]
+set_color ph4_Acceptor, [0.0, 0.8, 0.0]
+set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
+set_color ph4_Aromatic, [1.0, 0.85, 0.0]
+set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 
 pseudoatom Donor_0, pos=[86.966, 136.645, 140.149], vdw=1.818
@@ -48,15 +46,15 @@ group ph4_Aromatic, Aromatic_8
 pseudoatom Aromatic_9, pos=[90.128, 135.700, 137.770], vdw=1.000
 color ph4_Aromatic, Aromatic_9
 group ph4_Aromatic, Aromatic_9
-pseudoatom Hydrophobe_10, pos=[90.840, 135.403, 137.373], vdw=1.154
-color ph4_Hydrophobe, Hydrophobe_10
-group ph4_Hydrophobe, Hydrophobe_10
-pseudoatom Hydrophobe_11, pos=[91.279, 130.915, 134.781], vdw=1.180
-color ph4_Hydrophobe, Hydrophobe_11
-group ph4_Hydrophobe, Hydrophobe_11
-pseudoatom Hydrophobe_12, pos=[90.874, 125.624, 133.081], vdw=1.000
-color ph4_Hydrophobe, Hydrophobe_12
-group ph4_Hydrophobe, Hydrophobe_12
+pseudoatom LumpedHydrophobe_10, pos=[90.128, 135.700, 137.770], vdw=1.000
+color ph4_LumpedHydrophobe, LumpedHydrophobe_10
+group ph4_LumpedHydrophobe, LumpedHydrophobe_10
+pseudoatom LumpedHydrophobe_11, pos=[91.159, 130.423, 133.803], vdw=1.000
+color ph4_LumpedHydrophobe, LumpedHydrophobe_11
+group ph4_LumpedHydrophobe, LumpedHydrophobe_11
+pseudoatom LumpedHydrophobe_12, pos=[90.502, 124.464, 133.206], vdw=1.000
+color ph4_LumpedHydrophobe, LumpedHydrophobe_12
+group ph4_LumpedHydrophobe, LumpedHydrophobe_12
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

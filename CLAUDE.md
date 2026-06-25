@@ -187,7 +187,8 @@ All scientific choices; none in code.
 `catalogue/pharmacophore_method.md`): features use RDKit **`LumpedHydrophobe`** (one
 centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (3)**
 ligands is **skipped and its output removed** (too few for an ensemble); after
-selection, **overlapping same-family clusters are merged keeping the largest**
+selection, **overlapping clusters are merged keeping the dominant one — within *and*
+across families** (a donor and acceptor can't share one spot)
 (`merge_overlapping`; geometric threshold = one centre inside the other's sphere, or an
 absolute `merge_radius`); each feature's **tolerance radius = cluster-point RMSD** and
 is the sphere size in the viz (spread, not density). Family colours: HBD/Donor pink,

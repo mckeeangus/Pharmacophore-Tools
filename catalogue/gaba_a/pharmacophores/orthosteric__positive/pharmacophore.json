@@ -33,8 +33,8 @@
         "random_state": 0
       }
     },
-    "n_features": 4,
-    "representative_ligand": "7QNC_EI7_B503"
+    "n_features": 1,
+    "representative_ligand": "7A5V_HSM_A5408"
   },
   "features": [
     {
@@ -44,36 +44,6 @@
       "z": 241.90040000000005,
       "radius": 2.7722237716317197,
       "n_points": 5,
-      "n_ligands": 2,
-      "support": 0.6667
-    },
-    {
-      "family": "Acceptor",
-      "x": 185.5155,
-      "y": 220.4005,
-      "z": 241.52949999999998,
-      "radius": 2.138444002072539,
-      "n_points": 2,
-      "n_ligands": 2,
-      "support": 0.6667
-    },
-    {
-      "family": "PosIonizable",
-      "x": 188.18573333333333,
-      "y": 223.02913333333333,
-      "z": 242.05633333333333,
-      "radius": 2.4460591979753814,
-      "n_points": 3,
-      "n_ligands": 2,
-      "support": 0.6667
-    },
-    {
-      "family": "Aromatic",
-      "x": 186.7283,
-      "y": 220.6845,
-      "z": 241.3095,
-      "radius": 1.0147369462082294,
-      "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667
     }

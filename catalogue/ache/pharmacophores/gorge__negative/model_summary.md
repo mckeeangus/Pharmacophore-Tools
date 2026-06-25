@@ -4,14 +4,12 @@
 - Skipped poses: 0
 - Clustering: `kmeans_silhouette`
 - Representative ligand (viz): `7D9O_H0L_B601`
-- Features kept: **7**
+- Features kept: **4**
 
 | Family | Features | Mean support |
 |---|---:|---:|
 | Acceptor | 1 | 0.54 |
 | Aromatic | 2 | 0.65 |
 | Donor | 1 | 0.77 |
-| LumpedHydrophobe | 2 | 0.62 |
-| PosIonizable | 1 | 0.69 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).

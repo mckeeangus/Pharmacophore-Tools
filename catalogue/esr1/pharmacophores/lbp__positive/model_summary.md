@@ -4,12 +4,11 @@
 - Skipped poses: 0
 - Clustering: `kmeans_silhouette`
 - Representative ligand (viz): `7NFB_GEN_A601`
-- Features kept: **8**
+- Features kept: **5**
 
 | Family | Features | Mean support |
 |---|---:|---:|
-| Acceptor | 3 | 0.62 |
-| Aromatic | 1 | 1.00 |
+| Acceptor | 1 | 0.56 |
 | Donor | 2 | 0.91 |
 | LumpedHydrophobe | 2 | 0.81 |
 

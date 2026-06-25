@@ -1,4 +1,4 @@
-# adora2a/orthosteric__negative — ensemble pharmacophore (5 features)
+# adora2a/orthosteric__negative — ensemble pharmacophore (3 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -16,21 +16,15 @@ set_color ph4_Aromatic, [1.0, 0.85, 0.0]
 set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 
-pseudoatom Donor_0, pos=[-1.394, 97.991, 52.038], vdw=1.000
-color ph4_Donor, Donor_0
-group ph4_Donor, Donor_0
-pseudoatom Acceptor_1, pos=[1.073, 95.882, 52.583], vdw=2.864
+pseudoatom Acceptor_0, pos=[1.073, 95.882, 52.583], vdw=2.864
+color ph4_Acceptor, Acceptor_0
+group ph4_Acceptor, Acceptor_0
+pseudoatom Acceptor_1, pos=[1.715, 103.447, 56.638], vdw=3.000
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_2, pos=[1.715, 103.447, 56.638], vdw=3.000
-color ph4_Acceptor, Acceptor_2
-group ph4_Acceptor, Acceptor_2
-pseudoatom Aromatic_3, pos=[0.772, 95.440, 52.350], vdw=2.467
-color ph4_Aromatic, Aromatic_3
-group ph4_Aromatic, Aromatic_3
-pseudoatom Aromatic_4, pos=[0.346, 102.766, 55.970], vdw=3.000
-color ph4_Aromatic, Aromatic_4
-group ph4_Aromatic, Aromatic_4
+pseudoatom Donor_2, pos=[-1.394, 97.991, 52.038], vdw=1.000
+color ph4_Donor, Donor_2
+group ph4_Donor, Donor_2
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

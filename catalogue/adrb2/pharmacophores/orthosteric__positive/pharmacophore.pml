@@ -1,4 +1,4 @@
-# adrb2/orthosteric__positive — ensemble pharmacophore (10 features)
+# adrb2/orthosteric__positive — ensemble pharmacophore (5 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -25,27 +25,12 @@ group ph4_Donor, Donor_1
 pseudoatom Donor_2, pos=[-26.538, 11.707, 5.394], vdw=1.000
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
-pseudoatom Donor_3, pos=[-32.971, 8.110, 7.359], vdw=1.000
-color ph4_Donor, Donor_3
-group ph4_Donor, Donor_3
-pseudoatom Acceptor_4, pos=[-32.237, 10.765, 7.451], vdw=1.000
-color ph4_Acceptor, Acceptor_4
-group ph4_Acceptor, Acceptor_4
-pseudoatom Acceptor_5, pos=[-26.372, 11.519, 5.402], vdw=1.000
-color ph4_Acceptor, Acceptor_5
-group ph4_Acceptor, Acceptor_5
-pseudoatom Acceptor_6, pos=[-26.438, 8.901, 6.143], vdw=1.000
-color ph4_Acceptor, Acceptor_6
-group ph4_Acceptor, Acceptor_6
-pseudoatom PosIonizable_7, pos=[-32.971, 8.110, 7.359], vdw=1.000
-color ph4_PosIonizable, PosIonizable_7
-group ph4_PosIonizable, PosIonizable_7
-pseudoatom Aromatic_8, pos=[-28.730, 10.707, 6.457], vdw=1.000
-color ph4_Aromatic, Aromatic_8
-group ph4_Aromatic, Aromatic_8
-pseudoatom LumpedHydrophobe_9, pos=[-28.730, 10.707, 6.457], vdw=1.000
-color ph4_LumpedHydrophobe, LumpedHydrophobe_9
-group ph4_LumpedHydrophobe, LumpedHydrophobe_9
+pseudoatom Aromatic_3, pos=[-28.730, 10.707, 6.457], vdw=1.000
+color ph4_Aromatic, Aromatic_3
+group ph4_Aromatic, Aromatic_3
+pseudoatom Donor_4, pos=[-32.971, 8.110, 7.359], vdw=1.000
+color ph4_Donor, Donor_4
+group ph4_Donor, Donor_4
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

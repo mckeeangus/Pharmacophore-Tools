@@ -33,20 +33,10 @@
         "random_state": 0
       }
     },
-    "n_features": 7,
+    "n_features": 5,
     "representative_ligand": "6DXK_HJ4_A801"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 28.805999999999997,
-      "y": 7.140000000000001,
-      "z": 16.8065,
-      "radius": 1.0,
-      "n_points": 2,
-      "n_ligands": 2,
-      "support": 0.6667
-    },
     {
       "family": "Acceptor",
       "x": 32.71025,
@@ -92,16 +82,6 @@
       "x": 27.2735,
       "y": 11.198333333333334,
       "z": 15.443,
-      "radius": 1.0,
-      "n_points": 2,
-      "n_ligands": 2,
-      "support": 0.6667
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 30.43608333333333,
-      "y": 3.440833333333333,
-      "z": 12.177083333333334,
       "radius": 1.0,
       "n_points": 2,
       "n_ligands": 2,

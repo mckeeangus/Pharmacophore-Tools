@@ -39,20 +39,10 @@
         "random_state": 0
       }
     },
-    "n_features": 4,
+    "n_features": 3,
     "representative_ligand": "4FRR_0VC_F301"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 166.8782857142857,
-      "y": 123.39357142857143,
-      "z": 186.2275714285714,
-      "radius": 1.0,
-      "n_points": 14,
-      "n_ligands": 14,
-      "support": 0.7778
-    },
     {
       "family": "Acceptor",
       "x": 171.48035294117645,

@@ -33,20 +33,10 @@
         "random_state": 0
       }
     },
-    "n_features": 8,
+    "n_features": 5,
     "representative_ligand": "8W1V_A1AE2_B1201"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": -33.22925,
-      "y": 9.66825,
-      "z": 7.696,
-      "radius": 1.4095426119844698,
-      "n_points": 4,
-      "n_ligands": 2,
-      "support": 0.6667
-    },
     {
       "family": "Acceptor",
       "x": -30.05333333333333,
@@ -56,6 +46,26 @@
       "n_points": 6,
       "n_ligands": 3,
       "support": 1.0
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": -30.310333333333332,
+      "y": 3.7747916666666663,
+      "z": 9.306416666666667,
+      "radius": 3.0,
+      "n_points": 4,
+      "n_ligands": 3,
+      "support": 1.0
+    },
+    {
+      "family": "Donor",
+      "x": -33.22925,
+      "y": 9.66825,
+      "z": 7.696,
+      "radius": 1.4095426119844698,
+      "n_points": 4,
+      "n_ligands": 2,
+      "support": 0.6667
     },
     {
       "family": "Acceptor",
@@ -73,46 +83,6 @@
       "y": 8.034333333333333,
       "z": 7.553666666666667,
       "radius": 1.0,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0
-    },
-    {
-      "family": "Aromatic",
-      "x": -32.096666666666664,
-      "y": 3.5098249999999998,
-      "z": 9.046475,
-      "radius": 3.0,
-      "n_points": 4,
-      "n_ligands": 2,
-      "support": 0.6667
-    },
-    {
-      "family": "Aromatic",
-      "x": -28.117999999999995,
-      "y": 11.05688888888889,
-      "z": 6.017499999999999,
-      "radius": 1.2563272996916932,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -30.310333333333332,
-      "y": 3.7747916666666663,
-      "z": 9.306416666666667,
-      "radius": 3.0,
-      "n_points": 4,
-      "n_ligands": 3,
-      "support": 1.0
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -28.117999999999995,
-      "y": 11.05688888888889,
-      "z": 6.017499999999999,
-      "radius": 1.2563272996916932,
       "n_points": 3,
       "n_ligands": 3,
       "support": 1.0

@@ -34,8 +34,8 @@
         "random_state": 0
       }
     },
-    "n_features": 6,
-    "representative_ligand": "8ZOY_LNR_A701"
+    "n_features": 3,
+    "representative_ligand": "8WTV_E5E_A704"
   },
   "features": [
     {
@@ -59,37 +59,7 @@
       "support": 0.5
     },
     {
-      "family": "Acceptor",
-      "x": 131.03166666666667,
-      "y": 133.09599999999998,
-      "z": 128.33633333333333,
-      "radius": 1.0,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 0.5
-    },
-    {
-      "family": "PosIonizable",
-      "x": 130.92625,
-      "y": 127.13224999999998,
-      "z": 134.49475,
-      "radius": 1.4853169905781087,
-      "n_points": 4,
-      "n_ligands": 4,
-      "support": 0.6667
-    },
-    {
       "family": "Aromatic",
-      "x": 130.60216666666665,
-      "y": 130.91995833333334,
-      "z": 130.11191666666667,
-      "radius": 1.0,
-      "n_points": 4,
-      "n_ligands": 4,
-      "support": 0.6667
-    },
-    {
-      "family": "LumpedHydrophobe",
       "x": 130.60216666666665,
       "y": 130.91995833333334,
       "z": 130.11191666666667,

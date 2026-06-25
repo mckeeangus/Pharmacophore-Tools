@@ -34,7 +34,7 @@
         "random_state": 0
       }
     },
-    "n_features": 16,
+    "n_features": 9,
     "representative_ligand": "1BWB_146_B641"
   },
   "features": [
@@ -49,26 +49,6 @@
       "support": 0.9062
     },
     {
-      "family": "Donor",
-      "x": -6.99456,
-      "y": 17.31432,
-      "z": 21.67244,
-      "radius": 2.4472354178541957,
-      "n_points": 25,
-      "n_ligands": 16,
-      "support": 0.5
-    },
-    {
-      "family": "Donor",
-      "x": -11.319173913043478,
-      "y": 14.528826086956522,
-      "z": 34.90421739130435,
-      "radius": 2.259398270430302,
-      "n_points": 23,
-      "n_ligands": 16,
-      "support": 0.5
-    },
-    {
       "family": "Acceptor",
       "x": -8.576136363636364,
       "y": 15.456136363636364,
@@ -77,16 +57,6 @@
       "n_points": 44,
       "n_ligands": 30,
       "support": 0.9375
-    },
-    {
-      "family": "Acceptor",
-      "x": -10.864666666666665,
-      "y": 19.00992307692308,
-      "z": 27.934282051282054,
-      "radius": 1.2908176034862884,
-      "n_points": 39,
-      "n_ligands": 29,
-      "support": 0.9062
     },
     {
       "family": "Acceptor",
@@ -117,46 +87,6 @@
       "n_points": 32,
       "n_ligands": 24,
       "support": 0.75
-    },
-    {
-      "family": "Aromatic",
-      "x": -4.876825396825398,
-      "y": 18.168317460317457,
-      "z": 26.40642857142857,
-      "radius": 1.0,
-      "n_points": 21,
-      "n_ligands": 21,
-      "support": 0.6562
-    },
-    {
-      "family": "Aromatic",
-      "x": -12.929079365079364,
-      "y": 13.433388888888889,
-      "z": 29.070896825396826,
-      "radius": 1.0,
-      "n_points": 21,
-      "n_ligands": 21,
-      "support": 0.6562
-    },
-    {
-      "family": "Aromatic",
-      "x": -8.62958888888889,
-      "y": 16.552977777777773,
-      "z": 22.48813703703703,
-      "radius": 1.0,
-      "n_points": 18,
-      "n_ligands": 17,
-      "support": 0.5312
-    },
-    {
-      "family": "Aromatic",
-      "x": -9.964657407407408,
-      "y": 15.84966851851852,
-      "z": 33.48205925925926,
-      "radius": 1.0217681563894652,
-      "n_points": 18,
-      "n_ligands": 17,
-      "support": 0.5312
     },
     {
       "family": "LumpedHydrophobe",

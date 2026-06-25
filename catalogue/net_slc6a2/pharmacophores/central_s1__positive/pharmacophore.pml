@@ -1,4 +1,4 @@
-# net_slc6a2/central_s1__positive — ensemble pharmacophore (6 features)
+# net_slc6a2/central_s1__positive — ensemble pharmacophore (3 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -22,18 +22,9 @@ group ph4_Donor, Donor_0
 pseudoatom Donor_1, pos=[131.331, 132.479, 128.683], vdw=1.680
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom Acceptor_2, pos=[131.032, 133.096, 128.336], vdw=1.000
-color ph4_Acceptor, Acceptor_2
-group ph4_Acceptor, Acceptor_2
-pseudoatom PosIonizable_3, pos=[130.926, 127.132, 134.495], vdw=1.485
-color ph4_PosIonizable, PosIonizable_3
-group ph4_PosIonizable, PosIonizable_3
-pseudoatom Aromatic_4, pos=[130.602, 130.920, 130.112], vdw=1.000
-color ph4_Aromatic, Aromatic_4
-group ph4_Aromatic, Aromatic_4
-pseudoatom LumpedHydrophobe_5, pos=[130.602, 130.920, 130.112], vdw=1.000
-color ph4_LumpedHydrophobe, LumpedHydrophobe_5
-group ph4_LumpedHydrophobe, LumpedHydrophobe_5
+pseudoatom Aromatic_2, pos=[130.602, 130.920, 130.112], vdw=1.000
+color ph4_Aromatic, Aromatic_2
+group ph4_Aromatic, Aromatic_2
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

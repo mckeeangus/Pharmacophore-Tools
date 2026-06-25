@@ -34,7 +34,7 @@
         "random_state": 0
       }
     },
-    "n_features": 7,
+    "n_features": 3,
     "representative_ligand": "7PRX_82H_A801"
   },
   "features": [
@@ -59,16 +59,6 @@
       "support": 0.95
     },
     {
-      "family": "Donor",
-      "x": 28.632323529411767,
-      "y": 5.908647058823529,
-      "z": 13.66064705882353,
-      "radius": 3.0,
-      "n_points": 34,
-      "n_ligands": 19,
-      "support": 0.95
-    },
-    {
       "family": "Aromatic",
       "x": 31.985369444444444,
       "y": 7.682676388888887,
@@ -77,36 +67,6 @@
       "n_points": 24,
       "n_ligands": 13,
       "support": 0.65
-    },
-    {
-      "family": "Aromatic",
-      "x": 28.044402380952384,
-      "y": 9.760016666666667,
-      "z": 14.412059523809523,
-      "radius": 2.3296043396057575,
-      "n_points": 14,
-      "n_ligands": 13,
-      "support": 0.65
-    },
-    {
-      "family": "Aromatic",
-      "x": 34.45921666666666,
-      "y": 9.264083333333332,
-      "z": 5.971066666666667,
-      "radius": 1.0,
-      "n_points": 10,
-      "n_ligands": 10,
-      "support": 0.5
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 32.41223529411764,
-      "y": 7.782019607843137,
-      "z": 10.738264705882353,
-      "radius": 1.4141124783082812,
-      "n_points": 17,
-      "n_ligands": 16,
-      "support": 0.8
     }
   ]
 }

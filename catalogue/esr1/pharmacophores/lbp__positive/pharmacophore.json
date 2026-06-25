@@ -34,7 +34,7 @@
         "random_state": 0
       }
     },
-    "n_features": 8,
+    "n_features": 5,
     "representative_ligand": "7NFB_GEN_A601"
   },
   "features": [
@@ -49,6 +49,16 @@
       "support": 1.0
     },
     {
+      "family": "LumpedHydrophobe",
+      "x": 22.511324074074075,
+      "y": -11.502407407407405,
+      "z": 4.561083333333333,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 16,
+      "support": 1.0
+    },
+    {
       "family": "Donor",
       "x": 26.64693333333333,
       "y": -12.0296,
@@ -59,22 +69,12 @@
       "support": 0.8125
     },
     {
-      "family": "Acceptor",
-      "x": 20.903000000000002,
-      "y": -11.052818181818182,
-      "z": 2.109818181818182,
-      "radius": 1.0,
+      "family": "LumpedHydrophobe",
+      "x": 25.268951515151514,
+      "y": -11.750178787878788,
+      "z": 8.473912121212122,
+      "radius": 1.3624118242923227,
       "n_points": 11,
-      "n_ligands": 11,
-      "support": 0.6875
-    },
-    {
-      "family": "Acceptor",
-      "x": 27.339999999999996,
-      "y": -11.5399,
-      "z": 10.8341,
-      "radius": 1.0,
-      "n_points": 10,
       "n_ligands": 10,
       "support": 0.625
     },
@@ -87,36 +87,6 @@
       "n_points": 9,
       "n_ligands": 9,
       "support": 0.5625
-    },
-    {
-      "family": "Aromatic",
-      "x": 22.494725490196082,
-      "y": -11.462588235294115,
-      "z": 4.443176470588234,
-      "radius": 1.0,
-      "n_points": 17,
-      "n_ligands": 16,
-      "support": 1.0
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 22.511324074074075,
-      "y": -11.502407407407405,
-      "z": 4.561083333333333,
-      "radius": 1.0,
-      "n_points": 18,
-      "n_ligands": 16,
-      "support": 1.0
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 25.268951515151514,
-      "y": -11.750178787878788,
-      "z": 8.473912121212122,
-      "radius": 1.3624118242923227,
-      "n_points": 11,
-      "n_ligands": 10,
-      "support": 0.625
     }
   ]
 }

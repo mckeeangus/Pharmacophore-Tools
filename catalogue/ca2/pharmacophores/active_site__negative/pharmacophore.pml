@@ -1,4 +1,4 @@
-# ca2/active_site__negative — ensemble pharmacophore (5 features)
+# ca2/active_site__negative — ensemble pharmacophore (4 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -25,12 +25,9 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Aromatic_2, pos=[-4.761, 3.525, 15.031], vdw=1.000
 color ph4_Aromatic, Aromatic_2
 group ph4_Aromatic, Aromatic_2
-pseudoatom LumpedHydrophobe_3, pos=[-4.771, 3.512, 14.974], vdw=1.000
-color ph4_LumpedHydrophobe, LumpedHydrophobe_3
-group ph4_LumpedHydrophobe, LumpedHydrophobe_3
-pseudoatom Donor_4, pos=[-5.360, -0.377, 16.079], vdw=1.000
-color ph4_Donor, Donor_4
-group ph4_Donor, Donor_4
+pseudoatom Donor_3, pos=[-5.360, -0.377, 16.079], vdw=1.000
+color ph4_Donor, Donor_3
+group ph4_Donor, Donor_3
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

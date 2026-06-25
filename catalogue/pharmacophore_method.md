@@ -88,14 +88,33 @@ without changing the output format; methods are registered in
 `clustering/registry.py`.
 
 The default is **`kmeans_silhouette`** (`clustering/kmeans.py`): k-means where the
-number of clusters *k* is chosen automatically by maximising the mean **silhouette
-score** over `k ∈ [k_min, min(k_max, n−1)]`. T009 instead fixes `k = ceil(n/kq)` with a
-hand-tuned `kq`; its own discussion flags that as the obstacle to automation, so we
-remove the hand-tuning. Degenerate inputs (≤2 points, or effectively coincident points)
-collapse to a single cluster.
+number of clusters *k* is chosen automatically rather than hand-tuned.
 
-Each cluster's **centre** is the mean of its member points — a candidate feature
-position.
+**How *k* is chosen.** For every candidate `k ∈ [k_min, min(k_max, n−1)]` (defaults
+`k_min = 2`, `k_max = 8`; `n` = number of points in the family) we run k-means
+(`n_init = 10` restarts, fixed `random_state` for reproducibility) and score the
+resulting partition by its **mean silhouette coefficient**. For a point *i* the
+silhouette is
+
+```
+s(i) = (b(i) − a(i)) / max(a(i), b(i))
+```
+
+where `a(i)` is *i*'s mean (Euclidean) distance to the other points **in its own
+cluster** and `b(i)` is its mean distance to the points of the **nearest other
+cluster**. `s(i)` runs from −1 (likely misassigned) through 0 (on a boundary) to +1
+(tight, well separated); the score for a given *k* is the mean of `s(i)` over all
+points. We keep the *k* with the **highest mean silhouette** — the partition whose
+clusters are simultaneously most compact and best separated — and return its labels. A
+*k* that collapses to a single occupied cluster, or for which the silhouette is
+undefined, is skipped. T009 instead fixes `k = ceil(n / kq)` with a hand-tuned `kq`;
+its own discussion flags that as the obstacle to automation, so we remove the
+hand-tuning. Degenerate inputs (≤ 2 points, or effectively coincident points) collapse
+to a single cluster. The chosen method and its parameters are recorded in each model's
+provenance block.
+
+Each cluster's **centre** is the (unweighted) **mean of its member points** — a
+candidate feature position.
 
 ---
 
@@ -110,17 +129,27 @@ A candidate cluster becomes a pharmacophore feature only if it is both **populou
   ligand.
 - **size** = number of feature points in the cluster ≥ `min_cluster_size` (= 2).
 
-Surviving candidates are sorted **largest first** (more points, then higher support).
-An optional `top_n_per_family` cap (default off) then keeps only the strongest N per
-family.
+Candidate features that pass these filters from **every family** are then pooled and
+sorted **largest first** (more points, then higher support). The merge (next) and an
+optional `top_n_per_family` cap (default off, keeps only the strongest N per family)
+are applied to that pooled, sorted list.
 
-### Merging overlapping clusters
+### Merging overlapping clusters (within *and across* families)
 
-k-means can split one genuinely single dense lobe into two adjacent clusters, leaving
-two near-coincident spheres of the same family. After selection we therefore **collapse
-overlapping same-family features, keeping the largest** (`selection.merge_overlapping`,
-default on). Walking the largest-first list, a candidate is dropped if it overlaps one
-already kept.
+Two distinct things can put two feature spheres in the same place, and neither should
+survive as two features:
+
+- k-means can split one genuinely single dense lobe into two adjacent **same-family**
+  clusters; and
+- two **different** families can land on the same atoms — a spot cannot be both an
+  H-bond donor *and* an acceptor (or a hydrophobe *and* an aromatic) at once, so two
+  overlapping features of different families are mutually exclusive too.
+
+So after selection we **collapse overlapping features regardless of family, keeping the
+dominant one** (`selection.merge_overlapping`, default on). Working down the pooled
+largest-first list, a candidate is dropped if it overlaps any feature already kept —
+the first (largest, then highest-support) feature accepted for a region wins, whatever
+its family. This is why the merge runs over the pooled set rather than per family.
 
 "Overlap" uses a **non-arbitrary, geometry-derived threshold** rather than a magic
 number: two features overlap when their centre-to-centre distance is **less than the
@@ -135,8 +164,23 @@ show the merge.
 
 ## 6. Tolerance radius — the size of a feature sphere
 
-Each kept feature carries a **tolerance radius** = the **RMSD of its cluster's points
-about the centre** (`tolerance.method: rmsd`), clamped to `[min, max] = [1.0, 3.0]` Å.
+Each kept feature carries a **tolerance radius** = the **spatial spread of its
+cluster's points about the centre**, measured as their root-mean-square distance
+(`tolerance.method: rmsd`) and clamped to `[min, max] = [1.0, 3.0]` Å.
+
+**How the spread is computed.** For a cluster of `m` member points `pᵢ` with centre
+`c` (the mean point, §4), the radius is the RMS of the point-to-centre distances:
+
+```
+radius = sqrt( (1/m) · Σᵢ ‖pᵢ − c‖² ),  then clamped to [1.0, 3.0] Å
+```
+
+i.e. the square root of the mean squared Euclidean distance from each feature point to
+the cluster centre (equivalently the standard deviation of the points' positions about
+their mean, taken in 3D). It is **not** a fitted Gaussian or a max-radius — every
+member point contributes, so one outlier widens it but cannot dominate, and the clamp
+keeps a lone outlier from ballooning the sphere past 3 Å or a near-coincident cluster
+from collapsing below 1 Å.
 
 This radius is the feature's **size in every visualisation** — the PyMOL spheres are
 drawn at exactly this radius. It is a **spread / dispersion** measure, so it is

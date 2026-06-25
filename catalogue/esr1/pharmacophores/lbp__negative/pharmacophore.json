@@ -34,30 +34,10 @@
         "random_state": 0
       }
     },
-    "n_features": 9,
+    "n_features": 6,
     "representative_ligand": "7RS8_7EI_C601"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 20.808906249999996,
-      "y": -10.921125,
-      "z": 1.9432500000000004,
-      "radius": 1.0,
-      "n_points": 32,
-      "n_ligands": 32,
-      "support": 0.7619
-    },
-    {
-      "family": "Donor",
-      "x": 28.29676,
-      "y": -4.010999999999999,
-      "z": 5.973,
-      "radius": 1.0,
-      "n_points": 25,
-      "n_ligands": 25,
-      "support": 0.5952
-    },
     {
       "family": "Acceptor",
       "x": 24.564316455696208,
@@ -67,26 +47,6 @@
       "n_points": 79,
       "n_ligands": 36,
       "support": 0.8571
-    },
-    {
-      "family": "Acceptor",
-      "x": 27.485394736842096,
-      "y": -7.309289473684209,
-      "z": 7.120684210526314,
-      "radius": 1.3466786932190182,
-      "n_points": 38,
-      "n_ligands": 35,
-      "support": 0.8333
-    },
-    {
-      "family": "Acceptor",
-      "x": 21.24536111111111,
-      "y": -11.1255,
-      "z": 2.2740833333333335,
-      "radius": 1.675955465925462,
-      "n_points": 36,
-      "n_ligands": 32,
-      "support": 0.7619
     },
     {
       "family": "Aromatic",
@@ -109,24 +69,34 @@
       "support": 1.0
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 26.252083333333335,
-      "y": -9.704436507936506,
-      "z": 6.731952380952383,
-      "radius": 1.0,
-      "n_points": 42,
-      "n_ligands": 42,
-      "support": 1.0
+      "family": "Acceptor",
+      "x": 27.485394736842096,
+      "y": -7.309289473684209,
+      "z": 7.120684210526314,
+      "radius": 1.3466786932190182,
+      "n_points": 38,
+      "n_ligands": 35,
+      "support": 0.8333
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 22.41621031746032,
-      "y": -11.602793650793648,
-      "z": 4.01036507936508,
+      "family": "Acceptor",
+      "x": 21.24536111111111,
+      "y": -11.1255,
+      "z": 2.2740833333333335,
+      "radius": 1.675955465925462,
+      "n_points": 36,
+      "n_ligands": 32,
+      "support": 0.7619
+    },
+    {
+      "family": "Donor",
+      "x": 28.29676,
+      "y": -4.010999999999999,
+      "z": 5.973,
       "radius": 1.0,
-      "n_points": 42,
-      "n_ligands": 42,
-      "support": 1.0
+      "n_points": 25,
+      "n_ligands": 25,
+      "support": 0.5952
     }
   ]
 }

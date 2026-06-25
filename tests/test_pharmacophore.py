@@ -105,6 +105,45 @@ def test_merge_overlapping_absolute_radius():
     assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=0.5)) == 2
 
 
+def test_merge_drops_overlapping_across_families():
+    # A donor and an acceptor cluster occupy the same region; a donor and acceptor
+    # cannot both describe one binding spot, so only the dominant cluster survives.
+    pts = []
+    ligands = [f"L{i}" for i in range(6)]
+    rng = np.random.default_rng(2)
+    for i, lig in enumerate(ligands):
+        # every ligand has a donor near the origin; the first four also drop a
+        # weaker acceptor nearby, so the donor cluster is the dominant one.
+        pts.append(FeaturePoint("Donor", *rng.normal(scale=0.2, size=3), lig))
+        if i < 4:
+            pts.append(FeaturePoint("Acceptor", *rng.normal(scale=0.2, size=3), lig))
+    table = FeatureTable(points=pts, ligand_ids=ligands)
+    res = build_pharmacophore(
+        table, KMeansSilhouette(k_min=2, k_max=3),
+        SelectionConfig(min_support_fraction=0.5, min_cluster_size=2),
+        ToleranceConfig(method="rmsd", min=1.0, max=3.0), name="xfam")
+    fams = {f.family for f in res.pharmacophore.features}
+    assert fams == {"Donor"}          # the overlapping acceptor was displaced
+    assert len(res.pharmacophore.features) == 1
+
+
+def test_merge_spares_distinct_family_features_apart():
+    # A donor and an acceptor in *different* regions both survive.
+    pts = []
+    ligands = [f"L{i}" for i in range(6)]
+    rng = np.random.default_rng(3)
+    for lig in ligands:
+        pts.append(FeaturePoint("Donor", *rng.normal(scale=0.2, size=3), lig))
+        pts.append(FeaturePoint(
+            "Acceptor", *(np.array([10.0, 0.0, 0.0]) + rng.normal(scale=0.2, size=3)), lig))
+    table = FeatureTable(points=pts, ligand_ids=ligands)
+    res = build_pharmacophore(
+        table, KMeansSilhouette(k_min=2, k_max=3),
+        SelectionConfig(min_support_fraction=0.5, min_cluster_size=2),
+        ToleranceConfig(method="rmsd", min=1.0, max=3.0), name="apart")
+    assert {f.family for f in res.pharmacophore.features} == {"Donor", "Acceptor"}
+
+
 def test_best_representative_prefers_the_fitting_ligand():
     # Model wants a Donor at the origin. L_fit has one there; L_off does not.
     table = FeatureTable(

@@ -33,10 +33,20 @@
         "random_state": 0
       }
     },
-    "n_features": 8,
+    "n_features": 5,
     "representative_ligand": "5ZK3_QNB_A501"
   },
   "features": [
+    {
+      "family": "Acceptor",
+      "x": 138.842,
+      "y": 144.63660000000002,
+      "z": 102.23119999999999,
+      "radius": 1.5702584500648291,
+      "n_points": 5,
+      "n_ligands": 3,
+      "support": 1.0
+    },
     {
       "family": "Donor",
       "x": 132.554,
@@ -48,22 +58,12 @@
       "support": 0.6667
     },
     {
-      "family": "Donor",
-      "x": 139.691,
-      "y": 145.65166666666667,
-      "z": 102.10066666666667,
+      "family": "Aromatic",
+      "x": 137.85299999999995,
+      "y": 146.58083333333332,
+      "z": 105.62444444444442,
       "radius": 1.0,
       "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0
-    },
-    {
-      "family": "Acceptor",
-      "x": 138.842,
-      "y": 144.63660000000002,
-      "z": 102.23119999999999,
-      "radius": 1.5702584500648291,
-      "n_points": 5,
       "n_ligands": 3,
       "support": 1.0
     },
@@ -78,26 +78,6 @@
       "support": 0.6667
     },
     {
-      "family": "PosIonizable",
-      "x": 132.39633333333333,
-      "y": 144.975,
-      "z": 102.43499999999999,
-      "radius": 1.0,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0
-    },
-    {
-      "family": "Aromatic",
-      "x": 137.85299999999995,
-      "y": 146.58083333333332,
-      "z": 105.62444444444442,
-      "radius": 1.0,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0
-    },
-    {
       "family": "Aromatic",
       "x": 138.97883333333334,
       "y": 148.26566666666668,
@@ -106,16 +86,6 @@
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 137.85299999999995,
-      "y": 146.58083333333332,
-      "z": 105.62444444444442,
-      "radius": 1.0,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0
     }
   ]
 }

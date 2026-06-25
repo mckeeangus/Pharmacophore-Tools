@@ -46,20 +46,10 @@
         "random_state": 0
       }
     },
-    "n_features": 5,
-    "representative_ligand": "10KT_A1C5S_A1202"
+    "n_features": 3,
+    "representative_ligand": "8JWY_VBF_A1201"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": -1.3936842105263156,
-      "y": 97.99063157894737,
-      "z": 52.03789473684211,
-      "radius": 1.0,
-      "n_points": 19,
-      "n_ligands": 18,
-      "support": 0.72
-    },
     {
       "family": "Acceptor",
       "x": 1.0732558139534882,
@@ -81,24 +71,14 @@
       "support": 0.56
     },
     {
-      "family": "Aromatic",
-      "x": 0.7718676767676766,
-      "y": 95.44043585858584,
-      "z": 52.34968585858585,
-      "radius": 2.467034270836033,
-      "n_points": 66,
-      "n_ligands": 25,
-      "support": 1.0
-    },
-    {
-      "family": "Aromatic",
-      "x": 0.3463023809523809,
-      "y": 102.76611190476191,
-      "z": 55.970195238095236,
-      "radius": 3.0,
-      "n_points": 14,
-      "n_ligands": 14,
-      "support": 0.56
+      "family": "Donor",
+      "x": -1.3936842105263156,
+      "y": 97.99063157894737,
+      "z": 52.03789473684211,
+      "radius": 1.0,
+      "n_points": 19,
+      "n_ligands": 18,
+      "support": 0.72
     }
   ]
 }

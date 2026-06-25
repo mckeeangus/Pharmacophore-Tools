@@ -9,6 +9,7 @@ is injected — so this is the unit-tested heart of the stage.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import TypeVar
 
 import numpy as np
 
@@ -16,6 +17,8 @@ from ..clustering.base import Clusterer
 from ..features.extract import FeatureTable
 from .config import SelectionConfig, ToleranceConfig
 from .model import Pharmacophore, PharmacophoreFeature
+
+_P = TypeVar("_P")  # opaque payload carried alongside a feature through merging
 
 
 @dataclass
@@ -45,7 +48,7 @@ def _radius(coords: np.ndarray, center: np.ndarray, tol: ToleranceConfig) -> flo
 
 def _overlaps(a: PharmacophoreFeature, b: PharmacophoreFeature,
               merge_radius: float | None) -> bool:
-    """True if two same-family features sit in the same region of space.
+    """True if two features sit in the same region of space (family-agnostic).
 
     With an explicit ``merge_radius`` the test is a fixed centre-to-centre cutoff.
     Otherwise it is geometric: the centres are closer than the larger of the two
@@ -57,26 +60,35 @@ def _overlaps(a: PharmacophoreFeature, b: PharmacophoreFeature,
     return dist < thresh
 
 
-def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, int]],
+def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, _P]],
                        merge_radius: float | None,
-                       ) -> list[tuple[PharmacophoreFeature, int]]:
+                       ) -> list[tuple[PharmacophoreFeature, _P]]:
     """Greedily drop overlapping features, keeping the largest in each region.
 
     ``candidates`` must already be sorted strongest-first (more points, then more
-    support), so the first feature accepted for a region is the one we keep.
+    support), so the first feature accepted for a region is the one we keep. The
+    payload travelling with each feature is opaque, so this serves both the
+    cross-family merge (payload = ``(family, label)``) and any same-family use.
+    Overlap ignores family on purpose: two features of *different* families that
+    occupy the same spot (e.g. a donor and an acceptor) cannot both describe one
+    binding position, so the dominant one displaces the other.
     """
-    accepted: list[tuple[PharmacophoreFeature, int]] = []
-    for feat, label in candidates:
+    accepted: list[tuple[PharmacophoreFeature, _P]] = []
+    for feat, payload in candidates:
         if any(_overlaps(feat, kept, merge_radius) for kept, _ in accepted):
             continue
-        accepted.append((feat, label))
+        accepted.append((feat, payload))
     return accepted
 
 
-def _family_features(family: str, coords: np.ndarray, labels: np.ndarray,
-                     ligands: list[str], n_ligands: int, sel: SelectionConfig,
-                     tol: ToleranceConfig) -> tuple[list[PharmacophoreFeature], set[int]]:
-    """Reduce one family's clusters to kept features (+ the kept label set)."""
+def _candidate_features(family: str, coords: np.ndarray, labels: np.ndarray,
+                        ligands: list[str], n_ligands: int, sel: SelectionConfig,
+                        tol: ToleranceConfig) -> list[tuple[PharmacophoreFeature, int]]:
+    """One family's clusters reduced to candidate features passing support/size.
+
+    No merge or top-N here — those are applied globally across families once all
+    candidates are pooled, so overlap resolution can cross family boundaries.
+    """
     candidates: list[tuple[PharmacophoreFeature, int]] = []
     for label in sorted(set(labels.tolist())):
         mask = labels == label
@@ -93,36 +105,56 @@ def _family_features(family: str, coords: np.ndarray, labels: np.ndarray,
             n_ligands=n_lig, support=round(support, 4),
         )
         candidates.append((feat, label))
-    # Largest first (more points, then more support): the head of each overlap
-    # region is the one kept, and this also drives the optional top-N cap.
-    candidates.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
-    if sel.merge_overlapping:
-        candidates = _merge_overlapping(candidates, sel.merge_radius)
-    if sel.top_n_per_family is not None:
-        candidates = candidates[: sel.top_n_per_family]
-    return [f for f, _ in candidates], {lbl for _, lbl in candidates}
+    return candidates
+
+
+def _cap_per_family(pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]],
+                    top_n: int) -> list[tuple[PharmacophoreFeature, tuple[str, int]]]:
+    """Keep at most ``top_n`` features per family from a strongest-first list."""
+    counts: dict[str, int] = {}
+    out: list[tuple[PharmacophoreFeature, tuple[str, int]]] = []
+    for feat, (family, label) in pooled:
+        if counts.get(family, 0) >= top_n:
+            continue
+        counts[family] = counts.get(family, 0) + 1
+        out.append((feat, (family, label)))
+    return out
 
 
 def build_pharmacophore(table: FeatureTable, clusterer: Clusterer, sel: SelectionConfig,
                         tol: ToleranceConfig, name: str,
                         metadata: dict | None = None) -> BuildResult:
-    features: list[PharmacophoreFeature] = []
     assignments: list[ClusterAssignment] = []
+    pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]] = []
     for family in table.families():
         pts = table.of_family(family)
         coords = np.array([p.position for p in pts], dtype=float)
         ligands = [p.ligand_id for p in pts]
         labels = np.asarray(clusterer.fit_predict(coords), dtype=int)
-        fam_feats, kept = _family_features(
+        cands = _candidate_features(
             family, coords, labels, ligands, table.n_ligands, sel, tol)
-        features.extend(fam_feats)
+        pooled.extend((feat, (family, label)) for feat, label in cands)
         centers = {
             int(lbl): tuple(coords[labels == lbl].mean(axis=0))
             for lbl in set(labels.tolist())
         }
         assignments.append(ClusterAssignment(
             family=family, coords=coords, labels=labels, ligand_ids=ligands,
-            centers=centers, kept_labels=kept))
+            centers=centers, kept_labels=set()))
+    # Strongest first (more points, then more support) so the dominant cluster
+    # heads each overlap region; merge then caps operate on the pooled set so
+    # overlap resolution spans families, not just within one.
+    pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
+    if sel.merge_overlapping:
+        pooled = _merge_overlapping(pooled, sel.merge_radius)
+    if sel.top_n_per_family is not None:
+        pooled = _cap_per_family(pooled, sel.top_n_per_family)
+    features = [feat for feat, _ in pooled]
+    kept_by_family: dict[str, set[int]] = {}
+    for _, (family, label) in pooled:
+        kept_by_family.setdefault(family, set()).add(label)
+    for assignment in assignments:
+        assignment.kept_labels = kept_by_family.get(assignment.family, set())
     meta = dict(metadata or {})
     meta.setdefault("clustering", clusterer.describe())
     meta["n_features"] = len(features)

@@ -34,7 +34,7 @@
         "random_state": 0
       }
     },
-    "n_features": 5,
+    "n_features": 4,
     "representative_ligand": "5DRS_5EF_A305"
   },
   "features": [
@@ -67,16 +67,6 @@
       "n_points": 62,
       "n_ligands": 59,
       "support": 0.7763
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -4.770649444444445,
-      "y": 3.512317777777778,
-      "z": 14.97371222222222,
-      "radius": 1.0,
-      "n_points": 60,
-      "n_ligands": 57,
-      "support": 0.75
     },
     {
       "family": "Donor",

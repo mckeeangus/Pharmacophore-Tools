@@ -86,8 +86,9 @@ merging, tolerance, the visualisation, and what "cluster size" means — is docu
   hydrophobes don't swamp the model;
 - a cell with **fewer than 3 ligands is skipped** (no output written/kept) — too few
   for an ensemble hypothesis;
-- overlapping same-family clusters are **merged, keeping the largest** (threshold is
-  geometric: one centre inside the other's sphere);
+- overlapping clusters are **merged, keeping the dominant one** — both within a family
+  and **across families** (a donor and an acceptor cannot share one spot), with a
+  geometric threshold (one centre inside the other's sphere);
 - the visualisation uses a **real representative ligand** from the cell (clean SDF),
   not the heavy-atom raw poses;
 - family colours: HBD/Donor **pink**, HBA/Acceptor **green**, hydrophobic **cyan**,

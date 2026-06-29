@@ -76,23 +76,30 @@ but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff
 
 ## Pharmacophores (Stage 4) — `pharmacophores/<pocket>__<efficacy>/`
 
-One ligand-based ensemble pharmacophore per cell, built by clustering the RDKit
-features of that cell's poses (see `config/pharmacophore.yaml`; method/params recorded
-in each model). **The full method — feature families, clustering, selection, overlap
-merging, tolerance, the visualisation, and what "cluster size" means — is documented in
-[`pharmacophore_method.md`](pharmacophore_method.md).** Headline choices:
+One ligand-based ensemble pharmacophore per cell, built from the RDKit features of that
+cell's poses (see `config/pharmacophore.yaml`; method/params recorded in each model).
+**The full method — feature families, both consensus strategies, selection, overlap
+merging, tolerance, excluded volume, the visualisation, and what "cluster size" means —
+is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headline choices:
 
+- the consensus step is pluggable via **`consensus_method`**: **`kmeans`** (default,
+  silhouette k-means → `pharmacophores/`) or **`density`** (Gaussian occupancy field →
+  peaks, written to the side-by-side **`pharmacophores_density/`** namespace). Both share
+  one in/out contract `(family, position, tolerance, optional direction)`;
 - features use RDKit's **`LumpedHydrophobe`** (one centroid per hydrophobic group) so
   hydrophobes don't swamp the model;
 - a cell with **fewer than 3 ligands is skipped** (no output written/kept) — too few
   for an ensemble hypothesis;
-- overlapping clusters are **merged, keeping the dominant one** — both within a family
-  and **across families** (a donor and an acceptor cannot share one spot), with a
+- (k-means) overlapping clusters are **merged, keeping the dominant one** — both within a
+  family and **across families** (a donor and an acceptor cannot share one spot), with a
   geometric threshold (one centre inside the other's sphere);
+- (density) the unit of evidence is the **distinct molecule** (per-point weighting),
+  features emerge from field peaks with **no `k`**, and **excluded-volume** spheres mark
+  receptor regions no ligand occupies; deterministic, two knobs only;
 - the visualisation uses a **real representative ligand** from the cell (clean SDF),
   not the heavy-atom raw poses;
 - family colours: HBD/Donor **pink**, HBA/Acceptor **green**, hydrophobic **cyan**,
-  Aromatic **yellow**, PosIonizable **red**, NegIonizable orange.
+  Aromatic **yellow**, PosIonizable **red**, NegIonizable orange, ExcludedVolume grey.
 
 Files per model:
 

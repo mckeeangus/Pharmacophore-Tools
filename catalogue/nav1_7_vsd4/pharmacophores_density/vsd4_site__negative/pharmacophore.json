@@ -1,0 +1,499 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "nav1_7_vsd4/vsd4_site__negative",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\nav1_7_vsd4\\groups\\vsd4_site__negative",
+      "n_ligands": 3,
+      "load": {
+        "template": 3
+      },
+      "skipped": []
+    },
+    "selection": {
+      "min_ligands": 3,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null,
+      "merge_overlapping": true,
+      "merge_radius": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-29",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "occupancy_floor": 2.0,
+        "scaffold_weighting": false,
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 41,
+    "representative_ligand": "8F0P_X7L_A1610"
+  },
+  "features": [
+    {
+      "family": "PosIonizable",
+      "x": 85.82503049611528,
+      "y": 137.34923882343563,
+      "z": 140.78789259825578,
+      "radius": 3.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 1.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 85.53999999999999,
+      "y": 133.6755,
+      "z": 142.5355,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 93.056,
+      "y": 127.594,
+      "z": 134.986,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 90.135,
+      "y": 130.27,
+      "z": 139.054,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 88.621,
+      "y": 129.305,
+      "z": 136.355,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 84.813,
+      "y": 133.15550000000002,
+      "z": 141.54950000000002,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 88.268,
+      "y": 128.8345,
+      "z": 134.71699999999998,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 94.755,
+      "y": 132.583,
+      "z": 138.712,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 93.57849999999999,
+      "y": 130.56099999999998,
+      "z": 130.98649999999998,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 93.411,
+      "y": 128.645,
+      "z": 131.066,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 91.127,
+      "y": 137.66,
+      "z": 141.003,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.942,
+      "y": 140.014,
+      "z": 134.962,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.75200000000001,
+      "y": 139.383,
+      "z": 133.35500000000002,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 95.9,
+      "y": 134.014,
+      "z": 133.852,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.804,
+      "y": 130.353,
+      "z": 129.5,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 93.89,
+      "y": 132.425,
+      "z": 130.958,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 90.935,
+      "y": 139.197,
+      "z": 133.892,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 88.747,
+      "y": 129.0485,
+      "z": 139.5095,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.304,
+      "y": 136.274,
+      "z": 131.297,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 91.187,
+      "y": 135.196,
+      "z": 130.487,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 93.411,
+      "y": 137.363,
+      "z": 139.49,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.408,
+      "y": 138.219,
+      "z": 139.077,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 91.617,
+      "y": 124.546,
+      "z": 137.528,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 88.249,
+      "y": 128.413,
+      "z": 130.763,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 82.696,
+      "y": 141.05,
+      "z": 138.899,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 94.6635,
+      "y": 131.2175,
+      "z": 137.343,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 94.928,
+      "y": 133.4385,
+      "z": 132.2925,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 94.342,
+      "y": 128.499,
+      "z": 132.18,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.69399999999999,
+      "y": 136.731,
+      "z": 141.0445,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 88.496,
+      "y": 134.643,
+      "z": 144.475,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 96.848,
+      "y": 134.6415,
+      "z": 137.8945,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 93.5565,
+      "y": 126.7115,
+      "z": 136.4065,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.285,
+      "y": 125.921,
+      "z": 137.66,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 90.7015,
+      "y": 138.849,
+      "z": 139.597,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 95.249,
+      "y": 130.766,
+      "z": 134.189,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 96.057,
+      "y": 133.191,
+      "z": 138.468,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 94.3735,
+      "y": 129.0125,
+      "z": 136.4235,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 96.856,
+      "y": 135.11,
+      "z": 133.94,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 87.5615,
+      "y": 131.1,
+      "z": 135.21050000000002,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 92.56,
+      "y": 123.367,
+      "z": 137.605,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 86.63300000000001,
+      "y": 131.4445,
+      "z": 137.376,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    }
+  ]
+}

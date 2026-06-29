@@ -103,9 +103,13 @@ def target_stage3_report(slug: str) -> Path:
 
 # --- Stage 4: pharmacophore models (tracked, under catalogue/) ---------------
 
-def target_pharmacophores_dir(slug: str) -> Path:
-    """Per-cell pharmacophore models: catalogue/<slug>/pharmacophores/<cell>/."""
-    return target_catalogue_dir(slug) / "pharmacophores"
+def target_pharmacophores_dir(slug: str, namespace: str = "pharmacophores") -> Path:
+    """Per-cell pharmacophore models: catalogue/<slug>/<namespace>/<cell>/.
+
+    The namespace separates consensus strategies so their outputs sit side by side:
+    ``pharmacophores`` (k-means, default) and ``pharmacophores_density`` (density).
+    """
+    return target_catalogue_dir(slug) / namespace
 
 
 def ensure_dir(path: Path) -> Path:

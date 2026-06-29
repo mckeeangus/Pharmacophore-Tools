@@ -15,16 +15,24 @@ SCHEMA = "pharmpipe.pharmacophore/v1"
 
 @dataclass(frozen=True)
 class PharmacophoreFeature:
-    """One consensus feature: a tolerance sphere of a single family."""
+    """One consensus feature: a tolerance sphere of a single family.
+
+    The output contract is method-agnostic: a feature carries a (family, position,
+    tolerance, optional direction) regardless of which consensus strategy produced
+    it (k-means or density), so downstream stages never branch on the method.
+    ``direction`` is a unit vector for projected families (HBD/HBA) when the upstream
+    feature perception supplies per-point directions; ``None`` otherwise.
+    """
 
     family: str
     x: float
     y: float
     z: float
     radius: float          # tolerance radius, Angstrom
-    n_points: int          # feature points in the cluster
+    n_points: int          # feature points in the cluster / basin
     n_ligands: int         # distinct ligands contributing
     support: float         # n_ligands / n_ligands_in_set
+    direction: tuple[float, float, float] | None = None
 
     @property
     def position(self) -> tuple[float, float, float]:
@@ -52,5 +60,14 @@ class Pharmacophore:
         schema = data.get("schema")
         if schema != SCHEMA:
             raise ValueError(f"unsupported pharmacophore schema {schema!r}; expected {SCHEMA}")
-        feats = [PharmacophoreFeature(**f) for f in data.get("features", [])]
+        feats = [PharmacophoreFeature(**_normalise_feature(f))
+                 for f in data.get("features", [])]
         return cls(name=data["name"], features=feats, metadata=data.get("metadata", {}))
+
+
+def _normalise_feature(f: dict) -> dict:
+    """JSON stores direction as a list; restore the tuple the dataclass expects."""
+    d = dict(f)
+    if d.get("direction") is not None:
+        d["direction"] = tuple(d["direction"])
+    return d

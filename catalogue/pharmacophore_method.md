@@ -4,12 +4,34 @@ Stage 4 of the pipeline turns each grouped set of aligned active poses into a si
 **ligand-based ensemble pharmacophore**: a small set of typed feature spheres (an
 H-bond donor here, an aromatic ring there, …) that capture the chemistry the active
 ligands share. The approach adapts the TeachOpenCADD **T009** workflow (extract RDKit
-features → cluster per family → cluster centres become the model) with the automation
-and clean-up changes described below.
+features → consensus per family → consensus positions become the model) with the
+automation and clean-up changes described below.
 
 Everything scientific lives in **`config/pharmacophore.yaml`**; the code is generic.
 The method-defining parameter values quoted here are the current config defaults — the
 config is the source of truth if they ever diverge.
+
+### Two consensus strategies behind one flag
+
+The step that turns per-molecule feature points into consensus features is pluggable
+via `consensus_method`:
+
+- **`kmeans`** (default) — cluster each family's points with silhouette-selected
+  k-means; cluster centres become features (§4–§6).
+- **`density`** — accumulate each family's points into a Gaussian-smoothed occupancy
+  field and read features off its peaks (§11).
+
+Both obey **one in/out contract** — in: aligned per-molecule feature points in the
+binding-site-local frame; out: a list of consensus features `(family, position,
+tolerance, optional direction)` — so every downstream artifact (JSON model, CSV, plots,
+PyMOL session) is identical in form and the two are directly comparable. Swapping the
+method changes feature *positions*, never the output *structure*. Outputs are written to
+**separate namespaces** so they sit side by side: k-means →
+`catalogue/<slug>/pharmacophores/`, density → `catalogue/<slug>/pharmacophores_density/`.
+The default method is unchanged (k-means); select density with
+`build-pharmacophores --consensus density` or `consensus_method: density` in config.
+Sections 1–3 (build unit, loading, feature extraction) and the tolerance clamp (§6) are
+**shared by both strategies**.
 
 ---
 
@@ -79,7 +101,11 @@ over-represented relative to the others.
 
 ---
 
-## 4. Clustering points into consensus positions
+## 4. Clustering points into consensus positions (k-means strategy)
+
+> This and §5–§6's selection/merge apply to the **`kmeans`** consensus method (the
+> default). The **`density`** method replaces §4–§5 with the occupancy-field procedure
+> in §11 but shares §6's tolerance clamp.
 
 For **each family independently**, the family's points (pooled across all the cell's
 ligands) are clustered in 3D. The clusterer is injected behind a one-method
@@ -238,6 +264,7 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 | `Aromatic` | aromatic ring | yellow |
 | `PosIonizable` | positive ionisable | red |
 | `NegIonizable` | negative ionisable | orange |
+| `ExcludedVolume` | receptor no-go region (density strategy only, §11) | grey |
 
 **Sizes in the visualisations** encode two different, deliberately distinct things:
 
@@ -261,3 +288,126 @@ Batch modes build only the `groups/` cells — never the `separate_state` / `unk
 `curation/efficacy_curation_README.md` before pooling (a surrogate pose carries the
 surrogate's pocket geometry; `mismatch` poses are wrong-target structures). The
 downstream DrugCLIP → docking flow is out of scope for this stage.
+
+---
+
+## 11. Density-based consensus strategy (`consensus_method: density`)
+
+An alternative to the k-means path (§4–§5) that consumes the **same** per-molecule
+feature points (§1–§3) and emits the **same** consensus-feature output (§6's tolerance
+clamp included), so it is a drop-in behind the `consensus_method` flag and downstream
+code never branches on it. It is implemented in `pharmpipe/pharmacophore/density.py`
+and dispatched, alongside k-means, by `pharmacophore/consensus.py` — the single seam the
+orchestrator calls.
+
+**Motivation and lessons carried over from k-means.** The k-means write-up's core
+lesson was *removing a hand-tuned knob* (T009's `kq` for k → silhouette automation,
+§4). The density strategy takes that further: by reading features off the **peaks of a
+smoothed density field**, the number of features of each type is *emergent* — each
+conserved sub-site is its own peak — so **no `k` is chosen at all**. It also keeps the
+other k-means lessons that still apply: the **min-ligands gate** (§1) and the
+**heavy-atom-mol2 SMILES-template loading** (§2) are upstream and shared unchanged; the
+**tolerance clamp** `[1.0, 3.0] Å` (§6) is reused; **`LumpedHydrophobe`** (§3) is still
+the hydrophobic family; and determinism is preserved — like seeded k-means, the density
+field uses a **fixed grid, bandwidth and threshold with no random seeding**, so a rerun
+is bit-stable.
+
+The strategy runs **independently per feature type** (HBD/Donor, HBA/Acceptor,
+LumpedHydrophobe, Aromatic, PosIonizable, NegIonizable). For each type:
+
+### 11.1 Pool points and weight by molecule, not by point
+
+All of that type's points are pooled across the cell's aligned actives. Each point is
+weighted by
+
+```
+w_i = 1 / (number of points molecule m(i) contributes to this type)
+```
+
+so **the unit of evidence is the distinct molecule**, not the raw point: a molecule that
+happens to place six hydrophobe points and one that places one each count once. (With
+`scaffold_weighting: true` the weight is additionally divided by the molecule's Murcko
+scaffold frequency, so an over-represented scaffold does not bias the field; off by
+default.) The weights of one molecule's points sum to 1, so the field is a map of
+distinct-molecule occurrence — directly the "occurrence frequency" idea from dynophore
+super-features.
+
+### 11.2 Accumulate into a Gaussian-smoothed occupancy field
+
+The weighted points are deposited into a fixed **voxel grid** spanning their bounding box
+plus a margin of `3·bandwidth`, then convolved with a Gaussian of width `bandwidth`
+(implemented as `scipy.ndimage.gaussian_filter` with `sigma = bandwidth / voxel`, which
+is an exact, deterministic kernel-density estimate on the grid). **Voxel and bandwidth
+are the single length knob** (~1.0–1.5 Å, ≈ the target feature tolerance). The result is
+an **occupancy field**: high where many distinct molecules place that feature type.
+
+### 11.3 Extract every local maximum; assign by nearest peak (watershed)
+
+**All** local maxima of the field are found (a voxel whose value equals its 3×3×3
+neighbourhood maximum and exceeds a tiny noise floor). Maxima closer than one
+`bandwidth` cannot be physically resolved at that smoothing, so near-coincident peaks
+are collapsed keeping the taller — the *only* post-filter on the field. Every above-floor
+voxel, and every point, is then assigned to its **nearest maximum** (a proximity
+watershed), giving one **basin** per peak. This is what yields multiple features of one
+type natively, with no `k`.
+
+### 11.4 Keep peaks that clear the occupancy floor
+
+A basin becomes a feature only if its **summed distinct-molecule weight** (Σ `w_i` over
+the points assigned to it) is at least `occupancy_floor` (default `2.0`, i.e. ~two
+distinct molecules of evidence). This is the density analogue of k-means' support
+threshold (§5), and the **second and last knob**. Because the weights are per-molecule,
+a single molecule's dense blob cannot clear a floor of 2 however many points it has.
+
+### 11.5 Collapse each kept basin to one feature
+
+- **position** = the **density-weighted centroid** of the basin: `Σ f_v·x_v / Σ f_v`
+  over the basin's voxels `v` (weights `f_v` = field value). This places the feature at
+  the field's centre of mass, not a bare point mean.
+- **tolerance** = the **field spread at the basin**: the field-weighted RMS distance of
+  the basin's voxels from that centroid,
+  `sqrt( Σ f_v·‖x_v − centroid‖² / Σ f_v )`, clamped to `[1.0, 3.0] Å` (§6). This is the
+  second moment of the occupancy contour — a tight peak → small sphere, a diffuse peak →
+  large sphere — directly comparable to the k-means RMSD radius.
+- **direction** — for projected families (HBD/HBA) the model carries an optional mean
+  unit vector. Our current feature perception (heavy-atom mol2 → RDKit `BaseFeatures`)
+  does not emit per-point projection vectors, and perception is upstream and out of
+  scope to change here, so `direction` is `None` in practice; the field is plumbed
+  through the model and the averaging will populate it the moment perception supplies
+  per-point directions. (We do **not** fabricate a direction — that would encode a
+  scientific decision in code, which the project rules forbid.)
+
+### 11.6 Excluded-volume spheres from the receptor
+
+Finally, **excluded-volume** spheres mark pocket regions the receptor occupies but no
+ligand reaches — the steric complement of the ligand envelope. Using the aligned
+reference receptor (`data/targets/<slug>/reference.pdb`, already in the ligands' frame),
+a protein heavy atom qualifies when its nearest ligand atom is **within `ev_shell`**
+(5 Å — it lines the pocket) yet **beyond `ev_clearance`** (2 Å — the ligand does not
+reach it). Qualifying atoms are coarsened onto an `ev_voxel` (2 Å) grid — one sphere per
+occupied cell at its atoms' mean, radius `ev_radius` (1 Å) — and the `ev_max` (40)
+nearest the ligand cloud are kept, family `ExcludedVolume` (grey, §9). Excluded volume
+needs a receptor, so it is built only in catalogue/target mode (where the reference is
+available) and is skipped cleanly for a bare `--input` directory; toggle with
+`density.excluded_volume`.
+
+### 11.7 Knobs, determinism, and differences from k-means
+
+**Only two scientific knobs**: the length scale (`voxel`/`bandwidth`) and the
+`occupancy_floor`; the excluded-volume parameters are a self-contained steric add-on.
+Everything is deterministic — fixed grid, fixed bandwidth, fixed floor, no seeding —
+so reruns are identical (asserted in `tests/test_density.py`).
+
+Two deliberate differences from the k-means path: (1) features of one type emerge from
+peaks rather than a chosen `k`; (2) density does **not** apply the cross-family overlap
+merge that k-means does (§5) — its per-type fields are independent by construction, and a
+group that is genuinely both a donor and an acceptor (e.g. a hydroxyl) is left as both,
+which is chemically faithful. The two methods are meant to be compared side by side from
+their separate namespaces, not reconciled.
+
+**Precedent** (the strategy is an automation of established field/consensus ideas):
+dynophore cloud → super-feature with occurrence frequency (Wolber lab); field-maximum
+extraction from interaction fields (GBPM; FLAPpharm, Baroni *et al.*); Gaussian
+feature-density molecular representation (Tanrikulu & Schneider); occupancy/frequency
+thresholding across multiple complexes (REPHARMBLE; SARS-CoV-2 Mpro consensus
+pharmacophores). These are cited in the module docstrings (`density.py`).

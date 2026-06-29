@@ -13,12 +13,15 @@ from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
 
-from ..clustering.registry import get_clusterer
+import numpy as np
+
 from ..features.extract import build_table, feature_factory
 from ..features.load import LoadReport, load_directory, read_smiles_map
+from ..io.structures import read_protein_atom_coords
 from ..util.paths import ensure_dir
-from .build import best_representative, build_pharmacophore
+from .build import best_representative
 from .config import PharmacophoreConfig
+from .consensus import build_consensus
 from .io import write_features_csv, write_json, write_pml, write_representative_sdf
 from .model import Pharmacophore
 from .viz import plot_raw_features
@@ -47,7 +50,7 @@ def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
         f"- Skipped poses: {len(report.skipped)}"
         + (f" ({', '.join(f'{lid}:{why}' for lid, why in report.skipped)})"
            if report.skipped else ""),
-        f"- Clustering: `{ph.metadata.get('clustering', {}).get('method', '?')}`",
+        f"- Consensus method: `{ph.metadata.get('consensus_method', '?')}`",
         f"- Representative ligand (viz): `{ph.metadata.get('representative_ligand') or 'none'}`",
         f"- Features kept: **{len(ph.features)}**", "",
         "| Family | Features | Mean support |", "|---|---:|---:|",
@@ -62,13 +65,42 @@ def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
     return path
 
 
+def _ligand_atom_coords(molecules: list[tuple[str, object]]) -> np.ndarray:
+    """All heavy-atom coordinates of the loaded poses (the ligand envelope)."""
+    blocks = [m.GetConformer().GetPositions()
+              for _, m in molecules if m is not None and m.GetNumConformers()]
+    return np.vstack(blocks) if blocks else np.empty((0, 3), dtype=float)
+
+
+def _scaffold_frequencies(molecules: list[tuple[str, object]]) -> dict[str, int]:
+    """Map each ligand_id to how many loaded ligands share its Murcko scaffold."""
+    from rdkit.Chem import MolToSmiles
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+
+    scaffold_of: dict[str, str] = {}
+    for lig, mol in molecules:
+        if mol is None:
+            continue
+        try:
+            scaffold_of[lig] = MolToSmiles(MurckoScaffold.GetScaffoldForMol(mol))
+        except Exception:                            # pragma: no cover — perception edge
+            scaffold_of[lig] = lig
+    counts: dict[str, int] = {}
+    for scaf in scaffold_of.values():
+        counts[scaf] = counts.get(scaf, 0) + 1
+    return {lig: counts[scaf] for lig, scaf in scaffold_of.items()}
+
+
 def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfig,
                          smiles_map: dict[str, str] | None = None,
-                         name: str | None = None) -> ModelOutputs | None:
+                         name: str | None = None,
+                         reference_pdb: Path | None = None) -> ModelOutputs | None:
     """Build a pharmacophore from any directory of aligned ``*.mol2`` compounds.
 
     Returns ``None`` (and writes nothing) when the set has fewer than
     ``selection.min_ligands`` loadable ligands — too few to define a hypothesis.
+    ``reference_pdb`` (aligned receptor) enables excluded-volume spheres for the
+    density consensus strategy; it is ignored by the k-means path.
     """
     name = name or input_dir.name
     molecules, report = load_directory(input_dir, smiles_map)
@@ -80,7 +112,6 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
 
     factory = feature_factory(cfg.features.fdef)
     table = build_table(molecules, factory, cfg.features.families)
-    clusterer = get_clusterer(cfg.clustering.method, cfg.clustering.params)
     metadata = {
         "source": {"input_dir": str(input_dir), "n_ligands": len(molecules),
                    "load": report.by_method, "skipped": report.skipped},
@@ -88,8 +119,15 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
         "tolerance": asdict(cfg.tolerance),
         "created": date.today().isoformat(),
     }
-    result = build_pharmacophore(table, clusterer, cfg.selection, cfg.tolerance,
-                                 name, metadata)
+    ligand_atoms = protein_atoms = scaffold_freq = None
+    if cfg.consensus_method == "density":
+        if cfg.density.scaffold_weighting:
+            scaffold_freq = _scaffold_frequencies(molecules)
+        if cfg.density.excluded_volume and reference_pdb and reference_pdb.exists():
+            ligand_atoms = _ligand_atom_coords(molecules)
+            protein_atoms = read_protein_atom_coords(reference_pdb)
+    result = build_consensus(table, cfg, name, metadata, ligand_atoms=ligand_atoms,
+                             protein_atoms=protein_atoms, scaffold_freq=scaffold_freq)
 
     rep_id = best_representative(table, result.pharmacophore)
     rep_mol = dict(molecules).get(rep_id) if rep_id else None
@@ -123,7 +161,8 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
 
 def build_for_cell(cell_dir: Path, out_dir: Path, cfg: PharmacophoreConfig,
                    unique_ligands_csv: Path, name: str | None = None,
-                   ) -> ModelOutputs | None:
+                   reference_pdb: Path | None = None) -> ModelOutputs | None:
     """Catalogue convention: take SMILES from the target's unique_ligands.csv."""
     smiles_map = read_smiles_map(unique_ligands_csv)
-    return build_from_directory(cell_dir, out_dir, cfg, smiles_map=smiles_map, name=name)
+    return build_from_directory(cell_dir, out_dir, cfg, smiles_map=smiles_map,
+                                name=name, reference_pdb=reference_pdb)

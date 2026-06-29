@@ -160,7 +160,15 @@ is **general**: its real entry point takes *any* directory of aligned mol2 and e
 model; the catalogue batch mode is a convenience over that.
 
 Run: `pixi run build-pharmacophores --catalogue` (or `--target <slug>`, or
-`--input DIR --out DIR`). Offline.
+`--input DIR --out DIR`); add `--consensus density` for the density strategy. Offline.
+
+**Two consensus strategies behind one flag** (`consensus_method`): **`kmeans`**
+(default) and **`density`**. Both obey one in/out contract — in: aligned per-molecule
+feature points; out: consensus features `(family, position, tolerance, optional
+direction)` — so downstream is method-agnostic and the two are directly comparable.
+Outputs go to **separate namespaces**: k-means → `catalogue/<slug>/pharmacophores/`,
+density → `catalogue/<slug>/pharmacophores_density/`. Default is unchanged (k-means).
+`pharmacophore/consensus.py` is the dispatch seam.
 
 **Modules** (pure core, IO at the edges):
 - `pharmpipe/features` — `extract.py` (pure: feature factory → `FeaturePoint`/
@@ -170,20 +178,24 @@ Run: `pixi run build-pharmacophores --catalogue` (or `--target <slug>`, or
   connectivity-only graph; SMILES from the target's `unique_ligands.csv` keyed by HET)
   → falls back to a direct read → skips+logs. Per-pose coverage is recorded.
 - `pharmpipe/clustering` — a `Clusterer` Protocol (`fit_predict(coords)->labels`) is
-  the **only** contract the builder depends on, so methods are drop-in. `kmeans.py`
-  is `KMeansSilhouette` — k chosen by **silhouette score**, not the tutorial's
-  `k=n/kq` heuristic. Add a method in `registry.py`; output format is unchanged, so
-  methods stay comparable.
-- `pharmpipe/pharmacophore` — `build.py` (pure assembly: cluster→centre→support→
-  tolerance→select), `model.py` (`Pharmacophore`, schema `pharmpipe.pharmacophore/v1`,
-  JSON round-trip), `io.py`, `viz.py` (matplotlib raw-feature 3D plots), `config.py`,
-  `run.py` (orchestration).
+  the contract the **k-means** consensus depends on, so clustering methods are drop-in.
+  `kmeans.py` is `KMeansSilhouette` — k chosen by **silhouette score**, not the
+  tutorial's `k=n/kq` heuristic. Add a method in `registry.py`.
+- `pharmpipe/pharmacophore` — `consensus.py` (strategy dispatch), `build.py` (k-means
+  assembly: cluster→centre→support→tolerance→select+merge), `density.py` (density
+  strategy: molecule-weighted Gaussian occupancy field → peaks/watershed →
+  occupancy-floor → centroid/spread + excluded volume), `model.py` (`Pharmacophore`,
+  schema `pharmpipe.pharmacophore/v1`, optional per-feature `direction`, JSON
+  round-trip), `io.py`, `viz.py` (matplotlib raw-feature 3D plots), `config.py`,
+  `run.py` (orchestration). Both strategies return the same `BuildResult`, so viz/CSV/
+  representative-ligand are shared.
 
-**Config** `config/pharmacophore.yaml` — feature families/colours, clustering
-method+params, selection (min support fraction, min size, top-N), tolerance model.
+**Config** `config/pharmacophore.yaml` — feature families/colours, `consensus_method`,
+k-means `clustering` method+params, `density` knobs (voxel/bandwidth, occupancy floor,
+excluded volume), selection (min support fraction, min size, top-N), tolerance model.
 All scientific choices; none in code.
 
-**Method choices** (all in `config/pharmacophore.yaml`; full write-up in
+**Method choices — k-means** (all in `config/pharmacophore.yaml`; full write-up in
 `catalogue/pharmacophore_method.md`): features use RDKit **`LumpedHydrophobe`** (one
 centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (3)**
 ligands is **skipped and its output removed** (too few for an ensemble); after
@@ -193,7 +205,20 @@ across families** (a donor and acceptor can't share one spot)
 absolute `merge_radius`); each feature's **tolerance radius = cluster-point RMSD** and
 is the sphere size in the viz (spread, not density). Family colours: HBD/Donor pink,
 HBA/Acceptor green, hydrophobic cyan, Aromatic yellow, PosIonizable red, NegIonizable
-orange.
+orange, ExcludedVolume grey.
+
+**Method choices — density** (§11 of `pharmacophore_method.md`): per feature type, pool
+points and weight each by **1/(points that molecule contributes to the type)** so the
+unit of evidence is the **distinct molecule** (optional inverse-scaffold-frequency); a
+Gaussian-smoothed **voxel occupancy field** (voxel/bandwidth ~1.0–1.5 Å); features are
+**all local maxima** (no `k` chosen) with proximity watershed; keep a peak whose basin's
+summed molecule weight ≥ **occupancy floor**; feature **position = density-weighted
+centroid**, **tolerance = field spread** (clamped, §6), **direction** plumbed but `None`
+until perception emits per-point vectors (never fabricated). **Excluded-volume** grey
+spheres come from reference-receptor atoms lining the pocket that no ligand reaches.
+**Deterministic** (fixed grid, no seeding); **only two knobs** (length scale, occupancy
+floor). Density does **not** apply the cross-family merge (per-type fields are
+independent; a hydroxyl can be both donor and acceptor).
 
 **Outputs** per model dir (`catalogue/<slug>/pharmacophores/<cell>/`):
 `pharmacophore.json` (canonical, method-stable; provenance includes the representative

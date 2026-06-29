@@ -46,9 +46,13 @@ from pharmpipe.util.paths import (  # noqa: E402
     CATALOGUE_DIR,
     target_groups_dir,
     target_pharmacophores_dir,
+    target_reference_pdb,
 )
 
 log = logging.getLogger("build_pharmacophores")
+
+# Output namespace per consensus strategy, so k-means and density sit side by side.
+_NAMESPACE = {"kmeans": "pharmacophores", "density": "pharmacophores_density"}
 
 
 def _cells(slug: str) -> list[Path]:
@@ -63,13 +67,15 @@ def _targets() -> list[str]:
                   if d.is_dir() and target_groups_dir(d.name).is_dir())
 
 
-def _build_target(slug: str, cfg) -> tuple[int, int]:
+def _build_target(slug: str, cfg, namespace: str) -> tuple[int, int]:
     """Build every buildable cell of a target; returns (built, skipped)."""
     uniq = CATALOGUE_DIR / slug / "unique_ligands.csv"
+    ref = target_reference_pdb(slug)
     built = skipped = 0
     for cell in _cells(slug):
-        out = target_pharmacophores_dir(slug) / cell.name
-        res = build_for_cell(cell, out, cfg, uniq, name=f"{slug}/{cell.name}")
+        out = target_pharmacophores_dir(slug, namespace) / cell.name
+        res = build_for_cell(cell, out, cfg, uniq, name=f"{slug}/{cell.name}",
+                             reference_pdb=ref)
         if res is None:
             # Too few ligands: drop any model left over from a previous run.
             if out.exists():
@@ -97,11 +103,17 @@ def main(argv=None) -> int:
                     help="optional HET->SMILES csv (unique_ligands.csv) for --input")
     ap.add_argument("--config", type=Path, default=None)
     ap.add_argument("--method", help="override clustering.method from config")
+    ap.add_argument("--consensus", choices=("kmeans", "density"),
+                    help="override consensus_method (kmeans=default; density writes to "
+                         "the pharmacophores_density/ namespace)")
     args = ap.parse_args(argv)
 
     cfg = load_pharmacophore_config(args.config)
     if args.method:
         cfg.clustering.method = args.method
+    if args.consensus:
+        cfg.consensus_method = args.consensus
+    namespace = _NAMESPACE[cfg.consensus_method]
 
     if args.input:
         if not args.out:
@@ -118,11 +130,12 @@ def main(argv=None) -> int:
     total_built = total_skipped = 0
     for slug in slugs:
         print(f"{slug}:")
-        built, skipped = _build_target(slug, cfg)
+        built, skipped = _build_target(slug, cfg, namespace)
         total_built += built
         total_skipped += skipped
     print(f"\nBuilt {total_built} pharmacophore model(s) across {len(slugs)} target(s); "
-          f"{total_skipped} cell(s) skipped (< {cfg.selection.min_ligands} ligands).")
+          f"{total_skipped} cell(s) skipped (< {cfg.selection.min_ligands} ligands); "
+          f"consensus={cfg.consensus_method}, namespace={namespace}/.")
     return 0
 
 

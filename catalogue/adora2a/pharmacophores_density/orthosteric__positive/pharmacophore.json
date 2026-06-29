@@ -1,0 +1,559 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "adora2a/orthosteric__positive",
+  "metadata": {
+    "source": {
+      "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\adora2a\\groups\\orthosteric__positive",
+      "n_ligands": 6,
+      "load": {
+        "template": 6
+      },
+      "skipped": [
+        [
+          "8RLN_A1H1S_A1211",
+          "fail"
+        ]
+      ]
+    },
+    "selection": {
+      "min_ligands": 3,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2,
+      "top_n_per_family": null,
+      "merge_overlapping": true,
+      "merge_radius": null
+    },
+    "tolerance": {
+      "method": "rmsd",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-06-29",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "occupancy_floor": 2.0,
+        "scaffold_weighting": false,
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 46,
+    "representative_ligand": "4UHR_NGI_A1320"
+  },
+  "features": [
+    {
+      "family": "Donor",
+      "x": 3.3083071297313222,
+      "y": 91.66853721320103,
+      "z": 54.0607898545699,
+      "radius": 2.8410060355837574,
+      "n_points": 10,
+      "n_ligands": 5,
+      "support": 0.8333,
+      "direction": null
+    },
+    {
+      "family": "Acceptor",
+      "x": 0.8836985650403821,
+      "y": 97.39874260742901,
+      "z": 52.93698465431121,
+      "radius": 3.0,
+      "n_points": 17,
+      "n_ligands": 6,
+      "support": 1.0,
+      "direction": null
+    },
+    {
+      "family": "Acceptor",
+      "x": 2.36786783979795,
+      "y": 91.60636507308955,
+      "z": 52.38261093206508,
+      "radius": 3.0,
+      "n_points": 20,
+      "n_ligands": 5,
+      "support": 0.8333,
+      "direction": null
+    },
+    {
+      "family": "PosIonizable",
+      "x": 0.5618924577523672,
+      "y": 94.92929969028067,
+      "z": 51.653808894990156,
+      "radius": 2.572941958050778,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333,
+      "direction": null
+    },
+    {
+      "family": "Aromatic",
+      "x": 1.181910156048784,
+      "y": 96.01630074387586,
+      "z": 52.32538912331919,
+      "radius": 2.922698350279723,
+      "n_points": 12,
+      "n_ligands": 6,
+      "support": 1.0,
+      "direction": null
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": 2.6332497071538685,
+      "y": 102.71406386321986,
+      "z": 56.38595992211794,
+      "radius": 2.8659393627531236,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.3333,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -0.849,
+      "y": 101.56,
+      "z": 50.837,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.2155,
+      "y": 88.43299999999999,
+      "z": 53.286,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.931,
+      "y": 85.67,
+      "z": 49.87,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -8.142,
+      "y": 105.016,
+      "z": 55.44,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 2.569,
+      "y": 101.029,
+      "z": 59.73,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -3.873,
+      "y": 99.648,
+      "z": 56.484,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -2.706,
+      "y": 100.408,
+      "z": 57.599,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 3.893,
+      "y": 99.096,
+      "z": 59.316,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -3.699,
+      "y": 95.169,
+      "z": 50.19,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.839,
+      "y": 100.296,
+      "z": 60.698,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -2.411,
+      "y": 98.299,
+      "z": 59.039,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 5.229,
+      "y": 91.011,
+      "z": 50.95,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -4.3675,
+      "y": 96.6035,
+      "z": 50.8845,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 4.056,
+      "y": 88.743,
+      "z": 47.499,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 3.677,
+      "y": 86.63,
+      "z": 46.508,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 2.691,
+      "y": 98.69200000000001,
+      "z": 60.6345,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -8.138000000000002,
+      "y": 104.58,
+      "z": 57.3005,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.553,
+      "y": 98.328,
+      "z": 49.871,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 3.1180000000000003,
+      "y": 98.95949999999999,
+      "z": 50.721000000000004,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -0.368,
+      "y": 102.732,
+      "z": 49.955,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -9.054,
+      "y": 106.133,
+      "z": 55.527,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.964,
+      "y": 96.403,
+      "z": 57.14,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.4415,
+      "y": 96.667,
+      "z": 49.03,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 3.644,
+      "y": 97.244,
+      "z": 50.12,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -5.604,
+      "y": 103.209,
+      "z": 58.014,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -0.813,
+      "y": 92.46,
+      "z": 54.643,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -1.137,
+      "y": 96.9075,
+      "z": 59.2715,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 5.535,
+      "y": 89.075,
+      "z": 52.409,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 3.114,
+      "y": 96.097,
+      "z": 49.371,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 3.236,
+      "y": 91.109,
+      "z": 47.067,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 3.609,
+      "y": 89.797,
+      "z": 46.468,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -0.63,
+      "y": 88.139,
+      "z": 53.294,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.81,
+      "y": 86.804,
+      "z": 53.918,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -1.026,
+      "y": 93.585,
+      "z": 47.796,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 1.151,
+      "y": 104.961,
+      "z": 60.142,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 2.773,
+      "y": 84.413,
+      "z": 49.705,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -7.206,
+      "y": 100.988,
+      "z": 52.162,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 7.843,
+      "y": 101.077,
+      "z": 57.376,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": -8.041,
+      "y": 102.956,
+      "z": 56.693,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    },
+    {
+      "family": "ExcludedVolume",
+      "x": 0.163,
+      "y": 88.864,
+      "z": 56.863,
+      "radius": 1.0,
+      "n_points": 1,
+      "n_ligands": 0,
+      "support": 0.0,
+      "direction": null
+    }
+  ]
+}

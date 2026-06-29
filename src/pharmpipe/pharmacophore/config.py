@@ -25,6 +25,28 @@ class ClusteringConfig:
 
 
 @dataclass
+class DensityConfig:
+    """Knobs for the density-based consensus strategy (see pharmacophore/density.py).
+
+    By design there are only two scientific knobs — a single length scale
+    (``voxel`` / ``bandwidth``) and the ``occupancy_floor`` — plus a self-contained
+    excluded-volume sub-block. Everything is deterministic (fixed grid, no seeding).
+    """
+
+    voxel: float = 1.0              # grid spacing (A) = spatial resolution
+    bandwidth: float = 1.5          # Gaussian smoothing sigma (A) ~ feature tolerance
+    occupancy_floor: float = 2.0    # min summed distinct-molecule weight to keep a peak
+    scaffold_weighting: bool = False  # also weight by inverse scaffold frequency
+    # Excluded-volume spheres from receptor atoms in pocket regions no ligand occupies.
+    excluded_volume: bool = True
+    ev_shell: float = 5.0           # consider protein atoms within this of the ligand cloud
+    ev_clearance: float = 2.0       # ...but not within this of any ligand atom (occupied)
+    ev_voxel: float = 2.0           # coarsen protein atoms onto this grid -> one sphere each
+    ev_radius: float = 1.0          # excluded-volume sphere radius (A)
+    ev_max: int = 40                # cap the number of excluded-volume spheres
+
+
+@dataclass
 class SelectionConfig:
     min_ligands: int = 3
     min_support_fraction: float = 0.5
@@ -47,6 +69,11 @@ class PharmacophoreConfig:
     clustering: ClusteringConfig
     selection: SelectionConfig
     tolerance: ToleranceConfig
+    density: DensityConfig
+    # Which consensus strategy turns per-molecule feature points into consensus
+    # features: "kmeans" (silhouette k-means, the default) or "density" (Gaussian
+    # occupancy field). Both honour the same in/out contract.
+    consensus_method: str = "kmeans"
 
 
 def load_pharmacophore_config(path: str | Path | None = None) -> PharmacophoreConfig:
@@ -57,4 +84,6 @@ def load_pharmacophore_config(path: str | Path | None = None) -> PharmacophoreCo
         clustering=ClusteringConfig(**(raw.get("clustering") or {})),
         selection=SelectionConfig(**(raw.get("selection") or {})),
         tolerance=ToleranceConfig(**(raw.get("tolerance") or {})),
+        density=DensityConfig(**(raw.get("density") or {})),
+        consensus_method=raw.get("consensus_method", "kmeans"),
     )

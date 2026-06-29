@@ -40,6 +40,7 @@ COLORS = {
     "Aromatic": (1.00, 0.85, 0.00),         # yellow
     "PosIonizable": (1.00, 0.00, 0.00),     # red
     "NegIonizable": (1.00, 0.45, 0.00),     # orange
+    "ExcludedVolume": (0.55, 0.55, 0.55),   # grey — receptor excluded-volume (density)
 }
 _GREY = (0.5, 0.5, 0.5)
 

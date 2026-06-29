@@ -29,10 +29,21 @@ features:
     Aromatic:         [1.00, 0.85, 0.00]   # yellow — aromatic ring
     PosIonizable:     [1.00, 0.00, 0.00]   # red    — positive ionisable
     NegIonizable:     [1.00, 0.45, 0.00]   # orange — negative ionisable (uncoloured by request; kept distinct)
+    ExcludedVolume:   [0.55, 0.55, 0.55]   # grey   — receptor excluded-volume (density strategy)
 
-# --- Clustering (swappable) -------------------------------------------------
-# method must be registered in pharmpipe/clustering/registry.py. params are passed
-# straight to that clusterer's constructor.
+# --- Consensus strategy (swappable) -----------------------------------------
+# How per-molecule feature points become consensus features. Both strategies share
+# one in/out contract (points in -> typed feature spheres out), so swapping the method
+# changes only feature positions, never the output format — they are directly
+# comparable, and outputs go to separate namespaces (pharmacophores/ vs
+# pharmacophores_density/).
+#   kmeans  -> silhouette k-means clustering (see `clustering` below)
+#   density -> Gaussian occupancy field, peaks become features (see `density` below)
+consensus_method: kmeans
+
+# --- Clustering (k-means consensus) -----------------------------------------
+# Used when consensus_method = kmeans. method must be registered in
+# pharmpipe/clustering/registry.py. params are passed to that clusterer's constructor.
 clustering:
   method: kmeans_silhouette
   params:
@@ -40,6 +51,24 @@ clustering:
     k_max: 8            # largest k considered (clamped to n_points - 1)
     n_init: 10          # k-means restarts per k
     random_state: 0     # determinism
+
+# --- Density (density consensus) --------------------------------------------
+# Used when consensus_method = density. Deterministic (fixed grid, no seeding). By
+# design there are only two scientific knobs: the length scale (voxel/bandwidth) and
+# the occupancy floor; the excluded-volume sub-block is a self-contained add-on.
+density:
+  voxel: 1.0              # grid spacing (A) — spatial resolution of the field
+  bandwidth: 1.5         # Gaussian smoothing sigma (A) ~ target feature tolerance
+  occupancy_floor: 2.0   # keep a peak only if its basin's summed distinct-molecule
+                         #   weight >= this (units: effective molecules)
+  scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency
+  # Excluded-volume spheres: receptor atoms that line the pocket but no ligand reaches.
+  excluded_volume: true
+  ev_shell: 5.0          # consider protein atoms within this (A) of the ligand cloud
+  ev_clearance: 2.0      # ...but beyond this (A) of every ligand atom (else occupied)
+  ev_voxel: 2.0          # coarsen qualifying protein atoms onto this grid (one sphere each)
+  ev_radius: 1.0         # excluded-volume sphere radius (A)
+  ev_max: 40             # cap on the number of excluded-volume spheres
 
 # --- Cluster -> kept feature selection --------------------------------------
 selection:

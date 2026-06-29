@@ -34,7 +34,7 @@ from scipy.ndimage import gaussian_filter, maximum_filter
 from scipy.spatial import cKDTree
 
 from ..features.extract import FeatureTable
-from .build import BuildResult, ClusterAssignment
+from .build import BuildResult, ClusterAssignment, _merge_overlapping
 from .config import DensityConfig, ToleranceConfig
 from .model import Pharmacophore, PharmacophoreFeature
 
@@ -119,12 +119,16 @@ def _nearest(coords: np.ndarray, peaks: np.ndarray) -> np.ndarray:
 def _family_density(family: str, coords: np.ndarray, ligands: list[str],
                     weights: np.ndarray, n_ligands: int, dcfg: DensityConfig,
                     tol: ToleranceConfig
-                    ) -> tuple[np.ndarray, dict[int, tuple], set[int],
-                               list[PharmacophoreFeature]]:
-    """One feature type -> (point labels, basin centres, kept basins, features)."""
+                    ) -> tuple[np.ndarray, dict[int, tuple],
+                               list[tuple[int, PharmacophoreFeature]]]:
+    """One feature type -> (point labels, basin centres, kept (basin_label, feature)s).
+
+    Features keep their basin label so a later cross-family merge can update which
+    basins remain "kept" for the diagnostic plots.
+    """
     n = len(coords)
     if n == 0:
-        return np.empty(0, dtype=int), {}, set(), []
+        return np.empty(0, dtype=int), {}, []
 
     field, origin = _occupancy_field(coords, weights, dcfg)
     peaks = _local_maxima(field, origin, dcfg)
@@ -142,8 +146,7 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
     vox_basin = _nearest(vox_xyz, peaks)
 
     centers: dict[int, tuple] = {}
-    kept: set[int] = set()
-    features: list[PharmacophoreFeature] = []
+    kept: list[tuple[int, PharmacophoreFeature]] = []
     for p in range(len(peaks)):
         pts_mask = labels == p
         vox_mask = vox_basin == p
@@ -160,16 +163,15 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
         mol_weight = float(weights[pts_mask].sum())
         if mol_weight < dcfg.occupancy_floor:
             continue
-        kept.add(p)
         n_lig = len({lig for lig, m in zip(ligands, pts_mask, strict=True) if m})
-        features.append(PharmacophoreFeature(
+        kept.append((p, PharmacophoreFeature(
             family=family, x=centers[p][0], y=centers[p][1], z=centers[p][2],
             radius=float(min(max(spread, tol.min), tol.max)),
             n_points=int(pts_mask.sum()), n_ligands=n_lig,
             support=round(n_lig / n_ligands if n_ligands else 0.0, 4),
             direction=None,   # set when upstream perception supplies per-point vectors
-        ))
-    return labels, centers, kept, features
+        )))
+    return labels, centers, kept
 
 
 # --- excluded volume ---------------------------------------------------------
@@ -219,19 +221,32 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
     ``ligand_atoms`` / ``protein_atoms`` (both in the aligned frame) enable the
     excluded-volume spheres; omit them and only ligand-derived features are built.
     """
-    features: list[PharmacophoreFeature] = []
     assignments: list[ClusterAssignment] = []
+    pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]] = []
     for family in table.families():
         pts = table.of_family(family)
         coords = np.array([p.position for p in pts], dtype=float)
         ligands = [p.ligand_id for p in pts]
         weights = _molecule_weights(ligands, scaffold_freq)
-        labels, centers, kept, feats = _family_density(
+        labels, centers, kept = _family_density(
             family, coords, ligands, weights, table.n_ligands, dcfg, tol)
-        features.extend(feats)
+        pooled.extend((feat, (family, lbl)) for lbl, feat in kept)
         assignments.append(ClusterAssignment(
             family=family, coords=coords, labels=labels, ligand_ids=ligands,
-            centers=centers, kept_labels=kept))
+            centers=centers, kept_labels=set()))
+
+    # Cross-family merge: one feature per region of space (a donor and an acceptor that
+    # land on the same atoms cannot both be true), keeping the dominant peak. Same rule
+    # as the k-means path; excluded-volume spheres (added after) are exempt.
+    if dcfg.merge_overlapping:
+        pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
+        pooled = _merge_overlapping(pooled, dcfg.merge_radius)
+    features = [feat for feat, _ in pooled]
+    kept_by_family: dict[str, set[int]] = {}
+    for _, (family, lbl) in pooled:
+        kept_by_family.setdefault(family, set()).add(lbl)
+    for assignment in assignments:
+        assignment.kept_labels = kept_by_family.get(assignment.family, set())
 
     if dcfg.excluded_volume and protein_atoms is not None and ligand_atoms is not None:
         features.extend(_excluded_volume(protein_atoms, ligand_atoms, dcfg))

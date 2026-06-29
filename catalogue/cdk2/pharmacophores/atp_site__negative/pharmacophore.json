@@ -6,8 +6,8 @@
       "input_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\catalogue\\cdk2\\groups\\atp_site__negative",
       "n_ligands": 87,
       "load": {
-        "template": 85,
-        "direct": 2
+        "template": 83,
+        "direct": 4
       },
       "skipped": [
         [
@@ -45,7 +45,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -61,33 +62,36 @@
   "features": [
     {
       "family": "Acceptor",
-      "x": 7.310429203539825,
-      "y": -22.058530973451344,
-      "z": -22.60808849557521,
+      "x": 7.443825688073394,
+      "y": -22.12194954128442,
+      "z": -22.721766055045855,
       "radius": 3.0,
-      "n_points": 226,
-      "n_ligands": 87,
-      "support": 1.0
+      "n_points": 218,
+      "n_ligands": 86,
+      "support": 0.9885,
+      "direction": null
     },
     {
       "family": "Acceptor",
-      "x": 3.137531914893617,
-      "y": -27.17789361702128,
-      "z": -26.344893617021278,
-      "radius": 2.8334597250677143,
-      "n_points": 94,
-      "n_ligands": 56,
-      "support": 0.6437
+      "x": 3.2236923076923074,
+      "y": -27.141791208791215,
+      "z": -26.297373626373627,
+      "radius": 2.767603616322262,
+      "n_points": 91,
+      "n_ligands": 55,
+      "support": 0.6322,
+      "direction": null
     },
     {
       "family": "Donor",
-      "x": 7.309225352112674,
-      "y": -24.61952112676056,
-      "z": -24.82570422535211,
+      "x": 7.303797101449272,
+      "y": -24.63015942028985,
+      "z": -24.818768115942024,
       "radius": 1.0,
-      "n_points": 71,
-      "n_ligands": 70,
-      "support": 0.8046
+      "n_points": 69,
+      "n_ligands": 68,
+      "support": 0.7816,
+      "direction": null
     }
   ]
 }

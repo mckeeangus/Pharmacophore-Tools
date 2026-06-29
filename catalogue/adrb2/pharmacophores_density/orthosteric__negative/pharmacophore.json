@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -33,6 +33,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -41,7 +43,7 @@
         "ev_max": 40
       }
     },
-    "n_features": 47,
+    "n_features": 43,
     "representative_ligand": "2RH1_CAU_A408"
   },
   "features": [
@@ -52,39 +54,6 @@
       "z": 7.955769546289602,
       "radius": 2.943902351388577,
       "n_points": 14,
-      "n_ligands": 7,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": -29.637731590635926,
-      "y": 11.028693167494446,
-      "z": 6.938231477133986,
-      "radius": 2.6237442274778493,
-      "n_points": 9,
-      "n_ligands": 7,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": -33.52810266971523,
-      "y": 10.814534679036994,
-      "z": 8.368752936953463,
-      "radius": 2.514598603040291,
-      "n_points": 7,
-      "n_ligands": 7,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "PosIonizable",
-      "x": -33.71300000000003,
-      "y": 8.06921885695543,
-      "z": 7.387098491065174,
-      "radius": 2.6429669941066045,
-      "n_points": 7,
       "n_ligands": 7,
       "support": 1.0,
       "direction": null
@@ -109,17 +78,6 @@
       "n_points": 7,
       "n_ligands": 7,
       "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -27.289682535085092,
-      "y": 9.919484915158803,
-      "z": 6.388455608380153,
-      "radius": 3.0,
-      "n_points": 11,
-      "n_ligands": 6,
-      "support": 0.8571,
       "direction": null
     },
     {

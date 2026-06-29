@@ -4,15 +4,13 @@
 - Skipped poses: 0
 - Consensus method: `density`
 - Representative ligand (viz): `7X2C_G3C_F503`
-- Features kept: **50**
+- Features kept: **43**
 
 | Family | Features | Mean support |
 |---|---:|---:|
-| Acceptor | 2 | 0.66 |
-| Aromatic | 2 | 0.88 |
-| Donor | 3 | 0.56 |
+| Acceptor | 1 | 0.94 |
+| Aromatic | 1 | 0.75 |
 | ExcludedVolume | 40 | 0.00 |
-| LumpedHydrophobe | 2 | 0.69 |
 | PosIonizable | 1 | 0.69 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).

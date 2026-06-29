@@ -21,6 +21,7 @@ All poses for a target share one superposed reference frame (Stage 2 / Stage 3 a
 | Path | What it is |
 |---|---|
 | `unique_ligands.csv` | Stage 1 — one row per kept ligand (HET, name, counts, flags). |
+| `protonated_ligands.csv` | Stage-4 prep — HET → dominant **pH-7.4 microstate** SMILES (pkasolver pKa + ladder walk) + predicted pKa list; the loader prefers it over the neutral SMILES. |
 | `per_structure.csv` | Stage 1 — one row per (structure × ligand) curation decision. |
 | `resolved.json` | Verified UniProt accession(s) + scrape provenance for the target. |
 | `site_filter.csv` | Stage 2 — every ligand instance with its at-site/off-site status, distance-to-anchor and pocket RMSD. |
@@ -94,8 +95,12 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
   family and **across families** (a donor and an acceptor cannot share one spot), with a
   geometric threshold (one centre inside the other's sphere);
 - (density) the unit of evidence is the **distinct molecule** (per-point weighting),
-  features emerge from field peaks with **no `k`**, and **excluded-volume** spheres mark
-  receptor regions no ligand occupies; deterministic, two knobs only;
+  features emerge from field peaks with **no `k`**, the **same cross-family merge** then
+  gives one feature per region, and **excluded-volume** spheres mark receptor regions no
+  ligand occupies; deterministic, two knobs only;
+- ligands are **protonated to their pH-7.4 microstate** (pkasolver) before perception,
+  so donor/acceptor/±ionizable features reflect the real ionisation
+  (`protonated_ligands.csv`; see [`pharmacophore_method.md`](pharmacophore_method.md) §2);
 - the visualisation uses a **real representative ligand** from the cell (clean SDF),
   not the heavy-atom raw poses;
 - family colours: HBD/Donor **pink**, HBA/Acceptor **green**, hydrophobic **cyan**,

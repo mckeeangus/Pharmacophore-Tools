@@ -23,7 +23,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -45,7 +46,8 @@
       "radius": 2.2124140543221893,
       "n_points": 12,
       "n_ligands": 5,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Acceptor",
@@ -55,7 +57,8 @@
       "radius": 1.678559951328542,
       "n_points": 7,
       "n_ligands": 5,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Acceptor",
@@ -65,17 +68,19 @@
       "radius": 1.210074079458682,
       "n_points": 6,
       "n_ligands": 5,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Donor",
-      "x": -2.3774999999999995,
-      "y": 99.32883333333332,
-      "z": 52.024166666666666,
-      "radius": 2.238537661311759,
-      "n_points": 6,
-      "n_ligands": 4,
-      "support": 0.8
+      "x": -2.4577999999999998,
+      "y": 99.4724,
+      "z": 52.1068,
+      "radius": 2.4103805840572172,
+      "n_points": 5,
+      "n_ligands": 3,
+      "support": 0.6,
+      "direction": null
     },
     {
       "family": "Aromatic",
@@ -85,7 +90,8 @@
       "radius": 2.967657674178595,
       "n_points": 4,
       "n_ligands": 3,
-      "support": 0.6
+      "support": 0.6,
+      "direction": null
     },
     {
       "family": "LumpedHydrophobe",
@@ -95,7 +101,8 @@
       "radius": 1.137719613856191,
       "n_points": 3,
       "n_ligands": 3,
-      "support": 0.6
+      "support": 0.6,
+      "direction": null
     }
   ]
 }

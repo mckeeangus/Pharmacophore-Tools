@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -32,6 +32,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -40,7 +42,7 @@
         "ev_max": 40
       }
     },
-    "n_features": 44,
+    "n_features": 42,
     "representative_ligand": "8S9B_LQO_A2003"
   },
   "features": [
@@ -61,28 +63,6 @@
       "y": 125.58523637220712,
       "z": 108.31108187159182,
       "radius": 2.7801333740347336,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 0.6,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 122.12592459410692,
-      "y": 124.26627242013889,
-      "z": 104.74794869889632,
-      "radius": 3.0,
-      "n_points": 7,
-      "n_ligands": 4,
-      "support": 0.8,
-      "direction": null
-    },
-    {
-      "family": "Aromatic",
-      "x": 123.18785460331333,
-      "y": 125.07385237358129,
-      "z": 107.75495764879521,
-      "radius": 2.67136901507372,
       "n_points": 3,
       "n_ligands": 3,
       "support": 0.6,

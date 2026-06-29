@@ -15,6 +15,7 @@ set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
 set_color ph4_Aromatic, [1.0, 0.85, 0.0]
 set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
+set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
 pseudoatom Acceptor_0, pos=[138.842, 144.637, 102.231], vdw=1.570
 color ph4_Acceptor, Acceptor_0

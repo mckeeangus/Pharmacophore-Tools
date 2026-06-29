@@ -15,14 +15,15 @@ set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
 set_color ph4_Aromatic, [1.0, 0.85, 0.0]
 set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
+set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_0, pos=[7.310, -22.059, -22.608], vdw=3.000
+pseudoatom Acceptor_0, pos=[7.444, -22.122, -22.722], vdw=3.000
 color ph4_Acceptor, Acceptor_0
 group ph4_Acceptor, Acceptor_0
-pseudoatom Acceptor_1, pos=[3.138, -27.178, -26.345], vdw=2.833
+pseudoatom Acceptor_1, pos=[3.224, -27.142, -26.297], vdw=2.768
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Donor_2, pos=[7.309, -24.620, -24.826], vdw=1.000
+pseudoatom Donor_2, pos=[7.304, -24.630, -24.819], vdw=1.000
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
 show spheres, ph4_*

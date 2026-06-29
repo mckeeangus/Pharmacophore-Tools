@@ -2,7 +2,7 @@
 
 - Ligands loaded: **3** (template=3)
 - Skipped poses: 0
-- Clustering: `kmeans_silhouette`
+- Consensus method: `kmeans`
 - Representative ligand (viz): `5ZK3_QNB_A501`
 - Features kept: **5**
 

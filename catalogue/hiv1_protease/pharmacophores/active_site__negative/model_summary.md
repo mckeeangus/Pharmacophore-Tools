@@ -2,14 +2,14 @@
 
 - Ligands loaded: **32** (direct=3, template=29)
 - Skipped poses: 0
-- Clustering: `kmeans_silhouette`
-- Representative ligand (viz): `1BWB_146_B641`
-- Features kept: **9**
+- Consensus method: `kmeans`
+- Representative ligand (viz): `6DV4_GA5_B201`
+- Features kept: **11**
 
 | Family | Features | Mean support |
 |---|---:|---:|
-| Acceptor | 4 | 0.76 |
-| Donor | 1 | 0.91 |
+| Acceptor | 4 | 0.77 |
+| Donor | 3 | 0.86 |
 | LumpedHydrophobe | 4 | 0.77 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).

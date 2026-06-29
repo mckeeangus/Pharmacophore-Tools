@@ -4,11 +4,10 @@
 - Skipped poses: 0
 - Consensus method: `density`
 - Representative ligand (viz): `5KLS_6UC_C1304`
-- Features kept: **44**
+- Features kept: **43**
 
 | Family | Features | Mean support |
 |---|---:|---:|
-| Aromatic | 1 | 1.00 |
 | Donor | 1 | 1.00 |
 | ExcludedVolume | 40 | 0.00 |
 | LumpedHydrophobe | 1 | 1.00 |

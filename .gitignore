@@ -10,6 +10,14 @@ data/
 # T009 tutorial the Stage-4 pharmacophore method is adapted from).
 talktorial.ipynb
 
+# Vendored third-party clones (pkasolver + its bundled model weights). Re-clone on a
+# login node: git clone https://github.com/mayrf/pkasolver external/pkasolver
+external/
+
+# Transient working file pkasolver's dimorphite-dl step writes to the cwd during
+# `protonate-ligands` (overwritten per ligand; not project state).
+test.pkl
+
 # Python
 __pycache__/
 *.py[cod]

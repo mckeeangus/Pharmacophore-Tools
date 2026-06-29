@@ -2,7 +2,7 @@
 
 - Ligands loaded: **11** (direct=1, template=10)
 - Skipped poses: 0
-- Clustering: `kmeans_silhouette`
+- Consensus method: `kmeans`
 - Representative ligand (viz): `4LDL_XQC_A1401`
 - Features kept: **5**
 

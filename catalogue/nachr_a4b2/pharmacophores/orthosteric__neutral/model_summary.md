@@ -2,7 +2,7 @@
 
 - Ligands loaded: **9** (template=9)
 - Skipped poses: 0
-- Clustering: `kmeans_silhouette`
+- Consensus method: `kmeans`
 - Representative ligand (viz): `2XYT_TC9_F1206`
 - Features kept: **3**
 

@@ -29,7 +29,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -38,6 +38,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -46,21 +48,10 @@
         "ev_max": 40
       }
     },
-    "n_features": 45,
+    "n_features": 43,
     "representative_ligand": "4FRR_0VC_F301"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 167.20989037640462,
-      "y": 123.41787254889759,
-      "z": 186.42994122124495,
-      "radius": 3.0,
-      "n_points": 16,
-      "n_ligands": 15,
-      "support": 0.8333,
-      "direction": null
-    },
     {
       "family": "Acceptor",
       "x": 171.21478796080444,
@@ -73,25 +64,14 @@
       "direction": null
     },
     {
-      "family": "PosIonizable",
-      "x": 166.87489793874047,
-      "y": 123.38574339560569,
-      "z": 186.1619384189662,
-      "radius": 2.8758584064126596,
+      "family": "Donor",
+      "x": 167.20989037640462,
+      "y": 123.41787254889759,
+      "z": 186.42994122124495,
+      "radius": 3.0,
       "n_points": 16,
       "n_ligands": 15,
       "support": 0.8333,
-      "direction": null
-    },
-    {
-      "family": "Aromatic",
-      "x": 170.78545815534062,
-      "y": 122.6072833142586,
-      "z": 188.40796516821948,
-      "radius": 2.8340911891864873,
-      "n_points": 15,
-      "n_ligands": 14,
-      "support": 0.7778,
       "direction": null
     },
     {

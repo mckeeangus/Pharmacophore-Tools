@@ -2,8 +2,8 @@
 
 - Ligands loaded: **5** (template=5)
 - Skipped poses: 0
-- Clustering: `kmeans_silhouette`
-- Representative ligand (viz): `5IKR_ID8_A601`
+- Consensus method: `kmeans`
+- Representative ligand (viz): `5IKV_FLF_B601`
 - Features kept: **3**
 
 | Family | Features | Mean support |

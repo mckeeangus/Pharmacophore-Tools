@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -32,6 +32,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -40,7 +42,7 @@
         "ev_max": 40
       }
     },
-    "n_features": 44,
+    "n_features": 43,
     "representative_ligand": "5ZKB_82F_A1201"
   },
   "features": [
@@ -72,17 +74,6 @@
       "y": 146.36245746998688,
       "z": 105.54021803145937,
       "radius": 2.5475127008871565,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 137.6848742176815,
-      "y": 146.360154453718,
-      "z": 105.6986994950053,
-      "radius": 2.5558847220352625,
       "n_points": 3,
       "n_ligands": 3,
       "support": 1.0,

@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -33,6 +33,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -41,65 +43,10 @@
         "ev_max": 40
       }
     },
-    "n_features": 47,
+    "n_features": 43,
     "representative_ligand": "7NFB_GEN_A601"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 21.271889832535734,
-      "y": -11.311117129956102,
-      "z": 2.6867999064708648,
-      "radius": 3.0,
-      "n_points": 20,
-      "n_ligands": 16,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 26.74920035676267,
-      "y": -12.089092018427037,
-      "z": 10.669397435090318,
-      "radius": 3.0,
-      "n_points": 15,
-      "n_ligands": 13,
-      "support": 0.8125,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": 21.27132894180209,
-      "y": -10.95868943911784,
-      "z": 2.2496373954308626,
-      "radius": 2.87372614678296,
-      "n_points": 19,
-      "n_ligands": 16,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": 27.00697578427076,
-      "y": -12.121096708687588,
-      "z": 10.743172965761538,
-      "radius": 3.0,
-      "n_points": 12,
-      "n_ligands": 12,
-      "support": 0.75,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": 23.072860550606986,
-      "y": -13.012360782068013,
-      "z": 7.377091273183212,
-      "radius": 3.0,
-      "n_points": 18,
-      "n_ligands": 10,
-      "support": 0.625,
-      "direction": null
-    },
     {
       "family": "Aromatic",
       "x": 23.196931610496417,
@@ -112,14 +59,25 @@
       "direction": null
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 23.306904864248935,
-      "y": -11.631490979934396,
-      "z": 5.67868752540848,
+      "family": "Donor",
+      "x": 21.446177065722964,
+      "y": -10.969709214085539,
+      "z": 2.337560271654202,
       "radius": 3.0,
-      "n_points": 29,
-      "n_ligands": 16,
-      "support": 1.0,
+      "n_points": 17,
+      "n_ligands": 15,
+      "support": 0.9375,
+      "direction": null
+    },
+    {
+      "family": "Donor",
+      "x": 26.83622527496328,
+      "y": -11.948592274031746,
+      "z": 10.648944178663374,
+      "radius": 3.0,
+      "n_points": 13,
+      "n_ligands": 11,
+      "support": 0.6875,
       "direction": null
     },
     {

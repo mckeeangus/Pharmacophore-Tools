@@ -72,13 +72,45 @@ explicit hydrogens, misses H-bond donors. The loader therefore prefers a
 
 1. read the mol2 **connectivity** only, reduce it to a clean single-bond graph;
 2. transfer the correct bond orders from the ligand's reference SMILES via RDKit's
-   `AssignBondOrdersFromTemplate` (SMILES keyed by HET code from the target's
-   `unique_ligands.csv`);
+   `AssignBondOrdersFromTemplate` (SMILES keyed by HET code — see protonation below);
 3. fall back to a direct sanitised read; and finally
 4. skip the pose and record the reason — one bad pose never aborts a build.
 
 The per-pose outcome (`template` / `direct` / skipped) is reported in each
 `model_summary.md`, so feature coverage is auditable.
+
+### Protonation to the pH 7.4 microstate (preprocessing)
+
+The catalogue SMILES are drawn **neutral**, but H-bond donor/acceptor and ±ionizable
+perception depends on the protonation state the ligand actually adopts in the pocket — a
+basic amine on an aminergic agonist is cationic at physiological pH and must read as a
+`PosIonizable`/donor, a carboxylate as `NegIonizable`/acceptor. So before the build, a
+preprocessing step replaces each HET's template SMILES with its **dominant microstate at
+pH 7.4**:
+
+- pKa values are predicted with **pkasolver** (Mayr *et al.*; a graph-neural-network
+  ensemble), run once per unique HET (`scripts/protonate_ligands.py`).
+- The dominant microstate is selected by **walking the predicted pKa ladder**
+  (`pharmpipe/prep/protonate.py`, `dominant_microstate_at_ph`): from the fully
+  protonated species, every site with `pKa ≤ 7.4` is deprotonated; the species reached
+  when the next site's `pKa` exceeds 7.4 is taken (Henderson–Hasselbalch ordering). Note
+  pkasolver's own "pH 7.4" shortcut is really a dimorphite-dl call at pH 7.0; we use the
+  **ML pKa values** at the requested 7.4 instead.
+- Output is cached per target in `catalogue/<slug>/protonated_ligands.csv`
+  (HET → protonated SMILES + the predicted pKa list); the loader prefers it and falls
+  back per-HET to the neutral SMILES for anything pkasolver can't process (salts are
+  stripped to the largest fragment first; non-ionizable HETs, e.g. `Mg²⁺`, pass through).
+- Because `AssignBondOrdersFromTemplate` carries the **template's formal charges** onto
+  the pose, feeding the protonated SMILES is all that is needed — the perceived pose then
+  has the correct charges and H-count, and this flows identically into **both** consensus
+  strategies.
+
+pkasolver's pretrained checkpoints need a pinned 2021-era stack (python 3.10 / torch
+1.11 / torch-geometric 2.0.1), isolated in the pixi **`prep`** environment; pkasolver is
+vendored under `external/` (not installed) so its bundled weights load via `__file__`.
+The protonation step is the only networked/heavy-ML part and is run once up front
+(`pixi run -e prep protonate-ligands`); the build pipeline itself stays offline and only
+reads the cached CSV.
 
 ---
 
@@ -398,12 +430,18 @@ available) and is skipped cleanly for a bare `--input` directory; toggle with
 Everything is deterministic — fixed grid, fixed bandwidth, fixed floor, no seeding —
 so reruns are identical (asserted in `tests/test_density.py`).
 
-Two deliberate differences from the k-means path: (1) features of one type emerge from
-peaks rather than a chosen `k`; (2) density does **not** apply the cross-family overlap
-merge that k-means does (§5) — its per-type fields are independent by construction, and a
-group that is genuinely both a donor and an acceptor (e.g. a hydroxyl) is left as both,
-which is chemically faithful. The two methods are meant to be compared side by side from
-their separate namespaces, not reconciled.
+**Cross-family overlap merge.** After the per-type peaks are selected, the density path
+applies the **same family-agnostic overlap merge as k-means** (§5): the pooled features
+are sorted dominant-first (points, then support) and any feature overlapping a stronger
+one already kept is dropped — so a region of space yields **exactly one feature** even
+when a donor and an acceptor field both peak on the same atoms (`density.merge_overlapping`,
+default on; geometric threshold, or an absolute `density.merge_radius`). Excluded-volume
+spheres are added *after* the merge and are exempt (they are receptor markers, not ligand
+chemistry). The dropped basins lose their "kept" flag so the diagnostic plots show it.
+
+The one deliberate difference from k-means that remains: features of one type emerge from
+field peaks rather than a chosen `k`. The two methods are meant to be compared side by
+side from their separate namespaces.
 
 **Precedent** (the strategy is an automation of established field/consensus ideas):
 dynophore cloud → super-feature with occurrence frequency (Wolber lab); field-maximum

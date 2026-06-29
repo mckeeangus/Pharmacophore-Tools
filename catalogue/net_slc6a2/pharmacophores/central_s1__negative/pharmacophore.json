@@ -24,7 +24,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -46,7 +47,8 @@
       "radius": 2.4413428499505057,
       "n_points": 39,
       "n_ligands": 24,
-      "support": 0.96
+      "support": 0.96,
+      "direction": null
     },
     {
       "family": "Donor",
@@ -56,7 +58,8 @@
       "radius": 2.479660894602773,
       "n_points": 30,
       "n_ligands": 23,
-      "support": 0.92
+      "support": 0.92,
+      "direction": null
     }
   ]
 }

@@ -27,12 +27,12 @@ build-pharmacophores = "python scripts/build_pharmacophores.py"
 test = { cmd = "pytest -q", depends-on = [] }
 lint = "ruff check ."
 
-# --- Common, lightweight dependencies shared by every environment ---
-[dependencies]
-python = "3.12.*"
+# Python is pinned per-feature (not globally) so the legacy `prep` env can use 3.10
+# for pkasolver's 2021-era stack while everything else stays on 3.12.
 
 # --- core: networking, config, tabular IO (light, rarely breaks) ---
 [feature.core.dependencies]
+python = "3.12.*"
 requests = ">=2.31"
 pyyaml = ">=6.0"
 pandas = ">=2.0"
@@ -71,8 +71,58 @@ pymol-open-source = ">=2.5"
 [feature.ph4.dependencies]
 scikit-learn = "*"
 matplotlib = "*"
+scipy = "*"            # density consensus: Gaussian occupancy field + KD-tree
+
+# --- prep: ligand protonation (pH 7.4) via pkasolver — heavy ML stack, fully
+# isolated in its own solve-group/python so its deps never touch the rest.
+#
+# pkasolver's pretrained GIN checkpoints were saved with torch-geometric 2.0.x; the
+# GIN parameter layout changed after 2.0 (Sequential -> MLP), so newer PyG cannot load
+# them. We therefore pin the exact 2021-era stack: python 3.10 + torch 1.11.0(cpu) +
+# torch-geometric 2.0.4 with torch_scatter/torch_sparse wheels from the PyG index. The
+# pinned torch stack only has wheels on PyPI/PyG (not conda-forge win-64), so it is a
+# pip layer over conda-forge rdkit/cairosvg/molvs. pkasolver itself is NOT installed
+# (its setup.py would drag conflicting pins); it is vendored as a clone on PYTHONPATH
+# (see scripts/protonate_ligands.py), so its bundled weights resolve via __file__.
+# Network-heavy -> run on a login node on Gadi.
+[feature.prep.dependencies]
+python = "3.10.*"
+rdkit = ">=2024.03"
+cairosvg = "*"               # imported at pkasolver.query import time
+molvs = "*"                  # MolVS standardizer used by pkasolver.chem
+svgutils = "*"               # imported by pkasolver.query (drawing helpers)
+pandas = ">=2.0"
+numpy = "<2"                  # torch 1.11 / torch_scatter / torch_sparse are numpy-1.x ABI
+# torch-geometric 2.0.4's pure-python runtime deps, supplied from conda-forge so the
+# pip layer (which adds the PyTorch CPU index) doesn't resolve them — that index mirrors
+# an old `requests` that conflicts. Keeping these on conda leaves pip only the torch wheels.
+requests = ">=2.31"
+scipy = "*"
+scikit-learn = "*"
+networkx = "*"
+jinja2 = "*"
+pyparsing = "*"
+tqdm = ">=4.66"
+
+[feature.prep.pypi-dependencies]
+torch = "==1.11.0"
+torch-scatter = "==2.0.9"
+torch-sparse = "==0.6.15"
+torch-geometric = "==2.0.1"  # exact pin: pkasolver's checkpoints use this GIN layout
+class-resolver = "*"         # required by torch_geometric.nn.models.basic_gnn
+
+[feature.prep.pypi-options]
+extra-index-urls = ["https://download.pytorch.org/whl/cpu"]
+find-links = [{ url = "https://data.pyg.org/whl/torch-1.11.0+cpu.html" }]
+
+# Bound to the prep env (py3.10 + pkasolver stack). Run: pixi run -e prep protonate-ligands
+[feature.prep.tasks]
+protonate-ligands = "python scripts/protonate_ligands.py"
 
 [environments]
 default = { features = ["core", "chem", "ph4"], solve-group = "main" }
 dev = { features = ["core", "chem", "ph4", "dev"], solve-group = "main" }
 viz = { features = ["core", "chem", "ph4", "viz"], solve-group = "main" }
+# Standalone (no core/chem): prep pins its own python 3.10 + legacy torch stack,
+# so the protonation script must not import pharmpipe (it is self-contained).
+prep = { features = ["prep"], solve-group = "prep" }

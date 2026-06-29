@@ -4,13 +4,11 @@
 - Skipped poses: 0
 - Consensus method: `density`
 - Representative ligand (viz): `8S9B_LQO_A2003`
-- Features kept: **44**
+- Features kept: **42**
 
 | Family | Features | Mean support |
 |---|---:|---:|
 | Acceptor | 1 | 1.00 |
-| Aromatic | 1 | 0.60 |
-| Donor | 1 | 0.80 |
 | ExcludedVolume | 40 | 0.00 |
 | LumpedHydrophobe | 1 | 0.60 |
 

@@ -1,4 +1,4 @@
-# gaba_a/orthosteric__positive — ensemble pharmacophore (1 features)
+# gaba_a/orthosteric__positive — ensemble pharmacophore (2 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -15,10 +15,14 @@ set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
 set_color ph4_Aromatic, [1.0, 0.85, 0.0]
 set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
+set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
 pseudoatom Donor_0, pos=[187.423, 221.793, 241.900], vdw=2.772
 color ph4_Donor, Donor_0
 group ph4_Donor, Donor_0
+pseudoatom Acceptor_1, pos=[204.700, 203.827, 242.516], vdw=3.000
+color ph4_Acceptor, Acceptor_1
+group ph4_Acceptor, Acceptor_1
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

@@ -15,6 +15,7 @@ set_color ph4_LumpedHydrophobe, [0.0, 0.9, 0.9]
 set_color ph4_Aromatic, [1.0, 0.85, 0.0]
 set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
+set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
 pseudoatom Aromatic_0, pos=[0.680, 94.802, 52.108], vdw=2.212
 color ph4_Aromatic, Aromatic_0
@@ -25,7 +26,7 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_2, pos=[0.693, 97.874, 52.954], vdw=1.210
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Donor_3, pos=[-2.377, 99.329, 52.024], vdw=2.239
+pseudoatom Donor_3, pos=[-2.458, 99.472, 52.107], vdw=2.410
 color ph4_Donor, Donor_3
 group ph4_Donor, Donor_3
 pseudoatom Aromatic_4, pos=[3.191, 99.138, 56.062], vdw=2.968

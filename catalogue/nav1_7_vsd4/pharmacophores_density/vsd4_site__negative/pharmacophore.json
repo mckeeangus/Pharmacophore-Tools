@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -32,6 +32,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -45,12 +47,12 @@
   },
   "features": [
     {
-      "family": "PosIonizable",
-      "x": 85.82503049611528,
-      "y": 137.34923882343563,
-      "z": 140.78789259825578,
+      "family": "Donor",
+      "x": 86.8780772924481,
+      "y": 136.71039688924515,
+      "z": 140.07130018423234,
       "radius": 3.0,
-      "n_points": 3,
+      "n_points": 6,
       "n_ligands": 3,
       "support": 1.0,
       "direction": null

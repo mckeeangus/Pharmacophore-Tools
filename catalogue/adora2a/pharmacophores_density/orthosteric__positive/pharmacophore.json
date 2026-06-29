@@ -28,7 +28,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -37,6 +37,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -45,37 +47,15 @@
         "ev_max": 40
       }
     },
-    "n_features": 46,
+    "n_features": 44,
     "representative_ligand": "4UHR_NGI_A1320"
   },
   "features": [
     {
-      "family": "Donor",
-      "x": 3.3083071297313222,
-      "y": 91.66853721320103,
-      "z": 54.0607898545699,
-      "radius": 2.8410060355837574,
-      "n_points": 10,
-      "n_ligands": 5,
-      "support": 0.8333,
-      "direction": null
-    },
-    {
       "family": "Acceptor",
-      "x": 0.8836985650403821,
-      "y": 97.39874260742901,
-      "z": 52.93698465431121,
-      "radius": 3.0,
-      "n_points": 17,
-      "n_ligands": 6,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": 2.36786783979795,
-      "y": 91.60636507308955,
-      "z": 52.38261093206508,
+      "x": 2.370681349164831,
+      "y": 91.60248841887223,
+      "z": 52.38133334936273,
       "radius": 3.0,
       "n_points": 20,
       "n_ligands": 5,
@@ -83,25 +63,25 @@
       "direction": null
     },
     {
-      "family": "PosIonizable",
-      "x": 0.5618924577523672,
-      "y": 94.92929969028067,
-      "z": 51.653808894990156,
-      "radius": 2.572941958050778,
-      "n_points": 5,
-      "n_ligands": 5,
-      "support": 0.8333,
+      "family": "Acceptor",
+      "x": 1.1569769491677444,
+      "y": 97.8354448193675,
+      "z": 53.71664129255829,
+      "radius": 3.0,
+      "n_points": 18,
+      "n_ligands": 6,
+      "support": 1.0,
       "direction": null
     },
     {
-      "family": "Aromatic",
-      "x": 1.181910156048784,
-      "y": 96.01630074387586,
-      "z": 52.32538912331919,
-      "radius": 2.922698350279723,
-      "n_points": 12,
-      "n_ligands": 6,
-      "support": 1.0,
+      "family": "PosIonizable",
+      "x": 0.5466165046028081,
+      "y": 94.77484666195983,
+      "z": 52.00236120451134,
+      "radius": 2.5379905116845993,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333,
       "direction": null
     },
     {

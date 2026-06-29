@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -33,6 +33,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -41,30 +43,19 @@
         "ev_max": 40
       }
     },
-    "n_features": 48,
-    "representative_ligand": "2NNO_M28_A301"
+    "n_features": 43,
+    "representative_ligand": "8QFK_UII_AAA301"
   },
   "features": [
     {
       "family": "Acceptor",
-      "x": -6.33615429056532,
-      "y": 1.2614950514011685,
-      "z": 17.031497731222974,
-      "radius": 2.9631075671576887,
-      "n_points": 180,
+      "x": -6.3459119181882055,
+      "y": 1.2630718299511416,
+      "z": 17.03523352103324,
+      "radius": 2.9522117984626957,
+      "n_points": 178,
       "n_ligands": 74,
       "support": 0.9737,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": -3.0638257697774547,
-      "y": 5.663952731289446,
-      "z": 13.395617410368535,
-      "radius": 3.0,
-      "n_points": 78,
-      "n_ligands": 38,
-      "support": 0.5,
       "direction": null
     },
     {
@@ -79,58 +70,14 @@
       "direction": null
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": -4.492555775935221,
-      "y": 3.6265184641530017,
-      "z": 14.76351397531441,
-      "radius": 3.0,
-      "n_points": 70,
-      "n_ligands": 58,
-      "support": 0.7632,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": -5.629735912279002,
-      "y": -0.4832575085872537,
-      "z": 15.971218631193034,
-      "radius": 2.6439831129716236,
-      "n_points": 67,
-      "n_ligands": 62,
-      "support": 0.8158,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": -2.933571598116435,
-      "y": 5.569054214737356,
-      "z": 13.293970798712046,
-      "radius": 3.0,
-      "n_points": 37,
-      "n_ligands": 28,
-      "support": 0.3684,
-      "direction": null
-    },
-    {
-      "family": "NegIonizable",
-      "x": -2.6397403107043393,
-      "y": 7.168440387924888,
-      "z": 13.511833396424835,
-      "radius": 2.635586409742191,
-      "n_points": 2,
-      "n_ligands": 2,
-      "support": 0.0263,
-      "direction": null
-    },
-    {
       "family": "PosIonizable",
-      "x": -4.727612089804101,
-      "y": 1.8744219505484294,
-      "z": 15.219592370225529,
-      "radius": 2.916543143915281,
-      "n_points": 4,
-      "n_ligands": 4,
-      "support": 0.0526,
+      "x": -2.882964602564133,
+      "y": 7.152457555384098,
+      "z": 12.87447365994702,
+      "radius": 3.0,
+      "n_points": 9,
+      "n_ligands": 5,
+      "support": 0.0658,
       "direction": null
     },
     {

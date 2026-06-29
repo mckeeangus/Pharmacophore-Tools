@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -32,6 +32,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -40,21 +42,10 @@
         "ev_max": 40
       }
     },
-    "n_features": 44,
+    "n_features": 42,
     "representative_ligand": "8CIC_U30_A1202"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": -2.2309241977531236,
-      "y": 98.94392402833226,
-      "z": 51.82106839668061,
-      "radius": 3.0,
-      "n_points": 6,
-      "n_ligands": 4,
-      "support": 0.8,
-      "direction": null
-    },
     {
       "family": "Acceptor",
       "x": 1.1721360980115065,
@@ -62,17 +53,6 @@
       "z": 52.54661289006583,
       "radius": 3.0,
       "n_points": 20,
-      "n_ligands": 5,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "Aromatic",
-      "x": 1.0038570225093013,
-      "y": 94.90811848538608,
-      "z": 52.267342375287434,
-      "radius": 3.0,
-      "n_points": 13,
       "n_ligands": 5,
       "support": 1.0,
       "direction": null

@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -32,6 +32,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -40,32 +42,10 @@
         "ev_max": 40
       }
     },
-    "n_features": 46,
+    "n_features": 44,
     "representative_ligand": "2XYT_TC9_F1206"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 167.68689388947087,
-      "y": 123.35359543804987,
-      "z": 185.71011638778342,
-      "radius": 2.7628302943854752,
-      "n_points": 4,
-      "n_ligands": 3,
-      "support": 0.3333,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 170.3080423404069,
-      "y": 119.41378708410045,
-      "z": 181.96794280061124,
-      "radius": 3.0,
-      "n_points": 6,
-      "n_ligands": 5,
-      "support": 0.5556,
-      "direction": null
-    },
     {
       "family": "Acceptor",
       "x": 169.08253563789808,
@@ -89,6 +69,17 @@
       "direction": null
     },
     {
+      "family": "Donor",
+      "x": 170.3080423404069,
+      "y": 119.41378708410045,
+      "z": 181.96794280061124,
+      "radius": 3.0,
+      "n_points": 6,
+      "n_ligands": 5,
+      "support": 0.5556,
+      "direction": null
+    },
+    {
       "family": "PosIonizable",
       "x": 167.3510291748564,
       "y": 123.43221971925837,
@@ -97,17 +88,6 @@
       "n_points": 4,
       "n_ligands": 4,
       "support": 0.4444,
-      "direction": null
-    },
-    {
-      "family": "Aromatic",
-      "x": 168.2402168861193,
-      "y": 119.56638840388072,
-      "z": 184.97956322826494,
-      "radius": 3.0,
-      "n_points": 7,
-      "n_ligands": 3,
-      "support": 0.3333,
       "direction": null
     },
     {

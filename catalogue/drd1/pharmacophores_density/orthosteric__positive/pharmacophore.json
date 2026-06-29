@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -33,6 +33,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -41,43 +43,10 @@
         "ev_max": 40
       }
     },
-    "n_features": 50,
+    "n_features": 43,
     "representative_ligand": "7X2C_G3C_F503"
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 122.19899623249037,
-      "y": 119.09755339128958,
-      "z": 144.1418576957099,
-      "radius": 3.0,
-      "n_points": 18,
-      "n_ligands": 10,
-      "support": 0.625,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 129.51838352614652,
-      "y": 124.70484339972289,
-      "z": 148.49418009705957,
-      "radius": 3.0,
-      "n_points": 12,
-      "n_ligands": 7,
-      "support": 0.4375,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 128.0165376220685,
-      "y": 121.86190866131837,
-      "z": 142.23205270879527,
-      "radius": 2.8824648261134076,
-      "n_points": 11,
-      "n_ligands": 10,
-      "support": 0.625,
-      "direction": null
-    },
     {
       "family": "Acceptor",
       "x": 122.55688485963489,
@@ -87,39 +56,6 @@
       "n_points": 27,
       "n_ligands": 15,
       "support": 0.9375,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": 127.4854831853977,
-      "y": 121.52675707804546,
-      "z": 145.27456351977975,
-      "radius": 3.0,
-      "n_points": 7,
-      "n_ligands": 6,
-      "support": 0.375,
-      "direction": null
-    },
-    {
-      "family": "PosIonizable",
-      "x": 127.45061444433269,
-      "y": 121.74301434352519,
-      "z": 142.04793283605113,
-      "radius": 2.9693661446697854,
-      "n_points": 11,
-      "n_ligands": 11,
-      "support": 0.6875,
-      "direction": null
-    },
-    {
-      "family": "Aromatic",
-      "x": 123.6511512256059,
-      "y": 120.22086622410147,
-      "z": 142.64877552399406,
-      "radius": 2.6851507627431457,
-      "n_points": 21,
-      "n_ligands": 16,
-      "support": 1.0,
       "direction": null
     },
     {
@@ -134,25 +70,14 @@
       "direction": null
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 127.42034472666565,
-      "y": 122.71060068495439,
-      "z": 146.33507681483735,
-      "radius": 2.8069101502019933,
-      "n_points": 15,
-      "n_ligands": 12,
-      "support": 0.75,
-      "direction": null
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 124.0413957740829,
-      "y": 120.00172168330064,
-      "z": 143.1643786674122,
-      "radius": 2.6806302830726634,
-      "n_points": 10,
-      "n_ligands": 10,
-      "support": 0.625,
+      "family": "PosIonizable",
+      "x": 127.45061444433269,
+      "y": 121.74301434352519,
+      "z": 142.04793283605113,
+      "radius": 2.9693661446697854,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 0.6875,
       "direction": null
     },
     {

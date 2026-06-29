@@ -24,7 +24,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -46,7 +47,8 @@
       "radius": 2.0845182949398104,
       "n_points": 14,
       "n_ligands": 7,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Donor",
@@ -56,7 +58,8 @@
       "radius": 1.0,
       "n_points": 7,
       "n_ligands": 7,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Donor",
@@ -66,7 +69,8 @@
       "radius": 1.0,
       "n_points": 7,
       "n_ligands": 7,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Acceptor",
@@ -76,7 +80,8 @@
       "radius": 1.0,
       "n_points": 7,
       "n_ligands": 7,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "LumpedHydrophobe",
@@ -86,7 +91,8 @@
       "radius": 1.7965077435297505,
       "n_points": 7,
       "n_ligands": 7,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "LumpedHydrophobe",
@@ -96,7 +102,8 @@
       "radius": 1.551252119060241,
       "n_points": 5,
       "n_ligands": 5,
-      "support": 0.7143
+      "support": 0.7143,
+      "direction": null
     }
   ]
 }

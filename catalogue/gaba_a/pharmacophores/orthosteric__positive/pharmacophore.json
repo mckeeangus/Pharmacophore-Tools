@@ -23,7 +23,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -33,7 +34,7 @@
         "random_state": 0
       }
     },
-    "n_features": 1,
+    "n_features": 2,
     "representative_ligand": "7A5V_HSM_A5408"
   },
   "features": [
@@ -45,7 +46,19 @@
       "radius": 2.7722237716317197,
       "n_points": 5,
       "n_ligands": 2,
-      "support": 0.6667
+      "support": 0.6667,
+      "direction": null
+    },
+    {
+      "family": "Acceptor",
+      "x": 204.7,
+      "y": 203.827,
+      "z": 242.516,
+      "radius": 3.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667,
+      "direction": null
     }
   ]
 }

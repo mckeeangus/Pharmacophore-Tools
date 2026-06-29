@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -33,6 +33,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -41,63 +43,30 @@
         "ev_max": 40
       }
     },
-    "n_features": 51,
+    "n_features": 45,
     "representative_ligand": "7PRX_82H_A801"
   },
   "features": [
     {
       "family": "Acceptor",
-      "x": 28.086211155227346,
-      "y": 6.763432734860182,
-      "z": 16.701953334378963,
+      "x": 28.17535324509665,
+      "y": 6.820439958885037,
+      "z": 16.706356566566594,
       "radius": 3.0,
-      "n_points": 39,
+      "n_points": 37,
       "n_ligands": 19,
       "support": 0.95,
       "direction": null
     },
     {
       "family": "Acceptor",
-      "x": 31.61285996117099,
-      "y": 8.312017264758138,
-      "z": 7.333720064745053,
-      "radius": 2.781654876709659,
-      "n_points": 17,
-      "n_ligands": 17,
-      "support": 0.85,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": 29.706408600801947,
-      "y": 6.772045228144977,
-      "z": 12.505756395740704,
+      "x": 29.687589416961238,
+      "y": 6.890547810573117,
+      "z": 12.533159170996223,
       "radius": 3.0,
-      "n_points": 32,
-      "n_ligands": 19,
-      "support": 0.95,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 29.015247954154315,
-      "y": 5.289749726727972,
-      "z": 13.696946629003303,
-      "radius": 3.0,
-      "n_points": 33,
-      "n_ligands": 19,
-      "support": 0.95,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 36.9265110574603,
-      "y": 7.2116946318161155,
-      "z": 5.274419003049889,
-      "radius": 3.0,
-      "n_points": 7,
-      "n_ligands": 5,
-      "support": 0.25,
+      "n_points": 30,
+      "n_ligands": 18,
+      "support": 0.9,
       "direction": null
     },
     {
@@ -113,17 +82,6 @@
     },
     {
       "family": "Aromatic",
-      "x": 34.443257214597686,
-      "y": 9.164397755193809,
-      "z": 5.685226722424021,
-      "radius": 2.576086599830327,
-      "n_points": 10,
-      "n_ligands": 10,
-      "support": 0.5,
-      "direction": null
-    },
-    {
-      "family": "Aromatic",
       "x": 27.779712415494057,
       "y": 10.390829638967924,
       "z": 14.541581714946433,
@@ -134,36 +92,14 @@
       "direction": null
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 32.365710980956756,
-      "y": 7.557412126895037,
-      "z": 11.022729924560025,
-      "radius": 2.7814931731126817,
-      "n_points": 19,
-      "n_ligands": 16,
-      "support": 0.8,
-      "direction": null
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 34.41726517127901,
-      "y": 9.33944093474148,
-      "z": 5.957199973944419,
-      "radius": 2.6815738427638762,
-      "n_points": 9,
-      "n_ligands": 9,
-      "support": 0.45,
-      "direction": null
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 28.290125998375842,
-      "y": 9.482153148751705,
-      "z": 14.557385080540918,
-      "radius": 3.0,
-      "n_points": 13,
-      "n_ligands": 12,
-      "support": 0.6,
+      "family": "Aromatic",
+      "x": 34.443257214597686,
+      "y": 9.164397755193809,
+      "z": 5.685226722424021,
+      "radius": 2.576086599830327,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.5,
       "direction": null
     },
     {

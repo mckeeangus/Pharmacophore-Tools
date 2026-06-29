@@ -24,7 +24,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -46,7 +47,8 @@
       "radius": 1.0,
       "n_points": 11,
       "n_ligands": 11,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Donor",
@@ -56,7 +58,8 @@
       "radius": 1.0,
       "n_points": 11,
       "n_ligands": 11,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Donor",
@@ -66,7 +69,8 @@
       "radius": 1.0,
       "n_points": 11,
       "n_ligands": 11,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Aromatic",
@@ -76,7 +80,8 @@
       "radius": 1.0,
       "n_points": 11,
       "n_ligands": 11,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Donor",
@@ -86,7 +91,8 @@
       "radius": 1.0,
       "n_points": 10,
       "n_ligands": 10,
-      "support": 0.9091
+      "support": 0.9091,
+      "direction": null
     }
   ]
 }

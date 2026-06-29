@@ -29,7 +29,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -51,7 +52,8 @@
       "radius": 1.0,
       "n_points": 17,
       "n_ligands": 17,
-      "support": 0.9444
+      "support": 0.9444,
+      "direction": null
     },
     {
       "family": "PosIonizable",
@@ -61,7 +63,8 @@
       "radius": 1.0,
       "n_points": 15,
       "n_ligands": 15,
-      "support": 0.8333
+      "support": 0.8333,
+      "direction": null
     },
     {
       "family": "Aromatic",
@@ -71,7 +74,8 @@
       "radius": 1.0,
       "n_points": 14,
       "n_ligands": 14,
-      "support": 0.7778
+      "support": 0.7778,
+      "direction": null
     }
   ]
 }

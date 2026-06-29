@@ -17,9 +17,9 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom PosIonizable_0, pos=[85.825, 137.349, 140.788], vdw=3.000
-color ph4_PosIonizable, PosIonizable_0
-group ph4_PosIonizable, PosIonizable_0
+pseudoatom Donor_0, pos=[86.878, 136.710, 140.071], vdw=3.000
+color ph4_Donor, Donor_0
+group ph4_Donor, Donor_0
 pseudoatom ExcludedVolume_1, pos=[85.540, 133.675, 142.536], vdw=1.000
 color ph4_ExcludedVolume, ExcludedVolume_1
 group ph4_ExcludedVolume, ExcludedVolume_1

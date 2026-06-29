@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -32,6 +32,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -45,23 +47,23 @@
   },
   "features": [
     {
-      "family": "Donor",
-      "x": 28.41081736088809,
-      "y": 6.3722316646382176,
-      "z": 15.700822734888055,
-      "radius": 3.0,
-      "n_points": 5,
-      "n_ligands": 3,
-      "support": 1.0,
-      "direction": null
-    },
-    {
       "family": "Aromatic",
       "x": 30.072972156591465,
       "y": 4.513881399732171,
       "z": 12.727847772006614,
       "radius": 3.0,
       "n_points": 6,
+      "n_ligands": 3,
+      "support": 1.0,
+      "direction": null
+    },
+    {
+      "family": "Donor",
+      "x": 28.41081736088809,
+      "y": 6.3722316646382176,
+      "z": 15.700822734888055,
+      "radius": 3.0,
+      "n_points": 5,
       "n_ligands": 3,
       "support": 1.0,
       "direction": null

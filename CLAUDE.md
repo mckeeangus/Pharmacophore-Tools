@@ -94,8 +94,10 @@ Dependency management is **pixi**. Every session:
 
 Each stage writes tracked deliverables under `catalogue/`. Run via pixi tasks
 (`scrape-pdb-ligands` → `align-sites` → `resolve-efficacy` → `group-effects` →
-`build-pharmacophores`; add `-e viz` to bake `.pse`). The downstream DrugCLIP→GNINA
-flow stays out of scope.
+`protonate-ligands` → `build-pharmacophores`; add `-e viz` to bake `.pse`). The
+`protonate-ligands` prep step runs in the isolated `prep` env (`pixi run -e prep
+protonate-ligands`) and is networked/one-off; the build itself is offline. The
+downstream DrugCLIP→GNINA flow stays out of scope.
 
 1. **Scrape & catalogue** (`pdb/`, `catalogue/`) — verified UniProt accessions, dated
    RCSB search, curated ligands (drop additives/buffers; keep cofactors), bound-pose
@@ -214,11 +216,22 @@ Gaussian-smoothed **voxel occupancy field** (voxel/bandwidth ~1.0–1.5 Å); fea
 **all local maxima** (no `k` chosen) with proximity watershed; keep a peak whose basin's
 summed molecule weight ≥ **occupancy floor**; feature **position = density-weighted
 centroid**, **tolerance = field spread** (clamped, §6), **direction** plumbed but `None`
-until perception emits per-point vectors (never fabricated). **Excluded-volume** grey
-spheres come from reference-receptor atoms lining the pocket that no ligand reaches.
-**Deterministic** (fixed grid, no seeding); **only two knobs** (length scale, occupancy
-floor). Density does **not** apply the cross-family merge (per-type fields are
-independent; a hydroxyl can be both donor and acceptor).
+until perception emits per-point vectors (never fabricated). After the per-type peaks,
+density applies the **same cross-family overlap merge as k-means** (one feature per
+region; `density.merge_overlapping`), then appends **excluded-volume** grey spheres from
+reference-receptor atoms lining the pocket that no ligand reaches (exempt from the
+merge). **Deterministic** (fixed grid, no seeding); **two scientific knobs** (length
+scale, occupancy floor) plus the steric EV add-on.
+
+**Protonation (pH 7.4) preprocessing** (§2 of the method doc): before the build,
+`scripts/protonate_ligands.py` (pixi `prep` env) predicts pKa with **pkasolver** and
+writes each HET's dominant pH-7.4 microstate to `catalogue/<slug>/protonated_ligands.csv`
+(pure ladder-walk in `pharmpipe/prep/protonate.py`). The loader prefers it over the
+neutral `unique_ligands.csv` SMILES, and `AssignBondOrdersFromTemplate` carries the
+template's formal charges onto the pose — so donor/acceptor/±ionizable perception sees
+the real ionisation, feeding **both** consensus strategies. pkasolver needs a pinned
+2021-era stack (py3.10/torch1.11/PyG2.0.1, the `prep` env) and is vendored under
+`external/` (gitignored); the `protonated_ligands.csv` outputs are the tracked deliverable.
 
 **Outputs** per model dir (`catalogue/<slug>/pharmacophores/<cell>/`):
 `pharmacophore.json` (canonical, method-stable; provenance includes the representative

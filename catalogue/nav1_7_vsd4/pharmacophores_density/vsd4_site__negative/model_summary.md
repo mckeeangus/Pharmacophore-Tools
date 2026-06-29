@@ -8,7 +8,7 @@
 
 | Family | Features | Mean support |
 |---|---:|---:|
+| Donor | 1 | 1.00 |
 | ExcludedVolume | 40 | 0.00 |
-| PosIonizable | 1 | 1.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).

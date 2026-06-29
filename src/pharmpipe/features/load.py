@@ -56,6 +56,27 @@ def read_smiles_map(unique_ligands_csv: Path) -> dict[str, str]:
     return out
 
 
+def read_protonation_map(protonated_csv: Path) -> dict[str, str]:
+    """HET code -> pH-7.4 protonated SMILES, from ``protonated_ligands.csv``.
+
+    Produced by ``scripts/protonate_ligands.py``. Uses the ``protonated_smiles``
+    column, falling back per-HET to the neutral ``smiles`` column when protonation was
+    unavailable. The template path (``AssignBondOrdersFromTemplate``) carries the
+    template's formal charges onto the pose, so a protonated template yields a pose with
+    the correct charges/H-count for donor/acceptor/ionizable perception.
+    """
+    out: dict[str, str] = {}
+    if not protonated_csv.exists():
+        return out
+    with protonated_csv.open(encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            het = row.get("het_code")
+            smi = row.get("protonated_smiles") or row.get("smiles")
+            if het and smi:
+                out[het] = smi
+    return out
+
+
 def _connectivity_only(raw: Chem.Mol) -> Chem.Mol:
     """Strip bond orders / aromatic + charge flags so a template match is clean."""
     rw = Chem.RWMol(raw)

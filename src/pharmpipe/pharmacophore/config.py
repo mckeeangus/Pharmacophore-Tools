@@ -37,6 +37,10 @@ class DensityConfig:
     bandwidth: float = 1.5          # Gaussian smoothing sigma (A) ~ feature tolerance
     occupancy_floor: float = 2.0    # min summed distinct-molecule weight to keep a peak
     scaffold_weighting: bool = False  # also weight by inverse scaffold frequency
+    # Collapse overlapping features across families so a region of space yields one
+    # feature (same rule as the k-means path); excluded-volume spheres are exempt.
+    merge_overlapping: bool = True
+    merge_radius: float | None = None
     # Excluded-volume spheres from receptor atoms in pocket regions no ligand occupies.
     excluded_volume: bool = True
     ev_shell: float = 5.0           # consider protein atoms within this of the ligand cloud

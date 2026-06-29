@@ -23,7 +23,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -34,18 +35,19 @@
       }
     },
     "n_features": 3,
-    "representative_ligand": "5IKR_ID8_A601"
+    "representative_ligand": "5IKV_FLF_B601"
   },
   "features": [
     {
       "family": "Acceptor",
-      "x": 26.683727272727275,
-      "y": 4.277636363636363,
-      "z": 32.469545454545454,
-      "radius": 2.442409269824022,
-      "n_points": 11,
+      "x": 26.323333333333334,
+      "y": 4.2685,
+      "z": 32.1,
+      "radius": 2.6916739163989054,
+      "n_points": 6,
       "n_ligands": 5,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Aromatic",
@@ -55,7 +57,8 @@
       "radius": 1.0,
       "n_points": 5,
       "n_ligands": 5,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "Aromatic",
@@ -65,7 +68,8 @@
       "radius": 1.0,
       "n_points": 3,
       "n_ligands": 3,
-      "support": 0.6
+      "support": 0.6,
+      "direction": null
     }
   ]
 }

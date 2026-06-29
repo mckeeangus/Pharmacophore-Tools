@@ -16,7 +16,12 @@ from pathlib import Path
 import numpy as np
 
 from ..features.extract import build_table, feature_factory
-from ..features.load import LoadReport, load_directory, read_smiles_map
+from ..features.load import (
+    LoadReport,
+    load_directory,
+    read_protonation_map,
+    read_smiles_map,
+)
 from ..io.structures import read_protein_atom_coords
 from ..util.paths import ensure_dir
 from .build import best_representative
@@ -162,7 +167,15 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
 def build_for_cell(cell_dir: Path, out_dir: Path, cfg: PharmacophoreConfig,
                    unique_ligands_csv: Path, name: str | None = None,
                    reference_pdb: Path | None = None) -> ModelOutputs | None:
-    """Catalogue convention: take SMILES from the target's unique_ligands.csv."""
+    """Catalogue convention: SMILES from the target's unique_ligands.csv.
+
+    Prefers the pH-7.4 ``protonated_ligands.csv`` (written by
+    ``scripts/protonate_ligands.py``) when present, overlaying it onto the neutral map
+    so HETs without a protonation entry keep their original SMILES.
+    """
     smiles_map = read_smiles_map(unique_ligands_csv)
+    protonated = read_protonation_map(unique_ligands_csv.parent / "protonated_ligands.csv")
+    if protonated:
+        smiles_map = {**smiles_map, **protonated}
     return build_from_directory(cell_dir, out_dir, cfg, smiles_map=smiles_map,
                                 name=name, reference_pdb=reference_pdb)

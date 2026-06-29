@@ -1,8 +1,8 @@
 # Pharmacophore — net_slc6a2/central_s1__positive
 
-- Ligands loaded: **6** (direct=2, template=4)
+- Ligands loaded: **6** (direct=3, template=3)
 - Skipped poses: 0
-- Clustering: `kmeans_silhouette`
+- Consensus method: `kmeans`
 - Representative ligand (viz): `8WTV_E5E_A704`
 - Features kept: **3**
 

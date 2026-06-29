@@ -2,7 +2,7 @@
 
 - Ligands loaded: **18** (direct=2, template=16)
 - Skipped poses: 1 (3WTN_N2Y_H301:fail)
-- Clustering: `kmeans_silhouette`
+- Consensus method: `kmeans`
 - Representative ligand (viz): `4FRR_0VC_F301`
 - Features kept: **3**
 

@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-29",
+    "created": "2026-06-30",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -32,6 +32,8 @@
         "bandwidth": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": null,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -40,10 +42,21 @@
         "ev_max": 40
       }
     },
-    "n_features": 44,
+    "n_features": 43,
     "representative_ligand": "5KLS_6UC_C1304"
   },
   "features": [
+    {
+      "family": "LumpedHydrophobe",
+      "x": 25.026959097194958,
+      "y": 164.4563847661819,
+      "z": 10.344854782472657,
+      "radius": 2.999346097830327,
+      "n_points": 4,
+      "n_ligands": 3,
+      "support": 1.0,
+      "direction": null
+    },
     {
       "family": "Donor",
       "x": 25.746438091042695,
@@ -64,28 +77,6 @@
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667,
-      "direction": null
-    },
-    {
-      "family": "Aromatic",
-      "x": 25.01432539597589,
-      "y": 164.1461666666667,
-      "z": 10.827174604024133,
-      "radius": 2.7869972932893634,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0,
-      "direction": null
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 25.026959097194958,
-      "y": 164.4563847661819,
-      "z": 10.344854782472657,
-      "radius": 2.999346097830327,
-      "n_points": 4,
-      "n_ligands": 3,
-      "support": 1.0,
       "direction": null
     },
     {

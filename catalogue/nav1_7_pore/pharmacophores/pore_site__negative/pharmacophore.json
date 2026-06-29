@@ -23,7 +23,8 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-25",
+    "created": "2026-06-30",
+    "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
       "params": {
@@ -45,7 +46,8 @@
       "radius": 2.4129218996374493,
       "n_points": 8,
       "n_ligands": 5,
-      "support": 1.0
+      "support": 1.0,
+      "direction": null
     },
     {
       "family": "LumpedHydrophobe",
@@ -55,7 +57,8 @@
       "radius": 1.0989110940347244,
       "n_points": 3,
       "n_ligands": 3,
-      "support": 0.6
+      "support": 0.6,
+      "direction": null
     }
   ]
 }

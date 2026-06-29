@@ -62,6 +62,12 @@ density:
   occupancy_floor: 2.0   # keep a peak only if its basin's summed distinct-molecule
                          #   weight >= this (units: effective molecules)
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency
+  # Collapse overlapping features across families so a region of space yields exactly
+  # one feature (same geometric rule as the k-means path). merge_radius null = geometric
+  # (one centre inside the other's tolerance sphere); a number forces an absolute cutoff.
+  # Excluded-volume spheres are exempt (they are receptor markers, not ligand chemistry).
+  merge_overlapping: true
+  merge_radius: null
   # Excluded-volume spheres: receptor atoms that line the pocket but no ligand reaches.
   excluded_volume: true
   ev_shell: 5.0          # consider protein atoms within this (A) of the ligand cloud

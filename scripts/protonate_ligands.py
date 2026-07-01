@@ -43,13 +43,17 @@ sys.path.insert(0, str(PKASOLVER))
 os.environ["PYTHONPATH"] = os.pathsep.join(
     filter(None, [str(PKASOLVER), os.environ.get("PYTHONPATH", "")]))
 
+import yaml  # noqa: E402
 from rdkit import Chem, RDLogger  # noqa: E402
 
 RDLogger.DisableLog("rdApp.*")
 
 from pharmpipe.prep.protonate import (  # noqa: E402
     PHYSIOLOGICAL_PH,
+    PhenolRule,
+    apply_phenol_correction,
     largest_fragment,
+    neutralize_unactivated_phenolates,
     protonated_mol,
     to_smiles,
 )
@@ -57,9 +61,31 @@ from pharmpipe.prep.protonate import (  # noqa: E402
 log = logging.getLogger("protonate_ligands")
 
 CATALOGUE = REPO / "catalogue"
+CONFIG = REPO / "config" / "protonation.yaml"
 OUT_NAME = "protonated_ligands.csv"
 FIELDS = ["het_code", "smiles", "protonated_smiles", "ph", "n_pka_sites",
-          "pka_values", "method"]
+          "pka_values", "pka_overrides", "method"]
+
+
+def _load_phenol_rule(cfg_path: Path) -> PhenolRule | None:
+    """Compile the phenol pKa correction from config; None if absent/disabled.
+
+    pkasolver under-predicts phenol pKa on poly-ionizable scaffolds; this rule keeps
+    unactivated phenols protonated at pH 7.4 (see config/protonation.yaml).
+    """
+    if not cfg_path.exists():
+        return None
+    data = (yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}).get(
+        "phenol_correction", {})
+    if not data.get("enabled", False):
+        return None
+    activating = tuple(
+        Chem.MolFromSmarts(p["smarts"]) for p in data.get("activating_patterns", []))
+    return PhenolRule(
+        phenol=Chem.MolFromSmarts(data["phenol_smarts"]),
+        reference_pka=float(data["reference_pka"]),
+        activating=activating,
+    )
 
 
 def _targets(slug: str | None) -> list[Path]:
@@ -76,27 +102,40 @@ def _read_existing(out_csv: Path) -> dict[str, dict]:
         return {r["het_code"]: r for r in csv.DictReader(fh)}
 
 
-def _protonate_one(smiles: str, query_model, ph: float) -> tuple[str, int, str, str]:
-    """Return (protonated_smiles, n_sites, pka_csv, method) for one neutral SMILES."""
+def _protonate_one(
+    smiles: str, query_model, ph: float, phenol_rule: PhenolRule | None,
+) -> tuple[str, int, str, str, str]:
+    """Return (protonated_smiles, n_sites, pka_csv, overrides_csv, method) for one SMILES."""
     from pkasolver.query import calculate_microstate_pka_values
 
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
-        return smiles, 0, "", "fallback:unparseable"
+        return smiles, 0, "", "", "fallback:unparseable"
     mol = largest_fragment(mol)
     try:
         states = calculate_microstate_pka_values(mol, query_model=query_model)
     except Exception as exc:  # noqa: BLE001 — pkasolver edge cases must not abort the batch
         log.warning("pkasolver failed on %s: %s", smiles, exc)
-        return to_smiles(mol), 0, "", f"fallback:{type(exc).__name__}"
+        return to_smiles(mol), 0, "", "", f"fallback:{type(exc).__name__}"
     if not states:
-        return to_smiles(mol), 0, "", "pkasolver:no_ionizable"
+        return to_smiles(mol), 0, "", "", "pkasolver:no_ionizable"
+    method = "pkasolver"
+    overrides: list[tuple[int, float, float]] = []
+    if phenol_rule is not None:
+        states, overrides = apply_phenol_correction(states, phenol_rule)
     prot = protonated_mol(mol, states, ph)
+    ov_parts = [f"phenol@{i}:{old:.2f}->{new:.2f}" for i, old, new in overrides]
+    if phenol_rule is not None:
+        prot, neutralized = neutralize_unactivated_phenolates(prot, phenol_rule)
+        ov_parts += [f"phenol@{i}:[O-]->OH" for i in neutralized]
+    if ov_parts:
+        method = "pkasolver+phenol_rule"
     pkas = ";".join(f"{s.pka:.2f}" for s in sorted(states, key=lambda s: s.pka))
-    return to_smiles(prot), len(states), pkas, "pkasolver"
+    return to_smiles(prot), len(states), pkas, ";".join(ov_parts), method
 
 
-def _process_target(slug_dir: Path, query_model, ph: float, force: bool) -> tuple[int, int]:
+def _process_target(slug_dir: Path, query_model, ph: float, force: bool,
+                    phenol_rule: PhenolRule | None) -> tuple[int, int]:
     rows_in = list(csv.DictReader((slug_dir / "unique_ligands.csv").open(encoding="utf-8")))
     out_csv = slug_dir / OUT_NAME
     existing = {} if force else _read_existing(out_csv)
@@ -110,10 +149,11 @@ def _process_target(slug_dir: Path, query_model, ph: float, force: bool) -> tupl
             out_rows.append({k: existing[het].get(k, "") for k in FIELDS})
             reused += 1
             continue
-        prot, n_sites, pkas, method = _protonate_one(smi, query_model, ph)
+        prot, n_sites, pkas, overrides, method = _protonate_one(
+            smi, query_model, ph, phenol_rule)
         out_rows.append({"het_code": het, "smiles": smi, "protonated_smiles": prot,
                          "ph": ph, "n_pka_sites": n_sites, "pka_values": pkas,
-                         "method": method})
+                         "pka_overrides": overrides, "method": method})
         changed += 1
         log.info("%s/%s: %s -> %s [%s]", slug_dir.name, het, smi, prot, method)
     with out_csv.open("w", newline="", encoding="utf-8") as fh:
@@ -134,12 +174,16 @@ def main(argv=None) -> int:
 
     from pkasolver.query import QueryModel
 
+    phenol_rule = _load_phenol_rule(CONFIG)
+    log.info("phenol pKa correction: %s",
+             "enabled" if phenol_rule is not None else "disabled")
     log.info("loading pkasolver model ensemble …")
     query_model = QueryModel()
 
     total_changed = total_reused = 0
     for slug_dir in _targets(args.target):
-        changed, reused = _process_target(slug_dir, query_model, args.ph, args.force)
+        changed, reused = _process_target(slug_dir, query_model, args.ph, args.force,
+                                          phenol_rule)
         print(f"{slug_dir.name}: {changed} protonated, {reused} reused -> {OUT_NAME}")
         total_changed += changed
         total_reused += reused

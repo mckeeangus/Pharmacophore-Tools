@@ -1,0 +1,70 @@
+# Protonation microstate selection at physiological pH (Stage-4 prep).
+#
+# pkasolver predicts a pKa for every ionizable site and the dominant microstate at the
+# target pH is chosen by a Henderson-Hasselbalch ladder walk
+# (`pharmpipe/prep/protonate.py`). pkasolver is accurate for *isolated* ionizable centres
+# but systematically UNDER-predicts the pKa of PHENOLS that share a molecule with a
+# second ionizable group (carboxyl, a further phenol, ...). Measured on this set
+# (predicted vs experimental phenol pKa):
+#
+#     phenol                 9.99 -> 10.03      (isolated: correct)
+#     p-cresol              10.26 -> 10.18      (isolated: correct)
+#     4-nitrophenol          7.15 ->  8.19      (isolated + EWG: correct)
+#     4-hydroxybenzoic acid  9.32 ->  6.54      (para COOH:  -2.8)
+#     3-hydroxybenzoic acid  9.92 ->  6.13      (meta COOH:  -3.8)
+#     salicylic acid        13.40 ->  4.71      (ortho COOH: -8.7, H-bond)
+#
+# The error is confined to *coupled* ionizable centres (adjacent-charge electrostatics +
+# ortho intramolecular H-bonding), which a molecular-graph GNN cannot represent; it is a
+# blind spot shared by all current graph pKa models (QupKake included), so it is not
+# fixed by a heavier predictor. See catalogue/pharmacophore_method.md §2.1 for the full
+# rationale and the QupKake comparison.
+#
+# Correction (this file): a phenolic hydroxyl is assigned a REFERENCE pKa so it stays
+# protonated at pH 7.4, UNLESS its ring carries a strongly activating electron-
+# withdrawing substituent that genuinely makes it acidic — those keep pkasolver's
+# prediction. All values below are curated scientific choices, not code logic.
+
+phenol_correction:
+  enabled: true
+
+  # A phenolic hydroxyl (or its phenolate) = -OH / -O(-) on a benzene ring. The first
+  # SMARTS atom is the oxygen; it anchors the correction to a specific ionization site,
+  # and is charge-agnostic ([OX2H1] or [OX1-]) so the same rule serves both the rung
+  # correction (protonated form) and the final-microstate phenolate backstop.
+  # Restricting to a benzene carbocycle (c1ccccc1) deliberately excludes heteroaromatic/
+  # vinylogous "enol" hydroxyls (4-hydroxycoumarin, hydroxypyridines, tropolones,
+  # tetramic/tetronic acids), which are genuinely acidic and are left to pkasolver.
+  phenol_smarts: "[$([OX2H1]),$([OX1-])]-c1ccccc1"
+
+  # Reference aqueous pKa for an unactivated phenol. Above pH 7.4 by a comfortable
+  # >2.5-unit margin, so the dominant microstate is the neutral (protonated) phenol.
+  # Precedent: phenol 9.99, p-cresol 10.26, tyrosine side chain 10.1
+  #   - Haynes, ed., CRC Handbook of Chemistry & Physics, 97th ed. (2016), "Dissociation
+  #     Constants of Organic Acids and Bases".
+  #   - Serjeant & Dempsey, "Ionisation Constants of Organic Acids in Aqueous Solution",
+  #     IUPAC Chemical Data Series No. 23 (Pergamon, 1979).
+  reference_pka: 10.0
+
+  # Exception list: if a phenolic oxygen sits in one of these environments it IS acidic
+  # near pH 7.4, so pkasolver's predicted pKa is kept instead of the reference. Each
+  # SMARTS is anchored on the phenolic O (first atom). Experimental pKa in each comment
+  # (CRC Handbook / Serjeant & Dempsey, refs above). ortho/para nitro also matches every
+  # poly-nitrophenol (2,4-dinitrophenol 4.09; picric acid 0.38), which always bears an
+  # ortho or para nitro; ortho/para is required because a lone meta-EWG leaves the phenol
+  # above pH 7.4 (m-nitrophenol 8.36) where the reference and the true value agree.
+  # Each anchor O is charge-agnostic (see phenol_smarts) so activation is recognised on
+  # both the neutral phenol and its phenolate.
+  activating_patterns:
+    - name: ortho-nitrophenol           # o-nitrophenol pKa 7.23
+      smarts: "[$([OX2H1]),$([OX1-])]c1ccccc1[$([NX3](=O)=O),$([NX3+]([O-])=O)]"
+    - name: para-nitrophenol            # p-nitrophenol pKa 7.15
+      smarts: "[$([OX2H1]),$([OX1-])]c1ccc([$([NX3](=O)=O),$([NX3+]([O-])=O)])cc1"
+    - name: ortho-cyanophenol           # o-cyanophenol pKa 6.86
+      smarts: "[$([OX2H1]),$([OX1-])]c1ccccc1C#N"
+    - name: para-cyanophenol            # p-cyanophenol pKa 7.95 (borderline; kept ML)
+      smarts: "[$([OX2H1]),$([OX1-])]c1ccc(C#N)cc1"
+    - name: 2,4,6-trihalophenol         # 2,4,6-trichlorophenol 6.23; pentachlorophenol
+      smarts: "[$([OX2H1]),$([OX1-])]c1c([F,Cl,Br,I])cc([F,Cl,Br,I])cc1[F,Cl,Br,I]"  # 4.74; C6F5OH 5.53
+    - name: ortho-carbonyl-para-nitro   # e.g. picric/dinitro salicylates: extra o-C=O
+      smarts: "[$([OX2H1]),$([OX1-])]c1ccc([$([NX3](=O)=O),$([NX3+]([O-])=O)])cc1[CX3]=O"

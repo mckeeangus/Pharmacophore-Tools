@@ -103,6 +103,7 @@ networkx = "*"
 jinja2 = "*"
 pyparsing = "*"
 tqdm = ">=4.66"
+pyyaml = ">=6.0"             # reads config/protonation.yaml (phenol pKa correction)
 
 [feature.prep.pypi-dependencies]
 torch = "==1.11.0"

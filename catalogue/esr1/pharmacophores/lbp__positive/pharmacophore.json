@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-30",
+    "created": "2026-07-01",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -40,6 +40,17 @@
   },
   "features": [
     {
+      "family": "Donor",
+      "x": 21.161421052631578,
+      "y": -11.096421052631582,
+      "z": 2.6755263157894738,
+      "radius": 1.803270712665709,
+      "n_points": 19,
+      "n_ligands": 15,
+      "support": 0.9375,
+      "direction": null
+    },
+    {
       "family": "LumpedHydrophobe",
       "x": 22.511324074074075,
       "y": -11.502407407407405,
@@ -52,35 +63,13 @@
     },
     {
       "family": "Donor",
-      "x": 21.448625000000003,
-      "y": -10.950312500000003,
-      "z": 2.1398125,
-      "radius": 1.5043750701080167,
-      "n_points": 16,
-      "n_ligands": 15,
-      "support": 0.9375,
-      "direction": null
-    },
-    {
-      "family": "Acceptor",
-      "x": 22.666999999999998,
-      "y": -13.203333333333331,
-      "z": 7.636133333333333,
-      "radius": 1.8694972063216475,
+      "x": 26.64693333333333,
+      "y": -12.0296,
+      "z": 10.315733333333332,
+      "radius": 2.3155525397719754,
       "n_points": 15,
-      "n_ligands": 9,
-      "support": 0.5625,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 26.727714285714285,
-      "y": -11.8695,
-      "z": 10.265357142857143,
-      "radius": 2.2856811046698744,
-      "n_points": 14,
-      "n_ligands": 12,
-      "support": 0.75,
+      "n_ligands": 13,
+      "support": 0.8125,
       "direction": null
     },
     {
@@ -92,6 +81,17 @@
       "n_points": 11,
       "n_ligands": 10,
       "support": 0.625,
+      "direction": null
+    },
+    {
+      "family": "Acceptor",
+      "x": 23.216666666666665,
+      "y": -13.093666666666666,
+      "z": 7.486999999999999,
+      "radius": 1.0,
+      "n_points": 9,
+      "n_ligands": 9,
+      "support": 0.5625,
       "direction": null
     }
   ]

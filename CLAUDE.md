@@ -229,7 +229,15 @@ writes each HET's dominant pH-7.4 microstate to `catalogue/<slug>/protonated_lig
 (pure ladder-walk in `pharmpipe/prep/protonate.py`). The loader prefers it over the
 neutral `unique_ligands.csv` SMILES, and `AssignBondOrdersFromTemplate` carries the
 template's formal charges onto the pose — so donor/acceptor/±ionizable perception sees
-the real ionisation, feeding **both** consensus strategies. pkasolver needs a pinned
+the real ionisation, feeding **both** consensus strategies. A **phenol pKa correction**
+(§2.1; `config/protonation.yaml`, applied by `apply_phenol_correction`) overrides
+pkasolver's documented blind spot — it systematically under-predicts the pKa of phenols
+on poly-ionizable scaffolds (salicylate, gallate, hydroxybenzoates) because adjacent-
+charge + *ortho* H-bond effects are invisible to a graph GNN (QupKake shares this and
+was rejected as no better for the cost). Unactivated phenols are pinned to a reference
+pKa (10.0) → protonated at 7.4; a curated SMARTS exception list (nitro-/cyano-/polyhalo-
+phenols, with literature pKa) keeps pkasolver's value for the genuinely acidic ones.
+Overridden sites are logged per row (`pka_overrides` column, `method=pkasolver+phenol_rule`). pkasolver needs a pinned
 2021-era stack (py3.10/torch1.11/PyG2.0.1, the `prep` env) and is vendored under
 `external/` (gitignored); the `protonated_ligands.csv` outputs are the tracked deliverable.
 

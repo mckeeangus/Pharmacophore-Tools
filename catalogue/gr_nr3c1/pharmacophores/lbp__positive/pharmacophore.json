@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-30",
+    "created": "2026-07-01",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,16 +36,16 @@
       }
     },
     "n_features": 3,
-    "representative_ligand": "7PRX_82H_A801"
+    "representative_ligand": "3K23_JZN_B2"
   },
   "features": [
     {
       "family": "Acceptor",
-      "x": 28.78658461538462,
-      "y": 6.9700307692307675,
-      "z": 14.853953846153846,
+      "x": 28.75237878787879,
+      "y": 6.99431818181818,
+      "z": 14.875969696969698,
       "radius": 3.0,
-      "n_points": 65,
+      "n_points": 66,
       "n_ligands": 20,
       "support": 1.0,
       "direction": null

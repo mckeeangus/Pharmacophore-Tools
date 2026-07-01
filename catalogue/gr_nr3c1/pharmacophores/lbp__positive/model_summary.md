@@ -3,7 +3,7 @@
 - Ligands loaded: **20** (direct=1, template=19)
 - Skipped poses: 0
 - Consensus method: `kmeans`
-- Representative ligand (viz): `7PRX_82H_A801`
+- Representative ligand (viz): `3K23_JZN_B2`
 - Features kept: **3**
 
 | Family | Features | Mean support |

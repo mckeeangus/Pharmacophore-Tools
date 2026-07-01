@@ -21,7 +21,7 @@ All poses for a target share one superposed reference frame (Stage 2 / Stage 3 a
 | Path | What it is |
 |---|---|
 | `unique_ligands.csv` | Stage 1 — one row per kept ligand (HET, name, counts, flags). |
-| `protonated_ligands.csv` | Stage-4 prep — HET → dominant **pH-7.4 microstate** SMILES (pkasolver pKa + ladder walk) + predicted pKa list; the loader prefers it over the neutral SMILES. |
+| `protonated_ligands.csv` | Stage-4 prep — HET → dominant **pH-7.4 microstate** SMILES (pkasolver pKa + ladder walk, with the `config/protonation.yaml` phenol correction) + predicted pKa list; `pka_overrides` records any phenol pKa clamped to the reference. The loader prefers it over the neutral SMILES. |
 | `per_structure.csv` | Stage 1 — one row per (structure × ligand) curation decision. |
 | `resolved.json` | Verified UniProt accession(s) + scrape provenance for the target. |
 | `site_filter.csv` | Stage 2 — every ligand instance with its at-site/off-site status, distance-to-anchor and pocket RMSD. |

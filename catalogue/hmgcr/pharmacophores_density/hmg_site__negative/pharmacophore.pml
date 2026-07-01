@@ -17,16 +17,16 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_0, pos=[14.323, 3.440, 15.288], vdw=3.000
+pseudoatom Acceptor_0, pos=[14.319, 3.438, 15.284], vdw=3.000
 color ph4_Acceptor, Acceptor_0
 group ph4_Acceptor, Acceptor_0
-pseudoatom Acceptor_1, pos=[20.978, 9.647, 14.578], vdw=3.000
+pseudoatom Acceptor_1, pos=[20.980, 9.714, 14.555], vdw=3.000
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_2, pos=[14.266, 8.047, 18.846], vdw=3.000
+pseudoatom Acceptor_2, pos=[14.274, 8.053, 18.846], vdw=3.000
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Donor_3, pos=[14.749, 6.477, 10.728], vdw=2.562
+pseudoatom Donor_3, pos=[14.754, 6.477, 10.729], vdw=2.562
 color ph4_Donor, Donor_3
 group ph4_Donor, Donor_3
 pseudoatom LumpedHydrophobe_4, pos=[19.116, 8.887, 11.298], vdw=2.650

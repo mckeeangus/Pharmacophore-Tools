@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-30",
+    "created": "2026-07-01",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -40,11 +40,11 @@
   "features": [
     {
       "family": "Acceptor",
-      "x": 26.323333333333334,
-      "y": 4.2685,
-      "z": 32.1,
-      "radius": 2.6916739163989054,
-      "n_points": 6,
+      "x": 26.512,
+      "y": 4.334142857142857,
+      "z": 32.277,
+      "radius": 2.5763329658684273,
+      "n_points": 7,
       "n_ligands": 5,
       "support": 1.0,
       "direction": null

@@ -20,10 +20,10 @@ set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 pseudoatom Aromatic_0, pos=[23.197, -11.793, 5.594], vdw=3.000
 color ph4_Aromatic, Aromatic_0
 group ph4_Aromatic, Aromatic_0
-pseudoatom Donor_1, pos=[21.446, -10.970, 2.338], vdw=3.000
+pseudoatom Donor_1, pos=[21.182, -11.261, 2.758], vdw=3.000
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom Donor_2, pos=[26.836, -11.949, 10.649], vdw=3.000
+pseudoatom Donor_2, pos=[26.767, -12.103, 10.645], vdw=3.000
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
 pseudoatom ExcludedVolume_3, pos=[23.952, -18.805, 7.802], vdw=1.000

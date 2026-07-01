@@ -17,18 +17,18 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Donor_0, pos=[13.527, 4.701, 14.441], vdw=1.000
-color ph4_Donor, Donor_0
-group ph4_Donor, Donor_0
-pseudoatom Acceptor_1, pos=[15.100, 2.240, 16.147], vdw=1.068
-color ph4_Acceptor, Acceptor_1
-group ph4_Acceptor, Acceptor_1
-pseudoatom Aromatic_2, pos=[18.612, 9.310, 14.566], vdw=1.000
-color ph4_Aromatic, Aromatic_2
-group ph4_Aromatic, Aromatic_2
-pseudoatom Acceptor_3, pos=[21.476, 9.423, 13.818], vdw=1.198
-color ph4_Acceptor, Acceptor_3
-group ph4_Acceptor, Acceptor_3
+pseudoatom Acceptor_0, pos=[21.574, 9.516, 13.916], vdw=1.363
+color ph4_Acceptor, Acceptor_0
+group ph4_Acceptor, Acceptor_0
+pseudoatom Donor_1, pos=[13.527, 4.701, 14.441], vdw=1.000
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Acceptor_2, pos=[15.100, 2.240, 16.147], vdw=1.068
+color ph4_Acceptor, Acceptor_2
+group ph4_Acceptor, Acceptor_2
+pseudoatom Aromatic_3, pos=[18.612, 9.310, 14.566], vdw=1.000
+color ph4_Aromatic, Aromatic_3
+group ph4_Aromatic, Aromatic_3
 pseudoatom Donor_4, pos=[14.844, 6.574, 11.012], vdw=1.000
 color ph4_Donor, Donor_4
 group ph4_Donor, Donor_4
@@ -44,7 +44,7 @@ group ph4_LumpedHydrophobe, LumpedHydrophobe_7
 pseudoatom Aromatic_8, pos=[24.373, 12.416, 13.584], vdw=1.348
 color ph4_Aromatic, Aromatic_8
 group ph4_Aromatic, Aromatic_8
-pseudoatom Donor_9, pos=[22.166, 11.457, 14.736], vdw=2.042
+pseudoatom Donor_9, pos=[22.134, 11.638, 14.602], vdw=2.096
 color ph4_Donor, Donor_9
 group ph4_Donor, Donor_9
 show spheres, ph4_*

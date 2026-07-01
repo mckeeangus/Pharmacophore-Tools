@@ -112,6 +112,73 @@ The protonation step is the only networked/heavy-ML part and is run once up fron
 (`pixi run -e prep protonate-ligands`); the build pipeline itself stays offline and only
 reads the cached CSV.
 
+#### 2.1 Phenol pKa correction (`config/protonation.yaml`)
+
+pkasolver — like every current molecular-graph pKa GNN — is accurate for **isolated**
+ionizable centres but systematically **under-predicts the pKa of a phenol that shares a
+molecule with a second ionizable group**. Measured on this set (predicted vs
+experimental phenolic-OH pKa):
+
+| Compound | 2nd group | exp pKa | pkasolver | error |
+|---|---|---|---|---|
+| phenol | — | 9.99 | 10.03 | +0.0 |
+| p-cresol | — | 10.26 | 10.18 | −0.1 |
+| 4-nitrophenol | — (EWG) | 7.15 | 8.19 | +1.0 |
+| 4-hydroxybenzoic acid | *para* COOH | 9.32 | 6.54 | **−2.8** |
+| 3-hydroxybenzoic acid | *meta* COOH | 9.92 | 6.13 | **−3.8** |
+| salicylic acid | *ortho* COOH | 13.40 | 4.71 | **−8.7** |
+
+Isolated phenols (even large ones, even with a strong EWG like *p*-nitro) are predicted
+within ~1 unit; the error appears only once a **second ionizable centre** is present and
+grows monotonically as the two centres approach (para → meta → ortho). It decomposes
+into (i) a ~3-unit baseline error from **adjacent-charge electrostatics / polyprotic
+reference-state handling** — the phenol is the *second* deprotonation, on a species that
+already bears a carboxylate, which the model pushes toward carboxylic-acid values instead
+of raising — and (ii) a further ~5–6 units at *ortho* from the **intramolecular
+H-bond** (phenol-OH···⁻OOC) that lifts salicylate's phenol to pKa ≈ 13.4. Both are
+through-space / charged-state effects invisible to a 2-D molecular-graph model. This is a
+**data + inductive-bias limitation shared across graph pKa GNNs**; we confirmed
+**QupKake** (a GNN with added xTB/semi-empirical features + a tautomer front end) gives
+no material improvement here for its extra cost, because the missing physics is coupled
+inter-centre / macrostate behaviour, not the local electronic description it refines.
+
+Because the failure is confined to an identifiable class while isolated-phenol
+prediction is excellent, the fix is a **physically-grounded prior, not a heavier model**:
+a phenolic hydroxyl (`-OH` on a benzene ring) is assigned a **reference pKa of 10.0**
+(phenol 9.99, *p*-cresol 10.26, tyrosine 10.1 — CRC Handbook 97th ed.; Serjeant &
+Dempsey, IUPAC Chemical Data Series No. 23, 1979), which keeps it **protonated at pH 7.4**
+by a >2.5-unit margin, **unless** its ring carries a genuinely activating EWG, in which
+case pkasolver's prediction is kept. The exception list (config, each SMARTS anchored on
+the phenolic O) covers *ortho*/*para* nitrophenols (and hence all poly-nitrophenols:
+2,4-dinitrophenol 4.09, picric 0.38), *ortho*/*para* cyanophenols, and 2,4,6-tri/perhalo-
+phenols (pentachlorophenol 4.74, pentafluorophenol 5.53) — the phenols that really are
+acidic near physiological pH.
+
+The correction runs in **two stages**, because pkasolver mis-deprotonates a phenol in two
+different ways:
+
+1. **Rung correction** (`apply_phenol_correction`) — when pkasolver emits an explicit pKa
+   for the phenol, that rung's value is replaced by the reference before the
+   Henderson–Hasselbalch walk, so only the phenol rung moves and every other site keeps
+   its ML pKa. This is the salicylate/gallate/hydroxybenzoate case.
+2. **Phenolate backstop** (`neutralize_unactivated_phenolates`) — pkasolver reaches its
+   baseline pH-7 microstate through **dimorphite-dl**, which sometimes deprotonates a
+   phenol *without* pkasolver then emitting a re-protonation rung (seen for *ortho*-
+   carbonyl phenols in resorcylate macrolactones and for tyrosine-type phenols on
+   poly-ionizable scaffolds). There is no rung to edit, so the walk yields a phenolate.
+   This stage operates on the **final** microstate: any `[O-]` on a benzene ring that is
+   not in an activating environment is set back to the neutral hydroxyl — a pure
+   formal-charge/H edit, independent of pkasolver's rung enumeration, so it catches the
+   cases stage 1 cannot.
+
+Every corrected site is recorded in the `pka_overrides` column of
+`protonated_ligands.csv` (`phenol@<atom>:<old>-><new>` for a rung edit,
+`phenol@<atom>:[O-]->OH` for the backstop) and flips the row's `method` to
+`pkasolver+phenol_rule`, so the correction is fully auditable. Detection is restricted to
+a benzene carbocycle by design, leaving genuinely acidic heteroaromatic/vinylogous "enol"
+hydroxyls (4-hydroxycoumarin, hydroxypyridines, tropolones, tetramic acids) to pkasolver
+— as are all the activated phenols above (picric acid, polynitro-/polyfluoro-phenols).
+
 ---
 
 ## 3. Feature extraction (RDKit feature families)

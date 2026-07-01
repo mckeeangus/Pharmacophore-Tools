@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-30",
+    "created": "2026-07-01",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -49,11 +49,11 @@
   "features": [
     {
       "family": "Acceptor",
-      "x": -6.3459119181882055,
-      "y": 1.2630718299511416,
-      "z": 17.03523352103324,
-      "radius": 2.9522117984626957,
-      "n_points": 178,
+      "x": -6.353585716618197,
+      "y": 1.2677067231044683,
+      "z": 17.0355091345121,
+      "radius": 2.9568058153600987,
+      "n_points": 179,
       "n_ligands": 74,
       "support": 0.9737,
       "direction": null

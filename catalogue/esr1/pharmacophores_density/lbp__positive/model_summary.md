@@ -9,7 +9,7 @@
 | Family | Features | Mean support |
 |---|---:|---:|
 | Aromatic | 1 | 1.00 |
-| Donor | 2 | 0.81 |
+| Donor | 2 | 0.88 |
 | ExcludedVolume | 40 | 0.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).

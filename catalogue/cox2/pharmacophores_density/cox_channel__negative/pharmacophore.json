@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-06-30",
+    "created": "2026-07-01",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -48,11 +48,11 @@
   "features": [
     {
       "family": "Acceptor",
-      "x": 27.55096036460206,
-      "y": 4.559520261866998,
-      "z": 32.748980742735654,
+      "x": 27.7629833517636,
+      "y": 4.658720256713894,
+      "z": 32.86533210213236,
       "radius": 3.0,
-      "n_points": 6,
+      "n_points": 7,
       "n_ligands": 5,
       "support": 1.0,
       "direction": null

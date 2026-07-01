@@ -8,7 +8,7 @@ is injected — so this is the unit-tested heart of the stage.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import TypeVar
 
 import numpy as np
@@ -31,6 +31,8 @@ class ClusterAssignment:
     ligand_ids: list[str]       # (n,) source ligand per point
     centers: dict[int, tuple[float, float, float]]  # label -> centre
     kept_labels: set[int]       # labels that became pharmacophore features
+    # kept cluster label -> (feature label, support) for the raw-feature plots
+    feature_labels: dict[int, tuple[str, float]] = field(default_factory=dict)
 
 
 @dataclass
@@ -108,6 +110,32 @@ def _candidate_features(family: str, coords: np.ndarray, labels: np.ndarray,
     return candidates
 
 
+def finalize_features(
+    pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]],
+) -> tuple[list[PharmacophoreFeature], dict[str, set[int]],
+           dict[str, dict[int, tuple[str, float]]]]:
+    """Assign per-family ordinal labels and index the kept clusters for viz/report.
+
+    ``pooled`` is the final (post-merge/cap) feature list, strongest-first. Each family's
+    features are numbered ``1..n`` in that order, so ``Donor 1`` is the dominant donor.
+    Returns the labelled features, ``family -> kept cluster-labels``, and
+    ``family -> {cluster_label: (feature_label, support)}`` for the plots. Shared by
+    both consensus paths so labelling is identical.
+    """
+    counts: dict[str, int] = {}
+    features: list[PharmacophoreFeature] = []
+    kept_by_family: dict[str, set[int]] = {}
+    label_index: dict[str, dict[int, tuple[str, float]]] = {}
+    for feat, (family, cluster_label) in pooled:
+        counts[family] = counts.get(family, 0) + 1
+        labelled = replace(feat, label=f"{family} {counts[family]}")
+        features.append(labelled)
+        kept_by_family.setdefault(family, set()).add(cluster_label)
+        label_index.setdefault(family, {})[cluster_label] = (
+            labelled.label, labelled.support)
+    return features, kept_by_family, label_index
+
+
 def _cap_per_family(pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]],
                     top_n: int) -> list[tuple[PharmacophoreFeature, tuple[str, int]]]:
     """Keep at most ``top_n`` features per family from a strongest-first list."""
@@ -149,12 +177,10 @@ def build_pharmacophore(table: FeatureTable, clusterer: Clusterer, sel: Selectio
         pooled = _merge_overlapping(pooled, sel.merge_radius)
     if sel.top_n_per_family is not None:
         pooled = _cap_per_family(pooled, sel.top_n_per_family)
-    features = [feat for feat, _ in pooled]
-    kept_by_family: dict[str, set[int]] = {}
-    for _, (family, label) in pooled:
-        kept_by_family.setdefault(family, set()).add(label)
+    features, kept_by_family, label_index = finalize_features(pooled)
     for assignment in assignments:
         assignment.kept_labels = kept_by_family.get(assignment.family, set())
+        assignment.feature_labels = label_index.get(assignment.family, {})
     meta = dict(metadata or {})
     meta.setdefault("clustering", clusterer.describe())
     meta["n_features"] = len(features)

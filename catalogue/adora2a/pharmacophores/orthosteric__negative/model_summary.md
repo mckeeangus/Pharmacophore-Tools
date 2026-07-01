@@ -6,9 +6,12 @@
 - Representative ligand (viz): `8JWY_VBF_A1201`
 - Features kept: **3**
 
-| Family | Features | Mean support |
-|---|---:|---:|
-| Acceptor | 2 | 0.78 |
-| Donor | 1 | 0.68 |
+Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
-See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).
+| Feature | Points | Ligands | Support |
+|---|---:|---:|---:|
+| Acceptor 1 | 86 | 25 | 1.00 |
+| Acceptor 2 | 24 | 14 | 0.56 |
+| Donor 1 | 19 | 18 | 0.72 |
+
+See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -48,7 +48,8 @@
       "n_points": 39,
       "n_ligands": 24,
       "support": 0.96,
-      "direction": null
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
     },
     {
       "family": "Donor",
@@ -59,7 +60,8 @@
       "n_points": 30,
       "n_ligands": 23,
       "support": 0.92,
-      "direction": null
+      "direction": null,
+      "label": "Donor 1"
     }
   ]
 }

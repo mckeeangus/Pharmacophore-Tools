@@ -30,6 +30,7 @@ import csv
 import logging
 import os
 import sys
+from collections import Counter
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -50,10 +51,9 @@ RDLogger.DisableLog("rdApp.*")
 
 from pharmpipe.prep.protonate import (  # noqa: E402
     PHYSIOLOGICAL_PH,
-    PhenolRule,
-    apply_phenol_correction,
+    WeakAcidClass,
     largest_fragment,
-    neutralize_unactivated_phenolates,
+    neutralize_weak_acids,
     protonated_mol,
     to_smiles,
 )
@@ -64,28 +64,29 @@ CATALOGUE = REPO / "catalogue"
 CONFIG = REPO / "config" / "protonation.yaml"
 OUT_NAME = "protonated_ligands.csv"
 FIELDS = ["het_code", "smiles", "protonated_smiles", "ph", "n_pka_sites",
-          "pka_values", "pka_overrides", "method"]
+          "pka_values", "guard_neutralized", "method"]
 
 
-def _load_phenol_rule(cfg_path: Path) -> PhenolRule | None:
-    """Compile the phenol pKa correction from config; None if absent/disabled.
+def _load_weak_acid_guard(cfg_path: Path) -> list[WeakAcidClass]:
+    """Compile the weak-acid guard classes from config; empty if absent/disabled.
 
-    pkasolver under-predicts phenol pKa on poly-ionizable scaffolds; this rule keeps
-    unactivated phenols protonated at pH 7.4 (see config/protonation.yaml).
+    pkasolver over-deprotonates weak acids on poly-ionizable scaffolds; the guard
+    re-protonates them at pH 7.4 unless genuinely acidic (see config/protonation.yaml).
     """
     if not cfg_path.exists():
-        return None
+        return []
     data = (yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}).get(
-        "phenol_correction", {})
+        "weak_acid_guard", {})
     if not data.get("enabled", False):
-        return None
-    activating = tuple(
-        Chem.MolFromSmarts(p["smarts"]) for p in data.get("activating_patterns", []))
-    return PhenolRule(
-        phenol=Chem.MolFromSmarts(data["phenol_smarts"]),
-        reference_pka=float(data["reference_pka"]),
-        activating=activating,
-    )
+        return []
+    return [
+        WeakAcidClass(
+            name=cls["name"],
+            anion=Chem.MolFromSmarts(cls["anion"]),
+            exceptions=tuple(Chem.MolFromSmarts(s) for s in cls.get("exceptions", [])),
+        )
+        for cls in data.get("classes", [])
+    ]
 
 
 def _targets(slug: str | None) -> list[Path]:
@@ -103,9 +104,9 @@ def _read_existing(out_csv: Path) -> dict[str, dict]:
 
 
 def _protonate_one(
-    smiles: str, query_model, ph: float, phenol_rule: PhenolRule | None,
+    smiles: str, query_model, ph: float, guard: list[WeakAcidClass],
 ) -> tuple[str, int, str, str, str]:
-    """Return (protonated_smiles, n_sites, pka_csv, overrides_csv, method) for one SMILES."""
+    """Return (protonated_smiles, n_sites, pka_csv, guard_csv, method) for one SMILES."""
     from pkasolver.query import calculate_microstate_pka_values
 
     mol = Chem.MolFromSmiles(smiles)
@@ -119,23 +120,19 @@ def _protonate_one(
         return to_smiles(mol), 0, "", "", f"fallback:{type(exc).__name__}"
     if not states:
         return to_smiles(mol), 0, "", "", "pkasolver:no_ionizable"
-    method = "pkasolver"
-    overrides: list[tuple[int, float, float]] = []
-    if phenol_rule is not None:
-        states, overrides = apply_phenol_correction(states, phenol_rule)
     prot = protonated_mol(mol, states, ph)
-    ov_parts = [f"phenol@{i}:{old:.2f}->{new:.2f}" for i, old, new in overrides]
-    if phenol_rule is not None:
-        prot, neutralized = neutralize_unactivated_phenolates(prot, phenol_rule)
-        ov_parts += [f"phenol@{i}:[O-]->OH" for i in neutralized]
-    if ov_parts:
-        method = "pkasolver+phenol_rule"
+    neutralized: list[tuple[str, int]] = []
+    if guard:
+        prot, neutralized = neutralize_weak_acids(prot, guard)
+    method = "pkasolver+weak_acid_guard" if neutralized else "pkasolver"
     pkas = ";".join(f"{s.pka:.2f}" for s in sorted(states, key=lambda s: s.pka))
-    return to_smiles(prot), len(states), pkas, ";".join(ov_parts), method
+    counts = Counter(name for name, _ in neutralized)
+    guard_csv = ";".join(f"{cls}:{counts[cls]}" for cls in sorted(counts))
+    return to_smiles(prot), len(states), pkas, guard_csv, method
 
 
 def _process_target(slug_dir: Path, query_model, ph: float, force: bool,
-                    phenol_rule: PhenolRule | None) -> tuple[int, int]:
+                    guard: list[WeakAcidClass]) -> tuple[int, int]:
     rows_in = list(csv.DictReader((slug_dir / "unique_ligands.csv").open(encoding="utf-8")))
     out_csv = slug_dir / OUT_NAME
     existing = {} if force else _read_existing(out_csv)
@@ -149,11 +146,11 @@ def _process_target(slug_dir: Path, query_model, ph: float, force: bool,
             out_rows.append({k: existing[het].get(k, "") for k in FIELDS})
             reused += 1
             continue
-        prot, n_sites, pkas, overrides, method = _protonate_one(
-            smi, query_model, ph, phenol_rule)
+        prot, n_sites, pkas, guard_csv, method = _protonate_one(
+            smi, query_model, ph, guard)
         out_rows.append({"het_code": het, "smiles": smi, "protonated_smiles": prot,
                          "ph": ph, "n_pka_sites": n_sites, "pka_values": pkas,
-                         "pka_overrides": overrides, "method": method})
+                         "guard_neutralized": guard_csv, "method": method})
         changed += 1
         log.info("%s/%s: %s -> %s [%s]", slug_dir.name, het, smi, prot, method)
     with out_csv.open("w", newline="", encoding="utf-8") as fh:
@@ -174,16 +171,16 @@ def main(argv=None) -> int:
 
     from pkasolver.query import QueryModel
 
-    phenol_rule = _load_phenol_rule(CONFIG)
-    log.info("phenol pKa correction: %s",
-             "enabled" if phenol_rule is not None else "disabled")
+    guard = _load_weak_acid_guard(CONFIG)
+    log.info("weak-acid guard: %s",
+             f"{len(guard)} classes" if guard else "disabled")
     log.info("loading pkasolver model ensemble …")
     query_model = QueryModel()
 
     total_changed = total_reused = 0
     for slug_dir in _targets(args.target):
         changed, reused = _process_target(slug_dir, query_model, args.ph, args.force,
-                                          phenol_rule)
+                                          guard)
         print(f"{slug_dir.name}: {changed} protonated, {reused} reused -> {OUT_NAME}")
         total_changed += changed
         total_reused += reused

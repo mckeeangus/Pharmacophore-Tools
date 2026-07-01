@@ -17,18 +17,18 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_0, pos=[25.462, 167.265, 14.213], vdw=1.353
-color ph4_Acceptor, Acceptor_0
-group ph4_Acceptor, Acceptor_0
-pseudoatom LumpedHydrophobe_1, pos=[25.509, 164.696, 10.056], vdw=1.814
+pseudoatom Acceptor_1, pos=[25.462, 167.265, 14.213], vdw=1.353, label="Acceptor 1 (1.00)"
+color ph4_Acceptor, Acceptor_1
+group ph4_Acceptor, Acceptor_1
+pseudoatom LumpedHydrophobe_1, pos=[25.509, 164.696, 10.056], vdw=1.814, label="LumpedHydrophobe 1 (1.00)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
-pseudoatom Donor_2, pos=[25.632, 162.997, 15.217], vdw=1.220
+pseudoatom Donor_1, pos=[25.632, 162.997, 15.217], vdw=1.220, label="Donor 1 (1.00)"
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Donor_2, pos=[27.775, 164.940, 18.823], vdw=1.445, label="Donor 2 (0.67)"
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
-pseudoatom Donor_3, pos=[27.775, 164.940, 18.823], vdw=1.445
-color ph4_Donor, Donor_3
-group ph4_Donor, Donor_3
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

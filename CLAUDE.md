@@ -229,17 +229,21 @@ writes each HET's dominant pH-7.4 microstate to `catalogue/<slug>/protonated_lig
 (pure ladder-walk in `pharmpipe/prep/protonate.py`). The loader prefers it over the
 neutral `unique_ligands.csv` SMILES, and `AssignBondOrdersFromTemplate` carries the
 template's formal charges onto the pose — so donor/acceptor/±ionizable perception sees
-the real ionisation, feeding **both** consensus strategies. A **phenol pKa correction**
-(§2.1; `config/protonation.yaml`, applied by `apply_phenol_correction`) overrides
-pkasolver's documented blind spot — it systematically under-predicts the pKa of phenols
-on poly-ionizable scaffolds (salicylate, gallate, hydroxybenzoates) because adjacent-
-charge + *ortho* H-bond effects are invisible to a graph GNN (QupKake shares this and
-was rejected as no better for the cost). Unactivated phenols are pinned to a reference
-pKa (10.0) → protonated at 7.4; a curated SMARTS exception list (nitro-/cyano-/polyhalo-
-phenols, with literature pKa) keeps pkasolver's value for the genuinely acidic ones.
-Overridden sites are logged per row (`pka_overrides` column, `method=pkasolver+phenol_rule`). pkasolver needs a pinned
-2021-era stack (py3.10/torch1.11/PyG2.0.1, the `prep` env) and is vendored under
-`external/` (gitignored); the `protonated_ligands.csv` outputs are the tracked deliverable.
+the real ionisation, feeding **both** consensus strategies. A **weak-acid guard**
+(§2.1; `config/protonation.yaml`, applied by `neutralize_weak_acids`) corrects
+pkasolver's documented blind spot — it systematically *over-deprotonates* weak acids
+(O–H, N–H) on poly-ionizable scaffolds (phenols, alcohols, amides, primary sulfonamides,
+amino-heteroaromatics) because adjacent-charge / *ortho* H-bond / macrostate effects are
+invisible to a graph GNN (QupKake shares this and was rejected as no better for the cost).
+The guard is a **general structural prior, not per-compound literature pKa**: config
+defines weak-acid classes (each an anion SMARTS + genuinely-acidic exceptions) whose pKa
+is well above 7.4; any that survive the ladder walk as their conjugate base are
+re-protonated in the final microstate. It is purely additive (never removes a proton), so
+it can't disturb carboxylates/phosphates/amines. Sulfonamides are neutralised to the
+solution state (the CA2 Zn-bound-anion case is out of scope). Re-protonated sites are
+logged per row (`guard_neutralized` column, `method=pkasolver+weak_acid_guard`). pkasolver
+needs a pinned 2021-era stack (py3.10/torch1.11/PyG2.0.1, the `prep` env) and is vendored
+under `external/` (gitignored); the `protonated_ligands.csv` outputs are the tracked deliverable.
 
 **Outputs** per model dir (`catalogue/<slug>/pharmacophores/<cell>/`):
 `pharmacophore.json` (canonical, method-stable; provenance includes the representative

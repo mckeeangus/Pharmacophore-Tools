@@ -6,10 +6,13 @@
 - Representative ligand (viz): `7X2C_G3C_F503`
 - Features kept: **4**
 
-| Family | Features | Mean support |
-|---|---:|---:|
-| Acceptor | 2 | 0.72 |
-| LumpedHydrophobe | 1 | 0.75 |
-| PosIonizable | 1 | 0.69 |
+Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
-See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).
+| Feature | Points | Ligands | Support |
+|---|---:|---:|---:|
+| Acceptor 1 | 31 | 15 | 0.94 |
+| Acceptor 2 | 16 | 8 | 0.50 |
+| LumpedHydrophobe 1 | 15 | 12 | 0.75 |
+| PosIonizable 1 | 11 | 11 | 0.69 |
+
+See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

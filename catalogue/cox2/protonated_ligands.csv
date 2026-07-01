@@ -1,9 +1,9 @@
-het_code,smiles,protonated_smiles,ph,n_pka_sites,pka_values,pka_overrides,method
+het_code,smiles,protonated_smiles,ph,n_pka_sites,pka_values,guard_neutralized,method
 COH,Cc1c2n3c(c1CCC(=O)O)C=C4C(=C(C5=[N]4[Co]36[N]7=C(C=C8N6C(=C5)C(=C8C=C)C)C(=C(C7=C2)C=C)C)C)CCC(=O)O,C=CC1=C(C)C2=[N]3->[Co]45<-[N]6=C(C=c7c(C)c(C=C)c([n]74)=C2)C(C)=C(CCC(=O)O)C6=Cc2c(CCC(=O)O)c(C)c([n]25)C=C13,7.4,0,,,pkasolver:no_ionizable
 AKR,C=CC(=O)O,C=CC(=O)[O-],7.4,1,4.27,,pkasolver
 FLF,c1ccc(c(c1)C(=O)O)Nc2cccc(c2)C(F)(F)F,O=C([O-])c1ccccc1Nc1cccc(C(F)(F)F)c1,7.4,3,3.76;4.77;8.65,,pkasolver
 ID8,Cc1cccc(c1C)Nc2ccccc2C(=O)O,Cc1cccc(Nc2ccccc2C(=O)[O-])c1C,7.4,3,4.35;5.68;9.25,,pkasolver
-JMS,Cc1ccc(c(c1Cl)Nc2ccccc2C(=O)O)Cl,Cc1ccc(Cl)c([N-]c2ccccc2C(=O)[O-])c1Cl,7.4,3,4.26;4.98;7.36,,pkasolver
+JMS,Cc1ccc(c(c1Cl)Nc2ccccc2C(=O)O)Cl,Cc1ccc(Cl)c(Nc2ccccc2C(=O)[O-])c1Cl,7.4,3,4.26;4.98;7.36,aryl_amine:1,pkasolver+weak_acid_guard
 RCX,CS(=O)(=O)c1ccc(cc1)C2=C(C(=O)OC2)c3ccccc3,CS(=O)(=O)c1ccc(C2=C(c3ccccc3)C(=O)OC2)cc1,7.4,0,,,pkasolver:no_ionizable
-SAL,c1ccc(c(c1)C(=O)O)O,O=C([O-])c1ccccc1O,7.4,2,3.42;10.00,phenol@9:4.71->10.00,pkasolver+phenol_rule
+SAL,c1ccc(c(c1)C(=O)O)O,O=C([O-])c1ccccc1O,7.4,2,3.42;10.00,phenol:1,pkasolver+weak_acid_guard
 TLF,Cc1c(cccc1Cl)Nc2ccccc2C(=O)O,Cc1c(Cl)cccc1Nc1ccccc1C(=O)[O-],7.4,3,4.22;5.27;8.66,,pkasolver

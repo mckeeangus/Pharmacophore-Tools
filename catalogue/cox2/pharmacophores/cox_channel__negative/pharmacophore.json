@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -47,7 +47,8 @@
       "n_points": 7,
       "n_ligands": 5,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "Aromatic",
@@ -58,7 +59,8 @@
       "n_points": 5,
       "n_ligands": 5,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 1"
     },
     {
       "family": "Aromatic",
@@ -69,7 +71,8 @@
       "n_points": 3,
       "n_ligands": 3,
       "support": 0.6,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 2"
     }
   ]
 }

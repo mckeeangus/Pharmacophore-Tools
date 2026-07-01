@@ -6,9 +6,12 @@
 - Representative ligand (viz): `5IKV_FLF_B601`
 - Features kept: **3**
 
-| Family | Features | Mean support |
-|---|---:|---:|
-| Acceptor | 1 | 1.00 |
-| Aromatic | 2 | 0.80 |
+Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
-See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).
+| Feature | Points | Ligands | Support |
+|---|---:|---:|---:|
+| Acceptor 1 | 7 | 5 | 1.00 |
+| Aromatic 1 | 5 | 5 | 1.00 |
+| Aromatic 2 | 3 | 3 | 0.60 |
+
+See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

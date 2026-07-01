@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -48,7 +48,8 @@
       "n_points": 11,
       "n_ligands": 11,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "Donor",
@@ -59,7 +60,8 @@
       "n_points": 11,
       "n_ligands": 11,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Donor 2"
     },
     {
       "family": "Donor",
@@ -70,7 +72,8 @@
       "n_points": 11,
       "n_ligands": 11,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Donor 3"
     },
     {
       "family": "Aromatic",
@@ -81,7 +84,8 @@
       "n_points": 11,
       "n_ligands": 11,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 1"
     },
     {
       "family": "Donor",
@@ -92,7 +96,8 @@
       "n_points": 10,
       "n_ligands": 10,
       "support": 0.9091,
-      "direction": null
+      "direction": null,
+      "label": "Donor 4"
     }
   ]
 }

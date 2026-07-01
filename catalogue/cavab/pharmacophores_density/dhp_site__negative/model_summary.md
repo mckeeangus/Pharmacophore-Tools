@@ -6,11 +6,52 @@
 - Representative ligand (viz): `5KLS_6UC_C1304`
 - Features kept: **43**
 
-| Family | Features | Mean support |
-|---|---:|---:|
-| Donor | 1 | 1.00 |
-| ExcludedVolume | 40 | 0.00 |
-| LumpedHydrophobe | 1 | 1.00 |
-| PosIonizable | 1 | 0.67 |
+Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
-See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).
+| Feature | Points | Ligands | Support |
+|---|---:|---:|---:|
+| Donor 1 | 3 | 3 | 1.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| LumpedHydrophobe 1 | 4 | 3 | 1.00 |
+| PosIonizable 1 | 2 | 2 | 0.67 |
+
+See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

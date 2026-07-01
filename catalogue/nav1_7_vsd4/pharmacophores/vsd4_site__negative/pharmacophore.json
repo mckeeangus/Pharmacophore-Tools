@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -34,7 +34,7 @@
         "random_state": 0
       }
     },
-    "n_features": 9,
+    "n_features": 10,
     "representative_ligand": "8F0P_X7L_A1610"
   },
   "features": [
@@ -47,7 +47,8 @@
       "n_points": 6,
       "n_ligands": 3,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "Acceptor",
@@ -58,7 +59,8 @@
       "n_points": 5,
       "n_ligands": 3,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "Acceptor",
@@ -69,7 +71,8 @@
       "n_points": 4,
       "n_ligands": 3,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "Aromatic",
@@ -80,7 +83,8 @@
       "n_points": 4,
       "n_ligands": 3,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 1"
     },
     {
       "family": "Acceptor",
@@ -91,7 +95,8 @@
       "n_points": 3,
       "n_ligands": 3,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 3"
     },
     {
       "family": "Aromatic",
@@ -102,7 +107,20 @@
       "n_points": 3,
       "n_ligands": 3,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 2"
+    },
+    {
+      "family": "Donor",
+      "x": 91.898,
+      "y": 134.7775,
+      "z": 134.1895,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667,
+      "direction": null,
+      "label": "Donor 2"
     },
     {
       "family": "Acceptor",
@@ -113,7 +131,8 @@
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 4"
     },
     {
       "family": "Acceptor",
@@ -124,7 +143,8 @@
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 5"
     },
     {
       "family": "LumpedHydrophobe",
@@ -135,7 +155,8 @@
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667,
-      "direction": null
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
     }
   ]
 }

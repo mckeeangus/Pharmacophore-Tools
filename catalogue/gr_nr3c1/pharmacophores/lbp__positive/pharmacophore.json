@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,19 +36,20 @@
       }
     },
     "n_features": 3,
-    "representative_ligand": "3K23_JZN_B2"
+    "representative_ligand": "7PRX_82H_A801"
   },
   "features": [
     {
       "family": "Acceptor",
-      "x": 28.75237878787879,
-      "y": 6.99431818181818,
-      "z": 14.875969696969698,
+      "x": 28.73869565217392,
+      "y": 6.9077681159420266,
+      "z": 14.827333333333334,
       "radius": 3.0,
-      "n_points": 66,
+      "n_points": 69,
       "n_ligands": 20,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "Acceptor",
@@ -59,7 +60,8 @@
       "n_points": 33,
       "n_ligands": 19,
       "support": 0.95,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "Aromatic",
@@ -70,7 +72,8 @@
       "n_points": 24,
       "n_ligands": 13,
       "support": 0.65,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 1"
     }
   ]
 }

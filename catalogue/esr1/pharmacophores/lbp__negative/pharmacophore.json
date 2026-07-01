@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -48,7 +48,8 @@
       "n_points": 79,
       "n_ligands": 36,
       "support": 0.8571,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "Aromatic",
@@ -59,7 +60,8 @@
       "n_points": 44,
       "n_ligands": 42,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 1"
     },
     {
       "family": "Aromatic",
@@ -70,7 +72,8 @@
       "n_points": 42,
       "n_ligands": 42,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 2"
     },
     {
       "family": "Acceptor",
@@ -81,7 +84,8 @@
       "n_points": 38,
       "n_ligands": 35,
       "support": 0.8333,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "Acceptor",
@@ -92,7 +96,8 @@
       "n_points": 36,
       "n_ligands": 32,
       "support": 0.7619,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 3"
     },
     {
       "family": "PosIonizable",
@@ -103,7 +108,8 @@
       "n_points": 27,
       "n_ligands": 27,
       "support": 0.6429,
-      "direction": null
+      "direction": null,
+      "label": "PosIonizable 1"
     }
   ]
 }

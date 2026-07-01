@@ -17,18 +17,18 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_0, pos=[-5.272, 1.153, 17.993], vdw=1.000
-color ph4_Acceptor, Acceptor_0
-group ph4_Acceptor, Acceptor_0
-pseudoatom Acceptor_1, pos=[-7.225, 1.098, 16.563], vdw=1.000
+pseudoatom Acceptor_1, pos=[-5.272, 1.153, 17.993], vdw=1.000, label="Acceptor 1 (0.96)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Donor_2, pos=[-5.216, 0.068, 15.950], vdw=1.201
-color ph4_Donor, Donor_2
-group ph4_Donor, Donor_2
-pseudoatom Aromatic_3, pos=[-4.761, 3.525, 15.031], vdw=1.000
-color ph4_Aromatic, Aromatic_3
-group ph4_Aromatic, Aromatic_3
+pseudoatom Donor_1, pos=[-5.224, 0.049, 15.960], vdw=1.182, label="Donor 1 (0.80)"
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Acceptor_2, pos=[-7.225, 1.098, 16.563], vdw=1.000, label="Acceptor 2 (0.95)"
+color ph4_Acceptor, Acceptor_2
+group ph4_Acceptor, Acceptor_2
+pseudoatom Aromatic_1, pos=[-4.761, 3.525, 15.031], vdw=1.000, label="Aromatic 1 (0.78)"
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

@@ -1,6 +1,6 @@
-het_code,smiles,protonated_smiles,ph,n_pka_sites,pka_values,pka_overrides,method
+het_code,smiles,protonated_smiles,ph,n_pka_sites,pka_values,guard_neutralized,method
 P4G,CCOCCOCCOCC,CCOCCOCCOCC,7.4,0,,,pkasolver:no_ionizable
-LNR,c1cc(c(cc1[C@H](CN)O)O)O,[NH3+]C[C@H](O)c1ccc(O)c(O)c1,7.4,4,9.08;10.00;10.00;10.52,phenol@8:9.53->10.00;phenol@10:9.85->10.00,pkasolver+phenol_rule
+LNR,c1cc(c(cc1[C@H](CN)O)O)O,[NH3+]C[C@H](O)c1ccc(O)c(O)c1,7.4,4,9.08;10.00;10.00;10.52,phenol:2,pkasolver+weak_acid_guard
 DMU,CCCCCCCCCCO[C@H]1[C@@H]([C@H]([C@@H]([C@H](O1)CO)O[C@@H]2[C@@H]([C@H]([C@@H]([C@H](O2)CO)O)O)O)O)O,CCCCCCCCCCO[C@@H]1O[C@H](CO)[C@@H](O[C@H]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@H](O)[C@H]1O,7.4,5,8.85;8.97;9.24;9.29;9.37,,pkasolver
 A1EFM,CCCCCCCCCC(=O)O[C@H](COC(=O)CCCCCCCC)COP(=O)(O)OC[C@H](CO)O,CCCCCCCCCC(=O)O[C@H](COC(=O)CCCCCCCC)COP(=O)([O-])OC[C@@H](O)CO,7.4,3,6.68;9.41;9.46,,pkasolver
 PTY,CCCCCCCCCCCCCCCCCCCC(=O)O[C@H](COC(=O)CCCCCCCCCCCCCC)CO[P@@](=O)(O)OCCN,CCCCCCCCCCCCCCCCCCCC(=O)O[C@H](COC(=O)CCCCCCCCCCCCCC)CO[P@@](=O)([O-])OCC[NH3+],7.4,2,7.35;9.19,,pkasolver
@@ -10,9 +10,9 @@ A1LX4,Cc1ccccc1O[C@H](CCNC)c2ccccc2,C[NH2+]CC[C@@H](Oc1ccccc1C)c1ccccc1,7.4,1,9.
 42F,CN1[C@H]2CC[C@@H]1[C@H]([C@H](C2)c3ccc(cc3)I)C(=O)OC,COC(=O)[C@H]1[C@@H](c2ccc(I)cc2)C[C@@H]2CC[C@H]1[NH+]2C,7.4,1,8.89,,pkasolver
 COC,C[N@]1[C@H]2CC[C@@H]1[C@H]([C@H](C2)OC(=O)c3ccccc3)C(=O)OC,COC(=O)[C@H]1[C@@H](OC(=O)c2ccccc2)C[C@@H]2CC[C@H]1[NH+]2C,7.4,1,8.45,,pkasolver
 DSM,CNCCCN1c2ccccc2CCc3c1cccc3,C[NH2+]CCCN1c2ccccc2CCc2ccccc21,7.4,2,5.91;9.53,,pkasolver
-E5E,c1cc(c(cc1[C@H](C[NH3+])O)O)O,[NH3+]C[C@H](O)c1ccc(O)c(O)c1,7.4,4,9.08;10.00;10.00;10.52,phenol@8:9.53->10.00;phenol@10:9.85->10.00,pkasolver+phenol_rule
+E5E,c1cc(c(cc1[C@H](C[NH3+])O)O)O,[NH3+]C[C@H](O)c1ccc(O)c(O)c1,7.4,4,9.08;10.00;10.00;10.52,phenol:2,pkasolver+weak_acid_guard
 F0F,CCN(CC)C(=O)[C@@]1(C[C@@H]1CN)c2ccccc2,CC[NH+](CC)C(=O)[C@]1(c2ccccc2)C[C@@H]1C[NH3+],7.4,2,7.57;9.14,,pkasolver
-LDP,c1cc(c(cc1CCN)O)O,[NH3+]CCc1ccc(O)c(O)c1,7.4,3,9.80;10.00;10.00,phenol@9:9.85->10.00;phenol@7:10.19->10.00,pkasolver+phenol_rule
+LDP,c1cc(c(cc1CCN)O)O,[NH3+]CCc1ccc(O)c(O)c1,7.4,3,9.80;10.00;10.00,phenol:2,pkasolver+weak_acid_guard
 1WE,C[C@@H](Cc1ccccc1)N,C[C@H]([NH3+])Cc1ccccc1,7.4,1,9.72,,pkasolver
 1WR,c1ccc(cc1)C(=CCCN2CCC[C@@H](C2)C(=O)O)c3ccccc3,O=C([O-])[C@H]1CCC[NH+](CCC=C(c2ccccc2)c2ccccc2)C1,7.4,2,5.63;9.22,,pkasolver
 1XR,C[C@@H](C(=O)c1cccc(c1)Cl)NC(C)(C)C,C[C@H]([NH2+]C(C)(C)C)C(=O)c1cccc(Cl)c1,7.4,1,8.38,,pkasolver

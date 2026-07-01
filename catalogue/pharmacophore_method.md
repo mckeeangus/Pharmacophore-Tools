@@ -112,12 +112,15 @@ The protonation step is the only networked/heavy-ML part and is run once up fron
 (`pixi run -e prep protonate-ligands`); the build pipeline itself stays offline and only
 reads the cached CSV.
 
-#### 2.1 Phenol pKa correction (`config/protonation.yaml`)
+#### 2.1 Weak-acid guard (`config/protonation.yaml`)
 
 pkasolver — like every current molecular-graph pKa GNN — is accurate for **isolated**
-ionizable centres but systematically **under-predicts the pKa of a phenol that shares a
-molecule with a second ionizable group**. Measured on this set (predicted vs
-experimental phenolic-OH pKa):
+ionizable centres but systematically **over-deprotonates weak acids (O–H, N–H) that sit
+on complex, poly-ionizable scaffolds**. The phenol was the most visible face of it; the
+same failure produces the *conjugate base* at pH 7.4 for aliphatic/sugar alcohols,
+amides, primary sulfonamides, and amino-heteroaromatics as well.
+
+The mechanism is clearest on phenols (predicted vs experimental phenolic-OH pKa):
 
 | Compound | 2nd group | exp pKa | pkasolver | error |
 |---|---|---|---|---|
@@ -128,56 +131,55 @@ experimental phenolic-OH pKa):
 | 3-hydroxybenzoic acid | *meta* COOH | 9.92 | 6.13 | **−3.8** |
 | salicylic acid | *ortho* COOH | 13.40 | 4.71 | **−8.7** |
 
-Isolated phenols (even large ones, even with a strong EWG like *p*-nitro) are predicted
+Isolated centres (even large ones, even with a strong EWG like *p*-nitro) are predicted
 within ~1 unit; the error appears only once a **second ionizable centre** is present and
 grows monotonically as the two centres approach (para → meta → ortho). It decomposes
 into (i) a ~3-unit baseline error from **adjacent-charge electrostatics / polyprotic
-reference-state handling** — the phenol is the *second* deprotonation, on a species that
-already bears a carboxylate, which the model pushes toward carboxylic-acid values instead
-of raising — and (ii) a further ~5–6 units at *ortho* from the **intramolecular
-H-bond** (phenol-OH···⁻OOC) that lifts salicylate's phenol to pKa ≈ 13.4. Both are
-through-space / charged-state effects invisible to a 2-D molecular-graph model. This is a
-**data + inductive-bias limitation shared across graph pKa GNNs**; we confirmed
-**QupKake** (a GNN with added xTB/semi-empirical features + a tautomer front end) gives
-no material improvement here for its extra cost, because the missing physics is coupled
-inter-centre / macrostate behaviour, not the local electronic description it refines.
+reference-state handling** — the weak acid is a *second* deprotonation, on a species that
+already bears a charge, which the model pushes toward acidic values instead of raising —
+and (ii) a further ~5–6 units at *ortho* from an **intramolecular H-bond** (e.g.
+phenol-OH···⁻OOC, lifting salicylate's phenol to pKa ≈ 13.4). Both are through-space /
+charged-state effects invisible to a 2-D molecular-graph model. This is a **data +
+inductive-bias limitation shared across graph pKa GNNs**; we confirmed **QupKake** (a GNN
+with added xTB/semi-empirical features + a tautomer front end) gives no material
+improvement for its extra cost, because the missing physics is coupled inter-centre /
+macrostate behaviour, not the local electronic description it refines.
 
-Because the failure is confined to an identifiable class while isolated-phenol
-prediction is excellent, the fix is a **physically-grounded prior, not a heavier model**:
-a phenolic hydroxyl (`-OH` on a benzene ring) is assigned a **reference pKa of 10.0**
-(phenol 9.99, *p*-cresol 10.26, tyrosine 10.1 — CRC Handbook 97th ed.; Serjeant &
-Dempsey, IUPAC Chemical Data Series No. 23, 1979), which keeps it **protonated at pH 7.4**
-by a >2.5-unit margin, **unless** its ring carries a genuinely activating EWG, in which
-case pkasolver's prediction is kept. The exception list (config, each SMARTS anchored on
-the phenolic O) covers *ortho*/*para* nitrophenols (and hence all poly-nitrophenols:
-2,4-dinitrophenol 4.09, picric 0.38), *ortho*/*para* cyanophenols, and 2,4,6-tri/perhalo-
-phenols (pentachlorophenol 4.74, pentafluorophenol 5.53) — the phenols that really are
-acidic near physiological pH.
+Because the failure is confined to identifiable classes while isolated-centre prediction
+is excellent, the fix is a **general structural prior, not a heavier model and not a
+per-compound literature pKa assignment**. Weak-acid classes whose aqueous pKa is well
+above 7.4 are re-protonated after the ladder walk; each is a config entry with an
+**anion SMARTS** (first atom = the conjugate-base heteroatom) and an optional list of
+genuinely-acidic **structural exceptions** that keep pkasolver's deprotonation:
 
-The correction runs in **two stages**, because pkasolver mis-deprotonates a phenol in two
-different ways:
+| Class | Guarded (→ neutral at 7.4) | Exceptions (stay deprotonated) |
+|---|---|---|
+| **phenol** | Ar–OH, pKa ~10 | *o/p*-nitrophenol (⇒ all polynitro), *o/p*-cyanophenol, 2,4,6-tri/perhalophenol |
+| **alcohol** | aliphatic/sugar C–OH, pKa ~16 | — (sp3-C anchor already excludes carboxylate/phosphate) |
+| **amide** | R–C(=O)–NH, pKa ~17 | imide & acylsulfonamide (excluded in the SMARTS itself) |
+| **sulfonamide** | R–SO₂–NH, pKa ~10 | acylsulfonamide (excluded) |
+| **aryl_amine** | exocyclic amino/anilino on (hetero)arene | — |
 
-1. **Rung correction** (`apply_phenol_correction`) — when pkasolver emits an explicit pKa
-   for the phenol, that rung's value is replaced by the reference before the
-   Henderson–Hasselbalch walk, so only the phenol rung moves and every other site keeps
-   its ML pKa. This is the salicylate/gallate/hydroxybenzoate case.
-2. **Phenolate backstop** (`neutralize_unactivated_phenolates`) — pkasolver reaches its
-   baseline pH-7 microstate through **dimorphite-dl**, which sometimes deprotonates a
-   phenol *without* pkasolver then emitting a re-protonation rung (seen for *ortho*-
-   carbonyl phenols in resorcylate macrolactones and for tyrosine-type phenols on
-   poly-ionizable scaffolds). There is no rung to edit, so the walk yields a phenolate.
-   This stage operates on the **final** microstate: any `[O-]` on a benzene ring that is
-   not in an activating environment is set back to the neutral hydroxyl — a pure
-   formal-charge/H edit, independent of pkasolver's rung enumeration, so it catches the
-   cases stage 1 cannot.
+Mechanically the guard (`neutralize_weak_acids`) operates on the **final** microstate:
+after the Henderson–Hasselbalch walk, any anion matching a class (and not an exception)
+has its formal charge set to 0 and one H added. It is **purely additive** — it never
+removes a proton — so it cannot disturb carboxylates, phosphates, protonated amines, or
+anything pkasolver already handles correctly, and it is idempotent. Every re-protonated
+group is recorded in the `guard_neutralized` column of `protonated_ligands.csv`
+(`<class>:<count>`, e.g. `phenol:2;amide:1`) and flips the row's `method` to
+`pkasolver+weak_acid_guard`, so the correction is fully auditable.
 
-Every corrected site is recorded in the `pka_overrides` column of
-`protonated_ligands.csv` (`phenol@<atom>:<old>-><new>` for a rung edit,
-`phenol@<atom>:[O-]->OH` for the backstop) and flips the row's `method` to
-`pkasolver+phenol_rule`, so the correction is fully auditable. Detection is restricted to
-a benzene carbocycle by design, leaving genuinely acidic heteroaromatic/vinylogous "enol"
-hydroxyls (4-hydroxycoumarin, hydroxypyridines, tropolones, tetramic acids) to pkasolver
-— as are all the activated phenols above (picric acid, polynitro-/polyfluoro-phenols).
+Deliberately **not** guarded (left to pkasolver, as genuinely acidic or irrelevant):
+aromatic ring N–H (tetrazolate, imidazolate), enols / vinylogous acids (tropolones,
+tetramic/tetronic acids, 4-hydroxycoumarins), and cofactor lactams (guanine/uracil) —
+the last only ever occur in review-track cofactors that never enter a built cell.
+
+> **Sulfonamides & carbonic anhydrase.** A primary arylsulfonamide has solution pKa ~10,
+> so its pH-7.4 microstate is neutral — which is what the guard enforces. The one context
+> where that is arguable is CA2, whose inhibitors bind the catalytic **Zn²⁺** as the
+> deprotonated sulfonamide anion; the solution and bound states genuinely differ there.
+> CA2 is out of scope for the intended publication for exactly this reason, so the guard
+> applies the consistent solution-state convention everywhere.
 
 ---
 
@@ -251,8 +253,16 @@ A candidate cluster becomes a pharmacophore feature only if it is both **populou
 - **support** = (distinct ligands contributing to the cluster) / (ligands in the cell)
   ≥ `min_support_fraction` (= 0.5). This is the T009 "present in most molecules" idea,
   made relative to the cell size — a feature must be shared, not the quirk of one
-  ligand.
+  ligand. **This 0.5 support floor applies to *both* consensus strategies**: the density
+  path enforces the same `min_support_fraction` on each peak (§11.4), so every feature in
+  every model — k-means or density — is present in at least half the cell's ligands.
 - **size** = number of feature points in the cluster ≥ `min_cluster_size` (= 2).
+
+Support is a **per-feature** quantity, and `model_summary.md` reports it that way — one
+row per feature (peak), labelled `<Family> <n>` (e.g. `Donor 1`, `Donor 2`) so two
+features of the same family are distinguished. The same label + support annotates each
+kept peak in the `raw_features_<family>.png` plots and names the feature objects in the
+`.pml` session, so the tables and the visualisations line up.
 
 Candidate features that pass these filters from **every family** are then pooled and
 sorted **largest first** (more points, then higher support). The merge (next) and an
@@ -324,9 +334,9 @@ a feature whose exact position the ligands agree on only loosely.
 | `pharmacophore.json` | Canonical, schema-versioned model (`pharmpipe.pharmacophore/v1`): each feature's family, centre, **tolerance radius**, point count, ligand support, plus a provenance block (clustering method/params, selection/tolerance settings, load coverage, the representative ligand). Method-stable — swapping the clusterer changes positions, not structure. |
 | `features.csv` | Every raw extracted point (family, source ligand, x/y/z, cluster id, **kept** flag) — the data behind the model, for auditing clustering quality. |
 | `representative_ligand.sdf` | One real ligand from the cell, written from the RDKit-perceived molecule (correct bond orders + 3D coords), used as the visual scaffold (§8). |
-| `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster, with cluster centres marked (§9). |
-| `pharmacophore.pml` | Lightweight self-contained PyMOL script: loads `representative_ligand.sdf` + the feature spheres. |
-| `model_summary.md` | Human-readable summary: load coverage, representative ligand, features kept per family, mean support. |
+| `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster, with cluster centres marked and each kept peak annotated with its label + support (§9). |
+| `pharmacophore.pml` | Lightweight self-contained PyMOL script: loads `representative_ligand.sdf` + the feature spheres (each object named `<Family>_<n>` and labelled with its support). |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support. |
 
 Richer inspection (raw-point overlay):
 `pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- --pharmacophore … [--features … --compounds … --out …]`.
@@ -450,13 +460,21 @@ voxel, and every point, is then assigned to its **nearest maximum** (a proximity
 watershed), giving one **basin** per peak. This is what yields multiple features of one
 type natively, with no `k`.
 
-### 11.4 Keep peaks that clear the occupancy floor
+### 11.4 Keep peaks that clear the occupancy floor *and* the support floor
 
-A basin becomes a feature only if its **summed distinct-molecule weight** (Σ `w_i` over
-the points assigned to it) is at least `occupancy_floor` (default `2.0`, i.e. ~two
-distinct molecules of evidence). This is the density analogue of k-means' support
-threshold (§5), and the **second and last knob**. Because the weights are per-molecule,
-a single molecule's dense blob cannot clear a floor of 2 however many points it has.
+A basin becomes a feature only if it clears **two** thresholds:
+
+1. its **summed distinct-molecule weight** (Σ `w_i` over the points assigned to it) is at
+   least `occupancy_floor` (default `2.0`, i.e. ~two distinct molecules of evidence) — the
+   density's own knob. Because the weights are per-molecule, a single molecule's dense
+   blob cannot clear a floor of 2 however many points it has; and
+2. its **support** — (distinct ligands in the basin) / (ligands in the cell) — is at
+   least `min_support_fraction` (= 0.5), the **same support floor as the k-means path**
+   (§5), threaded in from `selection`. So a feature is present in ≥ half the cell's
+   ligands whichever strategy built it.
+
+The occupancy floor is an *absolute* molecule count and the support floor a *fraction*;
+for a large cell the fraction is the stricter gate, for a tiny one the count is.
 
 ### 11.5 Collapse each kept basin to one feature
 
@@ -492,9 +510,12 @@ available) and is skipped cleanly for a bare `--input` directory; toggle with
 
 ### 11.7 Knobs, determinism, and differences from k-means
 
-**Only two scientific knobs**: the length scale (`voxel`/`bandwidth`) and the
-`occupancy_floor`; the excluded-volume parameters are a self-contained steric add-on.
-Everything is deterministic — fixed grid, fixed bandwidth, fixed floor, no seeding —
+**Only two scientific knobs of its own**: the length scale (`voxel`/`bandwidth`) and the
+`occupancy_floor`; the excluded-volume parameters are a self-contained steric add-on. In
+addition it honours the **shared `min_support_fraction` floor** from `selection` (§11.4),
+so its features meet the same "present in ≥ half the ligands" bar as the k-means path —
+this is a selection policy common to both strategies, not a density-specific knob.
+Everything is deterministic — fixed grid, fixed bandwidth, fixed floors, no seeding —
 so reruns are identical (asserted in `tests/test_density.py`).
 
 **Cross-family overlap merge.** After the per-type peaks are selected, the density path

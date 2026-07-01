@@ -48,6 +48,38 @@ def test_evidence_unit_is_the_molecule_not_the_point():
     assert accs[0].n_ligands == 3
 
 
+def test_support_floor_drops_low_fraction_peak():
+    # 10 ligands, but a Donor site drawn from only 3 of them: clears the occupancy floor
+    # (3 molecules >= 2) yet support 0.3 < 0.5 -> dropped by the shared support floor.
+    ligs = [f"L{i}" for i in range(10)]
+    pts = [FeaturePoint("Donor", 0.0, 0.0, 0.0, lig) for lig in ("L0", "L1", "L2")]
+    table = FeatureTable(points=pts, ligand_ids=ligs)
+    dropped = build_density(table, DensityConfig(occupancy_floor=2.0), _tol(), "s")
+    assert len(dropped.pharmacophore.features) == 0
+    # ...relax the floor to 0 and the same peak is kept, at support 0.3.
+    kept = build_density(table, DensityConfig(occupancy_floor=2.0), _tol(), "s",
+                         min_support=0.0)
+    assert len(kept.pharmacophore.features) == 1
+    assert kept.pharmacophore.features[0].support == 0.3
+
+
+def test_features_get_per_family_ordinal_labels():
+    # two Donor sub-sites -> "Donor 1" and "Donor 2".
+    pts, ligs = [], [f"L{i}" for i in range(6)]
+    rng = np.random.default_rng(3)
+    for lig in ligs:
+        pts.append(FeaturePoint("Donor", *rng.normal(scale=0.3, size=3), lig))
+        pts.append(FeaturePoint(
+            "Donor", *(np.array([10.0, 0, 0]) + rng.normal(scale=0.3, size=3)), lig))
+    table = FeatureTable(points=pts, ligand_ids=ligs)
+    res = build_density(table, DensityConfig(occupancy_floor=2.0), _tol(), "lab")
+    labels = {f.label for f in res.pharmacophore.features}
+    assert labels == {"Donor 1", "Donor 2"}
+    # the raw-feature plot data carries the same (label, support) per kept peak.
+    donor_assignment = next(a for a in res.assignments if a.family == "Donor")
+    assert set(donor_assignment.feature_labels) == set(donor_assignment.kept_labels)
+
+
 def test_occupancy_floor_filters():
     pts, ligs = [], [f"L{i}" for i in range(4)]
     for lig in ligs:

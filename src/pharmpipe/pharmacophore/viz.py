@@ -24,19 +24,25 @@ _CLUSTER_CMAP = "tab10"
 
 
 def _scatter_axes(ax, coords: np.ndarray, labels: np.ndarray, centers: dict,
-                  kept: set[int]) -> None:
+                  kept: set[int], feature_labels: dict) -> None:
     if len(coords):
         ax.scatter(coords[:, 0], coords[:, 1], coords[:, 2], c=labels,
                    cmap=_CLUSTER_CMAP, s=25, alpha=0.7, depthshade=True)
     # Centre marker AREA scales with the cluster's point count (its population /
     # local density): a bigger marker = more feature points collapsed into that
-    # centre. Kept clusters are drawn as a filled "X", dropped ones a thin "x".
+    # centre. Kept clusters are drawn as a filled "X", dropped ones a thin "x", and
+    # each kept peak is annotated with its ordinal + support (e.g. "1: 0.80").
     counts = {int(lbl): int((labels == lbl).sum()) for lbl in centers}
     for label, center in centers.items():
         is_kept = label in kept
         marker = "X" if is_kept else "x"
         size = 40 + counts[label] * (24 if is_kept else 8)
         ax.scatter(*center, c="black", marker=marker, s=size)
+        if is_kept and label in feature_labels:
+            name, support = feature_labels[label]
+            ordinal = name.rsplit(" ", 1)[-1]
+            ax.text(center[0], center[1], center[2], f"  {ordinal}: {support:.2f}",
+                    fontsize=8, fontweight="bold", color="black")
     ax.set_xlabel("x")
     ax.set_ylabel("y")
     ax.set_zlabel("z")
@@ -48,7 +54,8 @@ def plot_raw_features(result: BuildResult, out_dir: Path) -> list[Path]:
     for a in result.assignments:
         fig = plt.figure(figsize=(6, 5))
         ax = fig.add_subplot(111, projection="3d")
-        _scatter_axes(ax, a.coords, a.labels, a.centers, a.kept_labels)
+        _scatter_axes(ax, a.coords, a.labels, a.centers, a.kept_labels,
+                      a.feature_labels)
         n_kept = len(a.kept_labels)
         n_clusters = len(set(a.labels.tolist())) if len(a.labels) else 0
         ax.set_title(f"{result.pharmacophore.name}\n{a.family}: "

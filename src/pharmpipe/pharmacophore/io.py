@@ -81,9 +81,10 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
         lines.append(f"set_color ph4_{fam}, [{col[0]}, {col[1]}, {col[2]}]")
     lines.append("")
     for i, feat in enumerate(ph.features):
-        obj = f"{feat.family}_{i}"
+        obj = (feat.label or f"{feat.family} {i}").replace(" ", "_")
         lines.append(f"pseudoatom {obj}, pos=[{feat.x:.3f}, {feat.y:.3f}, {feat.z:.3f}], "
-                     f"vdw={feat.radius:.3f}")
+                     f"vdw={feat.radius:.3f}, label=\"{feat.label or feat.family} "
+                     f"({feat.support:.2f})\"")
         lines.append(f"color ph4_{feat.family}, {obj}")
         lines.append(f"group ph4_{feat.family}, {obj}")
     lines += ["show spheres, ph4_*", "set sphere_transparency, 0.4, ph4_*",

@@ -21,7 +21,7 @@ All poses for a target share one superposed reference frame (Stage 2 / Stage 3 a
 | Path | What it is |
 |---|---|
 | `unique_ligands.csv` | Stage 1 — one row per kept ligand (HET, name, counts, flags). |
-| `protonated_ligands.csv` | Stage-4 prep — HET → dominant **pH-7.4 microstate** SMILES (pkasolver pKa + ladder walk, with the `config/protonation.yaml` phenol correction) + predicted pKa list; `pka_overrides` records any phenol pKa clamped to the reference. The loader prefers it over the neutral SMILES. |
+| `protonated_ligands.csv` | Stage-4 prep — HET → dominant **pH-7.4 microstate** SMILES (pkasolver pKa + ladder walk, with the `config/protonation.yaml` weak-acid guard) + predicted pKa list; `guard_neutralized` records any weak-acid group re-protonated by the guard as `<class>:<count>` (e.g. `phenol:2;amide:1`). The loader prefers it over the neutral SMILES. |
 | `per_structure.csv` | Stage 1 — one row per (structure × ligand) curation decision. |
 | `resolved.json` | Verified UniProt accession(s) + scrape provenance for the target. |
 | `site_filter.csv` | Stage 2 — every ligand instance with its at-site/off-site status, distance-to-anchor and pocket RMSD. |
@@ -98,9 +98,11 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
   features emerge from field peaks with **no `k`**, the **same cross-family merge** then
   gives one feature per region, and **excluded-volume** spheres mark receptor regions no
   ligand occupies; deterministic, two knobs only;
-- ligands are **protonated to their pH-7.4 microstate** (pkasolver) before perception,
-  so donor/acceptor/±ionizable features reflect the real ionisation
-  (`protonated_ligands.csv`; see [`pharmacophore_method.md`](pharmacophore_method.md) §2);
+- ligands are **protonated to their pH-7.4 microstate** (pkasolver + a config-driven
+  **weak-acid guard** that corrects pkasolver's over-deprotonation of phenols/alcohols/
+  amides/sulfonamides/amino-heteroaromatics) before perception, so donor/acceptor/
+  ±ionizable features reflect the real ionisation (`protonated_ligands.csv`; see
+  [`pharmacophore_method.md`](pharmacophore_method.md) §2.1);
 - the visualisation uses a **real representative ligand** from the cell (clean SDF),
   not the heavy-atom raw poses;
 - family colours: HBD/Donor **pink**, HBA/Acceptor **green**, hydrophobic **cyan**,
@@ -115,7 +117,7 @@ Files per model:
 | `representative_ligand.sdf` | One real cell ligand (correct bond orders + 3D coords) chosen as the best fit to the model; the clean visual scaffold. |
 | `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster; centre-marker area scales with cluster population, kept centres a filled "X". |
 | `pharmacophore.pml` | Lightweight PyMOL script (representative ligand + feature spheres). The richer `scripts/pymol_pharmacophore.py` reads the JSON and adds a raw-point overlay. |
-| `model_summary.md` | Human-readable summary: load coverage, representative ligand, features kept per family, mean support. |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support (fraction of the cell's ligands contributing). |
 
 ## Other tracked files
 

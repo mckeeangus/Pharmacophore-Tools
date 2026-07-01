@@ -4,13 +4,20 @@
 - Skipped poses: 0
 - Consensus method: `kmeans`
 - Representative ligand (viz): `3CDA_8HI_B1`
-- Features kept: **10**
+- Features kept: **9**
 
-| Family | Features | Mean support |
-|---|---:|---:|
-| Acceptor | 3 | 0.89 |
-| Aromatic | 3 | 0.78 |
-| Donor | 3 | 0.78 |
-| LumpedHydrophobe | 1 | 0.83 |
+Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
-See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).
+| Feature | Points | Ligands | Support |
+|---|---:|---:|---:|
+| Acceptor 1 | 19 | 15 | 0.83 |
+| Acceptor 2 | 18 | 18 | 1.00 |
+| Acceptor 3 | 15 | 15 | 0.83 |
+| Aromatic 1 | 18 | 16 | 0.89 |
+| Aromatic 2 | 15 | 15 | 0.83 |
+| Aromatic 3 | 12 | 11 | 0.61 |
+| Donor 1 | 18 | 18 | 1.00 |
+| Donor 2 | 18 | 18 | 1.00 |
+| LumpedHydrophobe 1 | 15 | 15 | 0.83 |
+
+See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

@@ -17,10 +17,10 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_0, pos=[122.639, 123.538, 104.519], vdw=2.413
-color ph4_Acceptor, Acceptor_0
-group ph4_Acceptor, Acceptor_0
-pseudoatom LumpedHydrophobe_1, pos=[122.774, 125.184, 108.019], vdw=1.099
+pseudoatom Acceptor_1, pos=[122.639, 123.538, 104.519], vdw=2.413, label="Acceptor 1 (1.00)"
+color ph4_Acceptor, Acceptor_1
+group ph4_Acceptor, Acceptor_1
+pseudoatom LumpedHydrophobe_1, pos=[122.774, 125.184, 108.019], vdw=1.099, label="LumpedHydrophobe 1 (0.60)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
 show spheres, ph4_*

@@ -12,11 +12,10 @@ import pytest
 from rdkit import Chem
 
 from pharmpipe.prep.protonate import (
-    PhenolRule,
-    apply_phenol_correction,
+    WeakAcidClass,
     dominant_microstate_at_ph,
     largest_fragment,
-    neutralize_unactivated_phenolates,
+    neutralize_weak_acids,
     protonated_mol,
     to_smiles,
 )
@@ -74,79 +73,72 @@ def test_largest_fragment_strips_salt():
     assert to_smiles(largest_fragment(mol)) == "CC(=O)[O-]"
 
 
-# --- phenol pKa correction (config/protonation.yaml) -----------------------------------
+# --- weak-acid guard (config/protonation.yaml) -----------------------------------------
 
-def _phenol_rule() -> PhenolRule:
-    o = "[$([OX2H1]),$([OX1-])]"
-    return PhenolRule(
-        phenol=Chem.MolFromSmarts(f"{o}-c1ccccc1"),
-        reference_pka=10.0,
-        activating=(
-            Chem.MolFromSmarts(f"{o}c1ccccc1[$([NX3](=O)=O),$([NX3+]([O-])=O)]"),
-            Chem.MolFromSmarts(f"{o}c1ccc([$([NX3](=O)=O),$([NX3+]([O-])=O)])cc1"),
-        ),
-    )
-
-
-def _phenol_oxygen(smiles: str) -> tuple[Chem.Mol, int]:
-    """A mol and the index of its (first) phenolic -OH oxygen."""
-    mol = Chem.MolFromSmiles(smiles)
-    for atom in mol.GetAtoms():
-        if (atom.GetSymbol() == "O" and atom.GetTotalNumHs() >= 1
-                and any(n.GetIsAromatic() for n in atom.GetNeighbors())):
-            return mol, atom.GetIdx()
-    raise AssertionError("no phenolic oxygen")
+def _guard() -> list[WeakAcidClass]:
+    """The production guard classes, compiled from the same SMARTS as the config."""
+    return [
+        WeakAcidClass("phenol", Chem.MolFromSmarts("[OX1-]-c1ccccc1"), (
+            Chem.MolFromSmarts("[OX1-]c1ccccc1[$([NX3](=O)=O),$([NX3+]([O-])=O)]"),
+            Chem.MolFromSmarts("[OX1-]c1ccc([$([NX3](=O)=O),$([NX3+]([O-])=O)])cc1"),
+            Chem.MolFromSmarts("[OX1-]c1c([F,Cl,Br,I])cc([F,Cl,Br,I])cc1[F,Cl,Br,I]"),
+        )),
+        WeakAcidClass("alcohol", Chem.MolFromSmarts("[OX1-][CX4]")),
+        WeakAcidClass("amide", Chem.MolFromSmarts(
+            "[$([NX2-][CX3]=[OX1]);!$([NX2-]([CX3]=O)[CX3]=O);"
+            "!$([NX2-]([CX3]=O)[SX4](=O)=O)]")),
+        WeakAcidClass("sulfonamide", Chem.MolFromSmarts(
+            "[$([NX2-][SX4](=O)=O);!$([NX2-]([SX4](=O)=O)[CX3]=O)]")),
+        WeakAcidClass("aryl_amine", Chem.MolFromSmarts(
+            "[$([NX2-]a);!$([NX2-][CX3]=O);!$([NX2-][SX4](=O)=O)]")),
+    ]
 
 
-def test_unactivated_phenol_pka_is_lifted_to_reference():
-    # salicylate phenol: pkasolver's 4.71 -> reference 10.0, so it stays protonated.
-    prot, idx = _phenol_oxygen("O=C([O-])c1ccccc1O")
-    deprot = Chem.MolFromSmiles("O=C([O-])c1ccccc1[O-]")
-    state = FakeState(4.71, prot, deprot, reaction_center_idx=idx)
-    corrected, overrides = apply_phenol_correction([state], _phenol_rule())
-    assert overrides == [(idx, 4.71, 10.0)]
-    assert corrected[0].pka == 10.0
-    # ...and at pH 7.4 the phenol is now kept protonated.
-    assert to_smiles(dominant_microstate_at_ph(corrected, 7.4)) == "O=C([O-])c1ccccc1O"
+def _canon(smiles: str) -> str:
+    return to_smiles(Chem.MolFromSmiles(smiles))
 
 
-def test_activated_phenol_keeps_ml_pka():
-    # p-nitrophenol matches the activating list -> pkasolver's value is untouched.
-    prot, idx = _phenol_oxygen("O=[N+]([O-])c1ccc(O)cc1")
-    deprot = Chem.MolFromSmiles("O=[N+]([O-])c1ccc([O-])cc1")
-    state = FakeState(7.15, prot, deprot, reaction_center_idx=idx)
-    corrected, overrides = apply_phenol_correction([state], _phenol_rule())
-    assert overrides == []
-    assert corrected[0].pka == 7.15
+def test_guard_neutralizes_weak_acids():
+    # salicylate phenol, tyrosine phenol, sugar alkoxide, amide, primary sulfonamide,
+    # and an amino-pyrimidine are all re-protonated at pH 7.4.
+    cases = {
+        "O=C([O-])c1ccccc1[O-]": "O=C([O-])c1ccccc1O",          # salicylate: COO- kept, PhO- fixed
+        "Cc1ccc([O-])cc1": "Cc1ccc(O)cc1",                       # tyrosine-type phenol
+        "OC[C@@H]([O-])CO": "OCC(O)CO",                          # sugar/aliphatic alkoxide
+        "CC(=O)[N-]c1ccccc1": "CC(=O)Nc1ccccc1",                 # amide
+        "[NH-]S(=O)(=O)c1ccccc1": "NS(=O)(=O)c1ccccc1",          # primary sulfonamide
+        "[NH-]c1ncccn1": "Nc1ncccn1",                            # amino-pyrimidine
+    }
+    guard = _guard()
+    for anion, expected in cases.items():
+        out, neutralized = neutralize_weak_acids(Chem.MolFromSmiles(anion), guard)
+        assert neutralized, f"expected a neutralization for {anion}"
+        assert to_smiles(out) == _canon(expected), anion
 
 
-def test_non_phenol_site_untouched():
-    # a carboxyl reaction centre is not a phenol -> never corrected.
-    mol = Chem.MolFromSmiles("O=C(O)c1ccccc1O")
-    carboxyl_o = next(a.GetIdx() for a in mol.GetAtoms()
-                      if a.GetSymbol() == "O" and a.GetTotalNumHs() == 1
-                      and not any(n.GetIsAromatic() for n in a.GetNeighbors()))
-    state = FakeState(3.42, mol, Chem.MolFromSmiles("O=C([O-])c1ccccc1O"),
-                      reaction_center_idx=carboxyl_o)
-    corrected, overrides = apply_phenol_correction([state], _phenol_rule())
-    assert overrides == []
-    assert corrected[0].pka == 3.42
+def test_guard_leaves_genuinely_acidic_and_strong_bases_alone():
+    keep = [
+        "CC(=O)[O-]",                                            # carboxylate
+        "O=P([O-])([O-])OC",                                     # phosphate ester
+        "O=[N+]([O-])c1ccc([O-])cc1",                           # p-nitrophenolate (activated)
+        "O=[N+]([O-])c1cc([N+](=O)[O-])c([O-])c([N+](=O)[O-])c1",  # picric acid
+        "O=C1[N-]S(=O)(=O)c2ccccc21",                            # saccharin (acylsulfonamide)
+        "O=C1CCC(=O)[N-]1",                                      # succinimide (imide)
+        "[O-]c1cccccc1=S",                                       # tropolone-thione (non-benzene)
+        "C[NH3+]",                                               # ammonium (a base, never touched)
+    ]
+    guard = _guard()
+    for smi in keep:
+        out, neutralized = neutralize_weak_acids(Chem.MolFromSmiles(smi), guard)
+        assert neutralized == [], smi
+        assert to_smiles(out) == _canon(smi)
 
 
-def test_backstop_neutralizes_unactivated_phenolate():
-    # a bare tyrosine-type phenolate (no re-protonation rung available) is protonated…
+def test_guard_reports_class_and_index_and_is_idempotent():
     mol = Chem.MolFromSmiles("Cc1ccc([O-])cc1")
-    out, neutralized = neutralize_unactivated_phenolates(mol, _phenol_rule())
-    assert len(neutralized) == 1
-    assert to_smiles(out) == to_smiles(Chem.MolFromSmiles("Cc1ccc(O)cc1"))
-
-
-def test_backstop_leaves_activated_and_nonbenzene_phenolates():
-    # picric acid (2,4,6-trinitrophenolate) is genuinely acidic -> untouched…
-    picric = Chem.MolFromSmiles("O=[N+]([O-])c1cc([N+](=O)[O-])c([O-])c([N+](=O)[O-])c1")
-    out, neutralized = neutralize_unactivated_phenolates(picric, _phenol_rule())
-    assert neutralized == []
-    # …and a non-benzene enolate (tropolone-thione) is left to pkasolver.
-    trop = Chem.MolFromSmiles("[O-]c1cccccc1=S")
-    out2, neutralized2 = neutralize_unactivated_phenolates(trop, _phenol_rule())
-    assert neutralized2 == []
+    out, neutralized = neutralize_weak_acids(mol, _guard())
+    assert [n for n, _ in neutralized] == ["phenol"]
+    # a second pass finds nothing left to do (idempotent).
+    out2, again = neutralize_weak_acids(out, _guard())
+    assert again == []
+    assert to_smiles(out2) == to_smiles(out)

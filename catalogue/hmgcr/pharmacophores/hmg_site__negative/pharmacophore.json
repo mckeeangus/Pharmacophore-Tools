@@ -23,7 +23,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -34,7 +34,7 @@
         "random_state": 0
       }
     },
-    "n_features": 10,
+    "n_features": 9,
     "representative_ligand": "3CDA_8HI_B1"
   },
   "features": [
@@ -47,7 +47,20 @@
       "n_points": 19,
       "n_ligands": 15,
       "support": 0.8333,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Donor",
+      "x": 14.838555555555558,
+      "y": 6.577055555555556,
+      "z": 11.02288888888889,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0,
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "Donor",
@@ -58,7 +71,8 @@
       "n_points": 18,
       "n_ligands": 18,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Donor 2"
     },
     {
       "family": "Acceptor",
@@ -69,7 +83,8 @@
       "n_points": 18,
       "n_ligands": 18,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "Aromatic",
@@ -80,18 +95,8 @@
       "n_points": 18,
       "n_ligands": 16,
       "support": 0.8889,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 14.844466666666667,
-      "y": 6.573733333333333,
-      "z": 11.011733333333334,
-      "radius": 1.0,
-      "n_points": 15,
-      "n_ligands": 15,
-      "support": 0.8333,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 1"
     },
     {
       "family": "Acceptor",
@@ -102,7 +107,8 @@
       "n_points": 15,
       "n_ligands": 15,
       "support": 0.8333,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 3"
     },
     {
       "family": "Aromatic",
@@ -113,7 +119,8 @@
       "n_points": 15,
       "n_ligands": 15,
       "support": 0.8333,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 2"
     },
     {
       "family": "LumpedHydrophobe",
@@ -124,7 +131,8 @@
       "n_points": 15,
       "n_ligands": 15,
       "support": 0.8333,
-      "direction": null
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
     },
     {
       "family": "Aromatic",
@@ -135,18 +143,8 @@
       "n_points": 12,
       "n_ligands": 11,
       "support": 0.6111,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": 22.134083333333333,
-      "y": 11.637916666666664,
-      "z": 14.602333333333332,
-      "radius": 2.0955663216260496,
-      "n_points": 12,
-      "n_ligands": 9,
-      "support": 0.5,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 3"
     }
   ]
 }

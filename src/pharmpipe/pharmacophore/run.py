@@ -43,11 +43,16 @@ class ModelOutputs:
     files: list[Path] = field(default_factory=list)
 
 
+def _feature_ordinal(feat) -> int:
+    """The per-family index in a feature's label (``Donor 2`` -> 2); 0 if unlabelled."""
+    try:
+        return int(feat.label.rsplit(" ", 1)[1])
+    except (ValueError, IndexError):
+        return 0
+
+
 def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
                    path: Path) -> Path:
-    by_family: dict[str, int] = {}
-    for f in ph.features:
-        by_family[f.family] = by_family.get(f.family, 0) + 1
     lines = [
         f"# Pharmacophore — {ph.name}", "",
         f"- Ligands loaded: **{n_ligands}** "
@@ -58,14 +63,17 @@ def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
         f"- Consensus method: `{ph.metadata.get('consensus_method', '?')}`",
         f"- Representative ligand (viz): `{ph.metadata.get('representative_ligand') or 'none'}`",
         f"- Features kept: **{len(ph.features)}**", "",
-        "| Family | Features | Mean support |", "|---|---:|---:|",
+        "Support is the fraction of the cell's ligands that contribute to a feature "
+        "(one row per feature / peak; all features are kept only above the support floor).",
+        "",
+        "| Feature | Points | Ligands | Support |", "|---|---:|---:|---:|",
     ]
-    for fam in sorted(by_family):
-        feats = [f for f in ph.features if f.family == fam]
-        mean_support = sum(f.support for f in feats) / len(feats)
-        lines.append(f"| {fam} | {len(feats)} | {mean_support:.2f} |")
+    for f in sorted(ph.features, key=lambda f: (f.family, _feature_ordinal(f))):
+        lines.append(
+            f"| {f.label or f.family} | {f.n_points} | {f.n_ligands} | {f.support:.2f} |")
     lines += ["", "See `pharmacophore.json` (model), `features.csv` (raw points + "
-              "cluster ids), and `raw_features_*.png` (per-family point distributions)."]
+              "cluster ids), and `raw_features_*.png` (per-family point distributions, "
+              "each kept peak annotated with its label and support)."]
     path.write_text("\n".join(lines), encoding="utf-8")
     return path
 

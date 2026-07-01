@@ -3,13 +3,54 @@
 - Ligands loaded: **25** (template=25)
 - Skipped poses: 3 (5UIG_8D1_A503:fail, 7PX4_8E2_A2404:fail, 7PYR_8IM_A2404:fail)
 - Consensus method: `density`
-- Representative ligand (viz): `8JWY_VBF_A1201`
-- Features kept: **44**
+- Representative ligand (viz): `3REY_XAC_A999`
+- Features kept: **42**
 
-| Family | Features | Mean support |
-|---|---:|---:|
-| Acceptor | 2 | 0.76 |
-| ExcludedVolume | 40 | 0.00 |
-| LumpedHydrophobe | 2 | 0.16 |
+Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
-See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).
+| Feature | Points | Ligands | Support |
+|---|---:|---:|---:|
+| Acceptor 1 | 87 | 25 | 1.00 |
+| Acceptor 2 | 22 | 13 | 0.52 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 2 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+| ExcludedVolume | 1 | 0 | 0.00 |
+
+See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

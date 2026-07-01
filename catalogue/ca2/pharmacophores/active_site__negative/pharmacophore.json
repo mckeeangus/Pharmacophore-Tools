@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -48,7 +48,20 @@
       "n_points": 74,
       "n_ligands": 73,
       "support": 0.9605,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Donor",
+      "x": -5.2239729729729705,
+      "y": 0.048864864864864854,
+      "z": 15.959662162162164,
+      "radius": 1.1822894484205648,
+      "n_points": 74,
+      "n_ligands": 61,
+      "support": 0.8026,
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "Acceptor",
@@ -59,18 +72,8 @@
       "n_points": 72,
       "n_ligands": 72,
       "support": 0.9474,
-      "direction": null
-    },
-    {
-      "family": "Donor",
-      "x": -5.215591549295772,
-      "y": 0.06822535211267605,
-      "z": 15.949816901408452,
-      "radius": 1.2011479261142854,
-      "n_points": 71,
-      "n_ligands": 58,
-      "support": 0.7632,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "Aromatic",
@@ -81,7 +84,8 @@
       "n_points": 62,
       "n_ligands": 59,
       "support": 0.7763,
-      "direction": null
+      "direction": null,
+      "label": "Aromatic 1"
     }
   ]
 }

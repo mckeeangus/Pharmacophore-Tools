@@ -45,7 +45,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -69,7 +69,8 @@
       "n_points": 218,
       "n_ligands": 86,
       "support": 0.9885,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "Acceptor",
@@ -80,18 +81,20 @@
       "n_points": 91,
       "n_ligands": 55,
       "support": 0.6322,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "Donor",
-      "x": 7.303797101449272,
-      "y": -24.63015942028985,
-      "z": -24.818768115942024,
+      "x": 7.309225352112674,
+      "y": -24.61952112676056,
+      "z": -24.82570422535211,
       "radius": 1.0,
-      "n_points": 69,
-      "n_ligands": 68,
-      "support": 0.7816,
-      "direction": null
+      "n_points": 71,
+      "n_ligands": 70,
+      "support": 0.8046,
+      "direction": null,
+      "label": "Donor 1"
     }
   ]
 }

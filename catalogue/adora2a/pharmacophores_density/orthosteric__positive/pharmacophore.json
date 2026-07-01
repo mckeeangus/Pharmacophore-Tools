@@ -28,7 +28,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-01",
+    "created": "2026-07-02",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -47,8 +47,8 @@
         "ev_max": 40
       }
     },
-    "n_features": 44,
-    "representative_ligand": "4UHR_NGI_A1320"
+    "n_features": 43,
+    "representative_ligand": "5WF5_UKA_A1201"
   },
   "features": [
     {
@@ -60,7 +60,8 @@
       "n_points": 20,
       "n_ligands": 5,
       "support": 0.8333,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "Acceptor",
@@ -71,7 +72,8 @@
       "n_points": 18,
       "n_ligands": 6,
       "support": 1.0,
-      "direction": null
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "PosIonizable",
@@ -82,18 +84,8 @@
       "n_points": 5,
       "n_ligands": 5,
       "support": 0.8333,
-      "direction": null
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 2.6332497071538685,
-      "y": 102.71406386321986,
-      "z": 56.38595992211794,
-      "radius": 2.8659393627531236,
-      "n_points": 2,
-      "n_ligands": 2,
-      "support": 0.3333,
-      "direction": null
+      "direction": null,
+      "label": "PosIonizable 1"
     },
     {
       "family": "ExcludedVolume",
@@ -104,7 +96,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -115,7 +108,8 @@
       "n_points": 2,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -126,7 +120,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -137,7 +132,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -148,7 +144,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -159,7 +156,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -170,7 +168,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -181,7 +180,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -192,7 +192,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -203,7 +204,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -214,7 +216,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -225,7 +228,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -236,7 +240,8 @@
       "n_points": 2,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -247,7 +252,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -258,7 +264,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -269,7 +276,8 @@
       "n_points": 2,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -280,7 +288,8 @@
       "n_points": 2,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -291,7 +300,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -302,7 +312,8 @@
       "n_points": 2,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -313,7 +324,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -324,7 +336,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -335,7 +348,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -346,7 +360,8 @@
       "n_points": 2,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -357,7 +372,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -368,7 +384,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -379,7 +396,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -390,7 +408,8 @@
       "n_points": 2,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -401,7 +420,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -412,7 +432,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -423,7 +444,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -434,7 +456,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -445,7 +468,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -456,7 +480,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -467,7 +492,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -478,7 +504,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -489,7 +516,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -500,7 +528,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -511,7 +540,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -522,7 +552,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     },
     {
       "family": "ExcludedVolume",
@@ -533,7 +564,8 @@
       "n_points": 1,
       "n_ligands": 0,
       "support": 0.0,
-      "direction": null
+      "direction": null,
+      "label": ""
     }
   ]
 }

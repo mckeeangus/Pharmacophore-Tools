@@ -41,6 +41,7 @@ def build_consensus(table: FeatureTable, cfg: PharmacophoreConfig, name: str,
                                    name, meta)
     if method == "density":
         return build_density(table, cfg.density, cfg.tolerance, name, meta,
+                             min_support=cfg.selection.min_support_fraction,
                              ligand_atoms=ligand_atoms, protein_atoms=protein_atoms,
                              scaffold_freq=scaffold_freq)
     raise ValueError(

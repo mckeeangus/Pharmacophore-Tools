@@ -33,6 +33,7 @@ class PharmacophoreFeature:
     n_ligands: int         # distinct ligands contributing
     support: float         # n_ligands / n_ligands_in_set
     direction: tuple[float, float, float] | None = None
+    label: str = ""        # per-family ordinal, e.g. "Donor 1" (report/viz identity)
 
     @property
     def position(self) -> tuple[float, float, float]:

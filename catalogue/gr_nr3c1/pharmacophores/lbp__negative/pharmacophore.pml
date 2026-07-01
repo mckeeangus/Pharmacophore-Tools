@@ -17,21 +17,21 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_0, pos=[32.710, 8.607, 8.576], vdw=2.294
-color ph4_Acceptor, Acceptor_0
-group ph4_Acceptor, Acceptor_0
-pseudoatom Acceptor_1, pos=[27.163, 6.055, 16.417], vdw=2.210
+pseudoatom Acceptor_1, pos=[32.710, 8.607, 8.576], vdw=2.294, label="Acceptor 1 (1.00)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Aromatic_2, pos=[30.436, 3.441, 12.177], vdw=1.000
-color ph4_Aromatic, Aromatic_2
-group ph4_Aromatic, Aromatic_2
-pseudoatom LumpedHydrophobe_3, pos=[30.712, 7.164, 13.344], vdw=1.000
-color ph4_LumpedHydrophobe, LumpedHydrophobe_3
-group ph4_LumpedHydrophobe, LumpedHydrophobe_3
-pseudoatom LumpedHydrophobe_4, pos=[27.273, 11.198, 15.443], vdw=1.000
-color ph4_LumpedHydrophobe, LumpedHydrophobe_4
-group ph4_LumpedHydrophobe, LumpedHydrophobe_4
+pseudoatom Acceptor_2, pos=[27.163, 6.055, 16.417], vdw=2.210, label="Acceptor 2 (1.00)"
+color ph4_Acceptor, Acceptor_2
+group ph4_Acceptor, Acceptor_2
+pseudoatom Aromatic_1, pos=[30.436, 3.441, 12.177], vdw=1.000, label="Aromatic 1 (0.67)"
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
+pseudoatom LumpedHydrophobe_1, pos=[30.712, 7.164, 13.344], vdw=1.000, label="LumpedHydrophobe 1 (0.67)"
+color ph4_LumpedHydrophobe, LumpedHydrophobe_1
+group ph4_LumpedHydrophobe, LumpedHydrophobe_1
+pseudoatom LumpedHydrophobe_2, pos=[27.273, 11.198, 15.443], vdw=1.000, label="LumpedHydrophobe 2 (0.67)"
+color ph4_LumpedHydrophobe, LumpedHydrophobe_2
+group ph4_LumpedHydrophobe, LumpedHydrophobe_2
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

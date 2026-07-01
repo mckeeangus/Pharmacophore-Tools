@@ -6,9 +6,11 @@
 - Representative ligand (viz): `9KDH_A1D5S_B709`
 - Features kept: **2**
 
-| Family | Features | Mean support |
-|---|---:|---:|
-| Donor | 1 | 0.92 |
-| LumpedHydrophobe | 1 | 0.96 |
+Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
-See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions).
+| Feature | Points | Ligands | Support |
+|---|---:|---:|---:|
+| Donor 1 | 30 | 23 | 0.92 |
+| LumpedHydrophobe 1 | 39 | 24 | 0.96 |
+
+See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

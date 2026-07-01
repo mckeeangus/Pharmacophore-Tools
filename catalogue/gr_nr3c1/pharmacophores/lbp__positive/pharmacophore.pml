@@ -17,15 +17,15 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_0, pos=[28.752, 6.994, 14.876], vdw=3.000
-color ph4_Acceptor, Acceptor_0
-group ph4_Acceptor, Acceptor_0
-pseudoatom Acceptor_1, pos=[34.067, 8.315, 6.623], vdw=3.000
+pseudoatom Acceptor_1, pos=[28.739, 6.908, 14.827], vdw=3.000, label="Acceptor 1 (1.00)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Aromatic_2, pos=[31.985, 7.683, 9.456], vdw=1.815
-color ph4_Aromatic, Aromatic_2
-group ph4_Aromatic, Aromatic_2
+pseudoatom Acceptor_2, pos=[34.067, 8.315, 6.623], vdw=3.000, label="Acceptor 2 (0.95)"
+color ph4_Acceptor, Acceptor_2
+group ph4_Acceptor, Acceptor_2
+pseudoatom Aromatic_1, pos=[31.985, 7.683, 9.456], vdw=1.815, label="Aromatic 1 (0.65)"
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
 orient

@@ -1,4 +1,4 @@
-# esr1/lbp__positive — ensemble pharmacophore (5 features)
+# esr1/lbp__positive — ensemble pharmacophore (4 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,18 +17,15 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Donor_1, pos=[21.229, -11.142, 2.618], vdw=1.811, label="Donor 1 (1.00)"
+pseudoatom Donor_1, pos=[21.229, -11.142, 2.618], vdw=2.197, label="Donor 1 (1.00)"
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 pseudoatom LumpedHydrophobe_1, pos=[22.511, -11.502, 4.561], vdw=1.000, label="LumpedHydrophobe 1 (1.00)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
-pseudoatom Donor_2, pos=[26.647, -12.030, 10.316], vdw=2.316, label="Donor 2 (0.81)"
+pseudoatom Donor_2, pos=[26.647, -12.030, 10.316], vdw=2.608, label="Donor 2 (0.81)"
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
-pseudoatom LumpedHydrophobe_2, pos=[25.269, -11.750, 8.474], vdw=1.362, label="LumpedHydrophobe 2 (0.62)"
-color ph4_LumpedHydrophobe, LumpedHydrophobe_2
-group ph4_LumpedHydrophobe, LumpedHydrophobe_2
 pseudoatom Acceptor_1, pos=[23.217, -13.094, 7.487], vdw=1.000, label="Acceptor 1 (0.56)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1

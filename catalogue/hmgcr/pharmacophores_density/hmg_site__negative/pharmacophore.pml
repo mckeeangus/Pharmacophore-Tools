@@ -23,13 +23,13 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_2, pos=[20.973, 9.715, 14.566], vdw=3.000, label="Acceptor 2 (0.94)"
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Donor_1, pos=[14.762, 6.492, 10.697], vdw=2.559, label="Donor 1 (1.00)"
+pseudoatom Donor_1, pos=[14.762, 6.492, 10.697], vdw=3.000, label="Donor 1 (1.00)"
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 pseudoatom Acceptor_3, pos=[14.293, 8.061, 18.848], vdw=3.000, label="Acceptor 3 (0.94)"
 color ph4_Acceptor, Acceptor_3
 group ph4_Acceptor, Acceptor_3
-pseudoatom LumpedHydrophobe_1, pos=[19.116, 8.887, 11.298], vdw=2.650, label="LumpedHydrophobe 1 (0.83)"
+pseudoatom LumpedHydrophobe_1, pos=[19.116, 8.887, 11.298], vdw=3.000, label="LumpedHydrophobe 1 (0.83)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
 pseudoatom LumpedHydrophobe_2, pos=[24.609, 12.357, 13.762], vdw=3.000, label="LumpedHydrophobe 2 (0.67)"

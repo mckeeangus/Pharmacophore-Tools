@@ -23,7 +23,7 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_2, pos=[1.157, 97.835, 53.717], vdw=3.000, label="Acceptor 2 (1.00)"
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom PosIonizable_1, pos=[0.547, 94.775, 52.002], vdw=2.538, label="PosIonizable 1 (0.83)"
+pseudoatom PosIonizable_1, pos=[0.547, 94.775, 52.002], vdw=3.000, label="PosIonizable 1 (0.83)"
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
 pseudoatom ExcludedVolume_3, pos=[-0.849, 101.560, 50.837], vdw=1.000, label="ExcludedVolume (0.00)"

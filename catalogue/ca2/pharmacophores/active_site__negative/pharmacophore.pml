@@ -20,7 +20,7 @@ set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 pseudoatom Acceptor_1, pos=[-5.272, 1.153, 17.993], vdw=1.000, label="Acceptor 1 (0.96)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Donor_1, pos=[-5.224, 0.049, 15.960], vdw=1.182, label="Donor 1 (0.80)"
+pseudoatom Donor_1, pos=[-5.224, 0.049, 15.960], vdw=1.000, label="Donor 1 (0.80)"
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 pseudoatom Acceptor_2, pos=[-7.225, 1.098, 16.563], vdw=1.000, label="Acceptor 2 (0.95)"

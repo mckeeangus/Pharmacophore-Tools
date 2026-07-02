@@ -19,7 +19,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -34,8 +35,8 @@
         "random_state": 0
       }
     },
-    "n_features": 5,
-    "representative_ligand": "5ZK3_QNB_A501"
+    "n_features": 4,
+    "representative_ligand": "5ZKB_82F_A1201"
   },
   "features": [
     {
@@ -43,7 +44,7 @@
       "x": 138.842,
       "y": 144.63660000000002,
       "z": 102.23119999999999,
-      "radius": 1.5702584500648291,
+      "radius": 1.6631455137780466,
       "n_points": 5,
       "n_ligands": 3,
       "support": 1.0,
@@ -55,7 +56,7 @@
       "x": 132.554,
       "y": 146.1805,
       "z": 102.15949999999998,
-      "radius": 2.322673136711238,
+      "radius": 3.0,
       "n_points": 4,
       "n_ligands": 2,
       "support": 0.6667,
@@ -73,18 +74,6 @@
       "support": 1.0,
       "direction": null,
       "label": "Aromatic 1"
-    },
-    {
-      "family": "Acceptor",
-      "x": 135.104,
-      "y": 145.822,
-      "z": 102.86833333333334,
-      "radius": 1.8570662047673197,
-      "n_points": 3,
-      "n_ligands": 2,
-      "support": 0.6667,
-      "direction": null,
-      "label": "Acceptor 2"
     },
     {
       "family": "Aromatic",

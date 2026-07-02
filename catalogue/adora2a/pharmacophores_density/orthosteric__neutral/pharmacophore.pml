@@ -23,7 +23,7 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Donor_1, pos=[-2.231, 98.944, 51.821], vdw=3.000, label="Donor 1 (0.80)"
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom LumpedHydrophobe_1, pos=[-0.013, 92.935, 51.080], vdw=2.849, label="LumpedHydrophobe 1 (0.60)"
+pseudoatom LumpedHydrophobe_1, pos=[-0.013, 92.935, 51.080], vdw=3.000, label="LumpedHydrophobe 1 (0.60)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
 pseudoatom ExcludedVolume_3, pos=[2.154, 90.967, 48.170], vdw=1.000, label="ExcludedVolume (0.00)"

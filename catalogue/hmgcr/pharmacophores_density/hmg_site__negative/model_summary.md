@@ -4,7 +4,8 @@
 - Skipped poses: 0
 - Consensus method: `density`
 - Representative ligand (viz): `3CDA_8HI_B1`
-- Features kept: **46**
+- Features kept: **6**
+- Excluded-volume spheres (receptor markers): **40**
 
 Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
@@ -14,46 +15,6 @@ Support is the fraction of the cell's ligands that contribute to a feature (one 
 | Acceptor 2 | 31 | 17 | 0.94 |
 | Acceptor 3 | 18 | 17 | 0.94 |
 | Donor 1 | 18 | 18 | 1.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 3 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
 | LumpedHydrophobe 1 | 15 | 15 | 0.83 |
 | LumpedHydrophobe 2 | 13 | 12 | 0.67 |
 

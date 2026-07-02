@@ -20,7 +20,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -35,7 +36,7 @@
         "random_state": 0
       }
     },
-    "n_features": 5,
+    "n_features": 4,
     "representative_ligand": "7NFB_GEN_A601"
   },
   "features": [
@@ -44,7 +45,7 @@
       "x": 21.229000000000003,
       "y": -11.142100000000003,
       "z": 2.6180499999999998,
-      "radius": 1.8106294865322394,
+      "radius": 2.197131723975601,
       "n_points": 20,
       "n_ligands": 16,
       "support": 1.0,
@@ -68,24 +69,12 @@
       "x": 26.64693333333333,
       "y": -12.0296,
       "z": 10.315733333333332,
-      "radius": 2.3155525397719754,
+      "radius": 2.607735652928716,
       "n_points": 15,
       "n_ligands": 13,
       "support": 0.8125,
       "direction": null,
       "label": "Donor 2"
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": 25.268951515151514,
-      "y": -11.750178787878788,
-      "z": 8.473912121212122,
-      "radius": 1.3624118242923227,
-      "n_points": 11,
-      "n_ligands": 10,
-      "support": 0.625,
-      "direction": null,
-      "label": "LumpedHydrophobe 2"
     },
     {
       "family": "Acceptor",

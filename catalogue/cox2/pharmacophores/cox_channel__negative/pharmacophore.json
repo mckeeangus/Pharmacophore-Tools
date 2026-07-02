@@ -19,7 +19,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -35,7 +36,7 @@
       }
     },
     "n_features": 3,
-    "representative_ligand": "5IKV_FLF_B601"
+    "representative_ligand": "5IKR_ID8_A601"
   },
   "features": [
     {
@@ -43,7 +44,7 @@
       "x": 26.512,
       "y": 4.334142857142857,
       "z": 32.277,
-      "radius": 2.5763329658684273,
+      "radius": 2.775912594930519,
       "n_points": 7,
       "n_ligands": 5,
       "support": 1.0,

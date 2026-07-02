@@ -20,7 +20,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -35,7 +36,7 @@
         "random_state": 0
       }
     },
-    "n_features": 6,
+    "n_features": 5,
     "representative_ligand": "2RH1_CAU_A408"
   },
   "features": [
@@ -44,7 +45,7 @@
       "x": -27.300626190476187,
       "y": 9.856623809523809,
       "z": 6.392178571428571,
-      "radius": 2.0845182949398104,
+      "radius": 2.42976138771605,
       "n_points": 14,
       "n_ligands": 7,
       "support": 1.0,
@@ -92,24 +93,12 @@
       "x": -34.41978571428571,
       "y": 6.262166666666666,
       "z": 7.6185238095238095,
-      "radius": 1.7965077435297505,
+      "radius": 1.3649881093067204,
       "n_points": 7,
       "n_ligands": 7,
       "support": 1.0,
       "direction": null,
       "label": "LumpedHydrophobe 1"
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -26.86074,
-      "y": 7.736453333333334,
-      "z": 7.220766666666665,
-      "radius": 1.551252119060241,
-      "n_points": 5,
-      "n_ligands": 5,
-      "support": 0.7143,
-      "direction": null,
-      "label": "LumpedHydrophobe 2"
     }
   ]
 }

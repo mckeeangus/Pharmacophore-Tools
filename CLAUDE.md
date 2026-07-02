@@ -204,8 +204,10 @@ ligands is **skipped and its output removed** (too few for an ensemble); after
 selection, **overlapping clusters are merged keeping the dominant one — within *and*
 across families** (a donor and acceptor can't share one spot)
 (`merge_overlapping`; geometric threshold = one centre inside the other's sphere, or an
-absolute `merge_radius`); each feature's **tolerance radius = cluster-point RMSD** and
-is the sphere size in the viz (spread, not density). Family colours: HBD/Donor pink,
+absolute `merge_radius`); each feature's **tolerance radius = density-quantile core**
+(the radius enclosing `tolerance.quantile`=0.75 of the cluster's density mass, robust to
+the far in-cluster outliers that inflated the old RMS; `rmsd` mode still selectable) and
+is the sphere size in the viz. Family colours: HBD/Donor pink,
 HBA/Acceptor green, hydrophobic cyan, Aromatic yellow, PosIonizable red, NegIonizable
 orange, ExcludedVolume grey.
 
@@ -215,7 +217,8 @@ unit of evidence is the **distinct molecule** (optional inverse-scaffold-frequen
 Gaussian-smoothed **voxel occupancy field** (voxel/bandwidth ~1.0–1.5 Å); features are
 **all local maxima** (no `k` chosen) with proximity watershed; keep a peak whose basin's
 summed molecule weight ≥ **occupancy floor**; feature **position = density-weighted
-centroid**, **tolerance = field spread** (clamped, §6), **direction** plumbed but `None`
+centroid**, **tolerance = density-quantile radius of the field mass** (same `feature_radius`
+helper + `tolerance` config as k-means, clamped, §6), **direction** plumbed but `None`
 until perception emits per-point vectors (never fabricated). After the per-type peaks,
 density applies the **same cross-family overlap merge as k-means** (one feature per
 region; `density.merge_overlapping`), then appends **excluded-volume** grey spheres from

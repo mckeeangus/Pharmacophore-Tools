@@ -15,10 +15,10 @@ Support is the fraction of the cell's ligands that contribute to a feature (one 
 | Acceptor 3 | 3 | 3 | 1.00 |
 | Acceptor 4 | 2 | 2 | 0.67 |
 | Acceptor 5 | 2 | 2 | 0.67 |
-| Aromatic 1 | 4 | 3 | 1.00 |
-| Aromatic 2 | 3 | 3 | 1.00 |
+| Aromatic 1 | 3 | 3 | 1.00 |
 | Donor 1 | 6 | 3 | 1.00 |
 | Donor 2 | 2 | 2 | 0.67 |
 | LumpedHydrophobe 1 | 2 | 2 | 0.67 |
+| LumpedHydrophobe 2 | 2 | 2 | 0.67 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

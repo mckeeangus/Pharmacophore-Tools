@@ -17,7 +17,7 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Donor_1, pos=[-33.571, 9.442, 7.956], vdw=2.944, label="Donor 1 (1.00)"
+pseudoatom Donor_1, pos=[-33.571, 9.442, 7.956], vdw=3.000, label="Donor 1 (1.00)"
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 pseudoatom Aromatic_1, pos=[-27.393, 10.166, 6.255], vdw=3.000, label="Aromatic 1 (1.00)"

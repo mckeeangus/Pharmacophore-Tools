@@ -17,7 +17,7 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[24.564, -13.510, 9.986], vdw=2.585, label="Acceptor 1 (0.86)"
+pseudoatom Acceptor_1, pos=[24.564, -13.510, 9.986], vdw=2.827, label="Acceptor 1 (0.86)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
 pseudoatom Aromatic_1, pos=[22.437, -11.630, 4.100], vdw=1.000, label="Aromatic 1 (1.00)"
@@ -26,13 +26,13 @@ group ph4_Aromatic, Aromatic_1
 pseudoatom Aromatic_2, pos=[26.252, -9.704, 6.732], vdw=1.000, label="Aromatic 2 (1.00)"
 color ph4_Aromatic, Aromatic_2
 group ph4_Aromatic, Aromatic_2
-pseudoatom Acceptor_2, pos=[27.485, -7.309, 7.121], vdw=1.347, label="Acceptor 2 (0.83)"
+pseudoatom Acceptor_2, pos=[27.485, -7.309, 7.121], vdw=1.453, label="Acceptor 2 (0.83)"
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Acceptor_3, pos=[21.245, -11.126, 2.274], vdw=1.676, label="Acceptor 3 (0.76)"
+pseudoatom Acceptor_3, pos=[21.245, -11.126, 2.274], vdw=1.000, label="Acceptor 3 (0.76)"
 color ph4_Acceptor, Acceptor_3
 group ph4_Acceptor, Acceptor_3
-pseudoatom PosIonizable_1, pos=[28.312, -4.039, 5.982], vdw=1.000, label="PosIonizable 1 (0.64)"
+pseudoatom PosIonizable_1, pos=[28.312, -4.039, 5.982], vdw=1.157, label="PosIonizable 1 (0.64)"
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
 show spheres, ph4_*

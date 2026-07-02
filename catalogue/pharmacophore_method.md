@@ -299,31 +299,35 @@ show the merge.
 
 ## 6. Tolerance radius — the size of a feature sphere
 
-Each kept feature carries a **tolerance radius** = the **spatial spread of its
-cluster's points about the centre**, measured as their root-mean-square distance
-(`tolerance.method: rmsd`) and clamped to `[min, max] = [1.0, 3.0]` Å.
+Each kept feature carries a **tolerance radius** = the radius of the **dense core** of
+its cluster: the distance from the centre that encloses a fraction `quantile` (= 0.75)
+of the feature's density (`tolerance.method: density_quantile`), clamped to
+`[min, max] = [1.0, 3.0]` Å.
 
-**How the spread is computed.** For a cluster of `m` member points `pᵢ` with centre
-`c` (the mean point, §4), the radius is the RMS of the point-to-centre distances:
+**How the radius is computed.** For a cluster of member points `pᵢ` with centre `c`
+(§4), take the point-to-centre distances `dᵢ = ‖pᵢ − c‖`, weight each by its density
+mass `wᵢ` (equal weights for k-means; the molecule-weighted field value for density,
+§11), and return the smallest `d` below which a fraction `quantile` of the total weight
+lies — a **density-weighted quantile of the distances**:
 
 ```
-radius = sqrt( (1/m) · Σᵢ ‖pᵢ − c‖² ),  then clamped to [1.0, 3.0] Å
+radius = d(q)  such that  Σ_{dᵢ ≤ d(q)} wᵢ  =  q · Σᵢ wᵢ,   q = 0.75,  clamped to [1.0, 3.0] Å
 ```
 
-i.e. the square root of the mean squared Euclidean distance from each feature point to
-the cluster centre (equivalently the standard deviation of the points' positions about
-their mean, taken in 3D). It is **not** a fitted Gaussian or a max-radius — every
-member point contributes, so one outlier widens it but cannot dominate, and the clamp
-keeps a lone outlier from ballooning the sphere past 3 Å or a near-coincident cluster
-from collapsing below 1 Å.
+This is deliberately **robust to the cluster's tail**: the far points that were still
+assigned to the cluster set the last 25% of the mass, not the sphere size, so a few
+outliers no longer inflate the radius (contrast the earlier root-mean-square radius,
+where every point — including the farthest — entered the mean; that `rmsd` mode is still
+available via `tolerance.method`). Lowering `quantile` tightens every sphere uniformly;
+raising it toward 1.0 approaches the full extent. The clamp keeps a near-coincident
+cluster at ≥ 1 Å and a diffuse one at ≤ 3 Å.
 
 This radius is the feature's **size in every visualisation** — the PyMOL spheres are
-drawn at exactly this radius. It is a **spread / dispersion** measure, so it is
-inversely related to density: a *tight, dense* cluster (all ligands place that feature
-in nearly the same spot) gives a *small* sphere, while a *diffuse, low-density* cluster
-gives a *large* one (capped at 3 Å so a single outlier can't balloon it). Reading the
+drawn at exactly this radius. It is still a spread measure, but a **core-density** one:
+a *tight, dense* cluster gives a *small* sphere, a *diffuse* one a *larger* sphere (now
+governed by where 75% of the density sits, not the outermost members). Reading the
 model, a small sphere = a geometrically well-agreed, confident feature; a large sphere =
-a feature whose exact position the ligands agree on only loosely.
+one whose core the ligands agree on only loosely.
 
 ---
 
@@ -336,7 +340,7 @@ a feature whose exact position the ligands agree on only loosely.
 | `representative_ligand.sdf` | One real ligand from the cell, written from the RDKit-perceived molecule (correct bond orders + 3D coords), used as the visual scaffold (§8). |
 | `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster, with cluster centres marked and each kept peak annotated with its label + support (§9). |
 | `pharmacophore.pml` | Lightweight self-contained PyMOL script: loads `representative_ligand.sdf` + the feature spheres (each object named `<Family>_<n>` and labelled with its support). |
-| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support. |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support. Excluded-volume spheres (density strategy, §11.6) are receptor markers with no peak or support, so they are reported as a single **count** line rather than listed in the per-feature table. |
 
 Richer inspection (raw-point overlay):
 `pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- --pharmacophore … [--features … --compounds … --out …]`.
@@ -481,11 +485,13 @@ for a large cell the fraction is the stricter gate, for a tiny one the count is.
 - **position** = the **density-weighted centroid** of the basin: `Σ f_v·x_v / Σ f_v`
   over the basin's voxels `v` (weights `f_v` = field value). This places the feature at
   the field's centre of mass, not a bare point mean.
-- **tolerance** = the **field spread at the basin**: the field-weighted RMS distance of
-  the basin's voxels from that centroid,
-  `sqrt( Σ f_v·‖x_v − centroid‖² / Σ f_v )`, clamped to `[1.0, 3.0] Å` (§6). This is the
-  second moment of the occupancy contour — a tight peak → small sphere, a diffuse peak →
-  large sphere — directly comparable to the k-means RMSD radius.
+- **tolerance** = the **density-quantile radius of the basin** (§6): the field values
+  `f_v` are the density weights, and the radius is the field-weighted quantile of the
+  voxel-to-centroid distances — the distance enclosing `quantile` (= 0.75) of the basin's
+  field mass, clamped to `[1.0, 3.0] Å`. This reads the sphere off the **core** of the
+  occupancy contour rather than its diffuse tail, using the identical `feature_radius`
+  helper (and `tolerance` config) as the k-means path, so the sphere means the same thing
+  in both strategies.
 - **direction** — for projected families (HBD/HBA) the model carries an optional mean
   unit vector. Our current feature perception (heavy-atom mol2 → RDKit `BaseFeatures`)
   does not emit per-point projection vectors, and perception is upstream and out of

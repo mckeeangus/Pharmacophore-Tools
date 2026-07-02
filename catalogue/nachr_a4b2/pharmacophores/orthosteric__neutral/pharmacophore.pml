@@ -20,10 +20,10 @@ set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 pseudoatom Acceptor_1, pos=[169.614, 120.201, 184.976], vdw=3.000, label="Acceptor 1 (1.00)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_2, pos=[163.229, 124.030, 181.111], vdw=2.474, label="Acceptor 2 (0.67)"
+pseudoatom Acceptor_2, pos=[163.229, 124.030, 181.111], vdw=2.610, label="Acceptor 2 (0.67)"
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Donor_1, pos=[170.408, 119.399, 182.057], vdw=2.785, label="Donor 1 (0.56)"
+pseudoatom Donor_1, pos=[170.408, 119.399, 182.057], vdw=3.000, label="Donor 1 (0.56)"
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 show spheres, ph4_*

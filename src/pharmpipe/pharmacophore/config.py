@@ -62,7 +62,11 @@ class SelectionConfig:
 
 @dataclass
 class ToleranceConfig:
-    method: str = "rmsd"
+    # "density_quantile": radius enclosing `quantile` of the feature's (density-weighted)
+    # mass from the centre — robust to the far points still assigned to the cluster.
+    # "rmsd": root-mean-square point-to-centre distance (the tail-sensitive alternative).
+    method: str = "density_quantile"
+    quantile: float = 0.75
     min: float = 1.0
     max: float = 3.0
 

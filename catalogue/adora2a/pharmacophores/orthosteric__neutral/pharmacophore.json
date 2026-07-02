@@ -19,7 +19,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -34,7 +35,7 @@
         "random_state": 0
       }
     },
-    "n_features": 6,
+    "n_features": 5,
     "representative_ligand": "8CIC_U30_A1202"
   },
   "features": [
@@ -43,7 +44,7 @@
       "x": 0.6804527777777777,
       "y": 94.80246666666666,
       "z": 52.10769722222222,
-      "radius": 2.2124140543221893,
+      "radius": 2.6318174389673112,
       "n_points": 12,
       "n_ligands": 5,
       "support": 1.0,
@@ -55,7 +56,7 @@
       "x": 3.9344285714285716,
       "y": 94.72114285714285,
       "z": 53.562000000000005,
-      "radius": 1.678559951328542,
+      "radius": 2.0296594516804776,
       "n_points": 7,
       "n_ligands": 5,
       "support": 1.0,
@@ -67,7 +68,7 @@
       "x": 0.6930000000000001,
       "y": 97.87383333333332,
       "z": 52.95383333333333,
-      "radius": 1.210074079458682,
+      "radius": 1.4955076247065933,
       "n_points": 6,
       "n_ligands": 5,
       "support": 1.0,
@@ -79,7 +80,7 @@
       "x": -2.3774999999999995,
       "y": 99.32883333333332,
       "z": 52.024166666666666,
-      "radius": 2.238537661311759,
+      "radius": 1.7512777160944135,
       "n_points": 6,
       "n_ligands": 4,
       "support": 0.8,
@@ -91,24 +92,12 @@
       "x": 3.1911,
       "y": 99.13793333333334,
       "z": 56.0625,
-      "radius": 2.967657674178595,
+      "radius": 3.0,
       "n_points": 4,
       "n_ligands": 3,
       "support": 0.6,
       "direction": null,
       "label": "Aromatic 2"
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -0.020444444444444414,
-      "y": 92.86455555555555,
-      "z": 51.18216666666666,
-      "radius": 1.137719613856191,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 0.6,
-      "direction": null,
-      "label": "LumpedHydrophobe 1"
     }
   ]
 }

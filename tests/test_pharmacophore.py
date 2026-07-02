@@ -10,9 +10,23 @@ from pharmpipe.pharmacophore.build import (
     _merge_overlapping,
     best_representative,
     build_pharmacophore,
+    feature_radius,
 )
 from pharmpipe.pharmacophore.config import SelectionConfig, ToleranceConfig
 from pharmpipe.pharmacophore.model import Pharmacophore, PharmacophoreFeature
+
+
+def test_density_quantile_radius_ignores_outliers():
+    # a tight core of 9 points at 0.5 A plus one point at 6 A (a far member of the
+    # cluster). RMS is dragged up by the outlier; the density quantile sits on the core.
+    d = np.array([0.5] * 9 + [6.0])
+    rmsd = feature_radius(d, None, ToleranceConfig(method="rmsd", min=0.1, max=10.0))
+    quant = feature_radius(
+        d, None, ToleranceConfig(method="density_quantile", quantile=0.75,
+                                 min=0.1, max=10.0))
+    assert rmsd > 1.5              # the 6 A outlier inflates the RMS radius
+    assert quant == 0.5           # the quantile radius rests on the dense core
+    assert quant < rmsd
 
 
 def _table_two_donor_clusters() -> FeatureTable:

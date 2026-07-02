@@ -3,7 +3,7 @@
 - Ligands loaded: **5** (template=5)
 - Skipped poses: 0
 - Consensus method: `kmeans`
-- Representative ligand (viz): `5IKV_FLF_B601`
+- Representative ligand (viz): `5IKR_ID8_A601`
 - Features kept: **3**
 
 Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).

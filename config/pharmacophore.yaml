@@ -100,6 +100,10 @@ selection:
 
 # --- Tolerance (kept feature sphere radius, Angstrom) -----------------------
 tolerance:
-  method: rmsd                 # root-mean-square distance of cluster points to centre
+  # density_quantile: radius encloses `quantile` of the feature's (density-weighted) mass
+  #   from the centre, so the far points still assigned to the cluster do not inflate it.
+  #   (rmsd — root-mean-square point-to-centre distance — is the tail-sensitive alternative.)
+  method: density_quantile
+  quantile: 0.75               # fraction of density mass inside the sphere; lower = tighter
   min: 1.0                     # clamp so a tight cluster still has a usable radius
   max: 3.0                     # and a diffuse cluster does not balloon

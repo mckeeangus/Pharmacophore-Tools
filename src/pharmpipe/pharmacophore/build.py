@@ -41,11 +41,43 @@ class BuildResult:
     assignments: list[ClusterAssignment] = field(default_factory=list)
 
 
-def _radius(coords: np.ndarray, center: np.ndarray, tol: ToleranceConfig) -> float:
-    if tol.method != "rmsd":
+def _weighted_quantile(values: np.ndarray, weights: np.ndarray, q: float) -> float:
+    """Smallest ``value`` at or below which a fraction ``q`` of the weight lies."""
+    if len(values) == 0:
+        return 0.0
+    order = np.argsort(values)
+    v, w = values[order], weights[order]
+    cum = np.cumsum(w)
+    if cum[-1] <= 0:
+        return float(v[-1])
+    idx = int(np.searchsorted(cum, q * cum[-1]))
+    return float(v[min(idx, len(v) - 1)])
+
+
+def feature_radius(distances: np.ndarray, weights: np.ndarray | None,
+                   tol: ToleranceConfig) -> float:
+    """Tolerance radius from point-to-centre ``distances``, clamped to ``[min, max]``.
+
+    ``density_quantile`` (default) returns the radius enclosing ``tol.quantile`` of the
+    (optionally density-weighted) mass — the far points still assigned to the cluster no
+    longer set the size. ``rmsd`` returns the (weighted) root-mean-square distance. Shared
+    by both consensus paths so the sphere means the same thing in each.
+    """
+    if len(distances) == 0:
+        return tol.min
+    w = np.ones(len(distances)) if weights is None else np.asarray(weights, dtype=float)
+    if tol.method == "rmsd":
+        r = float(np.sqrt(np.average(distances ** 2, weights=w)))
+    elif tol.method == "density_quantile":
+        r = _weighted_quantile(distances, w, tol.quantile)
+    else:
         raise ValueError(f"unknown tolerance method {tol.method!r}")
-    rms = float(np.sqrt(np.mean(np.sum((coords - center) ** 2, axis=1))))
-    return float(min(max(rms, tol.min), tol.max))
+    return float(min(max(r, tol.min), tol.max))
+
+
+def _radius(coords: np.ndarray, center: np.ndarray, tol: ToleranceConfig) -> float:
+    distances = np.linalg.norm(coords - center, axis=1)
+    return feature_radius(distances, None, tol)
 
 
 def _overlaps(a: PharmacophoreFeature, b: PharmacophoreFeature,

@@ -4,7 +4,8 @@
 - Skipped poses: 0
 - Consensus method: `density`
 - Representative ligand (viz): `1BWB_146_B641`
-- Features kept: **46**
+- Features kept: **6**
+- Excluded-volume spheres (receptor markers): **40**
 
 Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
@@ -14,46 +15,6 @@ Support is the fraction of the cell's ligands that contribute to a feature (one 
 | Acceptor 2 | 56 | 24 | 0.75 |
 | Acceptor 3 | 39 | 24 | 0.75 |
 | Donor 1 | 110 | 29 | 0.91 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 2 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
-| ExcludedVolume | 1 | 0 | 0.00 |
 | LumpedHydrophobe 1 | 35 | 30 | 0.94 |
 | LumpedHydrophobe 2 | 34 | 29 | 0.91 |
 

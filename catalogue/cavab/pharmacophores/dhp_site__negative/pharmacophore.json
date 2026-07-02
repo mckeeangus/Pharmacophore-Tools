@@ -19,7 +19,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -35,7 +36,7 @@
       }
     },
     "n_features": 4,
-    "representative_ligand": "6KE5_6UB_B1301"
+    "representative_ligand": "5KLS_6UC_C1304"
   },
   "features": [
     {
@@ -43,7 +44,7 @@
       "x": 25.46166666666667,
       "y": 167.265,
       "z": 14.213333333333333,
-      "radius": 1.3534026665326815,
+      "radius": 1.6795662799928066,
       "n_points": 6,
       "n_ligands": 3,
       "support": 1.0,
@@ -55,7 +56,7 @@
       "x": 25.508583333333334,
       "y": 164.69579166666665,
       "z": 10.055833333333332,
-      "radius": 1.8139164958231728,
+      "radius": 1.8936116015617948,
       "n_points": 4,
       "n_ligands": 3,
       "support": 1.0,
@@ -67,7 +68,7 @@
       "x": 25.631999999999994,
       "y": 162.99733333333333,
       "z": 15.217333333333334,
-      "radius": 1.2198701205911666,
+      "radius": 1.4035612641499629,
       "n_points": 3,
       "n_ligands": 3,
       "support": 1.0,
@@ -79,7 +80,7 @@
       "x": 27.775,
       "y": 164.9395,
       "z": 18.823,
-      "radius": 1.444613183520078,
+      "radius": 1.4446131835200866,
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667,

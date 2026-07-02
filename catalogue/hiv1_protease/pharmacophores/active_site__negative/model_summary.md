@@ -4,7 +4,7 @@
 - Skipped poses: 0
 - Consensus method: `kmeans`
 - Representative ligand (viz): `6DV4_GA5_B201`
-- Features kept: **11**
+- Features kept: **10**
 
 Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
 
@@ -15,8 +15,7 @@ Support is the fraction of the cell's ligands that contribute to a feature (one 
 | Acceptor 3 | 35 | 21 | 0.66 |
 | Acceptor 4 | 31 | 24 | 0.75 |
 | Donor 1 | 38 | 28 | 0.88 |
-| Donor 2 | 29 | 28 | 0.88 |
-| Donor 3 | 29 | 27 | 0.84 |
+| Donor 2 | 29 | 27 | 0.84 |
 | LumpedHydrophobe 1 | 30 | 30 | 0.94 |
 | LumpedHydrophobe 2 | 29 | 29 | 0.91 |
 | LumpedHydrophobe 3 | 22 | 21 | 0.66 |

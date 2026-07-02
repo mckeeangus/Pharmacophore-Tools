@@ -17,10 +17,10 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[32.710, 8.607, 8.576], vdw=2.294, label="Acceptor 1 (1.00)"
+pseudoatom Acceptor_1, pos=[32.710, 8.607, 8.576], vdw=2.723, label="Acceptor 1 (1.00)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_2, pos=[27.163, 6.055, 16.417], vdw=2.210, label="Acceptor 2 (1.00)"
+pseudoatom Acceptor_2, pos=[27.163, 6.055, 16.417], vdw=2.132, label="Acceptor 2 (1.00)"
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
 pseudoatom Aromatic_1, pos=[30.436, 3.441, 12.177], vdw=1.000, label="Aromatic 1 (0.67)"

@@ -53,6 +53,11 @@ def _feature_ordinal(feat) -> int:
 
 def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
                    path: Path) -> Path:
+    # Excluded-volume spheres are receptor steric markers, not ligand-derived
+    # peaks: they carry no label and no support, so they are counted separately
+    # and kept out of the per-feature support table (which is one row per peak).
+    ligand_feats = [f for f in ph.features if f.family != "ExcludedVolume"]
+    n_ev = len(ph.features) - len(ligand_feats)
     lines = [
         f"# Pharmacophore — {ph.name}", "",
         f"- Ligands loaded: **{n_ligands}** "
@@ -62,13 +67,18 @@ def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
            if report.skipped else ""),
         f"- Consensus method: `{ph.metadata.get('consensus_method', '?')}`",
         f"- Representative ligand (viz): `{ph.metadata.get('representative_ligand') or 'none'}`",
-        f"- Features kept: **{len(ph.features)}**", "",
+        f"- Features kept: **{len(ligand_feats)}**",
+    ]
+    if n_ev:
+        lines.append(f"- Excluded-volume spheres (receptor markers): **{n_ev}**")
+    lines += [
+        "",
         "Support is the fraction of the cell's ligands that contribute to a feature "
         "(one row per feature / peak; all features are kept only above the support floor).",
         "",
         "| Feature | Points | Ligands | Support |", "|---|---:|---:|---:|",
     ]
-    for f in sorted(ph.features, key=lambda f: (f.family, _feature_ordinal(f))):
+    for f in sorted(ligand_feats, key=lambda f: (f.family, _feature_ordinal(f))):
         lines.append(
             f"| {f.label or f.family} | {f.n_points} | {f.n_ligands} | {f.support:.2f} |")
     lines += ["", "See `pharmacophore.json` (model), `features.csv` (raw points + "

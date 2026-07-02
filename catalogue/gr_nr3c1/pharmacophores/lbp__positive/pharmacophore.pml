@@ -23,7 +23,7 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_2, pos=[34.067, 8.315, 6.623], vdw=3.000, label="Acceptor 2 (0.95)"
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Aromatic_1, pos=[31.985, 7.683, 9.456], vdw=1.815, label="Aromatic 1 (0.65)"
+pseudoatom Aromatic_1, pos=[31.985, 7.683, 9.456], vdw=1.703, label="Aromatic 1 (0.65)"
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
 show spheres, ph4_*

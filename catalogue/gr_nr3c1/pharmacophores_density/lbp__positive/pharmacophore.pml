@@ -23,13 +23,13 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Donor_1, pos=[29.015, 5.290, 13.697], vdw=3.000, label="Donor 1 (0.95)"
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom Aromatic_1, pos=[31.930, 7.680, 9.505], vdw=2.978, label="Aromatic 1 (0.65)"
+pseudoatom Aromatic_1, pos=[31.930, 7.680, 9.505], vdw=3.000, label="Aromatic 1 (0.65)"
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
 pseudoatom Aromatic_2, pos=[27.780, 10.391, 14.542], vdw=3.000, label="Aromatic 2 (0.65)"
 color ph4_Aromatic, Aromatic_2
 group ph4_Aromatic, Aromatic_2
-pseudoatom Aromatic_3, pos=[34.443, 9.164, 5.685], vdw=2.576, label="Aromatic 3 (0.50)"
+pseudoatom Aromatic_3, pos=[34.443, 9.164, 5.685], vdw=3.000, label="Aromatic 3 (0.50)"
 color ph4_Aromatic, Aromatic_3
 group ph4_Aromatic, Aromatic_3
 pseudoatom ExcludedVolume_5, pos=[31.040, 11.671, 15.388], vdw=1.000, label="ExcludedVolume (0.00)"

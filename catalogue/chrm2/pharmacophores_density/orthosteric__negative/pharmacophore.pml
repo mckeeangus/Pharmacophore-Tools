@@ -23,7 +23,7 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom PosIonizable_1, pos=[132.072, 145.428, 102.234], vdw=3.000, label="PosIonizable 1 (1.00)"
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
-pseudoatom Aromatic_1, pos=[137.698, 146.362, 105.540], vdw=2.548, label="Aromatic 1 (1.00)"
+pseudoatom Aromatic_1, pos=[137.698, 146.362, 105.540], vdw=3.000, label="Aromatic 1 (1.00)"
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
 pseudoatom ExcludedVolume_3, pos=[134.262, 149.266, 101.219], vdw=1.000, label="ExcludedVolume (0.00)"

@@ -20,7 +20,7 @@ set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 pseudoatom Acceptor_1, pos=[122.860, 123.030, 104.650], vdw=3.000, label="Acceptor 1 (1.00)"
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom LumpedHydrophobe_1, pos=[122.326, 125.585, 108.311], vdw=2.780, label="LumpedHydrophobe 1 (0.60)"
+pseudoatom LumpedHydrophobe_1, pos=[122.326, 125.585, 108.311], vdw=3.000, label="LumpedHydrophobe 1 (0.60)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
 pseudoatom ExcludedVolume_2, pos=[125.285, 128.615, 109.702], vdw=1.000, label="ExcludedVolume (0.00)"

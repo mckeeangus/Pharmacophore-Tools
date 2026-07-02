@@ -20,7 +20,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -112,7 +113,7 @@
       "x": -13.094829806453363,
       "y": 13.182662251608944,
       "z": 29.044120034294313,
-      "radius": 2.9777662981424577,
+      "radius": 3.0,
       "n_points": 34,
       "n_ligands": 29,
       "support": 0.9062,

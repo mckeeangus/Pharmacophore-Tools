@@ -34,7 +34,13 @@ from scipy.ndimage import gaussian_filter, maximum_filter
 from scipy.spatial import cKDTree
 
 from ..features.extract import FeatureTable
-from .build import BuildResult, ClusterAssignment, _merge_overlapping, finalize_features
+from .build import (
+    BuildResult,
+    ClusterAssignment,
+    _merge_overlapping,
+    feature_radius,
+    finalize_features,
+)
 from .config import DensityConfig, ToleranceConfig
 from .model import Pharmacophore, PharmacophoreFeature
 
@@ -150,15 +156,17 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
     for p in range(len(peaks)):
         pts_mask = labels == p
         vox_mask = vox_basin == p
-        # density-weighted centroid + field-spread tolerance from the basin's voxels
+        # density-weighted centroid + radius from the basin's voxels: the radius encloses
+        # `tol.quantile` of the field mass (density_quantile), so the diffuse tail of the
+        # occupancy field does not set the sphere size.
         if vox_mask.any():
             w = vox_val[vox_mask]
             xyz = vox_xyz[vox_mask]
             centroid = (w[:, None] * xyz).sum(axis=0) / w.sum()
-            spread = float(np.sqrt((w * ((xyz - centroid) ** 2).sum(axis=1)).sum() / w.sum()))
+            radius = feature_radius(np.linalg.norm(xyz - centroid, axis=1), w, tol)
         else:                                        # peak with no field mass (rare)
             centroid = peaks[p]
-            spread = tol.min
+            radius = tol.min
         centers[p] = tuple(float(c) for c in centroid)
         mol_weight = float(weights[pts_mask].sum())
         n_lig = len({lig for lig, m in zip(ligands, pts_mask, strict=True) if m})
@@ -170,7 +178,7 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
             continue
         kept.append((p, PharmacophoreFeature(
             family=family, x=centers[p][0], y=centers[p][1], z=centers[p][2],
-            radius=float(min(max(spread, tol.min), tol.max)),
+            radius=radius,
             n_points=int(pts_mask.sum()), n_ligands=n_lig,
             support=round(support, 4),
             direction=None,   # set when upstream perception supplies per-point vectors

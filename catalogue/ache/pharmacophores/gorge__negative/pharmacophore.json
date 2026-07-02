@@ -20,7 +20,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -35,7 +36,7 @@
         "random_state": 0
       }
     },
-    "n_features": 4,
+    "n_features": 3,
     "representative_ligand": "7D9O_H0L_B601"
   },
   "features": [
@@ -44,7 +45,7 @@
       "x": 91.1667023809524,
       "y": 80.55038095238096,
       "z": -8.01277380952381,
-      "radius": 2.259859641671729,
+      "radius": 3.0,
       "n_points": 14,
       "n_ligands": 10,
       "support": 0.7692,
@@ -52,23 +53,11 @@
       "label": "Aromatic 1"
     },
     {
-      "family": "Donor",
-      "x": 90.91445454545455,
-      "y": 81.87627272727273,
-      "z": -6.156363636363636,
-      "radius": 2.013854591088838,
-      "n_points": 11,
-      "n_ligands": 10,
-      "support": 0.7692,
-      "direction": null,
-      "label": "Donor 1"
-    },
-    {
       "family": "Aromatic",
       "x": 88.23983333333334,
       "y": 89.06724074074074,
       "z": -1.9938888888888886,
-      "radius": 1.4571231954981403,
+      "radius": 1.3176556807987834,
       "n_points": 9,
       "n_ligands": 7,
       "support": 0.5385,
@@ -80,7 +69,7 @@
       "x": 86.015,
       "y": 87.29025,
       "z": -4.993375,
-      "radius": 1.1262648098360346,
+      "radius": 1.0,
       "n_points": 8,
       "n_ligands": 7,
       "support": 0.5385,

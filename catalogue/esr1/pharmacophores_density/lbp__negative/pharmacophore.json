@@ -20,7 +20,8 @@
       "merge_radius": null
     },
     "tolerance": {
-      "method": "rmsd",
+      "method": "density_quantile",
+      "quantile": 0.75,
       "min": 1.0,
       "max": 3.0
     },
@@ -43,7 +44,7 @@
         "ev_max": 40
       }
     },
-    "n_features": 46,
+    "n_features": 45,
     "representative_ligand": "7NDO_RAL_B601"
   },
   "features": [
@@ -64,7 +65,7 @@
       "x": 26.230271253094752,
       "y": -9.566841772101165,
       "z": 6.9864348564532825,
-      "radius": 2.7426176062518968,
+      "radius": 3.0,
       "n_points": 48,
       "n_ligands": 42,
       "support": 1.0,
@@ -76,7 +77,7 @@
       "x": 22.324566177316324,
       "y": -11.664388323798596,
       "z": 3.9005277757233756,
-      "radius": 2.6057897979816613,
+      "radius": 3.0,
       "n_points": 48,
       "n_ligands": 42,
       "support": 1.0,
@@ -84,23 +85,11 @@
       "label": "LumpedHydrophobe 1"
     },
     {
-      "family": "Donor",
-      "x": 20.557497348886923,
-      "y": -10.976622057193293,
-      "z": 1.742041707944685,
-      "radius": 2.5866983925738527,
-      "n_points": 32,
-      "n_ligands": 32,
-      "support": 0.7619,
-      "direction": null,
-      "label": "Donor 1"
-    },
-    {
       "family": "Acceptor",
       "x": 25.585503273166164,
       "y": -14.237115709498621,
       "z": 7.216458561659434,
-      "radius": 2.9099338460692525,
+      "radius": 3.0,
       "n_points": 31,
       "n_ligands": 31,
       "support": 0.7381,
@@ -112,7 +101,7 @@
       "x": 28.23555864525497,
       "y": -3.9549287483614353,
       "z": 5.907876731268876,
-      "radius": 2.7747117356684603,
+      "radius": 3.0,
       "n_points": 27,
       "n_ligands": 27,
       "support": 0.6429,

@@ -36,7 +36,6 @@
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
-        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,

@@ -104,7 +104,7 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
 - (density) the unit of evidence is the **distinct molecule** (per-point weighting),
   features emerge from field peaks with **no `k`**, the **same cross-family merge** then
   gives one feature per region, and **excluded-volume** spheres mark receptor regions no
-  ligand occupies; deterministic, three knobs (length scale, peak separation, floor);
+  ligand occupies; deterministic, two knobs (length scale, occupancy floor);
 - ligands are **protonated to their pH-7.4 microstate** (pkasolver + a config-driven
   **weak-acid guard** that corrects pkasolver's over-deprotonation of phenols/alcohols/
   amides/sulfonamides/amino-heteroaromatics) before perception, so donor/acceptor/
@@ -124,7 +124,7 @@ Files per model:
 | `representative_ligand.sdf` | One real cell ligand (correct bond orders + 3D coords) chosen as the best fit to the model; the clean visual scaffold. |
 | `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster; centre-marker area scales with cluster population, kept centres a filled "X". |
 | `pharmacophore.pml` | Lightweight PyMOL script (representative ligand + feature spheres). The richer `scripts/pymol_pharmacophore.py` reads the JSON and adds a raw-point overlay. |
-| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support (fraction of the cell's ligands contributing), plus a **Feature resolution** section listing any co-incident dual classifications collapsed by the feature hierarchy (`kept ← dropped` + the ligands involved). Density-strategy excluded-volume spheres are receptor markers (no peak/support), reported as a count line, not table rows. |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support (fraction of the cell's ligands contributing), plus a **Feature resolution** section listing any co-incident dual classifications collapsed by the feature hierarchy (`kept ← dropped` + the ligands involved), and a **Not selected** table of the clusters/peaks that formed but did not enter the model (below the support/size floor or displaced by the overlap merge) with their mean support. Density-strategy excluded-volume spheres are receptor markers (no peak/support), reported as a count line, not table rows. |
 
 ## Other tracked files
 

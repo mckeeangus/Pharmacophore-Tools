@@ -94,16 +94,13 @@ def _voxel_centers(idx: np.ndarray, origin: np.ndarray, voxel: float) -> np.ndar
 
 def _local_maxima(field: np.ndarray, origin: np.ndarray, dcfg: DensityConfig
                   ) -> np.ndarray:
-    """All local maxima of the field, as world coordinates, deduped by peak_separation.
+    """All local maxima of the field, as world coordinates, deduped by bandwidth.
 
-    Near-coincident maxima closer than ``peak_separation`` are collapsed keeping the
-    taller — the only place the field is post-filtered. ``peak_separation`` is decoupled
-    from the smoothing ``bandwidth`` so the resolution limit is a deliberate chemical
-    choice (default 1.0 A, ~ the shortest plausible feature spacing given bond lengths)
-    rather than tied to the tolerance scale. Note the Gaussian smoothing (sigma =
-    bandwidth) is the deeper limiter: two lobes closer than ~bandwidth rarely present
-    as two maxima at all, so lowering peak_separation only recovers peaks the field
-    still resolves.
+    Peaks closer than the smoothing bandwidth cannot be resolved, so near-coincident
+    maxima are collapsed keeping the taller — the only place the field is post-filtered.
+    The min peak spacing is the ``bandwidth`` itself: the Gaussian smoothing (sigma =
+    bandwidth) is the field's resolution limit, so two maxima nearer than that are the
+    same site and a separate spacing knob would only over-split single lobes.
     """
     if field.max() <= 0:
         return np.empty((0, 3), dtype=float)
@@ -115,10 +112,7 @@ def _local_maxima(field: np.ndarray, origin: np.ndarray, dcfg: DensityConfig
     coords = _voxel_centers(peak_idx[order], origin, dcfg.voxel)
     kept: list[np.ndarray] = []
     for c in coords:
-        # collapse peaks at or nearer than peak_separation (strict `>` to survive), so a
-        # single lobe split into tied adjacent grid voxels (exactly `voxel` apart) does
-        # not leak two peaks when peak_separation == voxel.
-        if all(np.linalg.norm(c - k) > dcfg.peak_separation for k in kept):
+        if all(np.linalg.norm(c - k) >= dcfg.bandwidth for k in kept):
             kept.append(c)
     return np.array(kept, dtype=float) if kept else np.empty((0, 3), dtype=float)
 

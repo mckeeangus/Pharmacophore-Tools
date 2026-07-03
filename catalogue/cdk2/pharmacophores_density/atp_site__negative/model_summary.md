@@ -24,4 +24,25 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | NegIonizable ← Acceptor | 10 | 4FKG_4CK_A300, 4FKU_60K_A303, 6Q4D_HHT_A301, 6Q4G_HJK_A301, 6Q4H_HGH_A301, 6Q4I_HGK_A302, 6Q4J_HHB_A303, 7M2F_YOS_A901, 7RWE_7TH_A301 |
 | PosIonizable ← Donor | 41 | 1GZ8_MBP_A1300, 1H00_FAP_A1300, 1H00_FCP_A1400, 1URW_I1P_A1300, 2VTT_LZD_A1299, 3PY0_SU9_A301, 3R73_X87_A920, 3RAI_X85_A923, 3RM6_18Z_A478, 4ACM_7YG_A1302, 4FKJ_11K_A301, 4FKP_LS5_A301, 4FKT_48K_A301, 4FKV_61K_A301, 5ANE_SZL_A1299, 5ANJ_ZXC_A1299, 5IEY_6AE_A1001, 6GUK_FC8_A301, 6Q4E_HH5_A303, 6Q4G_HJK_A301, 6Q4H_HGH_A301, 7M2F_YOS_A901, 7QHL_D5P_C301, 7RA5_3I3_A301, 7VDU_65L_A301, 8ERN_WQK_A402, 8RU8_I74_A301, 9UAW_A1EOO_A301 |
 
+## Not selected
+
+Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+
+| Feature | Points | Ligands | Mean support |
+|---|---:|---:|---:|
+| Aromatic | 154 | 86 | 0.99 |
+| Donor | 146 | 78 | 0.90 |
+| Aromatic | 66 | 60 | 0.69 |
+| LumpedHydrophobe | 25 | 24 | 0.28 |
+| Donor | 22 | 21 | 0.24 |
+| PosIonizable | 16 | 16 | 0.18 |
+| PosIonizable | 13 | 10 | 0.11 |
+| PosIonizable | 8 | 7 | 0.08 |
+| PosIonizable | 7 | 7 | 0.08 |
+| NegIonizable | 6 | 6 | 0.07 |
+| LumpedHydrophobe | 2 | 2 | 0.02 |
+| NegIonizable | 1 | 1 | 0.01 |
+| NegIonizable | 1 | 1 | 0.01 |
+| NegIonizable | 1 | 1 | 0.01 |
+
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

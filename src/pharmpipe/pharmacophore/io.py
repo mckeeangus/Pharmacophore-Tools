@@ -13,9 +13,10 @@ from pathlib import Path
 from .build import BuildResult
 from .model import Pharmacophore
 
-# Feature spheres render at a small FIXED radius (the tolerance radius, up to 3 A,
+# Ligand feature spheres render at a FIXED radius (the tolerance radius, up to 3 A,
 # swamps the scene); the true tolerance is preserved in pharmacophore.json.
-PH4_SPHERE_RADIUS = 0.5
+PH4_SPHERE_RADIUS = 2.0
+EV_FAMILY = "ExcludedVolume"
 
 
 def write_json(ph: Pharmacophore, path: Path) -> Path:
@@ -87,7 +88,13 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
     for i, feat in enumerate(ph.features):
         obj = (feat.label or f"{feat.family} {i}").replace(" ", "_")
         pos = f"pos=[{feat.x:.3f}, {feat.y:.3f}, {feat.z:.3f}]"
-        # small fixed-radius translucent sphere ...
+        if feat.family == EV_FAMILY:
+            # excluded-volume markers: their own steric radius, no centre point.
+            lines.append(f"pseudoatom {obj}, {pos}, vdw={feat.radius:.3f}")
+            lines.append(f"color ph4_{feat.family}, {obj}")
+            lines.append(f"group ph4_{feat.family}, {obj}")
+            continue
+        # fixed-radius translucent sphere ...
         lines.append(f"pseudoatom {obj}, {pos}, vdw={PH4_SPHERE_RADIUS:.3f}")
         lines.append(f"color ph4_{feat.family}, {obj}")
         lines.append(f"group ph4_{feat.family}, {obj}")

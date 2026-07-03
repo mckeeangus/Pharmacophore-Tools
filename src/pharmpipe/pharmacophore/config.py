@@ -41,9 +41,8 @@ class DensityConfig:
     """
 
     voxel: float = 1.0              # grid spacing (A) = spatial resolution
-    bandwidth: float = 1.5          # Gaussian smoothing sigma (A) ~ feature tolerance
-    peak_separation: float = 1.5    # min centre-to-centre distance (A) between two kept
-    #                                 peaks of one family (own knob; set = bandwidth)
+    bandwidth: float = 1.5          # Gaussian smoothing sigma (A) ~ feature tolerance;
+    #                                 also the min spacing between two kept peaks
     occupancy_floor: float = 2.0    # min summed distinct-molecule weight to keep a peak
     scaffold_weighting: bool = False  # also weight by inverse scaffold frequency
     # Collapse overlapping features across families so a region of space yields one

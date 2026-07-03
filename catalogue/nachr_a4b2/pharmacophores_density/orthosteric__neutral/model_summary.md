@@ -24,4 +24,18 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | Aromatic ← LumpedHydrophobe | 8 | 2WNC_TKT_C300, 2XYS_SY9_E1206, 2XYT_TC9_F1206, 3SIO_MLK_D260, 9SG3_PHN_A302 |
 | PosIonizable ← Donor | 4 | 2WNC_TKT_C300, 2XYS_SY9_E1206, 2XYT_TC9_F1206, 3SIO_MLK_D260 |
 
+## Not selected
+
+Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+
+| Feature | Points | Ligands | Mean support |
+|---|---:|---:|---:|
+| PosIonizable | 4 | 4 | 0.44 |
+| Aromatic | 7 | 3 | 0.33 |
+| Aromatic | 2 | 2 | 0.22 |
+| Aromatic | 2 | 1 | 0.11 |
+| Donor | 1 | 1 | 0.11 |
+| Donor | 1 | 1 | 0.11 |
+| PosIonizable | 1 | 1 | 0.11 |
+
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

@@ -25,4 +25,23 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | Aromatic ← LumpedHydrophobe | 17 | 4LDE_P0G_A1401, 4LDL_XQC_A1401, 4LDO_ALE_A1402, 6MXT_K5Y_A1401, 7DHI_68H_R401, 7XK9_GJ6_A1401, 8GG0_G1I_R501, 8JJ8_H98_F501, 8JJL_DZQ_A501, 9BUY_A1ASM_R504, 9LW5_LDP_R401 |
 | PosIonizable ← Donor | 11 | 4LDE_P0G_A1401, 4LDL_XQC_A1401, 4LDO_ALE_A1402, 6MXT_K5Y_A1401, 7DHI_68H_R401, 7XK9_GJ6_A1401, 8GG0_G1I_R501, 8JJ8_H98_F501, 8JJL_DZQ_A501, 9BUY_A1ASM_R504, 9LW5_LDP_R401 |
 
+## Not selected
+
+Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+
+| Feature | Points | Ligands | Mean support |
+|---|---:|---:|---:|
+| Acceptor | 10 | 10 | 0.91 |
+| Acceptor | 10 | 10 | 0.91 |
+| Acceptor | 8 | 8 | 0.73 |
+| Acceptor | 5 | 5 | 0.45 |
+| Aromatic | 4 | 4 | 0.36 |
+| Acceptor | 3 | 3 | 0.27 |
+| Acceptor | 2 | 2 | 0.18 |
+| Aromatic | 2 | 2 | 0.18 |
+| LumpedHydrophobe | 2 | 2 | 0.18 |
+| Donor | 1 | 1 | 0.09 |
+| Acceptor | 1 | 1 | 0.09 |
+| PosIonizable | 1 | 1 | 0.09 |
+
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

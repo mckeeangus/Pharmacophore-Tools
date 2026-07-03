@@ -75,15 +75,10 @@ clustering:
 # the occupancy floor; the excluded-volume sub-block is a self-contained add-on.
 density:
   voxel: 1.0              # grid spacing (A) — spatial resolution of the field
-  bandwidth: 1.5         # Gaussian smoothing sigma (A) ~ target feature tolerance
-  peak_separation: 1.5   # min centre-to-centre distance (A) between two kept peaks of
-                         #   one family. A separate knob from `bandwidth`, but set equal
-                         #   to it here: the smoothing sigma (=bandwidth) is the field's
-                         #   resolution limit, so a peak_separation below it does not
-                         #   resolve genuinely closer sub-sites — it only over-splits a
-                         #   single lobe into ripple sub-peaks that can then fall below
-                         #   occupancy_floor and be lost. To resolve <1.5 A sub-sites,
-                         #   lower `bandwidth` AND `voxel` too, not this alone.
+  bandwidth: 1.5         # Gaussian smoothing sigma (A) ~ target feature tolerance; also
+                         #   the min spacing between two kept peaks (the smoothing sigma
+                         #   is the field's resolution limit, so maxima nearer than it are
+                         #   the same site — no separate peak-spacing knob).
   occupancy_floor: 2.0   # keep a peak only if its basin's summed distinct-molecule
                          #   weight >= this (units: effective molecules)
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency

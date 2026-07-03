@@ -67,8 +67,31 @@ def _feature_ordinal(feat) -> int:
         return 0
 
 
-def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
+def _unselected_features(result, n_ligands: int) -> list[tuple[str, int, int, float]]:
+    """Clusters/peaks that were formed but did NOT enter the model, as
+    ``(family, n_points, n_ligands, support)`` sorted by support then size.
+
+    A cluster is "not selected" when its label is absent from the family's
+    ``kept_labels`` — it fell below the support/size floor (§5/§11.4) or was displaced by
+    the cross-family overlap merge. Support is recomputed here from the raw assignment.
+    """
+    rows: list[tuple[str, int, int, float]] = []
+    for a in result.assignments:
+        for lbl in sorted(set(a.labels.tolist())):
+            if lbl in a.kept_labels:
+                continue
+            mask = a.labels == lbl
+            n_points = int(mask.sum())
+            n_lig = len({lig for lig, m in zip(a.ligand_ids, mask, strict=True) if m})
+            support = n_lig / n_ligands if n_ligands else 0.0
+            rows.append((a.family, n_points, n_lig, support))
+    rows.sort(key=lambda r: (r[3], r[1]), reverse=True)
+    return rows
+
+
+def _write_summary(result, report: LoadReport, n_ligands: int,
                    path: Path) -> Path:
+    ph: Pharmacophore = result.pharmacophore
     # Excluded-volume spheres are receptor steric markers, not ligand-derived
     # peaks: they carry no label and no support, so they are counted separately
     # and kept out of the per-feature support table (which is one row per peak).
@@ -110,6 +133,17 @@ def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
             kept, dropped = pair.split("<-", 1)
             ligs = ", ".join(info["ligands"])
             lines.append(f"| {kept} ← {dropped} | {info['events']} | {ligs} |")
+    unselected = _unselected_features(result, n_ligands)
+    if unselected:
+        lines += [
+            "", "## Not selected",
+            "", "Clusters/peaks that formed but did not enter the model — below the "
+            "support or size floor, or displaced by the cross-family overlap merge — with "
+            "their mean support (fraction of the cell's ligands contributing).",
+            "", "| Feature | Points | Ligands | Mean support |", "|---|---:|---:|---:|",
+        ]
+        for fam, npts, nlig, sup in unselected:
+            lines.append(f"| {fam} | {npts} | {nlig} | {sup:.2f} |")
     lines += ["", "See `pharmacophore.json` (model), `features.csv` (raw points + "
               "cluster ids), and `raw_features_*.png` (per-family point distributions, "
               "each kept peak annotated with its label and support)."]
@@ -202,7 +236,7 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
         write_features_csv(result, out_dir / "features.csv"),
         write_pml(result.pharmacophore, out_dir / "pharmacophore.pml",
                   cfg.features.colors, ligand_file=ligand_file),
-        _write_summary(result.pharmacophore, report, len(molecules),
+        _write_summary(result, report, len(molecules),
                        out_dir / "model_summary.md"),
     ]
     if ligand_file is not None:

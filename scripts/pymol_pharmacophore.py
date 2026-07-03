@@ -45,9 +45,9 @@ COLORS = {
 }
 _GREY = (0.5, 0.5, 0.5)
 
-# Feature spheres are drawn at a small FIXED radius (not the tolerance radius, which is
+# Ligand feature spheres are drawn at a FIXED radius (not the tolerance radius, which is
 # up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json.
-PH4_SPHERE_RADIUS = 0.5
+PH4_SPHERE_RADIUS = 2.0
 
 
 def _args(argv):
@@ -89,7 +89,14 @@ def load_features(json_path):
     for i, feat in enumerate(model.get("features", [])):
         family = feat["family"]
         pos = [feat["x"], feat["y"], feat["z"]]
-        # small fixed-radius translucent sphere ...
+        if family == "ExcludedVolume":
+            # excluded-volume markers: their own steric radius, no centre point.
+            name = f"{family}_{i}"
+            cmd.pseudoatom(name, pos=pos, vdw=feat["radius"])
+            cmd.color(f"ph4_{family}", name)
+            cmd.group(f"ph4_{family}", name)
+            continue
+        # fixed-radius translucent sphere ...
         sphere = f"{family}_{i}"
         cmd.pseudoatom(sphere, pos=pos, vdw=PH4_SPHERE_RADIUS)
         cmd.color(f"ph4_{family}", sphere)

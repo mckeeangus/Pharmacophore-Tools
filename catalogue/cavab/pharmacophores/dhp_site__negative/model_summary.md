@@ -24,4 +24,17 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | Aromatic ← LumpedHydrophobe | 3 | 5KLS_6UC_C1304, 5KMF_6U9_A1301, 6KE5_6UB_B1301 |
 | PosIonizable ← Donor | 2 | 5KLS_6UC_C1304, 6KE5_6UB_B1301 |
 
+## Not selected
+
+Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+
+| Feature | Points | Ligands | Mean support |
+|---|---:|---:|---:|
+| Acceptor | 3 | 1 | 0.33 |
+| Acceptor | 3 | 1 | 0.33 |
+| Acceptor | 3 | 1 | 0.33 |
+| LumpedHydrophobe | 2 | 1 | 0.33 |
+| Donor | 1 | 1 | 0.33 |
+| Aromatic | 1 | 1 | 0.33 |
+
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

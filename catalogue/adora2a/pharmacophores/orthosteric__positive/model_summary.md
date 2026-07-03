@@ -31,4 +31,22 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | NegIonizable ← Acceptor | 1 | 4UHR_NGI_A1320 |
 | PosIonizable ← Donor | 3 | 5WF5_UKA_A1201, 7ARO_RVZ_A1201 |
 
+## Not selected
+
+Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+
+| Feature | Points | Ligands | Mean support |
+|---|---:|---:|---:|
+| Acceptor | 5 | 5 | 0.83 |
+| Acceptor | 5 | 5 | 0.83 |
+| PosIonizable | 5 | 5 | 0.83 |
+| Donor | 2 | 2 | 0.33 |
+| Acceptor | 2 | 2 | 0.33 |
+| Donor | 2 | 1 | 0.17 |
+| Aromatic | 2 | 1 | 0.17 |
+| Acceptor | 1 | 1 | 0.17 |
+| PosIonizable | 1 | 1 | 0.17 |
+| PosIonizable | 1 | 1 | 0.17 |
+| NegIonizable | 1 | 1 | 0.17 |
+
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

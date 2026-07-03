@@ -129,17 +129,17 @@ def test_cross_family_merge_keeps_one_feature_per_region():
     assert {f.family for f in kept.pharmacophore.features} == {"Donor", "Acceptor"}
 
 
-def test_peak_separation_controls_dedup():
-    # Two field maxima 2.0 A apart (voxel 1.0). The dedup keeps both when
-    # peak_separation < 2, and collapses to the taller one when peak_separation > 2 —
-    # so the merge radius is `peak_separation`, decoupled from `bandwidth`.
+def test_local_maxima_dedup_by_bandwidth():
+    # Two field maxima 2.0 A apart (voxel 1.0). The dedup keeps both when bandwidth < 2,
+    # and collapses to the taller one when bandwidth > 2 — the min peak spacing is the
+    # smoothing bandwidth itself.
     field = np.zeros((7, 5, 5))
     field[2, 2, 2] = 1.0      # taller peak
     field[4, 2, 2] = 0.9      # shorter peak, 2 voxels (2.0 A) away
     origin = np.zeros(3)
-    both = _local_maxima(field, origin, DensityConfig(voxel=1.0, peak_separation=1.0))
+    both = _local_maxima(field, origin, DensityConfig(voxel=1.0, bandwidth=1.0))
     assert len(both) == 2
-    merged = _local_maxima(field, origin, DensityConfig(voxel=1.0, peak_separation=3.0))
+    merged = _local_maxima(field, origin, DensityConfig(voxel=1.0, bandwidth=3.0))
     assert len(merged) == 1
     assert np.allclose(merged[0], np.array([2.5, 2.5, 2.5]))   # the taller peak survives
 

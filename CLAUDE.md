@@ -219,11 +219,12 @@ across families** (a donor and acceptor can't share one spot)
 absolute `merge_radius`); each feature's **tolerance radius = density-quantile core**
 (the radius enclosing `tolerance.quantile`=0.75 of the cluster's density mass, robust to
 the far in-cluster outliers that inflated the old RMS; `rmsd` mode still selectable) and
-is stored in the JSON — **not** the PyMOL sphere size: the viz now draws every feature as
-a **small fixed 0.5 Å sphere plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS` in
-`io.py` / `scripts/pymol_pharmacophore.py`), so tolerance is read from the model, not by
-eye. Family colours: HBD/Donor pink, HBA/Acceptor green, hydrophobic cyan, Aromatic
-yellow, PosIonizable red, NegIonizable orange, ExcludedVolume grey.
+is stored in the JSON — **not** the PyMOL sphere size: the viz now draws every ligand
+feature as a **fixed 2.0 Å sphere plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS`
+in `io.py` / `scripts/pymol_pharmacophore.py`; excluded-volume markers keep their own
+radius and get no centre point), so tolerance is read from the model, not by eye. Family
+colours: HBD/Donor pink, HBA/Acceptor green, hydrophobic cyan, Aromatic yellow,
+PosIonizable red, NegIonizable orange, ExcludedVolume grey.
 
 **Method choices — density** (§11 of `pharmacophore_method.md`): per feature type, pool
 points and weight each by **1/(points that molecule contributes to the type)** so the
@@ -237,9 +238,9 @@ until perception emits per-point vectors (never fabricated). After the per-type 
 density applies the **same cross-family overlap merge as k-means** (one feature per
 region; `density.merge_overlapping`), then appends **excluded-volume** grey spheres from
 reference-receptor atoms lining the pocket that no ligand reaches (exempt from the
-merge). **Deterministic** (fixed grid, no seeding); **three scientific knobs** (length
-scale, `peak_separation` min peak spacing — its own knob but set = bandwidth (1.5 Å),
-§11.3, occupancy floor) plus the steric EV add-on.
+merge). **Deterministic** (fixed grid, no seeding); **two scientific knobs** (length
+scale — `bandwidth` also sets the min peak spacing, §11.3 — and occupancy floor) plus the
+steric EV add-on.
 
 **Protonation (pH 7.4) preprocessing** (§2 of the method doc): before the build,
 `scripts/protonate_ligands.py` (pixi `prep` env) predicts pKa with **pkasolver** and

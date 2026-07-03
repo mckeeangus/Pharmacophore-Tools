@@ -25,4 +25,27 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | NegIonizable ← Acceptor | 5 | 2NNO_M28_A301, 5M78_SAL_A304, 6RFH_4SO_A305, 8QFK_UII_AAA301, 8QH8_V8I_A302 |
 | PosIonizable ← Donor | 23 | 2NNO_M28_A301, 2NNS_M25_A301, 4FPT_0VZ_A303, 4FRC_0VY_A303, 4FU5_0VX_A303, 4FVN_0VW_A303, 4Q08_V90_A305, 5DRS_5EF_A305, 6G3Q_FO9_A302, 6SBL_L4Q_A306, 6SDI_0VV_A305, 6SDJ_J3K_A302, 8QFK_UII_AAA301 |
 
+## Not selected
+
+Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+
+| Feature | Points | Ligands | Mean support |
+|---|---:|---:|---:|
+| Donor | 24 | 21 | 0.28 |
+| Acceptor | 29 | 19 | 0.25 |
+| Acceptor | 20 | 19 | 0.25 |
+| Acceptor | 22 | 17 | 0.22 |
+| Acceptor | 13 | 11 | 0.14 |
+| Acceptor | 13 | 11 | 0.14 |
+| PosIonizable | 14 | 10 | 0.13 |
+| Aromatic | 8 | 8 | 0.11 |
+| PosIonizable | 9 | 5 | 0.07 |
+| Acceptor | 6 | 5 | 0.07 |
+| Aromatic | 3 | 3 | 0.04 |
+| NegIonizable | 3 | 3 | 0.04 |
+| Aromatic | 2 | 2 | 0.03 |
+| NegIonizable | 2 | 2 | 0.03 |
+| LumpedHydrophobe | 2 | 2 | 0.03 |
+| LumpedHydrophobe | 1 | 1 | 0.01 |
+
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

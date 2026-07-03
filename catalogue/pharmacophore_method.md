@@ -369,11 +369,12 @@ sits, not the outermost members).
 
 **Note — it is no longer the PyMOL sphere size.** Drawing each sphere at its tolerance
 radius (up to 3 Å) swamped the scene and buried the ligand, so the PyMOL views
-(`pharmacophore.pml` and `scripts/pymol_pharmacophore.py`) now render every feature as a
-**small fixed-radius sphere (`PH4_SPHERE_RADIUS = 0.5 Å`)** plus an **opaque centre
+(`pharmacophore.pml` and `scripts/pymol_pharmacophore.py`) now render every ligand feature
+as a **fixed-radius sphere (`PH4_SPHERE_RADIUS = 2.0 Å`)** plus an **opaque centre
 pseudoatom** (a nonbonded-sphere point marker carrying the `<Family> <n> (support)`
-label). The true tolerance stays in the JSON; inspect it there (or via `model_summary.md`)
-rather than by sphere size.
+label). Excluded-volume markers keep their own steric radius and get **no** centre point.
+The true tolerance stays in the JSON; inspect it there (or via `model_summary.md`) rather
+than by sphere size.
 
 ---
 
@@ -386,7 +387,7 @@ rather than by sphere size.
 | `representative_ligand.sdf` | One real ligand from the cell, written from the RDKit-perceived molecule (correct bond orders + 3D coords), used as the visual scaffold (§8). |
 | `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster, with cluster centres marked and each kept peak annotated with its label + support (§9). |
 | `pharmacophore.pml` | Lightweight self-contained PyMOL script: loads `representative_ligand.sdf` + the feature spheres (each object named `<Family>_<n>` and labelled with its support). |
-| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support. Excluded-volume spheres (density strategy, §11.6) are receptor markers with no peak or support, so they are reported as a single **count** line rather than listed in the per-feature table. |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support — followed by a **Feature resolution** section (§3.1 hierarchy collapses) and a **Not selected** table listing clusters/peaks that formed but did not enter the model (below the support/size floor or displaced by the overlap merge) with their mean support. Excluded-volume spheres (density strategy, §11.6) are receptor markers with no peak or support, so they are reported as a single **count** line rather than listed in the per-feature table. |
 
 Richer inspection (raw-point overlay):
 `pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- --pharmacophore … [--features … --compounds … --out …]`.
@@ -427,9 +428,10 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 
 **Sizes in the visualisations** encode two different, deliberately distinct things:
 
-- **PyMOL feature spheres** — a **fixed 0.5 Å** radius (§6), with an opaque centre
-  pseudoatom marking each feature's exact position. (The feature's tolerance radius is
-  *not* shown as sphere size any more — read it from the JSON / `model_summary.md`.)
+- **PyMOL feature spheres** — a **fixed 2.0 Å** radius (§6), with an opaque centre
+  pseudoatom marking each feature's exact position (excluded-volume markers keep their
+  own radius and get no centre point). (The feature's tolerance radius is *not* shown as
+  sphere size any more — read it from the JSON / `model_summary.md`.)
 - **`raw_features_<family>.png` cluster-centre markers** — the marker **area scales with
   the cluster's point count** (its population / local density): a bigger marker means
   more raw feature points were collapsed into that centre. Kept clusters are drawn as a
@@ -504,30 +506,19 @@ an **occupancy field**: high where many distinct molecules place that feature ty
 ### 11.3 Extract every local maximum; assign by nearest peak (watershed)
 
 **All** local maxima of the field are found (a voxel whose value equals its 3×3×3
-neighbourhood maximum and exceeds a tiny noise floor). Maxima **at or nearer than
-`peak_separation`** are then collapsed keeping the taller — the *only* post-filter on the
-field. Every above-floor voxel, and every point, is then assigned to its **nearest
-maximum** (a proximity watershed), giving one **basin** per peak. This is what yields
-multiple features of one type natively, with no `k`.
+neighbourhood maximum and exceeds a tiny noise floor). Maxima closer than one `bandwidth`
+cannot be physically resolved at that smoothing, so near-coincident peaks are collapsed
+keeping the taller — the *only* post-filter on the field. Every above-floor voxel, and
+every point, is then assigned to its **nearest maximum** (a proximity watershed), giving
+one **basin** per peak. This is what yields multiple features of one type natively, with
+no `k`.
 
-**`peak_separation` is a separate knob from `bandwidth`** (both `1.5 Å`). It was
-previously hard-coupled to the smoothing bandwidth; it is now split out so the minimum
-peak spacing *can* be tuned independently, but it is deliberately **set equal to
-`bandwidth`**. Two facts, examined empirically on the catalogue, drive that choice:
-
-- The strict `>` collapse (merge peaks **≤** `peak_separation` apart) is needed so a
-  single lobe split across tied adjacent grid voxels (exactly `voxel` apart) does not leak
-  two peaks.
-- The **smoothing `bandwidth` is the deeper resolution limit.** Two lobes closer than
-  ~`bandwidth` rarely present as two maxima at all, so a `peak_separation` *below*
-  `bandwidth` does not resolve genuinely closer sub-sites — it only *over-splits* a single
-  site into ripple sub-peaks that can each fall below the `occupancy_floor` (§11.4),
-  dropping a real feature (seen at `peak_separation = 1.0` on the 3-ligand
-  `cavab/dhp_site__negative` density cell, whose PosIonizable fragmented into two
-  1-molecule basins and vanished). Setting `peak_separation = bandwidth = 1.5 Å` avoids
-  that. **To genuinely resolve <1.5 Å sub-sites, lower `bandwidth` *and* `voxel` too**, not
-  `peak_separation` alone. (The k-means path — the default `consensus_method` — does not
-  use `peak_separation` at all.)
+The **minimum peak spacing is the `bandwidth` itself** — deliberately not a separate
+knob. The Gaussian smoothing (sigma = bandwidth) is the field's resolution limit: two
+maxima nearer than that are the same site, and a smaller spacing would only *over-split* a
+single lobe into ripple sub-peaks that can each fall below the `occupancy_floor` (§11.4)
+and be lost. To genuinely resolve sub-sites closer than the bandwidth, lower `bandwidth`
+*and* `voxel` together, not a spacing knob.
 
 ### 11.4 Keep peaks that clear the occupancy floor *and* the support floor
 
@@ -581,9 +572,9 @@ available) and is skipped cleanly for a bare `--input` directory; toggle with
 
 ### 11.7 Knobs, determinism, and differences from k-means
 
-**Three scientific knobs of its own**: the length scale (`voxel`/`bandwidth`), the
-`peak_separation` (minimum peak spacing, §11.3), and the `occupancy_floor`; the
-excluded-volume parameters are a self-contained steric add-on. In
+**Only two scientific knobs of its own**: the length scale (`voxel`/`bandwidth`, which
+also sets the minimum peak spacing, §11.3) and the `occupancy_floor`; the excluded-volume
+parameters are a self-contained steric add-on. In
 addition it honours the **shared `min_support_fraction` floor** from `selection` (§11.4),
 so its features meet the same "present in ≥ half the ligands" bar as the k-means path —
 this is a selection policy common to both strategies, not a density-specific knob.

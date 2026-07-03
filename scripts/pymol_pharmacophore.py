@@ -11,12 +11,13 @@ Run (needs the viz environment):
         --compounds     catalogue/<slug>/groups/<cell> \
         --out           <cell>.pse
 
-Kept pharmacophore features are drawn as translucent spheres sized by their
-tolerance radius and coloured by family (HBD/donor pink, HBA/acceptor green,
-hydrophobic cyan, aromatic yellow, positive-ionisable red). ``--features
-features.csv`` additionally overlays the raw extracted points (small opaque dots)
-so the cluster centres can be compared to the data. Omit ``--out`` to stay in an
-interactive PyMOL window.
+Kept pharmacophore features are drawn as **small fixed-radius** translucent spheres
+(``PH4_SPHERE_RADIUS``) each with an opaque centre pseudoatom marking its position,
+coloured by family (HBD/donor pink, HBA/acceptor green, hydrophobic cyan, aromatic
+yellow, positive-ionisable red). The feature's true tolerance radius lives in the JSON,
+not the sphere size. ``--features features.csv`` additionally overlays the raw extracted
+points (small opaque dots) so the cluster centres can be compared to the data. Omit
+``--out`` to stay in an interactive PyMOL window.
 
 By default the clean ``representative_ligand.sdf`` written beside the JSON is shown
 (correct bond orders). Pass ``--compounds DIR`` to overlay the full raw mol2 set
@@ -43,6 +44,10 @@ COLORS = {
     "ExcludedVolume": (0.55, 0.55, 0.55),   # grey — receptor excluded-volume (density)
 }
 _GREY = (0.5, 0.5, 0.5)
+
+# Feature spheres are drawn at a small FIXED radius (not the tolerance radius, which is
+# up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json.
+PH4_SPHERE_RADIUS = 0.5
 
 
 def _args(argv):
@@ -83,13 +88,21 @@ def load_features(json_path):
         model = json.load(fh)
     for i, feat in enumerate(model.get("features", [])):
         family = feat["family"]
-        name = f"{family}_{i}"
-        cmd.pseudoatom(name, pos=[feat["x"], feat["y"], feat["z"]],
-                       vdw=feat["radius"])
-        cmd.color(f"ph4_{family}", name)
-        cmd.group(f"ph4_{family}", name)
+        pos = [feat["x"], feat["y"], feat["z"]]
+        # small fixed-radius translucent sphere ...
+        sphere = f"{family}_{i}"
+        cmd.pseudoatom(sphere, pos=pos, vdw=PH4_SPHERE_RADIUS)
+        cmd.color(f"ph4_{family}", sphere)
+        cmd.group(f"ph4_{family}", sphere)
+        # ... plus an opaque point marker (pseudoatom) at the exact centre.
+        centre = f"{family}_ctr_{i}"
+        cmd.pseudoatom(centre, pos=pos)
+        cmd.color(f"ph4_{family}", centre)
+        cmd.group("ph4_centers", centre)
     cmd.show("spheres", "ph4_*")
     cmd.set("sphere_transparency", 0.4, "ph4_*")
+    cmd.hide("spheres", "ph4_centers")
+    cmd.show("nb_spheres", "ph4_centers")
     return model.get("name", os.path.basename(json_path))
 
 

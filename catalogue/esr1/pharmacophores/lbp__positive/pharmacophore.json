@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -37,7 +37,30 @@
       }
     },
     "n_features": 4,
-    "representative_ligand": "7NFB_GEN_A601"
+    "representative_ligand": "9W12_A1ET8_A701",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 26,
+        "ligands": [
+          "2B1V_458_B202",
+          "2B1Z_17M_B202",
+          "2QAB_EI1_B1",
+          "2QSE_1HP_B1",
+          "2QZO_KN1_B1",
+          "4MG8_27J_A601",
+          "4MGA_27L_B601",
+          "4MGB_XDH_B601",
+          "4TV1_36M_A601",
+          "5TN4_7FZ_A601",
+          "5TN5_7G0_B601",
+          "7NEL_EST_A601",
+          "7NFB_GEN_A601",
+          "7RKE_5VP_B601",
+          "9W11_ZHB_A701",
+          "9W12_A1ET8_A701"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -53,16 +76,16 @@
       "label": "Donor 1"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 22.511324074074075,
-      "y": -11.502407407407405,
-      "z": 4.561083333333333,
+      "family": "Aromatic",
+      "x": 22.494725490196082,
+      "y": -11.462588235294115,
+      "z": 4.443176470588234,
       "radius": 1.0,
-      "n_points": 18,
+      "n_points": 17,
       "n_ligands": 16,
       "support": 1.0,
       "direction": null,
-      "label": "LumpedHydrophobe 1"
+      "label": "Aromatic 1"
     },
     {
       "family": "Donor",

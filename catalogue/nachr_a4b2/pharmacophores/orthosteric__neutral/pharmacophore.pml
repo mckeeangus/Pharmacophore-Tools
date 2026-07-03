@@ -1,4 +1,4 @@
-# nachr_a4b2/orthosteric__neutral — ensemble pharmacophore (3 features)
+# nachr_a4b2/orthosteric__neutral — ensemble pharmacophore (2 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,15 +17,20 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[169.614, 120.201, 184.976], vdw=3.000, label="Acceptor 1 (1.00)"
+pseudoatom Acceptor_1, pos=[169.614, 120.201, 184.976], vdw=0.500
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_2, pos=[163.229, 124.030, 181.111], vdw=2.610, label="Acceptor 2 (0.67)"
+pseudoatom Acceptor_1_ctr, pos=[169.614, 120.201, 184.976], label="Acceptor 1 (1.00)"
+color ph4_Acceptor, Acceptor_1_ctr
+group ph4_centers, Acceptor_1_ctr
+pseudoatom Acceptor_2, pos=[163.229, 124.030, 181.111], vdw=0.500
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Donor_1, pos=[170.408, 119.399, 182.057], vdw=3.000, label="Donor 1 (0.56)"
-color ph4_Donor, Donor_1
-group ph4_Donor, Donor_1
+pseudoatom Acceptor_2_ctr, pos=[163.229, 124.030, 181.111], label="Acceptor 2 (0.67)"
+color ph4_Acceptor, Acceptor_2_ctr
+group ph4_centers, Acceptor_2_ctr
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
+hide spheres, ph4_centers
+show nb_spheres, ph4_centers
 orient

@@ -24,13 +24,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -43,22 +44,31 @@
         "ev_max": 40
       }
     },
-    "n_features": 43,
-    "representative_ligand": "5IKR_ID8_A601"
+    "n_features": 42,
+    "representative_ligand": "5KIR_RCX_A601",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 9,
+        "ligands": [
+          "5F1A_SAL_A601",
+          "5IKR_ID8_A601",
+          "5IKT_TLF_B601",
+          "5IKV_FLF_B601",
+          "5KIR_RCX_A601"
+        ]
+      },
+      "NegIonizable<-Acceptor": {
+        "events": 4,
+        "ligands": [
+          "5F1A_SAL_A601",
+          "5IKR_ID8_A601",
+          "5IKT_TLF_B601",
+          "5IKV_FLF_B601"
+        ]
+      }
+    }
   },
   "features": [
-    {
-      "family": "Acceptor",
-      "x": 27.7629833517636,
-      "y": 4.658720256713894,
-      "z": 32.86533210213236,
-      "radius": 3.0,
-      "n_points": 7,
-      "n_ligands": 5,
-      "support": 1.0,
-      "direction": null,
-      "label": "Acceptor 1"
-    },
     {
       "family": "Aromatic",
       "x": 25.56086253915316,

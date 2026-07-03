@@ -24,13 +24,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -44,20 +45,36 @@
       }
     },
     "n_features": 41,
-    "representative_ligand": "7A5V_HSM_A5408"
+    "representative_ligand": "7A5V_HSM_A5408",
+    "feature_resolution": {
+      "NegIonizable<-Acceptor": {
+        "events": 1,
+        "ligands": [
+          "9EQG_ABU_E3205"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 5,
+        "ligands": [
+          "7A5V_HSM_A5408",
+          "7QNC_EI7_B503",
+          "9EQG_ABU_E3205"
+        ]
+      }
+    }
   },
   "features": [
     {
-      "family": "Donor",
-      "x": 187.387294761273,
-      "y": 221.65388477688276,
-      "z": 241.65392341041144,
+      "family": "PosIonizable",
+      "x": 187.77947538767964,
+      "y": 222.65247538767963,
+      "z": 241.56807890252242,
       "radius": 3.0,
-      "n_points": 5,
+      "n_points": 4,
       "n_ligands": 2,
       "support": 0.6667,
       "direction": null,
-      "label": "Donor 1"
+      "label": "PosIonizable 1"
     },
     {
       "family": "ExcludedVolume",

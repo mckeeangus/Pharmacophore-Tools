@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,10 +36,98 @@
         "random_state": 0
       }
     },
-    "n_features": 10,
-    "representative_ligand": "6DV4_GA5_B201"
+    "n_features": 9,
+    "representative_ligand": "6DV4_GA5_B201",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 83,
+        "ligands": [
+          "1BVE_DMP_B100",
+          "1BWB_146_B641",
+          "1DMP_DMQ_B450",
+          "1HIV_1ZK_A100",
+          "1HVH_Q82_B265",
+          "1HVR_XK2_A263",
+          "1HWR_216_B216",
+          "1ODX_0E8_A201",
+          "1ODY_LP1_A201",
+          "1QBR_XV6_A638",
+          "1QBU_846_B300",
+          "2FDE_385_A101",
+          "2WHH_PPN_A2301",
+          "4Q1Y_017_A106",
+          "4Q5M_ROC_A1101",
+          "4U7Q_3EM_B101",
+          "4U7V_3EN_B101",
+          "5DGU_5B7_A201",
+          "5DGW_5B5_A201",
+          "5KAO_G43_A500",
+          "6DIF_TPV_B201",
+          "6DJ1_AB1_B201",
+          "6DJ5_G52_B201",
+          "6DJ7_G10_B201",
+          "6DV0_GA8_B201",
+          "6DV4_GA5_B201",
+          "6E7J_HWY_A201",
+          "6E9A_J0S_B201",
+          "7DOZ_1UN_A1102",
+          "8ESX_X7B_B203",
+          "8F0F_X7H_B201"
+        ]
+      },
+      "NegIonizable<-Acceptor": {
+        "events": 2,
+        "ligands": [
+          "2WHH_GLU_A2302"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 27,
+        "ligands": [
+          "1BWB_146_B641",
+          "1HVH_Q82_B265",
+          "1HVR_XK2_A263",
+          "1ODX_0E8_A201",
+          "1QBR_XV6_A638",
+          "2FDE_385_A101",
+          "2WHH_GLU_A2302",
+          "4Q1Y_017_A106",
+          "4Q5M_ROC_A1101",
+          "4U7V_3EN_B101",
+          "5DGU_5B7_A201",
+          "5DGW_5B5_A201",
+          "5KAO_G43_A500",
+          "6DJ1_AB1_B201",
+          "6DJ5_G52_B201",
+          "6DJ7_G10_B201",
+          "6DV0_GA8_B201",
+          "6DV4_GA5_B201",
+          "6E9A_J0S_B201",
+          "7DOZ_1UN_A1102",
+          "8ESX_X7B_B203"
+        ]
+      },
+      "PosIonizable<-LumpedHydrophobe": {
+        "events": 2,
+        "ligands": [
+          "1BWB_146_B641"
+        ]
+      }
+    }
   },
   "features": [
+    {
+      "family": "Donor",
+      "x": -10.338250000000002,
+      "y": 17.921347222222224,
+      "z": 28.05227777777778,
+      "radius": 2.5231151566183208,
+      "n_points": 72,
+      "n_ligands": 28,
+      "support": 0.875,
+      "direction": null,
+      "label": "Donor 1"
+    },
     {
       "family": "Acceptor",
       "x": -11.953936170212767,
@@ -65,18 +153,6 @@
       "label": "Acceptor 2"
     },
     {
-      "family": "Donor",
-      "x": -10.918552631578946,
-      "y": 19.055894736842106,
-      "z": 27.878052631578953,
-      "radius": 1.451271240667612,
-      "n_points": 38,
-      "n_ligands": 28,
-      "support": 0.875,
-      "direction": null,
-      "label": "Donor 1"
-    },
-    {
       "family": "Acceptor",
       "x": -9.270828571428572,
       "y": 15.54442857142857,
@@ -90,75 +166,63 @@
     },
     {
       "family": "Acceptor",
-      "x": -7.980290322580645,
-      "y": 18.01909677419355,
-      "z": 20.703935483870964,
-      "radius": 1.9610425636697562,
-      "n_points": 31,
-      "n_ligands": 24,
-      "support": 0.75,
+      "x": -7.975793103448275,
+      "y": 17.98941379310345,
+      "z": 20.65468965517241,
+      "radius": 1.903749666606259,
+      "n_points": 29,
+      "n_ligands": 23,
+      "support": 0.7188,
       "direction": null,
       "label": "Acceptor 4"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": -5.25743888888889,
-      "y": 18.247283333333336,
-      "z": 26.716549999999998,
-      "radius": 1.4367631152960816,
-      "n_points": 30,
-      "n_ligands": 30,
-      "support": 0.9375,
-      "direction": null,
-      "label": "LumpedHydrophobe 1"
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -12.912775862068964,
-      "y": 13.698126436781608,
-      "z": 28.862086206896553,
-      "radius": 1.1293653733192994,
-      "n_points": 29,
-      "n_ligands": 29,
-      "support": 0.9062,
-      "direction": null,
-      "label": "LumpedHydrophobe 2"
-    },
-    {
-      "family": "Donor",
-      "x": -10.465344827586208,
-      "y": 16.24248275862069,
-      "z": 29.6851724137931,
-      "radius": 1.3228694525859352,
-      "n_points": 29,
-      "n_ligands": 27,
-      "support": 0.8438,
-      "direction": null,
-      "label": "Donor 2"
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -8.824378787878787,
-      "y": 16.495015151515155,
-      "z": 22.53415151515151,
+      "family": "Aromatic",
+      "x": -4.876825396825398,
+      "y": 18.168317460317457,
+      "z": 26.40642857142857,
       "radius": 1.0,
-      "n_points": 22,
+      "n_points": 21,
       "n_ligands": 21,
       "support": 0.6562,
       "direction": null,
-      "label": "LumpedHydrophobe 3"
+      "label": "Aromatic 1"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": -9.828675,
-      "y": 15.970241666666663,
-      "z": 33.322399999999995,
+      "family": "Aromatic",
+      "x": -12.929079365079364,
+      "y": 13.433388888888889,
+      "z": 29.070896825396826,
       "radius": 1.0,
-      "n_points": 20,
-      "n_ligands": 19,
-      "support": 0.5938,
+      "n_points": 21,
+      "n_ligands": 21,
+      "support": 0.6562,
       "direction": null,
-      "label": "LumpedHydrophobe 4"
+      "label": "Aromatic 2"
+    },
+    {
+      "family": "Aromatic",
+      "x": -8.62958888888889,
+      "y": 16.552977777777773,
+      "z": 22.48813703703703,
+      "radius": 1.0,
+      "n_points": 18,
+      "n_ligands": 17,
+      "support": 0.5312,
+      "direction": null,
+      "label": "Aromatic 3"
+    },
+    {
+      "family": "Aromatic",
+      "x": -9.964657407407408,
+      "y": 15.84966851851852,
+      "z": 33.48205925925926,
+      "radius": 1.0745659665947866,
+      "n_points": 18,
+      "n_ligands": 17,
+      "support": 0.5312,
+      "direction": null,
+      "label": "Aromatic 4"
     }
   ]
 }

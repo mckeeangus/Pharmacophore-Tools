@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -35,22 +35,31 @@
         "random_state": 0
       }
     },
-    "n_features": 3,
-    "representative_ligand": "5IKR_ID8_A601"
+    "n_features": 4,
+    "representative_ligand": "5IKR_ID8_A601",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 9,
+        "ligands": [
+          "5F1A_SAL_A601",
+          "5IKR_ID8_A601",
+          "5IKT_TLF_B601",
+          "5IKV_FLF_B601",
+          "5KIR_RCX_A601"
+        ]
+      },
+      "NegIonizable<-Acceptor": {
+        "events": 4,
+        "ligands": [
+          "5F1A_SAL_A601",
+          "5IKR_ID8_A601",
+          "5IKT_TLF_B601",
+          "5IKV_FLF_B601"
+        ]
+      }
+    }
   },
   "features": [
-    {
-      "family": "Acceptor",
-      "x": 26.512,
-      "y": 4.334142857142857,
-      "z": 32.277,
-      "radius": 2.775912594930519,
-      "n_points": 7,
-      "n_ligands": 5,
-      "support": 1.0,
-      "direction": null,
-      "label": "Acceptor 1"
-    },
     {
       "family": "Aromatic",
       "x": 25.682899999999997,
@@ -62,6 +71,30 @@
       "support": 1.0,
       "direction": null,
       "label": "Aromatic 1"
+    },
+    {
+      "family": "Donor",
+      "x": 25.02633333333333,
+      "y": 3.759,
+      "z": 32.687999999999995,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 0.6,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "NegIonizable",
+      "x": 28.031222222222222,
+      "y": 4.7382222222222214,
+      "z": 32.94333333333333,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 0.6,
+      "direction": null,
+      "label": "NegIonizable 1"
     },
     {
       "family": "Aromatic",

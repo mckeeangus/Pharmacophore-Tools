@@ -25,13 +25,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -45,7 +46,36 @@
       }
     },
     "n_features": 43,
-    "representative_ligand": "7D9O_H0L_B601"
+    "representative_ligand": "7D9O_H0L_B601",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 20,
+        "ligands": [
+          "4BDT_HUW_A701",
+          "4EY6_GNT_A604",
+          "4M0E_1YL_B605",
+          "4M0F_1YK_B605",
+          "6O4W_E20_A604",
+          "6O4X_AA_B603",
+          "6O50_EBW_A601",
+          "7D9O_H0L_B601",
+          "7D9P_H0R_A601",
+          "7D9Q_H1R_B601",
+          "7XN1_THA_A601"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 6,
+        "ligands": [
+          "4EY5_HUP_A604",
+          "4EY6_GNT_A604",
+          "6O4W_E20_A604",
+          "7D9O_H0L_B601",
+          "7D9P_H0R_A601",
+          "7D9Q_H1R_B601"
+        ]
+      }
+    }
   },
   "features": [
     {

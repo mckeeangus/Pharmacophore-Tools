@@ -24,13 +24,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -44,7 +45,24 @@
       }
     },
     "n_features": 43,
-    "representative_ligand": "5ZKB_82F_A1201"
+    "representative_ligand": "5ZKB_82F_A1201",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 4,
+        "ligands": [
+          "5ZK3_QNB_A501",
+          "5ZKB_82F_A1201",
+          "5ZKC_3C0_A501"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 3,
+        "ligands": [
+          "5ZK3_QNB_A501",
+          "5ZKB_82F_A1201"
+        ]
+      }
+    }
   },
   "features": [
     {

@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,32 +36,48 @@
       }
     },
     "n_features": 2,
-    "representative_ligand": "7A5V_HSM_A5408"
+    "representative_ligand": "7A5V_HSM_A5408",
+    "feature_resolution": {
+      "NegIonizable<-Acceptor": {
+        "events": 1,
+        "ligands": [
+          "9EQG_ABU_E3205"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 5,
+        "ligands": [
+          "7A5V_HSM_A5408",
+          "7QNC_EI7_B503",
+          "9EQG_ABU_E3205"
+        ]
+      }
+    }
   },
   "features": [
     {
-      "family": "Donor",
-      "x": 187.4228,
-      "y": 221.7926,
-      "z": 241.90040000000005,
-      "radius": 3.0,
-      "n_points": 5,
+      "family": "PosIonizable",
+      "x": 187.83455,
+      "y": 222.5841,
+      "z": 242.29975,
+      "radius": 2.25888507343777,
+      "n_points": 4,
       "n_ligands": 2,
       "support": 0.6667,
       "direction": null,
-      "label": "Donor 1"
+      "label": "PosIonizable 1"
     },
     {
-      "family": "Acceptor",
-      "x": 204.7,
-      "y": 203.827,
-      "z": 242.516,
-      "radius": 3.0,
+      "family": "Aromatic",
+      "x": 186.7283,
+      "y": 220.6845,
+      "z": 241.3095,
+      "radius": 1.0147369462082312,
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667,
       "direction": null,
-      "label": "Acceptor 1"
+      "label": "Aromatic 1"
     }
   ]
 }

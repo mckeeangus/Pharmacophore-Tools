@@ -16,6 +16,13 @@ class FeatureConfig:
     families: list[str] = field(
         default_factory=lambda: ["Donor", "Acceptor", "LumpedHydrophobe"])
     colors: dict[str, list[float]] = field(default_factory=dict)
+    # Co-atom feature hierarchy: when one atom is perceived as several families, keep
+    # only the highest-priority family in each group (higher subsumes lower on a shared
+    # atom). Each inner list is ordered highest-priority first. Resolution fires ONLY
+    # for co-incident (shared-atom) dual classifications; genuine dual roles (a hydroxyl
+    # as Donor+Acceptor, a ring heteroatom as Aromatic+Acceptor/Donor) are absent from
+    # the groups and so preserved. See config/pharmacophore.yaml `feature_hierarchy`.
+    feature_hierarchy: list[list[str]] = field(default_factory=list)
 
 
 @dataclass
@@ -35,6 +42,8 @@ class DensityConfig:
 
     voxel: float = 1.0              # grid spacing (A) = spatial resolution
     bandwidth: float = 1.5          # Gaussian smoothing sigma (A) ~ feature tolerance
+    peak_separation: float = 1.5    # min centre-to-centre distance (A) between two kept
+    #                                 peaks of one family (own knob; set = bandwidth)
     occupancy_floor: float = 2.0    # min summed distinct-molecule weight to keep a peak
     scaffold_weighting: bool = False  # also weight by inverse scaffold frequency
     # Collapse overlapping features across families so a region of space yields one

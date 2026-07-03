@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -37,32 +37,43 @@
       }
     },
     "n_features": 3,
-    "representative_ligand": "8WTV_E5E_A704"
+    "representative_ligand": "8ZOY_LNR_A701",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 6,
+        "ligands": [
+          "4XP1_LDP_A708",
+          "4XP6_B40_A601",
+          "4XP9_1WE_C706",
+          "8WTV_E5E_A704",
+          "8XB3_YMN_A701",
+          "8ZOY_LNR_A701"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 5,
+        "ligands": [
+          "4XP1_LDP_A708",
+          "4XP6_B40_A601",
+          "4XP9_1WE_C706",
+          "8WTV_E5E_A704",
+          "8ZOY_LNR_A701"
+        ]
+      }
+    }
   },
   "features": [
     {
-      "family": "Donor",
-      "x": 130.54057142857144,
-      "y": 127.33900000000001,
-      "z": 133.24714285714285,
-      "radius": 2.755316197270086,
-      "n_points": 7,
-      "n_ligands": 5,
-      "support": 0.8333,
+      "family": "PosIonizable",
+      "x": 130.92625,
+      "y": 127.13224999999998,
+      "z": 134.49475,
+      "radius": 1.8347846433573676,
+      "n_points": 4,
+      "n_ligands": 4,
+      "support": 0.6667,
       "direction": null,
-      "label": "Donor 1"
-    },
-    {
-      "family": "Donor",
-      "x": 131.331,
-      "y": 132.47866666666664,
-      "z": 128.683,
-      "radius": 2.07473888584671,
-      "n_points": 6,
-      "n_ligands": 3,
-      "support": 0.5,
-      "direction": null,
-      "label": "Donor 2"
+      "label": "PosIonizable 1"
     },
     {
       "family": "Aromatic",
@@ -75,6 +86,18 @@
       "support": 0.6667,
       "direction": null,
       "label": "Aromatic 1"
+    },
+    {
+      "family": "Donor",
+      "x": 131.03166666666667,
+      "y": 133.09599999999998,
+      "z": 128.33633333333333,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 0.5,
+      "direction": null,
+      "label": "Donor 1"
     }
   ]
 }

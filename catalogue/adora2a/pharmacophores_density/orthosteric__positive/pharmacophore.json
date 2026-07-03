@@ -29,13 +29,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -49,14 +50,38 @@
       }
     },
     "n_features": 43,
-    "representative_ligand": "5WF5_UKA_A1201"
+    "representative_ligand": "5WF5_UKA_A1201",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 5,
+        "ligands": [
+          "4UHR_NGI_A1320",
+          "5WF5_UKA_A1201",
+          "7ARO_RVZ_A1201",
+          "8WDT_WCH_A1000"
+        ]
+      },
+      "NegIonizable<-Acceptor": {
+        "events": 1,
+        "ligands": [
+          "4UHR_NGI_A1320"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 3,
+        "ligands": [
+          "5WF5_UKA_A1201",
+          "7ARO_RVZ_A1201"
+        ]
+      }
+    }
   },
   "features": [
     {
       "family": "Acceptor",
-      "x": 2.370681349164831,
-      "y": 91.60248841887223,
-      "z": 52.38133334936273,
+      "x": 2.3739908647672365,
+      "y": 91.59743252603096,
+      "z": 52.37901700343604,
       "radius": 3.0,
       "n_points": 20,
       "n_ligands": 5,
@@ -66,11 +91,11 @@
     },
     {
       "family": "Acceptor",
-      "x": 1.1569769491677444,
-      "y": 97.8354448193675,
-      "z": 53.71664129255829,
+      "x": 1.1789228833361134,
+      "y": 97.94195862185553,
+      "z": 53.77737417008784,
       "radius": 3.0,
-      "n_points": 18,
+      "n_points": 19,
       "n_ligands": 6,
       "support": 1.0,
       "direction": null,

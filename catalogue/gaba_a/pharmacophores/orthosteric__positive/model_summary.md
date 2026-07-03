@@ -10,7 +10,16 @@ Support is the fraction of the cell's ligands that contribute to a feature (one 
 
 | Feature | Points | Ligands | Support |
 |---|---:|---:|---:|
-| Acceptor 1 | 2 | 2 | 0.67 |
-| Donor 1 | 5 | 2 | 0.67 |
+| Aromatic 1 | 2 | 2 | 0.67 |
+| PosIonizable 1 | 4 | 2 | 0.67 |
+
+## Feature resolution
+
+Co-incident dual classifications collapsed by the feature hierarchy (higher-priority family kept on the shared atom); the listed ligands each carried both types on one atom.
+
+| Kept ← dropped | Events | Ligands |
+|---|---:|---|
+| NegIonizable ← Acceptor | 1 | 9EQG_ABU_E3205 |
+| PosIonizable ← Donor | 5 | 7A5V_HSM_A5408, 7QNC_EI7_B503, 9EQG_ABU_E3205 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,7 +36,25 @@
       }
     },
     "n_features": 5,
-    "representative_ligand": "8CIC_U30_A1202"
+    "representative_ligand": "8CIC_U30_A1202",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 5,
+        "ligands": [
+          "5OLH_9XT_A1201",
+          "5OLO_9XW_A1201",
+          "6GT3_F9Q_A2401",
+          "8CIC_U30_A1202",
+          "8RW0_JQ9_A1201"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 1,
+        "ligands": [
+          "5OLO_9XW_A1201"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -77,11 +95,11 @@
     },
     {
       "family": "Donor",
-      "x": -2.3774999999999995,
-      "y": 99.32883333333332,
-      "z": 52.024166666666666,
-      "radius": 1.7512777160944135,
-      "n_points": 6,
+      "x": -2.3665999999999996,
+      "y": 99.08779999999999,
+      "z": 51.983799999999995,
+      "radius": 1.5456447327895166,
+      "n_points": 5,
       "n_ligands": 4,
       "support": 0.8,
       "direction": null,

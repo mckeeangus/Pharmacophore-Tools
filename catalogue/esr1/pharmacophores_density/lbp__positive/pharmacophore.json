@@ -25,13 +25,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -45,7 +46,30 @@
       }
     },
     "n_features": 43,
-    "representative_ligand": "7NFB_GEN_A601"
+    "representative_ligand": "9W12_A1ET8_A701",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 26,
+        "ligands": [
+          "2B1V_458_B202",
+          "2B1Z_17M_B202",
+          "2QAB_EI1_B1",
+          "2QSE_1HP_B1",
+          "2QZO_KN1_B1",
+          "4MG8_27J_A601",
+          "4MGA_27L_B601",
+          "4MGB_XDH_B601",
+          "4TV1_36M_A601",
+          "5TN4_7FZ_A601",
+          "5TN5_7G0_B601",
+          "7NEL_EST_A601",
+          "7NFB_GEN_A601",
+          "7RKE_5VP_B601",
+          "9W11_ZHB_A701",
+          "9W12_A1ET8_A701"
+        ]
+      }
+    }
   },
   "features": [
     {

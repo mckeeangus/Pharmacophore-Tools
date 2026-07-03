@@ -13,6 +13,10 @@ from pathlib import Path
 from .build import BuildResult
 from .model import Pharmacophore
 
+# Feature spheres render at a small FIXED radius (the tolerance radius, up to 3 A,
+# swamps the scene); the true tolerance is preserved in pharmacophore.json.
+PH4_SPHERE_RADIUS = 0.5
+
 
 def write_json(ph: Pharmacophore, path: Path) -> Path:
     path.write_text(json.dumps(ph.to_dict(), indent=2), encoding="utf-8")
@@ -82,12 +86,19 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
     lines.append("")
     for i, feat in enumerate(ph.features):
         obj = (feat.label or f"{feat.family} {i}").replace(" ", "_")
-        lines.append(f"pseudoatom {obj}, pos=[{feat.x:.3f}, {feat.y:.3f}, {feat.z:.3f}], "
-                     f"vdw={feat.radius:.3f}, label=\"{feat.label or feat.family} "
-                     f"({feat.support:.2f})\"")
+        pos = f"pos=[{feat.x:.3f}, {feat.y:.3f}, {feat.z:.3f}]"
+        # small fixed-radius translucent sphere ...
+        lines.append(f"pseudoatom {obj}, {pos}, vdw={PH4_SPHERE_RADIUS:.3f}")
         lines.append(f"color ph4_{feat.family}, {obj}")
         lines.append(f"group ph4_{feat.family}, {obj}")
+        # ... plus an opaque point marker (pseudoatom) at the exact centre.
+        ctr = f"{obj}_ctr"
+        lines.append(f"pseudoatom {ctr}, {pos}, "
+                     f"label=\"{feat.label or feat.family} ({feat.support:.2f})\"")
+        lines.append(f"color ph4_{feat.family}, {ctr}")
+        lines.append(f"group ph4_centers, {ctr}")
     lines += ["show spheres, ph4_*", "set sphere_transparency, 0.4, ph4_*",
+              "hide spheres, ph4_centers", "show nb_spheres, ph4_centers",
               "orient", ""]
     path.write_text("\n".join(lines), encoding="utf-8")
     return path

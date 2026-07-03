@@ -37,13 +37,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -56,8 +57,47 @@
         "ev_max": 40
       }
     },
-    "n_features": 42,
-    "representative_ligand": "3REY_XAC_A999"
+    "n_features": 43,
+    "representative_ligand": "8JWY_VBF_A1201",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 19,
+        "ligands": [
+          "10KT_A1C5S_A1202",
+          "3REY_XAC_A999",
+          "3UZA_T4G_A330",
+          "5IU7_6DY_A2401",
+          "5IUA_6DX_A2401",
+          "5IUB_6DV_A2401",
+          "5NM4_ZMA_A507",
+          "5OLZ_T4E_A1201",
+          "6ZDR_QGE_A1201",
+          "6ZDV_QGW_A1201",
+          "8CU7_LJX_A1202",
+          "8DU3_TKO_A3001",
+          "8JWY_VBF_A1201",
+          "8RW4_A1H3L_A1201",
+          "8RW7_A1H3J_A1201",
+          "8RWC_A1H3I_A1201",
+          "8RWD_A1H3H_A1201",
+          "8RWE_A1H3K_A1201"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 17,
+        "ligands": [
+          "3REY_XAC_A999",
+          "5IU7_6DY_A2401",
+          "5IU8_6DZ_A2401",
+          "5IUA_6DX_A2401",
+          "5IUB_6DV_A2401",
+          "5N2R_8JN_A2401",
+          "7IO5_TEP_A1202",
+          "8RW4_A1H3L_A1201",
+          "8RW7_A1H3J_A1201"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -83,6 +123,18 @@
       "support": 0.52,
       "direction": null,
       "label": "Acceptor 2"
+    },
+    {
+      "family": "Donor",
+      "x": -1.6897038492864471,
+      "y": 97.98070893331789,
+      "z": 51.952992341773125,
+      "radius": 3.0,
+      "n_points": 14,
+      "n_ligands": 14,
+      "support": 0.56,
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "ExcludedVolume",

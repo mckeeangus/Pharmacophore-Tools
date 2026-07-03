@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,8 +36,33 @@
         "random_state": 0
       }
     },
-    "n_features": 5,
-    "representative_ligand": "2RH1_CAU_A408"
+    "n_features": 4,
+    "representative_ligand": "6PS3_CVD_A1201",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 12,
+        "ligands": [
+          "2RH1_CAU_A408",
+          "3NY9_JSZ_A1203",
+          "6PS3_CVD_A1201",
+          "6PS4_JRZ_A1201",
+          "6PS5_SNP_A1201",
+          "9RKF_A1JHU_A520"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 7,
+        "ligands": [
+          "2RH1_CAU_A408",
+          "3NY9_JSZ_A1203",
+          "6PS3_CVD_A1201",
+          "6PS4_JRZ_A1201",
+          "6PS5_SNP_A1201",
+          "6PS6_TIM_A1201",
+          "9RKF_A1JHU_A520"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -65,18 +90,6 @@
       "label": "Donor 1"
     },
     {
-      "family": "Donor",
-      "x": -33.547285714285714,
-      "y": 8.147857142857143,
-      "z": 7.571428571428571,
-      "radius": 1.0,
-      "n_points": 7,
-      "n_ligands": 7,
-      "support": 1.0,
-      "direction": null,
-      "label": "Donor 2"
-    },
-    {
       "family": "Acceptor",
       "x": -30.016428571428573,
       "y": 10.572428571428572,
@@ -89,16 +102,16 @@
       "label": "Acceptor 1"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": -34.41978571428571,
-      "y": 6.262166666666666,
-      "z": 7.6185238095238095,
-      "radius": 1.3649881093067204,
-      "n_points": 7,
-      "n_ligands": 7,
-      "support": 1.0,
+      "family": "PosIonizable",
+      "x": -33.5505,
+      "y": 8.29425,
+      "z": 7.44225,
+      "radius": 1.0,
+      "n_points": 4,
+      "n_ligands": 4,
+      "support": 0.5714,
       "direction": null,
-      "label": "LumpedHydrophobe 1"
+      "label": "PosIonizable 1"
     }
   ]
 }

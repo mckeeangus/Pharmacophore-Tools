@@ -24,13 +24,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -44,7 +45,17 @@
       }
     },
     "n_features": 41,
-    "representative_ligand": "6HUO_08H_D501"
+    "representative_ligand": "6HUO_08H_D501",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 6,
+        "ligands": [
+          "6HUO_08H_D501",
+          "6X3X_DZP_D404",
+          "8VQY_A1ADG_E401"
+        ]
+      }
+    }
   },
   "features": [
     {

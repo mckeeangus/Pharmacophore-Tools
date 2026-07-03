@@ -25,13 +25,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -45,7 +46,30 @@
       }
     },
     "n_features": 43,
-    "representative_ligand": "8ZOY_LNR_A701"
+    "representative_ligand": "8ZOY_LNR_A701",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 6,
+        "ligands": [
+          "4XP1_LDP_A708",
+          "4XP6_B40_A601",
+          "4XP9_1WE_C706",
+          "8WTV_E5E_A704",
+          "8XB3_YMN_A701",
+          "8ZOY_LNR_A701"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 5,
+        "ligands": [
+          "4XP1_LDP_A708",
+          "4XP6_B40_A601",
+          "4XP9_1WE_C706",
+          "8WTV_E5E_A704",
+          "8ZOY_LNR_A701"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -73,7 +97,7 @@
       "label": "Aromatic 1"
     },
     {
-      "family": "Acceptor",
+      "family": "Donor",
       "x": 131.56825613922146,
       "y": 132.6617022965219,
       "z": 128.51993672256484,
@@ -82,7 +106,7 @@
       "n_ligands": 3,
       "support": 0.5,
       "direction": null,
-      "label": "Acceptor 1"
+      "label": "Donor 1"
     },
     {
       "family": "ExcludedVolume",

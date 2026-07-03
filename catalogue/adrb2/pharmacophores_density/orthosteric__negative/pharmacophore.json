@@ -25,13 +25,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -45,21 +46,34 @@
       }
     },
     "n_features": 43,
-    "representative_ligand": "2RH1_CAU_A408"
+    "representative_ligand": "2RH1_CAU_A408",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 12,
+        "ligands": [
+          "2RH1_CAU_A408",
+          "3NY9_JSZ_A1203",
+          "6PS3_CVD_A1201",
+          "6PS4_JRZ_A1201",
+          "6PS5_SNP_A1201",
+          "9RKF_A1JHU_A520"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 7,
+        "ligands": [
+          "2RH1_CAU_A408",
+          "3NY9_JSZ_A1203",
+          "6PS3_CVD_A1201",
+          "6PS4_JRZ_A1201",
+          "6PS5_SNP_A1201",
+          "6PS6_TIM_A1201",
+          "9RKF_A1JHU_A520"
+        ]
+      }
+    }
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": -33.57077439049808,
-      "y": 9.442348005059051,
-      "z": 7.955769546289602,
-      "radius": 3.0,
-      "n_points": 14,
-      "n_ligands": 7,
-      "support": 1.0,
-      "direction": null,
-      "label": "Donor 1"
-    },
     {
       "family": "Aromatic",
       "x": -27.393245560790692,
@@ -73,14 +87,26 @@
       "label": "Aromatic 1"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": -33.8940698717504,
-      "y": 6.420016500483849,
-      "z": 7.435978420847602,
+      "family": "Donor",
+      "x": -33.551454495571846,
+      "y": 10.677257636477753,
+      "z": 8.267377318789686,
       "radius": 3.0,
       "n_points": 7,
       "n_ligands": 7,
       "support": 1.0,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": -33.984666574108275,
+      "y": 6.242401236693181,
+      "z": 7.219798854849201,
+      "radius": 3.0,
+      "n_points": 6,
+      "n_ligands": 6,
+      "support": 0.8571,
       "direction": null,
       "label": "LumpedHydrophobe 1"
     },

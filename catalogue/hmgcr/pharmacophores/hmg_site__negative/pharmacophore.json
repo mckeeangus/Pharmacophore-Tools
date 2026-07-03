@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,21 +36,55 @@
       }
     },
     "n_features": 10,
-    "representative_ligand": "3CCT_3HI_D3"
+    "representative_ligand": "3CCZ_5HI_B876",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 36,
+        "ligands": [
+          "1HWI_115_A2",
+          "1HWJ_116_A2",
+          "1HWK_117_A2",
+          "1HWL_FBI_A2",
+          "2Q1L_882_A877",
+          "2Q6B_HR2_A3001",
+          "2Q6C_HR1_A3002",
+          "2R4F_RIE_B876",
+          "3BGL_RID_A2",
+          "3CCT_3HI_D3",
+          "3CCW_4HI_C4",
+          "3CCZ_5HI_B876",
+          "3CD0_6HI_D3",
+          "3CD5_7HI_B1",
+          "3CDA_8HI_B1",
+          "3CDB_9HI_D3"
+        ]
+      },
+      "NegIonizable<-Acceptor": {
+        "events": 18,
+        "ligands": [
+          "1HW8_114_A2",
+          "1HW9_SIM_C2",
+          "1HWI_115_A2",
+          "1HWJ_116_A2",
+          "1HWK_117_A2",
+          "1HWL_FBI_A2",
+          "2Q1L_882_A877",
+          "2Q6B_HR2_A3001",
+          "2Q6C_HR1_A3002",
+          "2R4F_RIE_B876",
+          "3BGL_RID_A2",
+          "3CCT_3HI_D3",
+          "3CCW_4HI_C4",
+          "3CCZ_5HI_B876",
+          "3CD0_6HI_D3",
+          "3CD5_7HI_B1",
+          "3CDA_8HI_B1",
+          "3CDB_9HI_D3"
+        ]
+      }
+    }
   },
   "features": [
-    {
-      "family": "Acceptor",
-      "x": 21.573526315789476,
-      "y": 9.516315789473685,
-      "z": 13.91605263157895,
-      "radius": 1.5520053955841904,
-      "n_points": 19,
-      "n_ligands": 15,
-      "support": 0.8333,
-      "direction": null,
-      "label": "Acceptor 1"
-    },
     {
       "family": "Donor",
       "x": 14.838555555555558,
@@ -76,18 +110,6 @@
       "label": "Donor 2"
     },
     {
-      "family": "Acceptor",
-      "x": 15.100222222222223,
-      "y": 2.2402222222222226,
-      "z": 16.147333333333336,
-      "radius": 1.14172768152718,
-      "n_points": 18,
-      "n_ligands": 18,
-      "support": 1.0,
-      "direction": null,
-      "label": "Acceptor 2"
-    },
-    {
       "family": "Aromatic",
       "x": 18.61241296296296,
       "y": 9.309761111111111,
@@ -101,6 +123,18 @@
     },
     {
       "family": "Acceptor",
+      "x": 21.833294117647057,
+      "y": 9.492411764705885,
+      "z": 13.939411764705882,
+      "radius": 1.3129903506498637,
+      "n_points": 17,
+      "n_ligands": 14,
+      "support": 0.7778,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Acceptor",
       "x": 13.79486666666667,
       "y": 7.670333333333334,
       "z": 19.144933333333334,
@@ -109,7 +143,7 @@
       "n_ligands": 15,
       "support": 0.8333,
       "direction": null,
-      "label": "Acceptor 3"
+      "label": "Acceptor 2"
     },
     {
       "family": "Aromatic",
@@ -158,6 +192,18 @@
       "support": 0.6111,
       "direction": null,
       "label": "Aromatic 3"
+    },
+    {
+      "family": "NegIonizable",
+      "x": 15.15621212121212,
+      "y": 2.3006363636363636,
+      "z": 15.974878787878787,
+      "radius": 1.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 0.6111,
+      "direction": null,
+      "label": "NegIonizable 1"
     }
   ]
 }

@@ -29,7 +29,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -40,10 +40,46 @@
         "random_state": 0
       }
     },
-    "n_features": 9,
-    "representative_ligand": "4UHR_NGI_A1320"
+    "n_features": 10,
+    "representative_ligand": "4UHR_NGI_A1320",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 5,
+        "ligands": [
+          "4UHR_NGI_A1320",
+          "5WF5_UKA_A1201",
+          "7ARO_RVZ_A1201",
+          "8WDT_WCH_A1000"
+        ]
+      },
+      "NegIonizable<-Acceptor": {
+        "events": 1,
+        "ligands": [
+          "4UHR_NGI_A1320"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 3,
+        "ligands": [
+          "5WF5_UKA_A1201",
+          "7ARO_RVZ_A1201"
+        ]
+      }
+    }
   },
   "features": [
+    {
+      "family": "Acceptor",
+      "x": 1.5884999999999998,
+      "y": 97.50541666666668,
+      "z": 53.309416666666685,
+      "radius": 1.321171297456254,
+      "n_points": 12,
+      "n_ligands": 6,
+      "support": 1.0,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
     {
       "family": "Aromatic",
       "x": 0.9417277777777778,
@@ -55,30 +91,6 @@
       "support": 1.0,
       "direction": null,
       "label": "Aromatic 1"
-    },
-    {
-      "family": "Acceptor",
-      "x": 1.3573636363636365,
-      "y": 97.45727272727275,
-      "z": 53.21118181818183,
-      "radius": 1.3945710854584439,
-      "n_points": 11,
-      "n_ligands": 6,
-      "support": 1.0,
-      "direction": null,
-      "label": "Acceptor 1"
-    },
-    {
-      "family": "Acceptor",
-      "x": 3.2686,
-      "y": 91.4376,
-      "z": 53.90089999999999,
-      "radius": 1.4528499337509089,
-      "n_points": 10,
-      "n_ligands": 5,
-      "support": 0.8333,
-      "direction": null,
-      "label": "Acceptor 2"
     },
     {
       "family": "Donor",
@@ -93,28 +105,40 @@
       "label": "Donor 1"
     },
     {
-      "family": "Acceptor",
-      "x": 2.6218333333333335,
-      "y": 92.41383333333333,
-      "z": 50.925333333333334,
-      "radius": 1.0,
-      "n_points": 6,
-      "n_ligands": 5,
-      "support": 0.8333,
-      "direction": null,
-      "label": "Acceptor 3"
-    },
-    {
       "family": "Donor",
-      "x": 1.6792000000000002,
-      "y": 89.9564,
-      "z": 49.9356,
+      "x": 4.0598,
+      "y": 92.51340000000002,
+      "z": 53.928200000000004,
       "radius": 1.0,
       "n_points": 5,
       "n_ligands": 5,
       "support": 0.8333,
       "direction": null,
       "label": "Donor 2"
+    },
+    {
+      "family": "Donor",
+      "x": 2.4774000000000003,
+      "y": 90.36180000000002,
+      "z": 53.873599999999996,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333,
+      "direction": null,
+      "label": "Donor 3"
+    },
+    {
+      "family": "Acceptor",
+      "x": 2.8484000000000003,
+      "y": 92.5682,
+      "z": 51.1432,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333,
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "Acceptor",
@@ -126,19 +150,31 @@
       "n_ligands": 5,
       "support": 0.8333,
       "direction": null,
-      "label": "Acceptor 4"
+      "label": "Acceptor 3"
     },
     {
       "family": "Acceptor",
-      "x": 0.26575,
-      "y": 90.91749999999999,
-      "z": 50.969249999999995,
+      "x": 0.5104,
+      "y": 91.0624,
+      "z": 50.742599999999996,
+      "radius": 1.0,
+      "n_points": 5,
+      "n_ligands": 5,
+      "support": 0.8333,
+      "direction": null,
+      "label": "Acceptor 4"
+    },
+    {
+      "family": "Donor",
+      "x": 1.6695,
+      "y": 90.04525,
+      "z": 49.92375,
       "radius": 1.0,
       "n_points": 4,
       "n_ligands": 4,
       "support": 0.6667,
       "direction": null,
-      "label": "Acceptor 5"
+      "label": "Donor 4"
     },
     {
       "family": "Aromatic",

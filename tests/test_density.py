@@ -6,7 +6,12 @@ import numpy as np
 
 from pharmpipe.features.extract import FeaturePoint, FeatureTable
 from pharmpipe.pharmacophore.config import DensityConfig, ToleranceConfig
-from pharmpipe.pharmacophore.density import EV_FAMILY, _excluded_volume, build_density
+from pharmpipe.pharmacophore.density import (
+    EV_FAMILY,
+    _excluded_volume,
+    _local_maxima,
+    build_density,
+)
 
 
 def _tol() -> ToleranceConfig:
@@ -122,6 +127,21 @@ def test_cross_family_merge_keeps_one_feature_per_region():
     kept = build_density(table, DensityConfig(occupancy_floor=2.0,
                                               merge_overlapping=False), _tol(), "k")
     assert {f.family for f in kept.pharmacophore.features} == {"Donor", "Acceptor"}
+
+
+def test_peak_separation_controls_dedup():
+    # Two field maxima 2.0 A apart (voxel 1.0). The dedup keeps both when
+    # peak_separation < 2, and collapses to the taller one when peak_separation > 2 —
+    # so the merge radius is `peak_separation`, decoupled from `bandwidth`.
+    field = np.zeros((7, 5, 5))
+    field[2, 2, 2] = 1.0      # taller peak
+    field[4, 2, 2] = 0.9      # shorter peak, 2 voxels (2.0 A) away
+    origin = np.zeros(3)
+    both = _local_maxima(field, origin, DensityConfig(voxel=1.0, peak_separation=1.0))
+    assert len(both) == 2
+    merged = _local_maxima(field, origin, DensityConfig(voxel=1.0, peak_separation=3.0))
+    assert len(merged) == 1
+    assert np.allclose(merged[0], np.array([2.5, 2.5, 2.5]))   # the taller peak survives
 
 
 def test_excluded_volume_picks_bordering_atoms_only():

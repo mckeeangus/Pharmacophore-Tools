@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,21 +36,27 @@
       }
     },
     "n_features": 10,
-    "representative_ligand": "8F0P_X7L_A1610"
+    "representative_ligand": "8F0P_X7L_A1610",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 6,
+        "ligands": [
+          "8F0P_X7L_A1610",
+          "8F0R_X7W_A1606",
+          "8F0S_X80_A1605"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 3,
+        "ligands": [
+          "8F0P_X7L_A1610",
+          "8F0R_X7W_A1606",
+          "8F0S_X80_A1605"
+        ]
+      }
+    }
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": 86.9655,
-      "y": 136.64499999999998,
-      "z": 140.14866666666668,
-      "radius": 1.941612824718423,
-      "n_points": 6,
-      "n_ligands": 3,
-      "support": 1.0,
-      "direction": null,
-      "label": "Donor 1"
-    },
     {
       "family": "Acceptor",
       "x": 90.98400000000001,
@@ -74,6 +80,18 @@
       "support": 1.0,
       "direction": null,
       "label": "Acceptor 2"
+    },
+    {
+      "family": "Donor",
+      "x": 88.06133333333332,
+      "y": 135.9463333333333,
+      "z": 139.65833333333333,
+      "radius": 1.0,
+      "n_points": 3,
+      "n_ligands": 3,
+      "support": 1.0,
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "Acceptor",
@@ -136,16 +154,16 @@
       "label": "Acceptor 5"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 91.15916666666666,
-      "y": 130.4225833333333,
-      "z": 133.803,
+      "family": "PosIonizable",
+      "x": 86.72550000000001,
+      "y": 137.6745,
+      "z": 141.23149999999998,
       "radius": 1.0,
       "n_points": 2,
       "n_ligands": 2,
       "support": 0.6667,
       "direction": null,
-      "label": "LumpedHydrophobe 1"
+      "label": "PosIonizable 1"
     },
     {
       "family": "LumpedHydrophobe",
@@ -157,7 +175,7 @@
       "n_ligands": 2,
       "support": 0.6667,
       "direction": null,
-      "label": "LumpedHydrophobe 2"
+      "label": "LumpedHydrophobe 1"
     }
   ]
 }

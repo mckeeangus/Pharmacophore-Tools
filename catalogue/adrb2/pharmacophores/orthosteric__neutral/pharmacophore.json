@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,7 +36,24 @@
       }
     },
     "n_features": 5,
-    "representative_ligand": "8W1V_A1AE2_B1201"
+    "representative_ligand": "8W1V_A1AE2_B1201",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 5,
+        "ligands": [
+          "6PS2_JTZ_A1201",
+          "8W1V_A1AE2_B1201",
+          "9W3F_BER_A1201"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 3,
+        "ligands": [
+          "6PS2_JTZ_A1201",
+          "8W1V_A1AE2_B1201"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -50,30 +67,6 @@
       "support": 1.0,
       "direction": null,
       "label": "Acceptor 1"
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -30.310333333333332,
-      "y": 3.7747916666666663,
-      "z": 9.306416666666667,
-      "radius": 3.0,
-      "n_points": 4,
-      "n_ligands": 3,
-      "support": 1.0,
-      "direction": null,
-      "label": "LumpedHydrophobe 1"
-    },
-    {
-      "family": "Donor",
-      "x": -33.22925,
-      "y": 9.66825,
-      "z": 7.696,
-      "radius": 1.4389692925841049,
-      "n_points": 4,
-      "n_ligands": 2,
-      "support": 0.6667,
-      "direction": null,
-      "label": "Donor 1"
     },
     {
       "family": "Acceptor",
@@ -98,6 +91,30 @@
       "support": 1.0,
       "direction": null,
       "label": "PosIonizable 1"
+    },
+    {
+      "family": "Donor",
+      "x": -33.176500000000004,
+      "y": 11.022,
+      "z": 7.9175,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": -29.723,
+      "y": 5.569333333333333,
+      "z": 8.612666666666666,
+      "radius": 3.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
     }
   ]
 }

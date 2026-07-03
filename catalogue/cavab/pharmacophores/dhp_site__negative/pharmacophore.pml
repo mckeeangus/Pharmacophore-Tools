@@ -17,18 +17,32 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[25.462, 167.265, 14.213], vdw=1.680, label="Acceptor 1 (1.00)"
+pseudoatom Acceptor_1, pos=[25.462, 167.265, 14.213], vdw=0.500
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom LumpedHydrophobe_1, pos=[25.509, 164.696, 10.056], vdw=1.894, label="LumpedHydrophobe 1 (1.00)"
-color ph4_LumpedHydrophobe, LumpedHydrophobe_1
-group ph4_LumpedHydrophobe, LumpedHydrophobe_1
-pseudoatom Donor_1, pos=[25.632, 162.997, 15.217], vdw=1.404, label="Donor 1 (1.00)"
+pseudoatom Acceptor_1_ctr, pos=[25.462, 167.265, 14.213], label="Acceptor 1 (1.00)"
+color ph4_Acceptor, Acceptor_1_ctr
+group ph4_centers, Acceptor_1_ctr
+pseudoatom Donor_1, pos=[25.093, 162.663, 15.518], vdw=0.500
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom Donor_2, pos=[27.775, 164.940, 18.823], vdw=1.445, label="Donor 2 (0.67)"
-color ph4_Donor, Donor_2
-group ph4_Donor, Donor_2
+pseudoatom Donor_1_ctr, pos=[25.093, 162.663, 15.518], label="Donor 1 (0.67)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
+pseudoatom PosIonizable_1, pos=[27.775, 164.940, 18.823], vdw=0.500
+color ph4_PosIonizable, PosIonizable_1
+group ph4_PosIonizable, PosIonizable_1
+pseudoatom PosIonizable_1_ctr, pos=[27.775, 164.940, 18.823], label="PosIonizable 1 (0.67)"
+color ph4_PosIonizable, PosIonizable_1_ctr
+group ph4_centers, PosIonizable_1_ctr
+pseudoatom Aromatic_1, pos=[25.395, 164.346, 10.410], vdw=0.500
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
+pseudoatom Aromatic_1_ctr, pos=[25.395, 164.346, 10.410], label="Aromatic 1 (0.67)"
+color ph4_Aromatic, Aromatic_1_ctr
+group ph4_centers, Aromatic_1_ctr
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
+hide spheres, ph4_centers
+show nb_spheres, ph4_centers
 orient

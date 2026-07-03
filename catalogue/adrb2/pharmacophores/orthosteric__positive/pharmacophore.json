@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -37,21 +37,43 @@
       }
     },
     "n_features": 5,
-    "representative_ligand": "4LDL_XQC_A1401"
+    "representative_ligand": "4LDL_XQC_A1401",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 17,
+        "ligands": [
+          "4LDE_P0G_A1401",
+          "4LDL_XQC_A1401",
+          "4LDO_ALE_A1402",
+          "6MXT_K5Y_A1401",
+          "7DHI_68H_R401",
+          "7XK9_GJ6_A1401",
+          "8GG0_G1I_R501",
+          "8JJ8_H98_F501",
+          "8JJL_DZQ_A501",
+          "9BUY_A1ASM_R504",
+          "9LW5_LDP_R401"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 11,
+        "ligands": [
+          "4LDE_P0G_A1401",
+          "4LDL_XQC_A1401",
+          "4LDO_ALE_A1402",
+          "6MXT_K5Y_A1401",
+          "7DHI_68H_R401",
+          "7XK9_GJ6_A1401",
+          "8GG0_G1I_R501",
+          "8JJ8_H98_F501",
+          "8JJL_DZQ_A501",
+          "9BUY_A1ASM_R504",
+          "9LW5_LDP_R401"
+        ]
+      }
+    }
   },
   "features": [
-    {
-      "family": "Donor",
-      "x": -32.30527272727273,
-      "y": 10.727090909090908,
-      "z": 7.5108181818181805,
-      "radius": 1.0,
-      "n_points": 11,
-      "n_ligands": 11,
-      "support": 1.0,
-      "direction": null,
-      "label": "Donor 1"
-    },
     {
       "family": "Donor",
       "x": -26.45563636363637,
@@ -62,7 +84,7 @@
       "n_ligands": 11,
       "support": 1.0,
       "direction": null,
-      "label": "Donor 2"
+      "label": "Donor 1"
     },
     {
       "family": "Donor",
@@ -74,7 +96,7 @@
       "n_ligands": 11,
       "support": 1.0,
       "direction": null,
-      "label": "Donor 3"
+      "label": "Donor 2"
     },
     {
       "family": "Aromatic",
@@ -90,6 +112,18 @@
     },
     {
       "family": "Donor",
+      "x": -32.2367,
+      "y": 10.7654,
+      "z": 7.450999999999999,
+      "radius": 1.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091,
+      "direction": null,
+      "label": "Donor 3"
+    },
+    {
+      "family": "PosIonizable",
       "x": -32.9708,
       "y": 8.11,
       "z": 7.359499999999999,
@@ -98,7 +132,7 @@
       "n_ligands": 10,
       "support": 0.9091,
       "direction": null,
-      "label": "Donor 4"
+      "label": "PosIonizable 1"
     }
   ]
 }

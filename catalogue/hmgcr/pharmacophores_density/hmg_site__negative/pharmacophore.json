@@ -24,13 +24,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -44,32 +45,78 @@
       }
     },
     "n_features": 46,
-    "representative_ligand": "3CDA_8HI_B1"
+    "representative_ligand": "3CCZ_5HI_B876",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 36,
+        "ligands": [
+          "1HWI_115_A2",
+          "1HWJ_116_A2",
+          "1HWK_117_A2",
+          "1HWL_FBI_A2",
+          "2Q1L_882_A877",
+          "2Q6B_HR2_A3001",
+          "2Q6C_HR1_A3002",
+          "2R4F_RIE_B876",
+          "3BGL_RID_A2",
+          "3CCT_3HI_D3",
+          "3CCW_4HI_C4",
+          "3CCZ_5HI_B876",
+          "3CD0_6HI_D3",
+          "3CD5_7HI_B1",
+          "3CDA_8HI_B1",
+          "3CDB_9HI_D3"
+        ]
+      },
+      "NegIonizable<-Acceptor": {
+        "events": 18,
+        "ligands": [
+          "1HW8_114_A2",
+          "1HW9_SIM_C2",
+          "1HWI_115_A2",
+          "1HWJ_116_A2",
+          "1HWK_117_A2",
+          "1HWL_FBI_A2",
+          "2Q1L_882_A877",
+          "2Q6B_HR2_A3001",
+          "2Q6C_HR1_A3002",
+          "2R4F_RIE_B876",
+          "3BGL_RID_A2",
+          "3CCT_3HI_D3",
+          "3CCW_4HI_C4",
+          "3CCZ_5HI_B876",
+          "3CD0_6HI_D3",
+          "3CD5_7HI_B1",
+          "3CDA_8HI_B1",
+          "3CDB_9HI_D3"
+        ]
+      }
+    }
   },
   "features": [
     {
       "family": "Acceptor",
-      "x": 14.323513989110493,
-      "y": 3.45202944840932,
-      "z": 15.274390144239824,
-      "radius": 3.0,
-      "n_points": 36,
-      "n_ligands": 18,
-      "support": 1.0,
-      "direction": null,
-      "label": "Acceptor 1"
-    },
-    {
-      "family": "Acceptor",
-      "x": 20.973025222419935,
-      "y": 9.71516687482602,
-      "z": 14.566403805087592,
+      "x": 20.912228897831184,
+      "y": 9.730126354871397,
+      "z": 14.540001873220914,
       "radius": 3.0,
       "n_points": 31,
       "n_ligands": 17,
       "support": 0.9444,
       "direction": null,
-      "label": "Acceptor 2"
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Donor",
+      "x": 13.370031539861506,
+      "y": 4.427048495504564,
+      "z": 14.837462124518938,
+      "radius": 3.0,
+      "n_points": 18,
+      "n_ligands": 18,
+      "support": 1.0,
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "Donor",
@@ -81,43 +128,43 @@
       "n_ligands": 18,
       "support": 1.0,
       "direction": null,
-      "label": "Donor 1"
+      "label": "Donor 2"
     },
     {
       "family": "Acceptor",
-      "x": 14.292649643291085,
-      "y": 8.060666400545538,
-      "z": 18.847730355118856,
+      "x": 14.263058210268438,
+      "y": 8.052393478219482,
+      "z": 18.809977416236524,
       "radius": 3.0,
       "n_points": 18,
       "n_ligands": 17,
       "support": 0.9444,
       "direction": null,
-      "label": "Acceptor 3"
+      "label": "Acceptor 2"
     },
     {
       "family": "LumpedHydrophobe",
-      "x": 19.11605935839686,
-      "y": 8.887053993746912,
-      "z": 11.29799806979981,
+      "x": 19.13629370897017,
+      "y": 8.935128417742941,
+      "z": 11.420146248115337,
       "radius": 3.0,
-      "n_points": 15,
+      "n_points": 16,
       "n_ligands": 15,
       "support": 0.8333,
       "direction": null,
       "label": "LumpedHydrophobe 1"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 24.609436049851517,
-      "y": 12.356899086028024,
-      "z": 13.761893013019964,
+      "family": "Aromatic",
+      "x": 24.41682686140578,
+      "y": 12.307726962103867,
+      "z": 13.69424908385167,
       "radius": 3.0,
-      "n_points": 13,
-      "n_ligands": 12,
-      "support": 0.6667,
+      "n_points": 12,
+      "n_ligands": 11,
+      "support": 0.6111,
       "direction": null,
-      "label": "LumpedHydrophobe 2"
+      "label": "Aromatic 1"
     },
     {
       "family": "ExcludedVolume",

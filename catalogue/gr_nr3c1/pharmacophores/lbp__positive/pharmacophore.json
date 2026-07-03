@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -37,7 +37,34 @@
       }
     },
     "n_features": 3,
-    "representative_ligand": "7PRX_82H_A801"
+    "representative_ligand": "7PRX_82H_A801",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 32,
+        "ligands": [
+          "3BQD_DAY_A301",
+          "3E7C_866_A1",
+          "3K22_JZS_B1",
+          "3K23_JZN_B2",
+          "4CSJ_NN7_A1778",
+          "4LSJ_LSJ_A801",
+          "5G3J_E7T_A1779",
+          "5G5W_R8C_A1778",
+          "5NFT_8W8_A804",
+          "6EL6_B9Q_A802",
+          "6EL7_B9T_A802",
+          "6EL9_B9W_A802",
+          "7PRX_82H_A801",
+          "8VKZ_A1ACE_A901"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 1,
+        "ligands": [
+          "3K23_JZN_B2"
+        ]
+      }
+    }
   },
   "features": [
     {

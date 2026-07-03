@@ -1,4 +1,4 @@
-# hiv1_protease/active_site__negative — ensemble pharmacophore (10 features)
+# hiv1_protease/active_site__negative — ensemble pharmacophore (9 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,36 +17,62 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[-11.954, 14.855, 34.875], vdw=2.596, label="Acceptor 1 (0.72)"
-color ph4_Acceptor, Acceptor_1
-group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_2, pos=[-8.576, 15.456, 25.814], vdw=2.198, label="Acceptor 2 (0.94)"
-color ph4_Acceptor, Acceptor_2
-group ph4_Acceptor, Acceptor_2
-pseudoatom Donor_1, pos=[-10.919, 19.056, 27.878], vdw=1.451, label="Donor 1 (0.88)"
+pseudoatom Donor_1, pos=[-10.338, 17.921, 28.052], vdw=0.500
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom Acceptor_3, pos=[-9.271, 15.544, 30.658], vdw=1.666, label="Acceptor 3 (0.66)"
+pseudoatom Donor_1_ctr, pos=[-10.338, 17.921, 28.052], label="Donor 1 (0.88)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
+pseudoatom Acceptor_1, pos=[-11.954, 14.855, 34.875], vdw=0.500
+color ph4_Acceptor, Acceptor_1
+group ph4_Acceptor, Acceptor_1
+pseudoatom Acceptor_1_ctr, pos=[-11.954, 14.855, 34.875], label="Acceptor 1 (0.72)"
+color ph4_Acceptor, Acceptor_1_ctr
+group ph4_centers, Acceptor_1_ctr
+pseudoatom Acceptor_2, pos=[-8.576, 15.456, 25.814], vdw=0.500
+color ph4_Acceptor, Acceptor_2
+group ph4_Acceptor, Acceptor_2
+pseudoatom Acceptor_2_ctr, pos=[-8.576, 15.456, 25.814], label="Acceptor 2 (0.94)"
+color ph4_Acceptor, Acceptor_2_ctr
+group ph4_centers, Acceptor_2_ctr
+pseudoatom Acceptor_3, pos=[-9.271, 15.544, 30.658], vdw=0.500
 color ph4_Acceptor, Acceptor_3
 group ph4_Acceptor, Acceptor_3
-pseudoatom Acceptor_4, pos=[-7.980, 18.019, 20.704], vdw=1.961, label="Acceptor 4 (0.75)"
+pseudoatom Acceptor_3_ctr, pos=[-9.271, 15.544, 30.658], label="Acceptor 3 (0.66)"
+color ph4_Acceptor, Acceptor_3_ctr
+group ph4_centers, Acceptor_3_ctr
+pseudoatom Acceptor_4, pos=[-7.976, 17.989, 20.655], vdw=0.500
 color ph4_Acceptor, Acceptor_4
 group ph4_Acceptor, Acceptor_4
-pseudoatom LumpedHydrophobe_1, pos=[-5.257, 18.247, 26.717], vdw=1.437, label="LumpedHydrophobe 1 (0.94)"
-color ph4_LumpedHydrophobe, LumpedHydrophobe_1
-group ph4_LumpedHydrophobe, LumpedHydrophobe_1
-pseudoatom LumpedHydrophobe_2, pos=[-12.913, 13.698, 28.862], vdw=1.129, label="LumpedHydrophobe 2 (0.91)"
-color ph4_LumpedHydrophobe, LumpedHydrophobe_2
-group ph4_LumpedHydrophobe, LumpedHydrophobe_2
-pseudoatom Donor_2, pos=[-10.465, 16.242, 29.685], vdw=1.323, label="Donor 2 (0.84)"
-color ph4_Donor, Donor_2
-group ph4_Donor, Donor_2
-pseudoatom LumpedHydrophobe_3, pos=[-8.824, 16.495, 22.534], vdw=1.000, label="LumpedHydrophobe 3 (0.66)"
-color ph4_LumpedHydrophobe, LumpedHydrophobe_3
-group ph4_LumpedHydrophobe, LumpedHydrophobe_3
-pseudoatom LumpedHydrophobe_4, pos=[-9.829, 15.970, 33.322], vdw=1.000, label="LumpedHydrophobe 4 (0.59)"
-color ph4_LumpedHydrophobe, LumpedHydrophobe_4
-group ph4_LumpedHydrophobe, LumpedHydrophobe_4
+pseudoatom Acceptor_4_ctr, pos=[-7.976, 17.989, 20.655], label="Acceptor 4 (0.72)"
+color ph4_Acceptor, Acceptor_4_ctr
+group ph4_centers, Acceptor_4_ctr
+pseudoatom Aromatic_1, pos=[-4.877, 18.168, 26.406], vdw=0.500
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
+pseudoatom Aromatic_1_ctr, pos=[-4.877, 18.168, 26.406], label="Aromatic 1 (0.66)"
+color ph4_Aromatic, Aromatic_1_ctr
+group ph4_centers, Aromatic_1_ctr
+pseudoatom Aromatic_2, pos=[-12.929, 13.433, 29.071], vdw=0.500
+color ph4_Aromatic, Aromatic_2
+group ph4_Aromatic, Aromatic_2
+pseudoatom Aromatic_2_ctr, pos=[-12.929, 13.433, 29.071], label="Aromatic 2 (0.66)"
+color ph4_Aromatic, Aromatic_2_ctr
+group ph4_centers, Aromatic_2_ctr
+pseudoatom Aromatic_3, pos=[-8.630, 16.553, 22.488], vdw=0.500
+color ph4_Aromatic, Aromatic_3
+group ph4_Aromatic, Aromatic_3
+pseudoatom Aromatic_3_ctr, pos=[-8.630, 16.553, 22.488], label="Aromatic 3 (0.53)"
+color ph4_Aromatic, Aromatic_3_ctr
+group ph4_centers, Aromatic_3_ctr
+pseudoatom Aromatic_4, pos=[-9.965, 15.850, 33.482], vdw=0.500
+color ph4_Aromatic, Aromatic_4
+group ph4_Aromatic, Aromatic_4
+pseudoatom Aromatic_4_ctr, pos=[-9.965, 15.850, 33.482], label="Aromatic 4 (0.53)"
+color ph4_Aromatic, Aromatic_4_ctr
+group ph4_centers, Aromatic_4_ctr
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
+hide spheres, ph4_centers
+show nb_spheres, ph4_centers
 orient

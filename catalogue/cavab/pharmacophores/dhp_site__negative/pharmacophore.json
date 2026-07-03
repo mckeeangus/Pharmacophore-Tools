@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,7 +36,24 @@
       }
     },
     "n_features": 4,
-    "representative_ligand": "5KLS_6UC_C1304"
+    "representative_ligand": "6KE5_6UB_B1301",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 3,
+        "ligands": [
+          "5KLS_6UC_C1304",
+          "5KMF_6U9_A1301",
+          "6KE5_6UB_B1301"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 2,
+        "ligands": [
+          "5KLS_6UC_C1304",
+          "6KE5_6UB_B1301"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -52,31 +69,19 @@
       "label": "Acceptor 1"
     },
     {
-      "family": "LumpedHydrophobe",
-      "x": 25.508583333333334,
-      "y": 164.69579166666665,
-      "z": 10.055833333333332,
-      "radius": 1.8936116015617948,
-      "n_points": 4,
-      "n_ligands": 3,
-      "support": 1.0,
-      "direction": null,
-      "label": "LumpedHydrophobe 1"
-    },
-    {
       "family": "Donor",
-      "x": 25.631999999999994,
-      "y": 162.99733333333333,
-      "z": 15.217333333333334,
-      "radius": 1.4035612641499629,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 1.0,
+      "x": 25.0935,
+      "y": 162.66250000000002,
+      "z": 15.518,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667,
       "direction": null,
       "label": "Donor 1"
     },
     {
-      "family": "Donor",
+      "family": "PosIonizable",
       "x": 27.775,
       "y": 164.9395,
       "z": 18.823,
@@ -85,7 +90,19 @@
       "n_ligands": 2,
       "support": 0.6667,
       "direction": null,
-      "label": "Donor 2"
+      "label": "PosIonizable 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": 25.394999999999996,
+      "y": 164.34633333333335,
+      "z": 10.410499999999999,
+      "radius": 1.0,
+      "n_points": 2,
+      "n_ligands": 2,
+      "support": 0.6667,
+      "direction": null,
+      "label": "Aromatic 1"
     }
   ]
 }

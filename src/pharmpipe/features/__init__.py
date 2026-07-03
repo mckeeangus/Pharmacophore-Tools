@@ -4,10 +4,19 @@
 (mol2 files -> RDKit molecules).
 """
 
-from .extract import FeaturePoint, FeatureTable, build_table, feature_factory, featurize
+from .extract import (
+    FeaturePoint,
+    FeatureResolution,
+    FeatureTable,
+    build_table,
+    feature_factory,
+    featurize,
+    hierarchy_pairs,
+)
 from .load import LoadReport, load_directory, load_pose, read_smiles_map
 
 __all__ = [
-    "FeaturePoint", "FeatureTable", "build_table", "featurize", "feature_factory",
-    "LoadReport", "load_directory", "load_pose", "read_smiles_map",
+    "FeaturePoint", "FeatureResolution", "FeatureTable", "build_table", "featurize",
+    "feature_factory", "hierarchy_pairs", "LoadReport", "load_directory", "load_pose",
+    "read_smiles_map",
 ]

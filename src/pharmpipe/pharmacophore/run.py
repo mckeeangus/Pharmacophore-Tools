@@ -15,7 +15,7 @@ from pathlib import Path
 
 import numpy as np
 
-from ..features.extract import build_table, feature_factory
+from ..features.extract import FeatureResolution, build_table, feature_factory
 from ..features.load import (
     LoadReport,
     load_directory,
@@ -41,6 +41,22 @@ class ModelOutputs:
     pharmacophore: Pharmacophore
     report: LoadReport
     files: list[Path] = field(default_factory=list)
+
+
+def _aggregate_resolutions(resolutions: list[FeatureResolution]) -> dict:
+    """Group co-atom hierarchy decisions by ``kept<-dropped`` for provenance/report.
+
+    Returns ``{"PosIonizable<-Donor": {"events": n, "ligands": [ids...]}, ...}`` so the
+    ligands that carried a dual classification are recorded (sorted, de-duplicated).
+    """
+    by_pair: dict[str, dict] = {}
+    for r in resolutions:
+        key = f"{r.kept_family}<-{r.dropped_family}"
+        entry = by_pair.setdefault(key, {"events": 0, "ligands": set()})
+        entry["events"] += 1
+        entry["ligands"].add(r.ligand_id)
+    return {k: {"events": v["events"], "ligands": sorted(v["ligands"])}
+            for k, v in sorted(by_pair.items())}
 
 
 def _feature_ordinal(feat) -> int:
@@ -81,6 +97,19 @@ def _write_summary(ph: Pharmacophore, report: LoadReport, n_ligands: int,
     for f in sorted(ligand_feats, key=lambda f: (f.family, _feature_ordinal(f))):
         lines.append(
             f"| {f.label or f.family} | {f.n_points} | {f.n_ligands} | {f.support:.2f} |")
+    resolution = ph.metadata.get("feature_resolution") or {}
+    if resolution:
+        lines += [
+            "", "## Feature resolution",
+            "", "Co-incident dual classifications collapsed by the feature hierarchy "
+            "(higher-priority family kept on the shared atom); the listed ligands each "
+            "carried both types on one atom.",
+            "", "| Kept ← dropped | Events | Ligands |", "|---|---:|---|",
+        ]
+        for pair, info in resolution.items():
+            kept, dropped = pair.split("<-", 1)
+            ligs = ", ".join(info["ligands"])
+            lines.append(f"| {kept} ← {dropped} | {info['events']} | {ligs} |")
     lines += ["", "See `pharmacophore.json` (model), `features.csv` (raw points + "
               "cluster ids), and `raw_features_*.png` (per-family point distributions, "
               "each kept peak annotated with its label and support)."]
@@ -134,7 +163,8 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
         return None
 
     factory = feature_factory(cfg.features.fdef)
-    table = build_table(molecules, factory, cfg.features.families)
+    table = build_table(molecules, factory, cfg.features.families,
+                        cfg.features.feature_hierarchy)
     metadata = {
         "source": {"input_dir": str(input_dir), "n_ligands": len(molecules),
                    "load": report.by_method, "skipped": report.skipped},
@@ -155,6 +185,8 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
     rep_id = best_representative(table, result.pharmacophore)
     rep_mol = dict(molecules).get(rep_id) if rep_id else None
     result.pharmacophore.metadata["representative_ligand"] = rep_id
+    result.pharmacophore.metadata["feature_resolution"] = _aggregate_resolutions(
+        table.resolutions)
 
     ensure_dir(out_dir)
     # Drop per-family plots from a previous run (e.g. an old `Hydrophobe` family)

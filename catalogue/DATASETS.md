@@ -89,6 +89,13 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
   one in/out contract `(family, position, tolerance, optional direction)`;
 - features use RDKit's **`LumpedHydrophobe`** (one centroid per hydrophobic group) so
   hydrophobes don't swamp the model;
+- a curated **feature hierarchy** (`features.feature_hierarchy`) collapses **co-incident
+  dual classifications at extraction** — a protonated amine N labelled both `PosIonizable`
+  and `Donor`, a carboxylate O labelled both `NegIonizable` and `Acceptor`, an aromatic
+  ring labelled both `Aromatic` and `LumpedHydrophobe` — keeping the higher-priority family
+  on the shared atom (genuine dual roles like a hydroxyl's Donor+Acceptor are preserved).
+  It removes the redundant double-count only; the count-based merge is untouched. Logged
+  per model as a `kept ← dropped` **Feature resolution** table;
 - a cell with **fewer than 3 ligands is skipped** (no output written/kept) — too few
   for an ensemble hypothesis;
 - (k-means) overlapping clusters are **merged, keeping the dominant one** — both within a
@@ -97,7 +104,7 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
 - (density) the unit of evidence is the **distinct molecule** (per-point weighting),
   features emerge from field peaks with **no `k`**, the **same cross-family merge** then
   gives one feature per region, and **excluded-volume** spheres mark receptor regions no
-  ligand occupies; deterministic, two knobs only;
+  ligand occupies; deterministic, three knobs (length scale, peak separation, floor);
 - ligands are **protonated to their pH-7.4 microstate** (pkasolver + a config-driven
   **weak-acid guard** that corrects pkasolver's over-deprotonation of phenols/alcohols/
   amides/sulfonamides/amino-heteroaromatics) before perception, so donor/acceptor/
@@ -117,7 +124,7 @@ Files per model:
 | `representative_ligand.sdf` | One real cell ligand (correct bond orders + 3D coords) chosen as the best fit to the model; the clean visual scaffold. |
 | `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster; centre-marker area scales with cluster population, kept centres a filled "X". |
 | `pharmacophore.pml` | Lightweight PyMOL script (representative ligand + feature spheres). The richer `scripts/pymol_pharmacophore.py` reads the JSON and adds a raw-point overlay. |
-| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support (fraction of the cell's ligands contributing). Density-strategy excluded-volume spheres are receptor markers (no peak/support), reported as a count line, not table rows. |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support (fraction of the cell's ligands contributing), plus a **Feature resolution** section listing any co-incident dual classifications collapsed by the feature hierarchy (`kept ← dropped` + the ligands involved). Density-strategy excluded-volume spheres are receptor markers (no peak/support), reported as a count line, not table rows. |
 
 ## Other tracked files
 

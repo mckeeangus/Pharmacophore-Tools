@@ -24,13 +24,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -44,7 +45,23 @@
       }
     },
     "n_features": 42,
-    "representative_ligand": "4MDD_29M_B801"
+    "representative_ligand": "4MDD_29M_B801",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 5,
+        "ligands": [
+          "4MDD_29M_B801",
+          "5UC3_486_B801",
+          "6DXK_HJ4_A801"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 1,
+        "ligands": [
+          "4MDD_29M_B801"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -61,11 +78,11 @@
     },
     {
       "family": "Donor",
-      "x": 28.41081736088809,
-      "y": 6.3722316646382176,
-      "z": 15.700822734888055,
+      "x": 28.13330955672789,
+      "y": 6.992496049045689,
+      "z": 15.92694703948623,
       "radius": 3.0,
-      "n_points": 5,
+      "n_points": 4,
       "n_ligands": 3,
       "support": 1.0,
       "direction": null,

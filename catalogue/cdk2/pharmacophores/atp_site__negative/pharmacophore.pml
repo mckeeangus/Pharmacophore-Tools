@@ -17,15 +17,26 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[7.444, -22.122, -22.722], vdw=3.000, label="Acceptor 1 (0.99)"
+pseudoatom Acceptor_1, pos=[7.572, -22.200, -22.865], vdw=0.500
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_2, pos=[3.224, -27.142, -26.297], vdw=3.000, label="Acceptor 2 (0.63)"
+pseudoatom Acceptor_1_ctr, pos=[7.572, -22.200, -22.865], label="Acceptor 1 (0.98)"
+color ph4_Acceptor, Acceptor_1_ctr
+group ph4_centers, Acceptor_1_ctr
+pseudoatom Acceptor_2, pos=[3.286, -27.126, -26.244], vdw=0.500
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Donor_1, pos=[7.309, -24.620, -24.826], vdw=1.000, label="Donor 1 (0.80)"
+pseudoatom Acceptor_2_ctr, pos=[3.286, -27.126, -26.244], label="Acceptor 2 (0.61)"
+color ph4_Acceptor, Acceptor_2_ctr
+group ph4_centers, Acceptor_2_ctr
+pseudoatom Donor_1, pos=[7.357, -24.602, -24.812], vdw=0.500
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
+pseudoatom Donor_1_ctr, pos=[7.357, -24.602, -24.812], label="Donor 1 (0.79)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
 show spheres, ph4_*
 set sphere_transparency, 0.4, ph4_*
+hide spheres, ph4_centers
+show nb_spheres, ph4_centers
 orient

@@ -20,6 +20,23 @@ features:
   # chain or ring face) into a single centroid feature, instead of emitting one
   # point per carbon. That stops hydrophobes swamping the model.
   families: [Donor, Acceptor, LumpedHydrophobe, Aromatic, PosIonizable, NegIonizable]
+  # Co-atom feature hierarchy. RDKit assigns some atoms to several families at once
+  # (a protonated amine N is BOTH PosIonizable and Donor; a carboxylate O is BOTH
+  # NegIonizable and Acceptor; an aromatic ring is BOTH Aromatic and LumpedHydrophobe).
+  # Left alone this double-counts one atom as two features, so the more-specific type
+  # can lose the downstream support/size vote to its redundant partner. Each group
+  # below is ordered highest-priority first; when two families in the SAME group are
+  # perceived on a SHARED atom, only the higher one is kept (purely to remove the
+  # redundant co-incident point — it never overrides a genuine count of distinct atoms).
+  # Genuine dual roles are deliberately absent and so preserved: a hydroxyl stays
+  # Donor+Acceptor; an aromatic ring heteroatom (pyridine/pyrrole) stays
+  # Aromatic+Acceptor/Donor; a lone aliphatic hydrophobe (no aromatic overlap) is kept.
+  feature_hierarchy:
+    - [PosIonizable, Donor]            # protonated base: cation subsumes its donor
+    - [PosIonizable, LumpedHydrophobe]
+    - [NegIonizable, Acceptor]         # deprotonated acid: anion subsumes its acceptor
+    - [NegIonizable, LumpedHydrophobe]
+    - [Aromatic, LumpedHydrophobe]     # aromatic ring subsumes an overlapping hydrophobe
   # Display colours (RGB 0–1) shared by the PyMOL session/`.pml` and the
   # matplotlib raw-data plots, so a family looks the same everywhere.
   colors:
@@ -59,6 +76,14 @@ clustering:
 density:
   voxel: 1.0              # grid spacing (A) — spatial resolution of the field
   bandwidth: 1.5         # Gaussian smoothing sigma (A) ~ target feature tolerance
+  peak_separation: 1.5   # min centre-to-centre distance (A) between two kept peaks of
+                         #   one family. A separate knob from `bandwidth`, but set equal
+                         #   to it here: the smoothing sigma (=bandwidth) is the field's
+                         #   resolution limit, so a peak_separation below it does not
+                         #   resolve genuinely closer sub-sites — it only over-splits a
+                         #   single lobe into ripple sub-peaks that can then fall below
+                         #   occupancy_floor and be lost. To resolve <1.5 A sub-sites,
+                         #   lower `bandwidth` AND `voxel` too, not this alone.
   occupancy_floor: 2.0   # keep a peak only if its basin's summed distinct-molecule
                          #   weight >= this (units: effective molecules)
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency

@@ -30,13 +30,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -50,7 +51,33 @@
       }
     },
     "n_features": 42,
-    "representative_ligand": "4FRR_0VC_F301"
+    "representative_ligand": "4FRR_0VC_F301",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 1,
+        "ligands": [
+          "3U8L_09Q_J211"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 13,
+        "ligands": [
+          "3U8J_09O_A211",
+          "3U8K_09P_F211",
+          "3U8L_09Q_J211",
+          "3U8M_09R_L211",
+          "3U8N_09S_Q211",
+          "3ZDG_XRX_I301",
+          "3ZDH_XRS_A301",
+          "4FRR_0VC_F301",
+          "4ZJS_4P0_D301",
+          "5BP0_FN1_D302",
+          "5O87_NCT_A601",
+          "5SYO_C5E_E301",
+          "6SGV_LDQ_G601"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -66,16 +93,16 @@
       "label": "Acceptor 1"
     },
     {
-      "family": "Donor",
-      "x": 167.20989037640462,
-      "y": 123.41787254889759,
-      "z": 186.42994122124495,
+      "family": "PosIonizable",
+      "x": 166.87489793874047,
+      "y": 123.38574339560569,
+      "z": 186.1619384189662,
       "radius": 3.0,
       "n_points": 16,
       "n_ligands": 15,
       "support": 0.8333,
       "direction": null,
-      "label": "Donor 1"
+      "label": "PosIonizable 1"
     },
     {
       "family": "ExcludedVolume",

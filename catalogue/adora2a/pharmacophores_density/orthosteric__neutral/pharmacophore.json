@@ -24,13 +24,14 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_separation": 1.5,
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
@@ -43,8 +44,26 @@
         "ev_max": 40
       }
     },
-    "n_features": 43,
-    "representative_ligand": "8CIC_U30_A1202"
+    "n_features": 42,
+    "representative_ligand": "8CIC_U30_A1202",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 5,
+        "ligands": [
+          "5OLH_9XT_A1201",
+          "5OLO_9XW_A1201",
+          "6GT3_F9Q_A2401",
+          "8CIC_U30_A1202",
+          "8RW0_JQ9_A1201"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 1,
+        "ligands": [
+          "5OLO_9XW_A1201"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -61,27 +80,15 @@
     },
     {
       "family": "Donor",
-      "x": -2.2309241977531236,
-      "y": 98.94392402833226,
-      "z": 51.82106839668061,
+      "x": -1.7938500832141622,
+      "y": 98.01402421452897,
+      "z": 51.58730139554585,
       "radius": 3.0,
-      "n_points": 6,
+      "n_points": 4,
       "n_ligands": 4,
       "support": 0.8,
       "direction": null,
       "label": "Donor 1"
-    },
-    {
-      "family": "LumpedHydrophobe",
-      "x": -0.012774489064622311,
-      "y": 92.93497477623973,
-      "z": 51.08026133735638,
-      "radius": 3.0,
-      "n_points": 3,
-      "n_ligands": 3,
-      "support": 0.6,
-      "direction": null,
-      "label": "LumpedHydrophobe 1"
     },
     {
       "family": "ExcludedVolume",

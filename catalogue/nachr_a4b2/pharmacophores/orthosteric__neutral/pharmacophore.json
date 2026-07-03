@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-02",
+    "created": "2026-07-03",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -35,8 +35,29 @@
         "random_state": 0
       }
     },
-    "n_features": 3,
-    "representative_ligand": "2XYT_TC9_F1206"
+    "n_features": 2,
+    "representative_ligand": "2XYT_TC9_F1206",
+    "feature_resolution": {
+      "Aromatic<-LumpedHydrophobe": {
+        "events": 8,
+        "ligands": [
+          "2WNC_TKT_C300",
+          "2XYS_SY9_E1206",
+          "2XYT_TC9_F1206",
+          "3SIO_MLK_D260",
+          "9SG3_PHN_A302"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 4,
+        "ligands": [
+          "2WNC_TKT_C300",
+          "2XYS_SY9_E1206",
+          "2XYT_TC9_F1206",
+          "3SIO_MLK_D260"
+        ]
+      }
+    }
   },
   "features": [
     {
@@ -62,18 +83,6 @@
       "support": 0.6667,
       "direction": null,
       "label": "Acceptor 2"
-    },
-    {
-      "family": "Donor",
-      "x": 170.40833333333333,
-      "y": 119.39916666666666,
-      "z": 182.05683333333332,
-      "radius": 3.0,
-      "n_points": 6,
-      "n_ligands": 5,
-      "support": 0.5556,
-      "direction": null,
-      "label": "Donor 1"
     }
   ]
 }

@@ -17,7 +17,8 @@ coloured by family (HBD/donor pink, HBA/acceptor green, hydrophobic cyan, aromat
 yellow, positive-ionisable red). The feature's true tolerance radius lives in the JSON,
 not the sphere size. ``--features features.csv`` additionally overlays the raw extracted
 points (small opaque dots) so the cluster centres can be compared to the data. Omit
-``--out`` to stay in an interactive PyMOL window.
+``--out`` to stay in an interactive PyMOL window; ``--image PATH`` additionally writes a
+ray-traced PNG snapshot.
 
 By default the clean ``representative_ligand.sdf`` written beside the JSON is shown
 (correct bond orders). Pass ``--compounds DIR`` to overlay the full raw mol2 set
@@ -46,8 +47,10 @@ COLORS = {
 _GREY = (0.5, 0.5, 0.5)
 
 # Ligand feature spheres are drawn at a FIXED radius (not the tolerance radius, which is
-# up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json.
-PH4_SPHERE_RADIUS = 2.0
+# up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json. 1.0 A
+# mirrors the overlap-merge rule (two features within ~1 A collapse to one), so the drawn
+# spheres are just touching exactly when the model would have merged them.
+PH4_SPHERE_RADIUS = 1.0
 
 
 def _args(argv):
@@ -58,6 +61,7 @@ def _args(argv):
                     "(default: representative_ligand.sdf beside the JSON)")
     ap.add_argument("--features", help="optional features.csv to overlay raw points")
     ap.add_argument("--out", help="write a .pse here (else interactive)")
+    ap.add_argument("--image", help="write a ray-traced .png snapshot here")
     return ap.parse_args(argv)
 
 
@@ -151,6 +155,11 @@ def main(argv):
     if args.out:
         cmd.save(args.out)
         print(f"wrote {args.out}")
+    if args.image:
+        # Ray-traced default-orientation snapshot (opaque white background).
+        cmd.set("ray_opaque_background", 1)
+        cmd.png(args.image, width=1200, height=900, dpi=150, ray=1)
+        print(f"wrote {args.image}")
 
 
 # PyMOL runs a command-line script with ``__name__ == "pymol"`` (not "__main__")

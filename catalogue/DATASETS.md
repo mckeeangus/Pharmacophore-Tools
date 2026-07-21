@@ -78,7 +78,11 @@ but currently unpopulated (its poses fall outside the Stage-2 orthosteric cutoff
 ## Pharmacophores (Stage 4) — `pharmacophores/<pocket>__<efficacy>/`
 
 One ligand-based ensemble pharmacophore per cell, built from the RDKit features of that
-cell's poses (see `config/pharmacophore.yaml`; method/params recorded in each model).
+cell's poses (see `config/pharmacophore.yaml`; method/params recorded in each model). Any
+standalone directory of aligned mol2 can be turned into a full model + visualisations in
+one local command — `pixi run build-pharmacophores --input DIR --out DIR --smiles
+ligands.csv` (protonate → build → PyMOL `.pse`/`.png`); see
+[`pharmacophore_method.md`](pharmacophore_method.md).
 **The full method — feature families, both consensus strategies, selection, overlap
 merging, tolerance, excluded volume, the visualisation, and what "cluster size" means —
 is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headline choices:

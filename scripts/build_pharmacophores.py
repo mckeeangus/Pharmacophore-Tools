@@ -3,16 +3,26 @@
 
 Three modes:
 
-  * single directory  -- build one model from any folder of aligned ``*.mol2``:
-        pixi run build-pharmacophores --input PATH/TO/cell --out PATH/TO/out
+  * single directory  -- one-shot model from any folder of aligned ``*.mol2``:
+        pixi run build-pharmacophores --input DIR --out DIR --smiles ligands.csv
   * one target        -- build a model per cell of a catalogue target:
         pixi run build-pharmacophores --target gr_nr3c1
   * whole catalogue   -- every cell of every target:
         pixi run build-pharmacophores --catalogue
 
+The ``--input`` one-shot runs the whole local methodology end-to-end for one aligned
+directory: (A) protonate the ligands to their pH-7.4 microstate via the isolated
+``prep`` env (reused if already present in ``--out``), (B) build the model in-process,
+(C) bake a PyMOL ``.pse`` + ray-traced ``.png`` via the ``viz`` env. It requires a
+``--smiles`` HET->SMILES CSV (the heavy-atom mol2 need it for both protonation and clean
+bond perception); ``--reference-pdb`` enables density excluded volume, and
+``--force-protonate`` / ``--allow-unprotonated`` / ``--no-render`` tune the steps. It
+shells out across pixi envs, so it is local-only.
+
 Catalogue modes only build the ``groups/<pocket>__<efficacy>/`` cells (never the
 review tracks separate_state / unknown / quarantine) and write to
-``catalogue/<slug>/pharmacophores/<cell>/``. Offline.
+``catalogue/<slug>/pharmacophores/<cell>/``. Offline; no protonation subprocess/render
+(they consume the pre-built ``protonated_ligands.csv`` and write the ``.pml`` only).
 """
 
 from __future__ import annotations
@@ -21,6 +31,7 @@ import argparse
 import logging
 import os
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -36,7 +47,10 @@ from rdkit import RDLogger  # noqa: E402
 # per-atom kekulize/valence warnings are expected noise, so quiet them here.
 RDLogger.DisableLog("rdApp.*")
 
-from pharmpipe.features.load import read_smiles_map  # noqa: E402
+from pharmpipe.features.load import (  # noqa: E402
+    read_protonation_map,
+    read_smiles_map,
+)
 from pharmpipe.pharmacophore.config import load_pharmacophore_config  # noqa: E402
 from pharmpipe.pharmacophore.run import (  # noqa: E402
     build_for_cell,
@@ -51,8 +65,54 @@ from pharmpipe.util.paths import (  # noqa: E402
 
 log = logging.getLogger("build_pharmacophores")
 
+REPO = Path(__file__).resolve().parents[1]
+
 # Output namespace per consensus strategy, so k-means and density sit side by side.
 _NAMESPACE = {"kmeans": "pharmacophores", "density": "pharmacophores_density"}
+
+
+def _pixi() -> str:
+    """Locate the ``pixi`` executable (needed to reach the prep/viz envs)."""
+    exe = shutil.which("pixi")
+    if exe is None:
+        raise RuntimeError(
+            "pixi not found on PATH; the one-shot needs it to reach the prep/viz envs")
+    return exe
+
+
+def _protonate(smiles_csv: Path, out_csv: Path, force: bool) -> bool:
+    """Protonate ``smiles_csv`` -> ``out_csv`` via the isolated ``prep`` env.
+
+    Reuses an existing ``out_csv`` unless ``force`` (protonation is deterministic and
+    the slow step). Returns True when the output exists afterwards.
+    """
+    if out_csv.exists() and not force:
+        print(f"  protonation: reusing {out_csv}")
+        return True
+    cmd = [_pixi(), "run", "-e", "prep", "protonate-ligands",
+           "--input-smiles", str(smiles_csv), "--out", str(out_csv)]
+    if force:
+        cmd.append("--force")
+    print(f"  protonation: {' '.join(cmd)}")
+    subprocess.run(cmd, cwd=REPO, check=False)
+    return out_csv.exists()
+
+
+def _render(model_dir: Path, name: str) -> None:
+    """Bake a ``.pse`` + ray-traced ``.png`` from the model JSON via the ``viz`` env.
+
+    Non-fatal: the model artifacts are already on disk, so a PyMOL failure only warns.
+    """
+    script = REPO / "scripts" / "pymol_pharmacophore.py"
+    cmd = [_pixi(), "run", "-e", "viz", "pymol", "-cq", str(script), "--",
+           "--pharmacophore", str(model_dir / "pharmacophore.json"),
+           "--out", str(model_dir / f"{name}.pse"),
+           "--image", str(model_dir / f"{name}.png")]
+    print(f"  render: {' '.join(cmd)}")
+    result = subprocess.run(cmd, cwd=REPO, check=False)
+    if result.returncode != 0:
+        log.warning("render failed (exit %d); model artifacts are still written",
+                    result.returncode)
 
 
 def _cells(slug: str) -> list[Path]:
@@ -90,6 +150,46 @@ def _build_target(slug: str, cfg, namespace: str) -> tuple[int, int]:
     return built, skipped
 
 
+def _one_shot(args, cfg) -> int:
+    """Local one-shot for one aligned directory: protonate -> build -> render.
+
+    Assumes ``--input``/``--out``/``--smiles`` are set (validated by the caller). Writes
+    every artifact into ``--out``: the protonated map, the model + its CSV/SDF/PML/PNGs +
+    ``model_summary.md``, and (unless ``--no-render``) a baked ``.pse`` + ``.png``.
+    """
+    out = args.out.resolve()
+    smiles_csv = args.smiles.resolve()
+    out.mkdir(parents=True, exist_ok=True)
+
+    # Step A — protonate to the pH-7.4 microstate (isolated prep env), reuse if cached.
+    protonated_csv = out / "protonated_ligands.csv"
+    smiles_map = read_smiles_map(smiles_csv)
+    if _protonate(smiles_csv, protonated_csv, args.force_protonate):
+        smiles_map = {**smiles_map, **read_protonation_map(protonated_csv)}
+    elif args.allow_unprotonated:
+        log.warning("protonation unavailable; building from neutral SMILES")
+    else:
+        print("ERROR: protonation failed. Re-run with --allow-unprotonated to build "
+              "from neutral SMILES, or check the prep env "
+              "(pixi run -e prep protonate-ligands ...).", file=sys.stderr)
+        return 1
+
+    # Step B — build the model in-process (writes json/csv/sdf/pml/png/summary).
+    res = build_from_directory(args.input, out, cfg, smiles_map=smiles_map,
+                               name=args.input.name,
+                               reference_pdb=args.reference_pdb)
+    if res is None:
+        print(f"{args.input.name}: skipped (< {cfg.selection.min_ligands} ligands)")
+        return 0
+
+    # Step C — bake the PyMOL session + snapshot (viz env), unless suppressed.
+    if not args.no_render:
+        _render(out, out.name)
+
+    print(f"{res.name}: {len(res.pharmacophore.features)} features -> {out}")
+    return 0
+
+
 def main(argv=None) -> int:
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s")
     ap = argparse.ArgumentParser(description=__doc__,
@@ -100,7 +200,15 @@ def main(argv=None) -> int:
     mode.add_argument("--catalogue", action="store_true", help="every cell of every target")
     ap.add_argument("--out", type=Path, help="output dir (required with --input)")
     ap.add_argument("--smiles", type=Path,
-                    help="optional HET->SMILES csv (unique_ligands.csv) for --input")
+                    help="HET->SMILES csv (unique_ligands.csv); required with --input")
+    ap.add_argument("--reference-pdb", type=Path,
+                    help="aligned receptor for density excluded volume (--input)")
+    ap.add_argument("--force-protonate", action="store_true",
+                    help="recompute protonation even if cached (--input)")
+    ap.add_argument("--allow-unprotonated", action="store_true",
+                    help="build from neutral SMILES if protonation fails (--input)")
+    ap.add_argument("--no-render", action="store_true",
+                    help="skip the PyMOL .pse/.png render (--input)")
     ap.add_argument("--config", type=Path, default=None)
     ap.add_argument("--method", help="override clustering.method from config")
     ap.add_argument("--consensus", choices=("kmeans", "density"),
@@ -118,13 +226,9 @@ def main(argv=None) -> int:
     if args.input:
         if not args.out:
             ap.error("--out is required with --input")
-        smiles = read_smiles_map(args.smiles) if args.smiles else None
-        res = build_from_directory(args.input, args.out, cfg, smiles_map=smiles)
-        if res is None:
-            print(f"{args.input.name}: skipped (< {cfg.selection.min_ligands} ligands)")
-            return 0
-        print(f"{res.name}: {len(res.pharmacophore.features)} features -> {res.model_dir}")
-        return 0
+        if not args.smiles:
+            ap.error("--smiles (a het_code,smiles CSV) is required with --input")
+        return _one_shot(args, cfg)
 
     slugs = [args.target] if args.target else _targets()
     total_built = total_skipped = 0

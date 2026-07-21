@@ -17,7 +17,7 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom PosIonizable_1, pos=[-32.674, 7.635, 7.228], vdw=2.000
+pseudoatom PosIonizable_1, pos=[-32.674, 7.635, 7.228], vdw=1.000
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
 pseudoatom PosIonizable_1_ctr, pos=[-32.674, 7.635, 7.228], label="PosIonizable 1 (1.00)"

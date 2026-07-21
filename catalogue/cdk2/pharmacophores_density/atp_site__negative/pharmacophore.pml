@@ -17,13 +17,13 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[7.911, -22.142, -22.974], vdw=2.000
+pseudoatom Acceptor_1, pos=[7.911, -22.142, -22.974], vdw=1.000
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_1_ctr, pos=[7.911, -22.142, -22.974], label="Acceptor 1 (0.98)"
 color ph4_Acceptor, Acceptor_1_ctr
 group ph4_centers, Acceptor_1_ctr
-pseudoatom Acceptor_2, pos=[3.364, -26.655, -26.140], vdw=2.000
+pseudoatom Acceptor_2, pos=[3.364, -26.655, -26.140], vdw=1.000
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
 pseudoatom Acceptor_2_ctr, pos=[3.364, -26.655, -26.140], label="Acceptor 2 (0.61)"

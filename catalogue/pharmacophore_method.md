@@ -46,7 +46,19 @@ is exactly what a single pharmacophore hypothesis should describe.
 The build is general: the real entry point (`build_from_directory`) takes *any*
 directory of aligned `*.mol2` and emits a model; the catalogue batch mode
 (`build-pharmacophores --catalogue` / `--target <slug>`) is a convenience over it that
-also supplies per-target SMILES.
+also supplies per-target SMILES. For a standalone directory there is a **local one-shot**
+that runs the whole methodology end-to-end in one command — protonate (pH 7.4, `prep`
+env) → build → render a PyMOL `.pse` + `.png`:
+
+```
+pixi run build-pharmacophores --input DIR --out DIR --smiles ligands.csv
+```
+
+`--smiles` (a `het_code,smiles` CSV) is required — the heavy-atom mol2 need it for both
+protonation and template bond perception. Protonation is reused if already present in
+`--out`; `--reference-pdb` enables density excluded volume, and `--force-protonate` /
+`--allow-unprotonated` / `--no-render` tune the steps. It shells out across pixi envs, so
+it is local-only.
 
 ### Minimum-ligands gate
 
@@ -370,9 +382,12 @@ sits, not the outermost members).
 **Note — it is no longer the PyMOL sphere size.** Drawing each sphere at its tolerance
 radius (up to 3 Å) swamped the scene and buried the ligand, so the PyMOL views
 (`pharmacophore.pml` and `scripts/pymol_pharmacophore.py`) now render every ligand feature
-as a **fixed-radius sphere (`PH4_SPHERE_RADIUS = 2.0 Å`)** plus an **opaque centre
+as a **fixed-radius sphere (`PH4_SPHERE_RADIUS = 1.0 Å`)** plus an **opaque centre
 pseudoatom** (a nonbonded-sphere point marker carrying the `<Family> <n> (support)`
-label). Excluded-volume markers keep their own steric radius and get **no** centre point.
+label). The 1.0 Å radius mirrors the overlap-merge rule (§5): two features within ~1 Å
+collapse into one, so the drawn spheres are just touching exactly when the model would
+have merged them. Excluded-volume markers keep their own steric radius and get **no**
+centre point.
 The true tolerance stays in the JSON; inspect it there (or via `model_summary.md`) rather
 than by sphere size.
 
@@ -428,7 +443,8 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 
 **Sizes in the visualisations** encode two different, deliberately distinct things:
 
-- **PyMOL feature spheres** — a **fixed 2.0 Å** radius (§6), with an opaque centre
+- **PyMOL feature spheres** — a **fixed 1.0 Å** radius (matching the §5 overlap-merge
+  rule — spheres just touch when features would merge), with an opaque centre
   pseudoatom marking each feature's exact position (excluded-volume markers keep their
   own radius and get no centre point). (The feature's tolerance radius is *not* shown as
   sphere size any more — read it from the JSON / `model_summary.md`.)

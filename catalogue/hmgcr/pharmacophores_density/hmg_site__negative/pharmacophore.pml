@@ -17,37 +17,37 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[20.912, 9.730, 14.540], vdw=2.000
+pseudoatom Acceptor_1, pos=[20.912, 9.730, 14.540], vdw=1.000
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_1_ctr, pos=[20.912, 9.730, 14.540], label="Acceptor 1 (0.94)"
 color ph4_Acceptor, Acceptor_1_ctr
 group ph4_centers, Acceptor_1_ctr
-pseudoatom Donor_1, pos=[13.370, 4.427, 14.837], vdw=2.000
+pseudoatom Donor_1, pos=[13.370, 4.427, 14.837], vdw=1.000
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 pseudoatom Donor_1_ctr, pos=[13.370, 4.427, 14.837], label="Donor 1 (1.00)"
 color ph4_Donor, Donor_1_ctr
 group ph4_centers, Donor_1_ctr
-pseudoatom Donor_2, pos=[14.762, 6.492, 10.697], vdw=2.000
+pseudoatom Donor_2, pos=[14.762, 6.492, 10.697], vdw=1.000
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
 pseudoatom Donor_2_ctr, pos=[14.762, 6.492, 10.697], label="Donor 2 (1.00)"
 color ph4_Donor, Donor_2_ctr
 group ph4_centers, Donor_2_ctr
-pseudoatom Acceptor_2, pos=[14.263, 8.052, 18.810], vdw=2.000
+pseudoatom Acceptor_2, pos=[14.263, 8.052, 18.810], vdw=1.000
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
 pseudoatom Acceptor_2_ctr, pos=[14.263, 8.052, 18.810], label="Acceptor 2 (0.94)"
 color ph4_Acceptor, Acceptor_2_ctr
 group ph4_centers, Acceptor_2_ctr
-pseudoatom LumpedHydrophobe_1, pos=[19.136, 8.935, 11.420], vdw=2.000
+pseudoatom LumpedHydrophobe_1, pos=[19.136, 8.935, 11.420], vdw=1.000
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
 pseudoatom LumpedHydrophobe_1_ctr, pos=[19.136, 8.935, 11.420], label="LumpedHydrophobe 1 (0.83)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1_ctr
 group ph4_centers, LumpedHydrophobe_1_ctr
-pseudoatom Aromatic_1, pos=[24.417, 12.308, 13.694], vdw=2.000
+pseudoatom Aromatic_1, pos=[24.417, 12.308, 13.694], vdw=1.000
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
 pseudoatom Aromatic_1_ctr, pos=[24.417, 12.308, 13.694], label="Aromatic 1 (0.61)"

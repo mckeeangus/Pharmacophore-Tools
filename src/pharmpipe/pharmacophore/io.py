@@ -14,8 +14,10 @@ from .build import BuildResult
 from .model import Pharmacophore
 
 # Ligand feature spheres render at a FIXED radius (the tolerance radius, up to 3 A,
-# swamps the scene); the true tolerance is preserved in pharmacophore.json.
-PH4_SPHERE_RADIUS = 2.0
+# swamps the scene); the true tolerance is preserved in pharmacophore.json. 1.0 A
+# mirrors the overlap-merge rule (two features within ~1 A collapse to one), so the
+# drawn spheres are just touching exactly when the model would have merged them.
+PH4_SPHERE_RADIUS = 1.0
 EV_FAMILY = "ExcludedVolume"
 
 

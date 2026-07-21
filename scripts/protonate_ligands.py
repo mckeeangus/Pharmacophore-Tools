@@ -18,9 +18,12 @@ environment. pkasolver itself is vendored as a clone under ``external/pkasolver`
 PYTHONPATH here), not installed, so its bundled weights resolve via ``__file__``. This
 step is network-heavy at setup time (cloning) — run it on a Gadi login node.
 
-Run:  pixi run protonate-ligands            # all targets
+Run:  pixi run protonate-ligands            # all catalogue targets
       pixi run protonate-ligands --target drd1
-Re-runs are incremental: a HET already present in the output is reused unless --force.
+      pixi run -e prep protonate-ligands --input-smiles ligands.csv --out out.csv
+The last (general) form protonates any ``het_code,smiles`` CSV to a chosen path — used
+by the one-shot directory build. Re-runs are incremental: a HET already present in the
+output is reused unless --force.
 """
 
 from __future__ import annotations
@@ -131,13 +134,20 @@ def _protonate_one(
     return to_smiles(prot), len(states), pkas, guard_csv, method
 
 
-def _process_target(slug_dir: Path, query_model, ph: float, force: bool,
-                    guard: list[WeakAcidClass]) -> tuple[int, int]:
-    rows_in = list(csv.DictReader((slug_dir / "unique_ligands.csv").open(encoding="utf-8")))
-    out_csv = slug_dir / OUT_NAME
+def _protonate_rows(rows_in: list[dict], out_csv: Path, query_model, ph: float,
+                    force: bool, guard: list[WeakAcidClass],
+                    label: str = "") -> tuple[int, int]:
+    """Protonate ``het_code,smiles`` rows to ``out_csv`` (the ``FIELDS`` schema).
+
+    Shared by the catalogue batch (``_process_target``) and the general
+    ``--input-smiles`` mode. Incremental: a HET already carrying a
+    ``protonated_smiles`` in ``out_csv`` is reused unless ``force``. Returns
+    ``(changed, reused)``. ``label`` prefixes the per-ligand log line for context.
+    """
     existing = {} if force else _read_existing(out_csv)
     out_rows: list[dict] = []
     changed = reused = 0
+    prefix = f"{label}/" if label else ""
     for row in rows_in:
         het, smi = row.get("het_code"), row.get("smiles")
         if not het or not smi:
@@ -152,7 +162,7 @@ def _process_target(slug_dir: Path, query_model, ph: float, force: bool,
                          "ph": ph, "n_pka_sites": n_sites, "pka_values": pkas,
                          "guard_neutralized": guard_csv, "method": method})
         changed += 1
-        log.info("%s/%s: %s -> %s [%s]", slug_dir.name, het, smi, prot, method)
+        log.info("%s%s: %s -> %s [%s]", prefix, het, smi, prot, method)
     with out_csv.open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS)
         w.writeheader()
@@ -160,14 +170,28 @@ def _process_target(slug_dir: Path, query_model, ph: float, force: bool,
     return changed, reused
 
 
+def _process_target(slug_dir: Path, query_model, ph: float, force: bool,
+                    guard: list[WeakAcidClass]) -> tuple[int, int]:
+    rows_in = list(csv.DictReader((slug_dir / "unique_ligands.csv").open(encoding="utf-8")))
+    return _protonate_rows(rows_in, slug_dir / OUT_NAME, query_model, ph, force,
+                           guard, label=slug_dir.name)
+
+
 def main(argv=None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--target", help="only this catalogue slug (default: all)")
+    ap.add_argument("--input-smiles", type=Path,
+                    help="general mode: a het_code,smiles CSV to protonate (needs --out)")
+    ap.add_argument("--out", type=Path,
+                    help="general mode: output protonated CSV path (with --input-smiles)")
     ap.add_argument("--ph", type=float, default=PHYSIOLOGICAL_PH)
     ap.add_argument("--force", action="store_true", help="recompute even cached HETs")
     args = ap.parse_args(argv)
+
+    if args.input_smiles and not args.out:
+        ap.error("--out is required with --input-smiles")
 
     from pkasolver.query import QueryModel
 
@@ -176,6 +200,16 @@ def main(argv=None) -> int:
              f"{len(guard)} classes" if guard else "disabled")
     log.info("loading pkasolver model ensemble …")
     query_model = QueryModel()
+
+    # General mode: protonate an arbitrary HET->SMILES CSV to a chosen output path
+    # (the one-shot directory build uses this; no catalogue layout assumed).
+    if args.input_smiles:
+        rows_in = list(csv.DictReader(args.input_smiles.open(encoding="utf-8")))
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        changed, reused = _protonate_rows(rows_in, args.out, query_model, args.ph,
+                                          args.force, guard)
+        print(f"{args.out.name}: {changed} protonated, {reused} reused -> {args.out}")
+        return 0
 
     total_changed = total_reused = 0
     for slug_dir in _targets(args.target):

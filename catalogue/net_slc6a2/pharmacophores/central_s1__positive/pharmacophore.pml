@@ -1,4 +1,4 @@
-# net_slc6a2/central_s1__positive — ensemble pharmacophore (3 features)
+# net_slc6a2/central_s1__positive — ensemble pharmacophore (43 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,24 +17,24 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom PosIonizable_1, pos=[130.926, 127.132, 134.495], vdw=1.250
-color ph4_PosIonizable, PosIonizable_1
-group ph4_PosIonizable, PosIonizable_1
-pseudoatom PosIonizable_1_ctr, pos=[130.926, 127.132, 134.495], label="PosIonizable 1 (0.67)"
-color ph4_PosIonizable, PosIonizable_1_ctr
-group ph4_centers, PosIonizable_1_ctr
-pseudoatom Aromatic_1, pos=[130.602, 130.920, 130.112], vdw=1.250
+pseudoatom Aromatic_1, pos=[130.570, 130.572, 130.495], vdw=1.250
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[130.602, 130.920, 130.112], label="Aromatic 1 (0.67)"
+pseudoatom Aromatic_1_ctr, pos=[130.570, 130.572, 130.495], label="Aromatic 1 (0.83)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
-pseudoatom Donor_1, pos=[131.032, 133.096, 128.336], vdw=1.250
+pseudoatom Donor_1, pos=[131.568, 132.662, 128.520], vdw=1.250
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom Donor_1_ctr, pos=[131.032, 133.096, 128.336], label="Donor 1 (0.50)"
+pseudoatom Donor_1_ctr, pos=[131.568, 132.662, 128.520], label="Donor 1 (0.50)"
 color ph4_Donor, Donor_1_ctr
 group ph4_centers, Donor_1_ctr
+pseudoatom PosIonizable_1, pos=[130.403, 126.678, 133.622], vdw=1.250
+color ph4_PosIonizable, PosIonizable_1
+group ph4_PosIonizable, PosIonizable_1
+pseudoatom PosIonizable_1_ctr, pos=[130.403, 126.678, 133.622], label="PosIonizable 1 (0.50)"
+color ph4_PosIonizable, PosIonizable_1_ctr
+group ph4_centers, PosIonizable_1_ctr
 set surface_quality, 2
 flag ignore, ph4_*, clear
 show mesh, ph4_*

@@ -87,6 +87,7 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
     for fam, col in colors.items():
         lines.append(f"set_color ph4_{fam}, [{col[0]}, {col[1]}, {col[2]}]")
     lines.append("")
+    has_features = False
     for i, feat in enumerate(ph.features):
         # Excluded-volume markers are receptor steric markers, not ligand chemistry —
         # they stay in the JSON model but are never drawn in the visualisation.
@@ -104,8 +105,13 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
                      f"label=\"{feat.label or feat.family} ({feat.support:.2f})\"")
         lines.append(f"color ph4_{feat.family}, {ctr}")
         lines.append(f"group ph4_centers, {ctr}")
-    lines += ["set surface_quality, 2", "flag ignore, ph4_*, clear",
-              "show mesh, ph4_*", "hide mesh, ph4_centers",
-              "show nb_spheres, ph4_centers", "orient", ""]
+        has_features = True
+    # Some cells keep only excluded volume (no ligand features) — then there are no
+    # ph4_* objects to style, so skip the mesh/centre directives (they'd error).
+    if has_features:
+        lines += ["set surface_quality, 2", "flag ignore, ph4_*, clear",
+                  "show mesh, ph4_*", "hide mesh, ph4_centers",
+                  "show nb_spheres, ph4_centers"]
+    lines += ["orient", ""]
     path.write_text("\n".join(lines), encoding="utf-8")
     return path

@@ -1,18 +1,21 @@
-"""Unit tests for Stage 4 pharmacophore assembly + IO — pure, offline."""
+"""Unit tests for Stage 4 shared assembly primitives + IO — pure, offline.
+
+The density consensus path itself is covered in ``test_density.py``; this file exercises
+the strategy-agnostic building blocks in ``build.py`` (tolerance radius, the cross-family
+overlap merge and its records, representative-ligand pick) and the model schema.
+"""
 
 from __future__ import annotations
 
 import numpy as np
 
-from pharmpipe.clustering import KMeansSilhouette
 from pharmpipe.features.extract import FeaturePoint, FeatureTable
 from pharmpipe.pharmacophore.build import (
     _merge_overlapping,
     best_representative,
-    build_pharmacophore,
     feature_radius,
 )
-from pharmpipe.pharmacophore.config import SelectionConfig, ToleranceConfig
+from pharmpipe.pharmacophore.config import ToleranceConfig
 from pharmpipe.pharmacophore.model import Pharmacophore, PharmacophoreFeature
 
 
@@ -29,68 +32,6 @@ def test_density_quantile_radius_ignores_outliers():
     assert quant < rmsd
 
 
-def _table_two_donor_clusters() -> FeatureTable:
-    """6 ligands, each with a donor near (0,0,0) and one near (10,0,0)."""
-    pts = []
-    ligands = [f"L{i}" for i in range(6)]
-    rng = np.random.default_rng(1)
-    for lig in ligands:
-        a = rng.normal(scale=0.2, size=3)
-        b = np.array([10.0, 0.0, 0.0]) + rng.normal(scale=0.2, size=3)
-        pts.append(FeaturePoint("Donor", *a, lig))
-        pts.append(FeaturePoint("Donor", *b, lig))
-    return FeatureTable(points=pts, ligand_ids=ligands)
-
-
-def test_build_yields_two_supported_features():
-    table = _table_two_donor_clusters()
-    res = build_pharmacophore(
-        table, KMeansSilhouette(k_min=2, k_max=4),
-        SelectionConfig(min_support_fraction=0.5, min_cluster_size=2),
-        ToleranceConfig(method="rmsd", min=1.0, max=3.0), name="test")
-    donors = [f for f in res.pharmacophore.features if f.family == "Donor"]
-    assert len(donors) == 2
-    for f in donors:
-        assert f.support == 1.0            # all 6 ligands present in both clusters
-        assert 1.0 <= f.radius <= 3.0       # tolerance clamped
-        assert f.n_ligands == 6
-
-
-def test_low_support_cluster_is_dropped():
-    # 4 ligands at the main site; one stray point from a single ligand far away.
-    pts = [FeaturePoint("Acceptor", 0, 0, 0, f"L{i}") for i in range(4)]
-    pts.append(FeaturePoint("Acceptor", 50, 50, 50, "L0"))
-    table = FeatureTable(points=pts, ligand_ids=[f"L{i}" for i in range(4)])
-    res = build_pharmacophore(
-        table, KMeansSilhouette(k_min=2, k_max=3),
-        SelectionConfig(min_support_fraction=0.5, min_cluster_size=2),
-        ToleranceConfig(), name="test")
-    accs = [f for f in res.pharmacophore.features if f.family == "Acceptor"]
-    assert len(accs) == 1                   # the lone stray cluster is below support
-    assert accs[0].n_ligands == 4
-
-
-def test_top_n_caps_features_per_family():
-    table = _table_two_donor_clusters()
-    res = build_pharmacophore(
-        table, KMeansSilhouette(k_min=2, k_max=4),
-        SelectionConfig(min_support_fraction=0.5, min_cluster_size=2, top_n_per_family=1),
-        ToleranceConfig(), name="test")
-    assert len([f for f in res.pharmacophore.features if f.family == "Donor"]) == 1
-
-
-def test_json_round_trip():
-    table = _table_two_donor_clusters()
-    res = build_pharmacophore(
-        table, KMeansSilhouette(k_min=2, k_max=4),
-        SelectionConfig(), ToleranceConfig(), name="rt")
-    data = res.pharmacophore.to_dict()
-    back = Pharmacophore.from_dict(data)
-    assert back.name == "rt"
-    assert len(back.features) == len(res.pharmacophore.features)
-    assert back.features[0].family == res.pharmacophore.features[0].family
-
-
 def _feat(family: str, x: float, n_points: int, radius: float = 1.0) -> PharmacophoreFeature:
     return PharmacophoreFeature(family=family, x=x, y=0.0, z=0.0, radius=radius,
                                 n_points=n_points, n_ligands=n_points, support=1.0)
@@ -104,7 +45,7 @@ def test_merge_overlapping_keeps_largest_geometric():
     assert [f.n_points for f, _ in kept] == [8]
     # the dropped feature records the winner that displaced it
     assert len(dropped) == 1
-    dfeat, dpay, wfeat, wpay = dropped[0]
+    dfeat, _dpay, wfeat, wpay = dropped[0]
     assert dfeat.n_points == 3 and wfeat.n_points == 8 and wpay == 0
 
 
@@ -124,43 +65,15 @@ def test_merge_overlapping_absolute_radius():
     assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=0.5)[0]) == 2
 
 
-def test_merge_drops_overlapping_across_families():
-    # A donor and an acceptor cluster occupy the same region; a donor and acceptor
-    # cannot both describe one binding spot, so only the dominant cluster survives.
-    pts = []
-    ligands = [f"L{i}" for i in range(6)]
-    rng = np.random.default_rng(2)
-    for i, lig in enumerate(ligands):
-        # every ligand has a donor near the origin; the first four also drop a
-        # weaker acceptor nearby, so the donor cluster is the dominant one.
-        pts.append(FeaturePoint("Donor", *rng.normal(scale=0.2, size=3), lig))
-        if i < 4:
-            pts.append(FeaturePoint("Acceptor", *rng.normal(scale=0.2, size=3), lig))
-    table = FeatureTable(points=pts, ligand_ids=ligands)
-    res = build_pharmacophore(
-        table, KMeansSilhouette(k_min=2, k_max=3),
-        SelectionConfig(min_support_fraction=0.5, min_cluster_size=2),
-        ToleranceConfig(method="rmsd", min=1.0, max=3.0), name="xfam")
-    fams = {f.family for f in res.pharmacophore.features}
-    assert fams == {"Donor"}          # the overlapping acceptor was displaced
-    assert len(res.pharmacophore.features) == 1
-
-
-def test_merge_spares_distinct_family_features_apart():
-    # A donor and an acceptor in *different* regions both survive.
-    pts = []
-    ligands = [f"L{i}" for i in range(6)]
-    rng = np.random.default_rng(3)
-    for lig in ligands:
-        pts.append(FeaturePoint("Donor", *rng.normal(scale=0.2, size=3), lig))
-        pts.append(FeaturePoint(
-            "Acceptor", *(np.array([10.0, 0.0, 0.0]) + rng.normal(scale=0.2, size=3)), lig))
-    table = FeatureTable(points=pts, ligand_ids=ligands)
-    res = build_pharmacophore(
-        table, KMeansSilhouette(k_min=2, k_max=3),
-        SelectionConfig(min_support_fraction=0.5, min_cluster_size=2),
-        ToleranceConfig(method="rmsd", min=1.0, max=3.0), name="apart")
-    assert {f.family for f in res.pharmacophore.features} == {"Donor", "Acceptor"}
+def test_merge_overlapping_crosses_families():
+    # A donor and an acceptor on the same spot cannot both describe one binding
+    # position: the denser (donor) displaces the acceptor regardless of family.
+    donor = _feat("Donor", 0.0, n_points=8, radius=1.0)
+    acceptor = _feat("Acceptor", 0.4, n_points=4, radius=1.0)
+    kept, dropped = _merge_overlapping([(donor, ("Donor", 0)), (acceptor, ("Acceptor", 0))],
+                                       merge_radius=1.0)
+    assert [f.family for f, _ in kept] == ["Donor"]
+    assert dropped[0][0].family == "Acceptor" and dropped[0][3] == ("Donor", 0)
 
 
 def test_best_representative_prefers_the_fitting_ligand():
@@ -171,6 +84,18 @@ def test_best_representative_prefers_the_fitting_ligand():
         ligand_ids=["L_off", "L_fit"])  # L_off first, so order can't decide it
     ph = Pharmacophore(name="t", features=[_feat("Donor", 0.0, n_points=2, radius=1.0)])
     assert best_representative(table, ph) == "L_fit"
+
+
+def test_json_round_trip():
+    ph = Pharmacophore(
+        name="rt",
+        features=[PharmacophoreFeature("Donor", 0.0, 0.0, 0.0, radius=1.5, n_points=6,
+                                       n_ligands=6, support=1.0, label="Donor 1")],
+        metadata={"consensus_method": "density"})
+    back = Pharmacophore.from_dict(ph.to_dict())
+    assert back.name == "rt"
+    assert len(back.features) == 1
+    assert back.features[0].family == "Donor" and back.features[0].label == "Donor 1"
 
 
 def test_bad_schema_rejected():

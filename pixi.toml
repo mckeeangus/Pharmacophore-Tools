@@ -65,11 +65,10 @@ ruff = ">=0.5"
 [feature.viz.dependencies]
 pymol-open-source = ">=2.5"
 
-# --- ph4: pharmacophore construction (Stage 4) — clustering + raw-data plots.
-# scikit-learn (k-means + silhouette) and matplotlib (offline 3D feature scatter).
-# Feature extraction itself uses rdkit (in `chem`); these add the clustering/plot side.
+# --- ph4: pharmacophore construction (Stage 4) — density field + raw-data plots.
+# scipy (Gaussian occupancy field + KD-tree) and matplotlib (offline 3D feature scatter).
+# Feature extraction itself uses rdkit (in `chem`); these add the density/plot side.
 [feature.ph4.dependencies]
-scikit-learn = "*"
 matplotlib = "*"
 scipy = "*"            # density consensus: Gaussian occupancy field + KD-tree
 

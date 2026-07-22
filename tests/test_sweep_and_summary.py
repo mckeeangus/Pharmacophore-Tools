@@ -27,23 +27,25 @@ def _load_script(name: str):
 
 # --- occupancy-sweep cluster helper ----------------------------------------------------
 
-def test_read_clusters_occupancy_uncapped_and_min_size(tmp_path):
+def test_read_clusters_support_uses_membership_radius(tmp_path):
     mod = _load_script("pymol_pharmacophore")
     csv_path = tmp_path / "features.csv"
     csv_path.write_text(
         "family,ligand_id,x,y,z,cluster,kept\n"
         "Donor,L1,0,0,0,0,1\n"
-        "Donor,L2,2,0,0,0,1\n"
-        "Donor,L1,1,0,0,0,1\n"       # L1 gives 2 points -> 3 points / 2 ligands = 1.5
-        "Acceptor,L3,10,0,0,1,0\n",  # lone point -> dropped by min_cluster_size=2
+        "Donor,L2,0.3,0,0,0,1\n"
+        "Donor,L3,0,0.3,0,0,1\n"      # 3 ligands cluster tightly near the origin
+        "Donor,L4,9,0,0,7,0\n"        # L4's only Donor point is far -> outside the radius
+        "Acceptor,L1,10,0,0,1,0\n",   # lone Acceptor -> dropped by min_cluster_size=2
         encoding="utf-8")
 
-    clusters = mod._read_clusters(str(csv_path), min_cluster_size=2)
-    assert len(clusters) == 1                       # the singleton Acceptor is dropped
+    clusters = mod._read_clusters(str(csv_path), n_ligands=4, membership_radius=1.5,
+                                  min_cluster_size=2)
+    assert len(clusters) == 1                       # the two singletons are dropped
     (c,) = clusters
     assert c["family"] == "Donor"
-    assert abs(c["occ"] - 1.5) < 1e-9               # occupancy > 1, uncapped
-    assert abs(c["x"] - 1.0) < 1e-9                 # centroid of x = (0+2+1)/3
+    # L1/L2/L3 fall within 1.5 A of the centre; the far L4 point does not -> 3/4.
+    assert abs(c["support"] - 0.75) < 1e-9
 
 
 # --- model_summary tables --------------------------------------------------------------
@@ -56,12 +58,12 @@ def test_summary_reports_merged_away_and_uncapped_occupancy(tmp_path):
                          winner_family="Donor", winner_cluster_label=0,
                          winner_label="Donor 1")
     ph = Pharmacophore("cell", [kept],
-                       metadata={"consensus_method": "kmeans", "representative_ligand": "L1"})
+                       metadata={"consensus_method": "density", "representative_ligand": "L1"})
     result = BuildResult(pharmacophore=ph, assignments=[], merged_away=[record])
     report = LoadReport(by_method={"template": 14}, skipped=[])
 
     out = tmp_path / "model_summary.md"
-    _write_summary(result, report, 14, out)
+    _write_summary(result, report, 14, 1.5, out)
     text = out.read_text(encoding="utf-8")
 
     assert "## Merged away" in text

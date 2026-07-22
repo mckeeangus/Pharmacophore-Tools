@@ -83,14 +83,14 @@ standalone directory of aligned mol2 can be turned into a full model + visualisa
 one local command — `pixi run build-pharmacophores --input DIR --out DIR --smiles
 ligands.csv` (protonate → build → PyMOL `.pse`/`.png`); see
 [`pharmacophore_method.md`](pharmacophore_method.md).
-**The full method — feature families, both consensus strategies, selection, overlap
+**The full method — feature families, the density consensus, selection, overlap
 merging, tolerance, excluded volume, the visualisation, and what "cluster size" means —
 is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headline choices:
 
-- the consensus step is pluggable via **`consensus_method`**: **`kmeans`** (default,
-  silhouette k-means → `pharmacophores/`) or **`density`** (Gaussian occupancy field →
-  peaks, written to the side-by-side **`pharmacophores_density/`** namespace). Both share
-  one in/out contract `(family, position, tolerance, optional direction)`;
+- the consensus step is a single strategy — a **Gaussian occupancy field (KDE)** whose
+  local maxima become features `(family, position, tolerance, optional direction)`, all
+  written to `catalogue/<slug>/pharmacophores/` (an earlier swappable k-means path and its
+  `pharmacophores_density/` split have been removed);
 - features use RDKit's **`LumpedHydrophobe`** (one centroid per hydrophobic group) so
   hydrophobes don't swamp the model;
 - a curated **feature hierarchy** (`features.feature_hierarchy`) collapses **co-incident
@@ -102,14 +102,17 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
   per model as a `kept ← dropped` **Feature resolution** table;
 - a cell with **fewer than 3 ligands is skipped** (no output written/kept) — too few
   for an ensemble hypothesis;
-- (k-means) overlapping clusters are **merged, keeping the dominant one** (more points,
-  then support) — both within a family and **across families** (a donor and an acceptor
-  cannot share one spot), with a **fixed 1 Å centre-to-centre cutoff** (the removals are
-  logged in `model_summary.md`'s "Merged away … in favour of X" table);
-- (density) the unit of evidence is the **distinct molecule** (per-point weighting),
-  features emerge from field peaks with **no `k`**, the **same cross-family merge** then
-  gives one feature per region, and **excluded-volume** spheres mark receptor regions no
-  ligand occupies; deterministic, two knobs (length scale, occupancy floor);
+- the unit of evidence is the **distinct molecule** (per-point weighting), features emerge
+  from field peaks with **no `k`**, and a peak is kept only if its basin's molecule weight
+  clears the **occupancy floor** *and* its **support** clears 0.5;
+- **support = distinct ligands with a feature point within `density.membership_radius`
+  (1.5 Å) of the peak centre ÷ total ligands** — a hard-membership count (a far basin
+  outlier does not count), so it is the reliable feature-selection gate;
+- overlapping features are **merged across families, keeping the dominant one** (more
+  points, then support) — a donor and an acceptor cannot share one spot — with a **fixed
+  1 Å centre-to-centre cutoff**; removals are logged in `model_summary.md`'s "Merged away …
+  in favour of X" table. **Excluded-volume** spheres then mark receptor regions no ligand
+  occupies (exempt from the merge). Deterministic (fixed grid, no seeding);
 - ligands are **protonated to their pH-7.4 microstate** (pkasolver + a config-driven
   **weak-acid guard** that corrects pkasolver's over-deprotonation of phenols/alcohols/
   amides/sulfonamides/amino-heteroaromatics) before perception, so donor/acceptor/
@@ -117,7 +120,7 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
   [`pharmacophore_method.md`](pharmacophore_method.md) §2.1);
 - the visualisation uses a **real representative ligand** from the cell (clean SDF),
   not the heavy-atom raw poses; features are **mesh (wireframe) spheres** (Excluded-Volume
-  is part of the model but **not drawn**), and each model also ships an occupancy-cutoff
+  is part of the model but **not drawn**), and each model also ships a support-cutoff
   **`<cell>_sweep.pse`** (see the files table below);
 - family colours: HBD/Donor **pink**, HBA/Acceptor **green**, hydrophobic **cyan**,
   Aromatic **yellow**, PosIonizable **red**, NegIonizable orange, ExcludedVolume grey.
@@ -131,7 +134,7 @@ Files per model:
 | `representative_ligand.sdf` | One real cell ligand (correct bond orders + 3D coords) chosen as the best fit to the model; the clean visual scaffold. |
 | `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster; centre-marker area scales with cluster population, kept centres a filled "X". |
 | `pharmacophore.pml` | Lightweight PyMOL script (representative ligand + feature **mesh** spheres; Excluded-Volume markers are not drawn). The richer `scripts/pymol_pharmacophore.py` reads the JSON and adds a raw-point overlay. |
-| `<cell>_sweep.pse` | Occupancy-cutoff sweep: all raw clusters (no overlap merge, no support floor) laid across PyMOL states — each state raises an occupancy cutoff by 0.05 (state 1 = ≥0.05), running 0.05 → the model's observed max occupancy (≥20 states, past 1.0 when a cluster is denser than one point per ligand). Scrub states to see which clusters survive as the bar rises. Baked for every model (`--render-sweeps`); the one-shot emits it automatically. |
+| `<cell>_sweep.pse` | Support-cutoff sweep: all raw clusters (no overlap merge, no support floor) laid across 20 PyMOL states — each state raises a support cutoff by 0.05 (state 1 = ≥0.05, state 20 = ≥1.00), support measured with the same `membership_radius` as the model. Scrub states to see which clusters survive as the bar rises. Baked for every model (`--render-sweeps`); the one-shot emits it automatically. |
 | `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, **`Support`** (distinct ligands ÷ total, ≤1) and **`Occupancy`** (points ÷ ligands, uncapped >1); plus a **Feature resolution** section (co-incident dual classifications collapsed by the hierarchy, `kept ← dropped` + ligands), a **Merged away** table (clusters that cleared the floor but were displaced by the 1 Å overlap merge, each *in favour of* the kept feature that won its region), and a **Below the support/size floor** table. Density excluded-volume spheres are receptor markers (no peak/support), reported as a count line, not table rows. |
 
 ## Other tracked files

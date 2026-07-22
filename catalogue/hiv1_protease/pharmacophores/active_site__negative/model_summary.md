@@ -2,24 +2,19 @@
 
 - Ligands loaded: **32** (direct=3, template=29)
 - Skipped poses: 0
-- Consensus method: `kmeans`
-- Representative ligand (viz): `6DV4_GA5_B201`
-- Features kept: **10**
+- Consensus method: `density`
+- Representative ligand (viz): `1BWB_146_B641`
+- Features kept: **4**
+- Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor 1 | 47 | 23 | 0.72 | 2.04 |
-| Acceptor 2 | 44 | 30 | 0.94 | 1.47 |
-| Acceptor 3 | 38 | 28 | 0.88 | 1.36 |
-| Acceptor 4 | 35 | 21 | 0.66 | 1.67 |
-| Acceptor 5 | 29 | 23 | 0.72 | 1.26 |
-| Aromatic 1 | 21 | 21 | 0.66 | 1.00 |
-| Aromatic 2 | 21 | 21 | 0.66 | 1.00 |
-| Aromatic 3 | 18 | 17 | 0.53 | 1.06 |
-| Aromatic 4 | 18 | 17 | 0.53 | 1.06 |
-| Donor 1 | 72 | 28 | 0.88 | 2.57 |
+| Acceptor 1 | 31 | 27 | 0.84 | 1.15 |
+| Acceptor 2 | 17 | 16 | 0.50 | 1.06 |
+| Aromatic 1 | 19 | 19 | 0.59 | 1.00 |
+| Aromatic 2 | 17 | 17 | 0.53 | 1.00 |
 
 ## Feature resolution
 
@@ -32,29 +27,37 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | PosIonizable ← Donor | 27 | 1BWB_146_B641, 1HVH_Q82_B265, 1HVR_XK2_A263, 1ODX_0E8_A201, 1QBR_XV6_A638, 2FDE_385_A101, 2WHH_GLU_A2302, 4Q1Y_017_A106, 4Q5M_ROC_A1101, 4U7V_3EN_B101, 5DGU_5B7_A201, 5DGW_5B5_A201, 5KAO_G43_A500, 6DJ1_AB1_B201, 6DJ5_G52_B201, 6DJ7_G10_B201, 6DV0_GA8_B201, 6DV4_GA5_B201, 6E9A_J0S_B201, 7DOZ_1UN_A1102, 8ESX_X7B_B203 |
 | PosIonizable ← LumpedHydrophobe | 2 | 1BWB_146_B641 |
 
+## Merged away
+
+Clusters that passed the support/size floor but were displaced by the 1 Å cross-family overlap merge — one feature per region, keeping the denser one. Each row states in favour of which kept feature it was removed.
+
+| Feature | Points | Ligands | Support | Occupancy | In favour of |
+|---|---:|---:|---:|---:|---|
+| Donor | 21 | 21 | 0.66 | 1.00 | Acceptor 1 |
+
 ## Below the support/size floor
 
 Clusters that formed but never became candidates — below the 0.5 support floor or the minimum cluster size.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Donor | 18 | 15 | 0.47 | 1.20 |
-| Donor | 17 | 14 | 0.44 | 1.21 |
-| PosIonizable | 10 | 10 | 0.31 | 1.00 |
-| LumpedHydrophobe | 9 | 9 | 0.28 | 1.00 |
-| PosIonizable | 9 | 8 | 0.25 | 1.12 |
+| Aromatic | 13 | 12 | 0.38 | 1.08 |
+| Aromatic | 12 | 12 | 0.38 | 1.00 |
+| Acceptor | 11 | 10 | 0.31 | 1.10 |
+| Donor | 8 | 8 | 0.25 | 1.00 |
 | LumpedHydrophobe | 8 | 8 | 0.25 | 1.00 |
-| Acceptor | 9 | 7 | 0.22 | 1.29 |
+| LumpedHydrophobe | 8 | 8 | 0.25 | 1.00 |
+| Acceptor | 7 | 7 | 0.22 | 1.00 |
+| PosIonizable | 6 | 6 | 0.19 | 1.00 |
+| PosIonizable | 6 | 6 | 0.19 | 1.00 |
 | LumpedHydrophobe | 5 | 5 | 0.16 | 1.00 |
-| Aromatic | 6 | 4 | 0.12 | 1.50 |
-| Aromatic | 5 | 4 | 0.12 | 1.25 |
 | LumpedHydrophobe | 4 | 4 | 0.12 | 1.00 |
-| Aromatic | 5 | 3 | 0.09 | 1.67 |
-| Aromatic | 4 | 3 | 0.09 | 1.33 |
-| PosIonizable | 3 | 3 | 0.09 | 1.00 |
-| PosIonizable | 3 | 3 | 0.09 | 1.00 |
+| Donor | 2 | 2 | 0.06 | 1.00 |
+| Acceptor | 2 | 2 | 0.06 | 1.00 |
 | LumpedHydrophobe | 2 | 2 | 0.06 | 1.00 |
-| NegIonizable | 2 | 1 | 0.03 | 2.00 |
+| PosIonizable | 1 | 1 | 0.03 | 1.00 |
+| PosIonizable | 1 | 1 | 0.03 | 1.00 |
 | LumpedHydrophobe | 1 | 1 | 0.03 | 1.00 |
+| NegIonizable | 1 | 1 | 0.03 | 1.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

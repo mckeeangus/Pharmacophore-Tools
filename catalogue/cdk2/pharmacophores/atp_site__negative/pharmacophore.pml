@@ -1,4 +1,4 @@
-# cdk2/atp_site__negative — ensemble pharmacophore (4 features)
+# cdk2/atp_site__negative — ensemble pharmacophore (41 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,28 +17,10 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[7.572, -22.200, -22.865], vdw=1.250
-color ph4_Acceptor, Acceptor_1
-group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_1_ctr, pos=[7.572, -22.200, -22.865], label="Acceptor 1 (0.98)"
-color ph4_Acceptor, Acceptor_1_ctr
-group ph4_centers, Acceptor_1_ctr
-pseudoatom Acceptor_2, pos=[3.286, -27.126, -26.244], vdw=1.250
-color ph4_Acceptor, Acceptor_2
-group ph4_Acceptor, Acceptor_2
-pseudoatom Acceptor_2_ctr, pos=[3.286, -27.126, -26.244], label="Acceptor 2 (0.61)"
-color ph4_Acceptor, Acceptor_2_ctr
-group ph4_centers, Acceptor_2_ctr
-pseudoatom Donor_1, pos=[7.357, -24.602, -24.812], vdw=1.250
-color ph4_Donor, Donor_1
-group ph4_Donor, Donor_1
-pseudoatom Donor_1_ctr, pos=[7.357, -24.602, -24.812], label="Donor 1 (0.79)"
-color ph4_Donor, Donor_1_ctr
-group ph4_centers, Donor_1_ctr
-pseudoatom Aromatic_1, pos=[4.767, -25.854, -26.218], vdw=1.250
+pseudoatom Aromatic_1, pos=[4.773, -25.666, -25.899], vdw=1.250
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[4.767, -25.854, -26.218], label="Aromatic 1 (0.68)"
+pseudoatom Aromatic_1_ctr, pos=[4.773, -25.666, -25.899], label="Aromatic 1 (0.59)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
 set surface_quality, 2

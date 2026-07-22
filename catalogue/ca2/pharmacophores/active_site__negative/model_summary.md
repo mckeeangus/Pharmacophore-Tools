@@ -2,18 +2,18 @@
 
 - Ligands loaded: **76** (direct=13, template=63)
 - Skipped poses: 0
-- Consensus method: `kmeans`
+- Consensus method: `density`
 - Representative ligand (viz): `5DRS_5EF_A305`
-- Features kept: **4**
+- Features kept: **3**
+- Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor 1 | 74 | 73 | 0.96 | 1.01 |
-| Acceptor 2 | 71 | 71 | 0.93 | 1.00 |
-| Aromatic 1 | 62 | 59 | 0.78 | 1.05 |
-| Donor 1 | 60 | 58 | 0.76 | 1.03 |
+| Acceptor 1 | 128 | 72 | 0.95 | 1.78 |
+| Aromatic 1 | 58 | 58 | 0.76 | 1.00 |
+| Donor 1 | 57 | 57 | 0.75 | 1.00 |
 
 ## Feature resolution
 
@@ -31,21 +31,16 @@ Clusters that formed but never became candidates — below the 0.5 support floor
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Donor | 24 | 21 | 0.28 | 1.14 |
-| Acceptor | 29 | 19 | 0.25 | 1.53 |
-| Acceptor | 20 | 19 | 0.25 | 1.05 |
-| Acceptor | 22 | 17 | 0.22 | 1.29 |
-| Acceptor | 13 | 11 | 0.14 | 1.18 |
-| Acceptor | 13 | 11 | 0.14 | 1.18 |
-| PosIonizable | 14 | 10 | 0.13 | 1.40 |
-| Aromatic | 8 | 8 | 0.11 | 1.00 |
-| PosIonizable | 9 | 5 | 0.07 | 1.80 |
-| Acceptor | 6 | 5 | 0.07 | 1.20 |
-| Aromatic | 3 | 3 | 0.04 | 1.00 |
-| NegIonizable | 3 | 3 | 0.04 | 1.00 |
-| Aromatic | 2 | 2 | 0.03 | 1.00 |
+| Acceptor | 12 | 11 | 0.14 | 1.09 |
+| Donor | 7 | 7 | 0.09 | 1.00 |
+| PosIonizable | 5 | 5 | 0.07 | 1.00 |
+| PosIonizable | 3 | 2 | 0.03 | 1.50 |
 | NegIonizable | 2 | 2 | 0.03 | 1.00 |
-| LumpedHydrophobe | 2 | 2 | 0.03 | 1.00 |
+| NegIonizable | 1 | 1 | 0.01 | 1.00 |
+| NegIonizable | 1 | 1 | 0.01 | 1.00 |
+| NegIonizable | 1 | 1 | 0.01 | 1.00 |
 | LumpedHydrophobe | 1 | 1 | 0.01 | 1.00 |
+| LumpedHydrophobe | 1 | 1 | 0.01 | 1.00 |
+| Aromatic | 0 | 0 | 0.00 | 0.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

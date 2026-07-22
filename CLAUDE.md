@@ -153,24 +153,20 @@ entry always beats the CSV; `unknown` is never defaulted away.
 
 ## Stage 4 — pharmacophore construction (current)
 
-Builds a **ligand-based ensemble pharmacophore** per cell, adapting the TeachOpenCADD
-T009 workflow (extract RDKit features → cluster per family → cluster centres become
-the model). The build unit is one **cell** —
+Builds a **ligand-based ensemble pharmacophore** per cell with a **single consensus
+strategy — a Gaussian occupancy field (KDE)** whose peaks become features (RDKit
+feature extraction à la TeachOpenCADD T009 feeds it). The build unit is one **cell** —
 `catalogue/<slug>/groups/<pocket>__<efficacy>/`, mol2 poses already superposed in a
 common frame, same pocket, same efficacy sign. One hypothesis per cell. The pipeline
 is **general**: its real entry point takes *any* directory of aligned mol2 and emits a
 model; the catalogue batch mode is a convenience over that.
 
 Run: `pixi run build-pharmacophores --catalogue` (or `--target <slug>`, or
-`--input DIR --out DIR`); add `--consensus density` for the density strategy. Offline.
-
-**Two consensus strategies behind one flag** (`consensus_method`): **`kmeans`**
-(default) and **`density`**. Both obey one in/out contract — in: aligned per-molecule
-feature points; out: consensus features `(family, position, tolerance, optional
-direction)` — so downstream is method-agnostic and the two are directly comparable.
-Outputs go to **separate namespaces**: k-means → `catalogue/<slug>/pharmacophores/`,
-density → `catalogue/<slug>/pharmacophores_density/`. Default is unchanged (k-means).
-`pharmacophore/consensus.py` is the dispatch seam.
+`--input DIR --out DIR --smiles ligands.csv`). Offline. Every model writes to the single
+namespace `catalogue/<slug>/pharmacophores/<cell>/`. (An earlier swappable k-means
+strategy and its `pharmacophores_density/` split have been **removed** — density/KDE is
+the sole method. In/out contract: aligned per-molecule feature points in → consensus
+features `(family, position, tolerance, optional direction)` out.)
 
 **Modules** (pure core, IO at the edges):
 - `pharmpipe/features` — `extract.py` (pure: feature factory → `FeaturePoint`/
@@ -179,23 +175,19 @@ density → `catalogue/<slug>/pharmacophores_density/`. Default is unchanged (k-
   prefers **SMILES-template** bond assignment (`AssignBondOrdersFromTemplate` on a
   connectivity-only graph; SMILES from the target's `unique_ligands.csv` keyed by HET)
   → falls back to a direct read → skips+logs. Per-pose coverage is recorded.
-- `pharmpipe/clustering` — a `Clusterer` Protocol (`fit_predict(coords)->labels`) is
-  the contract the **k-means** consensus depends on, so clustering methods are drop-in.
-  `kmeans.py` is `KMeansSilhouette` — k chosen by **silhouette score**, not the
-  tutorial's `k=n/kq` heuristic. Add a method in `registry.py`.
-- `pharmpipe/pharmacophore` — `consensus.py` (strategy dispatch), `build.py` (k-means
-  assembly: cluster→centre→support→tolerance→select+merge), `density.py` (density
-  strategy: molecule-weighted Gaussian occupancy field → peaks/watershed →
-  occupancy-floor → centroid/spread + excluded volume), `model.py` (`Pharmacophore`,
-  schema `pharmpipe.pharmacophore/v1`, optional per-feature `direction`, JSON
-  round-trip), `io.py`, `viz.py` (matplotlib raw-feature 3D plots), `config.py`,
-  `run.py` (orchestration). Both strategies return the same `BuildResult`, so viz/CSV/
-  representative-ligand are shared.
+- `pharmpipe/pharmacophore` — `density.py` (the consensus strategy: molecule-weighted
+  Gaussian occupancy field → peaks/watershed → occupancy-floor → membership-radius
+  support → centroid/spread + cross-family merge + excluded volume), `build.py` (the
+  shared, strategy-agnostic primitives density reuses: `feature_radius`, the cross-family
+  overlap merge + `MergeRecord` bookkeeping, per-family labelling, representative-ligand
+  pick), `model.py` (`Pharmacophore`, schema `pharmpipe.pharmacophore/v1`, optional
+  per-feature `direction`, JSON round-trip), `io.py`, `viz.py` (matplotlib raw-feature
+  3D plots), `config.py`, `run.py` (orchestration).
 
 **Config** `config/pharmacophore.yaml` — feature families/colours, `feature_hierarchy`,
-`consensus_method`, k-means `clustering` method+params, `density` knobs
-(voxel/bandwidth, `peak_separation`, occupancy floor, excluded volume), selection (min
-support fraction, min size, top-N), tolerance model. All scientific choices; none in code.
+`density` knobs (voxel/bandwidth, occupancy floor, **`membership_radius`**, cross-family
+`merge_radius`, excluded volume), selection (`min_ligands`, `min_support_fraction`,
+`min_cluster_size`), tolerance model. All scientific choices; none in code.
 
 **Feature hierarchy (co-atom resolution; §3.1 of the method doc).** RDKit tags some
 atoms with two families at once (protonated amine N = `PosIonizable`+`Donor`; carboxylate
@@ -206,49 +198,41 @@ config) resolves this **at extraction, per ligand, keyed on the shared atom** (h
 subsumes lower); it fires **only for co-incident atoms** so genuine dual roles
 (`Donor`+`Acceptor` hydroxyls, `Aromatic`+`Acceptor`/`Donor` ring heteroatoms) are kept,
 and it **never overrides a genuine count** (the cross-family merge stays support/size-
-based). Applies upstream, so **both** consensus strategies benefit. Each collapse is
-logged (`kept ← dropped` + ligands) in the JSON provenance and `model_summary.md`.
+based). Applies upstream at extraction. Each collapse is logged (`kept ← dropped` +
+ligands) in the JSON provenance and `model_summary.md`.
 
-**Method choices — k-means** (all in `config/pharmacophore.yaml`; full write-up in
+**Method choices — density/KDE** (all in `config/pharmacophore.yaml`; full write-up in
 `catalogue/pharmacophore_method.md`): features use RDKit **`LumpedHydrophobe`** (one
-centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (3)**
-ligands is **skipped and its output removed** (too few for an ensemble); after
-selection, **overlapping clusters are merged keeping the dominant one (more points, then
-support) — within *and* across families** (a donor and acceptor can't share one spot)
-(`merge_overlapping`; **fixed 1 Å centre-to-centre cutoff**, `merge_radius: 1.0` — a small,
-predictable reach; `null` restores the old geometric 1–3 Å rule). A
-bidentate OH's donor+acceptor sit ~0.6–1 Å apart, so its acceptor still merges into the
-denser donor; `model_summary.md`'s **"Merged away … in favour of X"** table records every
-above-floor removal (a second table lists below-floor clusters), and **`Support`** (distinct
-ligands ÷ total, ≤1) sits beside an uncapped **`Occupancy`** (points ÷ ligands, honest
->1.0). Each feature's **tolerance radius = density-quantile core** (the radius enclosing
-`tolerance.quantile`=0.75 of the cluster's density mass, robust to the far in-cluster
-outliers that inflated the old RMS; `rmsd` mode still selectable) and is stored in the JSON
-— **not** the PyMOL sphere size: the viz draws every ligand feature as a **fixed 1.25 Å-radius
-mesh (wireframe) sphere plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS` in `io.py` /
-`scripts/pymol_pharmacophore.py`, a pure display size independent of the tolerance and the
-merge), so tolerance is read from the model, not by
-eye. **Excluded-Volume markers are part of the model but NOT drawn** in any view. Each model
-dir also carries a **`<cell>_sweep.pse`** occupancy-cutoff sweep (all raw clusters across
-PyMOL states, cutoff 0.05→observed max; baked for every model via `--render-sweeps`, and by
-the one-shot). Family colours: HBD/Donor pink, HBA/Acceptor green, hydrophobic cyan,
-Aromatic yellow, PosIonizable red, NegIonizable orange, ExcludedVolume grey.
-
-**Method choices — density** (§11 of `pharmacophore_method.md`): per feature type, pool
-points and weight each by **1/(points that molecule contributes to the type)** so the
-unit of evidence is the **distinct molecule** (optional inverse-scaffold-frequency); a
-Gaussian-smoothed **voxel occupancy field** (voxel/bandwidth ~1.0–1.5 Å); features are
-**all local maxima** (no `k` chosen) with proximity watershed; keep a peak whose basin's
-summed molecule weight ≥ **occupancy floor**; feature **position = density-weighted
-centroid**, **tolerance = density-quantile radius of the field mass** (same `feature_radius`
-helper + `tolerance` config as k-means, clamped, §6), **direction** plumbed but `None`
-until perception emits per-point vectors (never fabricated). After the per-type peaks,
-density applies the **same cross-family overlap merge as k-means** (one feature per
-region; `density.merge_overlapping`), then appends **excluded-volume** grey spheres from
-reference-receptor atoms lining the pocket that no ligand reaches (exempt from the
-merge). **Deterministic** (fixed grid, no seeding); **two scientific knobs** (length
-scale — `bandwidth` also sets the min peak spacing, §11.3 — and occupancy floor) plus the
-steric EV add-on.
+centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (3)** ligands
+is **skipped and its output removed**. Per feature type, points are weighted by
+**1/(points that molecule contributes to the type)** so the unit of evidence is the
+**distinct molecule** (optional inverse-scaffold-frequency), a Gaussian-smoothed **voxel
+occupancy field** (voxel/bandwidth ~1.0–1.5 Å) is built, and features are **all local
+maxima** (no `k`) with proximity watershed. A peak survives only if its basin's summed
+molecule weight ≥ **`occupancy_floor`** **and** its **support ≥ `min_support_fraction`
+(0.5)**. **Support is a hard-membership count** — distinct ligands with a feature point
+within **`density.membership_radius` (1.5 Å)** of the peak centre ÷ total ligands — so a
+far basin outlier no longer inflates it (this is the main feature-selection gate; support
+also drives the sweep). Feature **position = density-weighted centroid**, **tolerance =
+density-quantile core** (`tolerance.quantile`=0.75 of the field mass, clamped `[1,3]` Å;
+`rmsd` selectable), **direction** plumbed but `None` until perception emits per-point
+vectors. Then a **cross-family overlap merge** keeps one feature per region — dominant
+(more points, then support) wins, **fixed 1 Å centre-to-centre cutoff** (`merge_radius:
+1.0`; `null` = old geometric 1–3 Å). A bidentate OH's donor+acceptor sit ~0.6–1 Å apart,
+so its acceptor still merges into the denser donor; `model_summary.md`'s **"Merged away …
+in favour of X"** table records every above-floor removal (a "Below the support/size
+floor" table lists the rest, both with **`Support`** and an uncapped **`Occupancy`** =
+points ÷ ligands). Finally **excluded-volume** grey spheres are added from
+reference-receptor atoms lining the pocket that no ligand reaches (exempt from the merge).
+**Deterministic** (fixed grid, no seeding). The tolerance radius is stored in the JSON —
+**not** the PyMOL sphere size: the viz draws every ligand feature as a **fixed 1.25 Å-radius
+mesh (wireframe) sphere plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS`, a pure
+display size), and **Excluded-Volume markers are part of the model but NOT drawn**. Each
+model dir also carries a **`<cell>_sweep.pse`** support-cutoff sweep (all raw clusters
+across 20 PyMOL states, support cutoff 0.05→1.00 using the same membership radius; baked
+via `--render-sweeps`, and by the one-shot). Family colours: HBD/Donor pink, HBA/Acceptor
+green, hydrophobic cyan, Aromatic yellow, PosIonizable red, NegIonizable orange,
+ExcludedVolume grey.
 
 **Protonation (pH 7.4) preprocessing** (§2 of the method doc): before the build,
 `scripts/protonate_ligands.py` (pixi `prep` env) predicts pKa with **pkasolver** and
@@ -256,7 +240,7 @@ writes each HET's dominant pH-7.4 microstate to `catalogue/<slug>/protonated_lig
 (pure ladder-walk in `pharmpipe/prep/protonate.py`). The loader prefers it over the
 neutral `unique_ligands.csv` SMILES, and `AssignBondOrdersFromTemplate` carries the
 template's formal charges onto the pose — so donor/acceptor/±ionizable perception sees
-the real ionisation, feeding **both** consensus strategies. A **weak-acid guard**
+the real ionisation, feeding feature perception. A **weak-acid guard**
 (§2.1; `config/protonation.yaml`, applied by `neutralize_weak_acids`) corrects
 pkasolver's documented blind spot — it systematically *over-deprotonates* weak acids
 (O–H, N–H) on poly-ionizable scaffolds (phenols, alcohols, amides, primary sulfonamides,

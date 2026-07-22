@@ -2,18 +2,17 @@
 
 - Ligands loaded: **16** (direct=1, template=15)
 - Skipped poses: 0
-- Consensus method: `kmeans`
+- Consensus method: `density`
 - Representative ligand (viz): `9W12_A1ET8_A701`
-- Features kept: **4**
+- Features kept: **2**
+- Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor 1 | 9 | 9 | 0.56 | 1.00 |
-| Aromatic 1 | 17 | 16 | 1.00 | 1.06 |
-| Donor 1 | 20 | 16 | 1.00 | 1.25 |
-| Donor 2 | 15 | 13 | 0.81 | 1.15 |
+| Acceptor 1 | 11 | 11 | 0.69 | 1.00 |
+| Donor 1 | 10 | 10 | 0.62 | 1.00 |
 
 ## Feature resolution
 
@@ -29,8 +28,8 @@ Clusters that passed the support/size floor but were displaced by the 1 Å cross
 
 | Feature | Points | Ligands | Support | Occupancy | In favour of |
 |---|---:|---:|---:|---:|---|
-| Acceptor | 11 | 11 | 0.69 | 1.00 | Donor 1 |
-| Acceptor | 10 | 10 | 0.62 | 1.00 | Donor 2 |
+| Donor | 10 | 10 | 0.62 | 1.00 | Acceptor 1 |
+| Acceptor | 9 | 9 | 0.56 | 1.00 | Donor 1 |
 
 ## Below the support/size floor
 
@@ -38,14 +37,9 @@ Clusters that formed but never became candidates — below the 0.5 support floor
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Aromatic | 13 | 7 | 0.44 | 1.86 |
-| Acceptor | 5 | 5 | 0.31 | 1.00 |
-| Acceptor | 4 | 4 | 0.25 | 1.00 |
-| Acceptor | 4 | 4 | 0.25 | 1.00 |
-| Acceptor | 3 | 3 | 0.19 | 1.00 |
-| Acceptor | 3 | 3 | 0.19 | 1.00 |
-| LumpedHydrophobe | 2 | 2 | 0.12 | 1.00 |
+| Acceptor | 7 | 7 | 0.44 | 1.00 |
+| Aromatic | 5 | 5 | 0.31 | 1.00 |
+| LumpedHydrophobe | 3 | 3 | 0.19 | 1.00 |
 | PosIonizable | 1 | 1 | 0.06 | 1.00 |
-| LumpedHydrophobe | 1 | 1 | 0.06 | 1.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

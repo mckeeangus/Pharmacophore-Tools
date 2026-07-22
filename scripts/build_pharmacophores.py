@@ -9,13 +9,13 @@ Four modes:
         pixi run build-pharmacophores --target gr_nr3c1
   * whole catalogue   -- every cell of every target:
         pixi run build-pharmacophores --catalogue
-  * render sweeps     -- bake the occupancy-sweep .pse for every built model (viz env):
+  * render sweeps     -- bake the support-sweep .pse for every built model (viz env):
         pixi run build-pharmacophores --render-sweeps
 
 The ``--input`` one-shot runs the whole local methodology end-to-end for one aligned
 directory: (A) protonate the ligands to their pH-7.4 microstate via the isolated
 ``prep`` env (reused if already present in ``--out``), (B) build the model in-process,
-(C) bake the kept-model PyMOL ``.pse``/``.png`` **and** the occupancy-sweep
+(C) bake the kept-model PyMOL ``.pse``/``.png`` **and** the support-sweep
 ``.pse``/``.png`` via the ``viz`` env. It requires a
 ``--smiles`` HET->SMILES CSV (the heavy-atom mol2 need it for both protonation and clean
 bond perception); ``--reference-pdb`` enables density excluded volume, and
@@ -38,8 +38,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-# k-means runs many small clusterings; one thread each avoids MKL oversubscription
-# (and its Windows memory-leak warning) and keeps behaviour reproducible on Gadi.
+# One BLAS thread each keeps the numpy field maths reproducible and avoids MKL
+# oversubscription (and its Windows memory-leak warning) on Gadi.
 os.environ.setdefault("OMP_NUM_THREADS", "1")
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -70,9 +70,6 @@ log = logging.getLogger("build_pharmacophores")
 
 REPO = Path(__file__).resolve().parents[1]
 
-# Output namespace per consensus strategy, so k-means and density sit side by side.
-_NAMESPACE = {"kmeans": "pharmacophores", "density": "pharmacophores_density"}
-
 
 def _pixi() -> str:
     """Locate the ``pixi`` executable (needed to reach the prep/viz envs)."""
@@ -101,8 +98,8 @@ def _protonate(smiles_csv: Path, out_csv: Path, force: bool) -> bool:
     return out_csv.exists()
 
 
-def _render(model_dir: Path, name: str) -> None:
-    """Bake the kept-model ``.pse``/``.png`` **and** the occupancy-sweep ``.pse``/``.png``
+def _render(model_dir: Path, name: str, membership_radius: float) -> None:
+    """Bake the kept-model ``.pse``/``.png`` **and** the support-sweep ``.pse``/``.png``
     from the model JSON via the ``viz`` env.
 
     Non-fatal: the model artifacts are already on disk, so a PyMOL failure only warns.
@@ -113,7 +110,8 @@ def _render(model_dir: Path, name: str) -> None:
            "--out", str(model_dir / f"{name}.pse"),
            "--image", str(model_dir / f"{name}.png"),
            "--sweep-out", str(model_dir / f"{name}_sweep.pse"),
-           "--sweep-image", str(model_dir / f"{name}_sweep.png")]
+           "--sweep-image", str(model_dir / f"{name}_sweep.png"),
+           "--membership-radius", str(membership_radius)]
     print(f"  render: {' '.join(cmd)}")
     result = subprocess.run(cmd, cwd=REPO, check=False)
     if result.returncode != 0:
@@ -121,8 +119,8 @@ def _render(model_dir: Path, name: str) -> None:
                     result.returncode)
 
 
-def _render_sweep(model_dir: Path) -> bool:
-    """Bake only the occupancy-sweep ``<cell>_sweep.pse`` for one built model dir.
+def _render_sweep(model_dir: Path, membership_radius: float) -> bool:
+    """Bake only the support-sweep ``<cell>_sweep.pse`` for one built model dir.
 
     The kept-model view stays the offline ``.pml``; this adds the interactive sweep.
     Non-fatal (returns False on failure); needs the ``viz`` env for PyMOL.
@@ -130,36 +128,36 @@ def _render_sweep(model_dir: Path) -> bool:
     script = REPO / "scripts" / "pymol_pharmacophore.py"
     cmd = [_pixi(), "run", "-e", "viz", "pymol", "-cq", str(script), "--",
            "--pharmacophore", str(model_dir / "pharmacophore.json"),
-           "--sweep-out", str(model_dir / f"{model_dir.name}_sweep.pse")]
+           "--sweep-out", str(model_dir / f"{model_dir.name}_sweep.pse"),
+           "--membership-radius", str(membership_radius)]
     return subprocess.run(cmd, cwd=REPO, check=False).returncode == 0
 
 
 def _model_dirs() -> list[Path]:
-    """Every built catalogue model dir (k-means + density) with a JSON + features.csv."""
+    """Every built catalogue model dir (pharmacophores/) with a JSON + features.csv."""
     dirs: list[Path] = []
     for slug_dir in sorted(p for p in CATALOGUE_DIR.iterdir() if p.is_dir()):
-        for ns in _NAMESPACE.values():
-            base = slug_dir / ns
-            if not base.is_dir():
-                continue
-            dirs.extend(sorted(
-                cell for cell in base.iterdir()
-                if (cell / "pharmacophore.json").exists()
-                and (cell / "features.csv").exists()))
+        base = target_pharmacophores_dir(slug_dir.name)
+        if not base.is_dir():
+            continue
+        dirs.extend(sorted(
+            cell for cell in base.iterdir()
+            if (cell / "pharmacophore.json").exists()
+            and (cell / "features.csv").exists()))
     return dirs
 
 
-def _render_all_sweeps() -> int:
-    """Render the occupancy-sweep ``.pse`` for every built catalogue model."""
+def _render_all_sweeps(cfg) -> int:
+    """Render the support-sweep ``.pse`` for every built catalogue model."""
     dirs = _model_dirs()
     ok = 0
     for d in dirs:
         print(f"sweep: {d}")
-        if _render_sweep(d):
+        if _render_sweep(d, cfg.density.membership_radius):
             ok += 1
         else:
             log.warning("sweep render failed for %s", d)
-    print(f"\nRendered {ok}/{len(dirs)} occupancy-sweep .pse file(s).")
+    print(f"\nRendered {ok}/{len(dirs)} support-sweep .pse file(s).")
     return 0 if ok == len(dirs) else 1
 
 
@@ -175,13 +173,13 @@ def _targets() -> list[str]:
                   if d.is_dir() and target_groups_dir(d.name).is_dir())
 
 
-def _build_target(slug: str, cfg, namespace: str) -> tuple[int, int]:
+def _build_target(slug: str, cfg) -> tuple[int, int]:
     """Build every buildable cell of a target; returns (built, skipped)."""
     uniq = CATALOGUE_DIR / slug / "unique_ligands.csv"
     ref = target_reference_pdb(slug)
     built = skipped = 0
     for cell in _cells(slug):
-        out = target_pharmacophores_dir(slug, namespace) / cell.name
+        out = target_pharmacophores_dir(slug) / cell.name
         res = build_for_cell(cell, out, cfg, uniq, name=f"{slug}/{cell.name}",
                              reference_pdb=ref)
         if res is None:
@@ -232,7 +230,7 @@ def _one_shot(args, cfg) -> int:
 
     # Step C — bake the PyMOL session + snapshot (viz env), unless suppressed.
     if not args.no_render:
-        _render(out, out.name)
+        _render(out, out.name, cfg.density.membership_radius)
 
     print(f"{res.name}: {len(res.pharmacophore.features)} features -> {out}")
     return 0
@@ -261,21 +259,12 @@ def main(argv=None) -> int:
     ap.add_argument("--no-render", action="store_true",
                     help="skip the PyMOL .pse/.png render (--input)")
     ap.add_argument("--config", type=Path, default=None)
-    ap.add_argument("--method", help="override clustering.method from config")
-    ap.add_argument("--consensus", choices=("kmeans", "density"),
-                    help="override consensus_method (kmeans=default; density writes to "
-                         "the pharmacophores_density/ namespace)")
     args = ap.parse_args(argv)
 
-    if args.render_sweeps:
-        return _render_all_sweeps()
-
     cfg = load_pharmacophore_config(args.config)
-    if args.method:
-        cfg.clustering.method = args.method
-    if args.consensus:
-        cfg.consensus_method = args.consensus
-    namespace = _NAMESPACE[cfg.consensus_method]
+
+    if args.render_sweeps:
+        return _render_all_sweeps(cfg)
 
     if args.input:
         if not args.out:
@@ -288,12 +277,12 @@ def main(argv=None) -> int:
     total_built = total_skipped = 0
     for slug in slugs:
         print(f"{slug}:")
-        built, skipped = _build_target(slug, cfg, namespace)
+        built, skipped = _build_target(slug, cfg)
         total_built += built
         total_skipped += skipped
     print(f"\nBuilt {total_built} pharmacophore model(s) across {len(slugs)} target(s); "
-          f"{total_skipped} cell(s) skipped (< {cfg.selection.min_ligands} ligands); "
-          f"consensus={cfg.consensus_method}, namespace={namespace}/.")
+          f"{total_skipped} cell(s) skipped (< {cfg.selection.min_ligands} ligands) "
+          f"-> catalogue/<slug>/pharmacophores/.")
     return 0
 
 

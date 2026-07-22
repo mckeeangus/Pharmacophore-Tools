@@ -1,4 +1,4 @@
-# cavab/dhp_site__negative — ensemble pharmacophore (4 features)
+# cavab/dhp_site__negative — ensemble pharmacophore (42 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,28 +17,16 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[25.462, 167.265, 14.213], vdw=1.250
-color ph4_Acceptor, Acceptor_1
-group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_1_ctr, pos=[25.462, 167.265, 14.213], label="Acceptor 1 (1.00)"
-color ph4_Acceptor, Acceptor_1_ctr
-group ph4_centers, Acceptor_1_ctr
-pseudoatom Donor_1, pos=[25.093, 162.663, 15.518], vdw=1.250
+pseudoatom Donor_1, pos=[25.787, 163.008, 14.950], vdw=1.250
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
-pseudoatom Donor_1_ctr, pos=[25.093, 162.663, 15.518], label="Donor 1 (0.67)"
+pseudoatom Donor_1_ctr, pos=[25.787, 163.008, 14.950], label="Donor 1 (1.00)"
 color ph4_Donor, Donor_1_ctr
 group ph4_centers, Donor_1_ctr
-pseudoatom PosIonizable_1, pos=[27.775, 164.940, 18.823], vdw=1.250
-color ph4_PosIonizable, PosIonizable_1
-group ph4_PosIonizable, PosIonizable_1
-pseudoatom PosIonizable_1_ctr, pos=[27.775, 164.940, 18.823], label="PosIonizable 1 (0.67)"
-color ph4_PosIonizable, PosIonizable_1_ctr
-group ph4_centers, PosIonizable_1_ctr
-pseudoatom Aromatic_1, pos=[25.395, 164.346, 10.410], vdw=1.250
+pseudoatom Aromatic_1, pos=[25.014, 164.146, 10.827], vdw=1.250
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[25.395, 164.346, 10.410], label="Aromatic 1 (0.67)"
+pseudoatom Aromatic_1_ctr, pos=[25.014, 164.146, 10.827], label="Aromatic 1 (1.00)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
 set surface_quality, 2

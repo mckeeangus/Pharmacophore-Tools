@@ -1,9 +1,9 @@
-"""Assemble an ensemble pharmacophore from feature points (Stage 4, pure core).
+"""Shared assembly primitives for the density consensus strategy (Stage 4, pure core).
 
-Per feature family: cluster the points (any ``Clusterer``), reduce each cluster to a
-centre + tolerance radius + support statistics, then keep the clusters that recur
-across enough ligands. No IO and no clustering algorithm live here — the clusterer
-is injected — so this is the unit-tested heart of the stage.
+The pure building blocks the density builder reuses: tolerance-radius / feature-radius
+maths, the cross-family overlap merge and its "merged away" bookkeeping, per-family
+ordinal labelling, and the representative-ligand pick. No IO lives here, so this is the
+unit-tested heart of the stage.
 """
 
 from __future__ import annotations
@@ -13,9 +13,8 @@ from typing import TypeVar
 
 import numpy as np
 
-from ..clustering.base import Clusterer
 from ..features.extract import FeatureTable
-from .config import SelectionConfig, ToleranceConfig
+from .config import ToleranceConfig
 from .model import Pharmacophore, PharmacophoreFeature
 
 _P = TypeVar("_P")  # opaque payload carried alongside a feature through merging
@@ -93,11 +92,6 @@ def feature_radius(distances: np.ndarray, weights: np.ndarray | None,
     return float(min(max(r, tol.min), tol.max))
 
 
-def _radius(coords: np.ndarray, center: np.ndarray, tol: ToleranceConfig) -> float:
-    distances = np.linalg.norm(coords - center, axis=1)
-    return feature_radius(distances, None, tol)
-
-
 def _overlaps(a: PharmacophoreFeature, b: PharmacophoreFeature,
               merge_radius: float | None) -> bool:
     """True if two features sit in the same region of space (family-agnostic).
@@ -161,33 +155,6 @@ def _merge_records(
     return records
 
 
-def _candidate_features(family: str, coords: np.ndarray, labels: np.ndarray,
-                        ligands: list[str], n_ligands: int, sel: SelectionConfig,
-                        tol: ToleranceConfig) -> list[tuple[PharmacophoreFeature, int]]:
-    """One family's clusters reduced to candidate features passing support/size.
-
-    No merge or top-N here — those are applied globally across families once all
-    candidates are pooled, so overlap resolution can cross family boundaries.
-    """
-    candidates: list[tuple[PharmacophoreFeature, int]] = []
-    for label in sorted(set(labels.tolist())):
-        mask = labels == label
-        pts = coords[mask]
-        center = pts.mean(axis=0)
-        n_points = int(mask.sum())
-        n_lig = len({lig for lig, m in zip(ligands, mask, strict=True) if m})
-        support = n_lig / n_ligands if n_ligands else 0.0
-        if n_points < sel.min_cluster_size or support < sel.min_support_fraction:
-            continue
-        feat = PharmacophoreFeature(
-            family=family, x=float(center[0]), y=float(center[1]), z=float(center[2]),
-            radius=_radius(pts, center, tol), n_points=n_points,
-            n_ligands=n_lig, support=round(support, 4),
-        )
-        candidates.append((feat, label))
-    return candidates
-
-
 def finalize_features(
     pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]],
 ) -> tuple[list[PharmacophoreFeature], dict[str, set[int]],
@@ -212,60 +179,6 @@ def finalize_features(
         label_index.setdefault(family, {})[cluster_label] = (
             labelled.label, labelled.support)
     return features, kept_by_family, label_index
-
-
-def _cap_per_family(pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]],
-                    top_n: int) -> list[tuple[PharmacophoreFeature, tuple[str, int]]]:
-    """Keep at most ``top_n`` features per family from a strongest-first list."""
-    counts: dict[str, int] = {}
-    out: list[tuple[PharmacophoreFeature, tuple[str, int]]] = []
-    for feat, (family, label) in pooled:
-        if counts.get(family, 0) >= top_n:
-            continue
-        counts[family] = counts.get(family, 0) + 1
-        out.append((feat, (family, label)))
-    return out
-
-
-def build_pharmacophore(table: FeatureTable, clusterer: Clusterer, sel: SelectionConfig,
-                        tol: ToleranceConfig, name: str,
-                        metadata: dict | None = None) -> BuildResult:
-    assignments: list[ClusterAssignment] = []
-    pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]] = []
-    for family in table.families():
-        pts = table.of_family(family)
-        coords = np.array([p.position for p in pts], dtype=float)
-        ligands = [p.ligand_id for p in pts]
-        labels = np.asarray(clusterer.fit_predict(coords), dtype=int)
-        cands = _candidate_features(
-            family, coords, labels, ligands, table.n_ligands, sel, tol)
-        pooled.extend((feat, (family, label)) for feat, label in cands)
-        centers = {
-            int(lbl): tuple(coords[labels == lbl].mean(axis=0))
-            for lbl in set(labels.tolist())
-        }
-        assignments.append(ClusterAssignment(
-            family=family, coords=coords, labels=labels, ligand_ids=ligands,
-            centers=centers, kept_labels=set()))
-    # Strongest first (more points, then more support) so the dominant cluster
-    # heads each overlap region; merge then caps operate on the pooled set so
-    # overlap resolution spans families, not just within one.
-    pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
-    dropped: list = []
-    if sel.merge_overlapping:
-        pooled, dropped = _merge_overlapping(pooled, sel.merge_radius)
-    if sel.top_n_per_family is not None:
-        pooled = _cap_per_family(pooled, sel.top_n_per_family)
-    features, kept_by_family, label_index = finalize_features(pooled)
-    for assignment in assignments:
-        assignment.kept_labels = kept_by_family.get(assignment.family, set())
-        assignment.feature_labels = label_index.get(assignment.family, {})
-    meta = dict(metadata or {})
-    meta.setdefault("clustering", clusterer.describe())
-    meta["n_features"] = len(features)
-    ph = Pharmacophore(name=name, features=features, metadata=meta)
-    return BuildResult(pharmacophore=ph, assignments=assignments,
-                       merged_away=_merge_records(dropped, label_index))
 
 
 def best_representative(table: FeatureTable, ph: Pharmacophore) -> str | None:

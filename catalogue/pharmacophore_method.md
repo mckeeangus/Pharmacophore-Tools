@@ -11,27 +11,21 @@ Everything scientific lives in **`config/pharmacophore.yaml`**; the code is gene
 The method-defining parameter values quoted here are the current config defaults — the
 config is the source of truth if they ever diverge.
 
-### Two consensus strategies behind one flag
+### One consensus strategy — the density field (KDE)
 
-The step that turns per-molecule feature points into consensus features is pluggable
-via `consensus_method`:
+The step that turns per-molecule feature points into consensus features is a **single
+strategy**: accumulate each family's points into a **Gaussian-smoothed occupancy field**
+(a KDE) and read features off its **local maxima** (§11 is the full write-up; §4 is a
+short orientation). In: aligned per-molecule feature points in the binding-site-local
+frame; out: a list of consensus features `(family, position, tolerance, optional
+direction)`. Every model is written to the single namespace
+`catalogue/<slug>/pharmacophores/`.
 
-- **`kmeans`** (default) — cluster each family's points with silhouette-selected
-  k-means; cluster centres become features (§4–§6).
-- **`density`** — accumulate each family's points into a Gaussian-smoothed occupancy
-  field and read features off its peaks (§11).
-
-Both obey **one in/out contract** — in: aligned per-molecule feature points in the
-binding-site-local frame; out: a list of consensus features `(family, position,
-tolerance, optional direction)` — so every downstream artifact (JSON model, CSV, plots,
-PyMOL session) is identical in form and the two are directly comparable. Swapping the
-method changes feature *positions*, never the output *structure*. Outputs are written to
-**separate namespaces** so they sit side by side: k-means →
-`catalogue/<slug>/pharmacophores/`, density → `catalogue/<slug>/pharmacophores_density/`.
-The default method is unchanged (k-means); select density with
-`build-pharmacophores --consensus density` or `consensus_method: density` in config.
-Sections 1–3 (build unit, loading, feature extraction) and the tolerance clamp (§6) are
-**shared by both strategies**.
+> **Note.** An earlier design offered a swappable `consensus_method` with a silhouette
+> **k-means** alternative written to a side-by-side `pharmacophores_density/` namespace.
+> That k-means path and the namespace split have been **removed** — density/KDE is now the
+> sole method. Where the sections below say "cluster", read "peak/basin"; the selection
+> (§5), tolerance (§6) and merge maths are shared, pure helpers the density builder reuses.
 
 ---
 
@@ -254,61 +248,36 @@ resolution** section of `model_summary.md`.
 
 ---
 
-## 4. Clustering points into consensus positions (k-means strategy)
-
-> This and §5–§6's selection/merge apply to the **`kmeans`** consensus method (the
-> default). The **`density`** method replaces §4–§5 with the occupancy-field procedure
-> in §11 but shares §6's tolerance clamp.
+## 4. Grouping points into consensus positions (the density field)
 
 For **each family independently**, the family's points (pooled across all the cell's
-ligands) are clustered in 3D. The clusterer is injected behind a one-method
-`Clusterer` protocol (`fit_predict(coords) -> labels`), so the method is swappable
-without changing the output format; methods are registered in
-`clustering/registry.py`.
+ligands) are turned into consensus positions by the **density/KDE procedure of §11**:
+they are accumulated into a Gaussian-smoothed occupancy field and each **local maximum**
+(peak) is a candidate feature position — its **basin** (points assigned to the nearest
+peak) is the analogue of a cluster. There is **no *k* to choose**: the number of features
+of a type is emergent from the field. The full construction — molecule weighting, the
+field, watershed, and the occupancy/support floors — is §11; §5–§6 (selection, tolerance)
+and the merge (below) are shared, pure helpers the density builder reuses.
 
-The default is **`kmeans_silhouette`** (`clustering/kmeans.py`): k-means where the
-number of clusters *k* is chosen automatically rather than hand-tuned.
-
-**How *k* is chosen.** For every candidate `k ∈ [k_min, min(k_max, n−1)]` (defaults
-`k_min = 2`, `k_max = 8`; `n` = number of points in the family) we run k-means
-(`n_init = 10` restarts, fixed `random_state` for reproducibility) and score the
-resulting partition by its **mean silhouette coefficient**. For a point *i* the
-silhouette is
-
-```
-s(i) = (b(i) − a(i)) / max(a(i), b(i))
-```
-
-where `a(i)` is *i*'s mean (Euclidean) distance to the other points **in its own
-cluster** and `b(i)` is its mean distance to the points of the **nearest other
-cluster**. `s(i)` runs from −1 (likely misassigned) through 0 (on a boundary) to +1
-(tight, well separated); the score for a given *k* is the mean of `s(i)` over all
-points. We keep the *k* with the **highest mean silhouette** — the partition whose
-clusters are simultaneously most compact and best separated — and return its labels. A
-*k* that collapses to a single occupied cluster, or for which the silhouette is
-undefined, is skipped. T009 instead fixes `k = ceil(n / kq)` with a hand-tuned `kq`;
-its own discussion flags that as the obstacle to automation, so we remove the
-hand-tuning. Degenerate inputs (≤ 2 points, or effectively coincident points) collapse
-to a single cluster. The chosen method and its parameters are recorded in each model's
-provenance block.
-
-Each cluster's **centre** is the (unweighted) **mean of its member points** — a
+Each peak's **position** is the **density-weighted centroid** of its basin (§11.5) — a
 candidate feature position.
 
 ---
 
-## 5. Cluster → kept feature (selection)
+## 5. Peak → kept feature (selection)
 
-A candidate cluster becomes a pharmacophore feature only if it is both **populous** and
+A candidate peak becomes a pharmacophore feature only if it is both **populous** and
 **recurrent** (`selection`):
 
-- **support** = (distinct ligands contributing to the cluster) / (ligands in the cell)
-  ≥ `min_support_fraction` (= 0.5). This is the T009 "present in most molecules" idea,
-  made relative to the cell size — a feature must be shared, not the quirk of one
-  ligand. **This 0.5 support floor applies to *both* consensus strategies**: the density
-  path enforces the same `min_support_fraction` on each peak (§11.4), so every feature in
-  every model — k-means or density — is present in at least half the cell's ligands.
-- **size** = number of feature points in the cluster ≥ `min_cluster_size` (= 2).
+- **support** = (distinct ligands with a feature point **within `density.membership_radius`
+  (1.5 Å) of the peak centre**) / (ligands in the cell) ≥ `min_support_fraction` (= 0.5).
+  This is the T009 "present in most molecules" idea, made relative to the cell size — a
+  feature must be shared, not the quirk of one ligand. The **membership radius** makes
+  support a **hard-membership count**: because the field assigns *every* point to some peak
+  (nearest-peak, no cutoff), a far basin outlier would otherwise inflate support; requiring
+  a point within 1.5 Å of the centre removes that. This 0.5 support floor is the main
+  feature-selection gate.
+- **size** = number of feature points behind the peak ≥ `min_cluster_size` (= 2).
 
 Support is a **per-feature** quantity, and `model_summary.md` reports it that way — one
 row per feature (peak), labelled `<Family> <n>` (e.g. `Donor 1`, `Donor 2`) so two
@@ -322,28 +291,27 @@ that won its region (§5) — and **"Below the support/size floor"** — cluster
 became candidates.
 
 Candidate features that pass these filters from **every family** are then pooled and
-sorted **largest first** (more points, then higher support). The merge (next) and an
-optional `top_n_per_family` cap (default off, keeps only the strongest N per family)
-are applied to that pooled, sorted list.
+sorted **largest first** (more points, then higher support), and the merge (next) is
+applied to that pooled, sorted list.
 
-### Merging overlapping clusters (within *and across* families)
+### Merging overlapping features (within *and across* families)
 
 Two distinct things can put two feature spheres in the same place, and neither should
 survive as two features:
 
-- k-means can split one genuinely single dense lobe into two adjacent **same-family**
-  clusters; and
+- the density watershed can split one genuinely single lobe into adjacent **same-family**
+  sub-peaks (ripples of the field); and
 - two **different** families can land on the same atoms — a spot cannot be both an
   H-bond donor *and* an acceptor (or a hydrophobe *and* an aromatic) at once, so two
   overlapping features of different families are mutually exclusive too.
 
 So after selection we **collapse overlapping features regardless of family, keeping the
-dominant one** (`selection.merge_overlapping`, default on). Working down the pooled
+dominant one** (`density.merge_overlapping`, default on). Working down the pooled
 largest-first list, a candidate is dropped if it overlaps any feature already kept —
 the first (largest, then highest-support) feature accepted for a region wins, whatever
 its family. This is why the merge runs over the pooled set rather than per family.
 
-"Overlap" uses a **fixed 1 Å centre-to-centre cutoff** (`selection.merge_radius: 1.0`):
+"Overlap" uses a **fixed 1 Å centre-to-centre cutoff** (`density.merge_radius: 1.0`):
 two features merge when their centres are within 1 Å — a small, predictable reach that
 only collapses **genuinely coincident** features. (The viz sphere size in §6 is a separate
 display choice and does not set this cutoff.) (The earlier default was a *geometric* rule —
@@ -366,11 +334,11 @@ its cluster: the distance from the centre that encloses a fraction `quantile` (=
 of the feature's density (`tolerance.method: density_quantile`), clamped to
 `[min, max] = [1.0, 3.0]` Å.
 
-**How the radius is computed.** For a cluster of member points `pᵢ` with centre `c`
-(§4), take the point-to-centre distances `dᵢ = ‖pᵢ − c‖`, weight each by its density
-mass `wᵢ` (equal weights for k-means; the molecule-weighted field value for density,
-§11), and return the smallest `d` below which a fraction `quantile` of the total weight
-lies — a **density-weighted quantile of the distances**:
+**How the radius is computed.** For a peak's basin voxels `pᵢ` with centre `c`
+(§11.5), take the point-to-centre distances `dᵢ = ‖pᵢ − c‖`, weight each by its density
+mass `wᵢ` (the molecule-weighted field value), and return the smallest `d` below which a
+fraction `quantile` of the total weight lies — a **density-weighted quantile of the
+distances**:
 
 ```
 radius = d(q)  such that  Σ_{dᵢ ≤ d(q)} wᵢ  =  q · Σᵢ wᵢ,   q = 0.75,  clamped to [1.0, 3.0] Å
@@ -407,12 +375,13 @@ there (or via `model_summary.md`) rather than by sphere size.
 
 | File | What it is |
 |---|---|
-| `pharmacophore.json` | Canonical, schema-versioned model (`pharmpipe.pharmacophore/v1`): each feature's family, centre, **tolerance radius**, point count, ligand support, plus a provenance block (clustering method/params, selection/tolerance settings, load coverage, the representative ligand). Method-stable — swapping the clusterer changes positions, not structure. |
-| `features.csv` | Every raw extracted point (family, source ligand, x/y/z, cluster id, **kept** flag) — the data behind the model, for auditing clustering quality. |
+| `pharmacophore.json` | Canonical, schema-versioned model (`pharmpipe.pharmacophore/v1`): each feature's family, centre, **tolerance radius**, point count, ligand support, plus a provenance block (density knobs, selection/tolerance settings, load coverage, the representative ligand). |
+| `features.csv` | Every raw extracted point (family, source ligand, x/y/z, basin/cluster id, **kept** flag) — the data behind the model, and the source for the support sweep. |
 | `representative_ligand.sdf` | One real ligand from the cell, written from the RDKit-perceived molecule (correct bond orders + 3D coords), used as the visual scaffold (§8). |
-| `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by cluster, with cluster centres marked and each kept peak annotated with its label + support (§9). |
-| `pharmacophore.pml` | Lightweight self-contained PyMOL script: loads `representative_ligand.sdf` + the feature spheres (each object named `<Family>_<n>` and labelled with its support). |
-| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, and support — followed by a **Feature resolution** section (§3.1 hierarchy collapses) and a **Not selected** table listing clusters/peaks that formed but did not enter the model (below the support/size floor or displaced by the overlap merge) with their mean support. Excluded-volume spheres (density strategy, §11.6) are receptor markers with no peak or support, so they are reported as a single **count** line rather than listed in the per-feature table. |
+| `raw_features_<family>.png` | Per-family 3D scatter of the raw points, coloured by basin, with peak centres marked and each kept peak annotated with its label + support (§9). |
+| `pharmacophore.pml` | Lightweight self-contained PyMOL script: loads `representative_ligand.sdf` + the feature **mesh** spheres (each named `<Family>_<n>`, labelled with its support). Excluded-Volume is part of the model but not drawn. |
+| `<cell>_sweep.pse` | Support-cutoff sweep across 20 PyMOL states (0.05 → 1.00) over all raw clusters — the by-eye view of how support thins toward the 0.5 floor (§9). |
+| `model_summary.md` | Human-readable summary: load coverage, representative ligand, and one row **per feature (peak)** — its `<Family> <n>` label, point/ligand counts, **Support** and **Occupancy** — followed by a **Feature resolution** section (§3.1 hierarchy collapses), a **Merged away** table (above-floor peaks displaced by the 1 Å overlap merge, each *in favour of* the winner), and a **Below the support/size floor** table. Excluded-volume spheres (§11.6) are receptor markers with no peak or support, reported as a single **count** line rather than table rows. |
 
 Richer inspection (raw-point overlay):
 `pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- --pharmacophore … [--features … --compounds … --out …]`.
@@ -467,26 +436,27 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 So "cluster size" means *spread* on the model spheres and *population/density* on the
 diagnostic markers — both are stated on the artifacts they appear on.
 
-### Occupancy-cutoff sweep (`<cell>_sweep.pse`)
+### Support-cutoff sweep (`<cell>_sweep.pse`)
 
 Alongside the kept-model view, every model dir carries a **separate** sweep visualisation
 baked by `scripts/pymol_pharmacophore.py --sweep-out` (and, for a one-shot directory build,
 automatically). It reads `features.csv` — **all raw clusters, with no 1 Å overlap merge and
-no support floor** — and lays them across **PyMOL states**: each state raises an
-**occupancy** cutoff by 0.05 (state 1 = ≥ 0.05, showing everything), and a cluster is
-present only in states up to its own occupancy, so scrubbing states upward reveals which
-clusters survive as the threshold rises. States run from 0.05 to the model's **observed max
-occupancy**, so the movie is ≥ 20 states and runs **past 1.0** whenever a cluster is denser
-than one point per ligand. Clusters are mesh spheres (family colours); a per-state label
-shows the current cutoff. This is the tool for judging, by eye, how the population thins as
-the support/occupancy bar is raised — Excluded-Volume never appears (it is not in
-`features.csv`).
+no support floor** — and lays them across **20 PyMOL states**: each state raises a **support**
+cutoff by 0.05 (state 1 = ≥ 0.05 showing everything, state 20 = ≥ 1.00), and a cluster is
+present only in states up to its own support, so scrubbing states upward reveals which
+clusters survive as the bar rises toward the 0.5 model floor and beyond. Support here is the
+**same membership-radius count** the model uses (`--membership-radius`, distinct ligands with
+a point within 1.5 Å of the cluster centre ÷ total ligands). Clusters are mesh spheres
+(family colours); a per-state label shows the current cutoff. This is the tool for judging,
+by eye, how the population thins as the support bar is raised — Excluded-Volume never appears
+(it is not in `features.csv`).
 
-**Support vs occupancy.** `support` = distinct ligands contributing ÷ total ligands
-(≤ 1.0; it drives the 0.5 selection floor — "present in most molecules"). `occupancy` =
-points ÷ contributing ligands (points-per-ligand), which is **> 1.0** when a ligand drops
-several same-family points into one cluster, so `n_points ≥ n_ligands` is normal. Occupancy
-is reported **honestly, never clamped**, in `model_summary.md` and is the sweep axis.
+**Support vs occupancy.** `support` = distinct ligands within the membership radius ÷ total
+ligands (≤ 1.0; it drives the 0.5 selection floor and the sweep — "present in most
+molecules"). `occupancy` = points ÷ contributing ligands (points-per-ligand), which is
+**> 1.0** when a ligand drops several same-family points into one cluster, so
+`n_points ≥ n_ligands` is possible; it is reported **honestly, never clamped**, as a column
+in `model_summary.md` (diagnostic only — it does not gate selection).
 
 ---
 
@@ -500,26 +470,22 @@ downstream DrugCLIP → docking flow is out of scope for this stage.
 
 ---
 
-## 11. Density-based consensus strategy (`consensus_method: density`)
+## 11. The density consensus strategy (the sole method)
 
-An alternative to the k-means path (§4–§5) that consumes the **same** per-molecule
-feature points (§1–§3) and emits the **same** consensus-feature output (§6's tolerance
-clamp included), so it is a drop-in behind the `consensus_method` flag and downstream
-code never branches on it. It is implemented in `pharmpipe/pharmacophore/density.py`
-and dispatched, alongside k-means, by `pharmacophore/consensus.py` — the single seam the
-orchestrator calls.
+The consensus strategy in full. It consumes the per-molecule feature points (§1–§3) and
+emits consensus features `(family, position, tolerance, optional direction)` (§6's
+tolerance clamp included). It is implemented in `pharmpipe/pharmacophore/density.py` and
+called by `run.py`; the strategy-agnostic maths it reuses (tolerance/feature radius, the
+cross-family overlap merge, per-family labelling, representative-ligand pick) lives in
+`build.py`.
 
-**Motivation and lessons carried over from k-means.** The k-means write-up's core
-lesson was *removing a hand-tuned knob* (T009's `kq` for k → silhouette automation,
-§4). The density strategy takes that further: by reading features off the **peaks of a
-smoothed density field**, the number of features of each type is *emergent* — each
-conserved sub-site is its own peak — so **no `k` is chosen at all**. It also keeps the
-other k-means lessons that still apply: the **min-ligands gate** (§1) and the
-**heavy-atom-mol2 SMILES-template loading** (§2) are upstream and shared unchanged; the
-**tolerance clamp** `[1.0, 3.0] Å` (§6) is reused; **`LumpedHydrophobe`** (§3) is still
-the hydrophobic family; and determinism is preserved — like seeded k-means, the density
-field uses a **fixed grid, bandwidth and threshold with no random seeding**, so a rerun
-is bit-stable.
+**Motivation.** By reading features off the **peaks of a smoothed density field**, the
+number of features of each type is *emergent* — each conserved sub-site is its own peak —
+so **no `k` is chosen at all** (the obstacle T009 flags for automation, its hand-tuned
+`kq`, simply does not arise). The **min-ligands gate** (§1) and the **heavy-atom-mol2
+SMILES-template loading** (§2) are upstream; the **tolerance clamp** `[1.0, 3.0] Å` (§6) is
+reused; **`LumpedHydrophobe`** (§3) is the hydrophobic family; and it is **deterministic** —
+a fixed grid, bandwidth and threshold with no random seeding, so a rerun is bit-stable.
 
 The strategy runs **independently per feature type** (HBD/Donor, HBA/Acceptor,
 LumpedHydrophobe, Aromatic, PosIonizable, NegIonizable). For each type:
@@ -575,10 +541,12 @@ A basin becomes a feature only if it clears **two** thresholds:
    least `occupancy_floor` (default `2.0`, i.e. ~two distinct molecules of evidence) — the
    density's own knob. Because the weights are per-molecule, a single molecule's dense
    blob cannot clear a floor of 2 however many points it has; and
-2. its **support** — (distinct ligands in the basin) / (ligands in the cell) — is at
-   least `min_support_fraction` (= 0.5), the **same support floor as the k-means path**
-   (§5), threaded in from `selection`. So a feature is present in ≥ half the cell's
-   ligands whichever strategy built it.
+2. its **support** — (distinct ligands with a feature point **within
+   `membership_radius` (1.5 Å) of the peak centre**) / (ligands in the cell) — is at
+   least `min_support_fraction` (= 0.5) (§5), threaded in from `selection`. The membership
+   radius matters here precisely because the watershed assigns *every* point to some peak
+   (nearest-peak, no cutoff): counting only points that actually **reach** the centre stops
+   a far basin outlier from inflating support, so the 0.5 floor means what it says.
 
 The occupancy floor is an *absolute* molecule count and the support floor a *fraction*;
 for a large cell the fraction is the stricter gate, for a tiny one the count is.
@@ -592,9 +560,8 @@ for a large cell the fraction is the stricter gate, for a tiny one the count is.
   `f_v` are the density weights, and the radius is the field-weighted quantile of the
   voxel-to-centroid distances — the distance enclosing `quantile` (= 0.75) of the basin's
   field mass, clamped to `[1.0, 3.0] Å`. This reads the sphere off the **core** of the
-  occupancy contour rather than its diffuse tail, using the identical `feature_radius`
-  helper (and `tolerance` config) as the k-means path, so the sphere means the same thing
-  in both strategies.
+  occupancy contour rather than its diffuse tail, using the shared `feature_radius` helper
+  (and `tolerance` config, §6).
 - **direction** — for projected families (HBD/HBA) the model carries an optional mean
   unit vector. Our current feature perception (heavy-atom mol2 → RDKit `BaseFeatures`)
   does not emit per-point projection vectors, and perception is upstream and out of
@@ -617,29 +584,24 @@ needs a receptor, so it is built only in catalogue/target mode (where the refere
 available) and is skipped cleanly for a bare `--input` directory; toggle with
 `density.excluded_volume`.
 
-### 11.7 Knobs, determinism, and differences from k-means
+### 11.7 Knobs and determinism
 
-**Only two scientific knobs of its own**: the length scale (`voxel`/`bandwidth`, which
-also sets the minimum peak spacing, §11.3) and the `occupancy_floor`; the excluded-volume
-parameters are a self-contained steric add-on. In
-addition it honours the **shared `min_support_fraction` floor** from `selection` (§11.4),
-so its features meet the same "present in ≥ half the ligands" bar as the k-means path —
-this is a selection policy common to both strategies, not a density-specific knob.
-Everything is deterministic — fixed grid, fixed bandwidth, fixed floors, no seeding —
-so reruns are identical (asserted in `tests/test_density.py`).
+**Scientific knobs**: the length scale (`voxel`/`bandwidth`, which also sets the minimum
+peak spacing, §11.3), the `occupancy_floor` (§11.4), and the **`membership_radius`** that
+defines support (§5/§11.4); the excluded-volume parameters are a self-contained steric
+add-on, and `min_support_fraction` (0.5) is the shared selection floor from `selection`.
+Everything is deterministic — fixed grid, fixed bandwidth, fixed floors, no seeding — so
+reruns are identical (asserted in `tests/test_density.py`).
 
-**Cross-family overlap merge.** After the per-type peaks are selected, the density path
-applies the **same family-agnostic overlap merge as k-means** (§5): the pooled features
-are sorted dominant-first (points, then support) and any feature overlapping a stronger
-one already kept is dropped — so a region of space yields **exactly one feature** even
-when a donor and an acceptor field both peak on the same atoms (`density.merge_overlapping`,
-default on; geometric threshold, or an absolute `density.merge_radius`). Excluded-volume
-spheres are added *after* the merge and are exempt (they are receptor markers, not ligand
-chemistry). The dropped basins lose their "kept" flag so the diagnostic plots show it.
-
-The one deliberate difference from k-means that remains: features of one type emerge from
-field peaks rather than a chosen `k`. The two methods are meant to be compared side by
-side from their separate namespaces.
+**Cross-family overlap merge.** After the per-type peaks are selected, a family-agnostic
+overlap merge (§5) runs: the pooled features are sorted dominant-first (points, then
+support) and any feature overlapping a stronger one already kept is dropped — so a region
+of space yields **exactly one feature** even when a donor and an acceptor field both peak
+on the same atoms (`density.merge_overlapping`, default on; **fixed 1 Å `density.merge_radius`**,
+or `null` for the geometric rule). Excluded-volume spheres are added *after* the merge and
+are exempt (they are receptor markers, not ligand chemistry). The dropped basins lose their
+"kept" flag, and every above-floor removal is logged in the `model_summary.md` "Merged
+away … in favour of" table.
 
 **Precedent** (the strategy is an automation of established field/consensus ideas):
 dynophore cloud → super-feature with occurrence frequency (Wolber lab); field-maximum

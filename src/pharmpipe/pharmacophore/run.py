@@ -26,7 +26,7 @@ from ..io.structures import read_protein_atom_coords
 from ..util.paths import ensure_dir
 from .build import best_representative
 from .config import PharmacophoreConfig
-from .consensus import build_consensus
+from .density import build_density
 from .io import write_features_csv, write_json, write_pml, write_representative_sdf
 from .model import Pharmacophore
 from .viz import plot_raw_features
@@ -77,23 +77,26 @@ def _occupancy(n_points: int, n_ligands: int) -> float:
 
 
 def _below_floor_features(
-    result, n_ligands: int, exclude: set[tuple[str, int]],
+    result, n_ligands: int, exclude: set[tuple[str, int]], membership_radius: float,
 ) -> list[tuple[str, int, int, float]]:
-    """Clusters that formed but never became candidates — below the support/size floor —
+    """Peaks that formed but never became candidates — below the support/size floor —
     as ``(family, n_points, n_ligands, support)`` sorted by support then size.
 
-    A cluster is here when its label is absent from the family's ``kept_labels`` *and* it
-    was not displaced by the overlap merge (``exclude`` = the merged-away cluster keys,
-    reported separately). Support is recomputed from the raw assignment.
+    A peak is here when its label is absent from the family's ``kept_labels`` *and* it was
+    not displaced by the overlap merge (``exclude`` = the merged-away keys, reported
+    separately). Support uses the SAME membership radius as the model (distinct ligands
+    with a point within ``membership_radius`` of the peak centre), so the reported support
+    matches the reason the peak was dropped — not the basin count.
     """
     rows: list[tuple[str, int, int, float]] = []
     for a in result.assignments:
         for lbl in sorted(set(a.labels.tolist())):
-            if lbl in a.kept_labels or (a.family, int(lbl)) in exclude:
+            centre = a.centers.get(int(lbl))
+            if lbl in a.kept_labels or (a.family, int(lbl)) in exclude or centre is None:
                 continue
-            mask = a.labels == lbl
-            n_points = int(mask.sum())
-            n_lig = len({lig for lig, m in zip(a.ligand_ids, mask, strict=True) if m})
+            within = np.linalg.norm(a.coords - np.asarray(centre), axis=1) <= membership_radius
+            n_points = int(within.sum())
+            n_lig = len({lig for lig, m in zip(a.ligand_ids, within, strict=True) if m})
             support = n_lig / n_ligands if n_ligands else 0.0
             rows.append((a.family, n_points, n_lig, support))
     rows.sort(key=lambda r: (r[3], r[1]), reverse=True)
@@ -101,7 +104,7 @@ def _below_floor_features(
 
 
 def _write_summary(result, report: LoadReport, n_ligands: int,
-                   path: Path) -> Path:
+                   membership_radius: float, path: Path) -> Path:
     ph: Pharmacophore = result.pharmacophore
     # Excluded-volume spheres are receptor steric markers, not ligand-derived
     # peaks: they carry no label and no support, so they are counted separately
@@ -164,7 +167,7 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
                 f"| {r.dropped_family} | {r.dropped_points} | {r.dropped_ligands} "
                 f"| {r.dropped_support:.2f} | {occ:.2f} | {r.winner_label} |")
     exclude = {(r.dropped_family, r.dropped_cluster_label) for r in merged_away}
-    below = _below_floor_features(result, n_ligands, exclude)
+    below = _below_floor_features(result, n_ligands, exclude, membership_radius)
     if below:
         lines += [
             "", "## Below the support/size floor",
@@ -238,15 +241,16 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
         "tolerance": asdict(cfg.tolerance),
         "created": date.today().isoformat(),
     }
-    ligand_atoms = protein_atoms = scaffold_freq = None
-    if cfg.consensus_method == "density":
-        if cfg.density.scaffold_weighting:
-            scaffold_freq = _scaffold_frequencies(molecules)
-        if cfg.density.excluded_volume and reference_pdb and reference_pdb.exists():
-            ligand_atoms = _ligand_atom_coords(molecules)
-            protein_atoms = read_protein_atom_coords(reference_pdb)
-    result = build_consensus(table, cfg, name, metadata, ligand_atoms=ligand_atoms,
-                             protein_atoms=protein_atoms, scaffold_freq=scaffold_freq)
+    metadata["consensus_method"] = "density"
+    scaffold_freq = _scaffold_frequencies(molecules) if cfg.density.scaffold_weighting else None
+    ligand_atoms = protein_atoms = None
+    if cfg.density.excluded_volume and reference_pdb and reference_pdb.exists():
+        ligand_atoms = _ligand_atom_coords(molecules)
+        protein_atoms = read_protein_atom_coords(reference_pdb)
+    result = build_density(table, cfg.density, cfg.tolerance, name, metadata,
+                           min_support=cfg.selection.min_support_fraction,
+                           ligand_atoms=ligand_atoms, protein_atoms=protein_atoms,
+                           scaffold_freq=scaffold_freq)
 
     rep_id = best_representative(table, result.pharmacophore)
     rep_mol = dict(molecules).get(rep_id) if rep_id else None
@@ -269,7 +273,7 @@ def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfi
         write_pml(result.pharmacophore, out_dir / "pharmacophore.pml",
                   cfg.features.colors, ligand_file=ligand_file),
         _write_summary(result, report, len(molecules),
-                       out_dir / "model_summary.md"),
+                       cfg.density.membership_radius, out_dir / "model_summary.md"),
     ]
     if ligand_file is not None:
         files.append(ligand_file)

@@ -1,4 +1,4 @@
-# gaba_a/orthosteric__positive — ensemble pharmacophore (2 features)
+# gaba_a/orthosteric__positive — ensemble pharmacophore (41 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,16 +17,10 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom PosIonizable_1, pos=[187.835, 222.584, 242.300], vdw=1.250
-color ph4_PosIonizable, PosIonizable_1
-group ph4_PosIonizable, PosIonizable_1
-pseudoatom PosIonizable_1_ctr, pos=[187.835, 222.584, 242.300], label="PosIonizable 1 (0.67)"
-color ph4_PosIonizable, PosIonizable_1_ctr
-group ph4_centers, PosIonizable_1_ctr
-pseudoatom Aromatic_1, pos=[186.728, 220.685, 241.310], vdw=1.250
+pseudoatom Aromatic_1, pos=[186.617, 220.865, 241.222], vdw=1.250
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[186.728, 220.685, 241.310], label="Aromatic 1 (0.67)"
+pseudoatom Aromatic_1_ctr, pos=[186.617, 220.865, 241.222], label="Aromatic 1 (0.67)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
 set surface_quality, 2

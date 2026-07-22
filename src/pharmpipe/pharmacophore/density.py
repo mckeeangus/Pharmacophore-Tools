@@ -1,21 +1,18 @@
 """Density-based consensus strategy for ensemble pharmacophores (Stage 4, pure core).
 
-An alternative to the k-means feature-clustering path (``build.py``) that turns the
-same per-molecule, binding-site-aligned feature points into the same consensus-feature
-output — so it is a drop-in behind the ``consensus_method`` flag and downstream code
-never branches on which ran.
-
-Instead of choosing *k* and partitioning points, it estimates, per feature type, a
-**Gaussian-smoothed occupancy field** over a fixed voxel grid, then reads consensus
-features off the field's local maxima. Each conserved sub-site is its own peak, so
-multiple features of one type fall out natively with no *k* to pick, and the whole
-procedure is deterministic (fixed grid, bandwidth and threshold; no random seeding).
+The sole consensus strategy: it turns per-molecule, binding-site-aligned feature points
+into consensus features by estimating, per feature type, a **Gaussian-smoothed occupancy
+field** (a KDE) over a fixed voxel grid, then reading consensus features off the field's
+local maxima. Each conserved sub-site is its own peak, so multiple features of one type
+fall out natively with no *k* to pick, and the whole procedure is deterministic (fixed
+grid, bandwidth and threshold; no random seeding).
 
 The unit of evidence is the **distinct molecule**, not the raw point: every point is
 weighted by ``1 / (points that molecule contributes to this feature type)`` so a
 molecule that happens to place many points of one type cannot dominate the field
 (optionally also by inverse scaffold frequency). A peak is kept only if the summed
-distinct-molecule weight in its basin clears an occupancy floor.
+distinct-molecule weight in its basin clears an occupancy floor **and** its
+membership-radius support clears the support floor.
 
 Precedent: dynophore cloud -> super-feature with occurrence frequency (Wolber lab);
 field-maximum extraction (GBPM; Baroni et al. FLAPpharm); Gaussian feature-density
@@ -172,18 +169,24 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
             centroid = peaks[p]
             radius = tol.min
         centers[p] = tuple(float(c) for c in centroid)
+        # Support is a HARD-MEMBERSHIP count: a ligand supports this peak only if it has a
+        # feature point within `membership_radius` of the centre (over all family points,
+        # not just the basin), so a far basin outlier no longer inflates support. Point
+        # count and occupancy derive from that member set; the occupancy floor still gates
+        # on the basin's field prominence (`mol_weight`).
+        member = np.linalg.norm(coords - centroid, axis=1) <= dcfg.membership_radius
         mol_weight = float(weights[pts_mask].sum())
-        n_lig = len({lig for lig, m in zip(ligands, pts_mask, strict=True) if m})
+        n_points = int(member.sum())
+        n_lig = len({lig for lig, m in zip(ligands, member, strict=True) if m})
         support = n_lig / n_ligands if n_ligands else 0.0
-        # A peak must clear both the distinct-molecule occupancy floor and the shared
-        # support floor (a pharmacophore feature is present in >= this fraction of the
-        # cell's ligands) — the same support requirement as the k-means path.
+        # A peak must clear both the distinct-molecule occupancy floor and the support
+        # floor (present in >= this fraction of the cell's ligands, within the radius).
         if mol_weight < dcfg.occupancy_floor or support < min_support:
             continue
         kept.append((p, PharmacophoreFeature(
             family=family, x=centers[p][0], y=centers[p][1], z=centers[p][2],
             radius=radius,
-            n_points=int(pts_mask.sum()), n_ligands=n_lig,
+            n_points=n_points, n_ligands=n_lig,
             support=round(support, 4),
             direction=None,   # set when upstream perception supplies per-point vectors
         )))
@@ -233,11 +236,11 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
                   ligand_atoms: np.ndarray | None = None,
                   protein_atoms: np.ndarray | None = None,
                   scaffold_freq: dict[str, int] | None = None) -> BuildResult:
-    """Density consensus: same contract as ``build_pharmacophore`` (k-means path).
+    """The density consensus builder: feature points in -> ``BuildResult`` out.
 
-    ``min_support`` is the shared selection floor: a peak becomes a feature only if at
-    least this fraction of the cell's ligands contribute to it (as in the k-means path).
-    ``ligand_atoms`` / ``protein_atoms`` (both in the aligned frame) enable the
+    ``min_support`` is the selection floor: a peak becomes a feature only if at least this
+    fraction of the cell's ligands have a point within ``dcfg.membership_radius`` of its
+    centre. ``ligand_atoms`` / ``protein_atoms`` (both in the aligned frame) enable the
     excluded-volume spheres; omit them and only ligand-derived features are built.
     """
     assignments: list[ClusterAssignment] = []

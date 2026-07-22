@@ -20,12 +20,12 @@ drawn.** ``--features features.csv`` additionally overlays the raw extracted poi
 (small opaque dots). Omit ``--out`` to stay in an interactive PyMOL window; ``--image
 PATH`` additionally writes a ray-traced PNG snapshot.
 
-``--sweep-out PATH`` writes a **second, separate** visualisation: an occupancy-cutoff
-sweep across PyMOL states. Reading ``features.csv`` (all raw clusters, no overlap merge
-and no support floor), each state raises an occupancy cutoff by 0.05 (occupancy = points
-÷ contributing ligands, uncapped), showing every cluster at or above it — so scrubbing
-states reveals which clusters survive as the threshold rises. ``--sweep-image PATH``
-snapshots state 1 (all clusters).
+``--sweep-out PATH`` writes a **second, separate** visualisation: a support-cutoff sweep
+across 20 PyMOL states. Reading ``features.csv`` (all raw clusters, no overlap merge and
+no support floor), each state raises a support cutoff by 0.05 (support = distinct ligands
+with a point within ``--membership-radius`` of the cluster centre ÷ total ligands),
+showing every cluster at or above it — so scrubbing states 0.05 → 1.00 reveals which
+clusters survive as the bar rises. ``--sweep-image PATH`` snapshots state 1 (all clusters).
 
 By default the clean ``representative_ligand.sdf`` written beside the JSON is shown
 (correct bond orders). Pass ``--compounds DIR`` to overlay the full raw mol2 set
@@ -81,6 +81,9 @@ def _args(argv):
                     help="write a .png snapshot of the sweep (state 1 = all clusters) here")
     ap.add_argument("--min-cluster-size", dest="min_cluster_size", type=int, default=2,
                     help="drop sweep clusters with fewer points than this (matches config)")
+    ap.add_argument("--membership-radius", dest="membership_radius", type=float, default=1.5,
+                    help="sweep support radius (A): a ligand supports a cluster only if it "
+                         "has a point within this of the centre (matches config)")
     return ap.parse_args(argv)
 
 
@@ -109,6 +112,7 @@ def load_compounds(compounds_dir):
 def load_features(json_path):
     with open(json_path, encoding="utf-8") as fh:
         model = json.load(fh)
+    has_features = False
     for i, feat in enumerate(model.get("features", [])):
         family = feat["family"]
         # Excluded-volume markers are receptor steric markers, not ligand chemistry —
@@ -126,10 +130,12 @@ def load_features(json_path):
         cmd.pseudoatom(centre, pos=pos)
         cmd.color(f"ph4_{family}", centre)
         cmd.group("ph4_centers", centre)
-    _show_mesh_spheres()
-    # centres are opaque nonbonded-sphere points, not mesh
-    cmd.hide("mesh", "ph4_centers")
-    cmd.show("nb_spheres", "ph4_centers")
+        has_features = True
+    if has_features:                       # some cells keep only excluded volume -> no spheres
+        _show_mesh_spheres()
+        # centres are opaque nonbonded-sphere points, not mesh
+        cmd.hide("mesh", "ph4_centers")
+        cmd.show("nb_spheres", "ph4_centers")
     return model.get("name", os.path.basename(json_path))
 
 
@@ -145,43 +151,51 @@ def _show_mesh_spheres():
     cmd.show("mesh", "ph4_*")
 
 
-def _read_clusters(features_csv, min_cluster_size):
-    """Per (family, cluster) centroid + occupancy from a features.csv (EV-free by
-    construction). ``occupancy = n_points / distinct ligands`` (uncapped)."""
-    pts = defaultdict(list)
+def _read_clusters(features_csv, n_ligands, membership_radius, min_cluster_size):
+    """Per (family, cluster): centroid + support from a features.csv (EV-free).
+
+    ``support = distinct ligands with a point within ``membership_radius`` of the cluster
+    centre / ``n_ligands`` — the same hard-membership rule the model uses (a far basin
+    outlier does not count). Support is measured over ALL points of the family, so a
+    ligand whose nearest point sits in a neighbouring basin still counts if it reaches."""
+    by_family = defaultdict(list)                 # family -> [(x, y, z, ligand), ...]
+    by_cluster = defaultdict(list)                # (family, cluster) -> [...]
     with open(features_csv, encoding="utf-8") as fh:
         for row in csv.DictReader(fh):
-            pts[(row["family"], row["cluster"])].append(
-                (float(row["x"]), float(row["y"]), float(row["z"]), row["ligand_id"]))
+            pt = (float(row["x"]), float(row["y"]), float(row["z"]), row["ligand_id"])
+            by_family[row["family"]].append(pt)
+            by_cluster[(row["family"], row["cluster"])].append(pt)
+    r2 = membership_radius * membership_radius
     clusters = []
-    for (family, _cl), rows in pts.items():
-        n = len(rows)
-        if n < min_cluster_size:
+    for (family, _cl), rows in by_cluster.items():
+        if len(rows) < min_cluster_size:
             continue
-        n_lig = len({r[3] for r in rows})
+        cx = sum(r[0] for r in rows) / len(rows)
+        cy = sum(r[1] for r in rows) / len(rows)
+        cz = sum(r[2] for r in rows) / len(rows)
+        ligs = {lig for (x, y, z, lig) in by_family[family]
+                if (x - cx) ** 2 + (y - cy) ** 2 + (z - cz) ** 2 <= r2}
         clusters.append({
-            "family": family,
-            "x": sum(r[0] for r in rows) / n,
-            "y": sum(r[1] for r in rows) / n,
-            "z": sum(r[2] for r in rows) / n,
-            "occ": n / n_lig if n_lig else 0.0,
+            "family": family, "x": cx, "y": cy, "z": cz,
+            "support": len(ligs) / n_ligands if n_ligands else 0.0,
         })
     return clusters
 
 
-def load_sweep(features_csv, min_cluster_size, step=0.05):
-    """Build the occupancy-cutoff sweep across states; returns the number of states.
+def load_sweep(features_csv, n_ligands, membership_radius, min_cluster_size, step=0.05):
+    """Build the support-cutoff sweep across 20 states; returns the number of states.
 
     Each raw cluster (no overlap merge, no support floor) is a mesh sphere present in
-    states ``1..floor(occupancy/step)``; a per-state label shows the cutoff. Scrubbing
-    states raises the occupancy threshold from 0.05 to the observed maximum."""
-    clusters = _read_clusters(features_csv, min_cluster_size)
+    states ``1..floor(support/step)`` — so as the state (support cutoff) rises from 0.05
+    to 1.00, poorly-supported clusters drop out and the well-supported ones remain."""
+    clusters = _read_clusters(features_csv, n_ligands, membership_radius, min_cluster_size)
     if not clusters:
         return 0
-    max_occ = max(c["occ"] for c in clusters)
-    n_states = max(20, math.ceil(max_occ / step - 1e-9))
+    n_states = round(1.0 / step)                  # 0.05 .. 1.00 -> 20 states
     for idx, c in enumerate(clusters):
-        k_max = min(n_states, max(1, math.floor(c["occ"] / step + 1e-9)))
+        k_max = min(n_states, math.floor(c["support"] / step + 1e-9))
+        if k_max < 1:                             # support below the lowest cutoff
+            continue
         name = f"{c['family']}_{idx}"
         for k in range(1, k_max + 1):
             cmd.pseudoatom(name, pos=[c["x"], c["y"], c["z"]],
@@ -194,7 +208,7 @@ def load_sweep(features_csv, min_cluster_size, step=0.05):
     cz = sum(c["z"] for c in clusters) / len(clusters)
     for k in range(1, n_states + 1):
         cmd.pseudoatom("sweep_cutoff", pos=[cx, cy, cz], state=k,
-                       label=f"occupancy >= {step * k:.2f}")
+                       label=f"support >= {step * k:.2f}")
     _show_mesh_spheres()
     cmd.hide("everything", "sweep_cutoff")
     cmd.show("labels", "sweep_cutoff")
@@ -260,22 +274,29 @@ def main(argv):
     if args.image:
         _snapshot(args.image)
 
-    # --- occupancy-cutoff sweep (separate file, 20+ states) ---
+    # --- support-cutoff sweep (separate file, 20 states, 0.05 -> 1.00) ---
     if args.sweep_out or args.sweep_image:
         features_csv = args.features or os.path.join(
             os.path.dirname(args.pharmacophore), "features.csv")
         if not os.path.exists(features_csv):
             print(f"sweep skipped: no features.csv ({features_csv})")
             return
+        with open(args.pharmacophore, encoding="utf-8") as fh:
+            n_ligands = int((json.load(fh).get("metadata", {})
+                             .get("source", {}).get("n_ligands", 0)) or 0)
+        if not n_ligands:
+            print("sweep skipped: n_ligands unknown (needs metadata.source.n_ligands)")
+            return
         _new_scene()
         _load_ligand_or_compounds(args, ligand)
-        n_states = load_sweep(features_csv, args.min_cluster_size)
+        n_states = load_sweep(features_csv, n_ligands, args.membership_radius,
+                              args.min_cluster_size)
         if n_states == 0:
             print("sweep skipped: no clusters")
             return
         cmd.orient()
         cmd.set("state", 1)
-        print(f"{name}: occupancy sweep with {n_states} states")
+        print(f"{name}: support sweep with {n_states} states")
         if args.sweep_out:
             cmd.save(args.sweep_out)
             print(f"wrote {args.sweep_out}")

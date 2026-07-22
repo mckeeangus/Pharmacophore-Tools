@@ -2,20 +2,19 @@
 
 - Ligands loaded: **20** (direct=1, template=19)
 - Skipped poses: 0
-- Consensus method: `kmeans`
-- Representative ligand (viz): `7PRX_82H_A801`
-- Features kept: **6**
+- Consensus method: `density`
+- Representative ligand (viz): `3K23_JZN_B2`
+- Features kept: **4**
+- Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor 1 | 69 | 20 | 1.00 | 3.45 |
-| Acceptor 2 | 33 | 19 | 0.95 | 1.74 |
-| Aromatic 1 | 24 | 13 | 0.65 | 1.85 |
-| Aromatic 2 | 14 | 13 | 0.65 | 1.08 |
-| Aromatic 3 | 10 | 10 | 0.50 | 1.00 |
-| Donor 1 | 34 | 19 | 0.95 | 1.79 |
+| Acceptor 1 | 15 | 15 | 0.75 | 1.00 |
+| Aromatic 1 | 14 | 11 | 0.55 | 1.27 |
+| Aromatic 2 | 10 | 10 | 0.50 | 1.00 |
+| Donor 1 | 10 | 10 | 0.50 | 1.00 |
 
 ## Feature resolution
 
@@ -32,9 +31,15 @@ Clusters that formed but never became candidates — below the 0.5 support floor
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| LumpedHydrophobe | 6 | 6 | 0.30 | 1.00 |
-| Donor | 6 | 5 | 0.25 | 1.20 |
+| Acceptor | 8 | 8 | 0.40 | 1.00 |
+| Acceptor | 6 | 6 | 0.30 | 1.00 |
+| LumpedHydrophobe | 4 | 4 | 0.20 | 1.00 |
+| Acceptor | 3 | 3 | 0.15 | 1.00 |
+| Acceptor | 3 | 3 | 0.15 | 1.00 |
+| Donor | 2 | 2 | 0.10 | 1.00 |
+| Aromatic | 2 | 2 | 0.10 | 1.00 |
 | LumpedHydrophobe | 2 | 2 | 0.10 | 1.00 |
+| Donor | 1 | 1 | 0.05 | 1.00 |
 | PosIonizable | 1 | 1 | 0.05 | 1.00 |
 | LumpedHydrophobe | 1 | 1 | 0.05 | 1.00 |
 

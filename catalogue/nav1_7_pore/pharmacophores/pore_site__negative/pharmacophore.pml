@@ -1,4 +1,4 @@
-# nav1_7_pore/pore_site__negative — ensemble pharmacophore (3 features)
+# nav1_7_pore/pore_site__negative — ensemble pharmacophore (40 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,27 +17,4 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[122.639, 123.538, 104.519], vdw=1.250
-color ph4_Acceptor, Acceptor_1
-group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_1_ctr, pos=[122.639, 123.538, 104.519], label="Acceptor 1 (1.00)"
-color ph4_Acceptor, Acceptor_1_ctr
-group ph4_centers, Acceptor_1_ctr
-pseudoatom Donor_1, pos=[121.440, 124.401, 103.772], vdw=1.250
-color ph4_Donor, Donor_1
-group ph4_Donor, Donor_1
-pseudoatom Donor_1_ctr, pos=[121.440, 124.401, 103.772], label="Donor 1 (0.60)"
-color ph4_Donor, Donor_1_ctr
-group ph4_centers, Donor_1_ctr
-pseudoatom Aromatic_1, pos=[123.173, 124.813, 107.114], vdw=1.250
-color ph4_Aromatic, Aromatic_1
-group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[123.173, 124.813, 107.114], label="Aromatic 1 (0.60)"
-color ph4_Aromatic, Aromatic_1_ctr
-group ph4_centers, Aromatic_1_ctr
-set surface_quality, 2
-flag ignore, ph4_*, clear
-show mesh, ph4_*
-hide mesh, ph4_centers
-show nb_spheres, ph4_centers
 orient

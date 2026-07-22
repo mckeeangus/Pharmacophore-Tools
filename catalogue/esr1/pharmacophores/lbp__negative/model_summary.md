@@ -2,20 +2,20 @@
 
 - Ligands loaded: **42** (direct=11, template=31)
 - Skipped poses: 0
-- Consensus method: `kmeans`
-- Representative ligand (viz): `7NDO_RAL_B601`
-- Features kept: **6**
+- Consensus method: `density`
+- Representative ligand (viz): `7RRY_L84_C601`
+- Features kept: **5**
+- Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor 1 | 79 | 36 | 0.86 | 2.19 |
-| Acceptor 2 | 38 | 35 | 0.83 | 1.09 |
-| Acceptor 3 | 36 | 32 | 0.76 | 1.12 |
-| Aromatic 1 | 44 | 42 | 1.00 | 1.05 |
-| Aromatic 2 | 42 | 42 | 1.00 | 1.00 |
-| PosIonizable 1 | 27 | 27 | 0.64 | 1.00 |
+| Acceptor 1 | 28 | 28 | 0.67 | 1.00 |
+| Aromatic 1 | 42 | 42 | 1.00 | 1.00 |
+| Aromatic 2 | 41 | 41 | 0.98 | 1.00 |
+| Donor 1 | 32 | 32 | 0.76 | 1.00 |
+| PosIonizable 1 | 24 | 24 | 0.57 | 1.00 |
 
 ## Feature resolution
 
@@ -32,7 +32,7 @@ Clusters that passed the support/size floor but were displaced by the 1 Å cross
 
 | Feature | Points | Ligands | Support | Occupancy | In favour of |
 |---|---:|---:|---:|---:|---|
-| Donor | 32 | 32 | 0.76 | 1.00 | Acceptor 3 |
+| Acceptor | 32 | 32 | 0.76 | 1.00 | Donor 1 |
 
 ## Below the support/size floor
 
@@ -40,18 +40,14 @@ Clusters that formed but never became candidates — below the 0.5 support floor
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Aromatic | 12 | 12 | 0.29 | 1.00 |
+| Acceptor | 23 | 17 | 0.40 | 1.35 |
+| Acceptor | 17 | 17 | 0.40 | 1.00 |
+| Aromatic | 10 | 10 | 0.24 | 1.00 |
 | Donor | 9 | 9 | 0.21 | 1.00 |
 | Donor | 9 | 9 | 0.21 | 1.00 |
-| Aromatic | 9 | 9 | 0.21 | 1.00 |
-| Aromatic | 8 | 8 | 0.19 | 1.00 |
-| Aromatic | 6 | 6 | 0.14 | 1.00 |
 | Donor | 4 | 4 | 0.10 | 1.00 |
-| Donor | 3 | 3 | 0.07 | 1.00 |
-| Aromatic | 3 | 3 | 0.07 | 1.00 |
-| Donor | 2 | 2 | 0.05 | 1.00 |
 | LumpedHydrophobe | 2 | 2 | 0.05 | 1.00 |
 | PosIonizable | 1 | 1 | 0.02 | 1.00 |
-| Aromatic | 1 | 1 | 0.02 | 1.00 |
+| Aromatic | 0 | 0 | 0.00 | 0.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

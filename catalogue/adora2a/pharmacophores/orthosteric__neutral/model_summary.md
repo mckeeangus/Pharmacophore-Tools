@@ -2,20 +2,17 @@
 
 - Ligands loaded: **5** (template=5)
 - Skipped poses: 0
-- Consensus method: `kmeans`
+- Consensus method: `density`
 - Representative ligand (viz): `8CIC_U30_A1202`
-- Features kept: **6**
+- Features kept: **2**
+- Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor 1 | 7 | 5 | 1.00 | 1.40 |
-| Acceptor 2 | 6 | 5 | 1.00 | 1.20 |
-| Acceptor 3 | 5 | 5 | 1.00 | 1.00 |
-| Aromatic 1 | 12 | 5 | 1.00 | 2.40 |
-| Aromatic 2 | 4 | 3 | 0.60 | 1.33 |
-| Donor 1 | 5 | 4 | 0.80 | 1.25 |
+| Aromatic 1 | 5 | 4 | 0.80 | 1.25 |
+| Donor 1 | 4 | 4 | 0.80 | 1.00 |
 
 ## Feature resolution
 
@@ -32,10 +29,14 @@ Clusters that formed but never became candidates — below the 0.5 support floor
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor | 4 | 2 | 0.40 | 2.00 |
-| Donor | 2 | 2 | 0.40 | 1.00 |
 | Acceptor | 2 | 2 | 0.40 | 1.00 |
-| PosIonizable | 2 | 2 | 0.40 | 1.00 |
+| Donor | 1 | 1 | 0.20 | 1.00 |
+| Donor | 1 | 1 | 0.20 | 1.00 |
+| Donor | 1 | 1 | 0.20 | 1.00 |
 | Acceptor | 1 | 1 | 0.20 | 1.00 |
+| PosIonizable | 1 | 1 | 0.20 | 1.00 |
+| PosIonizable | 1 | 1 | 0.20 | 1.00 |
+| Acceptor | 0 | 0 | 0.00 | 0.00 |
+| Aromatic | 0 | 0 | 0.00 | 0.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

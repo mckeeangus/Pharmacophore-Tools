@@ -1,4 +1,4 @@
-# gr_nr3c1/lbp__negative — ensemble pharmacophore (5 features)
+# gr_nr3c1/lbp__negative — ensemble pharmacophore (6 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -29,6 +29,12 @@ group ph4_Acceptor, Acceptor_2
 pseudoatom Acceptor_2_ctr, pos=[27.163, 6.055, 16.417], label="Acceptor 2 (1.00)"
 color ph4_Acceptor, Acceptor_2_ctr
 group ph4_centers, Acceptor_2_ctr
+pseudoatom Donor_1, pos=[28.806, 7.140, 16.806], vdw=0.500
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Donor_1_ctr, pos=[28.806, 7.140, 16.806], label="Donor 1 (0.67)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
 pseudoatom Aromatic_1, pos=[30.436, 3.441, 12.177], vdw=0.500
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
@@ -47,8 +53,8 @@ group ph4_LumpedHydrophobe, LumpedHydrophobe_2
 pseudoatom LumpedHydrophobe_2_ctr, pos=[27.273, 11.198, 15.443], label="LumpedHydrophobe 2 (0.67)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_2_ctr
 group ph4_centers, LumpedHydrophobe_2_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

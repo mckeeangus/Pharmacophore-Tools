@@ -213,18 +213,25 @@ logged (`kept ← dropped` + ligands) in the JSON provenance and `model_summary.
 `catalogue/pharmacophore_method.md`): features use RDKit **`LumpedHydrophobe`** (one
 centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (3)**
 ligands is **skipped and its output removed** (too few for an ensemble); after
-selection, **overlapping clusters are merged keeping the dominant one — within *and*
-across families** (a donor and acceptor can't share one spot)
-(`merge_overlapping`; geometric threshold = one centre inside the other's sphere, or an
-absolute `merge_radius`); each feature's **tolerance radius = density-quantile core**
-(the radius enclosing `tolerance.quantile`=0.75 of the cluster's density mass, robust to
-the far in-cluster outliers that inflated the old RMS; `rmsd` mode still selectable) and
-is stored in the JSON — **not** the PyMOL sphere size: the viz now draws every ligand
-feature as a **fixed 0.5 Å-radius sphere (1.0 Å diameter) plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS`
-in `io.py` / `scripts/pymol_pharmacophore.py`; excluded-volume markers keep their own
-radius and get no centre point), so tolerance is read from the model, not by eye. Family
-colours: HBD/Donor pink, HBA/Acceptor green, hydrophobic cyan, Aromatic yellow,
-PosIonizable red, NegIonizable orange, ExcludedVolume grey.
+selection, **overlapping clusters are merged keeping the dominant one (more points, then
+support) — within *and* across families** (a donor and acceptor can't share one spot)
+(`merge_overlapping`; **fixed 1 Å centre-to-centre cutoff**, `merge_radius: 1.0` — merge
+when the 0.5 Å viz spheres would touch; `null` restores the old geometric 1–3 Å rule). A
+bidentate OH's donor+acceptor sit ~0.6–1 Å apart, so its acceptor still merges into the
+denser donor; `model_summary.md`'s **"Merged away … in favour of X"** table records every
+above-floor removal (a second table lists below-floor clusters), and **`Support`** (distinct
+ligands ÷ total, ≤1) sits beside an uncapped **`Occupancy`** (points ÷ ligands, honest
+>1.0). Each feature's **tolerance radius = density-quantile core** (the radius enclosing
+`tolerance.quantile`=0.75 of the cluster's density mass, robust to the far in-cluster
+outliers that inflated the old RMS; `rmsd` mode still selectable) and is stored in the JSON
+— **not** the PyMOL sphere size: the viz draws every ligand feature as a **fixed 0.5 Å-radius
+mesh (wireframe) sphere (1.0 Å diameter) plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS`
+in `io.py` / `scripts/pymol_pharmacophore.py`), so tolerance is read from the model, not by
+eye. **Excluded-Volume markers are part of the model but NOT drawn** in any view. Each model
+dir also carries a **`<cell>_sweep.pse`** occupancy-cutoff sweep (all raw clusters across
+PyMOL states, cutoff 0.05→observed max; baked for every model via `--render-sweeps`, and by
+the one-shot). Family colours: HBD/Donor pink, HBA/Acceptor green, hydrophobic cyan,
+Aromatic yellow, PosIonizable red, NegIonizable orange, ExcludedVolume grey.
 
 **Method choices — density** (§11 of `pharmacophore_method.md`): per feature type, pool
 points and weight each by **1/(points that molecule contributes to the type)** so the

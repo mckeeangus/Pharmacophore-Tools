@@ -1,4 +1,4 @@
-# hiv1_protease/active_site__negative — ensemble pharmacophore (9 features)
+# hiv1_protease/active_site__negative — ensemble pharmacophore (10 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -35,18 +35,24 @@ group ph4_Acceptor, Acceptor_2
 pseudoatom Acceptor_2_ctr, pos=[-8.576, 15.456, 25.814], label="Acceptor 2 (0.94)"
 color ph4_Acceptor, Acceptor_2_ctr
 group ph4_centers, Acceptor_2_ctr
-pseudoatom Acceptor_3, pos=[-9.271, 15.544, 30.658], vdw=0.500
+pseudoatom Acceptor_3, pos=[-10.863, 19.033, 27.920], vdw=0.500
 color ph4_Acceptor, Acceptor_3
 group ph4_Acceptor, Acceptor_3
-pseudoatom Acceptor_3_ctr, pos=[-9.271, 15.544, 30.658], label="Acceptor 3 (0.66)"
+pseudoatom Acceptor_3_ctr, pos=[-10.863, 19.033, 27.920], label="Acceptor 3 (0.88)"
 color ph4_Acceptor, Acceptor_3_ctr
 group ph4_centers, Acceptor_3_ctr
-pseudoatom Acceptor_4, pos=[-7.976, 17.989, 20.655], vdw=0.500
+pseudoatom Acceptor_4, pos=[-9.271, 15.544, 30.658], vdw=0.500
 color ph4_Acceptor, Acceptor_4
 group ph4_Acceptor, Acceptor_4
-pseudoatom Acceptor_4_ctr, pos=[-7.976, 17.989, 20.655], label="Acceptor 4 (0.72)"
+pseudoatom Acceptor_4_ctr, pos=[-9.271, 15.544, 30.658], label="Acceptor 4 (0.66)"
 color ph4_Acceptor, Acceptor_4_ctr
 group ph4_centers, Acceptor_4_ctr
+pseudoatom Acceptor_5, pos=[-7.976, 17.989, 20.655], vdw=0.500
+color ph4_Acceptor, Acceptor_5
+group ph4_Acceptor, Acceptor_5
+pseudoatom Acceptor_5_ctr, pos=[-7.976, 17.989, 20.655], label="Acceptor 5 (0.72)"
+color ph4_Acceptor, Acceptor_5_ctr
+group ph4_centers, Acceptor_5_ctr
 pseudoatom Aromatic_1, pos=[-4.877, 18.168, 26.406], vdw=0.500
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
@@ -71,8 +77,8 @@ group ph4_Aromatic, Aromatic_4
 pseudoatom Aromatic_4_ctr, pos=[-9.965, 15.850, 33.482], label="Aromatic 4 (0.53)"
 color ph4_Aromatic, Aromatic_4_ctr
 group ph4_centers, Aromatic_4_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

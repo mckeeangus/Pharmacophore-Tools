@@ -4,19 +4,21 @@
 - Skipped poses: 0
 - Consensus method: `density`
 - Representative ligand (viz): `1BWB_146_B641`
-- Features kept: **6**
+- Features kept: **8**
 - Excluded-volume spheres (receptor markers): **40**
 
-Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
+**Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
-| Feature | Points | Ligands | Support |
-|---|---:|---:|---:|
-| Acceptor 1 | 69 | 30 | 0.94 |
-| Acceptor 2 | 56 | 24 | 0.75 |
-| Acceptor 3 | 32 | 23 | 0.72 |
-| Aromatic 1 | 28 | 23 | 0.72 |
-| Aromatic 2 | 26 | 23 | 0.72 |
-| Donor 1 | 70 | 28 | 0.88 |
+| Feature | Points | Ligands | Support | Occupancy |
+|---|---:|---:|---:|---:|
+| Acceptor 1 | 69 | 30 | 0.94 | 2.30 |
+| Acceptor 2 | 56 | 24 | 0.75 | 2.33 |
+| Acceptor 3 | 32 | 23 | 0.72 | 1.39 |
+| Aromatic 1 | 28 | 23 | 0.72 | 1.22 |
+| Aromatic 2 | 26 | 23 | 0.72 | 1.13 |
+| Aromatic 3 | 22 | 18 | 0.56 | 1.22 |
+| Aromatic 4 | 22 | 17 | 0.53 | 1.29 |
+| Donor 1 | 70 | 28 | 0.88 | 2.50 |
 
 ## Feature resolution
 
@@ -29,28 +31,33 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | PosIonizable ← Donor | 27 | 1BWB_146_B641, 1HVH_Q82_B265, 1HVR_XK2_A263, 1ODX_0E8_A201, 1QBR_XV6_A638, 2FDE_385_A101, 2WHH_GLU_A2302, 4Q1Y_017_A106, 4Q5M_ROC_A1101, 4U7V_3EN_B101, 5DGU_5B7_A201, 5DGW_5B5_A201, 5KAO_G43_A500, 6DJ1_AB1_B201, 6DJ5_G52_B201, 6DJ7_G10_B201, 6DV0_GA8_B201, 6DV4_GA5_B201, 6E9A_J0S_B201, 7DOZ_1UN_A1102, 8ESX_X7B_B203 |
 | PosIonizable ← LumpedHydrophobe | 2 | 1BWB_146_B641 |
 
-## Not selected
+## Merged away
 
-Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+Clusters that passed the support/size floor but were displaced by the 1 Å cross-family overlap merge — one feature per region, keeping the denser one. Each row states in favour of which kept feature it was removed.
 
-| Feature | Points | Ligands | Mean support |
-|---|---:|---:|---:|
-| Acceptor | 39 | 28 | 0.88 |
-| Aromatic | 22 | 18 | 0.56 |
-| Aromatic | 22 | 17 | 0.53 |
-| Donor | 18 | 15 | 0.47 |
-| Donor | 19 | 14 | 0.44 |
-| PosIonizable | 12 | 12 | 0.38 |
-| PosIonizable | 10 | 9 | 0.28 |
-| LumpedHydrophobe | 9 | 9 | 0.28 |
-| LumpedHydrophobe | 8 | 8 | 0.25 |
-| LumpedHydrophobe | 5 | 5 | 0.16 |
-| Acceptor | 6 | 4 | 0.12 |
-| LumpedHydrophobe | 4 | 4 | 0.12 |
-| PosIonizable | 2 | 2 | 0.06 |
-| LumpedHydrophobe | 2 | 2 | 0.06 |
-| NegIonizable | 2 | 1 | 0.03 |
-| PosIonizable | 1 | 1 | 0.03 |
-| LumpedHydrophobe | 1 | 1 | 0.03 |
+| Feature | Points | Ligands | Support | Occupancy | In favour of |
+|---|---:|---:|---:|---:|---|
+| Acceptor | 39 | 28 | 0.88 | 1.39 | Donor 1 |
+
+## Below the support/size floor
+
+Clusters that formed but never became candidates — below the 0.5 support floor or the minimum cluster size.
+
+| Feature | Points | Ligands | Support | Occupancy |
+|---|---:|---:|---:|---:|
+| Donor | 18 | 15 | 0.47 | 1.20 |
+| Donor | 19 | 14 | 0.44 | 1.36 |
+| PosIonizable | 12 | 12 | 0.38 | 1.00 |
+| PosIonizable | 10 | 9 | 0.28 | 1.11 |
+| LumpedHydrophobe | 9 | 9 | 0.28 | 1.00 |
+| LumpedHydrophobe | 8 | 8 | 0.25 | 1.00 |
+| LumpedHydrophobe | 5 | 5 | 0.16 | 1.00 |
+| Acceptor | 6 | 4 | 0.12 | 1.50 |
+| LumpedHydrophobe | 4 | 4 | 0.12 | 1.00 |
+| PosIonizable | 2 | 2 | 0.06 | 1.00 |
+| LumpedHydrophobe | 2 | 2 | 0.06 | 1.00 |
+| NegIonizable | 2 | 1 | 0.03 | 2.00 |
+| PosIonizable | 1 | 1 | 0.03 | 1.00 |
+| LumpedHydrophobe | 1 | 1 | 0.03 | 1.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

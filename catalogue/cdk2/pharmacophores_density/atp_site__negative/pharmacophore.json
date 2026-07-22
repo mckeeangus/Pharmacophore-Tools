@@ -38,7 +38,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -46,7 +46,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -56,7 +56,7 @@
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
-        "merge_radius": null,
+        "merge_radius": 1.0,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -65,7 +65,7 @@
         "ev_max": 40
       }
     },
-    "n_features": 42,
+    "n_features": 44,
     "representative_ligand": "1URW_I1P_A1300",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
@@ -205,6 +205,18 @@
       "label": "Acceptor 1"
     },
     {
+      "family": "Donor",
+      "x": 7.750967555025178,
+      "y": -23.499977794703778,
+      "z": -23.929284486626056,
+      "radius": 3.0,
+      "n_points": 146,
+      "n_ligands": 78,
+      "support": 0.8966,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
       "family": "Acceptor",
       "x": 3.3636805817784916,
       "y": -26.654779561980956,
@@ -215,6 +227,18 @@
       "support": 0.6092,
       "direction": null,
       "label": "Acceptor 2"
+    },
+    {
+      "family": "Aromatic",
+      "x": 4.772555698069247,
+      "y": -25.6663260188239,
+      "z": -25.899299295131964,
+      "radius": 3.0,
+      "n_points": 66,
+      "n_ligands": 60,
+      "support": 0.6897,
+      "direction": null,
+      "label": "Aromatic 1"
     },
     {
       "family": "ExcludedVolume",

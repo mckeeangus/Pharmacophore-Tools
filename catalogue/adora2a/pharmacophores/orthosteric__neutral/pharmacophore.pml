@@ -1,4 +1,4 @@
-# adora2a/orthosteric__neutral — ensemble pharmacophore (5 features)
+# adora2a/orthosteric__neutral — ensemble pharmacophore (6 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -35,6 +35,12 @@ group ph4_Acceptor, Acceptor_2
 pseudoatom Acceptor_2_ctr, pos=[0.693, 97.874, 52.954], label="Acceptor 2 (1.00)"
 color ph4_Acceptor, Acceptor_2_ctr
 group ph4_centers, Acceptor_2_ctr
+pseudoatom Acceptor_3, pos=[-0.913, 95.680, 51.441], vdw=0.500
+color ph4_Acceptor, Acceptor_3
+group ph4_Acceptor, Acceptor_3
+pseudoatom Acceptor_3_ctr, pos=[-0.913, 95.680, 51.441], label="Acceptor 3 (1.00)"
+color ph4_Acceptor, Acceptor_3_ctr
+group ph4_centers, Acceptor_3_ctr
 pseudoatom Donor_1, pos=[-2.367, 99.088, 51.984], vdw=0.500
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
@@ -47,8 +53,8 @@ group ph4_Aromatic, Aromatic_2
 pseudoatom Aromatic_2_ctr, pos=[3.191, 99.138, 56.062], label="Aromatic 2 (0.60)"
 color ph4_Aromatic, Aromatic_2_ctr
 group ph4_centers, Aromatic_2_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

@@ -17,7 +17,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,7 +36,7 @@
         "random_state": 0
       }
     },
-    "n_features": 2,
+    "n_features": 3,
     "representative_ligand": "4XNX_41X_A707",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
@@ -111,6 +111,18 @@
       "support": 0.96,
       "direction": null,
       "label": "Aromatic 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": 130.1403448275862,
+      "y": 129.47948275862066,
+      "z": 132.50310344827582,
+      "radius": 3.0,
+      "n_points": 29,
+      "n_ligands": 16,
+      "support": 0.64,
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "PosIonizable",

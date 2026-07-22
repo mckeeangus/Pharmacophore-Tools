@@ -16,7 +16,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -34,7 +34,7 @@
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
-        "merge_radius": null,
+        "merge_radius": 1.0,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -43,8 +43,8 @@
         "ev_max": 40
       }
     },
-    "n_features": 42,
-    "representative_ligand": "5KIR_RCX_A601",
+    "n_features": 44,
+    "representative_ligand": "5IKR_ID8_A601",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
         "events": 9,
@@ -79,6 +79,30 @@
       "support": 1.0,
       "direction": null,
       "label": "Aromatic 1"
+    },
+    {
+      "family": "Donor",
+      "x": 25.680662865502917,
+      "y": 3.897389741012941,
+      "z": 32.886389741012906,
+      "radius": 3.0,
+      "n_points": 4,
+      "n_ligands": 4,
+      "support": 0.8,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "NegIonizable",
+      "x": 27.089215579479472,
+      "y": 4.281921761623377,
+      "z": 32.855000000000004,
+      "radius": 3.0,
+      "n_points": 4,
+      "n_ligands": 4,
+      "support": 0.8,
+      "direction": null,
+      "label": "NegIonizable 1"
     },
     {
       "family": "Aromatic",

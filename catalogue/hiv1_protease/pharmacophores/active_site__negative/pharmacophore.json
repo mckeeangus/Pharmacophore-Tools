@@ -17,7 +17,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -36,7 +36,7 @@
         "random_state": 0
       }
     },
-    "n_features": 9,
+    "n_features": 10,
     "representative_ligand": "6DV4_GA5_B201",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
@@ -154,6 +154,18 @@
     },
     {
       "family": "Acceptor",
+      "x": -10.862605263157894,
+      "y": 19.033157894736846,
+      "z": 27.920421052631582,
+      "radius": 1.4561374610254552,
+      "n_points": 38,
+      "n_ligands": 28,
+      "support": 0.875,
+      "direction": null,
+      "label": "Acceptor 3"
+    },
+    {
+      "family": "Acceptor",
       "x": -9.270828571428572,
       "y": 15.54442857142857,
       "z": 30.65831428571429,
@@ -162,7 +174,7 @@
       "n_ligands": 21,
       "support": 0.6562,
       "direction": null,
-      "label": "Acceptor 3"
+      "label": "Acceptor 4"
     },
     {
       "family": "Acceptor",
@@ -174,7 +186,7 @@
       "n_ligands": 23,
       "support": 0.7188,
       "direction": null,
-      "label": "Acceptor 4"
+      "label": "Acceptor 5"
     },
     {
       "family": "Aromatic",

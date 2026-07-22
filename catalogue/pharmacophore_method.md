@@ -312,9 +312,14 @@ A candidate cluster becomes a pharmacophore feature only if it is both **populou
 
 Support is a **per-feature** quantity, and `model_summary.md` reports it that way — one
 row per feature (peak), labelled `<Family> <n>` (e.g. `Donor 1`, `Donor 2`) so two
-features of the same family are distinguished. The same label + support annotates each
+features of the same family are distinguished, with an **`Occupancy`** column
+(points-per-ligand, uncapped; §9) beside `Support`. The same label + support annotates each
 kept peak in the `raw_features_<family>.png` plots and names the feature objects in the
-`.pml` session, so the tables and the visualisations line up.
+`.pml` session, so the tables and the visualisations line up. Two further tables record
+what did *not* enter the model: **"Merged away"** — clusters that cleared the support/size
+floor but were displaced by the 1 Å overlap merge, each *in favour of* the kept feature
+that won its region (§5) — and **"Below the support/size floor"** — clusters that never
+became candidates.
 
 Candidate features that pass these filters from **every family** are then pooled and
 sorted **largest first** (more points, then higher support). The merge (next) and an
@@ -338,14 +343,19 @@ largest-first list, a candidate is dropped if it overlaps any feature already ke
 the first (largest, then highest-support) feature accepted for a region wins, whatever
 its family. This is why the merge runs over the pooled set rather than per family.
 
-"Overlap" uses a **non-arbitrary, geometry-derived threshold** rather than a magic
-number: two features overlap when their centre-to-centre distance is **less than the
-larger of their two tolerance radii** — i.e. one centre lies *inside* the other's
-sphere. Because the radius is each cluster's own spatial spread (§6), the merge
-distance scales with the data instead of being a fixed cutoff. (An absolute cutoff can
-still be forced with `selection.merge_radius`, e.g. `0.75` Å, if a fixed value is ever
-wanted.) Dropped clusters also lose their "kept" flag, so the diagnostic plots (§7)
-show the merge.
+"Overlap" uses a **fixed 1 Å centre-to-centre cutoff** (`selection.merge_radius: 1.0`):
+two features merge when their centres are within 1 Å — exactly when the 0.5 Å-radius
+viz spheres (§6) would touch. This is a small, predictable reach that only collapses
+**genuinely coincident** features. (The earlier default was a *geometric* rule —
+`merge_radius: null`, threshold = the larger of the two tolerance radii, i.e. 1–3 Å —
+which over-reached: a diffuse donor with a 2.6 Å radius could swallow a distinct
+acceptor 2 Å away. Set `merge_radius: null` to restore it.) The tie-break is **point
+count** (then support), so where two families coincide the *denser* cluster wins. One
+consequence to know: a **bidentate hydroxyl** places its donor and acceptor ~0.6–1 Å
+apart, so at 1 Å the acceptor is still merged into the (usually denser) donor — the
+`model_summary.md` **"Merged away"** table records every such removal and *in favour of*
+which kept feature, so it is explicit rather than silent. Dropped clusters also lose
+their "kept" flag, so the diagnostic plots (§7) show the merge.
 
 ---
 
@@ -382,14 +392,14 @@ sits, not the outermost members).
 **Note — it is no longer the PyMOL sphere size.** Drawing each sphere at its tolerance
 radius (up to 3 Å) swamped the scene and buried the ligand, so the PyMOL views
 (`pharmacophore.pml` and `scripts/pymol_pharmacophore.py`) now render every ligand feature
-as a **fixed-radius sphere (`PH4_SPHERE_RADIUS = 0.5 Å`, i.e. a 1.0 Å-diameter ball)**
-plus an **opaque centre pseudoatom** (a nonbonded-sphere point marker carrying the
-`<Family> <n> (support)` label). The 0.5 Å radius mirrors the overlap-merge rule (§5):
-two such spheres just touch when their centres are ~1 Å apart, i.e. exactly when the
-model would have collapsed them into one feature. Excluded-volume markers keep their own
-steric radius and get **no** centre point.
-The true tolerance stays in the JSON; inspect it there (or via `model_summary.md`) rather
-than by sphere size.
+as a **fixed-radius mesh (wireframe) sphere (`PH4_SPHERE_RADIUS = 0.5 Å`, i.e. a 1.0 Å-
+diameter ball)** plus an **opaque centre pseudoatom** (a nonbonded-sphere point marker
+carrying the `<Family> <n> (support)` label). The 0.5 Å radius mirrors the overlap-merge
+rule (§5): two such spheres just touch when their centres are 1 Å apart, i.e. exactly when
+the model would have collapsed them into one feature. **Excluded-Volume (EV) markers are
+part of the model but are NOT drawn** in any view (they are receptor steric markers, not
+ligand chemistry, and clutter the scene). The true tolerance stays in the JSON; inspect it
+there (or via `model_summary.md`) rather than by sphere size.
 
 ---
 
@@ -443,12 +453,12 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 
 **Sizes in the visualisations** encode two different, deliberately distinct things:
 
-- **PyMOL feature spheres** — a **fixed 0.5 Å** radius (a 1.0 Å-diameter ball, matching
-  the §5 overlap-merge rule — spheres just touch when features' centres are ~1 Å apart,
-  i.e. when they would merge), with an opaque centre
-  pseudoatom marking each feature's exact position (excluded-volume markers keep their
-  own radius and get no centre point). (The feature's tolerance radius is *not* shown as
-  sphere size any more — read it from the JSON / `model_summary.md`.)
+- **PyMOL feature spheres** — a **fixed 0.5 Å** radius **mesh (wireframe) sphere** (a 1.0 Å-
+  diameter ball, matching the §5 overlap-merge rule — spheres just touch when features'
+  centres are 1 Å apart, i.e. when they would merge), with an opaque centre pseudoatom
+  marking each feature's exact position. **Excluded-Volume markers are not drawn** (receptor
+  steric markers, not chemistry). (The feature's tolerance radius is *not* shown as sphere
+  size any more — read it from the JSON / `model_summary.md`.)
 - **`raw_features_<family>.png` cluster-centre markers** — the marker **area scales with
   the cluster's point count** (its population / local density): a bigger marker means
   more raw feature points were collapsed into that centre. Kept clusters are drawn as a
@@ -457,6 +467,27 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 
 So "cluster size" means *spread* on the model spheres and *population/density* on the
 diagnostic markers — both are stated on the artifacts they appear on.
+
+### Occupancy-cutoff sweep (`<cell>_sweep.pse`)
+
+Alongside the kept-model view, every model dir carries a **separate** sweep visualisation
+baked by `scripts/pymol_pharmacophore.py --sweep-out` (and, for a one-shot directory build,
+automatically). It reads `features.csv` — **all raw clusters, with no 1 Å overlap merge and
+no support floor** — and lays them across **PyMOL states**: each state raises an
+**occupancy** cutoff by 0.05 (state 1 = ≥ 0.05, showing everything), and a cluster is
+present only in states up to its own occupancy, so scrubbing states upward reveals which
+clusters survive as the threshold rises. States run from 0.05 to the model's **observed max
+occupancy**, so the movie is ≥ 20 states and runs **past 1.0** whenever a cluster is denser
+than one point per ligand. Clusters are mesh spheres (family colours); a per-state label
+shows the current cutoff. This is the tool for judging, by eye, how the population thins as
+the support/occupancy bar is raised — Excluded-Volume never appears (it is not in
+`features.csv`).
+
+**Support vs occupancy.** `support` = distinct ligands contributing ÷ total ligands
+(≤ 1.0; it drives the 0.5 selection floor — "present in most molecules"). `occupancy` =
+points ÷ contributing ligands (points-per-ligand), which is **> 1.0** when a ligand drops
+several same-family points into one cluster, so `n_points ≥ n_ligands` is normal. Occupancy
+is reported **honestly, never clamped**, in `model_summary.md` and is the sweep axis.
 
 ---
 

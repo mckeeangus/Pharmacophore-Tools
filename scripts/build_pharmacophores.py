@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Stage 4 CLI: build ensemble pharmacophores from aligned compound sets.
 
-Three modes:
+Four modes:
 
   * single directory  -- one-shot model from any folder of aligned ``*.mol2``:
         pixi run build-pharmacophores --input DIR --out DIR --smiles ligands.csv
@@ -9,11 +9,14 @@ Three modes:
         pixi run build-pharmacophores --target gr_nr3c1
   * whole catalogue   -- every cell of every target:
         pixi run build-pharmacophores --catalogue
+  * render sweeps     -- bake the occupancy-sweep .pse for every built model (viz env):
+        pixi run build-pharmacophores --render-sweeps
 
 The ``--input`` one-shot runs the whole local methodology end-to-end for one aligned
 directory: (A) protonate the ligands to their pH-7.4 microstate via the isolated
 ``prep`` env (reused if already present in ``--out``), (B) build the model in-process,
-(C) bake a PyMOL ``.pse`` + ray-traced ``.png`` via the ``viz`` env. It requires a
+(C) bake the kept-model PyMOL ``.pse``/``.png`` **and** the occupancy-sweep
+``.pse``/``.png`` via the ``viz`` env. It requires a
 ``--smiles`` HET->SMILES CSV (the heavy-atom mol2 need it for both protonation and clean
 bond perception); ``--reference-pdb`` enables density excluded volume, and
 ``--force-protonate`` / ``--allow-unprotonated`` / ``--no-render`` tune the steps. It
@@ -99,7 +102,8 @@ def _protonate(smiles_csv: Path, out_csv: Path, force: bool) -> bool:
 
 
 def _render(model_dir: Path, name: str) -> None:
-    """Bake a ``.pse`` + ray-traced ``.png`` from the model JSON via the ``viz`` env.
+    """Bake the kept-model ``.pse``/``.png`` **and** the occupancy-sweep ``.pse``/``.png``
+    from the model JSON via the ``viz`` env.
 
     Non-fatal: the model artifacts are already on disk, so a PyMOL failure only warns.
     """
@@ -107,12 +111,56 @@ def _render(model_dir: Path, name: str) -> None:
     cmd = [_pixi(), "run", "-e", "viz", "pymol", "-cq", str(script), "--",
            "--pharmacophore", str(model_dir / "pharmacophore.json"),
            "--out", str(model_dir / f"{name}.pse"),
-           "--image", str(model_dir / f"{name}.png")]
+           "--image", str(model_dir / f"{name}.png"),
+           "--sweep-out", str(model_dir / f"{name}_sweep.pse"),
+           "--sweep-image", str(model_dir / f"{name}_sweep.png")]
     print(f"  render: {' '.join(cmd)}")
     result = subprocess.run(cmd, cwd=REPO, check=False)
     if result.returncode != 0:
         log.warning("render failed (exit %d); model artifacts are still written",
                     result.returncode)
+
+
+def _render_sweep(model_dir: Path) -> bool:
+    """Bake only the occupancy-sweep ``<cell>_sweep.pse`` for one built model dir.
+
+    The kept-model view stays the offline ``.pml``; this adds the interactive sweep.
+    Non-fatal (returns False on failure); needs the ``viz`` env for PyMOL.
+    """
+    script = REPO / "scripts" / "pymol_pharmacophore.py"
+    cmd = [_pixi(), "run", "-e", "viz", "pymol", "-cq", str(script), "--",
+           "--pharmacophore", str(model_dir / "pharmacophore.json"),
+           "--sweep-out", str(model_dir / f"{model_dir.name}_sweep.pse")]
+    return subprocess.run(cmd, cwd=REPO, check=False).returncode == 0
+
+
+def _model_dirs() -> list[Path]:
+    """Every built catalogue model dir (k-means + density) with a JSON + features.csv."""
+    dirs: list[Path] = []
+    for slug_dir in sorted(p for p in CATALOGUE_DIR.iterdir() if p.is_dir()):
+        for ns in _NAMESPACE.values():
+            base = slug_dir / ns
+            if not base.is_dir():
+                continue
+            dirs.extend(sorted(
+                cell for cell in base.iterdir()
+                if (cell / "pharmacophore.json").exists()
+                and (cell / "features.csv").exists()))
+    return dirs
+
+
+def _render_all_sweeps() -> int:
+    """Render the occupancy-sweep ``.pse`` for every built catalogue model."""
+    dirs = _model_dirs()
+    ok = 0
+    for d in dirs:
+        print(f"sweep: {d}")
+        if _render_sweep(d):
+            ok += 1
+        else:
+            log.warning("sweep render failed for %s", d)
+    print(f"\nRendered {ok}/{len(dirs)} occupancy-sweep .pse file(s).")
+    return 0 if ok == len(dirs) else 1
 
 
 def _cells(slug: str) -> list[Path]:
@@ -198,6 +246,9 @@ def main(argv=None) -> int:
     mode.add_argument("--input", type=Path, help="a single directory of aligned mol2")
     mode.add_argument("--target", help="build every cell of one catalogue target (slug)")
     mode.add_argument("--catalogue", action="store_true", help="every cell of every target")
+    mode.add_argument("--render-sweeps", dest="render_sweeps", action="store_true",
+                      help="bake the occupancy-sweep .pse for every built catalogue model "
+                           "(viz env; run after a --catalogue build)")
     ap.add_argument("--out", type=Path, help="output dir (required with --input)")
     ap.add_argument("--smiles", type=Path,
                     help="HET->SMILES csv (unique_ligands.csv); required with --input")
@@ -215,6 +266,9 @@ def main(argv=None) -> int:
                     help="override consensus_method (kmeans=default; density writes to "
                          "the pharmacophores_density/ namespace)")
     args = ap.parse_args(argv)
+
+    if args.render_sweeps:
+        return _render_all_sweeps()
 
     cfg = load_pharmacophore_config(args.config)
     if args.method:

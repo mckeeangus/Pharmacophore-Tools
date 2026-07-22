@@ -83,11 +83,12 @@ density:
                          #   weight >= this (units: effective molecules)
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency
   # Collapse overlapping features across families so a region of space yields exactly
-  # one feature (same geometric rule as the k-means path). merge_radius null = geometric
-  # (one centre inside the other's tolerance sphere); a number forces an absolute cutoff.
-  # Excluded-volume spheres are exempt (they are receptor markers, not ligand chemistry).
+  # one feature (same rule as the k-means path). 1.0 = fixed 1 A cutoff (features merge
+  # when the 0.5 A-radius viz spheres would overlap); null = geometric (larger tolerance
+  # radius, 1-3 A, which over-reaches). Excluded-volume spheres are exempt (receptor
+  # markers, not ligand chemistry).
   merge_overlapping: true
-  merge_radius: null
+  merge_radius: 1.0
   # Excluded-volume spheres: receptor atoms that line the pocket but no ligand reaches.
   excluded_volume: true
   ev_shell: 5.0          # consider protein atoms within this (A) of the ligand cloud
@@ -106,17 +107,22 @@ selection:
   min_support_fraction: 0.5
   min_cluster_size: 2          # and at least this many feature points
   top_n_per_family: null       # optional cap on kept clusters per family (null = all)
-  # Collapse near-coincident kept features of the SAME family: if two kept clusters
-  # sit on top of each other in space, keep only the larger (more points, then more
-  # support). This removes the duplicate spheres that appear when k-means oversplits
+  # Collapse near-coincident kept features — CROSS-FAMILY (a donor and an acceptor
+  # that land on the same spot cannot both describe one binding position): walking the
+  # pooled features strongest-first (more points, then more support), drop any candidate
+  # whose centre falls within `merge_radius` of an already-kept feature, keeping the
+  # dominant one. This also removes the duplicate spheres k-means makes when it oversplits
   # a single dense lobe.
   merge_overlapping: true
-  # Centre-to-centre distance (Angstrom) below which two same-family kept features
-  # are merged. `null` -> geometric rule: merge when the centres are closer than the
-  # larger of the two tolerance radii (i.e. one centre lies inside the other's
-  # sphere) — a non-arbitrary threshold that scales with each cluster's own spread.
-  # Set a number (e.g. 0.75) to force an absolute cutoff instead.
-  merge_radius: null
+  # Centre-to-centre distance (Angstrom) below which two kept features are merged.
+  # 1.0 = a fixed 1 A cutoff: features merge exactly when the 0.5 A-radius viz spheres
+  # (see tolerance / PH4_SPHERE_RADIUS) would overlap — a small, predictable reach that
+  # only collapses genuinely coincident features. `null` -> geometric rule instead (merge
+  # when centres are closer than the larger of the two tolerance radii, i.e. 1-3 A, which
+  # over-reaches). A bidentate hydroxyl's donor and acceptor sit ~0.6-1 A apart, so at 1 A
+  # the acceptor is still merged into the donor; the model_summary "Merged away" table
+  # records every such removal and in favour of which feature.
+  merge_radius: 1.0
 
 # --- Tolerance (kept feature sphere radius, Angstrom) -----------------------
 tolerance:

@@ -16,7 +16,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -24,7 +24,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -35,7 +35,7 @@
         "random_state": 0
       }
     },
-    "n_features": 2,
+    "n_features": 3,
     "representative_ligand": "2XYT_TC9_F1206",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
@@ -83,6 +83,18 @@
       "support": 0.6667,
       "direction": null,
       "label": "Acceptor 2"
+    },
+    {
+      "family": "Donor",
+      "x": 170.75233333333333,
+      "y": 120.70616666666666,
+      "z": 182.50233333333333,
+      "radius": 2.3839135715597335,
+      "n_points": 6,
+      "n_ligands": 5,
+      "support": 0.5556,
+      "direction": null,
+      "label": "Donor 1"
     }
   ]
 }

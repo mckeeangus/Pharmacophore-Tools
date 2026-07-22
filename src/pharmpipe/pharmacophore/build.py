@@ -36,9 +36,27 @@ class ClusterAssignment:
 
 
 @dataclass
+class MergeRecord:
+    """One overlap-merge removal: a candidate that passed the support/size floor but was
+    displaced by a stronger, already-kept feature within ``merge_radius``. Recorded so the
+    report can say *why* an above-floor feature is absent and *in favour of* which one.
+    ``winner_label`` is filled after ``finalize_features`` numbers the kept features."""
+
+    dropped_family: str
+    dropped_points: int
+    dropped_ligands: int
+    dropped_support: float
+    dropped_cluster_label: int
+    winner_family: str
+    winner_cluster_label: int
+    winner_label: str = ""
+
+
+@dataclass
 class BuildResult:
     pharmacophore: Pharmacophore
     assignments: list[ClusterAssignment] = field(default_factory=list)
+    merged_away: list[MergeRecord] = field(default_factory=list)
 
 
 def _weighted_quantile(values: np.ndarray, weights: np.ndarray, q: float) -> float:
@@ -96,7 +114,9 @@ def _overlaps(a: PharmacophoreFeature, b: PharmacophoreFeature,
 
 def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, _P]],
                        merge_radius: float | None,
-                       ) -> list[tuple[PharmacophoreFeature, _P]]:
+                       ) -> tuple[list[tuple[PharmacophoreFeature, _P]],
+                                  list[tuple[PharmacophoreFeature, _P,
+                                             PharmacophoreFeature, _P]]]:
     """Greedily drop overlapping features, keeping the largest in each region.
 
     ``candidates`` must already be sorted strongest-first (more points, then more
@@ -106,13 +126,39 @@ def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, _P]],
     Overlap ignores family on purpose: two features of *different* families that
     occupy the same spot (e.g. a donor and an acceptor) cannot both describe one
     binding position, so the dominant one displaces the other.
+
+    Returns ``(accepted, dropped)`` where each ``dropped`` entry is
+    ``(dropped_feat, dropped_payload, winner_feat, winner_payload)`` — the first
+    already-accepted feature that displaced it — for the "Merged away" report.
     """
     accepted: list[tuple[PharmacophoreFeature, _P]] = []
+    dropped: list[tuple[PharmacophoreFeature, _P,
+                        PharmacophoreFeature, _P]] = []
     for feat, payload in candidates:
-        if any(_overlaps(feat, kept, merge_radius) for kept, _ in accepted):
-            continue
-        accepted.append((feat, payload))
-    return accepted
+        winner = next(((kfeat, kpay) for kfeat, kpay in accepted
+                       if _overlaps(feat, kfeat, merge_radius)), None)
+        if winner is None:
+            accepted.append((feat, payload))
+        else:
+            dropped.append((feat, payload, winner[0], winner[1]))
+    return accepted, dropped
+
+
+def _merge_records(
+    dropped: list[tuple[PharmacophoreFeature, tuple[str, int],
+                        PharmacophoreFeature, tuple[str, int]]],
+    label_index: dict[str, dict[int, tuple[str, float]]],
+) -> list[MergeRecord]:
+    """Turn raw merge drops into ``MergeRecord``s, resolving the winner's final label."""
+    records: list[MergeRecord] = []
+    for dfeat, (_dfam, dlabel), _wfeat, (wfam, wlabel) in dropped:
+        winner_label = label_index.get(wfam, {}).get(wlabel, (wfam, 0.0))[0]
+        records.append(MergeRecord(
+            dropped_family=dfeat.family, dropped_points=dfeat.n_points,
+            dropped_ligands=dfeat.n_ligands, dropped_support=dfeat.support,
+            dropped_cluster_label=dlabel, winner_family=wfam,
+            winner_cluster_label=wlabel, winner_label=winner_label))
+    return records
 
 
 def _candidate_features(family: str, coords: np.ndarray, labels: np.ndarray,
@@ -205,8 +251,9 @@ def build_pharmacophore(table: FeatureTable, clusterer: Clusterer, sel: Selectio
     # heads each overlap region; merge then caps operate on the pooled set so
     # overlap resolution spans families, not just within one.
     pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
+    dropped: list = []
     if sel.merge_overlapping:
-        pooled = _merge_overlapping(pooled, sel.merge_radius)
+        pooled, dropped = _merge_overlapping(pooled, sel.merge_radius)
     if sel.top_n_per_family is not None:
         pooled = _cap_per_family(pooled, sel.top_n_per_family)
     features, kept_by_family, label_index = finalize_features(pooled)
@@ -217,7 +264,8 @@ def build_pharmacophore(table: FeatureTable, clusterer: Clusterer, sel: Selectio
     meta.setdefault("clustering", clusterer.describe())
     meta["n_features"] = len(features)
     ph = Pharmacophore(name=name, features=features, metadata=meta)
-    return BuildResult(pharmacophore=ph, assignments=assignments)
+    return BuildResult(pharmacophore=ph, assignments=assignments,
+                       merged_away=_merge_records(dropped, label_index))
 
 
 def best_representative(table: FeatureTable, ph: Pharmacophore) -> str | None:

@@ -89,15 +89,13 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
         lines.append(f"set_color ph4_{fam}, [{col[0]}, {col[1]}, {col[2]}]")
     lines.append("")
     for i, feat in enumerate(ph.features):
+        # Excluded-volume markers are receptor steric markers, not ligand chemistry —
+        # they stay in the JSON model but are never drawn in the visualisation.
+        if feat.family == EV_FAMILY:
+            continue
         obj = (feat.label or f"{feat.family} {i}").replace(" ", "_")
         pos = f"pos=[{feat.x:.3f}, {feat.y:.3f}, {feat.z:.3f}]"
-        if feat.family == EV_FAMILY:
-            # excluded-volume markers: their own steric radius, no centre point.
-            lines.append(f"pseudoatom {obj}, {pos}, vdw={feat.radius:.3f}")
-            lines.append(f"color ph4_{feat.family}, {obj}")
-            lines.append(f"group ph4_{feat.family}, {obj}")
-            continue
-        # fixed-radius translucent sphere ...
+        # fixed-radius mesh (wireframe) sphere ...
         lines.append(f"pseudoatom {obj}, {pos}, vdw={PH4_SPHERE_RADIUS:.3f}")
         lines.append(f"color ph4_{feat.family}, {obj}")
         lines.append(f"group ph4_{feat.family}, {obj}")
@@ -107,8 +105,8 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
                      f"label=\"{feat.label or feat.family} ({feat.support:.2f})\"")
         lines.append(f"color ph4_{feat.family}, {ctr}")
         lines.append(f"group ph4_centers, {ctr}")
-    lines += ["show spheres, ph4_*", "set sphere_transparency, 0.4, ph4_*",
-              "hide spheres, ph4_centers", "show nb_spheres, ph4_centers",
+    lines += ["flag ignore, ph4_*, clear", "show mesh, ph4_*",
+              "hide mesh, ph4_centers", "show nb_spheres, ph4_centers",
               "orient", ""]
     path.write_text("\n".join(lines), encoding="utf-8")
     return path

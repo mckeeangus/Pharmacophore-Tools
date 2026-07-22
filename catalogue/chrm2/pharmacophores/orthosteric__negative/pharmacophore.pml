@@ -1,4 +1,4 @@
-# chrm2/orthosteric__negative — ensemble pharmacophore (5 features)
+# chrm2/orthosteric__negative — ensemble pharmacophore (6 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -23,6 +23,12 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_1_ctr, pos=[138.842, 144.637, 102.231], label="Acceptor 1 (1.00)"
 color ph4_Acceptor, Acceptor_1_ctr
 group ph4_centers, Acceptor_1_ctr
+pseudoatom Donor_1, pos=[139.691, 145.652, 102.101], vdw=0.500
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Donor_1_ctr, pos=[139.691, 145.652, 102.101], label="Donor 1 (1.00)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
 pseudoatom PosIonizable_1, pos=[132.396, 144.975, 102.435], vdw=0.500
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
@@ -47,8 +53,8 @@ group ph4_Aromatic, Aromatic_2
 pseudoatom Aromatic_2_ctr, pos=[138.979, 148.266, 101.347], label="Aromatic 2 (0.67)"
 color ph4_Aromatic, Aromatic_2_ctr
 group ph4_centers, Aromatic_2_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

@@ -4,15 +4,17 @@
 - Skipped poses: 5 (7SA0_8KQ_A305:fail, 8FP0_RRC_A303:fail, 9JJ5_A1EB0_A301:fail, 9UAU_A1EOM_A301:fail, 9UGF_A1EO5_A301:fail)
 - Consensus method: `density`
 - Representative ligand (viz): `1URW_I1P_A1300`
-- Features kept: **2**
+- Features kept: **4**
 - Excluded-volume spheres (receptor markers): **40**
 
-Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
+**Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
-| Feature | Points | Ligands | Support |
-|---|---:|---:|---:|
-| Acceptor 1 | 208 | 85 | 0.98 |
-| Acceptor 2 | 91 | 53 | 0.61 |
+| Feature | Points | Ligands | Support | Occupancy |
+|---|---:|---:|---:|---:|
+| Acceptor 1 | 208 | 85 | 0.98 | 2.45 |
+| Acceptor 2 | 91 | 53 | 0.61 | 1.72 |
+| Aromatic 1 | 66 | 60 | 0.69 | 1.10 |
+| Donor 1 | 146 | 78 | 0.90 | 1.87 |
 
 ## Feature resolution
 
@@ -24,25 +26,30 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | NegIonizable ← Acceptor | 10 | 4FKG_4CK_A300, 4FKU_60K_A303, 6Q4D_HHT_A301, 6Q4G_HJK_A301, 6Q4H_HGH_A301, 6Q4I_HGK_A302, 6Q4J_HHB_A303, 7M2F_YOS_A901, 7RWE_7TH_A301 |
 | PosIonizable ← Donor | 41 | 1GZ8_MBP_A1300, 1H00_FAP_A1300, 1H00_FCP_A1400, 1URW_I1P_A1300, 2VTT_LZD_A1299, 3PY0_SU9_A301, 3R73_X87_A920, 3RAI_X85_A923, 3RM6_18Z_A478, 4ACM_7YG_A1302, 4FKJ_11K_A301, 4FKP_LS5_A301, 4FKT_48K_A301, 4FKV_61K_A301, 5ANE_SZL_A1299, 5ANJ_ZXC_A1299, 5IEY_6AE_A1001, 6GUK_FC8_A301, 6Q4E_HH5_A303, 6Q4G_HJK_A301, 6Q4H_HGH_A301, 7M2F_YOS_A901, 7QHL_D5P_C301, 7RA5_3I3_A301, 7VDU_65L_A301, 8ERN_WQK_A402, 8RU8_I74_A301, 9UAW_A1EOO_A301 |
 
-## Not selected
+## Merged away
 
-Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+Clusters that passed the support/size floor but were displaced by the 1 Å cross-family overlap merge — one feature per region, keeping the denser one. Each row states in favour of which kept feature it was removed.
 
-| Feature | Points | Ligands | Mean support |
-|---|---:|---:|---:|
-| Aromatic | 154 | 86 | 0.99 |
-| Donor | 146 | 78 | 0.90 |
-| Aromatic | 66 | 60 | 0.69 |
-| LumpedHydrophobe | 25 | 24 | 0.28 |
-| Donor | 22 | 21 | 0.24 |
-| PosIonizable | 16 | 16 | 0.18 |
-| PosIonizable | 13 | 10 | 0.11 |
-| PosIonizable | 8 | 7 | 0.08 |
-| PosIonizable | 7 | 7 | 0.08 |
-| NegIonizable | 6 | 6 | 0.07 |
-| LumpedHydrophobe | 2 | 2 | 0.02 |
-| NegIonizable | 1 | 1 | 0.01 |
-| NegIonizable | 1 | 1 | 0.01 |
-| NegIonizable | 1 | 1 | 0.01 |
+| Feature | Points | Ligands | Support | Occupancy | In favour of |
+|---|---:|---:|---:|---:|---|
+| Aromatic | 154 | 86 | 0.99 | 1.79 | Acceptor 1 |
+
+## Below the support/size floor
+
+Clusters that formed but never became candidates — below the 0.5 support floor or the minimum cluster size.
+
+| Feature | Points | Ligands | Support | Occupancy |
+|---|---:|---:|---:|---:|
+| LumpedHydrophobe | 25 | 24 | 0.28 | 1.04 |
+| Donor | 22 | 21 | 0.24 | 1.05 |
+| PosIonizable | 16 | 16 | 0.18 | 1.00 |
+| PosIonizable | 13 | 10 | 0.11 | 1.30 |
+| PosIonizable | 8 | 7 | 0.08 | 1.14 |
+| PosIonizable | 7 | 7 | 0.08 | 1.00 |
+| NegIonizable | 6 | 6 | 0.07 | 1.00 |
+| LumpedHydrophobe | 2 | 2 | 0.02 | 1.00 |
+| NegIonizable | 1 | 1 | 0.01 | 1.00 |
+| NegIonizable | 1 | 1 | 0.01 | 1.00 |
+| NegIonizable | 1 | 1 | 0.01 | 1.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

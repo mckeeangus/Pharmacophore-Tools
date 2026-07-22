@@ -67,18 +67,29 @@ def _feature_ordinal(feat) -> int:
         return 0
 
 
-def _unselected_features(result, n_ligands: int) -> list[tuple[str, int, int, float]]:
-    """Clusters/peaks that were formed but did NOT enter the model, as
-    ``(family, n_points, n_ligands, support)`` sorted by support then size.
+def _occupancy(n_points: int, n_ligands: int) -> float:
+    """Points per contributing ligand (``n_points / n_ligands``), uncapped.
 
-    A cluster is "not selected" when its label is absent from the family's
-    ``kept_labels`` — it fell below the support/size floor (§5/§11.4) or was displaced by
-    the cross-family overlap merge. Support is recomputed here from the raw assignment.
+    One ligand can drop several same-family points into one cluster, so this is ≥ 1.0
+    whenever a cluster is denser than one point per ligand. Unlike ``support`` (a
+    fraction of ligands, ≤ 1.0) it is reported honestly, never clamped."""
+    return n_points / n_ligands if n_ligands else 0.0
+
+
+def _below_floor_features(
+    result, n_ligands: int, exclude: set[tuple[str, int]],
+) -> list[tuple[str, int, int, float]]:
+    """Clusters that formed but never became candidates — below the support/size floor —
+    as ``(family, n_points, n_ligands, support)`` sorted by support then size.
+
+    A cluster is here when its label is absent from the family's ``kept_labels`` *and* it
+    was not displaced by the overlap merge (``exclude`` = the merged-away cluster keys,
+    reported separately). Support is recomputed from the raw assignment.
     """
     rows: list[tuple[str, int, int, float]] = []
     for a in result.assignments:
         for lbl in sorted(set(a.labels.tolist())):
-            if lbl in a.kept_labels:
+            if lbl in a.kept_labels or (a.family, int(lbl)) in exclude:
                 continue
             mask = a.labels == lbl
             n_points = int(mask.sum())
@@ -112,14 +123,17 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
         lines.append(f"- Excluded-volume spheres (receptor markers): **{n_ev}**")
     lines += [
         "",
-        "Support is the fraction of the cell's ligands that contribute to a feature "
-        "(one row per feature / peak; all features are kept only above the support floor).",
+        "**Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; "
+        "features are kept only above the 0.5 support floor). **Occupancy** = points ÷ "
+        "contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser "
+        "than one point per ligand). One row per feature / peak.",
         "",
-        "| Feature | Points | Ligands | Support |", "|---|---:|---:|---:|",
+        "| Feature | Points | Ligands | Support | Occupancy |", "|---|---:|---:|---:|---:|",
     ]
     for f in sorted(ligand_feats, key=lambda f: (f.family, _feature_ordinal(f))):
         lines.append(
-            f"| {f.label or f.family} | {f.n_points} | {f.n_ligands} | {f.support:.2f} |")
+            f"| {f.label or f.family} | {f.n_points} | {f.n_ligands} | {f.support:.2f} "
+            f"| {_occupancy(f.n_points, f.n_ligands):.2f} |")
     resolution = ph.metadata.get("feature_resolution") or {}
     if resolution:
         lines += [
@@ -133,17 +147,35 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
             kept, dropped = pair.split("<-", 1)
             ligs = ", ".join(info["ligands"])
             lines.append(f"| {kept} ← {dropped} | {info['events']} | {ligs} |")
-    unselected = _unselected_features(result, n_ligands)
-    if unselected:
+    merged_away = getattr(result, "merged_away", [])
+    if merged_away:
         lines += [
-            "", "## Not selected",
-            "", "Clusters/peaks that formed but did not enter the model — below the "
-            "support or size floor, or displaced by the cross-family overlap merge — with "
-            "their mean support (fraction of the cell's ligands contributing).",
-            "", "| Feature | Points | Ligands | Mean support |", "|---|---:|---:|---:|",
+            "", "## Merged away",
+            "", "Clusters that passed the support/size floor but were displaced by the "
+            "1 Å cross-family overlap merge — one feature per region, keeping the denser "
+            "one. Each row states in favour of which kept feature it was removed.",
+            "", "| Feature | Points | Ligands | Support | Occupancy | In favour of |",
+            "|---|---:|---:|---:|---:|---|",
         ]
-        for fam, npts, nlig, sup in unselected:
-            lines.append(f"| {fam} | {npts} | {nlig} | {sup:.2f} |")
+        for r in sorted(merged_away,
+                        key=lambda r: (r.dropped_support, r.dropped_points), reverse=True):
+            occ = _occupancy(r.dropped_points, r.dropped_ligands)
+            lines.append(
+                f"| {r.dropped_family} | {r.dropped_points} | {r.dropped_ligands} "
+                f"| {r.dropped_support:.2f} | {occ:.2f} | {r.winner_label} |")
+    exclude = {(r.dropped_family, r.dropped_cluster_label) for r in merged_away}
+    below = _below_floor_features(result, n_ligands, exclude)
+    if below:
+        lines += [
+            "", "## Below the support/size floor",
+            "", "Clusters that formed but never became candidates — below the 0.5 support "
+            "floor or the minimum cluster size.",
+            "", "| Feature | Points | Ligands | Support | Occupancy |",
+            "|---|---:|---:|---:|---:|",
+        ]
+        for fam, npts, nlig, sup in below:
+            lines.append(
+                f"| {fam} | {npts} | {nlig} | {sup:.2f} | {_occupancy(npts, nlig):.2f} |")
     lines += ["", "See `pharmacophore.json` (model), `features.csv` (raw points + "
               "cluster ids), and `raw_features_*.png` (per-family point distributions, "
               "each kept peak annotated with its label and support)."]

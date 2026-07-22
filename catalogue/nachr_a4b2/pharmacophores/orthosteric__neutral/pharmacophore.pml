@@ -1,4 +1,4 @@
-# nachr_a4b2/orthosteric__neutral — ensemble pharmacophore (2 features)
+# nachr_a4b2/orthosteric__neutral — ensemble pharmacophore (3 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -29,8 +29,14 @@ group ph4_Acceptor, Acceptor_2
 pseudoatom Acceptor_2_ctr, pos=[163.229, 124.030, 181.111], label="Acceptor 2 (0.67)"
 color ph4_Acceptor, Acceptor_2_ctr
 group ph4_centers, Acceptor_2_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+pseudoatom Donor_1, pos=[170.752, 120.706, 182.502], vdw=0.500
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Donor_1_ctr, pos=[170.752, 120.706, 182.502], label="Donor 1 (0.56)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

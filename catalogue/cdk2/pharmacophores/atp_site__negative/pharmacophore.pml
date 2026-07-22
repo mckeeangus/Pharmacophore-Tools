@@ -1,4 +1,4 @@
-# cdk2/atp_site__negative — ensemble pharmacophore (3 features)
+# cdk2/atp_site__negative — ensemble pharmacophore (4 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -35,8 +35,14 @@ group ph4_Donor, Donor_1
 pseudoatom Donor_1_ctr, pos=[7.357, -24.602, -24.812], label="Donor 1 (0.79)"
 color ph4_Donor, Donor_1_ctr
 group ph4_centers, Donor_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+pseudoatom Aromatic_1, pos=[4.767, -25.854, -26.218], vdw=0.500
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
+pseudoatom Aromatic_1_ctr, pos=[4.767, -25.854, -26.218], label="Aromatic 1 (0.68)"
+color ph4_Aromatic, Aromatic_1_ctr
+group ph4_centers, Aromatic_1_ctr
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

@@ -38,7 +38,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -46,7 +46,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "kmeans",
     "clustering": {
       "method": "kmeans_silhouette",
@@ -57,8 +57,8 @@
         "random_state": 0
       }
     },
-    "n_features": 3,
-    "representative_ligand": "9GNO_A1INI_A301",
+    "n_features": 4,
+    "representative_ligand": "1H00_FAP_A1300",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
         "events": 84,
@@ -219,6 +219,18 @@
       "support": 0.7931,
       "direction": null,
       "label": "Donor 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": 4.767472307692308,
+      "y": -25.85418358974359,
+      "z": -26.218302051282045,
+      "radius": 1.3268101453715455,
+      "n_points": 65,
+      "n_ligands": 59,
+      "support": 0.6782,
+      "direction": null,
+      "label": "Aromatic 1"
     }
   ]
 }

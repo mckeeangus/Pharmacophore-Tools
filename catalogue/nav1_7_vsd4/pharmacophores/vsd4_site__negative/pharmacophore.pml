@@ -1,4 +1,4 @@
-# nav1_7_vsd4/vsd4_site__negative — ensemble pharmacophore (10 features)
+# nav1_7_vsd4/vsd4_site__negative — ensemble pharmacophore (11 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -29,6 +29,12 @@ group ph4_Acceptor, Acceptor_2
 pseudoatom Acceptor_2_ctr, pos=[93.433, 134.595, 136.779], label="Acceptor 2 (1.00)"
 color ph4_Acceptor, Acceptor_2_ctr
 group ph4_centers, Acceptor_2_ctr
+pseudoatom Aromatic_1, pos=[91.315, 131.284, 133.783], vdw=0.500
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
+pseudoatom Aromatic_1_ctr, pos=[91.315, 131.284, 133.783], label="Aromatic 1 (1.00)"
+color ph4_Aromatic, Aromatic_1_ctr
+group ph4_centers, Aromatic_1_ctr
 pseudoatom Donor_1, pos=[88.061, 135.946, 139.658], vdw=0.500
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
@@ -41,12 +47,12 @@ group ph4_Acceptor, Acceptor_3
 pseudoatom Acceptor_3_ctr, pos=[92.818, 136.613, 135.127], label="Acceptor 3 (1.00)"
 color ph4_Acceptor, Acceptor_3_ctr
 group ph4_centers, Acceptor_3_ctr
-pseudoatom Aromatic_1, pos=[90.128, 135.700, 137.770], vdw=0.500
-color ph4_Aromatic, Aromatic_1
-group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[90.128, 135.700, 137.770], label="Aromatic 1 (1.00)"
-color ph4_Aromatic, Aromatic_1_ctr
-group ph4_centers, Aromatic_1_ctr
+pseudoatom Aromatic_2, pos=[90.128, 135.700, 137.770], vdw=0.500
+color ph4_Aromatic, Aromatic_2
+group ph4_Aromatic, Aromatic_2
+pseudoatom Aromatic_2_ctr, pos=[90.128, 135.700, 137.770], label="Aromatic 2 (1.00)"
+color ph4_Aromatic, Aromatic_2_ctr
+group ph4_centers, Aromatic_2_ctr
 pseudoatom Donor_2, pos=[91.898, 134.778, 134.190], vdw=0.500
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
@@ -77,8 +83,8 @@ group ph4_LumpedHydrophobe, LumpedHydrophobe_1
 pseudoatom LumpedHydrophobe_1_ctr, pos=[90.502, 124.464, 133.206], label="LumpedHydrophobe 1 (0.67)"
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1_ctr
 group ph4_centers, LumpedHydrophobe_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

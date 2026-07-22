@@ -35,8 +35,8 @@ group ph4_Aromatic, Aromatic_1
 pseudoatom Aromatic_1_ctr, pos=[170.850, 122.801, 188.266], label="Aromatic 1 (0.78)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

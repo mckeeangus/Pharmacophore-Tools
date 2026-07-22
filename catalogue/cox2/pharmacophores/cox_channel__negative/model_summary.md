@@ -6,14 +6,14 @@
 - Representative ligand (viz): `5IKR_ID8_A601`
 - Features kept: **4**
 
-Support is the fraction of the cell's ligands that contribute to a feature (one row per feature / peak; all features are kept only above the support floor).
+**Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
-| Feature | Points | Ligands | Support |
-|---|---:|---:|---:|
-| Aromatic 1 | 5 | 5 | 1.00 |
-| Aromatic 2 | 3 | 3 | 0.60 |
-| Donor 1 | 3 | 3 | 0.60 |
-| NegIonizable 1 | 3 | 3 | 0.60 |
+| Feature | Points | Ligands | Support | Occupancy |
+|---|---:|---:|---:|---:|
+| Aromatic 1 | 5 | 5 | 1.00 | 1.00 |
+| Aromatic 2 | 3 | 3 | 0.60 | 1.00 |
+| Donor 1 | 3 | 3 | 0.60 | 1.00 |
+| NegIonizable 1 | 3 | 3 | 0.60 | 1.00 |
 
 ## Feature resolution
 
@@ -24,16 +24,16 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 | Aromatic ← LumpedHydrophobe | 9 | 5F1A_SAL_A601, 5IKR_ID8_A601, 5IKT_TLF_B601, 5IKV_FLF_B601, 5KIR_RCX_A601 |
 | NegIonizable ← Acceptor | 4 | 5F1A_SAL_A601, 5IKR_ID8_A601, 5IKT_TLF_B601, 5IKV_FLF_B601 |
 
-## Not selected
+## Below the support/size floor
 
-Clusters/peaks that formed but did not enter the model — below the support or size floor, or displaced by the cross-family overlap merge — with their mean support (fraction of the cell's ligands contributing).
+Clusters that formed but never became candidates — below the 0.5 support floor or the minimum cluster size.
 
-| Feature | Points | Ligands | Mean support |
-|---|---:|---:|---:|
-| Acceptor | 3 | 2 | 0.40 |
-| Acceptor | 2 | 1 | 0.20 |
-| Donor | 1 | 1 | 0.20 |
-| NegIonizable | 1 | 1 | 0.20 |
-| Aromatic | 1 | 1 | 0.20 |
+| Feature | Points | Ligands | Support | Occupancy |
+|---|---:|---:|---:|---:|
+| Acceptor | 3 | 2 | 0.40 | 1.50 |
+| Acceptor | 2 | 1 | 0.20 | 2.00 |
+| Donor | 1 | 1 | 0.20 | 1.00 |
+| NegIonizable | 1 | 1 | 0.20 | 1.00 |
+| Aromatic | 1 | 1 | 0.20 | 1.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

@@ -1,4 +1,4 @@
-# esr1/lbp__negative — ensemble pharmacophore (45 features)
+# esr1/lbp__negative — ensemble pharmacophore (48 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -35,140 +35,38 @@ group ph4_Aromatic, Aromatic_2
 pseudoatom Aromatic_2_ctr, pos=[22.342, -11.633, 3.839], label="Aromatic 2 (1.00)"
 color ph4_Aromatic, Aromatic_2_ctr
 group ph4_centers, Aromatic_2_ctr
-pseudoatom Acceptor_2, pos=[25.586, -14.237, 7.216], vdw=0.500
+pseudoatom Acceptor_2, pos=[27.315, -7.344, 7.054], vdw=0.500
 color ph4_Acceptor, Acceptor_2
 group ph4_Acceptor, Acceptor_2
-pseudoatom Acceptor_2_ctr, pos=[25.586, -14.237, 7.216], label="Acceptor 2 (0.74)"
+pseudoatom Acceptor_2_ctr, pos=[27.315, -7.344, 7.054], label="Acceptor 2 (0.83)"
 color ph4_Acceptor, Acceptor_2_ctr
 group ph4_centers, Acceptor_2_ctr
+pseudoatom Donor_1, pos=[20.565, -10.977, 1.734], vdw=0.500
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Donor_1_ctr, pos=[20.565, -10.977, 1.734], label="Donor 1 (0.76)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
+pseudoatom Aromatic_3, pos=[25.333, -13.964, 10.239], vdw=0.500
+color ph4_Aromatic, Aromatic_3
+group ph4_Aromatic, Aromatic_3
+pseudoatom Aromatic_3_ctr, pos=[25.333, -13.964, 10.239], label="Aromatic 3 (0.74)"
+color ph4_Aromatic, Aromatic_3_ctr
+group ph4_centers, Aromatic_3_ctr
+pseudoatom Acceptor_3, pos=[25.586, -14.237, 7.216], vdw=0.500
+color ph4_Acceptor, Acceptor_3
+group ph4_Acceptor, Acceptor_3
+pseudoatom Acceptor_3_ctr, pos=[25.586, -14.237, 7.216], label="Acceptor 3 (0.74)"
+color ph4_Acceptor, Acceptor_3_ctr
+group ph4_centers, Acceptor_3_ctr
 pseudoatom PosIonizable_1, pos=[28.236, -3.955, 5.908], vdw=0.500
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
 pseudoatom PosIonizable_1_ctr, pos=[28.236, -3.955, 5.908], label="PosIonizable 1 (0.64)"
 color ph4_PosIonizable, PosIonizable_1_ctr
 group ph4_centers, PosIonizable_1_ctr
-pseudoatom ExcludedVolume_5, pos=[33.188, 1.054, 4.719], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_5
-group ph4_ExcludedVolume, ExcludedVolume_5
-pseudoatom ExcludedVolume_6, pos=[33.227, -1.902, 3.813], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_6
-group ph4_ExcludedVolume, ExcludedVolume_6
-pseudoatom ExcludedVolume_7, pos=[28.122, 0.997, 6.548], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_7
-group ph4_ExcludedVolume, ExcludedVolume_7
-pseudoatom ExcludedVolume_8, pos=[29.279, 1.531, 4.516], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_8
-group ph4_ExcludedVolume, ExcludedVolume_8
-pseudoatom ExcludedVolume_9, pos=[30.725, 1.479, 4.337], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_9
-group ph4_ExcludedVolume, ExcludedVolume_9
-pseudoatom ExcludedVolume_10, pos=[28.921, -10.884, 14.814], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_10
-group ph4_ExcludedVolume, ExcludedVolume_10
-pseudoatom ExcludedVolume_11, pos=[26.881, 1.361, 9.061], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_11
-group ph4_ExcludedVolume, ExcludedVolume_11
-pseudoatom ExcludedVolume_12, pos=[30.343, -12.194, 9.143], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_12
-group ph4_ExcludedVolume, ExcludedVolume_12
-pseudoatom ExcludedVolume_13, pos=[27.757, -13.535, 4.494], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_13
-group ph4_ExcludedVolume, ExcludedVolume_13
-pseudoatom ExcludedVolume_14, pos=[22.871, -10.914, 13.769], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_14
-group ph4_ExcludedVolume, ExcludedVolume_14
-pseudoatom ExcludedVolume_15, pos=[28.585, 1.177, 3.204], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_15
-group ph4_ExcludedVolume, ExcludedVolume_15
-pseudoatom ExcludedVolume_16, pos=[31.116, 2.164, 6.447], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_16
-group ph4_ExcludedVolume, ExcludedVolume_16
-pseudoatom ExcludedVolume_17, pos=[24.659, -19.345, 12.758], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_17
-group ph4_ExcludedVolume, ExcludedVolume_17
-pseudoatom ExcludedVolume_18, pos=[31.662, -9.418, 4.601], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_18
-group ph4_ExcludedVolume, ExcludedVolume_18
-pseudoatom ExcludedVolume_19, pos=[26.360, -18.527, 13.017], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_19
-group ph4_ExcludedVolume, ExcludedVolume_19
-pseudoatom ExcludedVolume_20, pos=[27.047, 1.126, 3.177], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_20
-group ph4_ExcludedVolume, ExcludedVolume_20
-pseudoatom ExcludedVolume_21, pos=[26.692, -0.707, 10.874], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_21
-group ph4_ExcludedVolume, ExcludedVolume_21
-pseudoatom ExcludedVolume_22, pos=[27.144, -10.685, 2.986], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_22
-group ph4_ExcludedVolume, ExcludedVolume_22
-pseudoatom ExcludedVolume_23, pos=[25.450, -7.697, 3.496], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_23
-group ph4_ExcludedVolume, ExcludedVolume_23
-pseudoatom ExcludedVolume_24, pos=[17.583, -10.527, 3.908], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_24
-group ph4_ExcludedVolume, ExcludedVolume_24
-pseudoatom ExcludedVolume_25, pos=[27.433, -15.297, 5.183], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_25
-group ph4_ExcludedVolume, ExcludedVolume_25
-pseudoatom ExcludedVolume_26, pos=[21.052, -19.509, 11.128], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_26
-group ph4_ExcludedVolume, ExcludedVolume_26
-pseudoatom ExcludedVolume_27, pos=[27.347, -11.496, 15.706], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_27
-group ph4_ExcludedVolume, ExcludedVolume_27
-pseudoatom ExcludedVolume_28, pos=[32.104, -14.383, 8.975], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_28
-group ph4_ExcludedVolume, ExcludedVolume_28
-pseudoatom ExcludedVolume_29, pos=[25.559, 0.797, 9.339], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_29
-group ph4_ExcludedVolume, ExcludedVolume_29
-pseudoatom ExcludedVolume_30, pos=[20.775, -9.180, -0.593], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_30
-group ph4_ExcludedVolume, ExcludedVolume_30
-pseudoatom ExcludedVolume_31, pos=[21.383, -15.404, 12.211], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_31
-group ph4_ExcludedVolume, ExcludedVolume_31
-pseudoatom ExcludedVolume_32, pos=[22.831, -2.321, 3.243], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_32
-group ph4_ExcludedVolume, ExcludedVolume_32
-pseudoatom ExcludedVolume_33, pos=[22.828, -15.419, 4.503], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_33
-group ph4_ExcludedVolume, ExcludedVolume_33
-pseudoatom ExcludedVolume_34, pos=[28.672, -11.054, 3.583], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_34
-group ph4_ExcludedVolume, ExcludedVolume_34
-pseudoatom ExcludedVolume_35, pos=[22.681, -20.497, 8.948], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_35
-group ph4_ExcludedVolume, ExcludedVolume_35
-pseudoatom ExcludedVolume_36, pos=[24.402, -4.978, 8.480], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_36
-group ph4_ExcludedVolume, ExcludedVolume_36
-pseudoatom ExcludedVolume_37, pos=[31.690, -12.490, 12.706], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_37
-group ph4_ExcludedVolume, ExcludedVolume_37
-pseudoatom ExcludedVolume_38, pos=[23.291, -8.613, 14.443], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_38
-group ph4_ExcludedVolume, ExcludedVolume_38
-pseudoatom ExcludedVolume_39, pos=[19.326, -12.930, 0.099], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_39
-group ph4_ExcludedVolume, ExcludedVolume_39
-pseudoatom ExcludedVolume_40, pos=[22.071, -16.359, 13.179], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_40
-group ph4_ExcludedVolume, ExcludedVolume_40
-pseudoatom ExcludedVolume_41, pos=[31.086, -0.255, 9.343], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_41
-group ph4_ExcludedVolume, ExcludedVolume_41
-pseudoatom ExcludedVolume_42, pos=[29.387, -8.967, 3.308], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_42
-group ph4_ExcludedVolume, ExcludedVolume_42
-pseudoatom ExcludedVolume_43, pos=[31.518, -12.157, 5.125], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_43
-group ph4_ExcludedVolume, ExcludedVolume_43
-pseudoatom ExcludedVolume_44, pos=[30.103, -17.426, 14.918], vdw=1.000
-color ph4_ExcludedVolume, ExcludedVolume_44
-group ph4_ExcludedVolume, ExcludedVolume_44
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

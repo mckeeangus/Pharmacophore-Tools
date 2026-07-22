@@ -17,7 +17,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -35,7 +35,7 @@
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
-        "merge_radius": null,
+        "merge_radius": 1.0,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -44,8 +44,8 @@
         "ev_max": 40
       }
     },
-    "n_features": 45,
-    "representative_ligand": "7RRY_L84_C601",
+    "n_features": 48,
+    "representative_ligand": "7NDO_RAL_B601",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
         "events": 128,
@@ -165,6 +165,42 @@
     },
     {
       "family": "Acceptor",
+      "x": 27.31484920313522,
+      "y": -7.344372535794337,
+      "z": 7.054073696242729,
+      "radius": 3.0,
+      "n_points": 38,
+      "n_ligands": 35,
+      "support": 0.8333,
+      "direction": null,
+      "label": "Acceptor 2"
+    },
+    {
+      "family": "Donor",
+      "x": 20.56493176456926,
+      "y": -10.9769767008674,
+      "z": 1.734206680474934,
+      "radius": 3.0,
+      "n_points": 32,
+      "n_ligands": 32,
+      "support": 0.7619,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": 25.33261652003869,
+      "y": -13.964257845302559,
+      "z": 10.238714149169915,
+      "radius": 3.0,
+      "n_points": 32,
+      "n_ligands": 31,
+      "support": 0.7381,
+      "direction": null,
+      "label": "Aromatic 3"
+    },
+    {
+      "family": "Acceptor",
       "x": 25.585503273166164,
       "y": -14.237115709498621,
       "z": 7.216458561659434,
@@ -173,7 +209,7 @@
       "n_ligands": 31,
       "support": 0.7381,
       "direction": null,
-      "label": "Acceptor 2"
+      "label": "Acceptor 3"
     },
     {
       "family": "PosIonizable",

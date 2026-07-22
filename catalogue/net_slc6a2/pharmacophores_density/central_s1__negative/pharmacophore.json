@@ -17,7 +17,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -35,7 +35,7 @@
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
-        "merge_radius": null,
+        "merge_radius": 1.0,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -44,8 +44,8 @@
         "ev_max": 40
       }
     },
-    "n_features": 42,
-    "representative_ligand": "9KDH_A1D5S_B709",
+    "n_features": 43,
+    "representative_ligand": "8WTY_XEF_A701",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
         "events": 46,
@@ -119,6 +119,18 @@
       "support": 0.96,
       "direction": null,
       "label": "Aromatic 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": 130.1781666469628,
+      "y": 129.2949707981412,
+      "z": 132.45410323799868,
+      "radius": 3.0,
+      "n_points": 29,
+      "n_ligands": 16,
+      "support": 0.64,
+      "direction": null,
+      "label": "Acceptor 1"
     },
     {
       "family": "PosIonizable",

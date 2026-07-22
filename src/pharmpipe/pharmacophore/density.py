@@ -38,6 +38,7 @@ from .build import (
     BuildResult,
     ClusterAssignment,
     _merge_overlapping,
+    _merge_records,
     feature_radius,
     finalize_features,
 )
@@ -256,9 +257,10 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
     # Cross-family merge: one feature per region of space (a donor and an acceptor that
     # land on the same atoms cannot both be true), keeping the dominant peak. Same rule
     # as the k-means path; excluded-volume spheres (added after) are exempt.
+    dropped: list = []
     if dcfg.merge_overlapping:
         pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
-        pooled = _merge_overlapping(pooled, dcfg.merge_radius)
+        pooled, dropped = _merge_overlapping(pooled, dcfg.merge_radius)
     features, kept_by_family, label_index = finalize_features(pooled)
     for assignment in assignments:
         assignment.kept_labels = kept_by_family.get(assignment.family, set())
@@ -271,4 +273,5 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
     meta.setdefault("consensus", {"method": "density", "params": asdict(dcfg)})
     meta["n_features"] = len(features)
     ph = Pharmacophore(name=name, features=features, metadata=meta)
-    return BuildResult(pharmacophore=ph, assignments=assignments)
+    return BuildResult(pharmacophore=ph, assignments=assignments,
+                       merged_away=_merge_records(dropped, label_index))

@@ -17,7 +17,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -35,7 +35,7 @@
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
-        "merge_radius": null,
+        "merge_radius": 1.0,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -44,7 +44,7 @@
         "ev_max": 40
       }
     },
-    "n_features": 43,
+    "n_features": 44,
     "representative_ligand": "7D9O_H0L_B601",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
@@ -100,6 +100,18 @@
       "support": 0.5385,
       "direction": null,
       "label": "Acceptor 1"
+    },
+    {
+      "family": "PosIonizable",
+      "x": 90.68394840447111,
+      "y": 81.05293107032108,
+      "z": -6.707442972829761,
+      "radius": 3.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 0.8462,
+      "direction": null,
+      "label": "PosIonizable 1"
     },
     {
       "family": "Aromatic",

@@ -35,8 +35,8 @@ group ph4_Donor, Donor_1
 pseudoatom Donor_1_ctr, pos=[131.032, 133.096, 128.336], label="Donor 1 (0.50)"
 color ph4_Donor, Donor_1_ctr
 group ph4_centers, Donor_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

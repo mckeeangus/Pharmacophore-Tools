@@ -77,8 +77,8 @@ group ph4_NegIonizable, NegIonizable_1
 pseudoatom NegIonizable_1_ctr, pos=[15.156, 2.301, 15.975], label="NegIonizable 1 (0.61)"
 color ph4_NegIonizable, NegIonizable_1_ctr
 group ph4_centers, NegIonizable_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

@@ -17,7 +17,7 @@
       "min_cluster_size": 2,
       "top_n_per_family": null,
       "merge_overlapping": true,
-      "merge_radius": null
+      "merge_radius": 1.0
     },
     "tolerance": {
       "method": "density_quantile",
@@ -25,7 +25,7 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-03",
+    "created": "2026-07-22",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
@@ -35,7 +35,7 @@
         "occupancy_floor": 2.0,
         "scaffold_weighting": false,
         "merge_overlapping": true,
-        "merge_radius": null,
+        "merge_radius": 1.0,
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -44,7 +44,7 @@
         "ev_max": 40
       }
     },
-    "n_features": 42,
+    "n_features": 43,
     "representative_ligand": "5DRS_5EF_A305",
     "feature_resolution": {
       "Aromatic<-LumpedHydrophobe": {
@@ -164,6 +164,18 @@
       "support": 0.7895,
       "direction": null,
       "label": "Aromatic 1"
+    },
+    {
+      "family": "Donor",
+      "x": -5.665348826830444,
+      "y": -0.5095367596906275,
+      "z": 16.003032393978046,
+      "radius": 3.0,
+      "n_points": 60,
+      "n_ligands": 58,
+      "support": 0.7632,
+      "direction": null,
+      "label": "Donor 1"
     },
     {
       "family": "ExcludedVolume",

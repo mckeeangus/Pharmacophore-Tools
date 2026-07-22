@@ -41,8 +41,8 @@ group ph4_PosIonizable, PosIonizable_1
 pseudoatom PosIonizable_1_ctr, pos=[-33.550, 8.294, 7.442], label="PosIonizable 1 (0.57)"
 color ph4_PosIonizable, PosIonizable_1_ctr
 group ph4_centers, PosIonizable_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

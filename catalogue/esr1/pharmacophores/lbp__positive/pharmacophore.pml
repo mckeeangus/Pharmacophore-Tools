@@ -41,8 +41,8 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_1_ctr, pos=[23.217, -13.094, 7.487], label="Acceptor 1 (0.56)"
 color ph4_Acceptor, Acceptor_1_ctr
 group ph4_centers, Acceptor_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

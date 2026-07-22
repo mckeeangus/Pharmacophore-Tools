@@ -100,23 +100,28 @@ def test_merge_overlapping_keeps_largest_geometric():
     # Two donors 0.5 A apart (< the 1.0 radius -> overlap); the bigger one wins.
     a = _feat("Donor", 0.0, n_points=8, radius=1.0)
     b = _feat("Donor", 0.5, n_points=3, radius=1.0)
-    kept = _merge_overlapping([(a, 0), (b, 1)], merge_radius=None)
+    kept, dropped = _merge_overlapping([(a, 0), (b, 1)], merge_radius=None)
     assert [f.n_points for f, _ in kept] == [8]
+    # the dropped feature records the winner that displaced it
+    assert len(dropped) == 1
+    dfeat, dpay, wfeat, wpay = dropped[0]
+    assert dfeat.n_points == 3 and wfeat.n_points == 8 and wpay == 0
 
 
 def test_merge_overlapping_spares_distinct_lobes():
     a = _feat("Donor", 0.0, n_points=8, radius=1.0)
     b = _feat("Donor", 10.0, n_points=6, radius=1.0)   # well separated
-    kept = _merge_overlapping([(a, 0), (b, 1)], merge_radius=None)
+    kept, dropped = _merge_overlapping([(a, 0), (b, 1)], merge_radius=None)
     assert len(kept) == 2
+    assert dropped == []
 
 
 def test_merge_overlapping_absolute_radius():
     a = _feat("Donor", 0.0, n_points=8, radius=1.0)
     b = _feat("Donor", 0.6, n_points=3, radius=1.0)
     # 0.6 A apart: merged under the geometric rule, spared under a 0.5 A cutoff.
-    assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=None)) == 1
-    assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=0.5)) == 2
+    assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=None)[0]) == 1
+    assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=0.5)[0]) == 2
 
 
 def test_merge_drops_overlapping_across_families():

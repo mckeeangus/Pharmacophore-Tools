@@ -1,4 +1,4 @@
-# ache/gorge__negative — ensemble pharmacophore (3 features)
+# ache/gorge__negative — ensemble pharmacophore (4 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -23,6 +23,12 @@ group ph4_Aromatic, Aromatic_1
 pseudoatom Aromatic_1_ctr, pos=[91.167, 80.550, -8.013], label="Aromatic 1 (0.77)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
+pseudoatom PosIonizable_1, pos=[90.842, 81.044, -6.913], vdw=0.500
+color ph4_PosIonizable, PosIonizable_1
+group ph4_PosIonizable, PosIonizable_1
+pseudoatom PosIonizable_1_ctr, pos=[90.842, 81.044, -6.913], label="PosIonizable 1 (0.85)"
+color ph4_PosIonizable, PosIonizable_1_ctr
+group ph4_centers, PosIonizable_1_ctr
 pseudoatom Aromatic_2, pos=[88.240, 89.067, -1.994], vdw=0.500
 color ph4_Aromatic, Aromatic_2
 group ph4_Aromatic, Aromatic_2
@@ -35,8 +41,8 @@ group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_1_ctr, pos=[86.015, 87.290, -4.993], label="Acceptor 1 (0.54)"
 color ph4_Acceptor, Acceptor_1_ctr
 group ph4_centers, Acceptor_1_ctr
-show spheres, ph4_*
-set sphere_transparency, 0.4, ph4_*
-hide spheres, ph4_centers
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
 show nb_spheres, ph4_centers
 orient

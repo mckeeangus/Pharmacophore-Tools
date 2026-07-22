@@ -47,10 +47,11 @@ COLORS = {
 _GREY = (0.5, 0.5, 0.5)
 
 # Ligand feature spheres are drawn at a FIXED radius (not the tolerance radius, which is
-# up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json. 1.0 A
-# mirrors the overlap-merge rule (two features within ~1 A collapse to one), so the drawn
-# spheres are just touching exactly when the model would have merged them.
-PH4_SPHERE_RADIUS = 1.0
+# up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json. This
+# is a RADIUS, so 0.5 A draws a 1.0 A-diameter ball -- and two such spheres just touch
+# when their centres are ~1 A apart, mirroring the overlap-merge rule (features within
+# ~1 A collapse to one).
+PH4_SPHERE_RADIUS = 0.5
 
 
 def _args(argv):

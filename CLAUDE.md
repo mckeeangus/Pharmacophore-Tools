@@ -220,7 +220,7 @@ absolute `merge_radius`); each feature's **tolerance radius = density-quantile c
 (the radius enclosing `tolerance.quantile`=0.75 of the cluster's density mass, robust to
 the far in-cluster outliers that inflated the old RMS; `rmsd` mode still selectable) and
 is stored in the JSON — **not** the PyMOL sphere size: the viz now draws every ligand
-feature as a **fixed 1.0 Å sphere plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS`
+feature as a **fixed 0.5 Å-radius sphere (1.0 Å diameter) plus an opaque centre pseudoatom** (`PH4_SPHERE_RADIUS`
 in `io.py` / `scripts/pymol_pharmacophore.py`; excluded-volume markers keep their own
 radius and get no centre point), so tolerance is read from the model, not by eye. Family
 colours: HBD/Donor pink, HBA/Acceptor green, hydrophobic cyan, Aromatic yellow,

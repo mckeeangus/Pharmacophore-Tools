@@ -17,19 +17,19 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Aromatic_1, pos=[-27.393, 10.166, 6.255], vdw=1.000
+pseudoatom Aromatic_1, pos=[-27.393, 10.166, 6.255], vdw=0.500
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
 pseudoatom Aromatic_1_ctr, pos=[-27.393, 10.166, 6.255], label="Aromatic 1 (1.00)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
-pseudoatom Donor_1, pos=[-33.551, 10.677, 8.267], vdw=1.000
+pseudoatom Donor_1, pos=[-33.551, 10.677, 8.267], vdw=0.500
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 pseudoatom Donor_1_ctr, pos=[-33.551, 10.677, 8.267], label="Donor 1 (1.00)"
 color ph4_Donor, Donor_1_ctr
 group ph4_centers, Donor_1_ctr
-pseudoatom LumpedHydrophobe_1, pos=[-33.985, 6.242, 7.220], vdw=1.000
+pseudoatom LumpedHydrophobe_1, pos=[-33.985, 6.242, 7.220], vdw=0.500
 color ph4_LumpedHydrophobe, LumpedHydrophobe_1
 group ph4_LumpedHydrophobe, LumpedHydrophobe_1
 pseudoatom LumpedHydrophobe_1_ctr, pos=[-33.985, 6.242, 7.220], label="LumpedHydrophobe 1 (0.86)"

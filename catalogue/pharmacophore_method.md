@@ -382,12 +382,12 @@ sits, not the outermost members).
 **Note — it is no longer the PyMOL sphere size.** Drawing each sphere at its tolerance
 radius (up to 3 Å) swamped the scene and buried the ligand, so the PyMOL views
 (`pharmacophore.pml` and `scripts/pymol_pharmacophore.py`) now render every ligand feature
-as a **fixed-radius sphere (`PH4_SPHERE_RADIUS = 1.0 Å`)** plus an **opaque centre
-pseudoatom** (a nonbonded-sphere point marker carrying the `<Family> <n> (support)`
-label). The 1.0 Å radius mirrors the overlap-merge rule (§5): two features within ~1 Å
-collapse into one, so the drawn spheres are just touching exactly when the model would
-have merged them. Excluded-volume markers keep their own steric radius and get **no**
-centre point.
+as a **fixed-radius sphere (`PH4_SPHERE_RADIUS = 0.5 Å`, i.e. a 1.0 Å-diameter ball)**
+plus an **opaque centre pseudoatom** (a nonbonded-sphere point marker carrying the
+`<Family> <n> (support)` label). The 0.5 Å radius mirrors the overlap-merge rule (§5):
+two such spheres just touch when their centres are ~1 Å apart, i.e. exactly when the
+model would have collapsed them into one feature. Excluded-volume markers keep their own
+steric radius and get **no** centre point.
 The true tolerance stays in the JSON; inspect it there (or via `model_summary.md`) rather
 than by sphere size.
 
@@ -443,8 +443,9 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 
 **Sizes in the visualisations** encode two different, deliberately distinct things:
 
-- **PyMOL feature spheres** — a **fixed 1.0 Å** radius (matching the §5 overlap-merge
-  rule — spheres just touch when features would merge), with an opaque centre
+- **PyMOL feature spheres** — a **fixed 0.5 Å** radius (a 1.0 Å-diameter ball, matching
+  the §5 overlap-merge rule — spheres just touch when features' centres are ~1 Å apart,
+  i.e. when they would merge), with an opaque centre
   pseudoatom marking each feature's exact position (excluded-volume markers keep their
   own radius and get no centre point). (The feature's tolerance radius is *not* shown as
   sphere size any more — read it from the JSON / `model_summary.md`.)

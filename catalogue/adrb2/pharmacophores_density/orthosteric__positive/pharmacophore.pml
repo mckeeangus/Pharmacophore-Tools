@@ -17,30 +17,31 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[-26.336, 10.004, 5.785], vdw=0.500
+pseudoatom Acceptor_1, pos=[-26.336, 10.004, 5.785], vdw=1.250
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
 pseudoatom Acceptor_1_ctr, pos=[-26.336, 10.004, 5.785], label="Acceptor 1 (1.00)"
 color ph4_Acceptor, Acceptor_1_ctr
 group ph4_centers, Acceptor_1_ctr
-pseudoatom PosIonizable_1, pos=[-33.117, 8.499, 7.300], vdw=0.500
+pseudoatom PosIonizable_1, pos=[-33.117, 8.499, 7.300], vdw=1.250
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
 pseudoatom PosIonizable_1_ctr, pos=[-33.117, 8.499, 7.300], label="PosIonizable 1 (1.00)"
 color ph4_PosIonizable, PosIonizable_1_ctr
 group ph4_centers, PosIonizable_1_ctr
-pseudoatom Aromatic_1, pos=[-28.779, 10.662, 6.229], vdw=0.500
+pseudoatom Aromatic_1, pos=[-28.779, 10.662, 6.229], vdw=1.250
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
 pseudoatom Aromatic_1_ctr, pos=[-28.779, 10.662, 6.229], label="Aromatic 1 (1.00)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
-pseudoatom Donor_1, pos=[-32.252, 10.826, 7.486], vdw=0.500
+pseudoatom Donor_1, pos=[-32.252, 10.826, 7.486], vdw=1.250
 color ph4_Donor, Donor_1
 group ph4_Donor, Donor_1
 pseudoatom Donor_1_ctr, pos=[-32.252, 10.826, 7.486], label="Donor 1 (0.91)"
 color ph4_Donor, Donor_1_ctr
 group ph4_centers, Donor_1_ctr
+set surface_quality, 2
 flag ignore, ph4_*, clear
 show mesh, ph4_*
 hide mesh, ph4_centers

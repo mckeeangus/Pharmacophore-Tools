@@ -13,12 +13,11 @@ from pathlib import Path
 from .build import BuildResult
 from .model import Pharmacophore
 
-# Ligand feature spheres render at a FIXED radius (the tolerance radius, up to 3 A,
-# swamps the scene); the true tolerance is preserved in pharmacophore.json. This is a
-# RADIUS, so 0.5 A draws a 1.0 A-diameter ball -- and two such spheres just touch when
-# their centres are ~1 A apart, mirroring the overlap-merge rule (features within ~1 A
-# collapse to one).
-PH4_SPHERE_RADIUS = 0.5
+# Ligand feature spheres render at a FIXED display radius (the tolerance radius, up to
+# 3 A, swamps the scene); the true tolerance is preserved in pharmacophore.json. This is
+# a pure display size (a mesh/wireframe sphere), independent of the tolerance and the 1 A
+# merge cutoff.
+PH4_SPHERE_RADIUS = 1.25
 EV_FAMILY = "ExcludedVolume"
 
 
@@ -105,8 +104,8 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
                      f"label=\"{feat.label or feat.family} ({feat.support:.2f})\"")
         lines.append(f"color ph4_{feat.family}, {ctr}")
         lines.append(f"group ph4_centers, {ctr}")
-    lines += ["flag ignore, ph4_*, clear", "show mesh, ph4_*",
-              "hide mesh, ph4_centers", "show nb_spheres, ph4_centers",
-              "orient", ""]
+    lines += ["set surface_quality, 2", "flag ignore, ph4_*, clear",
+              "show mesh, ph4_*", "hide mesh, ph4_centers",
+              "show nb_spheres, ph4_centers", "orient", ""]
     path.write_text("\n".join(lines), encoding="utf-8")
     return path

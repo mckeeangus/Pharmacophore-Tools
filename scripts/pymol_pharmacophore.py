@@ -58,12 +58,11 @@ COLORS = {
 }
 _GREY = (0.5, 0.5, 0.5)
 
-# Ligand feature spheres are drawn at a FIXED radius (not the tolerance radius, which is
-# up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json. This
-# is a RADIUS, so 0.5 A draws a 1.0 A-diameter ball -- and two such spheres just touch
-# when their centres are ~1 A apart, mirroring the overlap-merge rule (features within
-# ~1 A collapse to one).
-PH4_SPHERE_RADIUS = 0.5
+# Ligand feature spheres are drawn at a FIXED display radius (not the tolerance radius,
+# which is up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json.
+# This is a pure display size (a mesh/wireframe sphere), independent of the tolerance and
+# the 1 A merge cutoff.
+PH4_SPHERE_RADIUS = 1.25
 
 
 def _args(argv):
@@ -139,8 +138,8 @@ def _show_mesh_spheres():
 
     Pseudoatoms are excluded from surfaces by default, so their ``ignore`` flag is
     cleared before ``show mesh`` renders each vdw sphere as a wireframe. A raised
-    ``surface_quality`` smooths the small (0.5 Å) spheres from a coarse polyhedron."""
-    cmd.set("surface_quality", 1)
+    ``surface_quality`` smooths the spheres from a coarse polyhedron into a round mesh."""
+    cmd.set("surface_quality", 2)
     cmd.set("mesh_width", 0.6)
     cmd.flag("ignore", "ph4_*", "clear")
     cmd.show("mesh", "ph4_*")

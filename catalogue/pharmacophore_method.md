@@ -344,9 +344,9 @@ the first (largest, then highest-support) feature accepted for a region wins, wh
 its family. This is why the merge runs over the pooled set rather than per family.
 
 "Overlap" uses a **fixed 1 Å centre-to-centre cutoff** (`selection.merge_radius: 1.0`):
-two features merge when their centres are within 1 Å — exactly when the 0.5 Å-radius
-viz spheres (§6) would touch. This is a small, predictable reach that only collapses
-**genuinely coincident** features. (The earlier default was a *geometric* rule —
+two features merge when their centres are within 1 Å — a small, predictable reach that
+only collapses **genuinely coincident** features. (The viz sphere size in §6 is a separate
+display choice and does not set this cutoff.) (The earlier default was a *geometric* rule —
 `merge_radius: null`, threshold = the larger of the two tolerance radii, i.e. 1–3 Å —
 which over-reached: a diffuse donor with a 2.6 Å radius could swallow a distinct
 acceptor 2 Å away. Set `merge_radius: null` to restore it.) The tie-break is **point
@@ -392,12 +392,12 @@ sits, not the outermost members).
 **Note — it is no longer the PyMOL sphere size.** Drawing each sphere at its tolerance
 radius (up to 3 Å) swamped the scene and buried the ligand, so the PyMOL views
 (`pharmacophore.pml` and `scripts/pymol_pharmacophore.py`) now render every ligand feature
-as a **fixed-radius mesh (wireframe) sphere (`PH4_SPHERE_RADIUS = 0.5 Å`, i.e. a 1.0 Å-
-diameter ball)** plus an **opaque centre pseudoatom** (a nonbonded-sphere point marker
-carrying the `<Family> <n> (support)` label). The 0.5 Å radius mirrors the overlap-merge
-rule (§5): two such spheres just touch when their centres are 1 Å apart, i.e. exactly when
-the model would have collapsed them into one feature. **Excluded-Volume (EV) markers are
-part of the model but are NOT drawn** in any view (they are receptor steric markers, not
+as a **fixed-radius mesh (wireframe) sphere (`PH4_SPHERE_RADIUS = 1.25 Å`)** plus an
+**opaque centre pseudoatom** (a nonbonded-sphere point marker carrying the
+`<Family> <n> (support)` label). This radius is a **pure display size** — chosen for
+legibility, independent of both the tolerance radius and the 1 Å merge cutoff. **Excluded-
+Volume (EV) markers are part of the model but are NOT drawn** in any view (they are receptor
+steric markers, not
 ligand chemistry, and clutter the scene). The true tolerance stays in the JSON; inspect it
 there (or via `model_summary.md`) rather than by sphere size.
 
@@ -453,12 +453,11 @@ displays cleanly. (It is a viewing aid, not part of the model definition.)
 
 **Sizes in the visualisations** encode two different, deliberately distinct things:
 
-- **PyMOL feature spheres** — a **fixed 0.5 Å** radius **mesh (wireframe) sphere** (a 1.0 Å-
-  diameter ball, matching the §5 overlap-merge rule — spheres just touch when features'
-  centres are 1 Å apart, i.e. when they would merge), with an opaque centre pseudoatom
-  marking each feature's exact position. **Excluded-Volume markers are not drawn** (receptor
-  steric markers, not chemistry). (The feature's tolerance radius is *not* shown as sphere
-  size any more — read it from the JSON / `model_summary.md`.)
+- **PyMOL feature spheres** — a **fixed 1.25 Å** radius **mesh (wireframe) sphere** (a pure
+  display size for legibility, independent of the tolerance radius and the 1 Å merge cutoff),
+  with an opaque centre pseudoatom marking each feature's exact position. **Excluded-Volume
+  markers are not drawn** (receptor steric markers, not chemistry). (The feature's tolerance
+  radius is *not* shown as sphere size any more — read it from the JSON / `model_summary.md`.)
 - **`raw_features_<family>.png` cluster-centre markers** — the marker **area scales with
   the cluster's point count** (its population / local density): a bigger marker means
   more raw feature points were collapsed into that centre. Kept clusters are drawn as a

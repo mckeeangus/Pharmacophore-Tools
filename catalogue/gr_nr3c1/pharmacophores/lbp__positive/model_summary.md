@@ -4,17 +4,18 @@
 - Skipped poses: 0
 - Consensus method: `density`
 - Representative ligand (viz): `3K23_JZN_B2`
-- Features kept: **4**
+- Features kept: **5**
 - Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor 1 | 15 | 15 | 0.75 | 1.00 |
-| Aromatic 1 | 14 | 11 | 0.55 | 1.27 |
+| Acceptor 1 | 14 | 14 | 0.70 | 1.00 |
+| Acceptor 2 | 10 | 10 | 0.50 | 1.00 |
+| Aromatic 1 | 16 | 11 | 0.55 | 1.45 |
 | Aromatic 2 | 10 | 10 | 0.50 | 1.00 |
-| Donor 1 | 10 | 10 | 0.50 | 1.00 |
+| LumpedHydrophobe 1 | 14 | 14 | 0.70 | 1.00 |
 
 ## Feature resolution
 
@@ -22,7 +23,6 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 
 | Kept ← dropped | Events | Ligands |
 |---|---:|---|
-| Aromatic ← LumpedHydrophobe | 32 | 3BQD_DAY_A301, 3E7C_866_A1, 3K22_JZS_B1, 3K23_JZN_B2, 4CSJ_NN7_A1778, 4LSJ_LSJ_A801, 5G3J_E7T_A1779, 5G5W_R8C_A1778, 5NFT_8W8_A804, 6EL6_B9Q_A802, 6EL7_B9T_A802, 6EL9_B9W_A802, 7PRX_82H_A801, 8VKZ_A1ACE_A901 |
 | PosIonizable ← Donor | 1 | 3K23_JZN_B2 |
 
 ## Below the support/size floor
@@ -31,16 +31,15 @@ Clusters that formed but never became candidates — below the 0.5 support floor
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Acceptor | 8 | 8 | 0.40 | 1.00 |
+| Donor | 9 | 9 | 0.45 | 1.00 |
+| LumpedHydrophobe | 9 | 9 | 0.45 | 1.00 |
 | Acceptor | 6 | 6 | 0.30 | 1.00 |
-| LumpedHydrophobe | 4 | 4 | 0.20 | 1.00 |
-| Acceptor | 3 | 3 | 0.15 | 1.00 |
+| Acceptor | 6 | 6 | 0.30 | 1.00 |
+| LumpedHydrophobe | 6 | 6 | 0.30 | 1.00 |
 | Acceptor | 3 | 3 | 0.15 | 1.00 |
 | Donor | 2 | 2 | 0.10 | 1.00 |
 | Aromatic | 2 | 2 | 0.10 | 1.00 |
-| LumpedHydrophobe | 2 | 2 | 0.10 | 1.00 |
 | Donor | 1 | 1 | 0.05 | 1.00 |
 | PosIonizable | 1 | 1 | 0.05 | 1.00 |
-| LumpedHydrophobe | 1 | 1 | 0.05 | 1.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

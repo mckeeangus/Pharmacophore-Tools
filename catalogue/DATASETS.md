@@ -100,18 +100,25 @@ is documented in [`pharmacophore_method.md`](pharmacophore_method.md).** Headlin
   on the shared atom (genuine dual roles like a hydroxyl's Donor+Acceptor are preserved).
   It removes the redundant double-count only; the count-based merge is untouched. Logged
   per model as a `kept ← dropped` **Feature resolution** table;
-- a cell with **fewer than 3 ligands is skipped** (no output written/kept) — too few
-  for an ensemble hypothesis;
+- a cell with **fewer than 10 known actives is skipped** (no output written/kept) — below
+  ~10 poses the ensemble is too sparse to trust (raised from 3 after a coverage/quality
+  review; 13 catalogue cells clear the bar);
 - the unit of evidence is the **distinct molecule** (per-point weighting), features emerge
   from field peaks with **no `k`**, and a peak is kept only if its basin's molecule weight
   clears the **occupancy floor** *and* its **support** clears 0.5;
 - **support = distinct ligands with a feature point within `density.membership_radius`
   (1.5 Å) of the peak centre ÷ total ligands** — a hard-membership count (a far basin
   outlier does not count), so it is the reliable feature-selection gate;
+- a kept feature's **position is the peak-local density-weighted centroid** (basin voxels
+  within `membership_radius` of the peak), so a diffuse tail or a folded-in neighbouring
+  lobe cannot drag the centre off the true density maximum (its tolerance still spans the
+  whole basin);
 - overlapping features are **merged across families, keeping the dominant one** (more
-  points, then support) — a donor and an acceptor cannot share one spot — with a **fixed
-  1 Å centre-to-centre cutoff**; removals are logged in `model_summary.md`'s "Merged away …
-  in favour of X" table. **Excluded-volume** spheres then mark receptor regions no ligand
+  points, then support) with a **fixed 1 Å centre-to-centre cutoff** — **except compatible
+  co-located pairs** (`density.merge_exempt_pairs`: `Donor`+`Acceptor`, `Aromatic`+`hydrophobe`),
+  which literature keeps distinct so both survive (a hydroxyl is genuinely donor *and*
+  acceptor; a ring is aromatic *and* lipophilic); removals are logged in `model_summary.md`'s
+  "Merged away … in favour of X" table. **Excluded-volume** spheres then mark receptor regions no ligand
   occupies (exempt from the merge). Deterministic (fixed grid, no seeding);
 - ligands are **protonated to their pH-7.4 microstate** (pkasolver + a config-driven
   **weak-acid guard** that corrects pkasolver's over-deprotonation of phenols/alcohols/

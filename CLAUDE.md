@@ -191,20 +191,24 @@ features `(family, position, tolerance, optional direction)` out.)
 
 **Feature hierarchy (co-atom resolution; §3.1 of the method doc).** RDKit tags some
 atoms with two families at once (protonated amine N = `PosIonizable`+`Donor`; carboxylate
-O = `NegIonizable`+`Acceptor`; aromatic ring = `Aromatic`+`LumpedHydrophobe`), which
-double-counts one atom and lets the redundant partner win the support vote (the symptom:
-a `PosIonizable` pocket reporting `Donor`). `features.feature_hierarchy` (ordered groups,
-config) resolves this **at extraction, per ligand, keyed on the shared atom** (higher
-subsumes lower); it fires **only for co-incident atoms** so genuine dual roles
-(`Donor`+`Acceptor` hydroxyls, `Aromatic`+`Acceptor`/`Donor` ring heteroatoms) are kept,
-and it **never overrides a genuine count** (the cross-family merge stays support/size-
-based). Applies upstream at extraction. Each collapse is logged (`kept ← dropped` +
+O = `NegIonizable`+`Acceptor`), which double-counts one atom and lets the redundant partner
+win the support vote (the symptom: a `PosIonizable` pocket reporting `Donor`).
+`features.feature_hierarchy` (ordered groups, config) resolves **only truly redundant**
+ionizable pairs **at extraction, per ligand, keyed on the shared atom** (higher subsumes
+lower); it fires **only for co-incident atoms** so genuine dual roles (`Donor`+`Acceptor`
+hydroxyls, `Aromatic`+`Acceptor`/`Donor` ring heteroatoms) are kept. **`Aromatic`+`LumpedHydrophobe`
+is deliberately NOT collapsed** — an aromatic ring is genuinely both aromatic and lipophilic,
+and literature (Catalyst/HypoGen) reports a hydrophobic feature on rings, so both perceptions
+are kept (and the pair is exempt from the overlap merge, below). It **never overrides a genuine
+count** (the cross-family merge stays support/size-based). Each collapse is logged (`kept ← dropped` +
 ligands) in the JSON provenance and `model_summary.md`.
 
 **Method choices — density/KDE** (all in `config/pharmacophore.yaml`; full write-up in
 `catalogue/pharmacophore_method.md`): features use RDKit **`LumpedHydrophobe`** (one
-centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (3)** ligands
-is **skipped and its output removed**. Per feature type, points are weighted by
+centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (10)** known
+actives is **skipped and its output removed** (below ~10 poses the ensemble is too sparse to
+trust — a 0.5-support feature rests on a couple of ligands; raised from 3 after a coverage/
+quality review, which now builds 13 of the catalogue's cells). Per feature type, points are weighted by
 **1/(points that molecule contributes to the type)** so the unit of evidence is the
 **distinct molecule** (optional inverse-scaffold-frequency), a Gaussian-smoothed **voxel
 occupancy field** (voxel/bandwidth ~1.0–1.5 Å) is built, and features are **all local
@@ -213,13 +217,21 @@ molecule weight ≥ **`occupancy_floor`** **and** its **support ≥ `min_support
 (0.5)**. **Support is a hard-membership count** — distinct ligands with a feature point
 within **`density.membership_radius` (1.5 Å)** of the peak centre ÷ total ligands — so a
 far basin outlier no longer inflates it (this is the main feature-selection gate; support
-also drives the sweep). Feature **position = density-weighted centroid**, **tolerance =
-density-quantile core** (`tolerance.quantile`=0.75 of the field mass, clamped `[1,3]` Å;
-`rmsd` selectable), **direction** plumbed but `None` until perception emits per-point
-vectors. Then a **cross-family overlap merge** keeps one feature per region — dominant
+also drives the sweep). Feature **position = peak-local density-weighted centroid** (the
+basin voxels *within `membership_radius` of the peak*, so a diffuse tail / neighbouring lobe
+can't drag the centre off the true maximum — this recovered e.g. the esr1 aromatic A-ring,
+support 0.31→1.00), **tolerance = density-quantile core** (still over the whole basin;
+`tolerance.quantile`=0.75 of the field mass, clamped `[1,3]` Å; `rmsd` selectable),
+**direction** plumbed but `None` until perception emits per-point vectors. Peak resolution
+is decoupled via **`density.peak_bandwidth`** (a separate, sharper peak-detection field);
+it defaults to `null` (= `bandwidth`) and is **off** because a sharper global field
+fragments broad conserved sites below the basin `occupancy_floor` — re-enable only once the
+floor/merge are split-robust. Then a **cross-family overlap merge** keeps one feature per region — dominant
 (more points, then support) wins, **fixed 1 Å centre-to-centre cutoff** (`merge_radius:
-1.0`; `null` = old geometric 1–3 Å). A bidentate OH's donor+acceptor sit ~0.6–1 Å apart,
-so its acceptor still merges into the denser donor; `model_summary.md`'s **"Merged away …
+1.0`; `null` = old geometric 1–3 Å) — **except `density.merge_exempt_pairs`** (`Donor`+`Acceptor`,
+`Aromatic`+`LumpedHydrophobe`): compatible co-located roles literature keeps distinct, so a
+bidentate OH's acceptor is **no longer** deleted into its donor (this recovers e.g. estradiol's
+17β-OH acceptor and the β2 catechol acceptors). `model_summary.md`'s **"Merged away …
 in favour of X"** table records every above-floor removal (a "Below the support/size
 floor" table lists the rest, both with **`Support`** and an uncapped **`Occupancy`** =
 points ÷ ligands). Finally **excluded-volume** grey spheres are added from

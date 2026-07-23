@@ -17,7 +17,7 @@
       ]
     },
     "selection": {
-      "min_ligands": 3,
+      "min_ligands": 10,
       "min_support_fraction": 0.5,
       "min_cluster_size": 2
     },
@@ -27,18 +27,29 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-22",
+    "created": "2026-07-23",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_bandwidth": null,
         "occupancy_floor": 2.0,
         "membership_radius": 1.5,
         "scaffold_weighting": false,
         "merge_overlapping": true,
         "merge_radius": 1.0,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -50,12 +61,6 @@
     "n_features": 43,
     "representative_ligand": "4FRR_0VC_F301",
     "feature_resolution": {
-      "Aromatic<-LumpedHydrophobe": {
-        "events": 1,
-        "ligands": [
-          "3U8L_09Q_J211"
-        ]
-      },
       "PosIonizable<-Donor": {
         "events": 13,
         "ligands": [
@@ -79,9 +84,9 @@
   "features": [
     {
       "family": "Acceptor",
-      "x": 171.21478796080444,
-      "y": 123.75579360691148,
-      "z": 188.3812955262445,
+      "x": 171.12179024174603,
+      "y": 124.18541510325021,
+      "z": 188.03470605887094,
       "radius": 3.0,
       "n_points": 17,
       "n_ligands": 17,
@@ -91,9 +96,9 @@
     },
     {
       "family": "PosIonizable",
-      "x": 166.87489793874047,
-      "y": 123.38574339560569,
-      "z": 186.1619384189662,
+      "x": 167.00486332326759,
+      "y": 123.54798797416832,
+      "z": 186.17213180226628,
       "radius": 3.0,
       "n_points": 15,
       "n_ligands": 15,
@@ -103,9 +108,9 @@
     },
     {
       "family": "Aromatic",
-      "x": 170.78545815534062,
-      "y": 122.6072833142586,
-      "z": 188.40796516821948,
+      "x": 170.77483397703315,
+      "y": 122.80538693117026,
+      "z": 188.51643967850788,
       "radius": 3.0,
       "n_points": 14,
       "n_ligands": 14,

@@ -36,7 +36,11 @@ features:
     - [PosIonizable, LumpedHydrophobe]
     - [NegIonizable, Acceptor]         # deprotonated acid: anion subsumes its acceptor
     - [NegIonizable, LumpedHydrophobe]
-    - [Aromatic, LumpedHydrophobe]     # aromatic ring subsumes an overlapping hydrophobe
+  # NOTE: `[Aromatic, LumpedHydrophobe]` is deliberately NOT here. An aromatic ring is
+  # genuinely both aromatic and lipophilic, and literature models (Catalyst HydrophobicAromatic
+  # / HypoGen) report a hydrophobic feature on rings. Keeping both perceptions — and exempting
+  # the pair from the overlap merge (see `density.merge_exempt_pairs`) — lets a ring contribute
+  # to both families instead of vanishing from the hydrophobic count.
   # Display colours (RGB 0–1) shared by the PyMOL session/`.pml` and the
   # matplotlib raw-data plots, so a family looks the same everywhere.
   colors:
@@ -59,10 +63,15 @@ features:
 # self-contained add-on.
 density:
   voxel: 1.0              # grid spacing (A) — spatial resolution of the field
-  bandwidth: 1.5         # Gaussian smoothing sigma (A) ~ target feature tolerance; also
-                         #   the min spacing between two kept peaks (the smoothing sigma
-                         #   is the field's resolution limit, so maxima nearer than it are
-                         #   the same site — no separate peak-spacing knob).
+  bandwidth: 1.5         # Gaussian smoothing sigma (A) of the field that sets feature
+                         #   POSITIONS and tolerances (~ target feature tolerance).
+  peak_bandwidth: null   # smoothing sigma (A) of the SEPARATE field the peaks are read off,
+                         #   and the min spacing between two kept peaks. Decoupled from
+                         #   `bandwidth` so genuine multi-lobe sub-sites could resolve as
+                         #   distinct peaks; keep <= bandwidth. null => use bandwidth (default).
+                         #   NOTE: a sharper value fragments genuinely-broad conserved sites
+                         #   (their basin mass splits below occupancy_floor), so it is off
+                         #   until the floor/merge are made split-robust — see method doc.
   occupancy_floor: 2.0   # keep a peak only if its basin's summed distinct-molecule
                          #   weight >= this (units: effective molecules)
   # A ligand SUPPORTS a peak only if it has a feature point within this radius (A) of the
@@ -78,6 +87,14 @@ density:
   # model_summary.md's "Merged away ... in favour of" table.
   merge_overlapping: true
   merge_radius: 1.0
+  # Compatible co-located roles that are never merged into each other (unordered pairs):
+  # a hydroxyl is genuinely Donor+Acceptor (so the merge must not delete the acceptor half —
+  # this recovers e.g. estradiol's 17β-OH acceptor and the β2 catechol acceptors that
+  # literature site-models keep); an aromatic ring is Aromatic+hydrophobe. Same-family and
+  # other cross-family overlaps still merge to one feature per region.
+  merge_exempt_pairs:
+    - [Donor, Acceptor]
+    - [Aromatic, LumpedHydrophobe]
   # Excluded-volume spheres: receptor atoms that line the pocket but no ligand reaches.
   excluded_volume: true
   ev_shell: 5.0          # consider protein atoms within this (A) of the ligand cloud
@@ -88,9 +105,12 @@ density:
 
 # --- Peak -> kept feature selection -----------------------------------------
 selection:
-  # Skip a cell entirely if it has fewer than this many ligands (poses) — too few
-  # to define an ensemble hypothesis. The cell's pharmacophore output is removed.
-  min_ligands: 3
+  # Minimum number of known actives (distinct loadable poses) a cell must have to build a
+  # model — below this the ensemble is too sparse to trust (a 0.5-support feature would rest
+  # on only a couple of ligands), so the cell is skipped and any stale output removed. Set
+  # from a coverage/quality review of the catalogue: n<10 cells produced notably weaker,
+  # noisier models. Raising it trades target coverage for per-model robustness.
+  min_ligands: 10
   # Keep a peak only if it draws support from at least this fraction of the ligands in
   # the cell (the T009 "present in most molecules" idea, made relative; support uses the
   # density.membership_radius). This 0.5 floor is the main feature-selection gate.

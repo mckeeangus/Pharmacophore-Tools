@@ -56,13 +56,15 @@ it is local-only.
 
 ### Minimum-ligands gate
 
-A cell with **fewer than `selection.min_ligands` (= 3) ligands is skipped** and any
-model previously written for it is deleted. Two or one ligands cannot define an
-*ensemble* (a consensus needs something to be consensual about), so such a "model"
-would be an over-fit of one or two molecules dressed up as a hypothesis. Skipping them
-is an honest result, not a gap. Cells excluded on this basis at the last run:
-`drd1/orthosteric__negative` (1), `chrm2/orthosteric__positive` (2),
-`gaba_a/bzd_site__{negative,neutral}` (1 each), `nachr_a4b2/accessory__positive` (1).
+A cell with **fewer than `selection.min_ligands` (= 10) known actives is skipped** and any
+model previously written for it is deleted. Below ~10 poses the ensemble is too sparse to
+trust — a 0.5-support feature would rest on only a couple of ligands, and a consensus needs
+enough actives to be consensual about — so such a "model" is an over-fit dressed up as a
+hypothesis. The gate was **raised from 3 to 10** after a coverage/quality review found the
+few-ligand cells produced notably weaker, noisier models; it is the single knob trading target
+coverage for per-model robustness. Of the catalogue's cells, **13 clear the bar and build**;
+whole targets skipped for want of ≥10 actives at any one site include cavab, chrm2, cox2,
+gaba_a, and both Nav1.7 slugs. Skipping them is an honest result, not a gap.
 
 > In our `groups/` cells there is exactly one pose per distinct ligand (HET), so
 > "ligands" and "poses" coincide and the gate counts chemical diversity directly.
@@ -209,12 +211,11 @@ over-represented relative to the others.
 ### 3.1 Feature hierarchy — resolving co-incident dual classifications
 
 RDKit labels some atoms with **two families at once**: a protonated amine N is *both*
-`PosIonizable` and `Donor`; a carboxylate O is *both* `NegIonizable` and `Acceptor`; an
-aromatic ring is *both* `Aromatic` and `LumpedHydrophobe`. Left as-is this **double-counts
-one atom as two feature points**, so a single protonated nitrogen contributes both a
-PosIonizable *and* a Donor point to every ligand — and the more-specific type can then
-lose the downstream support/size vote (§5) to its own redundant partner (the classic
-symptom: a pocket that should read `PosIonizable` reports a `Donor`).
+`PosIonizable` and `Donor`; a carboxylate O is *both* `NegIonizable` and `Acceptor`. Left
+as-is this **double-counts one atom as two feature points**, so a single protonated nitrogen
+contributes both a PosIonizable *and* a Donor point to every ligand — and the more-specific
+type can then lose the downstream support/size vote (§5) to its own redundant partner (the
+classic symptom: a pocket that should read `PosIonizable` reports a `Donor`).
 
 A curated **`features.feature_hierarchy`** (config, never code) fixes this at extraction,
 per ligand, keyed on the **shared atom**. Each group is ordered highest-priority first;
@@ -224,8 +225,16 @@ is kept:
 ```
 [PosIonizable, Donor]            [PosIonizable, LumpedHydrophobe]
 [NegIonizable, Acceptor]         [NegIonizable, LumpedHydrophobe]
-[Aromatic, LumpedHydrophobe]
 ```
+
+`Aromatic`+`LumpedHydrophobe` is **deliberately excluded** from the hierarchy: an aromatic
+ring is genuinely *both* aromatic and lipophilic, and literature models (Catalyst's
+`HydrophobicAromatic`, HypoGen/HipHop hydrophobic features) report a hydrophobic feature on
+rings. Collapsing it made our models report only `Aromatic` and structurally under-count the
+hydrophobic features literature relies on (e.g. adora2a antagonists: 19 ring hydrophobes were
+folded into aromatic, so a "3 hydrophobic" literature model became "0 hydrophobic" for us).
+Both perceptions are now kept, and the pair is exempt from the overlap merge (§6.1) so both
+survive to the model.
 
 Key properties:
 
@@ -259,8 +268,10 @@ of a type is emergent from the field. The full construction — molecule weighti
 field, watershed, and the occupancy/support floors — is §11; §5–§6 (selection, tolerance)
 and the merge (below) are shared, pure helpers the density builder reuses.
 
-Each peak's **position** is the **density-weighted centroid** of its basin (§11.5) — a
-candidate feature position.
+Each peak's **position** is the **peak-local density-weighted centroid** — the centroid of
+the basin voxels *within `density.membership_radius` of the peak* (§11.5), so a diffuse
+tail or a neighbouring lobe spilling into the basin cannot drag the centre off the true
+density maximum.
 
 ---
 
@@ -301,15 +312,23 @@ survive as two features:
 
 - the density watershed can split one genuinely single lobe into adjacent **same-family**
   sub-peaks (ripples of the field); and
-- two **different** families can land on the same atoms — a spot cannot be both an
-  H-bond donor *and* an acceptor (or a hydrophobe *and* an aromatic) at once, so two
-  overlapping features of different families are mutually exclusive too.
+- two **different, incompatible** families can land on the same atoms — e.g. a hydrophobe
+  and a charged/H-bond feature at one spot — so two overlapping features of different
+  families are usually mutually exclusive too.
 
 So after selection we **collapse overlapping features regardless of family, keeping the
 dominant one** (`density.merge_overlapping`, default on). Working down the pooled
 largest-first list, a candidate is dropped if it overlaps any feature already kept —
 the first (largest, then highest-support) feature accepted for a region wins, whatever
 its family. This is why the merge runs over the pooled set rather than per family.
+
+**Exempt pairs (`density.merge_exempt_pairs`).** Some co-located roles are *compatible* and
+literature keeps them distinct, so they are never merged into each other: `Donor`+`Acceptor`
+(a hydroxyl genuinely is both) and `Aromatic`+`LumpedHydrophobe` (a ring is both aromatic and
+lipophilic). Without this, the merge deleted well-supported hydroxyl **acceptors** into their
+donors — e.g. estradiol's 17β-OH acceptor (anstead1997's key HBA) and the β2-agonist catechol
+acceptors (support 0.91) both vanished. Same-family ripples and other cross-family overlaps
+still merge normally.
 
 "Overlap" uses a **fixed 1 Å centre-to-centre cutoff** (`density.merge_radius: 1.0`):
 two features merge when their centres are within 1 Å — a small, predictable reach that
@@ -318,9 +337,9 @@ display choice and does not set this cutoff.) (The earlier default was a *geomet
 `merge_radius: null`, threshold = the larger of the two tolerance radii, i.e. 1–3 Å —
 which over-reached: a diffuse donor with a 2.6 Å radius could swallow a distinct
 acceptor 2 Å away. Set `merge_radius: null` to restore it.) The tie-break is **point
-count** (then support), so where two families coincide the *denser* cluster wins. One
-consequence to know: a **bidentate hydroxyl** places its donor and acceptor ~0.6–1 Å
-apart, so at 1 Å the acceptor is still merged into the (usually denser) donor — the
+count** (then support), so where two *incompatible* families coincide the *denser* cluster
+wins. A **bidentate hydroxyl** places its donor and acceptor ~0.6–1 Å apart, but because
+`Donor`+`Acceptor` is an exempt pair both are now kept; other overlaps are collapsed, and the
 `model_summary.md` **"Merged away"** table records every such removal and *in favour of*
 which kept feature, so it is explicit rather than silent. Dropped clusters also lose
 their "kept" flag, so the diagnostic plots (§7) show the merge.
@@ -451,6 +470,14 @@ a point within 1.5 Å of the cluster centre ÷ total ligands). Clusters are mesh
 by eye, how the population thins as the support bar is raised — Excluded-Volume never appears
 (it is not in `features.csv`).
 
+> **Future work — user-selected support floor.** The models ship at the fixed 0.5 support
+> floor. Rich cells over-feature relative to literature's compact hypotheses (e.g. hmgcr 14,
+> hiv 9), and the *right* floor is a per-cell scientific judgement rather than one global
+> number. The intended direction is to let the user **rationally select the support floor per
+> cell from this sweep** (ideally with the sweep showing the *actual* post-merge model at each
+> cutoff, plus a per-cell floor override in `selection`), instead of a hard feature-count cap.
+> Deferred; the 0.5-floor model is the current deliverable.
+
 **Support vs occupancy.** `support` = distinct ligands within the membership radius ÷ total
 ligands (≤ 1.0; it drives the 0.5 selection floor and the sweep — "present in most
 molecules"). `occupancy` = points ÷ contributing ligands (points-per-ligand), which is
@@ -526,12 +553,18 @@ every point, is then assigned to its **nearest maximum** (a proximity watershed)
 one **basin** per peak. This is what yields multiple features of one type natively, with
 no `k`.
 
-The **minimum peak spacing is the `bandwidth` itself** — deliberately not a separate
-knob. The Gaussian smoothing (sigma = bandwidth) is the field's resolution limit: two
-maxima nearer than that are the same site, and a smaller spacing would only *over-split* a
-single lobe into ripple sub-peaks that can each fall below the `occupancy_floor` (§11.4)
-and be lost. To genuinely resolve sub-sites closer than the bandwidth, lower `bandwidth`
-*and* `voxel` together, not a spacing knob.
+**Peak resolution vs. position smoothing.** Peaks are read off a field smoothed at
+`peak_bandwidth`, the min peak spacing is that same length, and positions/tolerances come
+from the `bandwidth`-smoothed field. `peak_bandwidth` defaults to `null` (= `bandwidth`),
+so by default one field does both and the min spacing is the `bandwidth`: the Gaussian
+smoothing is the field's resolution limit, and two maxima nearer than it are the same site.
+A **sharper** `peak_bandwidth` would resolve genuine sub-sites closer than the bandwidth
+(e.g. two aromatic rings ~5 Å apart that otherwise merge into one smeared peak) — but on a
+*single* sharp field a genuinely broad, highly-conserved site fragments into ripple
+sub-peaks whose per-basin mass each falls below the `occupancy_floor` (§11.4), so the whole
+feature is lost even at support 1.0. It is therefore **off by default** until the occupancy
+floor and the overlap merge are made split-robust; the position fix (§11.5) already removes
+the symptom that motivated it (a single merged peak still sits on its dominant lobe).
 
 ### 11.4 Keep peaks that clear the occupancy floor *and* the support floor
 
@@ -553,10 +586,18 @@ for a large cell the fraction is the stricter gate, for a tiny one the count is.
 
 ### 11.5 Collapse each kept basin to one feature
 
-- **position** = the **density-weighted centroid** of the basin: `Σ f_v·x_v / Σ f_v`
-  over the basin's voxels `v` (weights `f_v` = field value). This places the feature at
-  the field's centre of mass, not a bare point mean.
-- **tolerance** = the **density-quantile radius of the basin** (§6): the field values
+- **position** = the **peak-local density-weighted centroid**: `Σ f_v·x_v / Σ f_v` over the
+  basin voxels `v` *within `membership_radius` of the peak* (weights `f_v` = field value).
+  Restricting to the peak-local window (rather than the whole basin) places the feature on
+  the field's dominant lobe: a diffuse tail, or a neighbouring lobe that the watershed
+  folded into the same basin, no longer drags the centre into no-man's-land where the real
+  mode's membership support would collapse. (The old whole-basin centroid could sit >2 Å off
+  its peak; e.g. the esr1 aromatic A-ring — conserved across all 16 ligands — was dropped
+  because its centroid drifted to the midpoint between two rings, support 0.31 → 1.00 once
+  anchored to the peak.)
+- **tolerance** = the **density-quantile radius of the basin** (§6), still over the *whole*
+  basin (density_quantile already down-weights the diffuse tail, so the sphere can express
+  real spread up to the clamp): the field values
   `f_v` are the density weights, and the radius is the field-weighted quantile of the
   voxel-to-centroid distances — the distance enclosing `quantile` (= 0.75) of the basin's
   field mass, clamped to `[1.0, 3.0] Å`. This reads the sphere off the **core** of the

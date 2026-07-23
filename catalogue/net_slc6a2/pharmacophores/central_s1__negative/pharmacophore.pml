@@ -1,4 +1,4 @@
-# net_slc6a2/central_s1__negative — ensemble pharmacophore (40 features)
+# net_slc6a2/central_s1__negative — ensemble pharmacophore (43 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,4 +17,27 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
+pseudoatom LumpedHydrophobe_1, pos=[130.927, 130.748, 130.250], vdw=1.250
+color ph4_LumpedHydrophobe, LumpedHydrophobe_1
+group ph4_LumpedHydrophobe, LumpedHydrophobe_1
+pseudoatom LumpedHydrophobe_1_ctr, pos=[130.927, 130.748, 130.250], label="LumpedHydrophobe 1 (0.88)"
+color ph4_LumpedHydrophobe, LumpedHydrophobe_1_ctr
+group ph4_centers, LumpedHydrophobe_1_ctr
+pseudoatom Aromatic_1, pos=[130.927, 130.749, 130.250], vdw=1.250
+color ph4_Aromatic, Aromatic_1
+group ph4_Aromatic, Aromatic_1
+pseudoatom Aromatic_1_ctr, pos=[130.927, 130.749, 130.250], label="Aromatic 1 (0.88)"
+color ph4_Aromatic, Aromatic_1_ctr
+group ph4_centers, Aromatic_1_ctr
+pseudoatom PosIonizable_1, pos=[130.259, 126.341, 134.073], vdw=1.250
+color ph4_PosIonizable, PosIonizable_1
+group ph4_PosIonizable, PosIonizable_1
+pseudoatom PosIonizable_1_ctr, pos=[130.259, 126.341, 134.073], label="PosIonizable 1 (0.60)"
+color ph4_PosIonizable, PosIonizable_1_ctr
+group ph4_centers, PosIonizable_1_ctr
+set surface_quality, 2
+flag ignore, ph4_*, clear
+show mesh, ph4_*
+hide mesh, ph4_centers
+show nb_spheres, ph4_centers
 orient

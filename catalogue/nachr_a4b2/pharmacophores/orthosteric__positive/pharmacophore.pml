@@ -17,22 +17,22 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Acceptor_1, pos=[171.215, 123.756, 188.381], vdw=1.250
+pseudoatom Acceptor_1, pos=[171.122, 124.185, 188.035], vdw=1.250
 color ph4_Acceptor, Acceptor_1
 group ph4_Acceptor, Acceptor_1
-pseudoatom Acceptor_1_ctr, pos=[171.215, 123.756, 188.381], label="Acceptor 1 (0.94)"
+pseudoatom Acceptor_1_ctr, pos=[171.122, 124.185, 188.035], label="Acceptor 1 (0.94)"
 color ph4_Acceptor, Acceptor_1_ctr
 group ph4_centers, Acceptor_1_ctr
-pseudoatom PosIonizable_1, pos=[166.875, 123.386, 186.162], vdw=1.250
+pseudoatom PosIonizable_1, pos=[167.005, 123.548, 186.172], vdw=1.250
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
-pseudoatom PosIonizable_1_ctr, pos=[166.875, 123.386, 186.162], label="PosIonizable 1 (0.83)"
+pseudoatom PosIonizable_1_ctr, pos=[167.005, 123.548, 186.172], label="PosIonizable 1 (0.83)"
 color ph4_PosIonizable, PosIonizable_1_ctr
 group ph4_centers, PosIonizable_1_ctr
-pseudoatom Aromatic_1, pos=[170.785, 122.607, 188.408], vdw=1.250
+pseudoatom Aromatic_1, pos=[170.775, 122.805, 188.516], vdw=1.250
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[170.785, 122.607, 188.408], label="Aromatic 1 (0.78)"
+pseudoatom Aromatic_1_ctr, pos=[170.775, 122.805, 188.516], label="Aromatic 1 (0.78)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
 set surface_quality, 2

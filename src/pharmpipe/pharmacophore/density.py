@@ -24,7 +24,7 @@ the *complement* of the ligand envelope off the receptor.
 
 from __future__ import annotations
 
-from dataclasses import asdict
+from dataclasses import asdict, replace
 
 import numpy as np
 from scipy.ndimage import gaussian_filter, maximum_filter
@@ -137,8 +137,13 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
     if n == 0:
         return np.empty(0, dtype=int), {}, []
 
-    field, origin = _occupancy_field(coords, weights, dcfg)
-    peaks = _local_maxima(field, origin, dcfg)
+    # Peaks are read off a SEPARATE field smoothed at `peak_sigma` (<= bandwidth), so
+    # genuine multi-lobe sub-sites resolve as distinct peaks; positions/tolerances below
+    # still come from the `bandwidth`-smoothed field. When peak_bandwidth is unset the two
+    # fields coincide (old coupled behaviour).
+    pk_cfg = replace(dcfg, bandwidth=dcfg.peak_sigma)
+    pk_field, pk_origin = _occupancy_field(coords, weights, pk_cfg)
+    peaks = _local_maxima(pk_field, pk_origin, pk_cfg)
     if len(peaks) == 0:                              # degenerate: one basin at the mean
         peaks = coords.mean(axis=0, keepdims=True)
 
@@ -146,6 +151,7 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
 
     # Field voxels (where the field is non-trivial) -> nearest peak, for the
     # density-weighted centroid and the field-spread tolerance.
+    field, origin = _occupancy_field(coords, weights, dcfg)
     eps = field.max() * 1e-3
     vox_idx = np.argwhere(field > eps)
     vox_xyz = _voxel_centers(vox_idx, origin, dcfg.voxel)
@@ -157,16 +163,25 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
     for p in range(len(peaks)):
         pts_mask = labels == p
         vox_mask = vox_basin == p
-        # density-weighted centroid + radius from the basin's voxels: the radius encloses
-        # `tol.quantile` of the field mass (density_quantile), so the diffuse tail of the
-        # occupancy field does not set the sphere size.
-        if vox_mask.any():
-            w = vox_val[vox_mask]
-            xyz = vox_xyz[vox_mask]
-            centroid = (w[:, None] * xyz).sum(axis=0) / w.sum()
-            radius = feature_radius(np.linalg.norm(xyz - centroid, axis=1), w, tol)
+        # POSITION = density-weighted centroid of the basin voxels *within
+        # membership_radius of the peak* — a peak-local window, so a diffuse tail (or a
+        # neighbouring lobe spilling into the basin) cannot drag the centre off the true
+        # density maximum. TOLERANCE is still taken over the whole basin (density_quantile
+        # already down-weights the diffuse tail), so the sphere can still express real spread.
+        local_mask = vox_mask & (
+            np.linalg.norm(vox_xyz - peaks[p], axis=1) <= dcfg.membership_radius)
+        if not local_mask.any():
+            local_mask = vox_mask                    # rare: no voxel within the window
+        if local_mask.any():
+            wl = vox_val[local_mask]
+            centroid = (wl[:, None] * vox_xyz[local_mask]).sum(axis=0) / wl.sum()
         else:                                        # peak with no field mass (rare)
             centroid = peaks[p]
+        if vox_mask.any():
+            wb = vox_val[vox_mask]
+            radius = feature_radius(
+                np.linalg.norm(vox_xyz[vox_mask] - centroid, axis=1), wb, tol)
+        else:
             radius = tol.min
         centers[p] = tuple(float(c) for c in centroid)
         # Support is a HARD-MEMBERSHIP count: a ligand supports this peak only if it has a
@@ -262,8 +277,9 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
     # as the k-means path; excluded-volume spheres (added after) are exempt.
     dropped: list = []
     if dcfg.merge_overlapping:
+        exempt = frozenset(frozenset(pair) for pair in dcfg.merge_exempt_pairs)
         pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
-        pooled, dropped = _merge_overlapping(pooled, dcfg.merge_radius)
+        pooled, dropped = _merge_overlapping(pooled, dcfg.merge_radius, exempt)
     features, kept_by_family, label_index = finalize_features(pooled)
     for assignment in assignments:
         assignment.kept_labels = kept_by_family.get(assignment.family, set())

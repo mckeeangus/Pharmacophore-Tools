@@ -12,7 +12,7 @@
       "skipped": []
     },
     "selection": {
-      "min_ligands": 3,
+      "min_ligands": 10,
       "min_support_fraction": 0.5,
       "min_cluster_size": 2
     },
@@ -22,18 +22,29 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-22",
+    "created": "2026-07-23",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_bandwidth": null,
         "occupancy_floor": 2.0,
         "membership_radius": 1.5,
         "scaffold_weighting": false,
         "merge_overlapping": true,
         "merge_radius": 1.0,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -42,29 +53,9 @@
         "ev_max": 40
       }
     },
-    "n_features": 43,
-    "representative_ligand": "7CKX_G3O_R501",
+    "n_features": 47,
+    "representative_ligand": "7X2C_G3C_F503",
     "feature_resolution": {
-      "Aromatic<-LumpedHydrophobe": {
-        "events": 21,
-        "ligands": [
-          "7CKX_G3O_R501",
-          "7CKY_G3U_R502",
-          "7CRH_GBU_R501",
-          "7JOZ_VFP_R1201",
-          "7JVP_SK9_R501",
-          "7JVQ_OR9_R501",
-          "7LJC_SK0_R501",
-          "7X2C_G3C_F503",
-          "7X2D_86W_F502",
-          "8IRR_R5F_R501",
-          "8JXR_7LD_A401",
-          "8JXS_V6X_A401",
-          "9I52_A1IZU_R501",
-          "9LLJ_LDP_R701",
-          "9LWC_ALE_R501"
-        ]
-      },
       "PosIonizable<-Donor": {
         "events": 10,
         "ligands": [
@@ -85,33 +76,81 @@
   "features": [
     {
       "family": "Aromatic",
-      "x": 123.6511512256059,
-      "y": 120.22086622410147,
-      "z": 142.64877552399406,
+      "x": 123.58027163332851,
+      "y": 120.574973469256,
+      "z": 142.6569657540128,
       "radius": 3.0,
-      "n_points": 20,
-      "n_ligands": 15,
-      "support": 0.9375,
+      "n_points": 19,
+      "n_ligands": 14,
+      "support": 0.875,
       "direction": null,
       "label": "Aromatic 1"
     },
     {
-      "family": "Acceptor",
-      "x": 122.55688485963489,
-      "y": 119.42516681741854,
-      "z": 144.08399043855286,
+      "family": "LumpedHydrophobe",
+      "x": 127.02979951268021,
+      "y": 122.82436331406895,
+      "z": 146.51329240056234,
+      "radius": 3.0,
+      "n_points": 13,
+      "n_ligands": 10,
+      "support": 0.625,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": 126.60601846842725,
+      "y": 122.61253441432787,
+      "z": 146.57706021755345,
       "radius": 3.0,
       "n_points": 10,
       "n_ligands": 10,
       "support": 0.625,
       "direction": null,
+      "label": "Aromatic 2"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": 124.02584649799198,
+      "y": 119.91944011423794,
+      "z": 143.51412071294777,
+      "radius": 3.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.625,
+      "direction": null,
+      "label": "LumpedHydrophobe 2"
+    },
+    {
+      "family": "Donor",
+      "x": 122.2295286903917,
+      "y": 119.15298264930662,
+      "z": 144.87051458072557,
+      "radius": 3.0,
+      "n_points": 8,
+      "n_ligands": 8,
+      "support": 0.5,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": 122.24676319192704,
+      "y": 119.17542774243667,
+      "z": 144.86819336582334,
+      "radius": 3.0,
+      "n_points": 8,
+      "n_ligands": 8,
+      "support": 0.5,
+      "direction": null,
       "label": "Acceptor 1"
     },
     {
       "family": "PosIonizable",
-      "x": 127.45061444433269,
-      "y": 121.74301434352519,
-      "z": 142.04793283605113,
+      "x": 127.58448578093544,
+      "y": 121.66270181327552,
+      "z": 142.39580954939896,
       "radius": 3.0,
       "n_points": 8,
       "n_ligands": 8,

@@ -1,4 +1,4 @@
-# adrb2/orthosteric__positive — ensemble pharmacophore (44 features)
+# adrb2/orthosteric__positive — ensemble pharmacophore (47 features)
 # run from this file's directory:  pymol pharmacophore.pml
 reinitialize
 bg_color white
@@ -17,28 +17,46 @@ set_color ph4_PosIonizable, [1.0, 0.0, 0.0]
 set_color ph4_NegIonizable, [1.0, 0.45, 0.0]
 set_color ph4_ExcludedVolume, [0.55, 0.55, 0.55]
 
-pseudoatom Donor_1, pos=[-26.411, 10.266, 5.662], vdw=1.250
-color ph4_Donor, Donor_1
-group ph4_Donor, Donor_1
-pseudoatom Donor_1_ctr, pos=[-26.411, 10.266, 5.662], label="Donor 1 (1.00)"
-color ph4_Donor, Donor_1_ctr
-group ph4_centers, Donor_1_ctr
-pseudoatom Aromatic_1, pos=[-28.779, 10.662, 6.229], vdw=1.250
+pseudoatom Aromatic_1, pos=[-29.082, 10.359, 6.230], vdw=1.250
 color ph4_Aromatic, Aromatic_1
 group ph4_Aromatic, Aromatic_1
-pseudoatom Aromatic_1_ctr, pos=[-28.779, 10.662, 6.229], label="Aromatic 1 (1.00)"
+pseudoatom Aromatic_1_ctr, pos=[-29.082, 10.359, 6.230], label="Aromatic 1 (1.00)"
 color ph4_Aromatic, Aromatic_1_ctr
 group ph4_centers, Aromatic_1_ctr
-pseudoatom Donor_2, pos=[-32.252, 10.826, 7.486], vdw=1.250
+pseudoatom LumpedHydrophobe_1, pos=[-29.072, 10.355, 6.230], vdw=1.250
+color ph4_LumpedHydrophobe, LumpedHydrophobe_1
+group ph4_LumpedHydrophobe, LumpedHydrophobe_1
+pseudoatom LumpedHydrophobe_1_ctr, pos=[-29.072, 10.355, 6.230], label="LumpedHydrophobe 1 (1.00)"
+color ph4_LumpedHydrophobe, LumpedHydrophobe_1_ctr
+group ph4_centers, LumpedHydrophobe_1_ctr
+pseudoatom Donor_1, pos=[-26.461, 10.789, 5.334], vdw=1.250
+color ph4_Donor, Donor_1
+group ph4_Donor, Donor_1
+pseudoatom Donor_1_ctr, pos=[-26.461, 10.789, 5.334], label="Donor 1 (0.91)"
+color ph4_Donor, Donor_1_ctr
+group ph4_centers, Donor_1_ctr
+pseudoatom Donor_2, pos=[-32.443, 10.820, 7.314], vdw=1.250
 color ph4_Donor, Donor_2
 group ph4_Donor, Donor_2
-pseudoatom Donor_2_ctr, pos=[-32.252, 10.826, 7.486], label="Donor 2 (0.91)"
+pseudoatom Donor_2_ctr, pos=[-32.443, 10.820, 7.314], label="Donor 2 (0.91)"
 color ph4_Donor, Donor_2_ctr
 group ph4_centers, Donor_2_ctr
-pseudoatom PosIonizable_1, pos=[-33.117, 8.499, 7.300], vdw=1.250
+pseudoatom Acceptor_1, pos=[-26.456, 10.813, 5.326], vdw=1.250
+color ph4_Acceptor, Acceptor_1
+group ph4_Acceptor, Acceptor_1
+pseudoatom Acceptor_1_ctr, pos=[-26.456, 10.813, 5.326], label="Acceptor 1 (0.91)"
+color ph4_Acceptor, Acceptor_1_ctr
+group ph4_centers, Acceptor_1_ctr
+pseudoatom Acceptor_2, pos=[-32.451, 10.819, 7.314], vdw=1.250
+color ph4_Acceptor, Acceptor_2
+group ph4_Acceptor, Acceptor_2
+pseudoatom Acceptor_2_ctr, pos=[-32.451, 10.819, 7.314], label="Acceptor 2 (0.91)"
+color ph4_Acceptor, Acceptor_2_ctr
+group ph4_centers, Acceptor_2_ctr
+pseudoatom PosIonizable_1, pos=[-33.191, 8.634, 6.996], vdw=1.250
 color ph4_PosIonizable, PosIonizable_1
 group ph4_PosIonizable, PosIonizable_1
-pseudoatom PosIonizable_1_ctr, pos=[-33.117, 8.499, 7.300], label="PosIonizable 1 (0.91)"
+pseudoatom PosIonizable_1_ctr, pos=[-33.191, 8.634, 6.996], label="PosIonizable 1 (0.91)"
 color ph4_PosIonizable, PosIonizable_1_ctr
 group ph4_centers, PosIonizable_1_ctr
 set surface_quality, 2

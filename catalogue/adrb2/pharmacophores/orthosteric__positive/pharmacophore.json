@@ -12,7 +12,7 @@
       "skipped": []
     },
     "selection": {
-      "min_ligands": 3,
+      "min_ligands": 10,
       "min_support_fraction": 0.5,
       "min_cluster_size": 2
     },
@@ -22,18 +22,29 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-22",
+    "created": "2026-07-23",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_bandwidth": null,
         "occupancy_floor": 2.0,
         "membership_radius": 1.5,
         "scaffold_weighting": false,
         "merge_overlapping": true,
         "merge_radius": 1.0,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -42,25 +53,9 @@
         "ev_max": 40
       }
     },
-    "n_features": 44,
+    "n_features": 47,
     "representative_ligand": "4LDL_XQC_A1401",
     "feature_resolution": {
-      "Aromatic<-LumpedHydrophobe": {
-        "events": 17,
-        "ligands": [
-          "4LDE_P0G_A1401",
-          "4LDL_XQC_A1401",
-          "4LDO_ALE_A1402",
-          "6MXT_K5Y_A1401",
-          "7DHI_68H_R401",
-          "7XK9_GJ6_A1401",
-          "8GG0_G1I_R501",
-          "8JJ8_H98_F501",
-          "8JJL_DZQ_A501",
-          "9BUY_A1ASM_R504",
-          "9LW5_LDP_R401"
-        ]
-      },
       "PosIonizable<-Donor": {
         "events": 11,
         "ligands": [
@@ -81,22 +76,10 @@
   },
   "features": [
     {
-      "family": "Donor",
-      "x": -26.41093069542319,
-      "y": 10.26638959453172,
-      "z": 5.662005151778752,
-      "radius": 3.0,
-      "n_points": 15,
-      "n_ligands": 11,
-      "support": 1.0,
-      "direction": null,
-      "label": "Donor 1"
-    },
-    {
       "family": "Aromatic",
-      "x": -28.77870806892576,
-      "y": 10.662059257737386,
-      "z": 6.229478927038213,
+      "x": -29.08204776167642,
+      "y": 10.359285543395501,
+      "z": 6.229500062046309,
       "radius": 3.0,
       "n_points": 11,
       "n_ligands": 11,
@@ -105,10 +88,34 @@
       "label": "Aromatic 1"
     },
     {
+      "family": "LumpedHydrophobe",
+      "x": -29.072041554863173,
+      "y": 10.354544215640656,
+      "z": 6.229624803313615,
+      "radius": 3.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 1.0,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    },
+    {
       "family": "Donor",
-      "x": -32.251865813886546,
-      "y": 10.826060634772194,
-      "z": 7.4863716173478725,
+      "x": -26.46113898324772,
+      "y": 10.78875749839879,
+      "z": 5.3337946393177385,
+      "radius": 3.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "Donor",
+      "x": -32.44344385316454,
+      "y": 10.820166712758073,
+      "z": 7.313683095020587,
       "radius": 3.0,
       "n_points": 10,
       "n_ligands": 10,
@@ -117,10 +124,34 @@
       "label": "Donor 2"
     },
     {
+      "family": "Acceptor",
+      "x": -26.455523498640204,
+      "y": 10.813396427085657,
+      "z": 5.326476097040158,
+      "radius": 3.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": -32.45110721562262,
+      "y": 10.819089444360742,
+      "z": 7.31429105395421,
+      "radius": 3.0,
+      "n_points": 10,
+      "n_ligands": 10,
+      "support": 0.9091,
+      "direction": null,
+      "label": "Acceptor 2"
+    },
+    {
       "family": "PosIonizable",
-      "x": -33.116663367403156,
-      "y": 8.498830883252785,
-      "z": 7.300028187062106,
+      "x": -33.19050950575511,
+      "y": 8.633671133625803,
+      "z": 6.995936526849082,
       "radius": 3.0,
       "n_points": 10,
       "n_ligands": 10,

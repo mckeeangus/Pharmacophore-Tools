@@ -37,7 +37,12 @@ class DensityConfig:
 
     voxel: float = 1.0              # grid spacing (A) = spatial resolution
     bandwidth: float = 1.5          # Gaussian smoothing sigma (A) ~ feature tolerance;
-    #                                 also the min spacing between two kept peaks
+    #                                 sets feature positions/tolerances (the smooth field)
+    # Peak-detection length scale (A): the sigma of the SEPARATE field the peaks are read
+    # off, and the min spacing between two kept peaks. Decoupled from `bandwidth` so genuine
+    # multi-lobe sub-sites resolve as distinct peaks without also sharpening the position/
+    # tolerance field. None => fall back to `bandwidth` (the old coupled behaviour).
+    peak_bandwidth: float | None = None
     occupancy_floor: float = 2.0    # min summed distinct-molecule weight to keep a peak
     # A ligand SUPPORTS a feature only if it has a feature point within this radius (A)
     # of the peak centre — support = distinct supporting ligands / total ligands. This
@@ -48,6 +53,12 @@ class DensityConfig:
     # feature (same rule as the k-means path); excluded-volume spheres are exempt.
     merge_overlapping: bool = True
     merge_radius: float | None = None
+    # Compatible co-located family pairs that are NEVER merged into each other (each an
+    # unordered pair). A hydroxyl genuinely is both Donor and Acceptor, and an aromatic
+    # ring is both Aromatic and a hydrophobe; literature models keep these distinct, so
+    # exempting them stops the merge from deleting the weaker half (e.g. an OH acceptor
+    # collapsing into its donor). Same-family and non-listed cross-family overlaps still merge.
+    merge_exempt_pairs: list[list[str]] = field(default_factory=list)
     # Excluded-volume spheres from receptor atoms in pocket regions no ligand occupies.
     excluded_volume: bool = True
     ev_shell: float = 5.0           # consider protein atoms within this of the ligand cloud
@@ -55,6 +66,11 @@ class DensityConfig:
     ev_voxel: float = 2.0           # coarsen protein atoms onto this grid -> one sphere each
     ev_radius: float = 1.0          # excluded-volume sphere radius (A)
     ev_max: int = 40                # cap the number of excluded-volume spheres
+
+    @property
+    def peak_sigma(self) -> float:
+        """Length scale for peak detection: ``peak_bandwidth`` or ``bandwidth`` if unset."""
+        return self.peak_bandwidth if self.peak_bandwidth is not None else self.bandwidth
 
 
 @dataclass

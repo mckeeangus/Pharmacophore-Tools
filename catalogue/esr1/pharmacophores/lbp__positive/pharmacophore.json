@@ -12,7 +12,7 @@
       "skipped": []
     },
     "selection": {
-      "min_ligands": 3,
+      "min_ligands": 10,
       "min_support_fraction": 0.5,
       "min_cluster_size": 2
     },
@@ -22,18 +22,29 @@
       "min": 1.0,
       "max": 3.0
     },
-    "created": "2026-07-22",
+    "created": "2026-07-23",
     "consensus_method": "density",
     "consensus": {
       "method": "density",
       "params": {
         "voxel": 1.0,
         "bandwidth": 1.5,
+        "peak_bandwidth": null,
         "occupancy_floor": 2.0,
         "membership_radius": 1.5,
         "scaffold_weighting": false,
         "merge_overlapping": true,
         "merge_radius": 1.0,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
         "excluded_volume": true,
         "ev_shell": 5.0,
         "ev_clearance": 2.0,
@@ -42,38 +53,52 @@
         "ev_max": 40
       }
     },
-    "n_features": 42,
-    "representative_ligand": "9W12_A1ET8_A701",
-    "feature_resolution": {
-      "Aromatic<-LumpedHydrophobe": {
-        "events": 26,
-        "ligands": [
-          "2B1V_458_B202",
-          "2B1Z_17M_B202",
-          "2QAB_EI1_B1",
-          "2QSE_1HP_B1",
-          "2QZO_KN1_B1",
-          "4MG8_27J_A601",
-          "4MGA_27L_B601",
-          "4MGB_XDH_B601",
-          "4TV1_36M_A601",
-          "5TN4_7FZ_A601",
-          "5TN5_7G0_B601",
-          "7NEL_EST_A601",
-          "7NFB_GEN_A601",
-          "7RKE_5VP_B601",
-          "9W11_ZHB_A701",
-          "9W12_A1ET8_A701"
-        ]
-      }
-    }
+    "n_features": 46,
+    "representative_ligand": "7NFB_GEN_A601",
+    "feature_resolution": {}
   },
   "features": [
     {
+      "family": "Aromatic",
+      "x": 22.83808372304639,
+      "y": -11.778579135396102,
+      "z": 4.652004488750073,
+      "radius": 3.0,
+      "n_points": 16,
+      "n_ligands": 16,
+      "support": 1.0,
+      "direction": null,
+      "label": "Aromatic 1"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": 22.83888792032163,
+      "y": -11.612398013000902,
+      "z": 4.648067733224985,
+      "radius": 3.0,
+      "n_points": 16,
+      "n_ligands": 16,
+      "support": 1.0,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    },
+    {
+      "family": "Donor",
+      "x": 21.008941506038074,
+      "y": -11.266017189547757,
+      "z": 2.3368897394494272,
+      "radius": 3.0,
+      "n_points": 11,
+      "n_ligands": 11,
+      "support": 0.6875,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
       "family": "Acceptor",
-      "x": 21.27132894180209,
-      "y": -10.95868943911784,
-      "z": 2.2496373954308626,
+      "x": 21.010348292308674,
+      "y": -10.893127997649257,
+      "z": 2.3357202010364304,
       "radius": 3.0,
       "n_points": 11,
       "n_ligands": 11,
@@ -83,15 +108,27 @@
     },
     {
       "family": "Donor",
-      "x": 26.74920035676267,
-      "y": -12.089092018427037,
-      "z": 10.669397435090318,
+      "x": 26.99851137810143,
+      "y": -11.35546299080914,
+      "z": 11.293549506927135,
       "radius": 3.0,
       "n_points": 10,
       "n_ligands": 10,
       "support": 0.625,
       "direction": null,
-      "label": "Donor 1"
+      "label": "Donor 2"
+    },
+    {
+      "family": "Acceptor",
+      "x": 26.97944924076203,
+      "y": -11.888901542178548,
+      "z": 11.25394946795294,
+      "radius": 3.0,
+      "n_points": 9,
+      "n_ligands": 9,
+      "support": 0.5625,
+      "direction": null,
+      "label": "Acceptor 2"
     },
     {
       "family": "ExcludedVolume",

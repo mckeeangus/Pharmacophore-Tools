@@ -37,6 +37,24 @@ def test_two_lobes_yield_two_features_no_k():
         assert 1.0 <= f.radius <= 3.0
 
 
+def test_position_is_peak_local_not_dragged_by_diffuse_tail():
+    # A tight, fully-conserved Donor mode at the origin (all 8 ligands) plus a diffuse
+    # minority lobe a few A away (3 ligands). When the two lobes fall in one basin, the
+    # feature POSITION must stay on the dense mode (peak-local centroid), not drift toward
+    # the diffuse tail — otherwise the membership support of the real mode collapses.
+    ligs = [f"L{i}" for i in range(8)]
+    pts = [FeaturePoint("Donor", 0.0, 0.0, 0.0, lig) for lig in ligs]
+    for lig in ("L0", "L1", "L2"):                     # diffuse secondary spot at ~2.6 A
+        pts.append(FeaturePoint("Donor", 2.6, 0.0, 0.0, lig))
+    table = FeatureTable(points=pts, ligand_ids=ligs)
+    res = build_density(table, DensityConfig(occupancy_floor=2.0, membership_radius=1.5),
+                        _tol(), "peak")
+    donors = [f for f in res.pharmacophore.features if f.family == "Donor"]
+    dense = min(donors, key=lambda f: abs(f.x))        # the origin mode
+    assert abs(dense.x) < 1.0                           # centre stays on the dense mode
+    assert dense.support == 1.0                         # all 8 ligands within membership_radius
+
+
 def test_evidence_unit_is_the_molecule_not_the_point():
     # One molecule dumps 6 points at the origin; three other molecules each place one
     # point at (10,0,0). With the floor at 2 effective molecules, the dense single-

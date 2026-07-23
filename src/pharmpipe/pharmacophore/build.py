@@ -108,6 +108,7 @@ def _overlaps(a: PharmacophoreFeature, b: PharmacophoreFeature,
 
 def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, _P]],
                        merge_radius: float | None,
+                       exempt_pairs: frozenset[frozenset[str]] = frozenset(),
                        ) -> tuple[list[tuple[PharmacophoreFeature, _P]],
                                   list[tuple[PharmacophoreFeature, _P,
                                              PharmacophoreFeature, _P]]]:
@@ -119,7 +120,10 @@ def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, _P]],
     cross-family merge (payload = ``(family, label)``) and any same-family use.
     Overlap ignores family on purpose: two features of *different* families that
     occupy the same spot (e.g. a donor and an acceptor) cannot both describe one
-    binding position, so the dominant one displaces the other.
+    binding position, so the dominant one displaces the other — **unless** their two
+    families form a ``exempt_pairs`` pair. Those are *compatible* co-located roles that
+    literature models keep distinct (a hydroxyl really is both Donor and Acceptor; an
+    aromatic ring is both Aromatic and a hydrophobe), so they are never merged together.
 
     Returns ``(accepted, dropped)`` where each ``dropped`` entry is
     ``(dropped_feat, dropped_payload, winner_feat, winner_payload)`` — the first
@@ -130,7 +134,9 @@ def _merge_overlapping(candidates: list[tuple[PharmacophoreFeature, _P]],
                         PharmacophoreFeature, _P]] = []
     for feat, payload in candidates:
         winner = next(((kfeat, kpay) for kfeat, kpay in accepted
-                       if _overlaps(feat, kfeat, merge_radius)), None)
+                       if _overlaps(feat, kfeat, merge_radius)
+                       and frozenset((feat.family, kfeat.family)) not in exempt_pairs),
+                      None)
         if winner is None:
             accepted.append((feat, payload))
         else:

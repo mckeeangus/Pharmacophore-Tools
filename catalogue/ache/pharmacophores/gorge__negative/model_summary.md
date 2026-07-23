@@ -3,15 +3,17 @@
 - Ligands loaded: **13** (direct=1, template=12)
 - Skipped poses: 0
 - Consensus method: `density`
-- Representative ligand (viz): `4M0F_1YK_B605`
-- Features kept: **1**
+- Representative ligand (viz): `7D9O_H0L_B601`
+- Features kept: **3**
 - Excluded-volume spheres (receptor markers): **40**
 
 **Support** = fraction of the cell's ligands that contribute to a feature (≤ 1.0; features are kept only above the 0.5 support floor). **Occupancy** = points ÷ contributing ligands (points-per-ligand, uncapped: > 1.0 when a cluster is denser than one point per ligand). One row per feature / peak.
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Aromatic 1 | 7 | 7 | 0.54 | 1.00 |
+| Acceptor 1 | 7 | 7 | 0.54 | 1.00 |
+| LumpedHydrophobe 1 | 7 | 7 | 0.54 | 1.00 |
+| LumpedHydrophobe 2 | 7 | 7 | 0.54 | 1.00 |
 
 ## Feature resolution
 
@@ -19,7 +21,6 @@ Co-incident dual classifications collapsed by the feature hierarchy (higher-prio
 
 | Kept ← dropped | Events | Ligands |
 |---|---:|---|
-| Aromatic ← LumpedHydrophobe | 20 | 4BDT_HUW_A701, 4EY6_GNT_A604, 4M0E_1YL_B605, 4M0F_1YK_B605, 6O4W_E20_A604, 6O4X_AA_B603, 6O50_EBW_A601, 7D9O_H0L_B601, 7D9P_H0R_A601, 7D9Q_H1R_B601, 7XN1_THA_A601 |
 | PosIonizable ← Donor | 6 | 4EY5_HUP_A604, 4EY6_GNT_A604, 6O4W_E20_A604, 7D9O_H0L_B601, 7D9P_H0R_A601, 7D9Q_H1R_B601 |
 
 ## Below the support/size floor
@@ -28,15 +29,15 @@ Clusters that formed but never became candidates — below the 0.5 support floor
 
 | Feature | Points | Ligands | Support | Occupancy |
 |---|---:|---:|---:|---:|
-| Aromatic | 7 | 6 | 0.46 | 1.17 |
-| Acceptor | 4 | 4 | 0.31 | 1.00 |
+| Aromatic | 6 | 6 | 0.46 | 1.00 |
+| Aromatic | 6 | 6 | 0.46 | 1.00 |
+| Acceptor | 5 | 5 | 0.38 | 1.00 |
 | PosIonizable | 4 | 4 | 0.31 | 1.00 |
-| Acceptor | 3 | 3 | 0.23 | 1.00 |
-| Donor | 1 | 1 | 0.08 | 1.00 |
-| Donor | 1 | 1 | 0.08 | 1.00 |
+| Donor | 2 | 2 | 0.15 | 1.00 |
+| Donor | 2 | 2 | 0.15 | 1.00 |
 | Donor | 1 | 1 | 0.08 | 1.00 |
 | Acceptor | 1 | 1 | 0.08 | 1.00 |
+| Acceptor | 1 | 1 | 0.08 | 1.00 |
 | PosIonizable | 1 | 1 | 0.08 | 1.00 |
-| Acceptor | 0 | 0 | 0.00 | 0.00 |
 
 See `pharmacophore.json` (model), `features.csv` (raw points + cluster ids), and `raw_features_*.png` (per-family point distributions, each kept peak annotated with its label and support).

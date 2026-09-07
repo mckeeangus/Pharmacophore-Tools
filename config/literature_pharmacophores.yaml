@@ -1,0 +1,73 @@
+# config/literature_pharmacophores.yaml
+# Published pharmacophore models for the evaluation targets, distilled to a feature-family set
+# (our RDKit vocabulary: Donor, Acceptor, Aromatic, LumpedHydrophobe, PosIonizable, NegIonizable)
+# plus any key inter-feature distance the paper states. Extracted from the citations the user
+# provided earlier in this project; these are QUALITATIVE family-level references (most papers
+# report features + a few distances, not full geometries), used for a composition + key-distance
+# comparison, never as ground-truth coordinates. `notes` records the pharmacophoric rationale.
+
+esr1:
+  citation: "Anstead et al. 1997 (estrogen receptor)"
+  families: [Aromatic, Donor, Acceptor, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Phenolic A-ring (aromatic + H-bond donor/acceptor), 17β-OH H-bond, hydrophobic steroid body."
+
+nachr:
+  citation: "Beers & Reich 1970; Blum 2010; Kusay 2025 (nicotinic ACh receptor)"
+  families: [PosIonizable, Acceptor, Aromatic]
+  key_distances: {PosIonizable-Acceptor: 5.35}   # Beers-Reich cationic-N to H-bond acceptor ~4.8-5.9
+  notes: "Cationic centre + H-bond acceptor (pyridine-N / carbonyl) at ~5 A, plus aromatic/cation-pi."
+
+hiv1:
+  citation: "Yadav et al. 2012 (HIV-1 protease)"
+  families: [Acceptor, Donor, LumpedHydrophobe, Aromatic]
+  key_distances: {}
+  notes: "H-bond acceptors/donors around the catalytic aspartates + bridging water; two hydrophobic P1/P1' + aromatic."
+
+cdk2:
+  citation: "Ece & Sevin 2013 (CDK2)"
+  families: [Donor, Acceptor, Aromatic, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Hinge donor+acceptor pair (Leu83), aromatic core, hydrophobic pockets."
+
+ca:
+  citation: "Almansour et al. 2025 (carbonic anhydrase)"
+  families: [Acceptor, NegIonizable, Aromatic, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Zinc-binding group (deprotonated sulfonamide / acceptor to Zn), aromatic linker, hydrophobic tail."
+
+adrb2:
+  citation: "Xing et al. 2009 (β2-adrenoceptor)"
+  families: [PosIonizable, Aromatic, Donor, Acceptor, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Protonated amine (Asp113 salt bridge), catechol H-bond donor+acceptor, aromatic ring, hydrophobe."
+
+adora2a:
+  citation: "Xu et al. 2010 (adenosine A2A)"
+  families: [Aromatic, Acceptor, Donor, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Bicyclic aromatic core (Phe168 stack), exocyclic amine donor + ring-N acceptor (Asn253), hydrophobe."
+
+drd1:
+  citation: "Mottola et al. 1996 (dopamine D1)"
+  families: [PosIonizable, Aromatic, Acceptor, Donor, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Protonated amine, catechol hydroxyls (donor/acceptor), aromatic ring, accessory hydrophobe."
+
+gr:
+  citation: "Onnis 2010; Morgan 2002 (glucocorticoid receptor)"
+  families: [Acceptor, Donor, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Steroid H-bond acceptors (3-keto, 11β/17-OH) + donor, hydrophobic steroid nucleus."
+
+gaba_a:
+  citation: "Clayton 2007/2015; Bergmann 2013 (GABA-A benzodiazepine site)"
+  families: [Acceptor, Donor, Aromatic, LumpedHydrophobe]
+  key_distances: {}
+  notes: "H-bond acceptor (A2) + donor (H1), aromatic + lipophilic regions (L1/L2/L3) of the BzR model."
+
+nav1_7:
+  citation: "Wang et al. 2018 (Nav1.7 aryl-sulfonamide, VSD4)"
+  families: [NegIonizable, Acceptor, Aromatic, LumpedHydrophobe]
+  key_distances: {}
+  notes: "Acidic aryl-sulfonamide (deprotonated, coordinates VSD4 Arg), aromatic core, hydrophobic tail."

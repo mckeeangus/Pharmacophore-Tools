@@ -1,0 +1,1093 @@
+[
+  {
+    "key": "esr1",
+    "slug": "esr1",
+    "cell": "lbp__positive",
+    "literature": "esr1",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 4,
+        "families": "acc(0.65), arom(0.92), don(0.67), hydph(0.89)",
+        "vs_known": {
+          "verdict": "MATCH",
+          "recall": 1.0,
+          "shared": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "missing": [],
+          "extra": [],
+          "geom": {
+            "acceptor-donor": 0.25,
+            "donor-hydrophobe": 0.28,
+            "acceptor-hydrophobe": 0.74,
+            "aromatic-hydrophobe": 0.68,
+            "acceptor-aromatic": 0.28,
+            "aromatic-donor": 0.3
+          },
+          "mean_geom_delta": 0.42
+        },
+        "vs_literature": {
+          "verdict": "MATCH",
+          "recall": 1.0,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "missing": [],
+          "extra": [],
+          "citation": "Anstead et al. 1997 (estrogen receptor)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 6,
+        "families": "acc(0.70), arom(0.70), don(0.68), hydph(0.74)",
+        "vs_known": {
+          "verdict": "MATCH",
+          "recall": 1.0,
+          "shared": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "missing": [],
+          "extra": [],
+          "geom": {
+            "acceptor-donor": 0.0,
+            "donor-hydrophobe": 0.41,
+            "acceptor-hydrophobe": 0.46,
+            "aromatic-hydrophobe": 0.89,
+            "acceptor-aromatic": 0.56,
+            "aromatic-donor": 0.61
+          },
+          "mean_geom_delta": 0.49
+        },
+        "vs_literature": {
+          "verdict": "MATCH",
+          "recall": 1.0,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "missing": [],
+          "extra": [],
+          "citation": "Anstead et al. 1997 (estrogen receptor)"
+        }
+      }
+    }
+  },
+  {
+    "key": "hiv1_protease",
+    "slug": "hiv1_protease",
+    "cell": "active_site__negative",
+    "literature": "hiv1",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "shared": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "citation": "Yadav et al. 2012 (HIV-1 protease)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 3,
+        "families": "acc(0.64), arom(0.74), hydph(0.72)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 0.75,
+          "shared": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Donor"
+          ],
+          "extra": [],
+          "geom": {
+            "aromatic-hydrophobe": 0.05,
+            "acceptor-aromatic": 3.09,
+            "acceptor-hydrophobe": 2.83
+          },
+          "mean_geom_delta": 1.99
+        },
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.75,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Donor"
+          ],
+          "extra": [],
+          "citation": "Yadav et al. 2012 (HIV-1 protease)"
+        }
+      }
+    }
+  },
+  {
+    "key": "cdk2",
+    "slug": "cdk2",
+    "cell": "atp_site__negative",
+    "literature": "cdk2",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "shared": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "citation": "Ece & Sevin 2013 (CDK2)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 2,
+        "families": "arom(0.60), hydph(0.60)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.33,
+          "shared": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor"
+          ],
+          "extra": [
+            "LumpedHydrophobe"
+          ],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.5,
+          "recovered": [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor"
+          ],
+          "extra": [],
+          "citation": "Ece & Sevin 2013 (CDK2)"
+        }
+      }
+    }
+  },
+  {
+    "key": "hmgcr",
+    "slug": "hmgcr",
+    "cell": "hmg_site__negative",
+    "literature": "hmgcr",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 1,
+        "families": "anion-(0.52)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.2,
+          "shared": [
+            "NegIonizable"
+          ],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 8,
+        "families": "acc(0.76), arom(0.82), don(0.80), hydph(0.76), anion-(0.68)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 1.0,
+          "shared": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe",
+            "NegIonizable"
+          ],
+          "missing": [],
+          "extra": [],
+          "geom": {
+            "donor-anion": 6.49,
+            "acceptor-anion": 4.31,
+            "hydrophobe-anion": 2.67,
+            "acceptor-donor": 5.84,
+            "acceptor-hydrophobe": 4.47,
+            "donor-hydrophobe": 4.74,
+            "aromatic-hydrophobe": 3.12,
+            "acceptor-aromatic": 3.41,
+            "aromatic-anion": 0.53,
+            "aromatic-donor": 3.28
+          },
+          "mean_geom_delta": 3.89
+        }
+      }
+    }
+  },
+  {
+    "key": "nachr_a4b2_negative",
+    "slug": "nachr_a4b2",
+    "cell": null,
+    "literature": "nachr",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "PosIonizable"
+          ],
+          "extra": [],
+          "citation": "Beers & Reich 1970; Blum 2010; Kusay 2025 (nicotinic ACh receptor)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 2,
+        "families": "arom(0.50), hydph(0.58)",
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.33,
+          "recovered": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Acceptor",
+            "PosIonizable"
+          ],
+          "extra": [
+            "LumpedHydrophobe"
+          ],
+          "citation": "Beers & Reich 1970; Blum 2010; Kusay 2025 (nicotinic ACh receptor)"
+        }
+      }
+    }
+  },
+  {
+    "key": "ca2",
+    "slug": "ca2",
+    "cell": "active_site__negative",
+    "literature": "ca",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "shared": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe",
+            "NegIonizable"
+          ],
+          "extra": [],
+          "citation": "Almansour et al. 2025 (carbonic anhydrase)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 37,
+        "n_features": 1,
+        "families": "acc(0.70)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.25,
+          "shared": [
+            "Acceptor"
+          ],
+          "missing": [
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.25,
+          "recovered": [
+            "Acceptor"
+          ],
+          "missing": [
+            "Aromatic",
+            "LumpedHydrophobe",
+            "NegIonizable"
+          ],
+          "extra": [],
+          "citation": "Almansour et al. 2025 (carbonic anhydrase)"
+        }
+      }
+    }
+  },
+  {
+    "key": "ache",
+    "slug": "ache",
+    "cell": "gorge__negative",
+    "literature": null,
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 1,
+        "families": "acc(0.52)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 0.5,
+          "shared": [
+            "Acceptor"
+          ],
+          "missing": [
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 5,
+        "families": "acc(0.82), arom(0.86), hydph(0.86), cation+(0.66)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 1.0,
+          "shared": [
+            "Acceptor",
+            "LumpedHydrophobe"
+          ],
+          "missing": [],
+          "extra": [
+            "Aromatic",
+            "PosIonizable"
+          ],
+          "geom": {
+            "acceptor-hydrophobe": 4.99
+          },
+          "mean_geom_delta": 4.99
+        }
+      }
+    }
+  },
+  {
+    "key": "adrb2",
+    "slug": "adrb2",
+    "cell": "orthosteric__positive",
+    "literature": "adrb2",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 2,
+        "families": "arom(0.81), hydph(0.76)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.4,
+          "shared": [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor",
+            "PosIonizable"
+          ],
+          "extra": [],
+          "geom": {
+            "aromatic-hydrophobe": 0.42
+          },
+          "mean_geom_delta": 0.42
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.4,
+          "recovered": [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor",
+            "PosIonizable"
+          ],
+          "extra": [],
+          "citation": "Xing et al. 2009 (\u03b22-adrenoceptor)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 6,
+        "families": "acc(0.62), arom(1.00), don(0.60), hydph(1.00)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 0.8,
+          "shared": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "PosIonizable"
+          ],
+          "extra": [],
+          "geom": {
+            "acceptor-donor": 6.11,
+            "donor-hydrophobe": 1.13,
+            "acceptor-hydrophobe": 0.35,
+            "aromatic-hydrophobe": 0.8,
+            "acceptor-aromatic": 0.12,
+            "aromatic-donor": 0.79
+          },
+          "mean_geom_delta": 1.55
+        },
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.8,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "PosIonizable"
+          ],
+          "extra": [],
+          "citation": "Xing et al. 2009 (\u03b22-adrenoceptor)"
+        }
+      }
+    }
+  },
+  {
+    "key": "cox2",
+    "slug": "cox2",
+    "cell": null,
+    "literature": null,
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 2,
+        "families": "arom(0.51), hydph(0.67)"
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 6,
+        "families": "arom(0.82), don(0.88), hydph(0.80), anion-(0.76)"
+      }
+    }
+  },
+  {
+    "key": "adora2a",
+    "slug": "adora2a",
+    "cell": "orthosteric__negative",
+    "literature": "adora2a",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 1,
+        "families": "arom(0.55)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 0.5,
+          "shared": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Donor"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.25,
+          "recovered": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "citation": "Xu et al. 2010 (adenosine A2A)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 4,
+        "families": "acc(0.62), arom(0.68), hydph(0.60)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 0.5,
+          "shared": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Donor"
+          ],
+          "extra": [
+            "Acceptor",
+            "LumpedHydrophobe"
+          ],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.75,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Donor"
+          ],
+          "extra": [],
+          "citation": "Xu et al. 2010 (adenosine A2A)"
+        }
+      }
+    }
+  },
+  {
+    "key": "nachr_a4b2_positive",
+    "slug": "nachr_a4b2",
+    "cell": "orthosteric__positive",
+    "literature": "nachr",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 1,
+        "families": "arom(0.65)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.33,
+          "shared": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Acceptor",
+            "PosIonizable"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.33,
+          "recovered": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Acceptor",
+            "PosIonizable"
+          ],
+          "extra": [],
+          "citation": "Beers & Reich 1970; Blum 2010; Kusay 2025 (nicotinic ACh receptor)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 43,
+        "n_features": 3,
+        "families": "acc(0.81), arom(0.86), cation+(0.81)",
+        "vs_known": {
+          "verdict": "MATCH",
+          "recall": 1.0,
+          "shared": [
+            "Acceptor",
+            "Aromatic",
+            "PosIonizable"
+          ],
+          "missing": [],
+          "extra": [],
+          "geom": {
+            "acceptor-cation": 1.28,
+            "acceptor-aromatic": 0.13,
+            "aromatic-cation": 0.55
+          },
+          "mean_geom_delta": 0.66
+        },
+        "vs_literature": {
+          "verdict": "MATCH",
+          "recall": 1.0,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "PosIonizable"
+          ],
+          "missing": [],
+          "extra": [],
+          "citation": "Beers & Reich 1970; Blum 2010; Kusay 2025 (nicotinic ACh receptor)"
+        }
+      }
+    }
+  },
+  {
+    "key": "chrm2",
+    "slug": "chrm2",
+    "cell": null,
+    "literature": null,
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)"
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 5,
+        "families": "acc(0.84), arom(0.92), don(0.60), hydph(0.94), cation+(0.54)"
+      }
+    }
+  },
+  {
+    "key": "gaba_a_bzd",
+    "slug": "gaba_a",
+    "cell": null,
+    "literature": "gaba_a",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "citation": "Clayton 2007/2015; Bergmann 2013 (GABA-A benzodiazepine site)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "citation": "Clayton 2007/2015; Bergmann 2013 (GABA-A benzodiazepine site)"
+        }
+      }
+    }
+  },
+  {
+    "key": "gaba_a_gaba",
+    "slug": "gaba_a",
+    "cell": null,
+    "literature": "gaba_a",
+    "methods": {
+      "docked": {
+        "n_ligands": 999,
+        "n_features": 2,
+        "families": "arom(0.61), cation+(0.53)",
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.25,
+          "recovered": [
+            "Aromatic"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [
+            "PosIonizable"
+          ],
+          "citation": "Clayton 2007/2015; Bergmann 2013 (GABA-A benzodiazepine site)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 49,
+        "n_features": 3,
+        "families": "acc(0.69), arom(0.63), cation+(0.61)",
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.5,
+          "recovered": [
+            "Acceptor",
+            "Aromatic"
+          ],
+          "missing": [
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [
+            "PosIonizable"
+          ],
+          "citation": "Clayton 2007/2015; Bergmann 2013 (GABA-A benzodiazepine site)"
+        }
+      }
+    }
+  },
+  {
+    "key": "gr_nr3c1",
+    "slug": "gr_nr3c1",
+    "cell": "lbp__positive",
+    "literature": "gr",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "shared": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "geom": {},
+          "mean_geom_delta": null
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Donor",
+            "LumpedHydrophobe"
+          ],
+          "extra": [],
+          "citation": "Onnis 2010; Morgan 2002 (glucocorticoid receptor)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 3,
+        "families": "arom(0.78), hydph(0.66)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 0.67,
+          "shared": [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Acceptor"
+          ],
+          "extra": [],
+          "geom": {
+            "aromatic-hydrophobe": 1.87
+          },
+          "mean_geom_delta": 1.87
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.33,
+          "recovered": [
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor"
+          ],
+          "extra": [
+            "Aromatic"
+          ],
+          "citation": "Onnis 2010; Morgan 2002 (glucocorticoid receptor)"
+        }
+      }
+    }
+  },
+  {
+    "key": "nav1_7_pore",
+    "slug": "nav1_7_pore",
+    "cell": null,
+    "literature": "nav1_7",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 0,
+        "families": "(none)",
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.0,
+          "recovered": [],
+          "missing": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe",
+            "NegIonizable"
+          ],
+          "extra": [],
+          "citation": "Wang et al. 2018 (Nav1.7 aryl-sulfonamide, VSD4)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 6,
+        "families": "acc(0.74), arom(0.88), don(0.52), hydph(0.82)",
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.75,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "NegIonizable"
+          ],
+          "extra": [
+            "Donor"
+          ],
+          "citation": "Wang et al. 2018 (Nav1.7 aryl-sulfonamide, VSD4)"
+        }
+      }
+    }
+  },
+  {
+    "key": "nav1_7_vsd4",
+    "slug": "nav1_7_vsd4",
+    "cell": null,
+    "literature": "nav1_7",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 5,
+        "families": "acc(0.59), arom(0.72), hydph(0.73)",
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.75,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "NegIonizable"
+          ],
+          "extra": [],
+          "citation": "Wang et al. 2018 (Nav1.7 aryl-sulfonamide, VSD4)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 7,
+        "families": "acc(0.66), arom(0.76), don(0.56), hydph(0.76)",
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.75,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "NegIonizable"
+          ],
+          "extra": [
+            "Donor"
+          ],
+          "citation": "Wang et al. 2018 (Nav1.7 aryl-sulfonamide, VSD4)"
+        }
+      }
+    }
+  },
+  {
+    "key": "drd1",
+    "slug": "drd1",
+    "cell": "orthosteric__positive",
+    "literature": "drd1",
+    "methods": {
+      "docked": {
+        "n_ligands": 1000,
+        "n_features": 2,
+        "families": "arom(0.70), hydph(0.51)",
+        "vs_known": {
+          "verdict": "MISMATCH",
+          "recall": 0.4,
+          "shared": [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor",
+            "PosIonizable"
+          ],
+          "extra": [],
+          "geom": {
+            "aromatic-hydrophobe": 5.22
+          },
+          "mean_geom_delta": 5.22
+        },
+        "vs_literature": {
+          "verdict": "MISMATCH",
+          "recall": 0.4,
+          "recovered": [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ],
+          "missing": [
+            "Acceptor",
+            "Donor",
+            "PosIonizable"
+          ],
+          "extra": [],
+          "citation": "Mottola et al. 1996 (dopamine D1)"
+        }
+      },
+      "seed_align": {
+        "n_ligands": 50,
+        "n_features": 4,
+        "families": "acc(0.84), arom(0.78), hydph(0.56), cation+(0.54)",
+        "vs_known": {
+          "verdict": "PARTIAL",
+          "recall": 0.8,
+          "shared": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe",
+            "PosIonizable"
+          ],
+          "missing": [
+            "Donor"
+          ],
+          "extra": [],
+          "geom": {
+            "acceptor-cation": 0.12,
+            "hydrophobe-cation": 0.57,
+            "acceptor-hydrophobe": 4.2,
+            "aromatic-hydrophobe": 5.07,
+            "acceptor-aromatic": 1.24,
+            "aromatic-cation": 1.28
+          },
+          "mean_geom_delta": 2.08
+        },
+        "vs_literature": {
+          "verdict": "PARTIAL",
+          "recall": 0.8,
+          "recovered": [
+            "Acceptor",
+            "Aromatic",
+            "LumpedHydrophobe",
+            "PosIonizable"
+          ],
+          "missing": [
+            "Donor"
+          ],
+          "extra": [],
+          "citation": "Mottola et al. 1996 (dopamine D1)"
+        }
+      }
+    }
+  }
+]

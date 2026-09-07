@@ -1,0 +1,88 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "cdk2/seed_align",
+  "metadata": {
+    "source": {
+      "method": "seed_alignment",
+      "docked_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\data\\screening\\cdk2",
+      "index": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\data\\screening\\cdk2\\index_cdk2.csv",
+      "seed_k": 3,
+      "top_n_hits": 50,
+      "n_seed": 3,
+      "n_aligned": 47,
+      "n_dropped": 0,
+      "n_ligands": 50
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-07-26",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 2,
+    "representative_ligand": "Z4912279979__p1",
+    "feature_resolution": {}
+  },
+  "features": [
+    {
+      "family": "Aromatic",
+      "x": 100.28782531753959,
+      "y": 102.96737358797596,
+      "z": 76.72460394465286,
+      "radius": 3.0,
+      "n_points": 30,
+      "n_ligands": 30,
+      "support": 0.6,
+      "direction": null,
+      "label": "Aromatic 1"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": 100.27454226666082,
+      "y": 102.97488636153625,
+      "z": 76.7094960399236,
+      "radius": 3.0,
+      "n_points": 30,
+      "n_ligands": 30,
+      "support": 0.6,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    }
+  ]
+}

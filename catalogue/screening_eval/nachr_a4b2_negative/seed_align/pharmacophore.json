@@ -1,0 +1,88 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "nachr_a4b2_negative/seed_align",
+  "metadata": {
+    "source": {
+      "method": "seed_alignment",
+      "docked_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\data\\screening\\nachr_a4b2_negative",
+      "index": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\data\\screening\\nachr_a4b2_negative\\index_nachr_a4b2_negative.csv",
+      "seed_k": 3,
+      "top_n_hits": 50,
+      "n_seed": 3,
+      "n_aligned": 47,
+      "n_dropped": 0,
+      "n_ligands": 50
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-07-26",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 2,
+    "representative_ligand": "V024-1254__p1",
+    "feature_resolution": {}
+  },
+  "features": [
+    {
+      "family": "LumpedHydrophobe",
+      "x": 18.348744266548255,
+      "y": -18.997802185041813,
+      "z": -81.78462482993207,
+      "radius": 3.0,
+      "n_points": 29,
+      "n_ligands": 29,
+      "support": 0.58,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": 18.65402462069161,
+      "y": -18.44656854189424,
+      "z": -81.85073211624886,
+      "radius": 3.0,
+      "n_points": 25,
+      "n_ligands": 25,
+      "support": 0.5,
+      "direction": null,
+      "label": "Aromatic 1"
+    }
+  ]
+}

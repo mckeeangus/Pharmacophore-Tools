@@ -1,0 +1,124 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "chrm2/seed_align",
+  "metadata": {
+    "source": {
+      "method": "seed_alignment",
+      "docked_dir": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\data\\screening\\chrm2",
+      "index": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\data\\screening\\chrm2\\index_chrm2.csv",
+      "seed_k": 3,
+      "top_n_hits": 50,
+      "n_seed": 3,
+      "n_aligned": 47,
+      "n_dropped": 0,
+      "n_ligands": 50
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-07-26",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 5,
+    "representative_ligand": "STL005119__p3",
+    "feature_resolution": {}
+  },
+  "features": [
+    {
+      "family": "LumpedHydrophobe",
+      "x": 187.35125669917738,
+      "y": 25.382031671028933,
+      "z": 523.8134643775467,
+      "radius": 3.0,
+      "n_points": 47,
+      "n_ligands": 47,
+      "support": 0.94,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": 187.6122812628367,
+      "y": 25.376320300954212,
+      "z": 523.8156425702865,
+      "radius": 3.0,
+      "n_points": 46,
+      "n_ligands": 46,
+      "support": 0.92,
+      "direction": null,
+      "label": "Aromatic 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": 185.08991621127143,
+      "y": 25.332560519154107,
+      "z": 526.6994505296425,
+      "radius": 3.0,
+      "n_points": 43,
+      "n_ligands": 42,
+      "support": 0.84,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Donor",
+      "x": 184.9701114366474,
+      "y": 25.517792216253046,
+      "z": 526.6686292995568,
+      "radius": 3.0,
+      "n_points": 30,
+      "n_ligands": 30,
+      "support": 0.6,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "PosIonizable",
+      "x": 184.21776418453456,
+      "y": 28.76196221660278,
+      "z": 525.540528587385,
+      "radius": 3.0,
+      "n_points": 27,
+      "n_ligands": 27,
+      "support": 0.54,
+      "direction": null,
+      "label": "PosIonizable 1"
+    }
+  ]
+}

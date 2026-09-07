@@ -1,0 +1,42 @@
+# config/screening.yaml
+# Curated crosswalk for the DrugCLIP -> GNINA screening deposit (out/ + website_output/).
+#
+# Maps each docked PDB directory to its catalogue slug, site, DrugCLIP index, and the
+# known-actives cell + literature key used for the library-wide evaluation. This is CURATED
+# knowledge (no inference in code); every `pdb -> index` pairing is additionally *validated*
+# at organise-time by requiring >=99% mol_id overlap between out/<pdb> and its index, so a
+# wrong entry is caught rather than silently used. Consumed only by the screening scripts —
+# orthogonal to the catalogue/known-actives build.
+
+# Depth used by the seed-alignment method (top DrugCLIP hits aligned per target). Chosen by
+# scripts/eval_align_depth.py against the known-actives models: nachr MATCHes at depth 30/50/75
+# (recall 1.0) and degrades at 100 (dilution); cdk2 favours lower (30>50). 50 balances fidelity
+# (pre-dilution) with robustness (~40-50 aligned ligands); >=100 dilutes. See comparison_report.md.
+alignment_depth: 50
+
+# `key`   = the organised screening-set name -> data/screening/<key>/
+# `pdb`   = source directory under out/
+# `index` = DrugCLIP index under website_output/ (pipeline format, keyed by mol_id)
+# `slug`  = catalogue target slug (for the known-actives comparison)
+# `cell`  = the built known-actives pharmacophore cell, or null if none was built
+# `literature` = key into config/literature_pharmacophores.yaml, or null
+targets:
+  - {key: esr1,              pdb: 1A52,      index: esr1_output.csv,           slug: esr1,          cell: lbp__positive,        literature: esr1}
+  - {key: hiv1_protease,     pdb: 1DMP,      index: hiv-1_output.csv,          slug: hiv1_protease, cell: active_site__negative, literature: hiv1}
+  - {key: cdk2,              pdb: 1HCK,      index: CDK2_output.csv,           slug: cdk2,          cell: atp_site__negative,   literature: cdk2}
+  - {key: hmgcr,             pdb: 1HW8,      index: hmgcr_output.csv,          slug: hmgcr,         cell: hmg_site__negative,   literature: hmgcr}
+  - {key: nachr_a4b2_negative, pdb: 2BYR,    index: nAChR_negative_output.csv, slug: nachr_a4b2,    cell: null,                 literature: nachr}
+  - {key: ca2,               pdb: 2VVB,      index: ca2_output.csv,            slug: ca2,           cell: active_site__negative, literature: ca}
+  - {key: ache,              pdb: 4EY7,      index: ache_output.csv,           slug: ache,          cell: gorge__negative,      literature: null}
+  - {key: adrb2,             pdb: 4LDO,      index: abrb2_output.csv,          slug: adrb2,         cell: orthosteric__positive, literature: adrb2}
+  - {key: cox2,              pdb: 5IKV,      index: cox2_output.csv,           slug: cox2,          cell: null,                 literature: null}
+  - {key: adora2a,           pdb: 5IUB,      index: adora2a_output.csv,        slug: adora2a,       cell: orthosteric__negative, literature: adora2a}
+  - {key: nachr_a4b2_positive, pdb: 5KXI,    index: nAChR_positive_output.csv, slug: nachr_a4b2,    cell: orthosteric__positive, literature: nachr}
+  - {key: chrm2,             pdb: 5ZK8,      index: chrm2_output.csv,          slug: chrm2,         cell: null,                 literature: null}
+  - {key: gaba_a_bzd,        pdb: 6HUO_bzd,  index: gaba_a_bzd_output.csv,     slug: gaba_a,        cell: null,                 literature: gaba_a}
+  - {key: gaba_a_gaba,       pdb: 6HUO_gaba, index: gaba_a_gaba_output.csv,    slug: gaba_a,        cell: null,                 literature: gaba_a}
+  - {key: gr_nr3c1,          pdb: 7PRX,      index: gr_nr3c1_output.csv,       slug: gr_nr3c1,      cell: lbp__positive,        literature: gr}
+  - {key: nav1_7_pore,       pdb: 7W9K,      index: nav1_7_pore_output.csv,    slug: nav1_7_pore,   cell: null,                 literature: nav1_7}
+  - {key: nav1_7_vsd4,       pdb: 8F0P,      index: nav1_7_vsd4_output.csv,    slug: nav1_7_vsd4,   cell: null,                 literature: nav1_7}
+  - {key: drd1,              pdb: 8JXR,      index: drd1_output.csv,           slug: drd1,          cell: orthosteric__positive, literature: drd1}
+  # net_slc6a2 (out/8HLF) was deposited EMPTY (0 docked poses) — excluded from the evaluation.

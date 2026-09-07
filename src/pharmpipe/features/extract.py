@@ -130,7 +130,7 @@ def _resolve_hierarchy(
                 resolutions.append(
                     FeatureResolution(ligand_id, fam_j, fam_i, len(shared)))
                 break
-    kept = [(fam, pos) for k, (fam, pos, _) in enumerate(raw) if not dropped[k]]
+    kept = [(fam, pos, atoms) for k, (fam, pos, atoms) in enumerate(raw) if not dropped[k]]
     return kept, resolutions
 
 
@@ -150,8 +150,77 @@ def featurize(mol, factory, families: list[str], ligand_id: str,
             continue
         raw.append((fam, feat.GetPos(), frozenset(feat.GetAtomIds())))
     kept, resolutions = _resolve_hierarchy(raw, hierarchy or [], ligand_id)
-    points = [FeaturePoint(fam, pos.x, pos.y, pos.z, ligand_id) for fam, pos in kept]
+    points = [FeaturePoint(fam, pos.x, pos.y, pos.z, ligand_id) for fam, pos, _ in kept]
     return points, resolutions
+
+
+# Families whose H-bond / ring geometry gives a meaningful orientation for directional matching.
+DIRECTIONAL_FAMILIES = frozenset({"Donor", "Acceptor", "Aromatic"})
+
+
+def _feature_direction(mol, conf, family: str, atom_ids: frozenset[int]) -> np.ndarray | None:
+    """Unit orientation vector for a directional feature on one conformer, or ``None``.
+
+    * Donor    — mean(H − D) over the donor heavy atom's attached hydrogens (points the H-bond
+                 the way it is donated); ``None`` if the pose is heavy-atom-only (no explicit H).
+    * Acceptor — from the heavy neighbours toward the acceptor atom (acceptor − mean(neighbours)),
+                 i.e. the lone-pair / donor-approach direction; this is what distinguishes a
+                 correctly-oriented ring nitrogen from a ring-flipped one.
+    * Aromatic — the ring-plane normal (via SVD of the ring atom coordinates); sign-ambiguous, so it
+                 is matched unsigned downstream.
+    Returns a unit vector or ``None`` when the geometry is unavailable/degenerate.
+    """
+    def pos(idx: int) -> np.ndarray:
+        p = conf.GetAtomPosition(idx)
+        return np.array([p.x, p.y, p.z], dtype=float)
+
+    def unit(v: np.ndarray) -> np.ndarray | None:
+        n = float(np.linalg.norm(v))
+        return v / n if n > 1e-6 else None
+
+    if family == "Aromatic":
+        ring = np.array([pos(i) for i in atom_ids])
+        if len(ring) < 3:
+            return None
+        _, _, vt = np.linalg.svd(ring - ring.mean(axis=0))
+        return unit(vt[2])                              # normal = smallest-variance axis
+    heavy = [i for i in atom_ids if mol.GetAtomWithIdx(i).GetAtomicNum() > 1]
+    if not heavy:
+        return None
+    atom = mol.GetAtomWithIdx(heavy[0])
+    apos = pos(heavy[0])
+    if family == "Donor":
+        hs = [pos(nb.GetIdx()) for nb in atom.GetNeighbors() if nb.GetAtomicNum() == 1]
+        return unit(np.mean(hs, axis=0) - apos) if hs else None
+    if family == "Acceptor":
+        nbrs = [pos(nb.GetIdx()) for nb in atom.GetNeighbors() if nb.GetAtomicNum() > 1]
+        return unit(apos - np.mean(nbrs, axis=0)) if nbrs else None
+    return None
+
+
+def conformer_features(mol, factory, families: list[str],
+                       hierarchy: list[list[str]] | None = None,
+                       conf_id: int = -1,
+                       ) -> list[tuple[str, np.ndarray, np.ndarray | None]]:
+    """Resolved ``(family, xyz, direction)`` feature points for one conformer of ``mol`` (pure).
+
+    Like ``featurize`` but returns typed points *with an orientation vector* for a specific
+    conformer (``conf_id``, default the first) — used by the feature-alignment build. ``direction``
+    is a unit vector for directional families (Donor/Acceptor/Aromatic, see ``_feature_direction``)
+    and ``None`` otherwise (or when the geometry is unavailable, e.g. a heavy-atom-only pose has no
+    donor H). The co-atom hierarchy is applied exactly as elsewhere.
+    """
+    wanted = set(families)
+    raw = [(f.GetFamily(), f.GetPos(), frozenset(f.GetAtomIds()))
+           for f in factory.GetFeaturesForMol(mol, confId=conf_id) if f.GetFamily() in wanted]
+    kept, _ = _resolve_hierarchy(raw, hierarchy or [], "")
+    conf = mol.GetConformer(conf_id)
+    out = []
+    for fam, pos, atoms in kept:
+        direction = (_feature_direction(mol, conf, fam, atoms)
+                     if fam in DIRECTIONAL_FAMILIES else None)
+        out.append((fam, np.array([pos.x, pos.y, pos.z], dtype=float), direction))
+    return out
 
 
 def build_table(molecules: list[tuple[str, object]], factory,

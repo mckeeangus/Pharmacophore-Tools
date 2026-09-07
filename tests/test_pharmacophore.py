@@ -65,13 +65,31 @@ def test_merge_overlapping_absolute_radius():
     assert len(_merge_overlapping([(a, 0), (b, 1)], merge_radius=0.5)[0]) == 2
 
 
-def test_merge_overlapping_crosses_families():
-    # A donor and an acceptor on the same spot cannot both describe one binding
-    # position: the denser (donor) displaces the acceptor regardless of family.
+def test_merge_default_keeps_colocated_different_families():
+    # Default (same-family only): a donor and an acceptor on the same spot are BOTH kept —
+    # one region can genuinely be two pharmacophore types (e.g. a pyridine N).
     donor = _feat("Donor", 0.0, n_points=8, radius=1.0)
     acceptor = _feat("Acceptor", 0.4, n_points=4, radius=1.0)
     kept, dropped = _merge_overlapping([(donor, ("Donor", 0)), (acceptor, ("Acceptor", 0))],
                                        merge_radius=1.0)
+    assert sorted(f.family for f, _ in kept) == ["Acceptor", "Donor"]
+    assert dropped == []
+
+
+def test_merge_same_family_still_dedups():
+    # Two same-family peaks on the same spot: the denser is kept, the other dropped.
+    a = _feat("Donor", 0.0, n_points=8, radius=1.0)
+    b = _feat("Donor", 0.4, n_points=4, radius=1.0)
+    kept, dropped = _merge_overlapping([(a, ("Donor", 0)), (b, ("Donor", 1))], merge_radius=1.0)
+    assert [f.family for f, _ in kept] == ["Donor"] and len(dropped) == 1
+
+
+def test_merge_cross_family_opt_in_restores_old_behaviour():
+    # cross_family=True: the dominant family displaces the co-located other (old behaviour).
+    donor = _feat("Donor", 0.0, n_points=8, radius=1.0)
+    acceptor = _feat("Acceptor", 0.4, n_points=4, radius=1.0)
+    kept, dropped = _merge_overlapping([(donor, ("Donor", 0)), (acceptor, ("Acceptor", 0))],
+                                       merge_radius=1.0, cross_family=True)
     assert [f.family for f, _ in kept] == ["Donor"]
     assert dropped[0][0].family == "Acceptor" and dropped[0][3] == ("Donor", 0)
 

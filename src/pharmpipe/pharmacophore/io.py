@@ -47,6 +47,50 @@ def write_features_csv(result: BuildResult, path: Path) -> Path:
     return path
 
 
+def write_aligned_sdf(entries, path: Path) -> Path:
+    """Write the feature-aligned compound set to one multi-record SDF.
+
+    ``entries`` is an iterable of ``(mol, conf_id, rotation, translation, tags)`` — one per
+    aligned compound. Each molecule's chosen conformer is rigidly transformed (``x' = R·x + t``)
+    into the common alignment frame and written with its ``tags`` (mol_id, DrugCLIP rank, chosen
+    conformer, alignment RMSD) as SD properties. This is the hand-off deliverable: the existing
+    Gaussian-KDE (`build_density`) — or any consensus method — runs on features re-perceived from
+    these aligned poses.
+    """
+    import numpy as np
+    from rdkit import Chem
+    from rdkit.Geometry import Point3D
+
+    with Chem.SDWriter(str(path)) as w:
+        for mol, conf_id, rot, trans, tags in entries:
+            m = Chem.Mol(mol)                       # full copy, keeps conformer ids
+            conf = m.GetConformer(conf_id)
+            pos = conf.GetPositions() @ np.asarray(rot).T + np.asarray(trans)
+            for i in range(m.GetNumAtoms()):
+                conf.SetAtomPosition(i, Point3D(*(float(c) for c in pos[i])))
+            m.SetProp("_Name", str(tags.get("mol_id", "")))
+            for k, v in tags.items():
+                m.SetProp(str(k), str(v))
+            w.write(m, confId=conf_id)
+    return path
+
+
+def write_aligned_points_csv(points, path: Path) -> Path:
+    """Write the pooled aligned feature points (family, ligand_id, x, y, z, direction) to CSV.
+
+    The align-only hand-off: consensus extraction (KDE) consumes these directly, so a model can
+    be built without re-perceiving features from the SDF. ``points`` are
+    ``(family, xyz, direction|None, ligand_id)``; the direction columns are blank when absent."""
+    with path.open("w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["family", "ligand_id", "x", "y", "z", "dx", "dy", "dz"])
+        for fam, xyz, direction, lig in points:
+            d = ["", "", ""] if direction is None else [round(float(c), 3) for c in direction]
+            w.writerow([fam, lig, round(float(xyz[0]), 3), round(float(xyz[1]), 3),
+                        round(float(xyz[2]), 3), *d])
+    return path
+
+
 def write_representative_sdf(mol, ligand_id: str, path: Path) -> Path:
     """Write one representative ligand to SDF (bond orders + 3D coords intact).
 

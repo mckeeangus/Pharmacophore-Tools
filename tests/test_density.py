@@ -127,9 +127,9 @@ def test_density_is_deterministic():
     assert pa == pb
 
 
-def test_cross_family_merge_keeps_one_feature_per_region():
-    # A donor and an acceptor cluster sit on the same spot; with the cross-family merge
-    # on, only the dominant one survives (one feature per region of space).
+def test_colocated_families_both_kept_by_default():
+    # A donor and an acceptor cluster sit on the same spot. By default the merge is
+    # same-family only, so BOTH survive (a region can be two pharmacophore types at once).
     pts, ligs = [], [f"L{i}" for i in range(6)]
     rng = np.random.default_rng(11)
     for i, lig in enumerate(ligs):
@@ -137,14 +137,14 @@ def test_cross_family_merge_keeps_one_feature_per_region():
         if i < 5:                                   # acceptor slightly less populous
             pts.append(FeaturePoint("Acceptor", *rng.normal(scale=0.2, size=3), lig))
     table = FeatureTable(points=pts, ligand_ids=ligs)
-    merged = build_density(table, DensityConfig(occupancy_floor=2.0,
-                                                merge_overlapping=True), _tol(), "m")
+    default = build_density(table, DensityConfig(occupancy_floor=2.0,
+                                                 merge_overlapping=True), _tol(), "d")
+    assert {f.family for f in default.pharmacophore.features} == {"Donor", "Acceptor"}
+    # ...but opting back into the cross-family merge keeps only the dominant one.
+    merged = build_density(table, DensityConfig(occupancy_floor=2.0, merge_overlapping=True,
+                                                merge_cross_family=True), _tol(), "m")
     assert len(merged.pharmacophore.features) == 1
     assert merged.pharmacophore.features[0].family == "Donor"
-    # ...and with the merge off both coexist.
-    kept = build_density(table, DensityConfig(occupancy_floor=2.0,
-                                              merge_overlapping=False), _tol(), "k")
-    assert {f.family for f in kept.pharmacophore.features} == {"Donor", "Acceptor"}
 
 
 def test_local_maxima_dedup_by_bandwidth():

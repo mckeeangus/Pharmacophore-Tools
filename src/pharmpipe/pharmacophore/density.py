@@ -279,7 +279,8 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
     if dcfg.merge_overlapping:
         exempt = frozenset(frozenset(pair) for pair in dcfg.merge_exempt_pairs)
         pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
-        pooled, dropped = _merge_overlapping(pooled, dcfg.merge_radius, exempt)
+        pooled, dropped = _merge_overlapping(pooled, dcfg.merge_radius, exempt,
+                                             cross_family=dcfg.merge_cross_family)
     features, kept_by_family, label_index = finalize_features(pooled)
     for assignment in assignments:
         assignment.kept_labels = kept_by_family.get(assignment.family, set())

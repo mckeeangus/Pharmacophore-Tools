@@ -77,7 +77,7 @@ def test_hierarchy_preserves_nonoverlapping_hydrophobe():
         ("LumpedHydrophobe", None, frozenset({6, 7, 8, 9})),        # chain -> survives
     ]
     kept, res = _resolve_hierarchy(raw, [["Aromatic", "LumpedHydrophobe"]], "L")
-    fams = [fam for fam, _ in kept]
+    fams = [fam for fam, _, _ in kept]
     assert fams.count("LumpedHydrophobe") == 1     # only the disjoint chain remains
     assert "Aromatic" in fams
     assert len(res) == 1

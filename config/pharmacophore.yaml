@@ -80,18 +80,19 @@ density:
   membership_radius: 1.5
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency
   # Collapse overlapping features across families (a donor and an acceptor that land on
-  # the same spot cannot both describe one binding position), keeping the denser peak.
-  # 1.0 = fixed 1 A centre-to-centre cutoff (a small, predictable reach); null = geometric
-  # (larger tolerance radius, 1-3 A, which over-reaches). Excluded-volume spheres are
-  # exempt (receptor markers, not ligand chemistry). Removals are logged in
-  # model_summary.md's "Merged away ... in favour of" table.
+  # the same spot are not double-counted), keeping the denser peak. 1.0 = fixed 1 A
+  # centre-to-centre cutoff (a small, predictable reach); null = geometric (larger tolerance
+  # radius, 1-3 A, which over-reaches). Excluded-volume spheres are exempt (receptor markers).
+  # Removals are logged in model_summary.md's "Merged away ... in favour of" table.
   merge_overlapping: true
   merge_radius: 1.0
-  # Compatible co-located roles that are never merged into each other (unordered pairs):
-  # a hydroxyl is genuinely Donor+Acceptor (so the merge must not delete the acceptor half —
-  # this recovers e.g. estradiol's 17β-OH acceptor and the β2 catechol acceptors that
-  # literature site-models keep); an aromatic ring is Aromatic+hydrophobe. Same-family and
-  # other cross-family overlaps still merge to one feature per region.
+  # Merge only acts WITHIN a family (false): a region can carry several pharmacophore types at
+  # once and they are all kept — a pyridine N is genuinely both Aromatic and Acceptor, a hydroxyl
+  # both Donor and Acceptor, an aromatic ring both Aromatic and hydrophobe; literature models keep
+  # these distinct. (Perception already assigns the dual roles; the merge no longer deletes one.)
+  # true restores the old cross-family "one feature per region" merge, honouring merge_exempt_pairs.
+  merge_cross_family: false
+  # Only used when merge_cross_family is true: cross-family pairs never merged into each other.
   merge_exempt_pairs:
     - [Donor, Acceptor]
     - [Aromatic, LumpedHydrophobe]
@@ -126,3 +127,51 @@ tolerance:
   quantile: 0.75               # fraction of density mass inside the sphere; lower = tighter
   min: 1.0                     # clamp so a tight cluster still has a usable radius
   max: 3.0                     # and a diffuse cluster does not balloon
+
+# --- Alignment (docked-seed minimum-docking build ONLY) ---------------------
+# Consumed ONLY by the `--seed-docked` mode (pharmacophore/align.py); it is orthogonal
+# to the catalogue/known-actives path and does not affect any other build. That mode
+# seeds the model from a few docked poses (bioactive frame), then aligns the remaining
+# ranked compounds onto it by feature-clique matching over a conformer ensemble. The
+# recommended recipe is `--seed-docked DIR --top-hits 100 --seed-k 5`: dock only the top 5
+# ranked ligands (the bioactive frame — any engine; GNINA or AutoDockFR, see docs/adfr_seeding.md),
+# then incrementally align + fold in the next 95 ranked compounds. The correspondence graph
+# matches features on their *relative intra-molecular distances*, so the model captures the
+# shared pharmacophoric geometry independent of any single frame.
+alignment:
+  # Conformer ensemble per ligand (RDKit ETKDG v3 + MMFF). The bioactive conformer must be
+  # in the ensemble for the alignment to have anything correct to find, so sample generously
+  # and keep a low-energy window; for very flexible ligands raise n_conformers/energy_window.
+  n_conformers: 64             # embeds attempted per ligand
+  energy_window: 15.0          # keep conformers within this (kcal/mol) of the minimum
+  rmsd_prune: 0.5              # ETKDG pruneRmsThresh (A) — drop near-duplicate embeds
+  max_confs: 40                # cap the kept ensemble (energy-sorted)
+  # Feature-clique correspondence: two features match only if same-family and their
+  # intra-molecular distances agree within dist_tol; a rigid 3-D alignment needs >= min_clique
+  # mutually-consistent matches (3 = a determined transform). Compounds that cannot reach
+  # min_clique against the model are dropped (recorded in alignment_manifest.csv).
+  dist_tol: 1.5                # correspondence distance tolerance (A)
+  min_clique: 3                # minimum mutually-consistent feature matches to align
+  align_families: null         # families driving alignment; null => all features.families
+  seed_k: 5                    # docked poses used to seed the model (the bioactive frame)
+  # Accept a compound into the growing model only if its best clique superposition RMSD is
+  # <= this (A); poorer fits are dropped (aligned=False in the manifest), so one bad alignment
+  # cannot corrupt the running consensus. null disables the gate. Tuned on 5KXI (see method doc).
+  max_align_rmsd: 1.5
+  # Correspondence-graph size above which the clique search switches from exact Bron-Kerbosch
+  # (exponential) to a bounded greedy search — keeps feature-rich ligands (many H-bond/aromatic
+  # features) tractable. Small molecules stay under it and are solved exactly (unchanged).
+  max_clique_nodes: 40
+  # EM refinement after the initial growing pass: re-align every compound's conformer ensemble to
+  # the current consensus (re-selecting its best conformer against the improved model) and rebuild,
+  # up to em_iterations times, stopping when the largest feature-centre shift < em_tol (A). Removes
+  # the effect of a sub-optimal discrete conformer chosen early and reduces seed/order dependence.
+  # em_iterations: 0 disables EM (single growing pass, the old behaviour).
+  em_iterations: 5
+  em_tol: 0.1
+  # Orientation-aware matching: also fit H-bond donor/acceptor PROJECTED points (feature centre +
+  # projected_length A along the perceived lone-pair / D-H vector) in the superposition, so a
+  # directional feature must agree in orientation as well as position. This resolves the
+  # ring-flipped acceptor that positional-only matching averages away. false = positional only.
+  use_directions: true
+  projected_length: 1.5

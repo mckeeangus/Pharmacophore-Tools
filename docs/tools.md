@@ -55,3 +55,12 @@ geometry vs a reference; family composition vs literature). Curated inputs are c
 Offline unit tests (`pixi run -e dev pytest`): `test_dock_load` (pose selection/quality),
 `test_align` (clique alignment, EM, directionality, conformers, aligned-SDF), `test_screening`
 (crosswalk validation, comparison metric), plus the existing feature/density/pharmacophore tests.
+
+## Method animation
+
+`docs/method_animation/` — an explanatory animation of the construction method (the 9 signposted
+steps, conformer generation → seedless alignment → EM refinement → directional matching →
+feature abstraction → KDE → final model): `pharmacophore_method.html` (interactive, self-contained)
+plus linear `pharmacophore_method.gif` / `.mp4` renders. Regenerate with `pixi run python
+docs/method_animation/render_animation.py` (the MP4 step needs `imageio-ffmpeg` or a system ffmpeg;
+the GIF always works). Excluded from lint (standalone viz tooling, not pipeline code).

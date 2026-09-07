@@ -1,0 +1,757 @@
+<title>Building a Pharmacophore — Method Walkthrough</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    /* cool, slate-biased neutrals for a molecular-viewer feel */
+    --bg:#eef1f7;
+    --stage:#f8fafd;
+    --panel:#ffffff;
+    --edge:#d3dae7;
+    --ink:#1c2432;
+    --sub:#5a6779;
+    --faint:#8996a8;
+    --grid:rgba(77,141,255,.10);
+    --bond:rgba(70,86,110,.55);
+    --accent:#3f7bff;         /* UI chrome only — never a data colour */
+    --accent-soft:rgba(63,123,255,.14);
+    --shadow:0 1px 2px rgba(20,30,50,.06),0 12px 34px rgba(20,30,50,.10);
+    --mono:ui-monospace,"Cascadia Code","SF Mono",Menlo,Consolas,monospace;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0c111b; --stage:#0f1521; --panel:#151d2b; --edge:#26314552;
+      --ink:#e7ecf6; --sub:#9aa7bd; --faint:#6b7890;
+      --grid:rgba(90,150,255,.09); --bond:rgba(170,190,220,.42);
+      --accent:#5b93ff; --accent-soft:rgba(91,147,255,.16);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c111b; --stage:#0f1521; --panel:#151d2b; --edge:#26314552;
+    --ink:#e7ecf6; --sub:#9aa7bd; --faint:#6b7890;
+    --grid:rgba(90,150,255,.09); --bond:rgba(170,190,220,.42);
+    --accent:#5b93ff; --accent-soft:rgba(91,147,255,.16);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.5);
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f7; --stage:#f8fafd; --panel:#ffffff; --edge:#d3dae7;
+    --ink:#1c2432; --sub:#5a6779; --faint:#8996a8;
+    --grid:rgba(77,141,255,.10); --bond:rgba(70,86,110,.55);
+    --accent:#3f7bff; --accent-soft:rgba(63,123,255,.14);
+    --shadow:0 1px 2px rgba(20,30,50,.06),0 12px 34px rgba(20,30,50,.10);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--sans);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+    padding:clamp(14px,3vw,34px);
+  }
+  .wrap{max-width:1080px; margin:0 auto}
+
+  /* ---- header ---- */
+  header.top{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:16px}
+  .brand{display:flex; flex-direction:column; gap:6px}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); font-weight:600}
+  h1{font-size:clamp(21px,3.3vw,30px); line-height:1.08; margin:0; font-weight:750; letter-spacing:-.015em; text-wrap:balance; max-width:20ch}
+  .lede{color:var(--sub); font-size:14px; max-width:64ch; margin:2px 0 0}
+  .themebtn{flex:0 0 auto; border:1px solid var(--edge); background:var(--panel); color:var(--sub);
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em; border-radius:999px; padding:8px 14px; cursor:pointer; display:flex; gap:7px; align-items:center}
+  .themebtn:hover{color:var(--ink); border-color:var(--accent)}
+  .themebtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  /* ---- viewer ---- */
+  .viewer{background:var(--stage); border:1px solid var(--edge); border-radius:16px; box-shadow:var(--shadow); overflow:hidden}
+  .vhead{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid var(--edge)}
+  .vhead .tag{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint)}
+  .counter{font-family:var(--mono); font-size:12px; color:var(--sub); font-variant-numeric:tabular-nums}
+  .counter b{color:var(--ink)}
+  .canvas-wrap{position:relative; width:100%; aspect-ratio:16/9; min-height:280px}
+  canvas{display:block; width:100%; height:100%}
+
+  /* ---- caption dock ---- */
+  .caption{padding:16px 18px; border-top:1px solid var(--edge); display:grid; grid-template-columns:auto 1fr; gap:4px 16px; align-items:baseline}
+  .caption .step-no{font-family:var(--mono); font-size:12px; color:var(--accent); font-weight:600; letter-spacing:.06em; grid-row:1/3; align-self:center;
+    background:var(--accent-soft); border-radius:10px; padding:10px 12px; min-width:58px; text-align:center}
+  .caption h2{grid-column:2; margin:0; font-size:clamp(16px,2.2vw,19px); font-weight:700; letter-spacing:-.01em}
+  .caption p{grid-column:2; margin:0; color:var(--sub); font-size:14px; max-width:72ch}
+
+  /* ---- transport ---- */
+  .transport{display:flex; align-items:center; gap:14px; padding:14px 18px; border-top:1px solid var(--edge); flex-wrap:wrap}
+  .btns{display:flex; gap:8px}
+  button.ctl{border:1px solid var(--edge); background:var(--panel); color:var(--ink); width:40px; height:40px; border-radius:10px; cursor:pointer;
+    display:grid; place-items:center; transition:border-color .15s,background .15s}
+  button.ctl:hover{border-color:var(--accent); color:var(--accent)}
+  button.ctl:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  button.ctl.play{background:var(--accent); border-color:var(--accent); color:#fff; width:46px}
+  button.ctl.play:hover{filter:brightness(1.06); color:#fff}
+  button.ctl svg{width:16px; height:16px; fill:currentColor}
+  .stepper{display:flex; gap:6px; flex:1 1 260px; flex-wrap:wrap; align-items:center}
+  .dot{appearance:none; border:none; cursor:pointer; height:26px; padding:0 9px; border-radius:7px; background:transparent; color:var(--faint);
+    font-family:var(--mono); font-size:11px; font-variant-numeric:tabular-nums; display:flex; align-items:center; gap:6px; transition:.15s}
+  .dot .pip{width:8px; height:8px; border-radius:50%; background:currentColor; opacity:.5}
+  .dot:hover{color:var(--sub)}
+  .dot[aria-current="true"]{background:var(--accent-soft); color:var(--accent)}
+  .dot[aria-current="true"] .pip{opacity:1}
+  .dot:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  /* progress bar under transport */
+  .progress{height:3px; background:var(--edge)}
+  .progress .fill{height:100%; width:0%; background:var(--accent); transition:width .08s linear}
+
+  /* ---- legend ---- */
+  .legend{display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:16px; padding:14px 16px; background:var(--panel); border:1px solid var(--edge); border-radius:12px}
+  .legend .lg-title{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); width:100%; margin-bottom:2px}
+  .chip{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--sub)}
+  .chip .sw{width:12px; height:12px; border-radius:50%; box-shadow:0 0 0 1px rgba(0,0,0,.12) inset}
+  .foot{margin-top:14px; color:var(--faint); font-size:12px; font-family:var(--mono); letter-spacing:.02em}
+  .foot a{color:var(--sub)}
+
+  @media (max-width:560px){
+    .caption{grid-template-columns:1fr}
+    .caption .step-no{grid-row:auto; justify-self:start}
+    .caption h2,.caption p{grid-column:1}
+  }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">Stage 4 · Ligand-based ensemble pharmacophore</span>
+      <h1>Building a pharmacophore from a screening hit set</h1>
+      <p class="lede">A stylised walk through the construction method — from a DrugCLIP hit list to the nicotinic
+        three-point model. Schematic cartoons, not real coordinates.</p>
+    </div>
+    <button class="themebtn" id="themeBtn" aria-label="Toggle colour theme">
+      <span id="themeIcon">◐</span><span id="themeLbl">Theme</span>
+    </button>
+  </header>
+
+  <section class="viewer" aria-label="Method animation">
+    <div class="vhead">
+      <span class="tag">Method viewer</span>
+      <span class="counter">STEP <b id="stepNum">01</b> / 09</span>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="cv" role="img" aria-label="Animated schematic of the current method step"></canvas>
+    </div>
+
+    <div class="caption">
+      <div class="step-no" id="capNo">01</div>
+      <h2 id="capTitle">DrugCLIP hit set</h2>
+      <p id="capBody">Rank the virtual-screening library and take the top-N compounds by DrugCLIP score.</p>
+    </div>
+
+    <div class="transport">
+      <div class="btns">
+        <button class="ctl" id="back" aria-label="Previous step" title="Previous step">
+          <svg viewBox="0 0 24 24"><path d="M18 5v14l-9-7zM7 5h2v14H7z"/></svg>
+        </button>
+        <button class="ctl play" id="play" aria-label="Play" title="Play / pause">
+          <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="ctl" id="fwd" aria-label="Next step" title="Next step">
+          <svg viewBox="0 0 24 24"><path d="M6 5v14l9-7zM15 5h2v14h-2z"/></svg>
+        </button>
+      </div>
+      <div class="stepper" id="stepper" role="tablist" aria-label="Method steps"></div>
+    </div>
+    <div class="progress"><div class="fill" id="fill"></div></div>
+  </section>
+
+  <div class="legend" id="legend">
+    <span class="lg-title">Feature families (project config colours)</span>
+  </div>
+
+  <p class="foot">Schematic illustration of the Stage-4 seed-alignment + Gaussian-KDE method · payoff target: nicotinic AChR (α4β2)</p>
+</div>
+
+<script>
+"use strict";
+(function(){
+// ---------- family palette (fixed data colours, from config/pharmacophore.yaml) ----------
+const FAM = {
+  cation:  {c:"#FF0000", name:"Positive ionizable (cation)"},
+  aromatic:{c:"#FFD900", name:"Aromatic"},
+  acceptor:{c:"#00CC00", name:"H-bond acceptor"},
+  donor:   {c:"#FF66B2", name:"H-bond donor"},
+  hydro:   {c:"#00E5E5", name:"Hydrophobic"},
+  anion:   {c:"#FF7300", name:"Negative ionizable"},
+  excl:    {c:"#8C8C8C", name:"Excluded volume"},
+};
+// legend
+const legend = document.getElementById("legend");
+Object.values(FAM).forEach(f=>{
+  const el=document.createElement("span"); el.className="chip";
+  el.innerHTML=`<span class="sw" style="background:${f.c}"></span>${f.name}`;
+  legend.appendChild(el);
+});
+
+// ---------- stages ----------
+const STAGES = [
+  ["DrugCLIP hit set",
+   "Rank the virtual-screening library and take the top-N compounds by DrugCLIP score."],
+  ["Conformer generation & energy filtering",
+   "Each hit fans into an ETKDG conformer ensemble; strained high-energy conformers are discarded."],
+  ["Initialisation — seedless (default)",
+   "The top-ranked compound's lowest-energy conformer becomes the reference frame. A docked/crystal seed is an option, but seedless is usually as good or better."],
+  ["Iterative feature-clique alignment",
+   "Superpose each compound by matching same-type features on their relative intramolecular distances — a mutually consistent clique — then a rigid Kabsch fit. The consensus updates as it grows."],
+  ["EM refinement",
+   "Re-align every compound to the converged consensus, re-picking its best conformer, and repeat until the cloud stops moving."],
+  ["Directional matching",
+   "H-bond donor/acceptor orientation is matched too (lone-pair / D–H arrows), resolving a ring-flipped acceptor that position-only matching would average away."],
+  ["Abstraction to features",
+   "Drop the atoms and bonds; keep each aligned ligand's typed pharmacophore feature points."],
+  ["Clustering — Gaussian KDE",
+   "Pool the points into a molecule-weighted occupancy field; peaks become features, low-support scatter is filtered out."],
+  ["Nicotinic three-point model",
+   "The consensus survives: a cationic centre, an aromatic ring and an H-bond acceptor (~5.0 Å cation–acceptor). Excluded-volume markers are in the model but not drawn."],
+];
+const N = STAGES.length;
+const DUR = [3200,3800,3000,5200,3800,4200,3200,4000,3600]; // ms per stage
+
+// ---------- deterministic RNG ----------
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+// ---------- conserved 3-point core (local Å) : cation–acceptor ≈ 5.0 Å ----------
+const CORE = {
+  cation:  [-2.3, 1.05],
+  aromatic:[ 0.15,1.75],
+  acceptor:[ 2.3,-0.95],
+};
+// build 6 cartoon compounds sharing the core + individual decoy features
+function buildCompounds(){
+  const rnd = mulberry32(20240906);
+  const comps=[];
+  const nC=6;
+  for(let i=0;i<nC;i++){
+    const jitter = 0.42;
+    const feats=[];
+    // conserved core (small per-compound jitter)
+    for(const k of ["cation","aromatic","acceptor"]){
+      feats.push({fam:k, core:true,
+        x:CORE[k][0]+(rnd()-.5)*jitter, y:CORE[k][1]+(rnd()-.5)*jitter});
+    }
+    // decoy features that will NOT reach consensus (scattered)
+    const nDec = 1 + Math.floor(rnd()*3);
+    for(let d=0; d<nDec; d++){
+      const fam = ["hydro","donor","hydro","acceptor"][Math.floor(rnd()*4)];
+      feats.push({fam, core:false,
+        x:(rnd()-.5)*7.2, y:(rnd()-.5)*5.6});
+    }
+    // conformers: small variants; energies (index 0 = lowest energy / bioactive)
+    const nConf = 3;
+    const confs=[];
+    for(let c=0;c<nConf;c++){
+      confs.push({rot:(rnd()-.5)*0.5, warp:(rnd()-.5)*0.7*c, energy: c===0? 0 : 3+rnd()*7});
+    }
+    // unaligned placement (before alignment)
+    comps.push({
+      id:i, rank:i+1, score:(0.94-i*0.06+ (rnd()-.5)*0.01).toFixed(2),
+      feats, confs,
+      u:{ang:(rnd()-.5)*1.15, dx:(rnd()-.5)*3.0, dy:(rnd()-.5)*2.2},
+      res: feats.map(()=>[(rnd()-.5)*1.7,(rnd()-.5)*1.7]),  // residual scatter for aligned state
+      ringFlipComp: i===2,   // this compound carries the ring-flipped acceptor
+    });
+  }
+  return comps;
+}
+const COMPS = buildCompounds();
+
+// ---------- theme ----------
+function themeIsDark(){
+  const attr=document.documentElement.getAttribute("data-theme");
+  if(attr) return attr==="dark";
+  return matchMedia("(prefers-color-scheme:dark)").matches;
+}
+function pal(){
+  const cs=getComputedStyle(document.documentElement);
+  const g=(n,f)=>{const v=cs.getPropertyValue(n).trim();return v||f;};
+  return {
+    bg:g("--stage","#0f1521"), ink:g("--ink","#e7ecf6"), sub:g("--sub","#9aa7bd"),
+    faint:g("--faint","#6b7890"), grid:g("--grid","rgba(90,150,255,.09)"),
+    bond:g("--bond","rgba(170,190,220,.42)"), accent:g("--accent","#5b93ff"),
+    dark: themeIsDark(),
+  };
+}
+
+// ---------- canvas ----------
+const cv=document.getElementById("cv"); const ctx=cv.getContext("2d");
+let W=0,H=0,DPR=1;
+function resize(){
+  const r=cv.getBoundingClientRect();
+  DPR=Math.min(2, window.devicePixelRatio||1);
+  W=Math.max(2,Math.round(r.width)); H=Math.max(2,Math.round(r.height));
+  cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+new ResizeObserver(resize).observe(document.querySelector(".canvas-wrap"));
+
+// easing
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const clamp=(t,a=0,b=1)=>Math.max(a,Math.min(b,t));
+const lerp=(a,b,t)=>a+(b-a)*t;
+// sub-window of a stage: maps global t in [a,b] -> 0..1
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+
+// ---------- drawing primitives ----------
+function unitFor(){ return Math.min(W,H)/13; }   // pixels per Å-ish
+
+function featDot(px,py,fam,r,alpha=1,glow=false,dim=false){
+  const col=FAM[fam].c;
+  ctx.save();
+  if(glow){
+    const g=ctx.createRadialGradient(px,py,0,px,py,r*3.2);
+    g.addColorStop(0,hexA(col,.5*alpha)); g.addColorStop(1,hexA(col,0));
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(px,py,r*3.2,0,7); ctx.fill();
+  }
+  ctx.globalAlpha=alpha;
+  ctx.beginPath(); ctx.arc(px,py,r,0,7);
+  ctx.fillStyle=dim?hexA(col,.5):col; ctx.fill();
+  ctx.lineWidth=1.4; ctx.strokeStyle="rgba(255,255,255,.55)"; ctx.stroke();
+  ctx.restore();
+}
+function hexA(hex,a){
+  const h=hex.replace("#",""); const n=parseInt(h.length===3?h.split("").map(c=>c+c).join(""):h,16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+function ringPoly(cx,cy,rad,col,alpha){
+  ctx.save(); ctx.globalAlpha=alpha; ctx.beginPath();
+  for(let i=0;i<6;i++){const a=Math.PI/6+i*Math.PI/3; const x=cx+Math.cos(a)*rad, y=cy+Math.sin(a)*rad; i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+  ctx.closePath(); ctx.lineWidth=2.4; ctx.strokeStyle=col; ctx.stroke();
+  ctx.restore();
+}
+function arrow(px,py,dx,dy,len,col,alpha){
+  const L=Math.hypot(dx,dy)||1; const ux=dx/L, uy=dy/L;
+  const ex=px+ux*len, ey=py+uy*len;
+  ctx.save(); ctx.globalAlpha=alpha; ctx.strokeStyle=col; ctx.fillStyle=col; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(ex,ey); ctx.stroke();
+  const a=Math.atan2(uy,ux);
+  ctx.beginPath(); ctx.moveTo(ex,ey);
+  ctx.lineTo(ex-Math.cos(a-.4)*6, ey-Math.sin(a-.4)*6);
+  ctx.lineTo(ex-Math.cos(a+.4)*6, ey-Math.sin(a+.4)*6);
+  ctx.closePath(); ctx.fill(); ctx.restore();
+}
+function label(txt,px,py,col,size=12,align="center",weight=500){
+  ctx.save(); ctx.font=`${weight} ${size}px ui-monospace,Menlo,Consolas,monospace`;
+  ctx.textAlign=align; ctx.textBaseline="middle"; ctx.fillStyle=col; ctx.fillText(txt,px,py); ctx.restore();
+}
+
+// transform a feature's local coord through a compound pose
+function poseXform(comp, fx, fy, ang, dx, dy){
+  const c=Math.cos(ang), s=Math.sin(ang);
+  return [fx*c-fy*s+dx, fx*s+fy*c+dy];
+}
+
+// draw one compound at screen anchor (ax,ay), unit u, with a pose (ang,dx,dy in Å) + residual scale
+function drawCompound(comp, ax, ay, u, opt){
+  opt=opt||{};
+  const ang=opt.ang||0, dx=opt.dx||0, dy=opt.dy||0;
+  const rscale=opt.rscale==null?0:opt.rscale;
+  const alpha=opt.alpha==null?1:opt.alpha;
+  const showRing=opt.showRing!==false, showBonds=opt.showBonds!==false;
+  const onlyCore=opt.onlyCore||false;
+  const dot=opt.dot|| u*0.34;
+  const flipAcc=opt.flip||0;
+  // compute screen positions
+  const P={};
+  const pts=[];
+  comp.feats.forEach((f,idx)=>{
+    if(onlyCore && !f.core) return;
+    let [lx,ly]=poseXform(comp,f.x,f.y,ang,dx,dy);
+    const r=comp.res[idx];
+    lx+=r[0]*rscale; ly+=r[1]*rscale;
+    const px=ax+lx*u, py=ay-ly*u;
+    pts.push({f,px,py,idx});
+    if(f.core) P[f.fam]=[px,py];
+  });
+  // bonds (star from aromatic centre to other features)
+  if(showBonds && P.aromatic){
+    ctx.save(); ctx.globalAlpha=alpha*0.9; ctx.strokeStyle=opt.bond||pal().bond; ctx.lineWidth=1.6;
+    pts.forEach(p=>{ if(p.f.core && p.f.fam!=="aromatic"){ ctx.beginPath(); ctx.moveTo(P.aromatic[0],P.aromatic[1]); ctx.lineTo(p.px,p.py); ctx.stroke(); }});
+    ctx.restore();
+  }
+  // ring around aromatic
+  if(showRing && P.aromatic){ ringPoly(P.aromatic[0],P.aromatic[1],u*0.72,FAM.aromatic.c,alpha*0.9); }
+  // dots
+  pts.forEach(p=>{
+    featDot(p.px,p.py,p.f.fam,p.f.core?dot:dot*0.82,alpha,opt.glow&&p.f.core,!p.f.core&&opt.dimDecoy);
+  });
+  // directional arrows on acceptor/donor
+  if(opt.directions){
+    pts.forEach(p=>{
+      if(p.f.fam==="acceptor"){
+        // lone-pair points away from aromatic centre; flip for the ring-flipped compound
+        let vx=p.px-(P.aromatic?P.aromatic[0]:p.px), vy=p.py-(P.aromatic?P.aromatic[1]:p.py);
+        if(comp.ringFlipComp){ vx=-vx*(1-flipAcc)+vx*flipAcc; vy=-vy*(1-flipAcc)+vy*flipAcc; }
+        arrow(p.px,p.py,vx,vy,u*0.7,FAM.acceptor.c,alpha);
+      }
+      if(p.f.fam==="donor"){ arrow(p.px,p.py,0.4,0.9,u*0.6,FAM.donor.c,alpha*0.9); }
+    });
+  }
+  return P;
+}
+
+function bg(p){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle=p.bg; ctx.fillRect(0,0,W,H);
+  // faint molecular grid
+  ctx.save(); ctx.strokeStyle=p.grid; ctx.lineWidth=1;
+  const gs=Math.max(34, Math.min(W,H)/14);
+  for(let x=gs/2;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=gs/2;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  ctx.restore();
+}
+
+// ---------- per-stage renderers ----------
+function gridAnchors(cols,rows){
+  const mx=W*0.12, my=H*0.16, gw=(W-2*mx)/cols, gh=(H-2*my)/rows;
+  const a=[];
+  for(let i=0;i<COMPS.length;i++){const c=i%cols, r=Math.floor(i/cols); a.push([mx+gw*(c+.5), my+gh*(r+.5)]);}
+  return a;
+}
+
+function stage1(t,p){ // DrugCLIP hit set
+  const A=gridAnchors(3,2); const u=Math.min(W,H)/26;
+  label("DrugCLIP rank", W*0.5, H*0.07, p.faint, 12);
+  COMPS.forEach((c,i)=>{
+    const app=ease(clamp((t*1.5)-i*0.12));
+    if(app<=0) return;
+    const [ax,ay]=A[i];
+    ctx.save(); ctx.globalAlpha=app;
+    drawCompound(c,ax,ay+ (1-app)*20,u,{alpha:app,dimDecoy:false});
+    // rank badge + score bar
+    label("#"+c.rank, ax-u*1.9, ay-u*1.55, p.sub, 12, "left", 700);
+    const bw=u*2.4, bx=ax-bw/2, by=ay+u*1.7;
+    ctx.fillStyle=p.grid; ctx.fillRect(bx,by,bw,4);
+    ctx.fillStyle=p.accent; ctx.fillRect(bx,by,bw*(0.55+ (0.42*(COMPS.length-i)/COMPS.length)),4);
+    label(c.score, ax+bw/2+6, by+2, p.faint,10,"left");
+    ctx.restore();
+  });
+}
+
+function stage2(t,p){ // conformers + energy filter
+  const A=gridAnchors(3,2); const u=Math.min(W,H)/26;
+  const fan=seg(t,0,0.42), cull=seg(t,0.5,1);
+  COMPS.forEach((c,i)=>{
+    const [ax,ay]=A[i];
+    // draw conformers fanned around
+    c.confs.forEach((cf,k)=>{
+      const keep = k===0;
+      const spread = fan*(k)*0.9;
+      const off = (k-1)*u*1.15*fan;
+      let alpha;
+      if(keep) alpha=0.5+0.5*fan;
+      else alpha=(0.45+0.25*fan)*(1-cull);   // high-energy fade out
+      if(alpha<=0.02) return;
+      ctx.save();
+      drawCompound(c,ax+off,ay,u*0.9,{ang:cf.rot,alpha,onlyCore:false,showRing:true,
+        bond: keep?p.bond:hexA("#FF0000",.35)});
+      // energy tick
+      if(!keep){ label("ΔE↑", ax+off, ay+u*1.7, hexA("#FF0000",alpha), 10); }
+      ctx.restore();
+    });
+    if(cull>0.6) label("min-energy kept", ax, ay-u*1.85, p.faint, 10);
+  });
+  label("fan out → discard strained conformers", W*0.5, H*0.07, p.faint,12);
+}
+
+function centreAnchor(){ return [W*0.5, H*0.54]; }
+
+function stage3(t,p){ // seedless init
+  const u=unitFor(); const [ax,ay]=centreAnchor();
+  const A=gridAnchors(3,2);
+  const move=ease(t);
+  // fade the rest, pull #1 to centre
+  COMPS.forEach((c,i)=>{
+    if(i===0) return;
+    const [gx,gy]=A[i];
+    ctx.save(); ctx.globalAlpha=(1-move)*0.5; drawCompound(c,gx,gy,Math.min(W,H)/26,{alpha:(1-move)*0.5}); ctx.restore();
+  });
+  const c0=COMPS[0]; const [gx,gy]=A[0];
+  const cx=lerp(gx,ax,move), cy=lerp(gy,ay,move), uu=lerp(Math.min(W,H)/26,u,move);
+  drawCompound(c0,cx,cy,uu,{glow:true});
+  if(move>0.5){
+    ctx.save(); ctx.globalAlpha=(move-0.5)*2; ctx.setLineDash([5,5]); ctx.strokeStyle=p.accent; ctx.lineWidth=1.4;
+    ctx.strokeRect(ax-u*3.4,ay-u*3.0,u*6.8,u*6.0); ctx.setLineDash([]);
+    label("reference frame  ·  rank #1 lowest-energy conformer", ax, ay-u*3.5, p.accent,12);
+    ctx.restore();
+  }
+}
+
+function stage4(t,p){ // clique alignment
+  const u=unitFor(); const [ax,ay]=centreAnchor();
+  // reference (compound 0) always shown, aligned
+  const baseP=drawCompound(COMPS[0],ax,ay,u,{rscale:0,alpha:0.95,glow:false});
+  // sequentially bring in compounds 1..5
+  const per=1/(COMPS.length-1);
+  for(let i=1;i<COMPS.length;i++){
+    const start=(i-1)*per, prog=seg(t,start,start+per*0.96);
+    if(prog<=0) continue;
+    const c=COMPS[i];
+    // path: from unaligned pose -> aligned (ang0,0,0) with residual settling
+    const snap=ease(prog);
+    const ang=lerp(c.u.ang,0,snap), dx=lerp(c.u.dx,0,snap), dy=lerp(c.u.dy,0,snap);
+    const rscale=lerp(1.0,0.42,snap);
+    const alpha=0.35+0.6*snap;
+    const P=drawCompound(c,ax,ay,u,{ang,dx,dy,rscale,alpha});
+    // correspondence lines between same-type core features (during the match, before full snap)
+    if(prog<0.85){
+      const vis=clamp(1-Math.abs(prog-0.4)/0.4);
+      ctx.save(); ctx.globalAlpha=vis*0.8; ctx.lineWidth=1.4; ctx.setLineDash([3,4]);
+      for(const k of ["cation","aromatic","acceptor"]){
+        if(P[k]&&baseP[k]){ ctx.strokeStyle=FAM[k].c; ctx.beginPath(); ctx.moveTo(P[k][0],P[k][1]); ctx.lineTo(baseP[k][0],baseP[k][1]); ctx.stroke(); }
+      }
+      ctx.setLineDash([]); ctx.restore();
+    }
+  }
+  // consensus triangle + intramolecular distance emphasis on the reference
+  if(baseP.cation&&baseP.acceptor&&baseP.aromatic){
+    ctx.save(); ctx.globalAlpha=0.9; ctx.lineWidth=1.6; ctx.strokeStyle=p.sub; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(baseP.cation[0],baseP.cation[1]); ctx.lineTo(baseP.acceptor[0],baseP.acceptor[1]); ctx.stroke();
+    ctx.setLineDash([]); ctx.restore();
+    const mx=(baseP.cation[0]+baseP.acceptor[0])/2, my=(baseP.cation[1]+baseP.acceptor[1])/2;
+    label("match on internal distances", mx, my+16, p.faint,11);
+  }
+  const done=Math.floor(clamp(t)* (COMPS.length-1))+1;
+  label("clique + Kabsch  ·  consensus updating  ("+Math.min(done,COMPS.length)+"/"+COMPS.length+")", W*0.5, H*0.075, p.faint,12);
+}
+
+function stage5(t,p){ // EM refinement — cloud tightens
+  const u=unitFor(); const [ax,ay]=centreAnchor();
+  // residual scale shrinks in two visible passes
+  const iterT = t*2; const iter=Math.min(1,Math.floor(iterT))+1;
+  const rscale=lerp(0.42,0.06, ease(clamp(t)));
+  COMPS.forEach((c,i)=>{
+    drawCompound(c,ax,ay,u,{rscale, alpha:i===0?0.95:0.7, glow:false});
+  });
+  label("EM refinement  ·  re-align to consensus, re-pick best conformer  ·  pass "+Math.min(iter,2)+"/2",
+        W*0.5, H*0.075, p.faint,12);
+  label("cloud tightening → fixed point", W*0.5, H*0.93, p.faint,11);
+}
+
+function stage6(t,p){ // directional matching resolves ring flip
+  const u=unitFor(); const [ax,ay]=centreAnchor();
+  const flip=ease(seg(t,0.35,0.9));  // 0 = wrong (flipped) ... 1 = corrected
+  COMPS.forEach((c,i)=>{
+    const isFlip=c.ringFlipComp;
+    drawCompound(c,ax,ay,u,{rscale:0.06, alpha:isFlip?0.95:0.55,
+      directions:true, flip:isFlip?flip:0, glow:isFlip});
+  });
+  // callout
+  const call = seg(t,0,0.3);
+  if(t<0.5){
+    label("ring-flipped acceptor — orientation mismatch", W*0.5, H*0.075, hexA("#FF0000",0.9),12);
+  } else {
+    label("orientation matched — acceptor vector corrected", W*0.5, H*0.075, FAM.acceptor.c,12);
+  }
+  label("D–H / lone-pair arrows drive the fit", W*0.5, H*0.93, p.faint,11);
+}
+
+function stage7(t,p){ // abstraction to feature points
+  const u=unitFor(); const [ax,ay]=centreAnchor();
+  const dissolve=ease(t);
+  COMPS.forEach((c,i)=>{
+    // rings/bonds fade; dots remain
+    ctx.save();
+    drawCompound(c,ax,ay,u,{rscale:0.06, alpha:1,
+      showRing: dissolve<0.6, showBonds: dissolve<0.6,
+      dot: u*0.30});
+    ctx.restore();
+  });
+  label(dissolve<0.6? "dropping atoms & bonds…" : "typed feature point cloud", W*0.5, H*0.075, p.faint,12);
+}
+
+// KDE density blobs
+function stage8(t,p){ // clustering / KDE
+  const u=unitFor(); const [ax,ay]=centreAnchor();
+  const field=ease(seg(t,0,0.55)), filt=seg(t,0.6,1);
+  // gather all points in aligned frame (rscale small)
+  const groups={}; // fam -> list of screen pts, core flag
+  COMPS.forEach(c=>{
+    c.feats.forEach((f,idx)=>{
+      const r=c.res[idx];
+      const lx=f.x+r[0]*0.06, ly=f.y+r[1]*0.06;
+      (groups[f.fam]=groups[f.fam]||[]).push({px:ax+lx*u,py:ay-ly*u,core:f.core});
+    });
+  });
+  // density glow (additive)
+  ctx.save(); ctx.globalCompositeOperation="lighter";
+  for(const fam in groups){
+    groups[fam].forEach(pt=>{
+      const isNoise=!pt.core;
+      const a=(isNoise? (1-filt)*0.25 : 0.34)*field;
+      if(a<=0.01) return;
+      const rad=u*(isNoise?1.2:2.0)*(0.4+0.6*field);
+      const g=ctx.createRadialGradient(pt.px,pt.py,0,pt.px,pt.py,rad);
+      g.addColorStop(0,hexA(FAM[fam].c,a)); g.addColorStop(1,hexA(FAM[fam].c,0));
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(pt.px,pt.py,rad,0,7); ctx.fill();
+    });
+  }
+  ctx.restore();
+  // points
+  for(const fam in groups){
+    groups[fam].forEach(pt=>{
+      const isNoise=!pt.core;
+      const a=isNoise? (1-filt)*0.8+0.05 : 1;
+      featDot(pt.px,pt.py,fam, isNoise?u*0.16:u*0.24, a, false, isNoise);
+    });
+  }
+  // emerging peaks (core families)
+  if(field>0.7){
+    ["cation","aromatic","acceptor"].forEach(k=>{
+      const c=[ax+CORE[k][0]*u, ay-CORE[k][1]*u];
+      ctx.save(); ctx.globalAlpha=field; ctx.strokeStyle=FAM[k].c; ctx.lineWidth=2; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.arc(c[0],c[1],u*0.9,0,7); ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+    });
+  }
+  label(filt<0.3? "molecule-weighted occupancy field forming…" : "peaks kept · low-support scatter filtered",
+        W*0.5, H*0.075, p.faint,12);
+}
+
+function stage9(t,p){ // final 3-point model
+  const u=unitFor(); const [ax,ay]=centreAnchor();
+  const app=ease(t);
+  const pts={
+    cation:[ax+CORE.cation[0]*u, ay-CORE.cation[1]*u],
+    aromatic:[ax+CORE.aromatic[0]*u, ay-CORE.aromatic[1]*u],
+    acceptor:[ax+CORE.acceptor[0]*u, ay-CORE.acceptor[1]*u],
+  };
+  // excluded-volume: present in model, drawn only as faint hint that fades to "not shown"
+  const evHint=clamp(1-seg(t,0.4,0.75));
+  ctx.save(); ctx.globalAlpha=evHint*0.4; ctx.setLineDash([2,4]);
+  [[ax-u*3.6,ay-u*2.6],[ax+u*3.4,ay+u*2.2],[ax-u*3.2,ay+u*2.6]].forEach(([ex,ey])=>{
+    ctx.beginPath(); ctx.arc(ex,ey,u*0.7,0,7); ctx.strokeStyle=FAM.excl.c; ctx.lineWidth=1.5; ctx.stroke();
+  });
+  ctx.setLineDash([]); ctx.restore();
+
+  // ghost representative ligand skeleton
+  ctx.save(); ctx.globalAlpha=app*0.5; ctx.strokeStyle=p.bond; ctx.lineWidth=1.6;
+  ctx.beginPath(); ctx.moveTo(pts.aromatic[0],pts.aromatic[1]); ctx.lineTo(pts.cation[0],pts.cation[1]); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(pts.aromatic[0],pts.aromatic[1]); ctx.lineTo(pts.acceptor[0],pts.acceptor[1]); ctx.stroke();
+  ringPoly(pts.aromatic[0],pts.aromatic[1],u*0.72,FAM.aromatic.c,app*0.55);
+  ctx.restore();
+
+  // consensus mesh spheres (fixed display radius) with centre pip + label
+  const specs=[["cation","Cation","0.9"],["aromatic","Aromatic","1.0"],["acceptor","Acceptor †","0.6"]];
+  specs.forEach(([k,nm,sup])=>{
+    const [px,py]=pts[k]; const R=u*1.25*app;
+    // glow
+    const g=ctx.createRadialGradient(px,py,0,px,py,R*1.6);
+    g.addColorStop(0,hexA(FAM[k].c,.28*app)); g.addColorStop(1,hexA(FAM[k].c,0));
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(px,py,R*1.6,0,7); ctx.fill();
+    // wireframe mesh sphere (a few latitude circles)
+    ctx.save(); ctx.globalAlpha=app; ctx.strokeStyle=FAM[k].c; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.arc(px,py,R,0,7); ctx.stroke();
+    for(let j=-2;j<=2;j++){ const rr=R*Math.cos(j*0.5); ctx.beginPath(); ctx.ellipse(px,py,Math.abs(rr),R*0.32,0,0,7); ctx.stroke(); }
+    ctx.restore();
+    featDot(px,py,k,u*0.20,app,false);
+    label(nm, px, py-R-12, FAM[k].c, 12,"center",700);
+    label("support "+sup, px, py-R+2, p.faint,10);
+  });
+
+  // cation–acceptor 5.0 Å
+  if(app>0.5){
+    const a=pts.cation,b=pts.acceptor;
+    ctx.save(); ctx.globalAlpha=(app-0.5)*2; ctx.strokeStyle=p.sub; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); ctx.setLineDash([]);
+    const mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2;
+    ctx.fillStyle=p.bg; ctx.fillRect(mx-26,my-9,52,18);
+    label("5.0 Å", mx, my, p.ink,12,"center",700);
+    ctx.restore();
+  }
+  label("Nicotinic 3-point pharmacophore", W*0.5, H*0.075, p.ink,13);
+  label(evHint<0.2? "excluded-volume markers: in model, not drawn" : "", W*0.5, H*0.93, p.faint,11);
+}
+
+const RENDER=[stage1,stage2,stage3,stage4,stage5,stage6,stage7,stage8,stage9];
+
+// ---------- timeline / state ----------
+let stage=0, t=0, mode="paused"; // paused | playing | stepping
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+function render(){
+  const p=pal();
+  bg(p);
+  RENDER[stage](reduce?1:clamp(t),p);
+}
+let last=performance.now();
+function loop(now){
+  const dt=now-last; last=now;
+  if(mode!=="paused"){
+    t += (dt/DUR[stage]);
+    if(t>=1){
+      if(mode==="playing"){ t=0; stage=(stage+1)%N; syncUI(); }
+      else { t=1; mode="paused"; setPlayIcon(); }
+    }
+  }
+  render();
+  document.getElementById("fill").style.width=(clamp(t)*100).toFixed(1)+"%";
+  requestAnimationFrame(loop);
+}
+
+// ---------- UI ----------
+const stepper=document.getElementById("stepper");
+STAGES.forEach((s,i)=>{
+  const b=document.createElement("button"); b.className="dot"; b.type="button";
+  b.setAttribute("role","tab"); b.setAttribute("aria-label","Step "+(i+1)+": "+s[0]);
+  b.innerHTML=`<span class="pip"></span>${String(i+1).padStart(2,"0")}`;
+  b.addEventListener("click",()=>goStage(i,true));
+  stepper.appendChild(b);
+});
+function setPlayIcon(){
+  const path = mode==="playing"
+    ? '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>'
+    : '<path d="M8 5v14l11-7z"/>';
+  document.getElementById("playIcon").innerHTML=path;
+}
+function syncUI(){
+  document.getElementById("capNo").textContent=String(stage+1).padStart(2,"0");
+  document.getElementById("stepNum").textContent=String(stage+1).padStart(2,"0");
+  document.getElementById("capTitle").textContent=STAGES[stage][0];
+  document.getElementById("capBody").textContent=STAGES[stage][1];
+  [...stepper.children].forEach((d,i)=>d.setAttribute("aria-current", i===stage?"true":"false"));
+}
+function goStage(i,step){
+  stage=((i%N)+N)%N; t=0;
+  mode = step ? (reduce?"paused":"stepping") : mode;
+  if(reduce){ t=1; }
+  setPlayIcon(); syncUI();
+}
+document.getElementById("play").addEventListener("click",()=>{
+  mode = mode==="playing" ? "paused" : "playing";
+  if(mode==="playing" && t>=1){ t=0; }
+  setPlayIcon();
+});
+document.getElementById("fwd").addEventListener("click",()=>goStage(stage+1,true));
+document.getElementById("back").addEventListener("click",()=>goStage(stage-1,true));
+window.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight"){goStage(stage+1,true);e.preventDefault();}
+  else if(e.key==="ArrowLeft"){goStage(stage-1,true);e.preventDefault();}
+  else if(e.key===" "){document.getElementById("play").click();e.preventDefault();}
+});
+
+// theme toggle
+const themeBtn=document.getElementById("themeBtn");
+function applyThemeLabel(){
+  const d=themeIsDark();
+  document.getElementById("themeIcon").textContent=d?"☾":"☀";
+  document.getElementById("themeLbl").textContent=d?"Dark":"Light";
+}
+themeBtn.addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+  document.documentElement.setAttribute("data-theme", cur==="dark"?"light":"dark");
+  applyThemeLabel();
+});
+matchMedia("(prefers-color-scheme:dark)").addEventListener("change",applyThemeLabel);
+
+// ---------- boot ----------
+resize(); syncUI(); setPlayIcon(); applyThemeLabel();
+requestAnimationFrame(loop);
+// autoplay once visible (respect reduced motion)
+if(!reduce){ setTimeout(()=>{ mode="playing"; setPlayIcon(); }, 600); }
+})();
+</script>

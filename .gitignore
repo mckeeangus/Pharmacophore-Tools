@@ -6,6 +6,22 @@
 # catalogue/ is intentionally NOT ignored — it is the tracked deliverable.
 data/
 
+# DrugCLIP -> GNINA docked screening sets (bulk input for the --docked-dir one-shot:
+# a folder of <mol_id>_docked.sdf + a rank index_*.csv). Large, not a deliverable.
+5KXI/
+
+# Raw DrugCLIP/GNINA screening deposit (organised into data/screening/ by
+# scripts/organise_screening.py; data/ is already ignored). drugclip_output/ is a
+# superseded/mismatched index set. All bulk input, not deliverables.
+out/
+website_output/
+drugclip_output/
+
+# The full DrugCLIP screening compound library (~18.6M molecules, ~48 GB of vendor SDFs).
+# The source library DrugCLIP screens against — bulk input, never tracked. The tracked
+# summary of it is docs/molecule_library.md.
+molecule_library/
+
 # External reference material kept locally, not tracked (e.g. the TeachOpenCADD
 # T009 tutorial the Stage-4 pharmacophore method is adapted from).
 talktorial.ipynb

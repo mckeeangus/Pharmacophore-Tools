@@ -54,6 +54,164 @@ protonation and template bond perception. Protonation is reused if already prese
 `--allow-unprotonated` / `--no-render` tune the steps. It shells out across pixi envs, so
 it is local-only.
 
+### Docked screening sets (`--docked-dir`)
+
+The same one hypothesis-per-set logic serves a **DrugCLIP → GNINA** virtual-screening hit
+set. A second one-shot treats the docked poses as one aligned active set — every compound is
+docked into the **same receptor frame**, so the poses are already mutually superposed, no
+alignment step needed:
+
+```
+pixi run build-pharmacophores --docked-dir DIR --out DIR --top-hits N [--top-poses n]
+```
+
+`DIR` holds GNINA `<mol_id>_docked.sdf` files (one compound each, several docked poses) and a
+DrugCLIP rank `index_*.csv` (`mol_id,…,drugclip_score`; auto-detected, or `--index`). The
+build takes the **top `N` compounds by DrugCLIP score** and the **best `n` poses of each
+(`--top-poses`, default 1)**, then runs the identical extraction → density → selection →
+summary → viz path. Two things differ from the mol2 path, both because docked SDFs are
+richer inputs:
+
+- **No protonation subprocess.** Each SDF record already carries its pH-7.4
+  `protonated_smiles` (fixed at docking prep), which is used directly as the
+  `AssignBondOrdersFromTemplate` template — so ionisation-correct perception (§2) comes for
+  free and the build is fully offline. A record that fails template assignment falls back to
+  a direct sanitized read of the pose (its bond orders are already explicit, unlike mol2).
+- **Poses are independent observations, chosen by binding quality.** Each pose is loaded with
+  ligand_id `<mol_id>__p<gnina_rank>` (pointing at a specific SDF pose), so the density field's
+  molecule-weighting and support (§4–5) key on the pose. At the default one pose per hit the
+  unit of evidence is the compound; `--top-poses >1` lets a compound's alternative placements
+  count as separate observations (all recorded, with rank/pose/score/load-method, in
+  `docked_manifest.csv`). Crucially the poses are selected **by GNINA binding quality**
+  (`--pose-score`, default `cnnaffinity`; also `vina`/`cnnscore`/`cnn_vs`, plus a `--max-vina`
+  clash filter) **not by the raw SDF order**: GNINA writes poses in `CNNscore` (pose-quality
+  classifier) order, but `CNNscore` ranks physically-clashing poses highly — on 5KXI the mean
+  Vina energy of the CNN-rank-3 pose is already ≈0 kcal/mol and rank-5+ poses are majority
+  *positive* (clashing). Taking poses in that order poisons the ensemble, which is why naive
+  `--top-poses >1` degraded the model; selecting the single best pose by `CNNaffinity` or
+  `minimizedAffinity` instead recovers it.
+
+**Empirical settings (5KXI nAChR, known 3-point pharmacophore = cationic centre + aromatic +
+H-bond acceptor).** With quality-aware selection, `--top-hits 20–30 --top-poses 1
+--pose-score cnnaffinity` recovers all three features (cation support ≈0.9, aromatic ≈1.0,
+acceptor ≈0.6) with the classic nicotinic **cation–acceptor distance ≈5.0 Å** (Beers–Reich /
+Sheridan, 4.8–5.9 Å). Beyond this: (i) support decays monotonically with `top_hits` as deeper,
+looser DrugCLIP hits dilute the consensus — so a *small* top slice is best, not a large one;
+(ii) even with quality selection, **one well-chosen pose beats several** at these hit counts
+(the 2nd pose adds spatial scatter; extra poses help only at larger `N`); (iii) the top of the
+DrugCLIP list is scaffold-redundant (top-10 ≈ 4 unique scaffolds, nicotine analogs), but
+inverse-scaffold weighting barely moves the result because those duplicates *carry* the
+features anyway; (iv) **DrugCLIP score does not correlate with GNINA pose quality** (per-compound
+Spearman ≈0.2 for CNNscore, ≈0 for CNNaffinity, ≈−0.17 for Vina over the top 300) — the two are
+complementary filters, so docking-derived geometry cannot be replaced by trusting the DrugCLIP
+rank.
+
+The loader is `pharmpipe/features/dock_load.py`; both entry points share the build core
+`build_from_molecules`. Docked input dirs are gitignored bulk input, not a deliverable.
+
+### Minimum-docking construction (docked-seed alignment)
+
+`--docked-dir` docks the *whole* hit list. Benchmarking it against the native 5KXI nicotine
+crystal pose (the docked poses are in the crystal frame) showed that **most of the docking is
+unnecessary and one feature is actively harmed**: the cation and aromatic reconstruct on the
+true pocket (aromatic lands on native 93% of the time), but the directional acceptor is
+corrupted by a **GNINA ring-flip** — the ring docks correctly while the pyridine-N rotates to
+a non-native orientation, so the consensus acceptor sits ~3.5 Å off-native. DrugCLIP relevance
+and GNINA pose quality are also **orthogonal**, and the pharmacophore is front-loaded (formed
+by ~20–30 hits). So docking every compound buys nothing the top slice doesn't already give.
+
+`--seed-docked DIR --out DIR --top-hits 100 --seed-k 5` is the **minimum-docking** answer: dock
+only the top-`seed_k` (5) compounds, use their poses as a bioactive-frame **seed**, then bring
+the next 95 DrugCLIP-ranked compounds in by *ligand* alignment — no protein needed. The guiding
+idea is that the pharmacophore *is* the set of **relative distances between features within each
+molecule**; a docked conformation only supplies the starting frame, and the alignment matches on
+those internal distances, so the model is frame-independent chemistry:
+
+1. **Seed** — feature points of the top-`seed_k` docked poses → `align.consolidate` → one
+   reference point per site (the bioactive frame). Seeds are any docked SDFs (**engine-agnostic**:
+   GNINA now, **AutoDockFR** later — `docs/adfr_seeding.md`); the loader ranks poses by GNINA
+   `cnnaffinity` when present and otherwise falls back to pose 1, so ADFR poses (no GNINA tags)
+   seed correctly. Only the top-`seed_k` compounds need docked SDFs; the rest embed from SMILES.
+2. **Protonate** the ranked compounds to their pH-7.4 microstate — reused from each compound's
+   docked-SDF `protonated_smiles` when present, else via the `prep` env (`--allow-unprotonated`
+   falls back to neutral SMILES).
+3. **Conformer ensembles** (`features/conformers.py`: ETKDG v3 + MMFF, energy-windowed,
+   RMSD-pruned) — the bioactive conformer must be in the ensemble for the alignment to find it.
+4. **Feature-clique alignment** (`pharmacophore/align.py`, pure): a correspondence graph (same-
+   family node pairs; edges where intra-molecular distances agree within `dist_tol`) → maximal
+   cliques (**Bron–Kerbosch**) → **Kabsch** superposition per clique → best `(matched, −rmsd)`.
+   Each compound's best conformer is aligned onto the growing model, which is **updated** (running
+   mean of matched points) as it accretes — align 6th, update, align 7th, update, … A compound is
+   folded in **only if its best clique RMSD ≤ `max_align_rmsd`** (the key quality gate: a poor fit
+   would otherwise corrupt the running consensus); compounds below `min_clique` shared features or
+   above the RMSD gate are dropped, recorded `aligned=False` in `alignment_manifest.csv`.
+5. **Build** — the pooled aligned feature cloud → the same density consensus, artifacts, and viz.
+
+All knobs live in `config/pharmacophore.yaml` `alignment:` (consumed **only** by this mode, so it
+stays orthogonal to the catalogue build), tuned on 5KXI by `scripts/troubleshoot_seed_align.py`
+(the parameter sweep + benchmark → `catalogue/screening_eval/nachr_a4b2_positive/seed5_benchmark.md`).
+On 5KXI the recipe recovers the 3-point model with the cation and aromatic **~1 Å from the crystal
+nicotine** and honest support — at the cost of docking five compounds, not the library.
+
+**The acceptor stays low-confidence.** Alignment inherits (and, seeding from docked poses,
+propagates) the ring-flip: the consensus acceptor reproduces the flipped orientation, ~3.4 Å
+off-native. Directional families (Acceptor, Donor) are therefore **flagged † low-confidence** in
+`model_summary.md` — the pose-invariant cation/aromatic anchors are trustworthy, the directional
+feature is not. Resolving it needs the (parked) directional lone-pair/vector work, not more
+alignment. Two other honest limits: **coverage** (compounds sharing < `min_clique` feature types
+with the model are dropped — report aligned/total) and **conformer sampling** (modest for rigid
+ligands here; flexible targets need larger ensembles, the classic "bioactive conformer must be
+present" failure mode).
+
+**Generalised engine: init options, EM refinement, aligned-set output.** The seed is now one of
+three initialisations of the *same* iterative feature alignment: the docked top-`seed_k` (default),
+an arbitrary 3D-coordinate `--seed` (a crystal ligand or docked poses — a frame only), or
+**seedless** (`--seedless`) from the top-ranked compound's lowest-energy conformer. High-energy
+conformers are discarded up front (`alignment.energy_window` — a strained conformer is unlikely to
+be the bioactive one). After the growing pass, an **EM refinement** (`alignment.em_iterations`,
+`em_tol`) re-aligns every compound to the current full consensus and recomputes the feature centres
+to a fixed point. The re-alignment **re-selects each compound's best conformer against the improved
+consensus** — this is the refinement of choice (over torsional relaxation): it removes the effect of
+a sub-optimal *discrete* conformer chosen early **without distorting any structure**, so a rigid
+compound that cannot move is simply left at its best available conformer (no forcing; the
+`max_align_rmsd` gate still drops true outliers). `--align-only` writes just the **aligned compound
+set** (`aligned_compounds.sdf` + `aligned_points.csv` + `alignment_manifest.csv`); the Gaussian-KDE
+`build_density` runs on those pooled points (default) or can be re-run on the SDF later — the
+alignment and the consensus extraction are decoupled.
+
+**Is a seed necessary?** Tested on nAChR (`scripts/seed_necessity.py`) with crystal / docked /
+seedless inits, compared by frame-independent internal geometry against the known-actives model.
+**All three recover the 3-point model**, and *seedless* matches the known-actives geometry as well as
+the seeded builds (cation–aromatic 4.40 Å vs 4.50; aromatic–acceptor 1.53 Å vs 1.50), converging in
+one EM iteration. So on this target **a seed is not necessary for correct geometry** — the shared
+*rigid cores* impose enough mutual distance constraint that the consensus locks onto the right shape
+from any reasonable start; the seed only affects convergence speed.
+`catalogue/screening_eval/nachr_a4b2_positive/seed_necessity.md`.
+
+**This generalises** (`scripts/seed_necessity_all.py` → `catalogue/screening_eval/seed_necessity_report.md`).
+Across the **11 screening targets that have a known-actives ground truth**, docked-seed vs seedless
+compared to that model: **seedless matches or beats the docked seed in 10/11**, and is *often strictly
+better* — it recovers more feature families (on cdk2 the docked seed failed outright, recall 0, while
+seedless recovered all families) and aligns all 100 compounds (the docked path spends 5 as the seed).
+A poor docked pose can actively bias the frame, so seedless is sometimes not just adequate but
+preferable. The single exception is **ca2** (Zn-binding sulfonamides): few rigid multi-feature cores
+to anchor the consensus, plus a defining metal-coordination feature outside the vocabulary — the
+predicted failure mode where the seed frame still helps.
+
+**Directional (orientation-aware) matching** (`alignment.use_directions`, default on). Feature
+perception emits an orientation vector for the directional families — Donor D→H, Acceptor lone-pair
+(pointing from the heavy neighbours through the acceptor, which flips sign for a ring-flipped
+nitrogen), and Aromatic ring-normal. The clique superposition then fits, for each matched H-bond
+donor/acceptor, a **projected point** (feature centre + `projected_length` Å along its vector)
+*jointly with the centres* — the standard LigandScout/Catalyst device that turns orientation into a
+positional target — so a wrongly-oriented match no longer superposes and is penalised by RMSD. The
+consensus model's `direction` field (previously always `None`) is populated from the mean of the
+aligned points' directions. On nAChR the effect is modest (acceptor 1.54→1.41 Å off the crystal N,
+docked seed) because seed-align + EM already resolves the acceptor there; the flip was far more
+damaging in the `--docked-dir` full-consensus path, which is where the orientation term should pay
+off most (`scripts/directional_benchmark.py` →
+`catalogue/screening_eval/nachr_a4b2_positive/directional_benchmark.md`).
+
 ### Minimum-ligands gate
 
 A cell with **fewer than `selection.min_ligands` (= 10) known actives is skipped** and any

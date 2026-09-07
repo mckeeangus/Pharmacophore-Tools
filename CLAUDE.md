@@ -163,7 +163,123 @@ model; the catalogue batch mode is a convenience over that.
 
 Run: `pixi run build-pharmacophores --catalogue` (or `--target <slug>`, or
 `--input DIR --out DIR --smiles ligands.csv`). Offline. Every model writes to the single
-namespace `catalogue/<slug>/pharmacophores/<cell>/`. (An earlier swappable k-means
+namespace `catalogue/<slug>/pharmacophores/<cell>/`.
+
+**Docked screening sets (`--docked-dir`).** A second one-shot builds a hypothesis from a
+**DrugCLIP → GNINA** virtual-screening hit set, treating the docked poses as one aligned
+active set (all docked into the same receptor frame, so already superposed): `pixi run
+build-pharmacophores --docked-dir DIR --out DIR --top-hits N [--top-poses n]
+[--pose-score cnnaffinity] [--max-vina 0] [--reference-pdb receptor.pdb]`. The directory is
+a folder of GNINA `<mol_id>_docked.sdf` files (one compound each, several docked poses) plus
+a DrugCLIP rank `index_*.csv` (`mol_id,…,drugclip_score`, auto-detected or `--index`). It
+takes the **top `N` compounds by DrugCLIP score** and the **best `n` poses of each (default
+1)**, then runs the same build/summary/viz path as `--input`. **Pose selection is
+quality-aware** (`--pose-score`, default `cnnaffinity`; also `vina`/`cnnscore`/`cnn_vs`, plus
+`--max-vina` clash filter): GNINA writes poses in **`CNNscore`** order, but `CNNscore` ranks
+physically-clashing poses highly (poses ≥3 are majority Vina-positive), so selecting by
+**`CNNaffinity`** or **`minimizedAffinity`** instead is what recovers the correct model.
+**Empirically (5KXI nAChR):** `--top-hits 20–30 --top-poses 1 --pose-score cnnaffinity`
+recovers the full nicotinic **cation + aromatic + acceptor** 3-point pharmacophore with the
+literature cation–acceptor distance (~5.0 Å); more poses add scatter, not signal, and
+DrugCLIP score does **not** correlate with GNINA pose quality (they are complementary
+filters, so docking cannot be skipped by trusting DrugCLIP rank). It is **offline with no protonation subprocess** — the
+SDFs already carry each pose's pH-7.4 `protonated_smiles`, which is used as the
+`AssignBondOrdersFromTemplate` template (falling back to a direct SDF read). **Each pose is
+an independent observation** (ligand_id `<mol_id>__p<k>`), so support/molecule-weighting key
+on the pose: at the default one pose/hit the unit of evidence is the compound; `--top-poses
+>1` lets a compound's alternative placements count separately. Provenance (rank, pose, score,
+load method per pose) is written to `docked_manifest.csv`; the loader is
+`pharmpipe/features/dock_load.py` and the build core is shared via
+`pharmpipe.pharmacophore.run.build_from_molecules`. Docked input dirs are gitignored bulk
+input (like `data/`), not a tracked deliverable.
+
+**Minimum-docking (`--seed-docked`).** A validation against the native 5KXI nicotine crystal
+pose showed `--docked-dir` docks far more than needed and that its directional acceptor is
+corrupted by a GNINA **ring-flip** (cation/aromatic land on the crystal, the acceptor lands
+~3.5 Å off); DrugCLIP relevance and GNINA pose quality are **orthogonal**, and the model is
+front-loaded. **Recommended recipe `--top-hits 100 --seed-k 5`:** `pixi run
+build-pharmacophores --seed-docked DIR --out DIR --top-hits 100 [--seed-k 5]
+[--reference-pdb receptor.pdb]` docks only the top-`seed_k` compounds, uses their poses as a
+**bioactive-frame seed**, and incrementally aligns + folds in ranked compounds 6..100 by
+**feature-clique matching** (correspondence graph on **relative intra-molecular feature
+distances** → Bron–Kerbosch → Kabsch, `pharmacophore/align.py`) over a **conformer ensemble**
+(`features/conformers.py`), updating the model (running mean) as it grows — no protein needed.
+A compound is folded in only if its best clique RMSD clears `alignment.max_align_rmsd` (poor
+fits dropped, recorded `aligned=False` in `alignment_manifest.csv`) — the key quality gate for
+the incremental update. **Engine-agnostic seeding:** the seed poses are any docked SDFs (GNINA
+now, **AutoDockFR** later — only the top-`seed_k` need SDFs, the rest embed from index SMILES;
+the loader falls back to pose 1 when GNINA score tags are absent; see `docs/adfr_seeding.md`).
+Ligands are protonated from their docked-SDF `protonated_smiles` when present (offline), else
+via the `prep` env. On 5KXI it recovers the 3-point model with cation/aromatic **~1 Å from the
+crystal nicotine** while docking five compounds, not the library. The **acceptor stays
+low-confidence** (inherits the flip) and directional features are flagged `†` in
+`model_summary.md`. Knobs live in `config/pharmacophore.yaml` `alignment:`; the 5KXI parameter
+benchmark is `scripts/troubleshoot_seed_align.py` →
+`catalogue/screening_eval/nachr_a4b2_positive/seed5_benchmark.md`.
+
+**Generalised init + EM refinement.** The alignment is a general engine: the frame is initialised
+**seedless** (`--seedless`, from the top-ranked compound's lowest-energy conformer — the
+**recommended** default), from the docked top-`seed_k`, or from an arbitrary 3D-coordinate `--seed
+PATH.sdf` (a crystal ligand or docked poses). A seed remains a supported option but **generally
+works less effectively** than seedless — a docked/crystal frame can import a bad pose that biases
+the consensus (seedless matches or beats a seed on 10/11 targets; see below). After the growing pass an **EM refinement** (`alignment.em_iterations`)
+re-aligns every compound to the current consensus — **re-selecting each one's best conformer**, which
+removes the effect of a sub-optimal discrete conformer chosen early — and recomputes the consensus
+until the feature-centre shift < `alignment.em_tol`. High-energy conformers are discarded up front
+(`alignment.energy_window`). `--align-only` emits just the **aligned compound set**
+(`aligned_compounds.sdf` + `aligned_points.csv` + manifest) so the KDE can be re-run on it; the
+default also runs the KDE. **Thesis result — the chemistry carries the geometry.** On nAChR, seedless recovers the 3-point model
+with internal geometry matching the known-actives model as well as the crystal/docked seeds
+(cation–aromatic Δ0.10 Å, aromatic–acceptor Δ0.03 Å), in one EM iteration
+(`scripts/seed_necessity.py` → `.../nachr_a4b2_positive/seed_necessity.md`). **This generalises**:
+across the **11 targets with a known-actives ground truth**, seedless matches or beats the docked
+seed in **10/11** — and is *often strictly better* (on cdk2 the docked seed failed outright while
+seedless recovered every family; a bad docked pose can actively bias the frame). So **a docked/crystal
+seed is not necessary for correct geometry** — the shared *rigid cores* carry it; the seed only speeds
+convergence (the lone exception, ca2, has few rigid multi-feature cores + an unmodelled metal feature).
+Experiment: `scripts/seed_necessity_all.py` → `catalogue/screening_eval/seed_necessity_report.md`.
+
+**Directional (orientation-aware) matching** (`alignment.use_directions`, default on). Perception
+(`features/extract.py`) now emits an orientation vector per directional feature — Donor D→H,
+Acceptor lone-pair (from the heavy neighbours, which distinguishes a ring-flipped nitrogen), and
+Aromatic ring-normal. The superposition fits H-bond donor/acceptor **projected points** (centre +
+`projected_length` Å along the vector) jointly with positions, so a feature must agree in
+*orientation*, not just position; the consensus `direction` field is then populated from the aligned
+points. On nAChR the acceptor's off-native distance improves modestly (1.54→1.41 Å, docked seed) —
+small because seed-align + EM already place it well (~1.5 Å); the flip was far more damaging in the
+`--docked-dir` full-consensus path, which is where directionality should matter most.
+A/B: `scripts/directional_benchmark.py` → `.../nachr_a4b2_positive/directional_benchmark.md`.
+
+**Method vs the crystal + literature pharmacophores** (`scripts/alignment_vs_reference.py` →
+`catalogue/screening_eval/alignment_vs_reference.md`). The seedless alignment model scored against
+both references across the 11 known-actives targets: **vs crystal (known-actives)** 5 MATCH /
+6 PARTIAL / **0 MISMATCH** (families recovered in 11/11; geomD inflated only where the feature is
+the directional acceptor); **vs literature** 9/9 MATCH-or-PARTIAL on family composition. So the
+DrugCLIP alignment reproduces the experimentally- and literature-derived pharmacophores at the
+family level everywhere, and geometrically for the pose-invariant features; the acceptor is the
+one soft spot (directional).
+
+**Orthogonality.** The DrugCLIP paths (`--docked-dir`, `--seed-docked`) are an *orthogonal
+application layer* over the shared Stage-4 core: they reuse `build_density`/`io`/`viz` through
+the same narrow interfaces and add nothing to the known-actives / catalogue build, whose
+models are unchanged. The `alignment:` config block is additive and consumed only by
+`--seed-docked`. The pipeline never invokes GNINA/DrugCLIP — docked SDFs are consumed as input.
+
+**Library-wide screening evaluation** (`src/pharmpipe/screening/`, `config/screening.yaml`,
+`config/literature_pharmacophores.yaml`). A DrugCLIP→GNINA deposit of ~18 targets (docked poses
++ per-target indexes) is organised into `data/screening/<key>/` by
+`scripts/organise_screening.py` (curated PDB→slug crosswalk, each pairing validated by ≥99%
+mol_id overlap; raw `out/`+`website_output/` gitignored). `scripts/evaluate_screening.py` then
+builds **both** methods per target — full-docking over all poses and seed-alignment at the
+config `alignment_depth` (=50, chosen by `scripts/eval_align_depth.py` against the known-actives
+models) — and `compare.py` scores each vs the known-actives model + the literature by
+feature-family recall + internal geometry (frame-independent). Tracked deliverable:
+`catalogue/screening_eval/` (per-target models + `comparison_report.md`; the chemistry-vs-geometry
+diagnosis is `geometry_limit_report.md`). Orthogonal to the catalogue build; scientific choices
+(crosswalk, depth, literature features) live in config. The upstream **source library** DrugCLIP
+screens against is `molecule_library/` (~18.6 M molecules, ~48 GB of vendor SDFs; **gitignored**
+bulk input) — summarised in `docs/molecule_library.md` (+ `docs/molecule_library_manifest.csv`).
+(An earlier swappable k-means
 strategy and its `pharmacophores_density/` split have been **removed** — density/KDE is
 the sole method. In/out contract: aligned per-molecule feature points in → consensus
 features `(family, position, tolerance, optional direction)` out.)

@@ -1,0 +1,143 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "cdk2",
+  "metadata": {
+    "source": {
+      "input": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\results\\cdk2\\aligned_compounds.sdf",
+      "n_ligands": 49,
+      "created": "2026-09-08"
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-09-08",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_cross_family": false,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 3,
+    "representative_ligand": "Z8462111514",
+    "feature_resolution": {
+      "NegIonizable<-Acceptor": {
+        "events": 20,
+        "ligands": [
+          "MCULE-1747195129",
+          "MCULE-2334703321",
+          "MCULE-2687269303",
+          "MCULE-2752453438",
+          "MCULE-4193810350",
+          "MCULE-4920035048",
+          "MCULE-6110905834",
+          "MCULE-8219326142",
+          "MCULE-9373509363",
+          "Z8315143560"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 33,
+        "ligands": [
+          "MCULE-1390089024",
+          "MCULE-1528614132",
+          "MCULE-1747195129",
+          "MCULE-1966235308",
+          "MCULE-2334703321",
+          "MCULE-2683983486",
+          "MCULE-2687269303",
+          "MCULE-2752453438",
+          "MCULE-3368426694",
+          "MCULE-3438514248",
+          "MCULE-3957554977",
+          "MCULE-4134263693",
+          "MCULE-4193810350",
+          "MCULE-4920035048",
+          "MCULE-5517028926",
+          "MCULE-6110905834",
+          "MCULE-8219326142",
+          "MCULE-9139726948",
+          "MCULE-9373509363",
+          "MCULE-9624909007",
+          "Z5379192500",
+          "Z7684145496",
+          "Z8315143560",
+          "Z9061388696",
+          "Z9304513747",
+          "Z9304513756",
+          "Z9304515688"
+        ]
+      }
+    }
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": -1.6903215796546338,
+      "y": -3.9077397797725872,
+      "z": -1.5992936370976514,
+      "radius": 3.0,
+      "n_points": 31,
+      "n_ligands": 31,
+      "support": 0.6327,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": -1.5250223567722812,
+      "y": -2.649083494043647,
+      "z": -0.7686881820915293,
+      "radius": 3.0,
+      "n_points": 30,
+      "n_ligands": 27,
+      "support": 0.551,
+      "direction": null,
+      "label": "Aromatic 1"
+    },
+    {
+      "family": "Donor",
+      "x": 2.433895930470412,
+      "y": 3.5336966870811035,
+      "z": 0.5230902462173566,
+      "radius": 3.0,
+      "n_points": 26,
+      "n_ligands": 26,
+      "support": 0.5306,
+      "direction": null,
+      "label": "Donor 1"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz
+Acceptor,Acceptor 1,2.9164,0.3999,1.8496,3.0,45,45,0.9,,,
+LumpedHydrophobe,LumpedHydrophobe 1,-3.0697,1.2484,1.3596,3.0,44,44,0.88,,,
+Aromatic,Aromatic 1,-2.8181,1.1096,1.462,3.0,43,43,0.86,,,
+Donor,Donor 1,4.2253,-1.6975,1.9404,3.0,42,42,0.84,,,
+Acceptor,Acceptor 2,-1.0837,1.3799,-1.0945,3.0,39,39,0.78,,,
+Aromatic,Aromatic 2,2.1049,0.1601,1.4727,3.0,39,39,0.78,,,
+Donor,Donor 2,-3.7402,1.2712,-2.0444,3.0,38,38,0.76,,,
+NegIonizable,NegIonizable 1,3.1357,-2.6012,2.3484,3.0,37,37,0.74,,,
+Donor,Donor 3,-5.6983,0.3174,2.9073,3.0,36,36,0.72,,,
+LumpedHydrophobe,LumpedHydrophobe 2,1.9735,3.2616,1.2722,3.0,27,27,0.54,,,

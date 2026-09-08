@@ -1,0 +1,249 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "hmgcr",
+  "metadata": {
+    "source": {
+      "input": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\results\\hmgcr\\aligned_compounds.sdf",
+      "n_ligands": 50,
+      "created": "2026-09-08"
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-09-08",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_cross_family": false,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 10,
+    "representative_ligand": "V030-1754",
+    "feature_resolution": {
+      "NegIonizable<-Acceptor": {
+        "events": 100,
+        "ligands": [
+          "FCG223613171",
+          "FCG2296016965",
+          "FCG2296052867",
+          "STL458084",
+          "STL534049",
+          "STL541517",
+          "STL545808",
+          "V004-9878",
+          "V005-3120",
+          "V005-3132",
+          "V005-3144",
+          "V005-3154",
+          "V005-3202",
+          "V005-5095",
+          "V007-7694",
+          "V007-7712",
+          "V007-7729",
+          "V007-7738",
+          "V007-7762",
+          "V007-7764",
+          "V007-7771",
+          "V007-7784",
+          "V008-1848",
+          "V025-9447",
+          "V027-2568",
+          "V027-3760",
+          "V027-3772",
+          "V027-3799",
+          "V027-3820",
+          "V027-3902",
+          "V027-3903",
+          "V027-3914",
+          "V027-3952",
+          "V027-6137",
+          "V027-7724",
+          "V027-7761",
+          "V027-7822",
+          "V028-1587",
+          "V028-1648",
+          "V029-4999",
+          "V029-9694",
+          "V030-1729",
+          "V030-1754",
+          "V030-1764",
+          "V030-1765",
+          "V030-1799",
+          "Y042-8054",
+          "Y042-8055",
+          "Z223223430",
+          "Z2295663126"
+        ]
+      },
+      "PosIonizable<-Donor": {
+        "events": 4,
+        "ligands": [
+          "FCG223613171",
+          "Z223223430"
+        ]
+      },
+      "PosIonizable<-LumpedHydrophobe": {
+        "events": 2,
+        "ligands": [
+          "FCG223613171",
+          "Z223223430"
+        ]
+      }
+    }
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": 2.9163657489372476,
+      "y": 0.39992917971850084,
+      "z": 1.8495999646698504,
+      "radius": 3.0,
+      "n_points": 45,
+      "n_ligands": 45,
+      "support": 0.9,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": -3.0697301006414563,
+      "y": 1.2484202356721932,
+      "z": 1.359633639441685,
+      "radius": 3.0,
+      "n_points": 44,
+      "n_ligands": 44,
+      "support": 0.88,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": -2.8180525372616136,
+      "y": 1.1096396085262452,
+      "z": 1.4620344482549967,
+      "radius": 3.0,
+      "n_points": 43,
+      "n_ligands": 43,
+      "support": 0.86,
+      "direction": null,
+      "label": "Aromatic 1"
+    },
+    {
+      "family": "Donor",
+      "x": 4.22534969598997,
+      "y": -1.697483779592254,
+      "z": 1.9403917655242884,
+      "radius": 3.0,
+      "n_points": 42,
+      "n_ligands": 42,
+      "support": 0.84,
+      "direction": null,
+      "label": "Donor 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": -1.0837234292636042,
+      "y": 1.3798593483056658,
+      "z": -1.0945052754557867,
+      "radius": 3.0,
+      "n_points": 39,
+      "n_ligands": 39,
+      "support": 0.78,
+      "direction": null,
+      "label": "Acceptor 2"
+    },
+    {
+      "family": "Aromatic",
+      "x": 2.104930826509505,
+      "y": 0.1601426020636189,
+      "z": 1.4726560319099442,
+      "radius": 3.0,
+      "n_points": 39,
+      "n_ligands": 39,
+      "support": 0.78,
+      "direction": null,
+      "label": "Aromatic 2"
+    },
+    {
+      "family": "Donor",
+      "x": -3.7401814595900165,
+      "y": 1.2712309430926365,
+      "z": -2.0443573097395005,
+      "radius": 3.0,
+      "n_points": 38,
+      "n_ligands": 38,
+      "support": 0.76,
+      "direction": null,
+      "label": "Donor 2"
+    },
+    {
+      "family": "NegIonizable",
+      "x": 3.1356847054623307,
+      "y": -2.601155624245221,
+      "z": 2.3484218448722882,
+      "radius": 3.0,
+      "n_points": 37,
+      "n_ligands": 37,
+      "support": 0.74,
+      "direction": null,
+      "label": "NegIonizable 1"
+    },
+    {
+      "family": "Donor",
+      "x": -5.698250364728361,
+      "y": 0.31739484135077534,
+      "z": 2.9073310067939273,
+      "radius": 3.0,
+      "n_points": 36,
+      "n_ligands": 36,
+      "support": 0.72,
+      "direction": null,
+      "label": "Donor 3"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": 1.973516562268792,
+      "y": 3.261588599431638,
+      "z": 1.2721964625370263,
+      "radius": 3.0,
+      "n_points": 27,
+      "n_ligands": 27,
+      "support": 0.54,
+      "direction": null,
+      "label": "LumpedHydrophobe 2"
+    }
+  ]
+}

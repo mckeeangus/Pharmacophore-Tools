@@ -42,6 +42,7 @@ from .io import (
     write_aligned_sdf,
     write_features_csv,
     write_json,
+    write_model_csv,
     write_pml,
     write_representative_sdf,
 )
@@ -311,6 +312,7 @@ def _write_model_artifacts(result, report: LoadReport, out_dir: Path,
         ligand_file = write_representative_sdf(
             rep_mol, rep_id, out_dir / "representative_ligand.sdf")
     files = [
+        write_model_csv(result.pharmacophore, out_dir / "pharmacophore.csv"),
         write_json(result.pharmacophore, out_dir / "pharmacophore.json"),
         write_features_csv(result, out_dir / "features.csv"),
         write_pml(result.pharmacophore, out_dir / "pharmacophore.pml",

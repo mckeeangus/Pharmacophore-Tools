@@ -1,0 +1,9 @@
+family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz
+Aromatic,Aromatic 1,3.3063,-1.9012,0.1176,3.0,44,44,0.88,,,
+LumpedHydrophobe,LumpedHydrophobe 1,3.3091,-1.909,0.1082,3.0,43,43,0.86,,,
+Acceptor,Acceptor 1,-3.1655,-1.9626,2.5092,3.0,38,36,0.72,,,
+Acceptor,Acceptor 2,-1.1572,-0.971,-1.4674,3.0,36,36,0.72,,,
+Aromatic,Aromatic 2,-0.6073,2.0586,1.1328,3.0,34,34,0.68,,,
+LumpedHydrophobe,LumpedHydrophobe 2,-0.6156,2.0555,1.1392,3.0,33,33,0.66,,,
+LumpedHydrophobe,LumpedHydrophobe 3,-4.6348,-0.9116,-0.8366,3.0,33,33,0.66,,,
+Aromatic,Aromatic 3,-4.6375,-0.9177,-0.8428,3.0,30,30,0.6,,,

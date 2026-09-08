@@ -1,0 +1,90 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "ca2",
+  "metadata": {
+    "source": {
+      "input": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\results\\ca2\\aligned_compounds.sdf",
+      "n_ligands": 23,
+      "created": "2026-09-08"
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-09-08",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_cross_family": false,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 2,
+    "representative_ligand": "Z56785999",
+    "feature_resolution": {
+      "PosIonizable<-LumpedHydrophobe": {
+        "events": 1,
+        "ligands": [
+          "Z56771527"
+        ]
+      }
+    }
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": -1.293704407563825,
+      "y": 0.2616575368160191,
+      "z": 0.01808668365794743,
+      "radius": 3.0,
+      "n_points": 33,
+      "n_ligands": 19,
+      "support": 0.8261,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": -0.5553269120641667,
+      "y": 0.12485029231793586,
+      "z": 0.27912816259358475,
+      "radius": 3.0,
+      "n_points": 22,
+      "n_ligands": 22,
+      "support": 0.9565,
+      "direction": null,
+      "label": "Aromatic 1"
+    }
+  ]
+}

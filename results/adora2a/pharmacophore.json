@@ -1,0 +1,117 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "adora2a",
+  "metadata": {
+    "source": {
+      "input": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\results\\adora2a\\aligned_compounds.sdf",
+      "n_ligands": 50,
+      "created": "2026-09-08"
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-09-08",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_cross_family": false,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 4,
+    "representative_ligand": "OSSL_644910",
+    "feature_resolution": {
+      "PosIonizable<-Donor": {
+        "events": 6,
+        "ligands": [
+          "Z1770253642",
+          "Z52660414",
+          "Z52665462",
+          "Z52665806"
+        ]
+      }
+    }
+  },
+  "features": [
+    {
+      "family": "Acceptor",
+      "x": 5.435297168075817,
+      "y": 0.31453272383771497,
+      "z": -0.8797898257156646,
+      "radius": 3.0,
+      "n_points": 41,
+      "n_ligands": 41,
+      "support": 0.82,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Aromatic",
+      "x": 2.4582457881936097,
+      "y": -0.7074015913073952,
+      "z": -0.41806029213827184,
+      "radius": 3.0,
+      "n_points": 40,
+      "n_ligands": 38,
+      "support": 0.76,
+      "direction": null,
+      "label": "Aromatic 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": 0.49401207874437825,
+      "y": -0.67803581637762,
+      "z": 0.13653988468584188,
+      "radius": 3.0,
+      "n_points": 33,
+      "n_ligands": 27,
+      "support": 0.54,
+      "direction": null,
+      "label": "Acceptor 2"
+    },
+    {
+      "family": "Donor",
+      "x": 2.490017614202717,
+      "y": -2.518983832331941,
+      "z": -0.1331715072351631,
+      "radius": 3.0,
+      "n_points": 30,
+      "n_ligands": 30,
+      "support": 0.6,
+      "direction": null,
+      "label": "Donor 1"
+    }
+  ]
+}

@@ -7,25 +7,20 @@ platforms = ["win-64", "linux-64"]
 version = "0.1.0"
 
 [tasks]
-# Network-heavy: run on a login/data-mover node on Gadi (compute nodes have no internet).
-# Extra args pass through, e.g. `pixi run scrape-pdb-ligands --config config/targets.yaml`.
-scrape-pdb-ligands = "python scripts/scrape_pdb_ligands.py"
-# Align kept ligands into a per-target reference frame + write PyMOL .pml sessions.
-# Network-heavy (downloads every structure holding a kept ligand) -> login node on Gadi.
-align-sites = "python scripts/align_sites.py"
-# Bake .pml sessions into .pse files (needs PyMOL): pixi run -e viz build-sessions
-build-sessions = "python scripts/align_sites.py --sessions-only"
-# Stage 3.3: resolve `unknown` ligand efficacy via ChEMBL (network -> login node).
-# Caches responses under data/_cache/chembl; output feeds the offline grouping.
-resolve-efficacy = "python scripts/resolve_efficacy.py"
-# Stage 3: pocket-verified, effect-based grouping of the site-aligned poses.
-# Offline (cached structures + catalogue). Bake .pse with: pixi run -e viz group-effects
-group-effects = "python scripts/group_effects.py"
-# Stage 4: build ligand-based ensemble pharmacophores from the grouped cells.
-# Offline (uses the tracked catalogue). e.g. pixi run build-pharmacophores --catalogue
+# --- The three user-facing tools (align -> build -> visualise) ---
+# 1. Align a set of molecules by their pharmacophoric features (input: DrugCLIP CSV or SDF).
+align-molecules = "python scripts/align_molecules.py"
+# 2. Build a pharmacophore from aligned molecules (input: aligned SDF or a dir of aligned mol2).
+build-pharmacophore = "python scripts/build_pharmacophore.py"
+# 3. Visualise a pharmacophore CSV (drives PyMOL in the viz env under the hood).
+visualise-pharmacophore = "python scripts/visualise_pharmacophore.py"
+
+# Batch build of the catalogue known-actives cells (kept for the retained crystal data).
 build-pharmacophores = "python scripts/build_pharmacophores.py"
 test = { cmd = "pytest -q", depends-on = [] }
 lint = "ruff check ."
+# The former research pipeline (scrape/align-sites/group/resolve/screening-eval) is archived
+# under archive/scripts/; run it directly, e.g. `pixi run python archive/scripts/group_effects.py`.
 
 # Python is pinned per-feature (not globally) so the legacy `prep` env can use 3.10
 # for pkasolver's 2021-era stack while everything else stays on 3.12.

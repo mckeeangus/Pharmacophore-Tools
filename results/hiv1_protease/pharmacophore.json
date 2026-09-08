@@ -1,0 +1,174 @@
+{
+  "schema": "pharmpipe.pharmacophore/v1",
+  "name": "hiv1_protease",
+  "metadata": {
+    "source": {
+      "input": "C:\\Users\\angus\\Documents\\Pharmacophore_Construction\\results\\hiv1_protease\\aligned_compounds.sdf",
+      "n_ligands": 50,
+      "created": "2026-09-08"
+    },
+    "selection": {
+      "min_ligands": 10,
+      "min_support_fraction": 0.5,
+      "min_cluster_size": 2
+    },
+    "tolerance": {
+      "method": "density_quantile",
+      "quantile": 0.75,
+      "min": 1.0,
+      "max": 3.0
+    },
+    "created": "2026-09-08",
+    "consensus_method": "density",
+    "consensus": {
+      "method": "density",
+      "params": {
+        "voxel": 1.0,
+        "bandwidth": 1.5,
+        "peak_bandwidth": null,
+        "occupancy_floor": 2.0,
+        "membership_radius": 1.5,
+        "scaffold_weighting": false,
+        "merge_overlapping": true,
+        "merge_radius": 1.0,
+        "merge_cross_family": false,
+        "merge_exempt_pairs": [
+          [
+            "Donor",
+            "Acceptor"
+          ],
+          [
+            "Aromatic",
+            "LumpedHydrophobe"
+          ]
+        ],
+        "excluded_volume": true,
+        "ev_shell": 5.0,
+        "ev_clearance": 2.0,
+        "ev_voxel": 2.0,
+        "ev_radius": 1.0,
+        "ev_max": 40
+      }
+    },
+    "n_features": 8,
+    "representative_ligand": "STL001747",
+    "feature_resolution": {
+      "PosIonizable<-Donor": {
+        "events": 16,
+        "ligands": [
+          "G747-0001",
+          "G747-0004",
+          "G747-0011",
+          "G747-0035",
+          "G747-0043",
+          "G747-0051",
+          "G747-0063",
+          "G747-0365",
+          "G747-0390",
+          "G747-0519",
+          "G747-0544",
+          "Z358287958",
+          "Z8979036846"
+        ]
+      }
+    }
+  },
+  "features": [
+    {
+      "family": "Aromatic",
+      "x": 3.3063047786981485,
+      "y": -1.901231400066596,
+      "z": 0.11758349197210946,
+      "radius": 3.0,
+      "n_points": 44,
+      "n_ligands": 44,
+      "support": 0.88,
+      "direction": null,
+      "label": "Aromatic 1"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": 3.309148455425116,
+      "y": -1.9089887807478902,
+      "z": 0.10819329577077769,
+      "radius": 3.0,
+      "n_points": 43,
+      "n_ligands": 43,
+      "support": 0.86,
+      "direction": null,
+      "label": "LumpedHydrophobe 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": -3.165532134224863,
+      "y": -1.9625748729922048,
+      "z": 2.5092003677192003,
+      "radius": 3.0,
+      "n_points": 38,
+      "n_ligands": 36,
+      "support": 0.72,
+      "direction": null,
+      "label": "Acceptor 1"
+    },
+    {
+      "family": "Acceptor",
+      "x": -1.1571896745566512,
+      "y": -0.9709946419316078,
+      "z": -1.4674028896974545,
+      "radius": 3.0,
+      "n_points": 36,
+      "n_ligands": 36,
+      "support": 0.72,
+      "direction": null,
+      "label": "Acceptor 2"
+    },
+    {
+      "family": "Aromatic",
+      "x": -0.6072620642906286,
+      "y": 2.058550423213176,
+      "z": 1.132826942399808,
+      "radius": 3.0,
+      "n_points": 34,
+      "n_ligands": 34,
+      "support": 0.68,
+      "direction": null,
+      "label": "Aromatic 2"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": -0.615622855788464,
+      "y": 2.0555084798002206,
+      "z": 1.139205856615959,
+      "radius": 3.0,
+      "n_points": 33,
+      "n_ligands": 33,
+      "support": 0.66,
+      "direction": null,
+      "label": "LumpedHydrophobe 2"
+    },
+    {
+      "family": "LumpedHydrophobe",
+      "x": -4.634814243123542,
+      "y": -0.9115912757504087,
+      "z": -0.8366058715073196,
+      "radius": 3.0,
+      "n_points": 33,
+      "n_ligands": 33,
+      "support": 0.66,
+      "direction": null,
+      "label": "LumpedHydrophobe 3"
+    },
+    {
+      "family": "Aromatic",
+      "x": -4.637491844483414,
+      "y": -0.9177453097868593,
+      "z": -0.8428380151800492,
+      "radius": 3.0,
+      "n_points": 30,
+      "n_ligands": 30,
+      "support": 0.6,
+      "direction": null,
+      "label": "Aromatic 3"
+    }
+  ]
+}

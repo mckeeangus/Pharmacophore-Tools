@@ -68,7 +68,8 @@ PH4_SPHERE_RADIUS = 1.25
 def _args(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("--pharmacophore", required=True)
-    ap.add_argument("--compounds", help="optional directory of aligned *.mol2 to overlay")
+    ap.add_argument("--compounds", help="optional aligned ligands to overlay: a directory of "
+                    "*.mol2, or a single multi-molecule .sdf/.mol2")
     ap.add_argument("--ligand", help="representative ligand to show "
                     "(default: representative_ligand.sdf beside the JSON)")
     ap.add_argument("--features", help="optional features.csv to overlay raw points "
@@ -99,14 +100,25 @@ def load_ligand(ligand_path):
     cmd.color("grey70", "ligand and elem C")
 
 
-def load_compounds(compounds_dir):
-    files = sorted(glob.glob(os.path.join(compounds_dir, "*.mol2")))
+def load_compounds(compounds):
+    """Overlay the raw ligands. ``compounds`` is either a directory of aligned ``*.mol2``
+    (the crystal case) or a single multi-molecule file (``.sdf``/``.mol2``, as written by
+    the align/build tools). Every ligand loads into one ``compounds`` object."""
+    if os.path.isdir(compounds):
+        files = sorted(glob.glob(os.path.join(compounds, "*.mol2")))
+    else:
+        files = [compounds] if os.path.isfile(compounds) else []
+    n = 0
     for path in files:
         cmd.load(path, "compounds")
+        n = cmd.count_states("compounds") if path.lower().endswith(".sdf") else n + 1
+    if n == 0:
+        return 0
+    cmd.set("all_states", 1, "compounds")
     cmd.hide("everything", "compounds")
     cmd.show("lines", "compounds")
     cmd.color("grey70", "compounds and elem C")
-    return len(files)
+    return n
 
 
 def load_features(json_path):

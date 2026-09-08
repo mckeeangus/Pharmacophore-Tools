@@ -34,6 +34,11 @@ external/
 # `protonate-ligands` (overwritten per ligand; not project state).
 test.pkl
 
+# Reconstructed-findings PyMOL sessions: heavy binaries, regenerable from the tracked
+# pharmacophore.csv via `pixi run visualise-pharmacophore`. The PNG snapshots + models are
+# tracked; the .pse are not.
+results/**/*.pse
+
 # Python
 __pycache__/
 *.py[cod]

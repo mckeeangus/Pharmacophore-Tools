@@ -30,6 +30,57 @@ def read_json(path: Path) -> Pharmacophore:
     return Pharmacophore.from_dict(json.loads(Path(path).read_text(encoding="utf-8")))
 
 
+# The pharmacophore CSV is the tool-to-tool interchange (construction -> visualisation):
+# one row per consensus feature. Feature rows only (the ligand-based tools have no receptor,
+# hence no excluded volume). The JSON stays the lossless canonical model.
+_MODEL_CSV_COLUMNS = ["family", "label", "x", "y", "z", "radius", "n_points", "n_ligands",
+                      "support", "dx", "dy", "dz"]
+
+
+def write_model_csv(ph: Pharmacophore, path: Path) -> Path:
+    """Write the pharmacophore model to a flat CSV (one row per feature).
+
+    ``dx,dy,dz`` carry the optional orientation vector (blank when the feature has none). The
+    downstream visualiser reads this with ``read_model_csv``.
+    """
+    with Path(path).open("w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(_MODEL_CSV_COLUMNS)
+        for f in ph.features:
+            if f.family == EV_FAMILY:
+                continue  # the interchange is purely ligand-based: feature rows only
+            d = f.direction if f.direction is not None else ("", "", "")
+            w.writerow([f.family, f.label, round(f.x, 4), round(f.y, 4), round(f.z, 4),
+                        round(f.radius, 4), f.n_points, f.n_ligands, round(f.support, 4),
+                        *(round(c, 4) if c != "" else "" for c in d)])
+    return path
+
+
+def read_model_csv(path: Path) -> Pharmacophore:
+    """Reconstruct a ``Pharmacophore`` from a model CSV written by ``write_model_csv``.
+
+    The model name is the file stem. The CSV does not carry the full JSON metadata, but the
+    total ligand count (needed by the support sweep) is recovered as the max feature
+    ``n_ligands`` and stored under ``metadata.source.n_ligands``.
+    """
+    from .model import PharmacophoreFeature
+
+    feats: list[PharmacophoreFeature] = []
+    with Path(path).open(encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            dxyz = (row.get("dx"), row.get("dy"), row.get("dz"))
+            direction = (tuple(float(c) for c in dxyz)
+                         if all(c not in (None, "") for c in dxyz) else None)
+            feats.append(PharmacophoreFeature(
+                family=row["family"], x=float(row["x"]), y=float(row["y"]), z=float(row["z"]),
+                radius=float(row["radius"]), n_points=int(row["n_points"]),
+                n_ligands=int(row["n_ligands"]), support=float(row["support"]),
+                direction=direction, label=row.get("label", "")))
+    n_ligands = max((f.n_ligands for f in feats), default=0)
+    metadata = {"source": {"n_ligands": n_ligands}} if n_ligands else {}
+    return Pharmacophore(name=Path(path).stem, features=feats, metadata=metadata)
+
+
 def write_features_csv(result: BuildResult, path: Path) -> Path:
     """Every raw feature point with its family, cluster id, and kept flag.
 

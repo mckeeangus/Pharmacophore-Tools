@@ -16,13 +16,49 @@ sign)**. The tracked deliverable is `catalogue/` (start at `catalogue/DATASETS.m
 the full target list with per-target flags is "Known-actives reference" below, and
 the per-target counts are in `catalogue/run_summary.md`.
 
-**The current stage is pharmacophore construction** from those grouped active poses
-(see "Current stage" below). The longer-term flow — **DrugCLIP** virtual screening →
-ligand prep → **GNINA** docking → score filtering — remains **out of scope**; do not
-build or invoke DrugCLIP/GNINA.
+**The repo has pivoted to three user-facing tools** over the pharmacophore engine (see
+"The three tools" next). The former research pipeline (known-actives assembly, screening
+evaluation) is **archived** under `archive/` — accessible and runnable, out of the main
+path. The longer-term flow — **DrugCLIP** virtual screening → ligand prep → **GNINA**
+docking → score filtering — remains **out of scope**; do not build or invoke DrugCLIP/GNINA
+(docked SDFs are consumed as input only).
 
 Compute runs downstream on **Gadi (NCI)**, so everything must stay HPC-portable and
 reproducible (see operating rules).
+
+## The three tools (current structure)
+
+The pipeline is now three separately-invokable pixi tasks that chain **align → build →
+visualise**, over the shared engine in `src/pharmpipe/{features,pharmacophore}`:
+
+1. **`align-molecules`** (`scripts/align_molecules.py`) — superpose molecules on their shared
+   pharmacophoric features (conformer ensembles → feature-clique matching on relative
+   intra-molecular distances → EM refinement → directional matching), seedless by default.
+   Input a DrugCLIP output CSV or a multi-molecule SDF; output `aligned_compounds.sdf`.
+   Method: `docs/molecule_alignment.md`.
+2. **`build-pharmacophore`** (`scripts/build_pharmacophore.py`) — molecule-weighted Gaussian-KDE
+   consensus from a set of aligned molecules (the SDF from tool 1, or a dir of aligned crystal
+   mol2). **Purely ligand-based — no receptor, no excluded volume.** Output **`pharmacophore.csv`**
+   (the interchange) + JSON/summary/plots. Method: `docs/pharmacophore_construction.md`.
+3. **`visualise-pharmacophore`** (`scripts/visualise_pharmacophore.py`) — render a
+   `pharmacophore.csv` into a PyMOL session/snapshot + support-cutoff sweep (via the `viz` env).
+
+The **pharmacophore CSV** is the tool-2→tool-3 interchange (`io.write_model_csv`/`read_model_csv`):
+one row per feature (`family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz`), feature
+rows only. `scripts/build_pharmacophores.py` is kept as a **catalogue batch** convenience that
+regenerates the retained crystal known-actives models.
+
+**Reconstructed findings** live in `results/` — the two tools run end-to-end over the DrugCLIP
+hit sets of the 11 ground-truth targets, scored vs their crystal + literature references in
+`results/RECONSTRUCTION.md` (6 MATCH / 5 PARTIAL / 0 MISMATCH vs crystal at family level; family
+recovered on 11/11; geometry inflates only for directional/flexible features). Regenerate with
+`scripts/reconstruct_findings.py`.
+
+Everything below the "Known-actives reference" heading, and the detailed Stage 1–4 descriptions,
+document the **archived research pipeline** (now under `archive/scripts/` with library modules
+still at `src/pharmpipe/{pdb,sites,groups,catalogue,screening}`) and the durable target catalogue —
+kept as authoritative history and because the crystal data in `catalogue/` is a live input to
+`build-pharmacophore`.
 
 ## Code quality
 
@@ -70,34 +106,38 @@ Dependency management is **pixi**. Every session:
 .
 ├── CLAUDE.md  README.md  pixi.toml / pixi.lock  pyproject.toml
 ├── config/                    # curated scientific knowledge (no domain facts in code)
-│   ├── targets.yaml           #   targets + verified UniProt accessions + options
-│   ├── sites.yaml             #   per-target relevant site (anchor, references)
-│   ├── pockets.yaml           #   pocket naming, clustering thresholds, markers
-│   ├── efficacy.yaml          #   efficacy signs + provenance, keyed by HET
-│   └── pharmacophore.yaml     #   Stage-4 feature families, clustering, selection
-├── src/pharmpipe/
-│   ├── io/                    # structure & ligand parse/write (mmCIF, mol2)
-│   ├── pdb/                   # RCSB/UniProt querying, ligand extraction
-│   ├── catalogue/             # cataloguing/reporting (Stage 1)
-│   ├── sites/                 # site filtering + alignment (Stage 2)
-│   ├── groups/                # pocket verification + effect grouping (Stage 3)
-│   ├── features/ clustering/ pharmacophore/   # pharmacophore construction (Stage 4)
-│   ├── util/                  # http, paths
-│   └── config.py  pipeline.py # config dataclasses + Stage-1 orchestration
-├── scripts/                   # thin CLI wrappers (one per stage)
-├── catalogue/                 # TRACKED deliverable (see catalogue/DATASETS.md)
-├── data/                      # GITIGNORED, large (cached mmCIF + intermediate mol2)
+│   ├── pharmacophore.yaml     #   the tools' knobs (alignment:, density:, selection:, tolerance:)
+│   ├── protonation.yaml       #   weak-acid guard classes for pH-7.4 prep
+│   └── targets/sites/pockets/efficacy(.yaml) + screening/literature (archived-pipeline config)
+├── src/pharmpipe/             # the shared engine + (inert) archived research library
+│   ├── features/              #   feature perception (extract) + loaders (load, conformers, dock_load)
+│   ├── pharmacophore/         #   align.py, density/build, model, io (incl. CSV), viz, run (orchestration)
+│   ├── io/ prep/ util/        #   structure/ligand IO · pH-7.4 protonation · http, paths
+│   └── pdb/ sites/ groups/ catalogue/ screening/ + pipeline.py config.py   # archived research (inert)
+├── scripts/                   # align_molecules · build_pharmacophore · visualise_pharmacophore
+│                              #   + build_pharmacophores (catalogue batch) · protonate_ligands
+│                              #   · reconstruct_findings (regenerates results/)
+├── docs/                      # molecule_alignment.md · pharmacophore_construction.md · method_animation/
+├── results/                   # TRACKED: reconstructed findings (tool outputs + RECONSTRUCTION.md)
+├── catalogue/                 # TRACKED: crystal known-actives set + models (input to build-pharmacophore)
+├── archive/                   # the former research pipeline (scripts + screening_eval) — runnable
+├── data/                      # GITIGNORED, large (cached mmCIF, docked screening sets, scratch)
 └── tests/                     # offline unit tests
 ```
 
-## Pipeline stages (status)
+## Pipeline stages (status) — the archived research pipeline
 
-Each stage writes tracked deliverables under `catalogue/`. Run via pixi tasks
-(`scrape-pdb-ligands` → `align-sites` → `resolve-efficacy` → `group-effects` →
-`protonate-ligands` → `build-pharmacophores`; add `-e viz` to bake `.pse`). The
-`protonate-ligands` prep step runs in the isolated `prep` env (`pixi run -e prep
-protonate-ligands`) and is networked/one-off; the build itself is offline. The
-downstream DrugCLIP→GNINA flow stays out of scope.
+> **These stages are the archived research pipeline** that assembled the crystal catalogue
+> `catalogue/` now consumed by `build-pharmacophore`. The scripts live under `archive/scripts/`
+> (run directly, e.g. `pixi run python archive/scripts/group_effects.py`); their library modules
+> remain at `src/pharmpipe/{pdb,sites,groups,catalogue,screening}`. Kept as authoritative history.
+
+Each stage wrote tracked deliverables under `catalogue/`. The original run order was
+`scrape_pdb_ligands` → `align_sites` → `resolve_efficacy` → `group_effects` →
+`protonate_ligands` → the Stage-4 build; add `-e viz` to bake `.pse`. The `protonate-ligands`
+prep step runs in the isolated `prep` env (`pixi run -e prep protonate-ligands`) and is
+networked/one-off; the build itself is offline. The downstream DrugCLIP→GNINA flow stays out
+of scope.
 
 1. **Scrape & catalogue** (`pdb/`, `catalogue/`) — verified UniProt accessions, dated
    RCSB search, curated ligands (drop additives/buffers; keep cofactors), bound-pose

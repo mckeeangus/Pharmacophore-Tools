@@ -16,6 +16,7 @@ from pharmpipe.pharmacophore.build import (
     feature_radius,
 )
 from pharmpipe.pharmacophore.config import ToleranceConfig
+from pharmpipe.pharmacophore.io import read_model_csv, write_model_csv
 from pharmpipe.pharmacophore.model import Pharmacophore, PharmacophoreFeature
 
 
@@ -114,6 +115,29 @@ def test_json_round_trip():
     assert back.name == "rt"
     assert len(back.features) == 1
     assert back.features[0].family == "Donor" and back.features[0].label == "Donor 1"
+
+
+def test_model_csv_round_trip(tmp_path):
+    # the tool-2 -> tool-3 interchange: families/positions/support/direction survive, and
+    # the total ligand count is recovered into metadata for the visualiser's support sweep.
+    ph = Pharmacophore(
+        name="orig",
+        features=[
+            PharmacophoreFeature("PosIonizable", -0.95, 0.17, 1.28, radius=3.0, n_points=21,
+                                 n_ligands=21, support=1.0, label="PosIonizable 1"),
+            PharmacophoreFeature("Acceptor", 2.45, -2.01, -1.72, radius=3.0, n_points=18,
+                                 n_ligands=21, support=0.857, direction=(0.0, 0.0, 1.0),
+                                 label="Acceptor 1"),
+        ])
+    csv_path = tmp_path / "pharmacophore.csv"
+    write_model_csv(ph, csv_path)
+    back = read_model_csv(csv_path)
+    assert back.name == "pharmacophore"  # name = file stem
+    assert [f.family for f in back.features] == ["PosIonizable", "Acceptor"]
+    assert back.features[0].direction is None
+    assert back.features[1].direction == (0.0, 0.0, 1.0)
+    assert abs(back.features[1].support - 0.857) < 1e-6
+    assert back.metadata["source"]["n_ligands"] == 21  # feeds the support sweep
 
 
 def test_bad_schema_rejected():

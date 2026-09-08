@@ -138,7 +138,7 @@ def _render(model_dir: Path, name: str, membership_radius: float) -> None:
     """
     script = REPO / "scripts" / "pymol_pharmacophore.py"
     cmd = [_pixi(), "run", "-e", "viz", "pymol", "-cq", str(script), "--",
-           "--pharmacophore", str(model_dir / "pharmacophore.json"),
+           "--pharmacophore", str(model_dir / "pharmacophore_model.json"),
            "--out", str(model_dir / f"{name}.pse"),
            "--image", str(model_dir / f"{name}.png"),
            "--sweep-out", str(model_dir / f"{name}_sweep.pse"),
@@ -159,7 +159,7 @@ def _render_sweep(model_dir: Path, membership_radius: float) -> bool:
     """
     script = REPO / "scripts" / "pymol_pharmacophore.py"
     cmd = [_pixi(), "run", "-e", "viz", "pymol", "-cq", str(script), "--",
-           "--pharmacophore", str(model_dir / "pharmacophore.json"),
+           "--pharmacophore", str(model_dir / "pharmacophore_model.json"),
            "--sweep-out", str(model_dir / f"{model_dir.name}_sweep.pse"),
            "--membership-radius", str(membership_radius)]
     return subprocess.run(cmd, cwd=REPO, check=False).returncode == 0
@@ -174,7 +174,7 @@ def _model_dirs() -> list[Path]:
             continue
         dirs.extend(sorted(
             cell for cell in base.iterdir()
-            if (cell / "pharmacophore.json").exists()
+            if (cell / "pharmacophore_model.json").exists()
             and (cell / "features.csv").exists()))
     return dirs
 

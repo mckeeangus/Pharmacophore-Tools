@@ -210,7 +210,7 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
         for fam, npts, nlig, sup in below:
             lines.append(
                 f"| {fam} | {npts} | {nlig} | {sup:.2f} | {_occupancy(npts, nlig):.2f} |")
-    lines += ["", "See `pharmacophore.json` (model), `features.csv` (raw points + "
+    lines += ["", "See `pharmacophore_model.json` (model), `features.csv` (raw points + "
               "cluster ids), and `raw_features_*.png` (per-family point distributions, "
               "each kept peak annotated with its label and support)."]
     path.write_text("\n".join(lines), encoding="utf-8")
@@ -256,10 +256,14 @@ def build_from_molecules(molecules: list[tuple[str, object]], report: LoadReport
     nothing) when fewer than ``selection.min_ligands`` poses loaded. ``reference_pdb``
     (aligned receptor) enables density excluded-volume spheres.
     """
-    if len(molecules) < cfg.selection.min_ligands:
-        log.info("[%s] only %d ligand(s) < min_ligands=%d — skipped",
-                 name, len(molecules), cfg.selection.min_ligands)
+    if not molecules:
+        log.warning("[%s] no ligands loaded — nothing to build", name)
         return None
+    if len(molecules) < cfg.selection.min_ligands:
+        log.warning("[%s] only %d ligand(s) < min_ligands=%d — building anyway; with so few "
+                    "molecules the consensus is weak (a 0.5-support feature may rest on one or "
+                    "two ligands), so treat the model as provisional",
+                    name, len(molecules), cfg.selection.min_ligands)
 
     factory = feature_factory(cfg.features.fdef)
     table = build_table(molecules, factory, cfg.features.families,
@@ -313,9 +317,9 @@ def _write_model_artifacts(result, report: LoadReport, out_dir: Path,
             rep_mol, rep_id, out_dir / "representative_ligand.sdf")
     files = [
         write_model_csv(result.pharmacophore, out_dir / "pharmacophore.csv"),
-        write_json(result.pharmacophore, out_dir / "pharmacophore.json"),
+        write_json(result.pharmacophore, out_dir / "pharmacophore_model.json"),
         write_features_csv(result, out_dir / "features.csv"),
-        write_pml(result.pharmacophore, out_dir / "pharmacophore.pml",
+        write_pml(result.pharmacophore, out_dir / "pharmacophore_pymol.pml",
                   cfg.features.colors, ligand_file=ligand_file),
         _write_summary(result, report, n_ligands, cfg.density.membership_radius,
                        out_dir / "model_summary.md", directional_caveat=directional_caveat),
@@ -543,10 +547,13 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
     aligned_ids = sorted({lig for *_, lig in res.points})
     n_aligned = sum(1 for r in res.manifest if r.source == "aligned" and r.aligned)
     n_dropped = sum(1 for r in res.manifest if r.source == "aligned" and not r.aligned)
-    if len(aligned_ids) < cfg.selection.min_ligands:
-        log.info("[%s] only %d aligned ligand(s) < min_ligands=%d — skipped",
-                 name, len(aligned_ids), cfg.selection.min_ligands)
+    if not aligned_ids:
+        log.warning("[%s] no ligands aligned — nothing to build", name)
         return None
+    if len(aligned_ids) < cfg.selection.min_ligands:
+        log.warning("[%s] only %d aligned ligand(s) < min_ligands=%d — building anyway; the "
+                    "consensus is weak with so few molecules, so treat the model as provisional",
+                    name, len(aligned_ids), cfg.selection.min_ligands)
 
     ensure_dir(out_dir)
     aligned_sdf = write_aligned_sdf(_aligned_entries(res, conf_mols, ranks),

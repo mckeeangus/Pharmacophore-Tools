@@ -46,7 +46,7 @@ class ModelSummary:
 
 
 def summarise(features: list[dict]) -> ModelSummary:
-    """Reduce a list of pharmacophore.json features to a ModelSummary (ExcludedVolume dropped)."""
+    """Reduce a list of pharmacophore_model.json features to a ModelSummary (EV dropped)."""
     s = ModelSummary()
     for f in features:
         fam = f.get("family")

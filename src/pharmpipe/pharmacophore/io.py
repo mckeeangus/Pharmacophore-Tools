@@ -14,7 +14,7 @@ from .build import BuildResult
 from .model import Pharmacophore
 
 # Ligand feature spheres render at a FIXED display radius (the tolerance radius, up to
-# 3 A, swamps the scene); the true tolerance is preserved in pharmacophore.json. This is
+# 3 A, swamps the scene); the true tolerance is preserved in pharmacophore_model.json. This is
 # a pure display size (a mesh/wireframe sphere), independent of the tolerance and the 1 A
 # merge cutoff.
 PH4_SPHERE_RADIUS = 1.25

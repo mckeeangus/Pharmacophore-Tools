@@ -88,12 +88,12 @@ dominant one (more points, then support) wins, at a fixed 1 Å centre-to-centre 
 a bidentate hydroxyl's acceptor is not deleted into its donor. `model_summary.md` records every
 above-floor removal ("Merged away … in favour of X") and every below-floor cluster.
 
-### 5. Minimum-ligands gate
+### 5. Minimum-ligands warning
 
-A cell with **fewer than `selection.min_ligands` (= 10)** aligned molecules is **skipped** and any
-prior model for it removed. Below ~10 the ensemble is too sparse to be consensual — a 0.5-support
-feature would rest on a couple of ligands. This is the single knob trading target coverage for
-per-model robustness.
+A set with **fewer than `selection.min_ligands` (= 10)** molecules **still builds, but emits a
+warning** that the consensus is weak and the model provisional. Below ~10 the ensemble is sparse —
+a 0.5-support feature would rest on a couple of ligands — so treat such a model with caution; the
+threshold is a guidance knob, not a hard gate (the user decides whether the model is usable).
 
 ## No excluded volume
 
@@ -108,7 +108,7 @@ JSON still carries `ExcludedVolume` rows — historical, not produced by this to
 - **`pharmacophore.csv`** — the primary interchange, one row per feature:
   `family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz` (`dx,dy,dz` = orientation
   vector, blank when none). Feed this to `visualise-pharmacophore`.
-- **`pharmacophore.json`** — the canonical, lossless model (schema `pharmpipe.pharmacophore/v1`),
+- **`pharmacophore_model.json`** — the canonical, lossless model (schema `pharmpipe.pharmacophore/v1`),
   including provenance (feature-hierarchy collapses, merges, representative ligand).
 - **`model_summary.md`** — human-readable summary + the merge / below-floor tables.
 - **`features.csv`** — every raw feature point with its cluster id and kept flag (enables the

@@ -65,7 +65,7 @@ def run(use_directions: bool) -> dict:
     build_from_seed_alignment(SCREEN, INDEX, out, cfg, top_n_hits=100,
                               seed_k=cfg.alignment.seed_k, smiles_map=SMAP,
                               name=f"nachr_dir_{use_directions}")
-    feats = json.loads((out / "pharmacophore.json").read_text())["features"]
+    feats = json.loads((out / "pharmacophore_model.json").read_text())["features"]
     dom = {}
     for f in feats:
         fam = f["family"]

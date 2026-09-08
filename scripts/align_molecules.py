@@ -8,7 +8,7 @@ conformer ensemble per molecule and iteratively superposes them on their shared 
 (feature-clique matching on relative intramolecular distances → EM refinement → directional
 matching), seedless by default.
 
-    pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 100] [--seed frame.sdf]
+    pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 50] [--seed frame.sdf]
 
 Output (in ``--out``): ``aligned_compounds.sdf`` (the aligned molecules, best conformer each),
 ``aligned_points.csv`` (pooled feature points), ``alignment_manifest.csv`` (per-mol provenance).
@@ -74,8 +74,9 @@ def main(argv=None) -> int:
     ap.add_argument("--input", type=Path, required=True,
                     help="a DrugCLIP output CSV or a multi-molecule SDF")
     ap.add_argument("--out", type=Path, required=True, help="output directory")
-    ap.add_argument("--top-n", dest="top_n", type=int, default=100,
-                    help="align the top-N molecules (by score for a CSV; default 100)")
+    ap.add_argument("--top-n", dest="top_n", type=int, default=50,
+                    help="align the top-N molecules (by score for a CSV; default 50 — the depth "
+                         "that best matched the known-actives models; >=100 dilutes)")
     ap.add_argument("--seed", type=Path, default=None,
                     help="advanced: a 3D-coordinate SDF (crystal ligand / docked poses) to use as "
                          "the alignment frame instead of the default seedless start")
@@ -92,7 +93,8 @@ def main(argv=None) -> int:
             seed_poses=args.seed.resolve() if args.seed else None,
             seedless=args.seed is None, align_only=True)
     if res is None:
-        print(f"align-molecules: too few molecules aligned (< {cfg.selection.min_ligands})")
+        print("align-molecules: nothing aligned (no molecules loaded, or none shared enough "
+              "features to align)")
         return 1
     print(f"aligned {res.name} -> {args.out} "
           f"(aligned_compounds.sdf, aligned_points.csv, alignment_manifest.csv)")

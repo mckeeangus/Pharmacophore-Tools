@@ -47,8 +47,8 @@ matching. Protein-free and **seedless by default**. Method:
 [`docs/molecule_alignment.md`](docs/molecule_alignment.md).
 
 ```bash
-# From a DrugCLIP output CSV (mol_id,…,smiles,…,drugclip_score) — align the top 100 by score:
-pixi run align-molecules --input hits.csv --out out/aligned --top-n 100
+# From a DrugCLIP output CSV (mol_id,…,smiles,…,drugclip_score) — align the top 50 by score:
+pixi run align-molecules --input hits.csv --out out/aligned
 
 # From a multi-molecule SDF instead:
 pixi run align-molecules --input molecules.sdf --out out/aligned
@@ -58,7 +58,7 @@ Writes `aligned_compounds.sdf` (feed to tool 2), `aligned_points.csv`, `alignmen
 
 | Option | Effect |
 |---|---|
-| `--top-n N` | Align the top *N* molecules (by score for a CSV; default 100). |
+| `--top-n N` | Align the top *N* molecules (by score for a CSV; **default 50** — the depth that best matched the known-actives models; ≥100 dilutes). |
 | `--seed frame.sdf` | Advanced: use an explicit 3-D frame (crystal ligand / docked poses) instead of the seedless start. Generally less effective — a bad pose can bias the consensus. |
 | `--config PATH` | Override `config/pharmacophore.yaml` (the `alignment:` block). |
 
@@ -77,16 +77,34 @@ pixi run build-pharmacophore --input out/aligned/aligned_compounds.sdf --out out
 pixi run build-pharmacophore --input aligned_mol2_dir --out out/model --smiles ligands.csv
 ```
 
-Writes **`pharmacophore.csv`** (the interchange for tool 3), plus `pharmacophore.json`
-(canonical), `model_summary.md`, `features.csv`, `representative_ligand.sdf`, per-family PNGs.
+Writes **`pharmacophore.csv`** (the interchange for tool 3), plus `pharmacophore_model.json`
+(the canonical model + provenance), `model_summary.md`, `features.csv`,
+`representative_ligand.sdf`, per-family PNGs.
 
 | Option | Effect |
 |---|---|
-| `--smiles het_code,smiles.csv` | Bond orders for a heavy-atom mol2 directory (not needed for an SDF). A `protonated_ligands.csv` beside it is auto-used for pH-7.4 states (pkasolver + weak-acid guard); SDF input is trusted as-is. |
+| `--smiles het_code,smiles.csv` | Bond orders for a heavy-atom mol2 directory (not needed for an SDF). See the optional protonation step below. |
 | `--config PATH` | Override `config/pharmacophore.yaml` (`density:`/`selection:`/`tolerance:`). |
 
-> A cell with fewer than `selection.min_ligands` (10) molecules is skipped — below that the
-> consensus is too sparse to trust.
+> A cell with fewer than `selection.min_ligands` (10) molecules still builds, but emits a
+> **warning** that the consensus is weak and the model provisional — it is no longer skipped.
+
+#### Optional: pH-7.4 protonation with pkasolver
+
+Protonation is an **optional preprocessing step** for the crystal `*.mol2` path, and it is the
+tool's only protonation source. Run it once to predict each ligand's dominant pH-7.4 microstate
+with **pkasolver** (plus the weak-acid guard), writing `protonated_ligands.csv` beside your
+`--smiles` file:
+
+```bash
+pixi run -e prep protonate-ligands            # -> <slug>/protonated_ligands.csv
+```
+
+`build-pharmacophore` then **auto-detects and uses** that file so donor/acceptor/±ionizable
+perception sees the real ionisation. If it is absent, the build falls back to the neutral
+`--smiles` and warns. SDF input (from `align-molecules`, or any DrugCLIP-derived SDF) already
+carries its protonation and is trusted as-is — pkasolver is never run on it. pkasolver lives in
+the isolated `prep` env (a pinned 2021-era stack), so it stays out of the way unless you invoke it.
 
 ### 3. `visualise-pharmacophore` — render a pharmacophore CSV
 
@@ -106,7 +124,7 @@ Writes `pharmacophore.pse` + `.png` (the kept model) and, with `--features`,
 ### The full chain
 
 ```bash
-pixi run align-molecules       --input hits.csv --out out/aligned --top-n 100
+pixi run align-molecules       --input hits.csv --out out/aligned
 pixi run build-pharmacophore   --input out/aligned/aligned_compounds.sdf --out out/model
 pixi run visualise-pharmacophore --pharmacophore out/model/pharmacophore.csv --out out/viz \
     --compounds out/aligned/aligned_compounds.sdf --features out/model/features.csv

@@ -51,7 +51,7 @@ SCREEN = REPO_ROOT / "data" / "screening" / "nachr_a4b2_positive"
 INDEX = SCREEN / "index_nachr_a4b2_positive.csv"
 CIF = REPO_ROOT / "data" / "targets" / "nachr_a4b2" / "structures" / "5KXI.cif"
 KA = (CATALOGUE_DIR / "nachr_a4b2" / "pharmacophores" / "orthosteric__positive"
-      / "pharmacophore.json")
+      / "pharmacophore_model.json")
 REPORT = CATALOGUE_DIR / "screening_eval" / "nachr_a4b2_positive" / "seed5_benchmark.md"
 SHORT = {"PosIonizable": "cation", "Aromatic": "aromatic", "Acceptor": "acceptor"}
 LIT_CAT_ACC = 5.35  # Beers-Reich nicotinic cationic-N -> H-bond acceptor

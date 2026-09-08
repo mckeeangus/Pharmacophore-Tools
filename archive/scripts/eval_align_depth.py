@@ -35,7 +35,7 @@ EVAL_KEYS = os.environ.get("EVAL_KEYS",
 
 
 def _ka_features(slug: str, cell: str) -> list[dict] | None:
-    p = CATALOGUE_DIR / slug / "pharmacophores" / cell / "pharmacophore.json"
+    p = CATALOGUE_DIR / slug / "pharmacophores" / cell / "pharmacophore_model.json"
     return json.loads(p.read_text())["features"] if p.exists() else None
 
 
@@ -63,8 +63,8 @@ def main() -> int:
                 if res is None:
                     print(f"{key:<22} {d:>5}  (skipped)")
                     continue
-                a = summarise([f for f in
-                               json.loads((out / 'pharmacophore.json').read_text())['features']])
+                model = json.loads((out / "pharmacophore_model.json").read_text())
+                a = summarise(model["features"])
                 cmp = compare_models(a, ka_sum)
                 n_lig = res.pharmacophore.metadata["source"]["n_ligands"]
                 gd = f"{cmp.mean_geom_delta:.2f}" if cmp.mean_geom_delta is not None else "-"

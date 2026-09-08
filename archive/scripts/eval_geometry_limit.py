@@ -92,7 +92,7 @@ def carries(docked_dir: Path, index: Path, depth: int) -> tuple[dict[str, set], 
 
 
 def decompose(model_dir: Path, have: dict[str, set], n: int) -> list[dict]:
-    model = json.loads((model_dir / "pharmacophore.json").read_text())
+    model = json.loads((model_dir / "pharmacophore_model.json").read_text())
     kept = {f["family"]: np.array(f.get("position") or [f["x"], f["y"], f["z"]])
             for f in model["features"] if f["family"] in TRACK}
     pts = {f: [] for f in TRACK}
@@ -118,7 +118,7 @@ def decompose(model_dir: Path, have: dict[str, set], n: int) -> list[dict]:
 
 
 def _built(model_dir: Path) -> bool:
-    return (model_dir / "pharmacophore.json").exists()
+    return (model_dir / "pharmacophore_model.json").exists()
 
 
 def main() -> int:

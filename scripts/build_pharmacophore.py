@@ -17,7 +17,7 @@ derived SDF) already carries its protonation, so no pKa prediction is run on it.
     pixi run build-pharmacophore --input aligned_compounds.sdf|mol2_dir --out DIR [--smiles het.csv]
 
 Output (in ``--out``): **``pharmacophore.csv``** (the downstream interchange, one row per feature),
-``pharmacophore.json`` (canonical), ``model_summary.md``, ``features.csv`` (raw points),
+``pharmacophore_model.json`` (canonical), ``model_summary.md``, ``features.csv`` (raw points),
 ``representative_ligand.sdf``, per-family PNGs. Feed ``pharmacophore.csv`` to
 ``visualise-pharmacophore``. Methodology: docs/pharmacophore_construction.md.
 """
@@ -121,10 +121,11 @@ def main(argv=None) -> int:
         ap.error("--input must be an .sdf of aligned molecules or a directory of aligned *.mol2")
 
     if res is None:
-        print(f"build-pharmacophore: too few molecules (< {cfg.selection.min_ligands}) — skipped")
+        print("build-pharmacophore: no model built (no ligands loaded or no features survived)")
         return 1
     n_feat = len(res.pharmacophore.features)
-    print(f"{res.name}: {n_feat} features -> {out}/pharmacophore.csv (+ .json, model_summary.md)")
+    print(f"{res.name}: {n_feat} features -> {out}/pharmacophore.csv "
+          f"(+ pharmacophore_model.json, model_summary.md)")
     return 0
 
 

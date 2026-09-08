@@ -47,7 +47,7 @@ INDEX = SCREEN / "index_nachr_a4b2_positive.csv"
 NCT_MOL2 = REPO_ROOT / "data/targets/nachr_a4b2/ligands/aligned_mol2/5KXI_NCT_D402.mol2"
 NCT_SMILES = "C[N@@]1CCC[C@H]1c2cccnc2"
 KA = json.loads((CATALOGUE_DIR / "nachr_a4b2" / "pharmacophores" / "orthosteric__positive"
-                 / "pharmacophore.json").read_text())
+                 / "pharmacophore_model.json").read_text())
 OUTBASE = CATALOGUE_DIR / "screening_eval" / "nachr_a4b2_positive"
 SHORT = {"PosIonizable": "cation", "Aromatic": "aromatic", "Acceptor": "acceptor"}
 LIT_CAT_ACC = 5.35

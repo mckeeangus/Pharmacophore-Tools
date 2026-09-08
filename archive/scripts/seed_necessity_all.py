@@ -48,7 +48,7 @@ CFG = replace(load_pharmacophore_config(),
 
 
 def _ka_features(slug: str, cell: str) -> list[dict] | None:
-    p = CATALOGUE_DIR / slug / "pharmacophores" / cell / "pharmacophore.json"
+    p = CATALOGUE_DIR / slug / "pharmacophores" / cell / "pharmacophore_model.json"
     return json.loads(p.read_text())["features"] if p.exists() else None
 
 
@@ -59,12 +59,12 @@ def _smiles_map(docked_dir: Path, index: Path) -> dict[str, str]:
 
 def _build(key: str, init: str, docked_dir: Path, index: Path, smap: dict) -> dict | None:
     out = PROBE / key / init
-    if not (out / "pharmacophore.json").exists():
+    if not (out / "pharmacophore_model.json").exists():
         print(f"building {key}/{init}...", flush=True)
         build_from_seed_alignment(docked_dir, index, out, CFG, top_n_hits=DEPTH,
                                   seed_k=CFG.alignment.seed_k, name=f"{key}_{init}",
                                   smiles_map=smap, seedless=(init == "seedless"))
-    p = out / "pharmacophore.json"
+    p = out / "pharmacophore_model.json"
     if not p.exists():
         return None
     js = json.loads(p.read_text())
@@ -98,7 +98,8 @@ def main() -> int:
         ka_sum = summarise(ka)
         rec = {"key": t.key, "slug": t.slug}
         for init in ("docked", "seedless"):
-            if args.report_only and not (PROBE / t.key / init / "pharmacophore.json").exists():
+            model_json = PROBE / t.key / init / "pharmacophore_model.json"
+            if args.report_only and not model_json.exists():
                 rec[init] = None
                 continue
             try:

@@ -2,12 +2,12 @@
 """Visualise a pharmacophore + its compounds in PyMOL.
 
 Standalone: depends only on the Python standard library and PyMOL's ``cmd`` — it
-parses the ``pharmacophore.json`` itself, so it runs anywhere the files are copied.
+parses the ``pharmacophore_model.json`` itself, so it runs anywhere the files are copied.
 
 Run (needs the viz environment):
 
     pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- \
-        --pharmacophore catalogue/<slug>/pharmacophores/<cell>/pharmacophore.json \
+        --pharmacophore catalogue/<slug>/pharmacophores/<cell>/pharmacophore_model.json \
         --compounds     catalogue/<slug>/groups/<cell> \
         --out           <cell>.pse
 
@@ -59,7 +59,7 @@ COLORS = {
 _GREY = (0.5, 0.5, 0.5)
 
 # Ligand feature spheres are drawn at a FIXED display radius (not the tolerance radius,
-# which is up to 3 A and swamps the scene). The true tolerance stays in pharmacophore.json.
+# which is up to 3 A and swamps the scene). The true tolerance stays in pharmacophore_model.json.
 # This is a pure display size (a mesh/wireframe sphere), independent of the tolerance and
 # the 1 A merge cutoff.
 PH4_SPHERE_RADIUS = 1.25
@@ -100,25 +100,42 @@ def load_ligand(ligand_path):
     cmd.color("grey70", "ligand and elem C")
 
 
+def _clean_obj_name(raw, fallback):
+    """A PyMOL-safe object name from a molecule title (or a fallback)."""
+    nm = "".join(c if (c.isalnum() or c == "_") else "_" for c in (raw or "").strip())
+    return nm or fallback
+
+
 def load_compounds(compounds):
-    """Overlay the raw ligands. ``compounds`` is either a directory of aligned ``*.mol2``
-    (the crystal case) or a single multi-molecule file (``.sdf``/``.mol2``, as written by
-    the align/build tools). Every ligand loads into one ``compounds`` object."""
+    """Load the raw ligands as **separate, individually-toggleable objects** grouped under
+    ``compounds`` — so each molecule can be viewed on its own against the pharmacophore rather
+    than as one merged overlay. ``compounds`` is a directory of aligned ``*.mol2`` (one object
+    per file, named by its stem) or a single multi-molecule ``.sdf``/``.mol2`` (one object per
+    record, named by its title / mol_id). Returns the number of molecule objects created."""
+    names = []
     if os.path.isdir(compounds):
-        files = sorted(glob.glob(os.path.join(compounds, "*.mol2")))
-    else:
-        files = [compounds] if os.path.isfile(compounds) else []
-    n = 0
-    for path in files:
-        cmd.load(path, "compounds")
-        n = cmd.count_states("compounds") if path.lower().endswith(".sdf") else n + 1
-    if n == 0:
+        for path in sorted(glob.glob(os.path.join(compounds, "*.mol2"))):
+            nm = _clean_obj_name(os.path.splitext(os.path.basename(path))[0], "cmpd")
+            cmd.load(path, nm)
+            names.append(nm)
+    elif os.path.isfile(compounds):
+        tmp = "_compounds_tmp"
+        cmd.load(compounds, tmp)
+        for state in range(1, cmd.count_states(tmp) + 1):
+            nm = _clean_obj_name(cmd.get_title(tmp, state), f"cmpd_{state}")
+            if nm in names:                       # de-dupe identical titles
+                nm = f"{nm}_{state}"
+            cmd.create(nm, tmp, source_state=state, target_state=1)
+            names.append(nm)
+        cmd.delete(tmp)
+    if not names:
         return 0
-    cmd.set("all_states", 1, "compounds")
-    cmd.hide("everything", "compounds")
-    cmd.show("lines", "compounds")
-    cmd.color("grey70", "compounds and elem C")
-    return n
+    for nm in names:
+        cmd.hide("everything", nm)
+        cmd.show("sticks", nm)
+        cmd.color("grey70", f"{nm} and elem C")
+        cmd.group("compounds", nm)              # collapsible group; each still toggles on its own
+    return len(names)
 
 
 def load_features(json_path):
@@ -203,6 +220,11 @@ def load_sweep(features_csv, n_ligands, membership_radius, min_cluster_size, ste
     clusters = _read_clusters(features_csv, n_ligands, membership_radius, min_cluster_size)
     if not clusters:
         return 0
+    # A cluster whose support sits in [step, 2*step) spans a single state, making it a
+    # single-coordinate-state object; with PyMOL's default static_singletons those objects
+    # are drawn in EVERY frame, so the weakest clusters bleed across the whole sweep. Turn it
+    # off so each cluster shows only in the states it actually occupies.
+    cmd.set("static_singletons", 0)
     n_states = round(1.0 / step)                  # 0.05 .. 1.00 -> 20 states
     for idx, c in enumerate(clusters):
         k_max = min(n_states, math.floor(c["support"] / step + 1e-9))

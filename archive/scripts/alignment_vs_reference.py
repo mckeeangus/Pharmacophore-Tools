@@ -52,9 +52,9 @@ def main() -> int:
              "missing (lit) |", "|---|---|:--:|--:|--:|:--:|--:|---|"]
     rows = []
     for t in targets:
-        model = SEEDLESS / t.key / "seedless" / "pharmacophore.json"
+        model = SEEDLESS / t.key / "seedless" / "pharmacophore_model.json"
         cell_json = (CATALOGUE_DIR / t.slug / "pharmacophores" / (t.cell or "") /
-                     "pharmacophore.json")
+                     "pharmacophore_model.json")
         if not model.exists() or t.cell is None or not cell_json.exists():
             continue
         a = summarise(json.loads(model.read_text())["features"])

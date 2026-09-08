@@ -362,9 +362,10 @@ ligands) in the JSON provenance and `model_summary.md`.
 **Method choices — density/KDE** (all in `config/pharmacophore.yaml`; full write-up in
 `catalogue/pharmacophore_method.md`): features use RDKit **`LumpedHydrophobe`** (one
 centroid per hydrophobic group, not per atom); a cell with **< `min_ligands` (10)** known
-actives is **skipped and its output removed** (below ~10 poses the ensemble is too sparse to
-trust — a 0.5-support feature rests on a couple of ligands; raised from 3 after a coverage/
-quality review, which now builds 13 of the catalogue's cells). Per feature type, points are weighted by
+actives now **still builds but emits a warning** that the consensus is weak and the model
+provisional (below ~10 poses the ensemble is sparse — a 0.5-support feature rests on a couple of
+ligands; `min_ligands` was formerly a hard skip, since relaxed to a warning so the user decides).
+Per feature type, points are weighted by
 **1/(points that molecule contributes to the type)** so the unit of evidence is the
 **distinct molecule** (optional inverse-scaffold-frequency), a Gaussian-smoothed **voxel
 occupancy field** (voxel/bandwidth ~1.0–1.5 Å) is built, and features are **all local
@@ -425,11 +426,11 @@ needs a pinned 2021-era stack (py3.10/torch1.11/PyG2.0.1, the `prep` env) and is
 under `external/` (gitignored); the `protonated_ligands.csv` outputs are the tracked deliverable.
 
 **Outputs** per model dir (`catalogue/<slug>/pharmacophores/<cell>/`):
-`pharmacophore.json` (canonical, method-stable; provenance includes the representative
+`pharmacophore_model.json` (canonical, method-stable; provenance includes the representative
 ligand), `features.csv` (every raw point + cluster id + kept flag),
 `representative_ligand.sdf` (a real cell ligand, clean bond orders, best fit to the
 model — the visual scaffold), `raw_features_<family>.png` (per-family 3D scatter;
-centre-marker area ∝ cluster population), `pharmacophore.pml`, `model_summary.md`.
+centre-marker area ∝ cluster population), `pharmacophore_pymol.pml`, `model_summary.md`.
 Inspect a model in PyMOL with `pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py
 -- --pharmacophore … [--features … --compounds … --out …]` (defaults to the
 representative ligand when `--compounds` is omitted).

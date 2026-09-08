@@ -44,14 +44,14 @@ DOCKED_HITS = 1000  # "all the docked poses"
 
 
 def _features(model_dir: Path) -> list[dict] | None:
-    p = model_dir / "pharmacophore.json"
+    p = model_dir / "pharmacophore_model.json"
     return json.loads(p.read_text())["features"] if p.exists() else None
 
 
 def _ka_features(slug: str, cell: str | None) -> list[dict] | None:
     if not cell:
         return None
-    p = CATALOGUE_DIR / slug / "pharmacophores" / cell / "pharmacophore.json"
+    p = CATALOGUE_DIR / slug / "pharmacophores" / cell / "pharmacophore_model.json"
     return json.loads(p.read_text())["features"] if p.exists() else None
 
 
@@ -81,7 +81,7 @@ def evaluate(cfg, depth, targets, literature, only, force=False) -> list[dict]:
         lit = literature.get(t.literature) if t.literature else None
         for method in ("docked", "seed_align"):
             out = EVAL_DIR / t.key / method
-            model = out / "pharmacophore.json"
+            model = out / "pharmacophore_model.json"
             if force or not model.exists():       # build only when missing (resumable)
                 try:
                     if method == "docked":

@@ -61,7 +61,7 @@ SCREENING = REPO / "data" / "screening"
 
 
 def _crystal_model(slug: str, cell: str) -> Path:
-    return REPO / "catalogue" / slug / "pharmacophores" / cell / "pharmacophore.json"
+    return REPO / "catalogue" / slug / "pharmacophores" / cell / "pharmacophore_model.json"
 
 
 def _build_target(key: str, index: Path, out: Path, cfg, depth: int) -> Path | None:
@@ -87,7 +87,7 @@ def _build_target(key: str, index: Path, out: Path, cfg, depth: int) -> Path | N
     if built is None:
         log.warning("%s: build skipped (< min_ligands)", key)
         return None
-    return out / "pharmacophore.json"
+    return out / "pharmacophore_model.json"
 
 
 def _row(key, slug, cell, model_json: Path, lit_model) -> dict:
@@ -128,7 +128,7 @@ def reconstruct(only: str | None, depth_override: int | None, report_only: bool)
             log.warning("%s: no index at %s -- skipping", t.key, index)
             continue
         out = RESULTS / t.key
-        model_json = out / "pharmacophore.json"
+        model_json = out / "pharmacophore_model.json"
         if not report_only:
             out.mkdir(parents=True, exist_ok=True)
             log.warning("=== %s (depth %d) ===", t.key, depth)

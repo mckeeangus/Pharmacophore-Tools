@@ -20,11 +20,19 @@ that `visualise-pharmacophore` consumes.
 
 ### 1. Protonation to the pH-7.4 microstate (preprocessing)
 
-Feature perception must see the real ionisation, so each ligand is taken to its dominant
-pH-7.4 microstate before extraction. SDF input from `align-molecules` is already protonated;
-for a mol2 directory, `scripts/protonate_ligands.py` (the `prep` env) predicts pKa with
-**pkasolver** and writes the dominant microstate, and the bond-order template carries the formal
-charges onto the pose.
+Feature perception must see the real ionisation. The tool's **only** protonation source is
+**pkasolver + the weak-acid guard**, and it is applied to exactly one input kind:
+
+- **mol2 directory (crystal poses)** — `scripts/protonate_ligands.py` (the isolated `prep` env)
+  predicts pKa with **pkasolver**, applies the weak-acid guard (below), and writes each HET's
+  dominant pH-7.4 microstate to `protonated_ligands.csv`. `build-pharmacophore` **auto-overlays**
+  that CSV when it sits beside `--smiles` (pH-7.4 states win; HETs without an entry keep the
+  neutral SMILES), and the bond-order template (`AssignBondOrdersFromTemplate`) carries the
+  formal charges onto the heavy-atom pose. If the CSV is absent the build falls back to neutral
+  SMILES and warns.
+- **SDF input (from `align-molecules`, or any DrugCLIP-derived SDF)** — **trusted as-is.** These
+  poses already carry a protonation state, so **no pKa prediction is run on them** — pkasolver is
+  never invoked on SDF input.
 
 **Weak-acid guard.** pkasolver systematically *over-deprotonates* weak acids (phenols, alcohols,
 amides, primary sulfonamides, amino-heteroaromatics) on poly-ionizable scaffolds, because

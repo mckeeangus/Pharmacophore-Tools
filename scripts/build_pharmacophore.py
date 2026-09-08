@@ -3,10 +3,16 @@
 
 Build a consensus pharmacophore from a set of **aligned molecules**: either the
 ``aligned_compounds.sdf`` produced by ``align-molecules``, or a directory of aligned crystal
-``*.mol2`` poses. The molecules must already be superposed into one common frame. Features are
-perceived (pH-7.4 microstate for mol2 via the ``prep`` env), then a molecule-weighted Gaussian-KDE
-occupancy field is peaked and support-filtered into consensus features. Purely ligand-based — no
-receptor, no excluded volume.
+``*.mol2`` poses. The molecules must already be superposed into one common frame, then a
+molecule-weighted Gaussian-KDE occupancy field is peaked and support-filtered into consensus
+features. Purely ligand-based — no receptor, no excluded volume.
+
+**Protonation.** The tool's only protonation source is **pkasolver + the weak-acid guard**, and
+it is applied *only* to a heavy-atom ``*.mol2`` directory: the pH-7.4 states in
+``protonated_ligands.csv`` (written by ``pixi run -e prep protonate-ligands``, found beside
+``--smiles``) are overlaid onto the neutral SMILES so donor/acceptor/ionizable perception sees the
+real ionisation. **SDF input is trusted as-is** — an ``aligned_compounds.sdf`` (or any DrugCLIP-
+derived SDF) already carries its protonation, so no pKa prediction is run on it.
 
     pixi run build-pharmacophore --input aligned_compounds.sdf|mol2_dir --out DIR [--smiles het.csv]
 
@@ -32,7 +38,11 @@ from rdkit import Chem, RDLogger  # noqa: E402
 
 RDLogger.DisableLog("rdApp.*")
 
-from pharmpipe.features.load import LoadReport, read_smiles_map  # noqa: E402
+from pharmpipe.features.load import (  # noqa: E402
+    LoadReport,
+    read_protonation_map,
+    read_smiles_map,
+)
 from pharmpipe.pharmacophore.config import load_pharmacophore_config  # noqa: E402
 from pharmpipe.pharmacophore.run import (  # noqa: E402
     build_from_directory,
@@ -40,6 +50,29 @@ from pharmpipe.pharmacophore.run import (  # noqa: E402
 )
 
 log = logging.getLogger("build_pharmacophore")
+
+
+def _crystal_smiles_map(smiles_csv: Path | None) -> dict[str, str]:
+    """SMILES for a heavy-atom mol2 directory, with pH-7.4 protonation overlaid.
+
+    The neutral ``het_code,smiles`` map from ``--smiles`` is overlaid with the **pkasolver +
+    weak-acid-guard** states in ``protonated_ligands.csv`` (written by ``pixi run -e prep
+    protonate-ligands``) when it sits beside the SMILES CSV — this is the tool's only protonation
+    source. If it is absent the build falls back to the neutral SMILES and warns.
+    """
+    if smiles_csv is None:
+        return {}
+    smiles_csv = smiles_csv.resolve()
+    smiles_map = read_smiles_map(smiles_csv)
+    protonated_csv = smiles_csv.parent / "protonated_ligands.csv"
+    protonated = read_protonation_map(protonated_csv)
+    if protonated:
+        log.warning("pH-7.4 protonation (pkasolver + weak-acid guard) for %d HETs from %s",
+                    len(protonated), protonated_csv.name)
+        return {**smiles_map, **protonated}
+    log.warning("no protonated_ligands.csv beside %s - building from NEUTRAL SMILES; run "
+                "`pixi run -e prep protonate-ligands` for pH-7.4 states", smiles_csv.name)
+    return smiles_map
 
 
 def _from_sdf(sdf: Path, out: Path, cfg, name: str):
@@ -67,8 +100,9 @@ def main(argv=None) -> int:
                          "mol2")
     ap.add_argument("--out", type=Path, required=True, help="output directory")
     ap.add_argument("--smiles", type=Path, default=None,
-                    help="het_code,smiles CSV — required for a directory of heavy-atom mol2 "
-                         "(bond orders + pH-7.4 protonation); not needed for an SDF")
+                    help="het_code,smiles CSV — required for a heavy-atom mol2 directory (supplies "
+                         "bond orders). A protonated_ligands.csv beside it is used for pH-7.4 "
+                         "states (pkasolver + weak-acid guard). Not needed/used for an SDF")
     ap.add_argument("--config", type=Path, default=None)
     args = ap.parse_args(argv)
 
@@ -79,7 +113,7 @@ def main(argv=None) -> int:
     name = out.name
 
     if inp.is_dir():
-        smiles_map = read_smiles_map(args.smiles.resolve()) if args.smiles else {}
+        smiles_map = _crystal_smiles_map(args.smiles)
         res = build_from_directory(inp, out, cfg, smiles_map=smiles_map, name=name)
     elif inp.suffix.lower() == ".sdf":
         res = _from_sdf(inp, out, cfg, name)

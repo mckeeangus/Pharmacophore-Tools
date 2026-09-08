@@ -82,7 +82,7 @@ Writes **`pharmacophore.csv`** (the interchange for tool 3), plus `pharmacophore
 
 | Option | Effect |
 |---|---|
-| `--smiles het_code,smiles.csv` | Bond orders + pH-7.4 protonation for a heavy-atom mol2 directory (not needed for an SDF). |
+| `--smiles het_code,smiles.csv` | Bond orders for a heavy-atom mol2 directory (not needed for an SDF). A `protonated_ligands.csv` beside it is auto-used for pH-7.4 states (pkasolver + weak-acid guard); SDF input is trusted as-is. |
 | `--config PATH` | Override `config/pharmacophore.yaml` (`density:`/`selection:`/`tolerance:`). |
 
 > A cell with fewer than `selection.min_ligands` (10) molecules is skipped — below that the

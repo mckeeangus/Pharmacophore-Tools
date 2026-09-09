@@ -135,26 +135,6 @@ def read_protonated_smiles(docked_dir: Path, mol_id: str) -> str | None:
     return None
 
 
-def read_docked_pose(docked_dir: Path, mol_id: str) -> Chem.Mol | None:
-    """The compound's best (pose-1) docked 3D structure, protonated + bond-order-correct, or None.
-
-    Used to seed conformer generation with the docked **protonation and stereochemistry** — in
-    particular the protonated-amine invertomer, which the neutral index SMILES cannot express.
-    GNINA's poses are orientations of the same covalent species, so any pose fixes the same
-    stereo; pose 1 is taken. The 3D conformer is retained so ``AssignStereochemistryFrom3D`` can
-    read the configuration off the coordinates.
-    """
-    sdf = docked_dir / f"{mol_id}{DOCKED_SUFFIX}"
-    if not sdf.exists():
-        return None
-    for raw in Chem.SDMolSupplier(str(sdf), sanitize=False, removeHs=True):
-        if raw is None:
-            continue
-        mol, _method = _pose_from_record(raw, _record_smiles(raw, None))
-        return mol            # first valid record = GNINA pose 1
-    return None
-
-
 def _pose_from_record(raw: Chem.Mol, smiles: str | None) -> tuple[Chem.Mol | None, str]:
     """Return ``(mol, method)`` for one SDF record; method is ``template`` | ``direct`` | ``fail``.
 

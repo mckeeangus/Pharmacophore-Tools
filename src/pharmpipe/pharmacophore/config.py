@@ -107,7 +107,7 @@ class AlignmentConfig:
     # Conformer ensemble (RDKit ETKDG v3 + MMFF): the bioactive conformer must be present,
     # so sample generously, keep only a low-energy window, prune near-duplicates, then cap.
     n_conformers: int = 64          # embeds attempted per ligand
-    energy_window: float = 15.0     # keep conformers within this (kcal/mol) of the minimum
+    energy_window: float = 10.0     # keep conformers within this (kcal/mol) of the minimum
     rmsd_prune: float = 0.5         # ETKDG pruneRmsThresh (A) — drop near-duplicate embeds
     max_confs: int = 40             # cap the kept ensemble (energy-sorted)
     # Feature-clique alignment: two features correspond only if same-family and their

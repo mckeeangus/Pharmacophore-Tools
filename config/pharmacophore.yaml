@@ -143,7 +143,12 @@ alignment:
   # in the ensemble for the alignment to have anything correct to find, so sample generously
   # and keep a low-energy window; for very flexible ligands raise n_conformers/energy_window.
   n_conformers: 64             # embeds attempted per ligand
-  energy_window: 15.0          # keep conformers within this (kcal/mol) of the minimum
+  # keep conformers within this (kcal/mol) of the ensemble minimum. 10 sits in the standard
+  # bioactive-conformer range (Perola-Charifson; OMEGA-style windows): tight enough to drop
+  # genuinely strained conformers, loose enough to retain plausible bioactive ones and stay
+  # above MMFF's ~1-2 kcal/mol energy noise. Not ~1 (would miss bioactive conformers that bind
+  # a few kcal/mol above the minimum, and is inside the force-field error); not 15 (over-loose).
+  energy_window: 10.0
   rmsd_prune: 0.5              # ETKDG pruneRmsThresh (A) — drop near-duplicate embeds
   max_confs: 40                # cap the kept ensemble (energy-sorted)
   # Feature-clique correspondence: two features match only if same-family and their

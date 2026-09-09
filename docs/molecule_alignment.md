@@ -26,13 +26,32 @@ internally. (`--seed` is the exception: it supplies a 3-D frame; see below.)
 
 ## Method
 
-### 1. Protonation to the pH-7.4 microstate
+### 1. Protonation and stereochemistry from the docked pose
 
 Each compound is taken to its dominant physiological microstate so that donor/acceptor and
-±ionizable perception sees the real ionisation. Docked SDFs carry a per-record
-`protonated_smiles` (used directly, offline); otherwise protonation runs in the `prep` env
-(pkasolver + the weak-acid guard — see `pharmacophore_construction.md` §Protonation). This is
-the same protonation the construction tool uses, so the two stages agree on chemistry.
+±ionizable perception sees the real ionisation. The subtlety is that the DrugCLIP index
+`smiles` column is **neutral** — embedding it directly gives an uncharged amine with no N–H,
+so a protonatable nitrogen loses its cation *and* its H-bond donor. The correct pH-7.4 form is
+instead carried by the **docked pose** (`<mol_id>_docked.sdf`), so the conformer template is
+built from that pose, not the index SMILES:
+
+1. **Protonation.** The docked pose's `protonated_smiles` (fixed at docking prep) supplies the
+   pH-7.4 formal charges and hydrogens, so the amine is embedded as its real ammonium — restoring
+   both the `PosIonizable` and the `Donor`.
+2. **Stereochemistry, including the amine invertomer.** A protonated tertiary amine in a ring is
+   a **locked stereocentre** — which face the proton sits on is a genuine diastereomer (the N⁺
+   cannot invert without deprotonating), and the SMILES leaves it *unspecified*, so embedding it
+   blind yields a **random mixture of both invertomers** whose N–H points to opposite faces.
+   `features/conformers.py` therefore reads the configuration off the docked 3-D coordinates
+   (`AssignStereochemistryFrom3D`) and enforces it during embedding (ETKDG v3 `enforceChirality`),
+   so the ensemble is one diastereomer with a consistent N–H direction. This fixes the *chemistry*
+   underlying the weakest geometric feature (the directional donor/acceptor); see
+   `pharmacophore_construction.md` §Geometry.
+
+The precedence is **docked pose → docked `protonated_smiles` (protonation only) → neutral index
+SMILES** (the last is the honest fallback when a compound has no docked pose; protonation there
+would need the `prep` env). A crystal `*.mol2` build instead uses the `prep`-env
+pkasolver + weak-acid guard (`pharmacophore_construction.md` §Protonation).
 
 ### 2. Conformer ensembles (energy-filtered)
 
@@ -55,10 +74,50 @@ cliques:
 2. **Maximal cliques** via **Bron–Kerbosch** (greedy-bounded for large graphs).
 3. **Kabsch** superposition for each clique; keep the one maximising `(matched features, −RMSD)`.
 
-A compound is **folded into the model only if** its best clique shares at least
-`alignment.min_clique` feature types **and** clears `alignment.max_align_rmsd` — the key
-quality gate, since a poor fit would otherwise corrupt the running consensus. Dropped compounds
-are recorded `aligned=False` in `alignment_manifest.csv`.
+A compound is **folded into the model only if** it has a clique of at least
+`alignment.min_clique` (default **3**) correspondences — i.e. three of its features that each
+**match a same-family feature in the reference** at a mutually consistent geometry — **and** the
+resulting superposition clears `alignment.max_align_rmsd`. The `min_clique` match is the *entry
+ticket*: once a compound is placed, **all** of its features (including any the reference does not
+yet have) are pooled into the cloud the consensus is built from, so it can still introduce a new
+feature family. But it must first earn placement by matching ≥3 reference features — because with
+fewer than 3 it cannot be located in the frame at all (next). Dropped compounds are recorded
+`aligned=False` in `alignment_manifest.csv`.
+
+#### Why the minimum is three features (not a heuristic)
+
+The `min_clique = 3` floor is a **mathematical necessity of the rigid superposition**, not a
+tunable quality cut-off. A rigid-body transform in 3-D has **six degrees of freedom** (3
+translational + 3 rotational). Counting matched-point constraints against those DOF:
+
+- **1 correspondence** fixes translation but leaves the molecule free to rotate about that point
+  — **3 rotational DOF unconstrained**.
+- **2 correspondences** fix translation and the axis between the two points, but the molecule can
+  still **spin about that axis** — **1 rotational DOF unconstrained**; an infinite family of
+  placements satisfies the match equally.
+- **3 non-collinear correspondences** are the first case that fully determines all six DOF,
+  giving a unique (least-squares / Kabsch) overlay.
+
+So three is the smallest number of matched features from which a molecule can be *placed at all*;
+below it the pipeline would have to invent the unconstrained rotation, and any feature
+coordinates it then contributed would be artefacts. The gate therefore filters on
+**placeability** — a precondition for contributing geometric evidence — not on activity.
+
+This coincides with the field's canonical unit: three features plus their three pairwise
+distances define a rigid triangle, the **smallest arrangement with a genuine 3-D shape** — the
+basis of 3-point pharmacophore fingerprints and the minimum overlay in the standard engines
+(Catalyst/HypoGen, Phase, LigandScout). It is also where the hypothesis becomes **discriminative**:
+a two-point relationship (e.g. "a cation and an acceptor ~5 Å apart") is satisfied by a large
+fraction of drug-like molecules and carries little selective information; the third point adds the
+angular constraint that makes the arrangement specific. Relaxing to two was tested and behaves
+exactly as the theory predicts — it admits non-specific two-point matches that, measured on the
+target's own key geometry (e.g. the nicotinic cation–acceptor distance), compress and weaken the
+consensus at every search depth. The **honest boundary**: ≥3 is a hard geometric floor; where a
+formal pharmacophore is genuinely two-point, the *principled* relaxation is not `min_clique = 2`
+(which readmits underdetermined non-directional pairs) but **counting a directional feature's
+projected orientation point toward the minimum** — a cation + a *directional* acceptor already
+supplies ≥3 constraint points and is well-posed, so orientation, not a weaker threshold, is what
+would license a two-feature match.
 
 ### 4. Incremental growth + EM refinement
 

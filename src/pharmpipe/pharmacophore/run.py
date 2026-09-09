@@ -16,7 +16,13 @@ from pathlib import Path
 import numpy as np
 
 from ..features.conformers import generate_conformers
-from ..features.dock_load import load_docked_set, read_rank_index, write_manifest
+from ..features.dock_load import (
+    load_docked_set,
+    read_docked_pose,
+    read_protonated_smiles,
+    read_rank_index,
+    write_manifest,
+)
 from ..features.extract import (
     FeaturePoint,
     FeatureResolution,
@@ -519,7 +525,14 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
     for hit in read_rank_index(index_csv)[:max(top_n_hits, 0)]:
         if hit.mol_id in excluded_mol_ids:
             continue
-        gen = generate_conformers(smiles_map.get(hit.mol_id) or hit.smiles, acfg)
+        # Prefer the docked 3D pose as the conformer template: it fixes the pH-7.4 protonation
+        # AND the stereochemistry (incl. the protonated-amine invertomer) the neutral index
+        # SMILES cannot express. Fall back to the docked protonated_smiles (protonation only),
+        # then to the raw index SMILES.
+        pose = read_docked_pose(docked_dir, hit.mol_id)
+        smi = (smiles_map.get(hit.mol_id)
+               or read_protonated_smiles(docked_dir, hit.mol_id) or hit.smiles)
+        gen = generate_conformers(smi, acfg, template_pose=pose)
         if gen is None:
             continue
         mol, cids, _energies = gen

@@ -25,8 +25,25 @@ log = logging.getLogger("pharmpipe.features.conformers")
 _EMBED_SEED = 0xC0FFEE  # fixed so the ensemble is reproducible run-to-run
 
 
+def _mol_from_template(pose: Chem.Mol) -> Chem.Mol | None:
+    """A protonation- and stereo-specified molecule read off a docked 3D pose.
+
+    ``AssignStereochemistryFrom3D`` fixes every stereocentre from the coordinates — including
+    the **protonated-amine invertomer** (which face the proton sits on), a locked stereocentre
+    the neutral index SMILES cannot express. Round-tripping through canonical SMILES carries the
+    pose's formal charges (its pH-7.4 protonation) too, so the re-embedded ensemble keeps both
+    the docked ionisation and chirality instead of sampling a random invertomer mixture.
+    """
+    try:
+        m = Chem.Mol(pose)
+        Chem.AssignStereochemistryFrom3D(m)
+        return Chem.MolFromSmiles(Chem.MolToSmiles(Chem.RemoveHs(m)))
+    except Exception:  # noqa: BLE001 — any perception failure falls back to the plain SMILES
+        return None
+
+
 def generate_conformers(
-    smiles: str, cfg: AlignmentConfig,
+    smiles: str, cfg: AlignmentConfig, *, template_pose: Chem.Mol | None = None,
 ) -> tuple[Chem.Mol, list[int], dict[int, float]] | None:
     """Embed a low-energy conformer ensemble for ``smiles``.
 
@@ -36,8 +53,17 @@ def generate_conformers(
     then capped at ``cfg.max_confs``. ``rel_energies`` maps each kept conformer id to its MMFF
     energy relative to the ensemble minimum (kcal/mol). Returns ``None`` when the SMILES is
     unparseable or embedding fails.
+
+    ``template_pose`` (a docked 3D structure) takes precedence over ``smiles``: its protonation
+    **and** stereochemistry (incl. the protonated-amine invertomer) are read off the coordinates
+    and enforced during embedding, so the ensemble is one diastereomer, not a mixture. Embedding
+    uses ETKDG v3 with ``enforceChirality`` (default on), so a specified invertomer is held fixed
+    while ring/torsion flexibility is still sampled. Falls back to ``smiles`` if the template
+    cannot be perceived.
     """
-    mol = Chem.MolFromSmiles(smiles)
+    mol = _mol_from_template(template_pose) if template_pose is not None else None
+    if mol is None:
+        mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         return None
     mol = Chem.AddHs(mol)

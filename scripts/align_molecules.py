@@ -78,8 +78,11 @@ def main(argv=None) -> int:
                     help="align the top-N molecules (by score for a CSV; default 50 — the depth "
                          "that best matched the known-actives models; >=100 dilutes)")
     ap.add_argument("--seed", type=Path, default=None,
-                    help="advanced: a 3D-coordinate SDF (crystal ligand / docked poses) to use as "
-                         "the alignment frame instead of the default seedless start")
+                    help="optional 3D seed (a holo co-crystal ligand; .sdf or .mol2). It anchors "
+                         "the alignment frame through the growing pass, then is dropped before the "
+                         "EM refinement so the model reflects the aligned molecules alone "
+                         "(best-performing seed mode). If given in a protein's coordinates the "
+                         "output is positioned in that binding site. Default: seedless.")
     ap.add_argument("--config", type=Path, default=None)
     args = ap.parse_args(argv)
 

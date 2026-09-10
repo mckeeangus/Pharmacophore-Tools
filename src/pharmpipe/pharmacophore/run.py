@@ -36,7 +36,6 @@ from ..features.load import (
     read_protonation_map,
     read_smiles_map,
 )
-from ..io.structures import read_protein_atom_coords
 from ..util.paths import ensure_dir
 from .align import seed_align, write_alignment_manifest
 from .build import best_representative
@@ -281,13 +280,8 @@ def build_from_molecules(molecules: list[tuple[str, object]], report: LoadReport
         "consensus_method": "density",
     }
     scaffold_freq = _scaffold_frequencies(molecules) if cfg.density.scaffold_weighting else None
-    ligand_atoms = protein_atoms = None
-    if cfg.density.excluded_volume and reference_pdb and reference_pdb.exists():
-        ligand_atoms = _ligand_atom_coords(molecules)
-        protein_atoms = read_protein_atom_coords(reference_pdb)
     result = build_density(table, cfg.density, cfg.tolerance, name, metadata,
                            min_support=cfg.selection.min_support_fraction,
-                           ligand_atoms=ligand_atoms, protein_atoms=protein_atoms,
                            scaffold_freq=scaffold_freq)
 
     rep_id = best_representative(table, result.pharmacophore)
@@ -408,8 +402,20 @@ def _aligned_ligand_atoms(seed_mols, transforms, conf_mols) -> np.ndarray:
 
 
 def _read_seed_sdf(path: Path) -> list[tuple[str, object]]:
-    """Read an arbitrary 3D-coordinate seed SDF (crystal ligand or docked poses) -> (id, mol)."""
+    """Read an arbitrary 3D-coordinate seed (crystal ligand or docked poses) -> [(id, mol)].
+
+    Accepts ``.sdf`` (multi-record) or ``.mol2`` (single molecule). The seed's coordinates are
+    kept verbatim, so a ligand given in a protein's coordinate frame yields a pharmacophore
+    positioned in that binding site. A ``.mol2`` is read directly (sanitized); a heavy-atom-only
+    mol2 with no bond orders may perceive features poorly — prefer an SDF (or a bond-order-correct
+    mol2) for the seed.
+    """
     from rdkit import Chem
+
+    if path.suffix.lower() == ".mol2":
+        mol = Chem.MolFromMol2File(str(path), removeHs=True, sanitize=True)
+        return [(mol.GetProp("_Name") if mol.HasProp("_Name") and mol.GetProp("_Name")
+                 else "seed0", mol)] if mol is not None else []
     out = []
     for i, mol in enumerate(Chem.SDMolSupplier(str(path), removeHs=True)):
         if mol is None:
@@ -472,11 +478,13 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
     reference by feature-clique matching with EM refinement (``align.seed_align``). The frame is
     initialised one of three ways:
 
-    * **docked** (default): the top-``seed_k`` docked poses in ``docked_dir`` (those compounds are
-      the seed and excluded from the aligned set, as before);
-    * **seed_poses**: an arbitrary 3D-coordinate SDF (a crystal ligand or docked poses) — a frame
-      only; every ranked compound is aligned;
-    * **seedless**: the top-ranked compound's lowest-energy conformer.
+    * **seedless** (default): the top-ranked compound's lowest-energy conformer seeds the frame and
+      stays as a member of the consensus;
+    * **seed_poses** (``--seed``): an external 3D-coordinate seed (a holo co-crystal ligand, .sdf or
+      .mol2) is used as a **bootstrap scaffold** — it anchors the frame through the growing pass
+      then is dropped before EM (``bootstrap_seed``), so the model reflects the aligned compounds
+      alone but inherits the seed's (binding-site) coordinate frame;
+    * **docked**: the top-``seed_k`` docked poses in ``docked_dir`` seed the frame and are members.
 
     Writes the aligned compound set (``aligned_compounds.sdf``) always. With ``align_only`` it stops
     there (+ points CSV + manifest, no KDE); otherwise the density KDE runs and the full model
@@ -555,7 +563,8 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
                      membership_radius=cfg.density.membership_radius,
                      max_align_rmsd=acfg.max_align_rmsd, max_clique_nodes=acfg.max_clique_nodes,
                      em_iterations=acfg.em_iterations, em_tol=acfg.em_tol,
-                     use_directions=acfg.use_directions, projected_length=acfg.projected_length)
+                     use_directions=acfg.use_directions, projected_length=acfg.projected_length,
+                     bootstrap_seed=(seed_poses is not None))
     aligned_ids = sorted({lig for *_, lig in res.points})
     n_aligned = sum(1 for r in res.manifest if r.source == "aligned" and r.aligned)
     n_dropped = sum(1 for r in res.manifest if r.source == "aligned" and not r.aligned)
@@ -596,13 +605,8 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
         "selection": asdict(cfg.selection), "tolerance": asdict(cfg.tolerance),
         "created": date.today().isoformat(), "consensus_method": "density",
     }
-    ligand_atoms = protein_atoms = None
-    if cfg.density.excluded_volume and reference_pdb and reference_pdb.exists():
-        ligand_atoms = _aligned_ligand_atoms(seed_mols, res.transforms, conf_mols)
-        protein_atoms = read_protein_atom_coords(reference_pdb)
     result = build_density(table, cfg.density, cfg.tolerance, name, metadata,
-                           min_support=cfg.selection.min_support_fraction,
-                           ligand_atoms=ligand_atoms, protein_atoms=protein_atoms)
+                           min_support=cfg.selection.min_support_fraction)
     if acfg.use_directions:
         _set_feature_directions(result.pharmacophore, res.points,
                                 cfg.density.membership_radius)

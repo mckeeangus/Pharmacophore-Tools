@@ -1,4 +1,0 @@
-family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz
-Acceptor,Acceptor 1,2.601,-2.1809,-1.6992,3.0,39,39,1.0,,,
-PosIonizable,PosIonizable 1,-1.0001,0.1985,0.9268,3.0,39,39,1.0,,,
-Aromatic,Aromatic 1,2.3207,-0.8593,-1.1302,3.0,39,39,1.0,,,

@@ -1,8 +1,0 @@
-pdb_id,resolution,method,mapping,uniprot_accessions,kept_ligands,excluded_ligands
-5F19,2.04,X-ray,primary,P35354,AKR;COH,BOG;EDO;NAG
-5F1A,2.38,X-ray,primary,P35354,AKR;COH;SAL,BOG;EDO;NAG
-5IKQ,2.41,X-ray,primary,P35354,AKR;COH;JMS,BOG;NAG
-5IKR,2.342,X-ray,primary,P35354,COH;ID8,BOG;NAG;NH4
-5IKT,2.451,X-ray,primary,P35354,COH;TLF,NAG;PO4
-5IKV,2.508,X-ray,primary,P35354,COH;FLF,BOG;NAG;NH4
-5KIR,2.697,X-ray,primary,P35354,COH;RCX,GOL;NAG;NH4;PO4

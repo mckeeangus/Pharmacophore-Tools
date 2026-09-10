@@ -15,12 +15,8 @@ build-pharmacophore = "python scripts/build_pharmacophore.py"
 # 3. Visualise a pharmacophore CSV (drives PyMOL in the viz env under the hood).
 visualise-pharmacophore = "python scripts/visualise_pharmacophore.py"
 
-# Batch build of the catalogue known-actives cells (kept for the retained crystal data).
-build-pharmacophores = "python scripts/build_pharmacophores.py"
 test = { cmd = "pytest -q", depends-on = [] }
 lint = "ruff check ."
-# The former research pipeline (scrape/align-sites/group/resolve/screening-eval) is archived
-# under archive/scripts/; run it directly, e.g. `pixi run python archive/scripts/group_effects.py`.
 
 # Python is pinned per-feature (not globally) so the legacy `prep` env can use 3.10
 # for pkasolver's 2021-era stack while everything else stays on 3.12.

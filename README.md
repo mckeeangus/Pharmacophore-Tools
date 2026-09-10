@@ -36,6 +36,23 @@ isolated `pkasolver` stack for pH-7.4 protonation). Environments: `default` (cor
 
 ---
 
+## Quick start
+
+A small nAChR example ships in [`examples/`](examples/README.md). Run the full chain:
+
+```bash
+pixi run align-molecules         --input examples/nachr_hits.csv --out out/align
+pixi run build-pharmacophore     --input out/align/aligned_compounds.sdf --out out/model
+pixi run visualise-pharmacophore --pharmacophore out/model/pharmacophore.csv --out out/viz \
+    --compounds out/align/aligned_compounds.sdf --features out/model/features.csv
+```
+
+`out/model/pharmacophore.csv` is the classic nicotinic 3-point model (cation + aromatic +
+acceptor). (The example is deliberately small, so expect a "provisional model" warning — see
+[`examples/README.md`](examples/README.md).)
+
+---
+
 ## The three tools
 
 ### 1. `align-molecules` — align molecules by pharmacophoric features
@@ -59,7 +76,7 @@ Writes `aligned_compounds.sdf` (feed to tool 2), `aligned_points.csv`, `alignmen
 | Option | Effect |
 |---|---|
 | `--top-n N` | Align the top *N* molecules (by score for a CSV; **default 50** — the depth that best matched the known-actives models; ≥100 dilutes). |
-| `--seed frame.sdf` | Advanced: use an explicit 3-D frame (crystal ligand / docked poses) instead of the seedless start. Generally less effective — a bad pose can bias the consensus. |
+| `--seed ligand.sdf\|.mol2` | Optional holo co-crystal ligand. It **bootstraps** the frame (anchors the growing pass, then is dropped before EM so the model reflects the aligned molecules alone). If given in a protein's coordinates the output pharmacophore is positioned in that binding site. Default: seedless. |
 | `--config PATH` | Override `config/pharmacophore.yaml` (the `alignment:` block). |
 
 ### 2. `build-pharmacophore` — build a pharmacophore from aligned molecules
@@ -132,57 +149,33 @@ pixi run visualise-pharmacophore --pharmacophore out/model/pharmacophore.csv --o
 
 ---
 
-## Reconstructed findings
-
-`results/` holds the tools run end-to-end over the DrugCLIP→GNINA hit sets of the 11 targets
-that have a crystal known-actives ground truth. Each `results/<target>/` carries that target's
-tool outputs (aligned molecules, `pharmacophore.csv`, summary, plots, PyMOL session), and
-[`results/RECONSTRUCTION.md`](results/RECONSTRUCTION.md) scores every model against its crystal
-and literature references (feature-family recall + frame-independent internal geometry). Headline:
-the ligand-based align→build pipeline reproduces the experimentally- and literature-derived
-pharmacophores at the family level across all 11 targets, and geometrically for the pose-invariant
-features. Regenerate with `pixi run python scripts/reconstruct_findings.py`.
-
----
-
 ## Repository layout
 
 ```
-scripts/           the three tools + build_pharmacophores.py (catalogue batch) + protonate_ligands.py
-src/pharmpipe/      features/ (perception) · pharmacophore/ (alignment, KDE, model, io, viz) · io/ · prep/ · util/
-config/             pharmacophore.yaml (the tools' knobs) + curated scientific config
-docs/               the two methodology docs + method_animation/ (an animated walkthrough)
-results/            reconstructed findings (tool outputs per target + RECONSTRUCTION.md)
-catalogue/          the curated crystal known-actives set + its pharmacophore models (tracked)
-archive/            the former research pipeline + screening evaluation (see below)
+scripts/       align_molecules.py · build_pharmacophore.py · visualise_pharmacophore.py
+               · pymol_pharmacophore.py (viz backend) · protonate_ligands.py (prep env)
+src/pharmpipe/ features/ (perception + loaders) · pharmacophore/ (alignment, KDE, model,
+               io, viz, run) · prep/ (pH-7.4 protonation) · util/
+config/        pharmacophore.yaml (the tools' knobs) · protonation.yaml (weak-acid guard)
+docs/          molecule_alignment.md · pharmacophore_construction.md · method_animation/
+examples/      a small runnable nAChR example (see examples/README.md)
+tests/         offline unit tests
 ```
 
-### The archived research pipeline
+Scientific choices live in `config/`, never in code. The tools are **offline** and **purely
+ligand-based** (no receptor, no excluded volume).
 
-The known-actives assembly pipeline (PDB scrape → site alignment → effect grouping) and the
-DrugCLIP screening evaluation are **archived** under `archive/` — kept accessible and runnable,
-out of the main path. The scripts run directly, e.g.:
+## Research pipeline & derived results
 
-```bash
-pixi run python archive/scripts/group_effects.py --config config/targets.yaml
-pixi run python archive/scripts/seed_necessity_all.py --report-only
-```
+This repo is just the tools. The crystal known-actives research pipeline (PDB scrape → site
+alignment → effect grouping), the curated `catalogue/`, and the **results derived with these
+tools** (the DrugCLIP reconstruction + screening evaluation) live in a **separate repository**.
+Across the 11 targets with a crystal ground truth, the ligand-based align→build pipeline reproduced
+the experimentally- and literature-derived pharmacophores at the family level, and geometrically
+for the pose-invariant features (the directional acceptor is the one soft spot). The remaining
+ceiling is receptor-mediated (metal/water/steric), which is out of scope for a ligand-only tool.
 
-Their library modules remain under `src/pharmpipe/{pdb,sites,groups,catalogue,screening}` (inert
-to the three tools). `CLAUDE.md` documents the full research history and the target catalogue.
+## Data note
 
----
-
-## Outputs & data
-
-- `results/`, `catalogue/`, `docs/` (**tracked**) — the tool outputs, crystal catalogue, and docs.
-- `data/` (**gitignored**, large) — cached structures, organised docked screening sets, scratch.
-- The DrugCLIP source compound library (`molecule_library/`, ~48 GB) is gitignored; see
-  [`docs/molecule_library.md`](docs/molecule_library.md).
-
-## HPC / Gadi notes
-
-- Compute nodes have no internet — run any networked step (the archived scrape/align/efficacy
-  stages, docking) on a login/data-mover node. The three tools are offline.
-- Keep `.pixi/` and `PIXI_CACHE_DIR` off the 10 GiB `/home`; use `/scratch/<project>/<user>`
-  for repo+env and `/g/data` for reference data (and the compound library).
+`data/`, `.pixi/`, and any bulk inputs are gitignored. The tools read only what you pass on the
+command line; nothing large is tracked here.

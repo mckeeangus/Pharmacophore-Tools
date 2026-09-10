@@ -1,9 +1,0 @@
-het_code,name,category,flagged,n_structures,n_instances,representative_pdb,formula_weight,smiles
-COH,PROTOPORPHYRIN IX CONTAINING CO,cofactor,False,7,14,5F19,619.575,Cc1c2n3c(c1CCC(=O)O)C=C4C(=C(C5=[N]4[Co]36[N]7=C(C=C8N6C(=C5)C(=C8C=C)C)C(=C(C7=C2)C=C)C)C)CCC(=O)O
-AKR,ACRYLIC ACID,ligand,False,3,10,5F19,72.063,C=CC(=O)O
-FLF,2-[[3-(TRIFLUOROMETHYL)PHENYL]AMINO] BENZOIC ACID,ligand,False,1,2,5IKV,281.23,c1ccc(c(c1)C(=O)O)Nc2cccc(c2)C(F)(F)F
-ID8,"2-[(2,3-DIMETHYLPHENYL)AMINO]BENZOIC ACID",ligand,False,1,2,5IKR,241.285,Cc1cccc(c1C)Nc2ccccc2C(=O)O
-JMS,"2-[(2,6-dichloro-3-methyl-phenyl)amino]benzoic acid",ligand,False,1,2,5IKQ,296.149,Cc1ccc(c(c1Cl)Nc2ccccc2C(=O)O)Cl
-RCX,Rofecoxib,ligand,False,1,2,5KIR,314.356,CS(=O)(=O)c1ccc(cc1)C2=C(C(=O)OC2)c3ccccc3
-SAL,2-HYDROXYBENZOIC ACID,ligand,False,1,2,5F1A,138.121,c1ccc(c(c1)C(=O)O)O
-TLF,2-[(3-chloro-2-methylphenyl)amino]benzoic acid,ligand,False,1,2,5IKT,261.704,Cc1c(cccc1Cl)Nc2ccccc2C(=O)O

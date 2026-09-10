@@ -255,14 +255,16 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
                *, dist_tol: float, min_clique: int, membership_radius: float,
                max_align_rmsd: float | None = None, max_clique_nodes: int = 40,
                em_iterations: int = 0, em_tol: float = 0.1,
-               use_directions: bool = False, projected_length: float = 1.5) -> SeedAlignResult:
+               use_directions: bool = False, projected_length: float = 1.5,
+               bootstrap_seed: bool = False) -> SeedAlignResult:
     """Align each ranked compound onto a consensus initialised from ``seed_points``.
 
     ``seed_points`` are the initial frame's ``(family, xyz, direction, ligand_id)`` — docked poses,
     a crystal ligand, or (seedless) the top compound's lowest-energy conformer. ``compounds`` is
     ``(ligand_id, [conformer_cloud, ...])`` for every ranked ligand to align. Returns the pooled
     aligned feature cloud (with rotated directions), the per-ligand transforms, a manifest, and the
-    EM convergence trace.
+    EM convergence trace. The consensus is built **in the seed's coordinate frame**, so a seed given
+    in a protein's coordinates yields a pharmacophore aligned to that binding site.
 
     A **growing pass** aligns compounds in rank order, updating the reference slots by running mean
     (as the consensus accretes). Then an **EM refinement** (up to ``em_iterations``) re-aligns
@@ -270,6 +272,15 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
     recomputes each slot's centre and mean direction, until the largest slot shift falls below
     ``em_tol``. When ``use_directions``, H-bond orientation is fit via projected points (see
     ``align_features``). A compound whose best clique RMSD exceeds ``max_align_rmsd`` is dropped.
+
+    ``bootstrap_seed``: when True the seed is a **scaffold, not a member** — it anchors the
+    reference through the whole growing pass (so every compound aligns to the seed's bioactive
+    frame), but it is excluded from the pooled consensus and dropped before the EM refinement, so
+    the final model reflects the ranked compounds alone (re-settled by EM). The coordinate frame is
+    still the seed's, so a seed in a protein's coordinates yields a binding-site-aligned model. This
+    is what an external ``--seed`` (a holo co-crystal ligand) uses — it performed best in testing.
+    ``False`` (default) keeps the seed in the reference and consensus (the seedless top compound and
+    docked seeds are themselves ranked members).
     """
     ba = dict(dist_tol=dist_tol, min_clique=min_clique, max_clique_nodes=max_clique_nodes,
               max_align_rmsd=max_align_rmsd, use_directions=use_directions,
@@ -284,7 +295,8 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
 
     # --- growing pass: rank order, running-mean update -----------------------------
     result = SeedAlignResult()
-    result.points = list(seed_points)
+    # A bootstrap seed anchors the reference (below) but is kept out of the pooled consensus.
+    result.points = [] if bootstrap_seed else list(seed_points)
     accum: list[list[tuple]] = [list(s) for s in seed_by_slot]
     for lig in sorted({lid for _, _, _, lid in seed_points}):
         result.manifest.append(AlignRecord(lig, "seed", 0, -1, 0, float("nan"), True))
@@ -310,9 +322,10 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
     # --- EM refinement: re-align all to the consensus, recompute slots -------------
     for it in range(1, em_iterations + 1):
         prev = [c.copy() for _, c, _ in ref]
-        pooled: list[tuple] = list(seed_points)
+        # A bootstrap seed is gone by EM: re-align every compound to the seed-free consensus.
+        pooled: list[tuple] = [] if bootstrap_seed else list(seed_points)
         transforms: dict[str, tuple[np.ndarray, np.ndarray, int]] = {}
-        slot_pts: list[list[tuple]] = [list(s) for s in seed_by_slot]
+        slot_pts: list[list[tuple]] = [[] if bootstrap_seed else list(s) for s in seed_by_slot]
         manifest: list[AlignRecord] = [m for m in result.manifest if m.source == "seed"]
         for lig, conformers in compounds:
             best = _best_alignment(conformers, ref, **ba)

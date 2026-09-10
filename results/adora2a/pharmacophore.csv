@@ -1,5 +1,0 @@
-family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz
-Acceptor,Acceptor 1,5.4353,0.3145,-0.8798,3.0,41,41,0.82,,,
-Aromatic,Aromatic 1,2.4582,-0.7074,-0.4181,3.0,40,38,0.76,,,
-Acceptor,Acceptor 2,0.494,-0.678,0.1365,3.0,33,27,0.54,,,
-Donor,Donor 1,2.49,-2.519,-0.1332,3.0,30,30,0.6,,,

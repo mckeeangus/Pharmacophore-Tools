@@ -56,15 +56,17 @@ def test_protonate_rows_roundtrip_and_reuse(tmp_path, monkeypatch):
     assert calls == []
 
 
-# --- build_pharmacophores --input guards ------------------------------------------------
+# --- build_pharmacophore --input/--out guards -------------------------------------------
 
-def test_input_requires_smiles(tmp_path):
-    mod = _load("build_pharmacophores")
+def test_build_requires_out(tmp_path):
+    mod = _load("build_pharmacophore")
     with pytest.raises(SystemExit):
-        mod.main(["--input", str(tmp_path), "--out", str(tmp_path / "o")])
+        mod.main(["--input", str(tmp_path)])
 
 
-def test_input_requires_out(tmp_path):
-    mod = _load("build_pharmacophores")
+def test_build_rejects_unknown_input(tmp_path):
+    mod = _load("build_pharmacophore")
+    bad = tmp_path / "x.txt"
+    bad.write_text("")
     with pytest.raises(SystemExit):
-        mod.main(["--input", str(tmp_path), "--smiles", str(tmp_path / "s.csv")])
+        mod.main(["--input", str(bad), "--out", str(tmp_path / "o")])

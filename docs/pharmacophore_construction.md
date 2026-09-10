@@ -12,8 +12,8 @@ that `visualise-pharmacophore` consumes.
 
 - **An SDF of aligned molecules** (the common case — the output of `align-molecules`). Bonds and
   coordinates are intact, so features are perceived directly.
-- **A directory of aligned `*.mol2`** (the crystal known-actives case). These are heavy-atom-only,
-  so `--smiles het_code,smiles.csv` supplies bond orders (via RDKit
+- **A directory of aligned `*.mol2`** (e.g. experimental/crystal poses). These are often
+  heavy-atom-only, so `--smiles het_code,smiles.csv` supplies bond orders (via RDKit
   `AssignBondOrdersFromTemplate`) and the pH-7.4 protonation is applied through the `prep` env.
 
 ## Method
@@ -30,7 +30,8 @@ Feature perception must see the real ionisation. The tool's **only** protonation
   neutral SMILES), and the bond-order template (`AssignBondOrdersFromTemplate`) carries the
   formal charges onto the heavy-atom pose. If the CSV is absent the build falls back to neutral
   SMILES and warns.
-- **SDF input (from `align-molecules`, or any DrugCLIP-derived SDF)** — **trusted as-is.** These
+- **SDF input (from `align-molecules`, or any SDF whose 3D structures carry protonation)** —
+  **trusted as-is.** These
   poses already carry a protonation state, so **no pKa prediction is run on them** — pkasolver is
   never invoked on SDF input.
 
@@ -99,9 +100,8 @@ threshold is a guidance knob, not a hard gate (the user decides whether the mode
 
 Excluded-volume spheres mark receptor atoms lining the pocket that no ligand reaches — they can
 **only** come from a protein structure. These tools are purely ligand-based, so the model and the
-`pharmacophore.csv` contain **feature rows only**. (Retained crystal known-actives models in
-`catalogue/` were built by the earlier research pipeline *with* excluded volume, so their stored
-JSON still carries `ExcludedVolume` rows — historical, not produced by this tool.)
+`pharmacophore.csv` contain **feature rows only**. (A model produced by a receptor-aware pipeline
+may carry `ExcludedVolume` rows; this tool never reads or writes them.)
 
 ## Outputs (in `--out`)
 
@@ -127,6 +127,6 @@ scientific choices; none in code. The build is **deterministic** (fixed grid, no
 ---
 
 *Provenance:* the full research write-up (protonation study, feature-hierarchy rationale,
-density-field derivation, support-sweep design) is the combined historical note
-`catalogue/pharmacophore_method.md`; the reconstructed cross-target evaluation is
-`results/RECONSTRUCTION.md`.
+density-field derivation, support-sweep design) and the cross-target evaluation live in the
+companion repository,
+[Crystal_Pharmacophores](https://github.com/mckeeangus/Crystal_Pharmacophores).

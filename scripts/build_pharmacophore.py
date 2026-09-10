@@ -11,8 +11,8 @@ features. Purely ligand-based — no receptor, no excluded volume.
 it is applied *only* to a heavy-atom ``*.mol2`` directory: the pH-7.4 states in
 ``protonated_ligands.csv`` (written by ``pixi run -e prep protonate-ligands``, found beside
 ``--smiles``) are overlaid onto the neutral SMILES so donor/acceptor/ionizable perception sees the
-real ionisation. **SDF input is trusted as-is** — an ``aligned_compounds.sdf`` (or any DrugCLIP-
-derived SDF) already carries its protonation, so no pKa prediction is run on it.
+real ionisation. **SDF input is trusted as-is** — an ``aligned_compounds.sdf`` (or any SDF whose
+3D structures already carry their protonation) needs no pKa prediction, so none is run on it.
 
     pixi run build-pharmacophore --input aligned_compounds.sdf|mol2_dir --out DIR [--smiles het.csv]
 

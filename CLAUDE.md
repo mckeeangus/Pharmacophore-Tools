@@ -9,10 +9,11 @@ They chain **align → build → visualise** but each stands alone. The repo is 
 **purely ligand-based** (no receptor, no excluded volume). Everything runs through **pixi**;
 scientific choices live in `config/`, never in code.
 
-> The crystal known-actives research pipeline (PDB scrape → site-align → group), the curated
-> catalogue, and the **results derived with these tools** (DrugCLIP reconstruction + screening
-> evaluation) live in a **separate repository** — this repo was split out to hold just the tools.
-> Do not re-add that research code here.
+> This repo is deliberately standalone and general-purpose. The research project it came from (the
+> crystal known-actives pipeline + the validation runs) lives in a **separate companion repo,
+> [Crystal_Pharmacophores](https://github.com/mckeeangus/Crystal_Pharmacophores)**. Keep the tools
+> general — don't re-add that research code, and don't frame the tools as specific to DrugCLIP or
+> any one dataset (DrugCLIP is just one example of a ranked-CSV input).
 
 ## The three tools
 
@@ -20,9 +21,9 @@ scientific choices live in `config/`, never in code.
    pharmacophoric features: conformer ensembles (ETKDG+MMFF, energy-windowed) → feature-clique
    matching on **relative intra-molecular distances** (correspondence graph → Bron–Kerbosch →
    Kabsch) → EM refinement (re-selects each compound's best conformer) → orientation-aware H-bond
-   matching. **Seedless by default.** Input a DrugCLIP output CSV (`mol_id,…,smiles,…,
-   drugclip_score`) or a multi-molecule SDF; output `aligned_compounds.sdf` (+ points CSV +
-   manifest). Method: `docs/molecule_alignment.md`.
+   matching. **Seedless by default.** Input a ranked CSV (`mol_id,smiles[,score]` — e.g. a
+   virtual-screening output) or a multi-molecule SDF; output `aligned_compounds.sdf` (+ points CSV
+   + manifest). Method: `docs/molecule_alignment.md`.
 2. **`build-pharmacophore`** (`scripts/build_pharmacophore.py`) — molecule-weighted Gaussian-KDE
    consensus from aligned molecules (the SDF from tool 1, or a directory of aligned crystal
    `*.mol2`): occupancy field → peaks → support-filtered features. Output **`pharmacophore.csv`**
@@ -38,7 +39,8 @@ feature — `family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz` (fea
 
 ## Key behaviours & optimised defaults (in `config/pharmacophore.yaml`)
 
-- **`--top-n` = 50** — the depth that best matched the known-actives models; ≥100 dilutes.
+- **`--top-n` = 50** — the depth that benchmarked best; ≥100 tends to dilute. (Ranked by the CSV's
+  score column; with none, input order is the rank.)
 - **`alignment.min_clique` = 3** — a compound is folded in only if ≥3 of its features match the
   reference (same family + mutually distance-consistent) within `max_align_rmsd` (1.5 Å). This is
   the geometric minimum for a determined rigid 3-D superposition, not a tunable heuristic — see the
@@ -60,7 +62,7 @@ feature — `family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz` (fea
 
 ## Protonation (pH 7.4)
 
-- **SDF input is trusted as-is** — DrugCLIP-derived SDFs carry their protonation; no pKa
+- **SDF input is trusted as-is** — an SDF's 3D structures carry their protonation; no pKa
   prediction is run on them.
 - **Crystal `*.mol2` input**: `build-pharmacophore` auto-uses a `protonated_ligands.csv` (pkasolver
   + weak-acid guard, from `pixi run -e prep protonate-ligands`) found beside `--smiles`; else falls
@@ -71,7 +73,7 @@ feature — `family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz` (fea
 
 - `src/pharmpipe/features/` — `extract.py` (pure feature perception → `FeaturePoint`/`FeatureTable`,
   with the co-atom feature hierarchy), `load.py` (mol2/SMILES loading, protonation map),
-  `conformers.py` (ensembles), `dock_load.py` (DrugCLIP index + docked SDF readers).
+  `conformers.py` (ensembles), `dock_load.py` (ranked-index + docked-SDF readers).
 - `src/pharmpipe/pharmacophore/` — `align.py` (clique alignment + `seed_align`), `density.py` (KDE
   consensus), `build.py` (shared primitives: tolerance, merge, representative pick), `model.py`
   (`Pharmacophore` schema), `io.py` (JSON/CSV/PML/SDF), `viz.py` (matplotlib), `run.py`

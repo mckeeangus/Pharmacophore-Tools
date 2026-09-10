@@ -2,11 +2,12 @@
 """Tool 1 — **molecule alignment**.
 
 Align a set of molecules to each other by their pharmacophoric features (no protein needed) and
-write the aligned molecules out. Input is either a **DrugCLIP output CSV** (a rank index with
-``mol_id,…,smiles,…,drugclip_score`` columns) or a **multi-molecule SDF**; the tool embeds a
-conformer ensemble per molecule and iteratively superposes them on their shared features
-(feature-clique matching on relative intramolecular distances → EM refinement → directional
-matching), seedless by default.
+write the aligned molecules out. Input is either a **ranked CSV** (columns ``mol_id``, ``smiles``,
+and optionally a score column such as ``drugclip_score`` — e.g. a virtual-screening output; with no
+score column, input order is the rank) or a **multi-molecule SDF**; the tool embeds a conformer
+ensemble per molecule and iteratively superposes them on their shared features (feature-clique
+matching on relative intramolecular distances → EM refinement → directional matching), seedless by
+default.
 
     pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 50] [--seed frame.sdf]
 
@@ -43,7 +44,7 @@ INDEX_COLUMNS = ["entity_id", "mol_id", "library_name", "smiles", "drugclip_scor
 
 def _index_from_sdf(sdf: Path, dest_dir: Path) -> Path:
     """Derive a rank-index CSV (mol_id,smiles) from a multi-molecule SDF, so the SDF path reuses
-    the same alignment core as a DrugCLIP CSV. Molecule order = rank; id = title or ``mol<i>``."""
+    the same alignment core as a ranked CSV. Molecule order = rank; id = title or ``mol<i>``."""
     index = dest_dir / "index_input.csv"
     with index.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
@@ -63,7 +64,7 @@ def _resolve_input(inp: Path, tmp: Path) -> tuple[Path, Path]:
     if inp.suffix.lower() in (".sdf", ".mol"):
         index = _index_from_sdf(inp, tmp)
         return tmp, index
-    # a DrugCLIP CSV: the file itself is the index; its directory may hold docked SDFs (for --seed)
+    # a ranked CSV: the file itself is the index; its directory may hold docked SDFs (for --seed)
     return inp.parent, inp
 
 
@@ -72,11 +73,11 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--input", type=Path, required=True,
-                    help="a DrugCLIP output CSV or a multi-molecule SDF")
+                    help="a ranked CSV (mol_id,smiles[,score]) or a multi-molecule SDF")
     ap.add_argument("--out", type=Path, required=True, help="output directory")
     ap.add_argument("--top-n", dest="top_n", type=int, default=50,
-                    help="align the top-N molecules (by score for a CSV; default 50 — the depth "
-                         "that best matched the known-actives models; >=100 dilutes)")
+                    help="align the top-N molecules (by the CSV score column; none -> input order; "
+                         "default 50 — the depth that benchmarked best; >=100 tends to dilute)")
     ap.add_argument("--seed", type=Path, default=None,
                     help="optional 3D seed (a holo co-crystal ligand; .sdf or .mol2). It anchors "
                          "the alignment frame through the growing pass, then is dropped before the "

@@ -1,12 +1,13 @@
 # Pharmacophore tools
 
-Three command-line tools for building and inspecting **ligand-based pharmacophore models**,
-generalised across diverse protein classes (work targeting a JCIM publication). They chain
+Three command-line tools for building and inspecting **ligand-based pharmacophore models** from a
+set of molecules believed to bind a common target — no receptor structure required. They chain
 together — **align → build → visualise** — but each stands alone:
 
 1. **Molecule alignment** (`align-molecules`) — superpose a set of molecules on their shared
-   pharmacophoric features, with no protein and no pre-existing common frame. Input a DrugCLIP
-   output CSV or a multi-molecule SDF; output the aligned molecules.
+   pharmacophoric features, with no protein and no pre-existing common frame. Input a CSV of
+   molecules (id, SMILES, optional ranking score — e.g. a virtual-screening output) or a
+   multi-molecule SDF; output the aligned molecules.
 2. **Pharmacophore construction** (`build-pharmacophore`) — build a Gaussian-KDE consensus
    pharmacophore from a set of aligned molecules (the output of tool 1, or aligned crystal
    poses). Output a `pharmacophore.csv` model.
@@ -64,7 +65,7 @@ matching. Protein-free and **seedless by default**. Method:
 [`docs/molecule_alignment.md`](docs/molecule_alignment.md).
 
 ```bash
-# From a DrugCLIP output CSV (mol_id,…,smiles,…,drugclip_score) — align the top 50 by score:
+# From a ranked CSV (columns: mol_id, smiles, and optionally drugclip_score) — top 50 by score:
 pixi run align-molecules --input hits.csv --out out/aligned
 
 # From a multi-molecule SDF instead:
@@ -75,7 +76,7 @@ Writes `aligned_compounds.sdf` (feed to tool 2), `aligned_points.csv`, `alignmen
 
 | Option | Effect |
 |---|---|
-| `--top-n N` | Align the top *N* molecules (by score for a CSV; **default 50** — the depth that best matched the known-actives models; ≥100 dilutes). |
+| `--top-n N` | Align the top *N* molecules (by the CSV's score column; without one, input order is the rank). **Default 50** — the depth that benchmarked best; ≥100 tends to dilute the consensus. |
 | `--seed ligand.sdf\|.mol2` | Optional holo co-crystal ligand. It **bootstraps** the frame (anchors the growing pass, then is dropped before EM so the model reflects the aligned molecules alone). If given in a protein's coordinates the output pharmacophore is positioned in that binding site. Default: seedless. |
 | `--config PATH` | Override `config/pharmacophore.yaml` (the `alignment:` block). |
 
@@ -119,8 +120,8 @@ pixi run -e prep protonate-ligands            # -> <slug>/protonated_ligands.csv
 
 `build-pharmacophore` then **auto-detects and uses** that file so donor/acceptor/±ionizable
 perception sees the real ionisation. If it is absent, the build falls back to the neutral
-`--smiles` and warns. SDF input (from `align-molecules`, or any DrugCLIP-derived SDF) already
-carries its protonation and is trusted as-is — pkasolver is never run on it. pkasolver lives in
+`--smiles` and warns. SDF input (from `align-molecules`, or any SDF whose 3D structures already
+carry their protonation) is trusted as-is — pkasolver is never run on it. pkasolver lives in
 the isolated `prep` env (a pinned 2021-era stack), so it stays out of the way unless you invoke it.
 
 ### 3. `visualise-pharmacophore` — render a pharmacophore CSV
@@ -165,16 +166,16 @@ tests/         offline unit tests
 Scientific choices live in `config/`, never in code. The tools are **offline** and **purely
 ligand-based** (no receptor, no excluded volume).
 
-## Research pipeline & derived results
+## Provenance & validation
 
-This repo is just the tools. The crystal known-actives research pipeline (PDB scrape → site
-alignment → effect grouping), the curated `catalogue/`, and the **results derived with these
-tools** (the DrugCLIP reconstruction + screening evaluation) live in a separate repository:
-**[Crystal_Pharmacophores](https://github.com/mckeeangus/Crystal_Pharmacophores)**.
-Across the 11 targets with a crystal ground truth, the ligand-based align→build pipeline reproduced
-the experimentally- and literature-derived pharmacophores at the family level, and geometrically
-for the pose-invariant features (the directional acceptor is the one soft spot). The remaining
-ceiling is receptor-mediated (metal/water/steric), which is out of scope for a ligand-only tool.
+These tools were developed and benchmarked in a pharmacophore study: across 11 targets with a
+crystal-structure ground truth, the align→build pipeline reproduced the experimentally- and
+literature-derived pharmacophores at the family level, and geometrically for the pose-invariant
+features (the directional H-bond acceptor is the one soft spot; the remaining ceiling is
+receptor-mediated — metal/water/steric — and out of scope for a ligand-only method). That study —
+the crystal-dataset assembly and the validation runs — lives in a companion repository,
+**[Crystal_Pharmacophores](https://github.com/mckeeangus/Crystal_Pharmacophores)**, and is **not
+needed to use these tools**.
 
 ## Data note
 

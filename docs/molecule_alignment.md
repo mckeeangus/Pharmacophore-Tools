@@ -1,6 +1,6 @@
 # Molecule alignment — method
 
-**Tool:** `pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 100] [--seed frame.sdf]`
+**Tool:** `pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 50] [--seed ligand.sdf]`
 
 Align a set of molecules to each other **by their shared pharmacophoric features**, with no
 protein and no pre-existing common frame. The output is the set of molecules superposed into
@@ -9,15 +9,16 @@ one frame plus their pooled feature points — ready for `build-pharmacophore`.
 The guiding idea: a pharmacophore *is* the set of **relative distances between features within
 each molecule**. A docked or crystal conformation only supplies a *starting frame*; the
 alignment matches on those internal distances, so the result is frame-independent chemistry.
-Across the targets with a known-actives ground truth this recovers the same models the crystal
-poses give (see `results/RECONSTRUCTION.md`).
+In benchmarking against crystal-structure ground truth this recovered the same models the
+experimental poses give.
 
 ## Input
 
 Auto-detected by extension:
 
-- a **DrugCLIP output CSV** — a rank index with `mol_id,…,smiles,…,drugclip_score` columns.
-  The top `--top-n` compounds by score are aligned; a blank score column keeps input order.
+- a **ranked CSV** — columns `mol_id`, `smiles`, and optionally a score column (e.g.
+  `drugclip_score` from a virtual screen). The top `--top-n` by score are aligned; with no score
+  column, input order is the rank.
 - a **multi-molecule SDF** — each record a compound; molecule order is the rank, the title
   (or `mol<i>`) is the id, and the connectivity/SMILES is read from the record.
 
@@ -29,14 +30,14 @@ internally. (`--seed` is the exception: it supplies a 3-D frame; see below.)
 ### 1. Protonation
 
 Each compound is embedded in its dominant physiological (pH-7.4) microstate so that
-donor/acceptor and ±ionizable perception sees the real ionisation. The subtlety is that the
-DrugCLIP index `smiles` column is often **neutral** — embedding it directly gives an uncharged
-amine with no N–H, so a protonatable nitrogen loses its cation *and* its H-bond donor. The correct
-pH-7.4 form is carried by the **docked SDF's `protonated_smiles`** (fixed at docking prep), so the
-conformer SMILES is chosen with precedence **explicit map → docked `protonated_smiles` → neutral
-index SMILES** (the last is the honest fallback when a compound has no docked record). A crystal
-`*.mol2` build instead uses the `prep`-env pkasolver + weak-acid guard
-(`pharmacophore_construction.md` §Protonation).
+donor/acceptor and ±ionizable perception sees the real ionisation. The subtlety is that a plain
+input `smiles` column is often **neutral** — embedding it directly gives an uncharged amine with no
+N–H, so a protonatable nitrogen loses its cation *and* its H-bond donor. The correct pH-7.4 form is
+best carried by the input itself: if a `<mol_id>_docked.sdf` with a `protonated_smiles` tag sits
+beside the CSV (as virtual-screening outputs often provide), it is used. So the conformer SMILES is
+chosen with precedence **explicit map → docked `protonated_smiles` → the CSV SMILES** (the last is
+the honest fallback). A crystal `*.mol2` build instead uses the `prep`-env pkasolver + weak-acid
+guard (`pharmacophore_construction.md` §Protonation).
 
 > **Note — the protonated-amine invertomer is left as a mixture, deliberately.** A protonated
 > tertiary amine in a ring is a locked stereocentre (which face the proton sits on is a genuine
@@ -188,7 +189,7 @@ All in `config/pharmacophore.yaml` under `alignment:` — `dist_tol`, `min_cliqu
 
 ---
 
-*Provenance:* this method was developed and benchmarked on the DrugCLIP→GNINA nAChR set and
-generalised across the 11 ground-truth targets. The full research write-up (seed-necessity,
-directional, geometry-limit studies) is preserved in `archive/` and the combined historical
-method note `catalogue/pharmacophore_method.md`.
+*Provenance:* this method was developed and benchmarked across 11 targets with crystal-structure
+ground truth (seed-necessity, directional, and geometry-limit studies). The full research write-up
+lives in the companion repository,
+[Crystal_Pharmacophores](https://github.com/mckeeangus/Crystal_Pharmacophores).

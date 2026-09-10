@@ -169,7 +169,8 @@ ligand-based** (no receptor, no excluded volume).
 
 This repo is just the tools. The crystal known-actives research pipeline (PDB scrape → site
 alignment → effect grouping), the curated `catalogue/`, and the **results derived with these
-tools** (the DrugCLIP reconstruction + screening evaluation) live in a **separate repository**.
+tools** (the DrugCLIP reconstruction + screening evaluation) live in a separate repository:
+**[Crystal_Pharmacophores](https://github.com/mckeeangus/Crystal_Pharmacophores)**.
 Across the 11 targets with a crystal ground truth, the ligand-based align→build pipeline reproduced
 the experimentally- and literature-derived pharmacophores at the family level, and geometrically
 for the pose-invariant features (the directional acceptor is the one soft spot). The remaining

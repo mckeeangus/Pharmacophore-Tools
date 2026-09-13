@@ -15,7 +15,11 @@ Kept pharmacophore features are drawn as **fixed-radius mesh (wireframe) spheres
 (``PH4_SPHERE_RADIUS``) each with an opaque centre pseudoatom marking its position,
 coloured by family (HBD/donor pink, HBA/acceptor green, hydrophobic cyan, aromatic
 yellow, positive-ionisable red). The feature's true tolerance radius lives in the JSON,
-not the sphere size. **Excluded-Volume markers are receptor steric markers and are NOT
+not the sphere size. Directional features additionally carry an **orientation arrow**
+(grouped ``ph4_directions``) drawn from the feature's ``direction`` vector: a single-headed
+arrow along the signed lone-pair / donor vector for Donor/Acceptor, and a **double-headed**
+arrow along the aromatic ring normal (an undirected axis — either ring face is equivalent).
+**Excluded-Volume markers are receptor steric markers and are NOT
 drawn.** ``--features features.csv`` additionally overlays the raw extracted points
 (small opaque dots). Omit ``--out`` to stay in an interactive PyMOL window; ``--image
 PATH`` additionally writes a ray-traced PNG snapshot.
@@ -63,6 +67,55 @@ _GREY = (0.5, 0.5, 0.5)
 # This is a pure display size (a mesh/wireframe sphere), independent of the tolerance and
 # the 1 A merge cutoff.
 PH4_SPHERE_RADIUS = 1.25
+
+# Orientation arrows for directional features (drawn from the feature centre along its
+# `direction` vector). Donor/Acceptor get a single-headed arrow along the signed lone-pair /
+# donor-approach vector; Aromatic gets a DOUBLE-headed arrow along the ring normal, because that
+# normal is an undirected axis (either ring face is equivalent) — a single head would imply a
+# direction the chemistry does not have.
+ARROW_LEN = 2.2       # display length of a direction arrow (A) from the centre
+ARROW_SHAFT_R = 0.10  # shaft radius
+ARROW_HEAD_R = 0.30   # arrowhead base radius
+ARROW_HEAD_FRAC = 0.40  # fraction of the length taken by the head
+
+
+def _unit(v):
+    n = math.sqrt(sum(c * c for c in v))
+    return [c / n for c in v] if n > 1e-6 else None
+
+
+def _arrow_cgo(base, direction, rgb):
+    """CGO list for one single-headed arrow: a shaft cylinder + a cone head, from ``base`` along
+    the unit ``direction`` for ``ARROW_LEN`` A. Colour ``rgb`` (0-1 triple). Every element is a
+    float — PyMOL's CGO parser silently rejects a buffer containing ints."""
+    from pymol.cgo import CONE, CYLINDER
+    r, g, b = (float(c) for c in rgb)
+    base = [float(c) for c in base]
+    tip = [base[k] + ARROW_LEN * float(direction[k]) for k in range(3)]
+    neck = [base[k] + ARROW_LEN * (1.0 - ARROW_HEAD_FRAC) * float(direction[k]) for k in range(3)]
+    return [
+        CYLINDER, base[0], base[1], base[2], neck[0], neck[1], neck[2],
+        ARROW_SHAFT_R, r, g, b, r, g, b,
+        CONE, neck[0], neck[1], neck[2], tip[0], tip[1], tip[2],
+        ARROW_HEAD_R, 0.0, r, g, b, r, g, b, 1.0, 1.0,
+    ]
+
+
+def _draw_direction(name, pos, direction, family, rgb):
+    """Draw the orientation arrow(s) for one directional feature; returns True if drawn.
+
+    Aromatic is rendered as a symmetric double-headed axis (arrows both ways from the centre);
+    Donor/Acceptor as a single arrow along the true (signed) vector."""
+    u = _unit(direction)
+    if u is None:
+        return False
+    if family == "Aromatic":                       # undirected axis -> both directions
+        cgo = _arrow_cgo(pos, u, rgb) + _arrow_cgo(pos, [-c for c in u], rgb)
+    else:                                           # signed lone-pair / D-H vector
+        cgo = _arrow_cgo(pos, u, rgb)
+    cmd.load_cgo(cgo, name)
+    cmd.group("ph4_directions", name)
+    return True
 
 
 def _args(argv):
@@ -159,6 +212,13 @@ def load_features(json_path):
         cmd.pseudoatom(centre, pos=pos)
         cmd.color(f"ph4_{family}", centre)
         cmd.group("ph4_centers", centre)
+        # ... plus an orientation arrow for directional features (donor/acceptor lone-pair vector,
+        # aromatic ring normal), drawn from the `direction` the model recorded. Grouped so it can
+        # be toggled independently of the spheres.
+        direction = feat.get("direction")
+        if direction:
+            _draw_direction(f"{family}_dir_{i}", pos, direction,
+                            family, COLORS.get(family, _GREY))
         has_features = True
     if has_features:                       # some cells keep only excluded volume -> no spheres
         _show_mesh_spheres()

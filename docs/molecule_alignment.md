@@ -116,15 +116,40 @@ basis of 3-point pharmacophore fingerprints and the minimum overlay in the stand
 (Catalyst/HypoGen, Phase, LigandScout). It is also where the hypothesis becomes **discriminative**:
 a two-point relationship (e.g. "a cation and an acceptor ~5 Å apart") is satisfied by a large
 fraction of drug-like molecules and carries little selective information; the third point adds the
-angular constraint that makes the arrangement specific. Relaxing to two was tested and behaves
-exactly as the theory predicts — it admits non-specific two-point matches that, measured on the
-target's own key geometry (e.g. the nicotinic cation–acceptor distance), compress and weaken the
-consensus at every search depth. The **honest boundary**: ≥3 is a hard geometric floor; where a
-formal pharmacophore is genuinely two-point, the *principled* relaxation is not `min_clique = 2`
-(which readmits underdetermined non-directional pairs) but **counting a directional feature's
-projected orientation point toward the minimum** — a cation + a *directional* acceptor already
-supplies ≥3 constraint points and is well-posed, so orientation, not a weaker threshold, is what
-would license a two-feature match.
+angular constraint that makes the arrangement specific.
+
+#### The two-point case, and why dropping it biases two-point targets
+
+A blanket `min_clique = 2` is still wrong — it readmits the *non-specific* pairs above (a compound
+matching two of its many features on an undetermined roll, whose unmatched features are then
+smeared onto the consensus). But refusing **every** two-feature compound has a real cost on targets
+whose true pharmacophore *is* two-point (the classic being the nicotinic **cationic centre + H-bond
+acceptor**, ~5–6 Å — Beers–Reich). There, the ≥3 rule is a **survivorship bias**: it keeps the
+retrieved actives that happen to carry a third feature (often an aromatic scaffold) and drops the
+minimal two-feature actives — so the aromatic appears in nearly every *surviving* molecule, clears
+the support floor, and is written into the model as consensus. The pipeline can then only ever
+*confirm* the third feature, because it has discarded the very molecules (genuine two-point ligands)
+that would drive its support fraction below threshold. It cannot reproduce the two-point model.
+
+The **principled fix**, controlled by `alignment.two_feature_alignment` (default on), admits a
+size-2 clique in exactly the two cases where a two-feature overlay is well-posed, and no others:
+
+- **Orientation-determined** — a directional Donor/Acceptor contributes a *projected* point
+  (§ orientation-aware matching), so the clique's Kabsch set has ≥3 constraints that span a plane
+  and the rotation is fully pinned. A cation + a *directional* acceptor is well-posed on three
+  points (two centres + the acceptor's lone-pair point) — orientation, not a weaker threshold, is
+  what licenses it.
+- **Roll-irrelevant** — the compound has *no features off the two-point axis* (a genuine
+  two-feature ligand). The single undetermined DOF is rotation *about* that axis, and the two
+  matched features lie *on* it, so they are placed deterministically regardless; there is nothing
+  off-axis for the free roll to misplace.
+
+A compound that matches only two of its three-or-more features with no directionality is still
+rejected (the smearing case above). And because ranking is by match count first, any ≥ `min_clique`
+clique out-ranks a two-feature one — so this never perturbs an ordinary 3-point build; it only
+recovers a placement that would otherwise have been dropped. The **honest boundary** is unchanged:
+≥3 remains the floor for a *general* rigid overlay; two features are admitted only when the geometry
+(directionality) or the molecule (no off-axis content) makes the missing DOF a non-issue.
 
 ### 4. Incremental growth + EM refinement
 
@@ -161,7 +186,19 @@ sign for a ring-flipped nitrogen), Aromatic ring-normal. The clique superpositio
 each matched donor/acceptor, a **projected point** (feature centre + `projected_length` Å along
 its vector) *jointly with the centres* — the standard LigandScout/Catalyst device that turns
 orientation into a positional target — so a wrongly-oriented match no longer superposes cleanly
-and is penalised by RMSD. The consensus `direction` field is populated from the aligned points.
+and is penalised by RMSD.
+
+**Aromatic orientation is handled *axially*** (`alignment.aromatic_axial`, default on). A ring
+normal is an **undirected axis** — either ring face is equivalent, so the SVD normal's sign is
+arbitrary. Using it naively as a projected point would inject a random ±flip into the fit, which is
+why it was previously left out of the superposition entirely. Instead, each probe normal's sign is
+first **resolved against the reference** (flipped when the dot product is negative) before it is
+projected, so ring-plane orientation can constrain the alignment without the artefact. The same
+axial reconciliation is applied wherever aromatic directions are pooled (`_slot_direction` →
+`_axial_mean_direction`): fold every contributor into a common hemisphere *then* average, so
+opposite faces reinforce one axis instead of cancelling toward a meaningless zero. This is what
+makes the consensus `direction` field **reliable for aromatics**, not just for donor/acceptor. The
+consensus `direction` field is populated from the aligned points (axially for aromatics).
 
 ## Outputs (in `--out`)
 
@@ -174,13 +211,15 @@ and is penalised by RMSD. The consensus `direction` field is populated from the 
 ## Knobs
 
 All in `config/pharmacophore.yaml` under `alignment:` — `dist_tol`, `min_clique`,
-`max_align_rmsd`, `energy_window`, `em_iterations`, `em_tol`, `seed_k`, `use_directions`,
-`projected_length`. These are scientific choices and live in config, never in code.
+`two_feature_alignment`, `max_align_rmsd`, `energy_window`, `em_iterations`, `em_tol`, `seed_k`,
+`use_directions`, `aromatic_axial`, `projected_length`. These are scientific choices and live in
+config, never in code.
 
 ## Limits (honest)
 
-- **Coverage** — compounds sharing fewer than `min_clique` feature types with the model are
-  dropped; the manifest reports aligned/total.
+- **Coverage** — compounds sharing fewer than `min_clique` matchable features with the model are
+  dropped, unless `two_feature_alignment` admits a well-posed two-feature overlay (directional or
+  roll-irrelevant); the manifest reports aligned/total.
 - **Conformer sampling** — flexible targets need larger ensembles; if the bioactive conformer is
   absent from the ensemble the alignment cannot find it.
 - **Directional acceptors** — the one soft spot; a docked ring-flip propagates into the

@@ -48,6 +48,15 @@ def test_read_clusters_support_uses_membership_radius(tmp_path):
     assert abs(c["support"] - 0.75) < 1e-9
 
 
+def test_unit_normalises_and_guards_degenerate():
+    mod = _load_script("pymol_pharmacophore")
+    u = mod._unit([0.0, 3.0, 0.0])
+    assert u == [0.0, 1.0, 0.0]
+    v = mod._unit([1.0, 2.0, 2.0])
+    assert abs(sum(c * c for c in v) - 1.0) < 1e-9        # unit length
+    assert mod._unit([0.0, 0.0, 0.0]) is None             # degenerate -> None (no arrow drawn)
+
+
 # --- model_summary tables --------------------------------------------------------------
 
 def test_summary_reports_merged_away_and_uncapped_occupancy(tmp_path):

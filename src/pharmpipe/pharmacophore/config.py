@@ -115,6 +115,17 @@ class AlignmentConfig:
     # `min_clique` mutually-consistent correspondences (3 => a determined 3-D transform).
     dist_tol: float = 1.5           # correspondence distance tolerance (A)
     min_clique: int = 3             # minimum mutually-consistent feature matches to align
+    # Admit genuinely TWO-point pharmacophores that a strict `min_clique = 3` would drop, but only
+    # where a two-feature superposition is well-posed: (a) orientation-determined — a directional
+    # Donor/Acceptor's projected point supplies the third constraint (e.g. cation + directional
+    # acceptor); or (b) roll-irrelevant — the compound has only two features, so the one
+    # undetermined DOF (rotation about the two-point axis) moves nothing that is contributed. A
+    # compound matching only two of its 3+ features with no directionality is NOT admitted (its free
+    # roll would misplace the unmatched features) — it still needs a >= min_clique match. A >=
+    # min_clique clique always out-ranks a two-feature one, so this only fires when nothing larger
+    # exists. Needed to reconstruct two-point models such as the nicotinic cation/acceptor
+    # pharmacophore without an over-fitted third feature. See docs/molecule_alignment.md.
+    two_feature_alignment: bool = True
     # Families used to drive the alignment (a subset of features.families). None => all of
     # features.families. Restricting to the pharmacophorically-defining families keeps the
     # correspondence graph small and the cliques meaningful.
@@ -142,6 +153,13 @@ class AlignmentConfig:
     # features/extract.py. False = positional matching only (the pre-directional behaviour).
     use_directions: bool = True
     projected_length: float = 1.5
+    # Also fit the AROMATIC ring normal in the superposition, as an *undirected axis* (the probe
+    # normal's sign is resolved to the reference before projecting, so the sign-ambiguity of a ring
+    # normal never leaks into the fit). This lets ring-plane orientation constrain alignment, not
+    # just position. Independent of this flag, aromatic orientation is always pooled *axially* so
+    # the output model's ring-normal direction is meaningful rather than an average of sign-flipped
+    # normals that cancels to noise. Only meaningful when `use_directions` is on.
+    aromatic_axial: bool = True
 
 
 @dataclass

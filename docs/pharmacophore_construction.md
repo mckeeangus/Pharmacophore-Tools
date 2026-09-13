@@ -107,7 +107,10 @@ may carry `ExcludedVolume` rows; this tool never reads or writes them.)
 
 - **`pharmacophore.csv`** — the primary interchange, one row per feature:
   `family,label,x,y,z,radius,n_points,n_ligands,support,dx,dy,dz` (`dx,dy,dz` = orientation
-  vector, blank when none). Feed this to `visualise-pharmacophore`.
+  vector, blank when none; signed for Donor/Acceptor, an axial ring-normal for Aromatic). Feed this
+  to `visualise-pharmacophore`, which renders it as an **orientation arrow** on each directional
+  feature — single-headed along the donor/acceptor vector, double-headed along the aromatic ring
+  normal (an undirected axis).
 - **`pharmacophore_model.json`** — the canonical, lossless model (schema `pharmpipe.pharmacophore/v1`),
   including provenance (feature-hierarchy collapses, merges, representative ligand).
 - **`model_summary.md`** — human-readable summary + the merge / below-floor tables.

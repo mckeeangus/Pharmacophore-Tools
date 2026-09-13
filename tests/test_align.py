@@ -6,6 +6,8 @@ import numpy as np
 
 from pharmpipe.features.conformers import generate_conformers
 from pharmpipe.pharmacophore.align import (
+    _axial_mean_direction,
+    _slot_direction,
     align_features,
     consolidate,
     seed_align,
@@ -81,6 +83,104 @@ def test_directional_matching_penalises_flipped_acceptor():
     # positional-only: the flip is invisible
     pf = align_features(flipped, ref, dist_tol=0.5, min_clique=3, use_directions=False)
     assert pf.rmsd < 1e-6
+
+
+def test_two_feature_roll_irrelevant_admitted_only_when_enabled():
+    # A genuine two-feature ligand: nothing lies off the two-point axis, so the one undetermined
+    # DOF (roll about that axis) moves nothing. Placeable when two_feature is on, dropped when off.
+    ref = [("PosIonizable", np.array([0.0, 0.0, 0.0]), None),
+           ("Acceptor", np.array([5.5, 0.0, 0.0]), None)]
+    probe = _rigid_copy(ref)
+    assert align_features(probe, ref, dist_tol=0.5, min_clique=3) is None
+    res = align_features(probe, ref, dist_tol=0.5, min_clique=3, two_feature=True)
+    assert res is not None and res.n_matched == 2
+    for (_, p, _), (_, r, _) in zip(probe, ref, strict=True):
+        assert np.allclose(res.apply(p), r, atol=1e-5)   # the two features are placed exactly
+
+
+def test_two_feature_directionality_determines_and_protects():
+    # ref has only two families; the probe carries a THIRD (off-axis) feature the ref lacks, so
+    # only two features can match and the probe has >2 features (roll-irrelevant does NOT apply).
+    ref = [("PosIonizable", np.array([0.0, 0.0, 0.0]), None),
+           ("Acceptor", np.array([5.5, 0.0, 0.0]), np.array([0.0, 1.0, 0.0]))]
+    probe = _rigid_copy([("PosIonizable", np.array([0.0, 0.0, 0.0]), None),
+                         ("Acceptor", np.array([5.5, 0.0, 0.0]), np.array([0.0, 1.0, 0.0])),
+                         ("LumpedHydrophobe", np.array([0.0, 0.0, 7.0]), None)])
+    # a directional acceptor supplies the third constraint point -> transform determined -> admit
+    res = align_features(probe, ref, dist_tol=0.5, min_clique=3,
+                         use_directions=True, two_feature=True)
+    assert res is not None and res.n_matched == 2
+    # without directionality this is a non-specific 2-of-3 match whose free roll would smear the
+    # unmatched hydrophobe -> deliberately rejected even with two_feature on
+    assert align_features(probe, ref, dist_tol=0.5, min_clique=3,
+                          use_directions=False, two_feature=True) is None
+
+
+def test_two_feature_never_downgrades_a_full_clique():
+    ref = _cloud()
+    res = align_features(_rigid_copy(ref), ref, dist_tol=0.5, min_clique=3, two_feature=True)
+    assert res is not None and res.n_matched == 4      # the full clique still out-ranks any pair
+
+
+def test_seed_align_folds_in_two_feature_ligand_when_enabled():
+    # A minimal two-feature compound matching two of the seed frame's features is dropped under the
+    # strict floor but folded in once two_feature is enabled (recovering two-point pharmacophores).
+    ref = _cloud()
+    seed = _seed(ref, "seedA")
+    mini = _rigid_copy([("PosIonizable", np.array([3.0, 0.0, 0.0]), None),
+                        ("Acceptor", np.array([0.0, 4.0, 0.0]), np.array([0.0, 1.0, 0.0]))])
+    kw = dict(dist_tol=0.5, min_clique=3, membership_radius=1.5, max_align_rmsd=1.5,
+              use_directions=True)
+    off = seed_align(seed, [("mini", [mini])], **kw)
+    on = seed_align(seed, [("mini", [mini])], two_feature=True, **kw)
+    assert not {r.ligand_id: r for r in off.manifest}["mini"].aligned
+    assert {r.ligand_id: r for r in on.manifest}["mini"].aligned
+
+
+def test_axial_mean_does_not_cancel_opposite_normals():
+    # Aromatic ring normals are sign-ambiguous: opposite faces must reinforce ONE axis, not cancel.
+    up, down = np.array([0.0, 0.0, 1.0]), np.array([0.0, 0.0, -1.0])
+    plain = np.mean([up, down], axis=0)
+    assert np.linalg.norm(plain) < 1e-9                       # naive mean cancels to ~zero
+    ax = _axial_mean_direction([up, down, up])
+    assert ax is not None and abs(abs(ax[2]) - 1.0) < 1e-9    # axial mean recovers the z-axis
+    # dispatcher: Aromatic -> axial, Donor -> plain (opposite donors DO cancel, correctly)
+    assert _slot_direction("Aromatic", [up, down]) is not None
+    assert _slot_direction("Donor", [up, down]) is None
+
+
+def test_slot_direction_aromatic_output_is_stable_under_flips():
+    # A consensus ring normal must be recoverable whatever each contributor's perceived sign.
+    base = np.array([0.3, 0.0, 0.95])
+    base /= np.linalg.norm(base)
+    flipped = [base if i % 2 else -base for i in range(6)]
+    md = _slot_direction("Aromatic", flipped)
+    assert md is not None and abs(abs(float(np.dot(md, base))) - 1.0) < 1e-6
+
+
+def test_aromatic_axial_matching_penalises_ring_plane_mismatch():
+    # cation + aromatic + acceptor, all three matched. With aromatic_axial on, a probe whose ring
+    # plane is tilted vs the reference aligns worse (higher RMSD) than one whose ring plane matches;
+    # the sign of the normal is irrelevant (opposite ring faces are the same axis).
+    ref = [("PosIonizable", np.array([0.0, 0.0, 0.0]), None),
+           ("Aromatic", np.array([5.0, 0.0, 0.0]), np.array([0.0, 0.0, 1.0])),
+           ("Acceptor", np.array([0.0, 5.0, 0.0]), None)]
+    aligned = [("PosIonizable", np.array([0.0, 0.0, 0.0]), None),
+               ("Aromatic", np.array([5.0, 0.0, 0.0]), np.array([0.0, 0.0, -1.0])),  # opposite face
+               ("Acceptor", np.array([0.0, 5.0, 0.0]), None)]
+    tilted = [("PosIonizable", np.array([0.0, 0.0, 0.0]), None),
+              ("Aromatic", np.array([5.0, 0.0, 0.0]), np.array([0.0, 0.8, 0.6])),     # tilted plane
+              ("Acceptor", np.array([0.0, 5.0, 0.0]), None)]
+    ka = align_features(aligned, ref, dist_tol=0.5, min_clique=3,
+                        use_directions=True, aromatic_axial=True)
+    kt = align_features(tilted, ref, dist_tol=0.5, min_clique=3,
+                        use_directions=True, aromatic_axial=True)
+    assert ka.rmsd < 1e-6                       # opposite-face normal is treated as the same axis
+    assert kt.rmsd > ka.rmsd + 0.3              # a genuinely tilted ring plane is penalised
+    # with axial matching off, the ring normal does not enter the fit at all
+    off = align_features(tilted, ref, dist_tol=0.5, min_clique=3,
+                         use_directions=True, aromatic_axial=False)
+    assert off.rmsd < 1e-6
 
 
 def test_consolidate_merges_within_radius_and_means_direction():

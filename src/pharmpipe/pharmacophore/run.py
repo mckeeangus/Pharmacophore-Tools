@@ -443,12 +443,14 @@ def _aligned_entries(res, conf_mols: dict, ranks: dict):
 def _set_feature_directions(pharmacophore, pooled_points, membership_radius: float) -> None:
     """Populate each directional feature's `direction` from the consensus of nearby aligned points.
 
-    For every kept directional feature (Donor/Acceptor/Aromatic), take the mean of the aligned
-    pooled points' directions of the same family within ``membership_radius`` of the feature centre
-    (unit-normalised). Frozen dataclass, so features are rebuilt via ``replace``. Populates the
-    model's previously-unused `direction` field with the orientation the alignment agreed on.
+    For every kept directional feature (Donor/Acceptor/Aromatic), take the consensus of the aligned
+    pooled points' directions of the same family within ``membership_radius`` of the feature centre.
+    Signed families (Donor/Acceptor) use a unit mean; the aromatic ring normal is combined *axially*
+    (``_slot_direction`` -> ``_axial_mean_direction``), so opposite ring faces reinforce one axis
+    rather than cancelling. Frozen dataclass, so features are rebuilt via ``replace``. Populates the
+    model's `direction` field with the orientation the alignment agreed on.
     """
-    from .align import _mean_direction
+    from .align import _slot_direction
     directional = {"Donor", "Acceptor", "Aromatic"}
     new = []
     for f in pharmacophore.features:
@@ -457,7 +459,7 @@ def _set_feature_directions(pharmacophore, pooled_points, membership_radius: flo
             dirs = [d for fam, xyz, d, _ in pooled_points
                     if fam == f.family and d is not None
                     and np.linalg.norm(xyz - centre) <= membership_radius]
-            md = _mean_direction(dirs)
+            md = _slot_direction(f.family, dirs)
             if md is not None:
                 f = replace(f, direction=(float(md[0]), float(md[1]), float(md[2])))
         new.append(f)
@@ -564,6 +566,7 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
                      max_align_rmsd=acfg.max_align_rmsd, max_clique_nodes=acfg.max_clique_nodes,
                      em_iterations=acfg.em_iterations, em_tol=acfg.em_tol,
                      use_directions=acfg.use_directions, projected_length=acfg.projected_length,
+                     two_feature=acfg.two_feature_alignment, aromatic_axial=acfg.aromatic_axial,
                      bootstrap_seed=(seed_poses is not None))
     aligned_ids = sorted({lig for *_, lig in res.points})
     n_aligned = sum(1 for r in res.manifest if r.source == "aligned" and r.aligned)
@@ -598,6 +601,8 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
         "source": {"method": "seed_alignment", "init": tag, "docked_dir": str(docked_dir),
                    "index": str(index_csv), "seed_k": seed_k, "top_n_hits": top_n_hits,
                    "dist_tol": acfg.dist_tol, "min_clique": acfg.min_clique,
+                   "two_feature_alignment": acfg.two_feature_alignment,
+                   "aromatic_axial": acfg.aromatic_axial,
                    "max_align_rmsd": acfg.max_align_rmsd,
                    "em_iterations": acfg.em_iterations, "em_convergence": res.convergence,
                    "n_seed": len({lig for lig, _ in seed_mols}), "n_aligned": n_aligned,

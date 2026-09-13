@@ -24,10 +24,17 @@ import numpy as np
 # directions are used) fits orientation via projected points (see `align_features`).
 FeatureCloud = list[tuple[str, np.ndarray, np.ndarray | None]]
 
-# Directional families whose orientation is fit in the superposition via a projected point. The
-# aromatic ring-normal is perceived but excluded here: it is sign-ambiguous, so it is not used as
-# a Kabsch target (the H-bond donor/acceptor orientation is what resolves the ring-flip).
+# Directional families whose orientation is fit in the superposition via a **signed** projected
+# point (the H-bond lone-pair / donor approach vector has a true direction).
 PROJECTED_FAMILIES = frozenset({"Donor", "Acceptor"})
+
+# Families whose orientation is an **undirected axis** — the aromatic ring normal has no intrinsic
+# sign (either ring face is equivalent). It is handled *axially*: averaged by folding normals into a
+# common hemisphere (`_axial_mean_direction`), and — when `aromatic_axial` alignment is enabled —
+# used as a Kabsch target only after resolving each probe normal's sign against the reference, so no
+# ring-face ambiguity leaks into the superposition. Kept separate from PROJECTED_FAMILIES for this
+# reason.
+AXIAL_FAMILIES = frozenset({"Aromatic"})
 
 
 @dataclass(frozen=True)
@@ -119,31 +126,84 @@ def _cliques(adj: list[set[int]], max_nodes: int):
 
 
 def _clique_points(probe: FeatureCloud, ref: FeatureCloud, nodes, idx,
-                   use_directions: bool, projected_length: float):
+                   use_directions: bool, projected_length: float,
+                   aromatic_axial: bool = False):
     """Correspondence point sets (P from probe, Q from ref) for one clique.
 
-    Each matched pair contributes its centre; when ``use_directions`` and both members of a
-    ``PROJECTED_FAMILIES`` pair carry a direction, it *also* contributes a **projected point**
-    (centre + ``projected_length`` · direction). Fitting those jointly bakes H-bond orientation
-    into the superposition, so a ring-flipped acceptor (right position, wrong direction) no longer
-    superposes and is penalised by RMSD."""
+    Each matched pair contributes its centre; when ``use_directions`` and both members carry a
+    direction, it *also* contributes a **projected point** (centre + ``projected_length`` ·
+    direction), so orientation — not just position — is fit:
+
+    * ``PROJECTED_FAMILIES`` (Donor/Acceptor): the signed lone-pair / D-H vector is used directly,
+      so a ring-flipped acceptor (right position, wrong direction) no longer superposes and is
+      penalised by RMSD.
+    * ``AXIAL_FAMILIES`` (Aromatic), only when ``aromatic_axial``: the ring normal is an undirected
+      axis, so the probe normal's sign is first resolved against the reference (flipped if the dot
+      product is negative) before projecting. This lets ring-plane orientation constrain the fit
+      without injecting a random ring-face flip."""
     P, Q = [], []
     for k in idx:
         i, j = nodes[k]
+        fam = probe[i][0]
         P.append(probe[i][1])
         Q.append(ref[j][1])
-        if use_directions and probe[i][0] in PROJECTED_FAMILIES:
-            dp, dq = probe[i][2], ref[j][2]
-            if dp is not None and dq is not None:
-                P.append(probe[i][1] + projected_length * dp)
-                Q.append(ref[j][1] + projected_length * dq)
+        if not use_directions:
+            continue
+        dp, dq = probe[i][2], ref[j][2]
+        if dp is None or dq is None:
+            continue
+        if fam in PROJECTED_FAMILIES:
+            P.append(probe[i][1] + projected_length * dp)
+            Q.append(ref[j][1] + projected_length * dq)
+        elif aromatic_axial and fam in AXIAL_FAMILIES:
+            dpr = dp if float(np.dot(dp, dq)) >= 0.0 else -dp   # resolve the sign to the reference
+            P.append(probe[i][1] + projected_length * dpr)
+            Q.append(ref[j][1] + projected_length * dq)
     return np.array(P), np.array(Q)
+
+
+def _spans_plane(pts: np.ndarray, rel_tol: float = 1e-2) -> bool:
+    """True if ``pts`` are not all (near-)collinear — the precondition for a rotation to be
+    *determined* by them. A purely collinear set has only one non-negligible singular value,
+    so a rotation about that line stays free; we require a second singular value above
+    ``rel_tol`` of the first (scale-relative, so it is unit-agnostic)."""
+    if len(pts) < 3:
+        return False
+    s = np.linalg.svd(pts - pts.mean(0), compute_uv=False)
+    return s.shape[0] >= 2 and s[1] > rel_tol * s[0]
+
+
+def _two_point_admissible(probe: FeatureCloud, P: np.ndarray, Q: np.ndarray,
+                          min_points: int) -> bool:
+    """Whether a size-2 feature clique may still yield a usable superposition.
+
+    Two matched features under-determine a rigid transform by one DOF — rotation about the axis
+    through them. That is admissible in exactly two situations, and no others:
+
+    * **Orientation-determined**: a directional feature (Donor/Acceptor) contributes a *projected*
+      point, so the clique's Kabsch point set has ``>= min_points`` constraints that span a plane
+      — the rotation is then fully pinned. This is the principled two-feature case (a cation + a
+      directional acceptor is well-posed on 3 points: two centres + the acceptor's lone-pair point).
+    * **Roll-irrelevant**: the probe has *no features off the two-point axis* — a genuine
+      two-feature ligand (e.g. the minimal nicotinic cation+acceptor pharmacophore). The one free
+      DOF only swings off-axis content, of which there is none, so the two matched features are
+      placed deterministically and nothing spurious is contributed to the consensus.
+
+    A molecule that matches only two of its (three or more) features, with no directionality, is
+    deliberately **not** admitted here: the free roll would misplace its unmatched features. Such
+    a compound still needs a >= ``min_clique`` match, exactly as before.
+    """
+    if len(P) >= min_points and _spans_plane(P) and _spans_plane(Q):
+        return True
+    return len(probe) == 2
 
 
 def align_features(probe: FeatureCloud, ref: FeatureCloud,
                    dist_tol: float, min_clique: int, max_nodes: int = 40,
                    use_directions: bool = False,
-                   projected_length: float = 1.5) -> AlignResult | None:
+                   projected_length: float = 1.5,
+                   two_feature: bool = False,
+                   aromatic_axial: bool = False) -> AlignResult | None:
     """Best rigid transform mapping ``probe`` feature points onto ``ref`` (or ``None``).
 
     A correspondence node is a same-family pair ``(i in probe, j in ref)``; two nodes are
@@ -153,9 +213,17 @@ def align_features(probe: FeatureCloud, ref: FeatureCloud,
     donor/acceptor **projected points** (see ``_clique_points``), so orientation — not just
     position — is matched. ``None`` when no clique exists. Exact enumeration is used while the
     graph has <= ``max_nodes`` nodes; above that a bounded greedy search keeps runtime polynomial.
+
+    When ``two_feature`` is set, a size-2 clique is *also* accepted, but only where a two-feature
+    superposition is well-posed — orientation-determined, or roll-irrelevant — per
+    ``_two_point_admissible``. This lets genuinely two-point pharmacophores (e.g. the nicotinic
+    cation+acceptor) be modelled instead of silently dropped. It never weakens the ordinary path:
+    any clique of >= ``min_clique`` out-ranks a two-feature one (ranking is by match count first),
+    so the two-feature transform is used only when nothing larger exists.
     """
     nodes = [(i, j) for i, pf in enumerate(probe) for j, rf in enumerate(ref) if pf[0] == rf[0]]
-    if len(nodes) < min_clique:
+    floor = 2 if two_feature else min_clique
+    if len(nodes) < floor:
         return None
     adj: list[set[int]] = [set() for _ in nodes]
     for a in range(len(nodes)):
@@ -171,10 +239,13 @@ def align_features(probe: FeatureCloud, ref: FeatureCloud,
                 adj[b].add(a)
     best: AlignResult | None = None
     for clique in _cliques(adj, max_nodes):
-        if len(clique) < min_clique:
+        if len(clique) < floor:
             continue
         idx = sorted(clique)
-        P, Q = _clique_points(probe, ref, nodes, idx, use_directions, projected_length)
+        P, Q = _clique_points(probe, ref, nodes, idx, use_directions, projected_length,
+                              aromatic_axial)
+        if len(clique) < min_clique and not _two_point_admissible(probe, P, Q, min_clique):
+            continue
         R, t, rmsd = _kabsch(P, Q)
         if best is None or (len(clique), -rmsd) > (best.n_matched, -best.rmsd):
             best = AlignResult(R, t, len(clique), rmsd)
@@ -189,6 +260,31 @@ def _mean_direction(dirs: list) -> np.ndarray | None:
     m = np.mean(vs, axis=0)
     n = float(np.linalg.norm(m))
     return m / n if n > 1e-6 else None
+
+
+def _axial_mean_direction(dirs: list) -> np.ndarray | None:
+    """Unit mean of *undirected* axes (e.g. aromatic ring normals, which have no intrinsic sign).
+
+    Each vector is folded into a common hemisphere (made to agree with the first) before averaging,
+    so two molecules presenting opposite ring faces reinforce the same axis instead of cancelling.
+    A plain mean of raw sign-ambiguous normals can average toward zero and give a meaningless
+    direction; this recovers the consensus ring-plane axis. ``None`` if none/degenerate."""
+    vs = [d for d in dirs if d is not None]
+    if not vs:
+        return None
+    ref = vs[0]
+    folded = [v if float(np.dot(v, ref)) >= 0.0 else -v for v in vs]
+    m = np.mean(folded, axis=0)
+    n = float(np.linalg.norm(m))
+    return m / n if n > 1e-6 else None
+
+
+def _slot_direction(family: str, dirs: list) -> np.ndarray | None:
+    """Consensus orientation for one feature slot: an **axial** mean for sign-ambiguous families
+    (the aromatic ring normal), an ordinary unit mean for signed families (Donor/Acceptor). Used
+    everywhere feature directions are pooled (consolidate, EM slot updates, and the output model),
+    so aromatic orientation is treated consistently as an undirected axis throughout."""
+    return _axial_mean_direction(dirs) if family in AXIAL_FAMILIES else _mean_direction(dirs)
 
 
 def consolidate(points: FeatureCloud, radius: float) -> FeatureCloud:
@@ -211,13 +307,14 @@ def consolidate(points: FeatureCloud, radius: float) -> FeatureCloud:
                     used[j] = True
                     group.append(j)
             centroid = np.mean([pts[g][0] for g in group], axis=0)
-            ref.append((fam, centroid, _mean_direction([pts[g][1] for g in group])))
+            ref.append((fam, centroid, _slot_direction(fam, [pts[g][1] for g in group])))
     return ref
 
 
 def _best_alignment(conformers: list[FeatureCloud], ref: FeatureCloud, *, dist_tol: float,
                     min_clique: int, max_clique_nodes: int, max_align_rmsd: float | None,
                     use_directions: bool, projected_length: float,
+                    two_feature: bool = False, aromatic_axial: bool = False,
                     ) -> tuple[AlignResult, int, FeatureCloud] | None:
     """Best (most-matched, lowest-RMSD) conformer alignment of one compound onto ``ref``.
 
@@ -228,7 +325,7 @@ def _best_alignment(conformers: list[FeatureCloud], ref: FeatureCloud, *, dist_t
     best: tuple[AlignResult, int, FeatureCloud] | None = None
     for ci, cloud in enumerate(conformers):
         res = align_features(cloud, ref, dist_tol, min_clique, max_clique_nodes,
-                             use_directions, projected_length)
+                             use_directions, projected_length, two_feature, aromatic_axial)
         if res is None or (max_align_rmsd is not None and res.rmsd > max_align_rmsd):
             continue
         if best is None or (res.n_matched, -res.rmsd) > (best[0].n_matched, -best[0].rmsd):
@@ -256,6 +353,7 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
                max_align_rmsd: float | None = None, max_clique_nodes: int = 40,
                em_iterations: int = 0, em_tol: float = 0.1,
                use_directions: bool = False, projected_length: float = 1.5,
+               two_feature: bool = False, aromatic_axial: bool = False,
                bootstrap_seed: bool = False) -> SeedAlignResult:
     """Align each ranked compound onto a consensus initialised from ``seed_points``.
 
@@ -271,7 +369,12 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
     *every* compound to the current full consensus — re-selecting each one's best conformer — and
     recomputes each slot's centre and mean direction, until the largest slot shift falls below
     ``em_tol``. When ``use_directions``, H-bond orientation is fit via projected points (see
-    ``align_features``). A compound whose best clique RMSD exceeds ``max_align_rmsd`` is dropped.
+    ``align_features``). When ``two_feature``, genuinely two-point compounds are also admitted where
+    a two-feature superposition is well-posed (see ``align_features`` / ``_two_point_admissible``).
+    When ``aromatic_axial``, aromatic ring normals additionally constrain the superposition, matched
+    as undirected axes (sign resolved to the reference); either way aromatic orientation is pooled
+    axially (``_slot_direction``) so the consensus ring normal is meaningful. A compound whose best
+    clique RMSD exceeds ``max_align_rmsd`` is dropped.
 
     ``bootstrap_seed``: when True the seed is a **scaffold, not a member** — it anchors the
     reference through the whole growing pass (so every compound aligns to the seed's bioactive
@@ -284,7 +387,8 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
     """
     ba = dict(dist_tol=dist_tol, min_clique=min_clique, max_clique_nodes=max_clique_nodes,
               max_align_rmsd=max_align_rmsd, use_directions=use_directions,
-              projected_length=projected_length)
+              projected_length=projected_length, two_feature=two_feature,
+              aromatic_axial=aromatic_axial)
     ref = consolidate([(f, p, d) for f, p, d, _ in seed_points], membership_radius)
     # fixed seed anchors per slot: (position, direction)
     seed_by_slot: list[list[tuple]] = [[] for _ in ref]
@@ -315,7 +419,7 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
             if k is not None:
                 accum[k].append((axyz, adir))
                 ref[k] = (ref[k][0], np.mean([p for p, _ in accum[k]], axis=0),
-                          _mean_direction([d for _, d in accum[k]]))
+                          _slot_direction(ref[k][0], [d for _, d in accum[k]]))
         result.manifest.append(
             AlignRecord(lig, "aligned", len(conformers), ci, res.n_matched, res.rmsd, True))
 
@@ -346,7 +450,7 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
         for k in range(len(ref)):
             if slot_pts[k]:
                 ref[k] = (ref[k][0], np.mean([p for p, _ in slot_pts[k]], axis=0),
-                          _mean_direction([d for _, d in slot_pts[k]]))
+                          _slot_direction(ref[k][0], [d for _, d in slot_pts[k]]))
         result.points, result.transforms, result.manifest = pooled, transforms, manifest
         shift = max((float(np.linalg.norm(ref[k][1] - prev[k])) for k in range(len(ref))),
                     default=0.0)

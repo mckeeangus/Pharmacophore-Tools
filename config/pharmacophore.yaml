@@ -157,6 +157,16 @@ alignment:
   # min_clique against the model are dropped (recorded in alignment_manifest.csv).
   dist_tol: 1.5                # correspondence distance tolerance (A)
   min_clique: 3                # minimum mutually-consistent feature matches to align
+  # Also model genuinely TWO-point pharmacophores that a strict min_clique=3 would drop — but only
+  # where a two-feature overlay is well-posed: (a) orientation-determined (a directional
+  # Donor/Acceptor projected point gives the third constraint, e.g. cation + directional acceptor),
+  # or (b) roll-irrelevant (the compound has only two features, so the one undetermined rotational
+  # DOF moves nothing contributed). A compound matching only two of its 3+ features with no
+  # directionality is NOT admitted (its free roll would misplace the rest). A >=min_clique match
+  # always out-ranks a two-feature one, so this fires only when nothing larger exists. Without it,
+  # requiring 3 features biases two-point targets (e.g. the nicotinic cation/acceptor pharmacophore)
+  # by dropping the minimal actives and over-fitting a third (aromatic) feature from the survivors.
+  two_feature_alignment: true
   align_families: null         # families driving alignment; null => all features.families
   seed_k: 5                    # docked poses used to seed the model (the bioactive frame)
   # Accept a compound into the growing model only if its best clique superposition RMSD is
@@ -180,3 +190,10 @@ alignment:
   # ring-flipped acceptor that positional-only matching averages away. false = positional only.
   use_directions: true
   projected_length: 1.5
+  # Also fit the AROMATIC ring normal in the superposition, as an undirected AXIS: the probe normal's
+  # sign is resolved to the reference before it is used, so a ring normal's inherent sign-ambiguity
+  # (either face is equivalent) never injects a random flip into the fit. Lets ring-plane orientation
+  # constrain alignment, not just ring-centre position. Independent of this flag, aromatic orientation
+  # is ALWAYS pooled axially, so the output model carries a meaningful ring-normal direction instead of
+  # a sign-cancelled average. Only active when use_directions is true.
+  aromatic_axial: true

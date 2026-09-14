@@ -78,6 +78,7 @@ Writes `aligned_compounds.sdf` (feed to tool 2), `aligned_points.csv`, `alignmen
 |---|---|
 | `--top-n N` | Align the top *N* molecules (by the CSV's score column; without one, input order is the rank). **Default 50** — the depth that benchmarked best; ≥100 tends to dilute the consensus. |
 | `--seed ligand.sdf\|.mol2` | Optional holo co-crystal ligand. It **bootstraps** the frame (anchors the growing pass, then is dropped before EM so the model reflects the aligned molecules alone). If given in a protein's coordinates the output pharmacophore is positioned in that binding site. Default: seedless. |
+| `--protonate` | Protonate the top-*N* aligned ligands to their pH-7.4 dominant microstate (pkasolver, via the isolated `prep` env) before conformers are built. **Off by default** — a no-op for amine/base cations (RDKit perceives the cationic centre from the neutral SMILES already), but needed for acids (carboxylate, phosphate, …), whose neutral form gives a spurious donor + extra acceptor. Requires the `prep` env. |
 | `--config PATH` | Override `config/pharmacophore.yaml` (the `alignment:` block). |
 
 ### 2. `build-pharmacophore` — build a pharmacophore from aligned molecules

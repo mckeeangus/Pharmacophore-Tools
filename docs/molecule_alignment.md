@@ -29,15 +29,29 @@ internally. (`--seed` is the exception: it supplies a 3-D frame; see below.)
 
 ### 1. Protonation
 
-Each compound is embedded in its dominant physiological (pH-7.4) microstate so that
-donor/acceptor and ±ionizable perception sees the real ionisation. The subtlety is that a plain
-input `smiles` column is often **neutral** — embedding it directly gives an uncharged amine with no
-N–H, so a protonatable nitrogen loses its cation *and* its H-bond donor. The correct pH-7.4 form is
-best carried by the input itself: if a `<mol_id>_docked.sdf` with a `protonated_smiles` tag sits
-beside the CSV (as virtual-screening outputs often provide), it is used. So the conformer SMILES is
-chosen with precedence **explicit map → docked `protonated_smiles` → the CSV SMILES** (the last is
-the honest fallback). A crystal `*.mol2` build instead uses the `prep`-env pkasolver + weak-acid
-guard (`pharmacophore_construction.md` §Protonation).
+Each compound is embedded in its dominant physiological (pH-7.4) microstate so that donor/acceptor
+and ±ionizable perception sees the real ionisation. How much this matters depends on the group, and
+it is **not symmetric between bases and acids**:
+
+- **Bases (amines, amidines, …): a neutral SMILES is already sufficient.** RDKit's BaseFeatures
+  SMARTS match the *neutral* basic group, so a neutral amine is perceived as `PosIonizable` (its
+  cationic centre) — and the co-atom hierarchy folds its `Donor` into that centre — exactly as the
+  protonated ammonium is. Protonating a base does not change the heavy-atom H-bonding pattern, so
+  the feature set is identical. This is why the seedless SMILES path recovers cationic pharmacophores
+  (e.g. the nicotinic cation) with no protonation step.
+- **Acids (carboxylate, phosphate, sulfonamide, tetrazole, …): the neutral form is wrong.** A
+  neutral carboxylic acid is perceived with a **spurious `Donor` and an extra `Acceptor`** versus its
+  pH-7.4 carboxylate. Here the microstate must be fixed before perception, or the consensus
+  over-counts H-bonding features on those groups.
+
+The pH-7.4 form is taken with precedence **explicit map → docked `protonated_smiles` → the input
+SMILES**. Three ways to supply it: (a) a `<mol_id>_docked.sdf` carrying a `protonated_smiles` tag
+beside the CSV (as many virtual-screening outputs provide) is used automatically; (b) pass
+**`--protonate`**, which runs the `prep`-env pkasolver on the top-N aligned ligands and overrides
+their SMILES with the pH-7.4 microstate (off by default, since it is a no-op for base-only ligand
+sets and needs the isolated `prep` env); (c) the input SMILES as-is (the honest fallback). A crystal
+`*.mol2` build instead uses the `prep`-env pkasolver + weak-acid guard
+(`pharmacophore_construction.md` §Protonation).
 
 > **Note — the protonated-amine invertomer is left as a mixture, deliberately.** A protonated
 > tertiary amine in a ring is a locked stereocentre (which face the proton sits on is a genuine

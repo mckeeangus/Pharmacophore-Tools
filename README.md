@@ -27,13 +27,14 @@ never in code. Methodology is documented in
 pixi install -e dev          # core + cheminformatics + test/lint tooling
 pixi run test                # pytest (offline unit tests)
 pixi run lint                # ruff
+pixi run setup-prep          # optional: provisions the 'prep' env for --pkasolver
 ```
 
 Dependencies are split into pixi *features* so a heavy/brittle one never blocks the rest:
 `core` (config/tabular IO), `chem` (`rdkit`, `openbabel`, `gemmi`), `ph4` (`scipy`,
 `matplotlib`), `dev` (`pytest`, `ruff`), `viz` (`pymol-open-source`, for tool 3), `prep` (an
-isolated `pkasolver` stack for pH-7.4 protonation). Environments: `default` (core+chem+ph4),
-`dev`, `viz`, `prep`.
+isolated `pkasolver` stack for `--pkasolver`, provisioned by `pixi run setup-prep`).
+Environments: `default` (core+chem+ph4), `dev`, `viz`, `prep`.
 
 ---
 
@@ -65,7 +66,8 @@ matching. Protein-free and **seedless by default**. Method:
 [`docs/molecule_alignment.md`](docs/molecule_alignment.md).
 
 ```bash
-# From a ranked CSV (columns: mol_id, smiles, and optionally drugclip_score) — top 50 by score:
+# From a ranked CSV — top 50 by score. A header with a `smiles` column is enough (mol_id/score
+# optional, any order); a header-less `smiles,score` screen output or a bare SMILES list also work:
 pixi run align-molecules --input hits.csv --out out/aligned
 
 # From a multi-molecule SDF instead:
@@ -78,7 +80,7 @@ Writes `aligned_compounds.sdf` (feed to tool 2), `aligned_points.csv`, `alignmen
 |---|---|
 | `--top-n N` | Align the top *N* molecules (by the CSV's score column; without one, input order is the rank). **Default 50** — the depth that benchmarked best; ≥100 tends to dilute the consensus. |
 | `--seed ligand.sdf\|.mol2` | Optional holo co-crystal ligand. It **bootstraps** the frame (anchors the growing pass, then is dropped before EM so the model reflects the aligned molecules alone). If given in a protein's coordinates the output pharmacophore is positioned in that binding site. Default: seedless. |
-| `--protonate` | Protonate the top-*N* aligned ligands to their pH-7.4 dominant microstate (pkasolver, via the isolated `prep` env) before conformers are built. **Off by default** — a no-op for amine/base cations (RDKit perceives the cationic centre from the neutral SMILES already), but needed for acids (carboxylate, phosphate, …), whose neutral form gives a spurious donor + extra acceptor. Requires the `prep` env. |
+| `--pkasolver` | Protonate the top-*N* aligned ligands to their pH-7.4 dominant microstate (pkasolver, via the isolated `prep` env) before conformers are built. **Off by default** — a no-op for amine/base cations (RDKit perceives the cationic centre from the neutral SMILES already), but needed for acids (carboxylate, phosphate, …), whose neutral form gives a spurious donor + extra acceptor. |
 | `--config PATH` | Override `config/pharmacophore.yaml` (the `alignment:` block). |
 
 ### 2. `build-pharmacophore` — build a pharmacophore from aligned molecules
@@ -102,28 +104,12 @@ Writes **`pharmacophore.csv`** (the interchange for tool 3), plus `pharmacophore
 
 | Option | Effect |
 |---|---|
-| `--smiles het_code,smiles.csv` | Bond orders for a heavy-atom mol2 directory (not needed for an SDF). See the optional protonation step below. |
+| `--smiles het_code,smiles.csv` | Bond orders for a heavy-atom mol2 directory (not needed for an SDF). |
+| `--pkasolver` | Protonate `--smiles` to pH 7.4 (pkasolver + weak-acid guard, via the isolated `prep` env), writing `protonated_ligands.csv` beside it. **Off by default** — the build falls back to neutral SMILES and warns. SDF input is always trusted as-is (no pKa prediction is ever run on it). |
 | `--config PATH` | Override `config/pharmacophore.yaml` (`density:`/`selection:`/`tolerance:`). |
 
 > A cell with fewer than `selection.min_ligands` (10) molecules still builds, but emits a
 > **warning** that the consensus is weak and the model provisional — it is no longer skipped.
-
-#### Optional: pH-7.4 protonation with pkasolver
-
-Protonation is an **optional preprocessing step** for the crystal `*.mol2` path, and it is the
-tool's only protonation source. Run it once to predict each ligand's dominant pH-7.4 microstate
-with **pkasolver** (plus the weak-acid guard), writing `protonated_ligands.csv` beside your
-`--smiles` file:
-
-```bash
-pixi run -e prep protonate-ligands            # -> <slug>/protonated_ligands.csv
-```
-
-`build-pharmacophore` then **auto-detects and uses** that file so donor/acceptor/±ionizable
-perception sees the real ionisation. If it is absent, the build falls back to the neutral
-`--smiles` and warns. SDF input (from `align-molecules`, or any SDF whose 3D structures already
-carry their protonation) is trusted as-is — pkasolver is never run on it. pkasolver lives in
-the isolated `prep` env (a pinned 2021-era stack), so it stays out of the way unless you invoke it.
 
 ### 3. `visualise-pharmacophore` — render a pharmacophore CSV
 
@@ -138,16 +124,8 @@ pixi run visualise-pharmacophore \
 ```
 
 Writes `pharmacophore.pse` + `.png` (the kept model) and, with `--features`,
-`pharmacophore_sweep.pse` + `.png` (the support-cutoff sweep across 20 states).
-
-### The full chain
-
-```bash
-pixi run align-molecules       --input hits.csv --out out/aligned
-pixi run build-pharmacophore   --input out/aligned/aligned_compounds.sdf --out out/model
-pixi run visualise-pharmacophore --pharmacophore out/model/pharmacophore.csv --out out/viz \
-    --compounds out/aligned/aligned_compounds.sdf --features out/model/features.csv
-```
+`pharmacophore_sweep.pse` + `.png` (the support-cutoff sweep across 20 states). Aligned ligands
+found beside `--pharmacophore` (or passed via `--compounds`) are loaded as separate objects.
 
 ---
 
@@ -159,7 +137,7 @@ scripts/       align_molecules.py · build_pharmacophore.py · visualise_pharmac
 src/pharmpipe/ features/ (perception + loaders) · pharmacophore/ (alignment, KDE, model,
                io, viz, run) · prep/ (pH-7.4 protonation) · util/
 config/        pharmacophore.yaml (the tools' knobs) · protonation.yaml (weak-acid guard)
-docs/          molecule_alignment.md · pharmacophore_construction.md · method_animation/
+docs/          molecule_alignment.md · pharmacophore_construction.md
 examples/      a small runnable nAChR example (see examples/README.md)
 tests/         offline unit tests
 ```

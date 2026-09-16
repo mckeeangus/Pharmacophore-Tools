@@ -1,25 +1,8 @@
 #!/usr/bin/env python
-"""Tool 2 — **pharmacophore construction**.
+"""Tool 2 — pharmacophore construction. See README.md / docs/pharmacophore_construction.md.
 
-Build a consensus pharmacophore from a set of **aligned molecules**: either the
-``aligned_compounds.sdf`` produced by ``align-molecules``, or a directory of aligned crystal
-``*.mol2`` poses. The molecules must already be superposed into one common frame, then a
-molecule-weighted Gaussian-KDE occupancy field is peaked and support-filtered into consensus
-features. Purely ligand-based — no receptor, no excluded volume.
-
-**Protonation.** The tool's only protonation source is **pkasolver + the weak-acid guard**, and
-it is applied *only* to a heavy-atom ``*.mol2`` directory: the pH-7.4 states in
-``protonated_ligands.csv`` (written by ``pixi run -e prep protonate-ligands``, found beside
-``--smiles``) are overlaid onto the neutral SMILES so donor/acceptor/ionizable perception sees the
-real ionisation. **SDF input is trusted as-is** — an ``aligned_compounds.sdf`` (or any SDF whose
-3D structures already carry their protonation) needs no pKa prediction, so none is run on it.
-
-    pixi run build-pharmacophore --input aligned_compounds.sdf|mol2_dir --out DIR [--smiles het.csv]
-
-Output (in ``--out``): **``pharmacophore.csv``** (the downstream interchange, one row per feature),
-``pharmacophore_model.json`` (canonical), ``model_summary.md``, ``features.csv`` (raw points),
-``representative_ligand.sdf``, per-family PNGs. Feed ``pharmacophore.csv`` to
-``visualise-pharmacophore``. Methodology: docs/pharmacophore_construction.md.
+    pixi run build-pharmacophore --input aligned_compounds.sdf|mol2_dir --out DIR
+                                 [--smiles het.csv] [--pkasolver]
 """
 
 from __future__ import annotations
@@ -27,12 +10,14 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+import subprocess
 import sys
 from datetime import date
 from pathlib import Path
 
 os.environ.setdefault("OMP_NUM_THREADS", "1")
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "src"))
 
 from rdkit import Chem, RDLogger  # noqa: E402
 
@@ -52,34 +37,47 @@ from pharmpipe.pharmacophore.run import (  # noqa: E402
 log = logging.getLogger("build_pharmacophore")
 
 
-def _crystal_smiles_map(smiles_csv: Path | None) -> dict[str, str]:
-    """SMILES for a heavy-atom mol2 directory, with pH-7.4 protonation overlaid.
+def _run_pkasolver(smiles_csv: Path, out_csv: Path) -> None:
+    """Shell out to ``pixi run -e prep protonate-ligands`` (incremental: cached HETs are reused)."""
+    cmd = ["pixi", "run", "-e", "prep", "protonate-ligands",
+           "--input-smiles", str(smiles_csv), "--out", str(out_csv)]
+    log.info("protonating %s at pH 7.4 (prep env / pkasolver)...", smiles_csv.name)
+    proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
+    if proc.returncode != 0 or not out_csv.exists():
+        sys.stderr.write((proc.stdout or "") + "\n" + (proc.stderr or "") + "\n")
+        raise SystemExit(
+            "build-pharmacophore: --pkasolver failed. Run `pixi run setup-prep` to provision the "
+            "isolated 'prep' env, or omit --pkasolver to build from neutral SMILES.")
 
-    The neutral ``het_code,smiles`` map from ``--smiles`` is overlaid with the **pkasolver +
-    weak-acid-guard** states in ``protonated_ligands.csv`` (written by ``pixi run -e prep
-    protonate-ligands``) when it sits beside the SMILES CSV — this is the tool's only protonation
-    source. If it is absent the build falls back to the neutral SMILES and warns.
-    """
+
+def _crystal_smiles_map(smiles_csv: Path | None, use_pkasolver: bool) -> dict[str, str]:
+    """SMILES for a heavy-atom mol2 directory, with pH-7.4 protonation optionally overlaid."""
     if smiles_csv is None:
         return {}
     smiles_csv = smiles_csv.resolve()
     smiles_map = read_smiles_map(smiles_csv)
+    if not use_pkasolver:
+        log.warning("pkasolver protonation off (pass --pkasolver) - building from NEUTRAL SMILES")
+        return smiles_map
     protonated_csv = smiles_csv.parent / "protonated_ligands.csv"
+    _run_pkasolver(smiles_csv, protonated_csv)
     protonated = read_protonation_map(protonated_csv)
     if protonated:
         log.warning("pH-7.4 protonation (pkasolver + weak-acid guard) for %d HETs from %s",
                     len(protonated), protonated_csv.name)
         return {**smiles_map, **protonated}
-    log.warning("no protonated_ligands.csv beside %s - building from NEUTRAL SMILES; run "
-                "`pixi run -e prep protonate-ligands` for pH-7.4 states", smiles_csv.name)
+    log.warning("pkasolver returned no protonation states - building from NEUTRAL SMILES")
     return smiles_map
 
 
 def _from_sdf(sdf: Path, out: Path, cfg, name: str):
-    """Build from an SDF of aligned molecules (bonds/coords intact — perceived directly)."""
+    """Build from an SDF of aligned molecules (bonds/coords intact — perceived directly).
+
+    Hydrogens are kept (``removeHs=False``) so donor D->H orientation vectors can be perceived.
+    """
     molecules = []
     report = LoadReport()
-    for mol in Chem.SDMolSupplier(str(sdf), removeHs=True):
+    for mol in Chem.SDMolSupplier(str(sdf), removeHs=False):
         if mol is None:
             report.skip("?", "unreadable")
             continue
@@ -96,13 +94,12 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--input", type=Path, required=True,
-                    help="aligned molecules: an SDF (from align-molecules) or a dir of aligned "
-                         "mol2")
+                    help="aligned SDF, or a directory of aligned mol2")
     ap.add_argument("--out", type=Path, required=True, help="output directory")
     ap.add_argument("--smiles", type=Path, default=None,
-                    help="het_code,smiles CSV — required for a heavy-atom mol2 directory (supplies "
-                         "bond orders). A protonated_ligands.csv beside it is used for pH-7.4 "
-                         "states (pkasolver + weak-acid guard). Not needed/used for an SDF")
+                    help="het_code,smiles CSV (required for a mol2 directory)")
+    ap.add_argument("--pkasolver", action="store_true",
+                    help="protonate --smiles to pH 7.4 (pkasolver, needs the 'prep' env)")
     ap.add_argument("--config", type=Path, default=None)
     args = ap.parse_args(argv)
 
@@ -113,7 +110,7 @@ def main(argv=None) -> int:
     name = out.name
 
     if inp.is_dir():
-        smiles_map = _crystal_smiles_map(args.smiles)
+        smiles_map = _crystal_smiles_map(args.smiles, args.pkasolver)
         res = build_from_directory(inp, out, cfg, smiles_map=smiles_map, name=name)
     elif inp.suffix.lower() == ".sdf":
         res = _from_sdf(inp, out, cfg, name)

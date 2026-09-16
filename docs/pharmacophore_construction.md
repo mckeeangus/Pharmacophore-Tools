@@ -1,6 +1,6 @@
 # Pharmacophore construction — method
 
-**Tool:** `pixi run build-pharmacophore --input aligned.sdf|mol2_dir --out DIR [--smiles het.csv]`
+**Tool:** `pixi run build-pharmacophore --input aligned.sdf|mol2_dir --out DIR [--smiles het.csv] [--pkasolver]`
 
 Build a **consensus pharmacophore** from a set of **already-aligned molecules** — the
 `aligned_compounds.sdf` from `align-molecules`, or a directory of aligned crystal `*.mol2`
@@ -23,13 +23,12 @@ that `visualise-pharmacophore` consumes.
 Feature perception must see the real ionisation. The tool's **only** protonation source is
 **pkasolver + the weak-acid guard**, and it is applied to exactly one input kind:
 
-- **mol2 directory (crystal poses)** — `scripts/protonate_ligands.py` (the isolated `prep` env)
-  predicts pKa with **pkasolver**, applies the weak-acid guard (below), and writes each HET's
-  dominant pH-7.4 microstate to `protonated_ligands.csv`. `build-pharmacophore` **auto-overlays**
-  that CSV when it sits beside `--smiles` (pH-7.4 states win; HETs without an entry keep the
-  neutral SMILES), and the bond-order template (`AssignBondOrdersFromTemplate`) carries the
-  formal charges onto the heavy-atom pose. If the CSV is absent the build falls back to neutral
-  SMILES and warns.
+- **mol2 directory (crystal poses)** — pass **`--pkasolver`** to run `protonate_ligands.py` (the
+  isolated `prep` env): it predicts pKa with **pkasolver**, applies the weak-acid guard (below),
+  and writes each HET's dominant pH-7.4 microstate to `protonated_ligands.csv` beside `--smiles`
+  (pH-7.4 states win; HETs without an entry keep the neutral SMILES). The bond-order template
+  (`AssignBondOrdersFromTemplate`) carries the formal charges onto the heavy-atom pose. Off by
+  default (needs the isolated `prep` env) — the build falls back to neutral SMILES and warns.
 - **SDF input (from `align-molecules`, or any SDF whose 3D structures carry protonation)** —
   **trusted as-is.** These
   poses already carry a protonation state, so **no pKa prediction is run on them** — pkasolver is

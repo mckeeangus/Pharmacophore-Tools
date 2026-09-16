@@ -1,24 +1,8 @@
 #!/usr/bin/env python
-"""Tool 1 — **molecule alignment**.
-
-Align a set of molecules to each other by their pharmacophoric features (no protein needed) and
-write the aligned molecules out. Input is either a **ranked CSV** (columns ``mol_id``, ``smiles``,
-and optionally a score column such as ``drugclip_score`` — e.g. a virtual-screening output; with no
-score column, input order is the rank) or a **multi-molecule SDF**; the tool embeds a conformer
-ensemble per molecule and iteratively superposes them on their shared features (feature-clique
-matching on relative intramolecular distances -> EM refinement -> directional matching), seedless by
-default.
+"""Tool 1 — molecule alignment. See README.md / docs/molecule_alignment.md.
 
     pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 50] [--seed frame.sdf]
-                             [--protonate]
-
-``--protonate`` sets each aligned ligand to its pH-7.4 dominant microstate (pkasolver, prep env)
-before conformers are built — needed for acids (carboxylate etc.); a no-op for amine/base cations,
-whose cationic centre RDKit already perceives from the neutral SMILES.
-
-Output (in ``--out``): ``aligned_compounds.sdf`` (the aligned molecules, best conformer each),
-``aligned_points.csv`` (pooled feature points), ``alignment_manifest.csv`` (per-mol provenance).
-Feed ``aligned_compounds.sdf`` to ``build-pharmacophore``. Methodology: docs/molecule_alignment.md.
+                             [--pkasolver]
 """
 
 from __future__ import annotations
@@ -67,24 +51,67 @@ def _index_from_sdf(sdf: Path, dest_dir: Path) -> Path:
     return index
 
 
+def _looks_like_header(fields: list[str]) -> bool:
+    """True if a row looks like a header (names a smiles/mol_id column) rather than data."""
+    low = {f.strip().lower() for f in fields}
+    return bool(low & {"smiles", "smi", "mol_id"})
+
+
+def _normalise_csv_index(inp: Path, tmp: Path) -> Path:
+    """Normalise any tabular input into the canonical rank-index CSV (``INDEX_COLUMNS``).
+
+    Accepts, robustly:
+      * a **ranked CSV with a header** — ``smiles`` (or ``smi``) required, ``mol_id`` and a score
+        column (``drugclip_score`` or ``score``) optional, in any order;
+      * a **header-less** ``smiles,score`` file — e.g. the raw ``retrieval.py`` screen output;
+      * a **header-less single-column** SMILES list.
+    A ``mol_id`` is generated (``hit1``, ``hit2`` …) when the input has none, so the SMILES alone is
+    enough — the id is only a row label. Rows with no SMILES are dropped.
+    """
+    rows = [r for r in csv.reader(inp.open(encoding="utf-8")) if r and any(c.strip() for c in r)]
+    if not rows:
+        raise SystemExit(f"align-molecules: no rows in {inp}")
+
+    def col(idx, i):
+        return idx[i].strip() if i is not None and i < len(idx) else ""
+
+    if _looks_like_header(rows[0]):
+        h = {c.strip().lower(): i for i, c in enumerate(rows[0])}
+        smi_i = h.get("smiles", h.get("smi"))
+        if smi_i is None:
+            raise SystemExit(f"align-molecules: {inp} has a header but no 'smiles' column")
+        mid_i, sc_i = h.get("mol_id"), h.get("drugclip_score", h.get("score"))
+        recs = [(col(r, mid_i) or f"hit{n}", col(r, smi_i), col(r, sc_i))
+                for n, r in enumerate(rows[1:], 1)]
+    else:  # header-less: [smiles] or [smiles, score]
+        recs = [(f"hit{n}", r[0].strip(), r[1].strip() if len(r) > 1 else "")
+                for n, r in enumerate(rows, 1)]
+
+    out = tmp / "index_input.csv"
+    with out.open("w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(INDEX_COLUMNS)
+        for mid, smi, sc in recs:
+            if smi:
+                w.writerow(["", mid, "input", smi, sc, ""])
+    return out
+
+
 def _resolve_input(inp: Path, tmp: Path) -> tuple[Path, Path]:
-    """Return (docked_dir, index_csv) for the alignment core, from a CSV or an SDF input."""
+    """Return (docked_dir, index_csv) for the alignment core, from a CSV/txt or an SDF input.
+
+    The index is normalised (see ``_normalise_csv_index``) so a header-less ``smiles,score`` screen
+    output works as directly as a full ranked CSV. ``docked_dir`` stays the input's own directory so
+    any co-located ``<mol_id>_docked.sdf`` (for ``--seed`` / protonation) is still found.
+    """
     if inp.suffix.lower() in (".sdf", ".mol"):
-        index = _index_from_sdf(inp, tmp)
-        return tmp, index
-    # a ranked CSV: the file itself is the index; its directory may hold docked SDFs (for --seed)
-    return inp.parent, inp
+        return tmp, _index_from_sdf(inp, tmp)
+    return inp.parent, _normalise_csv_index(inp, tmp)
 
 
 def _protonate_smiles_map(index_csv: Path, top_n: int, tmp: Path) -> dict[str, str]:
-    """Protonate the top-N ligands to their pH-7.4 dominant microstate, returning
-    ``{mol_id: protonated_smiles}`` to override the neutral index SMILES during alignment.
-
-    Shells out to ``pixi run -e prep protonate-ligands`` (pkasolver): its pinned 2021 stack lives in
-    the isolated ``prep`` env, not this one. Molecules with no ionisable site fall back to their
-    input SMILES, so the returned map covers every ligand. Only the top-N are protonated (the set
-    actually aligned), so the cost is small. Raises ``SystemExit`` with guidance if the step fails.
-    """
+    """Protonate the top-N ligands to their pH-7.4 dominant microstate (pkasolver, prep env),
+    returning ``{mol_id: protonated_smiles}`` to override the neutral index SMILES."""
     hits = read_rank_index(index_csv)[:max(top_n, 0)]
     src = tmp / "to_protonate.csv"
     with src.open("w", newline="", encoding="utf-8") as fh:
@@ -100,9 +127,8 @@ def _protonate_smiles_map(index_csv: Path, top_n: int, tmp: Path) -> dict[str, s
     if proc.returncode != 0 or not out.exists():
         sys.stderr.write((proc.stdout or "") + "\n" + (proc.stderr or "") + "\n")
         raise SystemExit(
-            "align-molecules: --protonate failed. It needs the isolated 'prep' env (pkasolver); "
-            "check `pixi run -e prep protonate-ligands --help` runs. Omit --protonate to align the "
-            "input SMILES as-is (fine for amine/base cations; only acids need protonation).")
+            "align-molecules: --pkasolver failed. Run `pixi run setup-prep` to provision the "
+            "isolated 'prep' env, or omit --pkasolver to align the input SMILES as-is.")
     smiles_map: dict[str, str] = {}
     with out.open(encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
@@ -117,25 +143,14 @@ def main(argv=None) -> int:
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s")
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--input", type=Path, required=True,
-                    help="a ranked CSV (mol_id,smiles[,score]) or a multi-molecule SDF")
+    ap.add_argument("--input", type=Path, required=True, help="ranked CSV or multi-molecule SDF")
     ap.add_argument("--out", type=Path, required=True, help="output directory")
     ap.add_argument("--top-n", dest="top_n", type=int, default=50,
-                    help="align the top-N molecules (by the CSV score column; none -> input order; "
-                         "default 50 — the depth that benchmarked best; >=100 tends to dilute)")
+                    help="align the top-N molecules (default 50)")
     ap.add_argument("--seed", type=Path, default=None,
-                    help="optional 3D seed (a holo co-crystal ligand; .sdf or .mol2). It anchors "
-                         "the alignment frame through the growing pass, then is dropped before the "
-                         "EM refinement so the model reflects the aligned molecules alone "
-                         "(best-performing seed mode). If given in a protein's coordinates the "
-                         "output is positioned in that binding site. Default: seedless.")
-    ap.add_argument("--protonate", action="store_true",
-                    help="protonate the top-N aligned ligands to their pH-7.4 dominant "
-                         "microstate (pkasolver, in the isolated 'prep' env) before "
-                         "conformers are built. Off by default: RDKit perceives the "
-                         "cationic centre of amine/base ligands in the neutral SMILES "
-                         "already; acids (carboxylate, phosphate, tetrazole) need it to "
-                         "avoid a spurious donor + extra acceptor. Requires the 'prep' env.")
+                    help="optional 3D seed ligand (.sdf/.mol2); default seedless")
+    ap.add_argument("--pkasolver", action="store_true",
+                    help="protonate the top-N ligands to pH 7.4 (pkasolver, needs the 'prep' env)")
     ap.add_argument("--config", type=Path, default=None)
     args = ap.parse_args(argv)
 
@@ -143,7 +158,7 @@ def main(argv=None) -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as td:
         docked_dir, index = _resolve_input(args.input.resolve(), Path(td))
-        smiles_map = _protonate_smiles_map(index, args.top_n, Path(td)) if args.protonate else None
+        smiles_map = _protonate_smiles_map(index, args.top_n, Path(td)) if args.pkasolver else None
         res = build_from_seed_alignment(
             docked_dir, index, args.out.resolve(), cfg, top_n_hits=args.top_n,
             seed_k=cfg.alignment.seed_k, name=args.out.name, smiles_map=smiles_map,

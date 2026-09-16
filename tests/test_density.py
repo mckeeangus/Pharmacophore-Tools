@@ -7,8 +7,6 @@ import numpy as np
 from pharmpipe.features.extract import FeaturePoint, FeatureTable
 from pharmpipe.pharmacophore.config import DensityConfig, ToleranceConfig
 from pharmpipe.pharmacophore.density import (
-    EV_FAMILY,
-    _excluded_volume,
     _local_maxima,
     build_density,
 )
@@ -162,29 +160,3 @@ def test_local_maxima_dedup_by_bandwidth():
     assert np.allclose(merged[0], np.array([2.5, 2.5, 2.5]))   # the taller peak survives
 
 
-def test_excluded_volume_picks_bordering_atoms_only():
-    # ligand cloud at the origin; protein atoms at 1 A (occupied), 4 A (border) and
-    # 20 A (too far). Only the 4 A shell should yield excluded-volume spheres.
-    ligand = np.zeros((5, 3))
-    occupied = np.array([[1.0, 0, 0], [0, 1.0, 0]])
-    border = np.array([[4.0, 0, 0], [0, 4.0, 0], [0, 0, 4.0]])
-    far = np.array([[20.0, 0, 0]])
-    protein = np.vstack([occupied, border, far])
-    dcfg = DensityConfig(ev_shell=5.0, ev_clearance=2.0, ev_voxel=2.0, ev_radius=1.0)
-    feats = _excluded_volume(protein, ligand, dcfg)
-    assert feats and all(f.family == EV_FAMILY for f in feats)
-    for f in feats:
-        d = np.linalg.norm(np.array(f.position) - ligand, axis=1).min()
-        assert dcfg.ev_clearance < d <= dcfg.ev_shell
-
-
-def test_excluded_volume_appended_in_full_build():
-    pts, ligs = [], [f"L{i}" for i in range(4)]
-    for lig in ligs:
-        pts.append(FeaturePoint("Donor", 0.0, 0.0, 0.0, lig))
-    table = FeatureTable(points=pts, ligand_ids=ligs)
-    ligand_atoms = np.zeros((4, 3))
-    protein = np.array([[4.0, 0, 0], [0, 4.0, 0]])
-    res = build_density(table, DensityConfig(occupancy_floor=2.0), _tol(), "ev",
-                        ligand_atoms=ligand_atoms, protein_atoms=protein)
-    assert any(f.family == EV_FAMILY for f in res.pharmacophore.features)

@@ -18,7 +18,6 @@ from .model import Pharmacophore
 # a pure display size (a mesh/wireframe sphere), independent of the tolerance and the 1 A
 # merge cutoff.
 PH4_SPHERE_RADIUS = 1.25
-EV_FAMILY = "ExcludedVolume"
 
 
 def write_json(ph: Pharmacophore, path: Path) -> Path:
@@ -31,8 +30,7 @@ def read_json(path: Path) -> Pharmacophore:
 
 
 # The pharmacophore CSV is the tool-to-tool interchange (construction -> visualisation):
-# one row per consensus feature. Feature rows only (the ligand-based tools have no receptor,
-# hence no excluded volume). The JSON stays the lossless canonical model.
+# one row per consensus feature. The JSON stays the lossless canonical model.
 _MODEL_CSV_COLUMNS = ["family", "label", "x", "y", "z", "radius", "n_points", "n_ligands",
                       "support", "dx", "dy", "dz"]
 
@@ -47,8 +45,6 @@ def write_model_csv(ph: Pharmacophore, path: Path) -> Path:
         w = csv.writer(fh)
         w.writerow(_MODEL_CSV_COLUMNS)
         for f in ph.features:
-            if f.family == EV_FAMILY:
-                continue  # the interchange is purely ligand-based: feature rows only
             d = f.direction if f.direction is not None else ("", "", "")
             w.writerow([f.family, f.label, round(f.x, 4), round(f.y, 4), round(f.z, 4),
                         round(f.radius, 4), f.n_points, f.n_ligands, round(f.support, 4),
@@ -184,10 +180,6 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
     lines.append("")
     has_features = False
     for i, feat in enumerate(ph.features):
-        # Excluded-volume markers are receptor steric markers, not ligand chemistry —
-        # they stay in the JSON model but are never drawn in the visualisation.
-        if feat.family == EV_FAMILY:
-            continue
         obj = (feat.label or f"{feat.family} {i}").replace(" ", "_")
         pos = f"pos=[{feat.x:.3f}, {feat.y:.3f}, {feat.z:.3f}]"
         # fixed-radius mesh (wireframe) sphere ...
@@ -201,8 +193,7 @@ def write_pml(ph: Pharmacophore, path: Path, colors: dict[str, list[float]],
         lines.append(f"color ph4_{feat.family}, {ctr}")
         lines.append(f"group ph4_centers, {ctr}")
         has_features = True
-    # Some cells keep only excluded volume (no ligand features) — then there are no
-    # ph4_* objects to style, so skip the mesh/centre directives (they'd error).
+    # No ph4_* objects to style when the model has zero features (they'd error).
     if has_features:
         lines += ["set surface_quality, 2", "flag ignore, ph4_*, clear",
                   "show mesh, ph4_*", "hide mesh, ph4_centers",

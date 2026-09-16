@@ -50,17 +50,15 @@ features:
     Aromatic:         [1.00, 0.85, 0.00]   # yellow — aromatic ring
     PosIonizable:     [1.00, 0.00, 0.00]   # red    — positive ionisable
     NegIonizable:     [1.00, 0.45, 0.00]   # orange — negative ionisable (uncoloured by request; kept distinct)
-    ExcludedVolume:   [0.55, 0.55, 0.55]   # grey   — receptor excluded-volume (density strategy)
 
 # --- Consensus strategy -----------------------------------------------------
 # Consensus features come from a single strategy: a Gaussian occupancy field (KDE)
 # whose peaks become features (see `density` below and pharmacophore/density.py).
-# Deterministic (fixed grid, no seeding). Outputs live in catalogue/<slug>/pharmacophores/.
+# Deterministic (fixed grid, no seeding).
 
 # --- Density (consensus strategy) -------------------------------------------
 # The scientific knobs are the length scale (voxel/bandwidth), the occupancy floor, and
-# the membership radius (which defines support); the excluded-volume sub-block is a
-# self-contained add-on.
+# the membership radius (which defines support).
 density:
   voxel: 1.0              # grid spacing (A) — spatial resolution of the field
   bandwidth: 1.5         # Gaussian smoothing sigma (A) of the field that sets feature
@@ -82,8 +80,8 @@ density:
   # Collapse overlapping features across families (a donor and an acceptor that land on
   # the same spot are not double-counted), keeping the denser peak. 1.0 = fixed 1 A
   # centre-to-centre cutoff (a small, predictable reach); null = geometric (larger tolerance
-  # radius, 1-3 A, which over-reaches). Excluded-volume spheres are exempt (receptor markers).
-  # Removals are logged in model_summary.md's "Merged away ... in favour of" table.
+  # radius, 1-3 A, which over-reaches). Removals are logged in model_summary.md's
+  # "Merged away ... in favour of" table.
   merge_overlapping: true
   merge_radius: 1.0
   # Merge only acts WITHIN a family (false): a region can carry several pharmacophore types at
@@ -96,13 +94,6 @@ density:
   merge_exempt_pairs:
     - [Donor, Acceptor]
     - [Aromatic, LumpedHydrophobe]
-  # Excluded-volume spheres: receptor atoms that line the pocket but no ligand reaches.
-  excluded_volume: true
-  ev_shell: 5.0          # consider protein atoms within this (A) of the ligand cloud
-  ev_clearance: 2.0      # ...but beyond this (A) of every ligand atom (else occupied)
-  ev_voxel: 2.0          # coarsen qualifying protein atoms onto this grid (one sphere each)
-  ev_radius: 1.0         # excluded-volume sphere radius (A)
-  ev_max: 40             # cap on the number of excluded-volume spheres
 
 # --- Peak -> kept feature selection -----------------------------------------
 selection:
@@ -128,16 +119,12 @@ tolerance:
   min: 1.0                     # clamp so a tight cluster still has a usable radius
   max: 3.0                     # and a diffuse cluster does not balloon
 
-# --- Alignment (docked-seed minimum-docking build ONLY) ---------------------
-# Consumed ONLY by the `--seed-docked` mode (pharmacophore/align.py); it is orthogonal
-# to the catalogue/known-actives path and does not affect any other build. That mode
-# seeds the model from a few docked poses (bioactive frame), then aligns the remaining
-# ranked compounds onto it by feature-clique matching over a conformer ensemble. The
-# recommended recipe is `--seed-docked DIR --top-hits 100 --seed-k 5`: dock only the top 5
-# ranked ligands (the bioactive frame — any engine; GNINA or AutoDockFR, see docs/adfr_seeding.md),
-# then incrementally align + fold in the next 95 ranked compounds. The correspondence graph
-# matches features on their *relative intra-molecular distances*, so the model captures the
-# shared pharmacophoric geometry independent of any single frame.
+# --- Alignment (align-molecules) ---------------------------------------------
+# Consumed by `align-molecules` (pharmacophore/align.py): aligns a ranked set of compounds by
+# feature-clique matching over a conformer ensemble, seedless by default or bootstrapped from
+# an optional `--seed` ligand. The correspondence graph matches features on their *relative
+# intra-molecular distances*, so the model captures the shared pharmacophoric geometry
+# independent of any single frame. See docs/molecule_alignment.md.
 alignment:
   # Conformer ensemble per ligand (RDKit ETKDG v3 + MMFF). The bioactive conformer must be
   # in the ensemble for the alignment to have anything correct to find, so sample generously

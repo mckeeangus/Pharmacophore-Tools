@@ -17,6 +17,9 @@ visualise-pharmacophore = "python scripts/visualise_pharmacophore.py"
 
 test = { cmd = "pytest -q", depends-on = [] }
 lint = "ruff check ."
+# Provisions the isolated `prep` env (pkasolver) so --pkasolver works: clones the vendored
+# pkasolver checkout and installs the env. Not part of normal setup (heavy, network-heavy).
+setup-prep = "python scripts/setup_prep.py"
 
 # Python is pinned per-feature (not globally) so the legacy `prep` env can use 3.10
 # for pkasolver's 2021-era stack while everything else stays on 3.12.

@@ -17,9 +17,7 @@ membership-radius support clears the support floor.
 Precedent: dynophore cloud -> super-feature with occurrence frequency (Wolber lab);
 field-maximum extraction (GBPM; Baroni et al. FLAPpharm); Gaussian feature-density
 molecular representation (Tanrikulu & Schneider); occupancy/frequency thresholding
-across complexes (REPHARMBLE; SARS-CoV-2 Mpro consensus pharmacophores). Excluded-volume
-spheres from receptor atoms in unoccupied pocket regions follow the GBPM idea of reading
-the *complement* of the ligand envelope off the receptor.
+across complexes (REPHARMBLE; SARS-CoV-2 Mpro consensus pharmacophores).
 """
 
 from __future__ import annotations
@@ -28,7 +26,6 @@ from dataclasses import asdict, replace
 
 import numpy as np
 from scipy.ndimage import gaussian_filter, maximum_filter
-from scipy.spatial import cKDTree
 
 from ..features.extract import FeatureTable
 from .build import (
@@ -41,9 +38,6 @@ from .build import (
 )
 from .config import DensityConfig, ToleranceConfig
 from .model import Pharmacophore, PharmacophoreFeature
-
-EV_FAMILY = "ExcludedVolume"
-
 
 # --- molecule weighting ------------------------------------------------------
 
@@ -208,55 +202,16 @@ def _family_density(family: str, coords: np.ndarray, ligands: list[str],
     return labels, centers, kept
 
 
-# --- excluded volume ---------------------------------------------------------
-
-def _excluded_volume(protein_atoms: np.ndarray, ligand_atoms: np.ndarray,
-                     dcfg: DensityConfig) -> list[PharmacophoreFeature]:
-    """Spheres on receptor atoms that border the pocket but no ligand occupies.
-
-    A protein atom qualifies when its nearest ligand atom is within ``ev_shell``
-    (it lines the pocket) yet beyond ``ev_clearance`` (the ligand does not reach it).
-    Qualifying atoms are coarsened onto an ``ev_voxel`` grid — one sphere per occupied
-    cell — and the nearest ``ev_max`` to the ligand cloud are kept.
-    """
-    if len(protein_atoms) == 0 or len(ligand_atoms) == 0:
-        return []
-    tree = cKDTree(ligand_atoms)
-    dist, _ = tree.query(protein_atoms, k=1)
-    keep = (dist > dcfg.ev_clearance) & (dist <= dcfg.ev_shell)
-    atoms = protein_atoms[keep]
-    if len(atoms) == 0:
-        return []
-    # one sphere per coarse voxel, at the mean of its atoms
-    cell = np.floor(atoms / dcfg.ev_voxel).astype(int)
-    buckets: dict[tuple[int, int, int], list[np.ndarray]] = {}
-    for key, atom in zip(map(tuple, cell), atoms, strict=True):
-        buckets.setdefault(key, []).append(atom)
-    spheres = [(np.mean(grp, axis=0), len(grp)) for grp in buckets.values()]
-    spheres.sort(key=lambda s: tree.query(s[0], k=1)[0])   # nearest the ligand first
-    feats: list[PharmacophoreFeature] = []
-    for centre, n_atoms in spheres[: dcfg.ev_max]:
-        feats.append(PharmacophoreFeature(
-            family=EV_FAMILY, x=float(centre[0]), y=float(centre[1]), z=float(centre[2]),
-            radius=dcfg.ev_radius, n_points=int(n_atoms), n_ligands=0, support=0.0,
-            direction=None))
-    return feats
-
-
 # --- public builder ----------------------------------------------------------
 
 def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig,
                   name: str, metadata: dict | None = None, *,
                   min_support: float = 0.5,
-                  ligand_atoms: np.ndarray | None = None,
-                  protein_atoms: np.ndarray | None = None,
                   scaffold_freq: dict[str, int] | None = None) -> BuildResult:
     """The density consensus builder: feature points in -> ``BuildResult`` out.
 
     ``min_support`` is the selection floor: a peak becomes a feature only if at least this
-    fraction of the cell's ligands have a point within ``dcfg.membership_radius`` of its
-    centre. ``ligand_atoms`` / ``protein_atoms`` (both in the aligned frame) enable the
-    excluded-volume spheres; omit them and only ligand-derived features are built.
+    fraction of the cell's ligands have a point within ``dcfg.membership_radius`` of its centre.
     """
     assignments: list[ClusterAssignment] = []
     pooled: list[tuple[PharmacophoreFeature, tuple[str, int]]] = []
@@ -273,8 +228,7 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
             centers=centers, kept_labels=set()))
 
     # Cross-family merge: one feature per region of space (a donor and an acceptor that
-    # land on the same atoms cannot both be true), keeping the dominant peak. Same rule
-    # as the k-means path; excluded-volume spheres (added after) are exempt.
+    # land on the same atoms cannot both be true), keeping the dominant peak.
     dropped: list = []
     if dcfg.merge_overlapping:
         exempt = frozenset(frozenset(pair) for pair in dcfg.merge_exempt_pairs)
@@ -285,9 +239,6 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
     for assignment in assignments:
         assignment.kept_labels = kept_by_family.get(assignment.family, set())
         assignment.feature_labels = label_index.get(assignment.family, {})
-
-    if dcfg.excluded_volume and protein_atoms is not None and ligand_atoms is not None:
-        features.extend(_excluded_volume(protein_atoms, ligand_atoms, dcfg))
 
     meta = dict(metadata or {})
     meta.setdefault("consensus", {"method": "density", "params": asdict(dcfg)})

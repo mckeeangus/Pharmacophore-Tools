@@ -1,39 +1,11 @@
 #!/usr/bin/env python
-"""Visualise a pharmacophore + its compounds in PyMOL.
-
-Standalone: depends only on the Python standard library and PyMOL's ``cmd`` — it
-parses the ``pharmacophore_model.json`` itself, so it runs anywhere the files are copied.
+"""Render a pharmacophore_model.json + its aligned ligands in PyMOL. Standalone (stdlib + PyMOL
+``cmd`` only). See README.md / docs/pharmacophore_construction.md.
 
 Run (needs the viz environment):
 
     pixi run -e viz pymol -cq scripts/pymol_pharmacophore.py -- \
-        --pharmacophore catalogue/<slug>/pharmacophores/<cell>/pharmacophore_model.json \
-        --compounds     catalogue/<slug>/groups/<cell> \
-        --out           <cell>.pse
-
-Kept pharmacophore features are drawn as **fixed-radius mesh (wireframe) spheres**
-(``PH4_SPHERE_RADIUS``) each with an opaque centre pseudoatom marking its position,
-coloured by family (HBD/donor pink, HBA/acceptor green, hydrophobic cyan, aromatic
-yellow, positive-ionisable red). The feature's true tolerance radius lives in the JSON,
-not the sphere size. Directional features additionally carry an **orientation arrow**
-(grouped ``ph4_directions``) drawn from the feature's ``direction`` vector: a single-headed
-arrow along the signed lone-pair / donor vector for Donor/Acceptor, and a **double-headed**
-arrow along the aromatic ring normal (an undirected axis — either ring face is equivalent).
-**Excluded-Volume markers are receptor steric markers and are NOT
-drawn.** ``--features features.csv`` additionally overlays the raw extracted points
-(small opaque dots). Omit ``--out`` to stay in an interactive PyMOL window; ``--image
-PATH`` additionally writes a ray-traced PNG snapshot.
-
-``--sweep-out PATH`` writes a **second, separate** visualisation: a support-cutoff sweep
-across 20 PyMOL states. Reading ``features.csv`` (all raw clusters, no overlap merge and
-no support floor), each state raises a support cutoff by 0.05 (support = distinct ligands
-with a point within ``--membership-radius`` of the cluster centre ÷ total ligands),
-showing every cluster at or above it — so scrubbing states 0.05 → 1.00 reveals which
-clusters survive as the bar rises. ``--sweep-image PATH`` snapshots state 1 (all clusters).
-
-By default the clean ``representative_ligand.sdf`` written beside the JSON is shown
-(correct bond orders). Pass ``--compounds DIR`` to overlay the full raw mol2 set
-instead (heavy-atom only — bonds may render imperfectly).
+        --pharmacophore pharmacophore_model.json --compounds aligned_dir --out session.pse
 """
 
 import argparse
@@ -58,7 +30,6 @@ COLORS = {
     "Aromatic": (1.00, 0.85, 0.00),         # yellow
     "PosIonizable": (1.00, 0.00, 0.00),     # red
     "NegIonizable": (1.00, 0.45, 0.00),     # orange
-    "ExcludedVolume": (0.55, 0.55, 0.55),   # grey — receptor excluded-volume (density)
 }
 _GREY = (0.5, 0.5, 0.5)
 
@@ -121,23 +92,20 @@ def _draw_direction(name, pos, direction, family, rgb):
 def _args(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("--pharmacophore", required=True)
-    ap.add_argument("--compounds", help="optional aligned ligands to overlay: a directory of "
-                    "*.mol2, or a single multi-molecule .sdf/.mol2")
-    ap.add_argument("--ligand", help="representative ligand to show "
+    ap.add_argument("--compounds", help="aligned ligands to overlay, each as its own object: a "
+                    "*.mol2 dir, or a multi-molecule .sdf/.mol2")
+    ap.add_argument("--ligand", help="single representative ligand to show "
                     "(default: representative_ligand.sdf beside the JSON)")
-    ap.add_argument("--features", help="optional features.csv to overlay raw points "
-                    "(also the source for --sweep-out; defaults to features.csv beside the JSON)")
+    ap.add_argument("--features", help="features.csv to overlay raw points / drive --sweep-out "
+                    "(default: features.csv beside the JSON)")
     ap.add_argument("--out", help="write the kept-model .pse here (else interactive)")
     ap.add_argument("--image", help="write a ray-traced .png of the kept-model view here")
-    ap.add_argument("--sweep-out", dest="sweep_out",
-                    help="write the occupancy-cutoff sweep .pse (20+ states) here")
-    ap.add_argument("--sweep-image", dest="sweep_image",
-                    help="write a .png snapshot of the sweep (state 1 = all clusters) here")
+    ap.add_argument("--sweep-out", dest="sweep_out", help="write the support-cutoff sweep .pse")
+    ap.add_argument("--sweep-image", dest="sweep_image", help="snapshot the sweep (state 1) here")
     ap.add_argument("--min-cluster-size", dest="min_cluster_size", type=int, default=2,
-                    help="drop sweep clusters with fewer points than this (matches config)")
+                    help="drop sweep clusters with fewer points than this")
     ap.add_argument("--membership-radius", dest="membership_radius", type=float, default=1.5,
-                    help="sweep support radius (A): a ligand supports a cluster only if it "
-                         "has a point within this of the centre (matches config)")
+                    help="sweep support radius (A, matches config)")
     return ap.parse_args(argv)
 
 
@@ -197,10 +165,6 @@ def load_features(json_path):
     has_features = False
     for i, feat in enumerate(model.get("features", [])):
         family = feat["family"]
-        # Excluded-volume markers are receptor steric markers, not ligand chemistry —
-        # part of the JSON model but never drawn in the visualisation.
-        if family == "ExcludedVolume":
-            continue
         pos = [feat["x"], feat["y"], feat["z"]]
         # fixed-radius mesh (wireframe) sphere ...
         sphere = f"{family}_{i}"
@@ -220,7 +184,7 @@ def load_features(json_path):
             _draw_direction(f"{family}_dir_{i}", pos, direction,
                             family, COLORS.get(family, _GREY))
         has_features = True
-    if has_features:                       # some cells keep only excluded volume -> no spheres
+    if has_features:
         _show_mesh_spheres()
         # centres are opaque nonbonded-sphere points, not mesh
         cmd.hide("mesh", "ph4_centers")
@@ -354,7 +318,7 @@ def main(argv):
                             "representative_ligand.sdf")
         ligand = cand if os.path.exists(cand) else None
 
-    # --- kept-model view (mesh spheres; excluded volume not drawn) ---
+    # --- kept-model view (mesh spheres) ---
     _new_scene()
     shown = _load_ligand_or_compounds(args, ligand)
     name = load_features(args.pharmacophore)

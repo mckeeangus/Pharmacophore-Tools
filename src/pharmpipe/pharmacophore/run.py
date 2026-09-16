@@ -2,8 +2,7 @@
 
 This is the orchestration edge: it wires the pure pieces (load -> featurize ->
 cluster -> assemble) and writes the model artifacts. The general entry point is
-``build_from_directory``; ``build_for_cell`` adds the catalogue convention
-(SMILES sourced from the target's unique_ligands.csv).
+``build_from_directory``; ``build_from_seed_alignment`` drives the feature-alignment build.
 """
 
 from __future__ import annotations
@@ -16,12 +15,7 @@ from pathlib import Path
 import numpy as np
 
 from ..features.conformers import generate_conformers
-from ..features.dock_load import (
-    load_docked_set,
-    read_protonated_smiles,
-    read_rank_index,
-    write_manifest,
-)
+from ..features.dock_load import load_docked_set, read_protonated_smiles, read_rank_index
 from ..features.extract import (
     FeaturePoint,
     FeatureResolution,
@@ -132,11 +126,6 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
                    membership_radius: float, path: Path,
                    directional_caveat: bool = False) -> Path:
     ph: Pharmacophore = result.pharmacophore
-    # Excluded-volume spheres are receptor steric markers, not ligand-derived
-    # peaks: they carry no label and no support, so they are counted separately
-    # and kept out of the per-feature support table (which is one row per peak).
-    ligand_feats = [f for f in ph.features if f.family != "ExcludedVolume"]
-    n_ev = len(ph.features) - len(ligand_feats)
     lines = [
         f"# Pharmacophore — {ph.name}", "",
         f"- Ligands loaded: **{n_ligands}** "
@@ -146,10 +135,8 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
            if report.skipped else ""),
         f"- Consensus method: `{ph.metadata.get('consensus_method', '?')}`",
         f"- Representative ligand (viz): `{ph.metadata.get('representative_ligand') or 'none'}`",
-        f"- Features kept: **{len(ligand_feats)}**",
+        f"- Features kept: **{len(ph.features)}**",
     ]
-    if n_ev:
-        lines.append(f"- Excluded-volume spheres (receptor markers): **{n_ev}**")
     if directional_caveat:
         lines += [
             "",
@@ -167,7 +154,7 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
         "",
         "| Feature | Points | Ligands | Support | Occupancy |", "|---|---:|---:|---:|---:|",
     ]
-    for f in sorted(ligand_feats, key=lambda f: (f.family, _feature_ordinal(f))):
+    for f in sorted(ph.features, key=lambda f: (f.family, _feature_ordinal(f))):
         mark = " †" if directional_caveat and f.family in _DIRECTIONAL_FAMILIES else ""
         lines.append(
             f"| {(f.label or f.family)}{mark} | {f.n_points} | {f.n_ligands} | {f.support:.2f} "
@@ -221,13 +208,6 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
     return path
 
 
-def _ligand_atom_coords(molecules: list[tuple[str, object]]) -> np.ndarray:
-    """All heavy-atom coordinates of the loaded poses (the ligand envelope)."""
-    blocks = [m.GetConformer().GetPositions()
-              for _, m in molecules if m is not None and m.GetNumConformers()]
-    return np.vstack(blocks) if blocks else np.empty((0, 3), dtype=float)
-
-
 def _scaffold_frequencies(molecules: list[tuple[str, object]]) -> dict[str, int]:
     """Map each ligand_id to how many loaded ligands share its Murcko scaffold."""
     from rdkit.Chem import MolToSmiles
@@ -250,15 +230,12 @@ def _scaffold_frequencies(molecules: list[tuple[str, object]]) -> dict[str, int]
 def build_from_molecules(molecules: list[tuple[str, object]], report: LoadReport,
                          out_dir: Path, cfg: PharmacophoreConfig, *,
                          source: dict, name: str,
-                         reference_pdb: Path | None = None,
                          extra_files: list[Path] | None = None) -> ModelOutputs | None:
     """Build + write one model from already-loaded aligned poses (the shared core).
 
-    ``source`` is copied into the model metadata verbatim, so each entry point records
-    its own provenance (mol2 directory vs docked screening set). ``extra_files`` are
-    appended to the artifact list (e.g. a docking manifest). Returns ``None`` (writing
-    nothing) when fewer than ``selection.min_ligands`` poses loaded. ``reference_pdb``
-    (aligned receptor) enables density excluded-volume spheres.
+    ``source`` is copied into the model metadata verbatim, so each entry point records its own
+    provenance. ``extra_files`` are appended to the artifact list. Returns ``None`` (writing
+    nothing) when fewer than ``selection.min_ligands`` poses loaded.
     """
     if not molecules:
         log.warning("[%s] no ligands loaded — nothing to build", name)
@@ -283,6 +260,11 @@ def build_from_molecules(molecules: list[tuple[str, object]], report: LoadReport
     result = build_density(table, cfg.density, cfg.tolerance, name, metadata,
                            min_support=cfg.selection.min_support_fraction,
                            scaffold_freq=scaffold_freq)
+    _set_feature_directions(
+        result.pharmacophore,
+        _pooled_directions(molecules, factory, cfg.features.families,
+                           cfg.features.feature_hierarchy),
+        cfg.density.membership_radius)
 
     rep_id = best_representative(table, result.pharmacophore)
     rep_mol = dict(molecules).get(rep_id) if rep_id else None
@@ -335,70 +317,17 @@ def _write_model_artifacts(result, report: LoadReport, out_dir: Path,
 
 def build_from_directory(input_dir: Path, out_dir: Path, cfg: PharmacophoreConfig,
                          smiles_map: dict[str, str] | None = None,
-                         name: str | None = None,
-                         reference_pdb: Path | None = None) -> ModelOutputs | None:
+                         name: str | None = None) -> ModelOutputs | None:
     """Build a pharmacophore from any directory of aligned ``*.mol2`` compounds.
 
     Returns ``None`` (and writes nothing) when the set has fewer than
     ``selection.min_ligands`` loadable ligands — too few to define a hypothesis.
-    ``reference_pdb`` (aligned receptor) enables excluded-volume spheres.
     """
     name = name or input_dir.name
     molecules, report = load_directory(input_dir, smiles_map)
     source = {"input_dir": str(input_dir), "n_ligands": len(molecules),
               "load": report.by_method, "skipped": report.skipped}
-    return build_from_molecules(molecules, report, out_dir, cfg, source=source,
-                                name=name, reference_pdb=reference_pdb)
-
-
-def build_from_docked_set(docked_dir: Path, index_csv: Path, out_dir: Path,
-                          cfg: PharmacophoreConfig, *, top_n_hits: int,
-                          top_n_poses: int = 1, name: str | None = None,
-                          reference_pdb: Path | None = None,
-                          score_column: str = "drugclip_score",
-                          pose_score: str = "cnnaffinity",
-                          max_vina: float | None = None) -> ModelOutputs | None:
-    """Build a pharmacophore from a DrugCLIP -> GNINA docked screening directory.
-
-    Treats the top-``top_n_hits`` ranked compounds (best ``top_n_poses`` poses each,
-    default 1) as one aligned active set and emits a single hypothesis, alongside a
-    ``docked_manifest.csv`` recording the rank/pose provenance of every loaded pose. Poses
-    are chosen by ``pose_score`` binding quality (``max_vina`` optional clash filter), not
-    raw SDF order. Returns ``None`` when fewer than ``selection.min_ligands`` poses loaded.
-    """
-    name = name or docked_dir.name
-    molecules, report, manifest = load_docked_set(
-        docked_dir, index_csv, top_n_hits, top_n_poses, score_column, pose_score, max_vina)
-    source = {"docked_dir": str(docked_dir), "index": str(index_csv),
-              "score_column": score_column, "top_n_hits": top_n_hits,
-              "top_n_poses": top_n_poses, "pose_score": pose_score, "max_vina": max_vina,
-              "n_hits": len({r.mol_id for r in manifest}),
-              "n_ligands": len(molecules),
-              "load": report.by_method, "skipped": report.skipped}
-    ensure_dir(out_dir)
-    manifest_file = write_manifest(manifest, out_dir / "docked_manifest.csv")
-    return build_from_molecules(molecules, report, out_dir, cfg, source=source,
-                                name=name, reference_pdb=reference_pdb,
-                                extra_files=[manifest_file])
-
-
-def _aligned_ligand_atoms(seed_mols, transforms, conf_mols) -> np.ndarray:
-    """Heavy(+H)-atom coords of the aligned ligand envelope, for excluded volume.
-
-    Seed poses are already in frame; each aligned compound's chosen conformer is transformed
-    by its clique rotation/translation. Best-effort — a mol that fails to transform is skipped.
-    """
-    blocks = [m.GetConformer().GetPositions() for _, m in seed_mols if m.GetNumConformers()]
-    for lig, (rot, trans, ci) in transforms.items():
-        mol, cids = conf_mols.get(lig, (None, None))
-        if mol is None or ci >= len(cids):
-            continue
-        try:
-            pos = mol.GetConformer(cids[ci]).GetPositions()
-            blocks.append(pos @ rot.T + trans)
-        except Exception:                                # pragma: no cover — conformer edge
-            continue
-    return np.vstack(blocks) if blocks else np.empty((0, 3), dtype=float)
+    return build_from_molecules(molecules, report, out_dir, cfg, source=source, name=name)
 
 
 def _read_seed_sdf(path: Path) -> list[tuple[str, object]]:
@@ -438,6 +367,23 @@ def _aligned_entries(res, conf_mols: dict, ranks: dict):
                         {"mol_id": lig, "drugclip_rank": ranks.get(lig, ""),
                          "conformer": ci, "align_rmsd": rmsd}))
     return entries
+
+
+def _pooled_directions(molecules: list[tuple[str, object]], factory, families: list[str],
+                       hierarchy: list[list[str]]) -> list[tuple]:
+    """Per-point ``(family, xyz, direction, ligand_id)`` from the loaded 3D poses.
+
+    The orientation source for a build-from-molecules run: re-perceives each aligned pose's
+    directional features (Donor D->H, Acceptor lone-pair, Aromatic ring-normal) so the consensus
+    features can carry a direction. Poses must retain explicit hydrogens for Donor vectors.
+    """
+    pooled: list[tuple] = []
+    for lig, mol in molecules:
+        if mol is None or not mol.GetNumConformers():
+            continue
+        for fam, xyz, d in conformer_features(mol, factory, families, hierarchy):
+            pooled.append((fam, xyz, d, lig))
+    return pooled
 
 
 def _set_feature_directions(pharmacophore, pooled_points, membership_radius: float) -> None:

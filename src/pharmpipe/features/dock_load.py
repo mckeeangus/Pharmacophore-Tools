@@ -75,7 +75,7 @@ class PoseRecord:
 # Per-pose GNINA scores usable to select poses by binding quality. Each maps to the
 # SDF tag and whether a HIGHER value is better (GNINA writes poses in CNNscore order,
 # but CNNscore ranks physically-clashing poses highly — CNNaffinity / minimizedAffinity
-# discriminate quality; see catalogue/pharmacophore_method.md).
+# discriminate quality better).
 POSE_METRICS: dict[str, tuple[str, bool]] = {
     "cnnscore":    ("CNNscore", True),           # pose-quality classifier [0,1], higher better
     "cnnaffinity": ("CNNaffinity", True),        # predicted pK, higher better

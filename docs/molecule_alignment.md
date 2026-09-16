@@ -16,9 +16,12 @@ experimental poses give.
 
 Auto-detected by extension:
 
-- a **ranked CSV** — columns `mol_id`, `smiles`, and optionally a score column (e.g.
-  `drugclip_score` from a virtual screen). The top `--top-n` by score are aligned; with no score
-  column, input order is the rank.
+- a **ranked CSV** — read robustly into a canonical index. A header naming a `smiles` (or `smi`)
+  column is enough; `mol_id` and a score column (`drugclip_score` or `score`) are optional and may
+  appear in any order. A **header-less** `smiles,score` file (e.g. a raw `retrieval.py` screen
+  output) and a bare one-column SMILES list are also accepted. When there is no `mol_id` a row label
+  is generated (`hit1`, `hit2`, … — the id is only a label; the SMILES carries the chemistry). The
+  top `--top-n` by score are aligned; with no score column, input order is the rank.
 - a **multi-molecule SDF** — each record a compound; molecule order is the rank, the title
   (or `mol<i>`) is the id, and the connectivity/SMILES is read from the record.
 
@@ -47,7 +50,7 @@ it is **not symmetric between bases and acids**:
 The pH-7.4 form is taken with precedence **explicit map → docked `protonated_smiles` → the input
 SMILES**. Three ways to supply it: (a) a `<mol_id>_docked.sdf` carrying a `protonated_smiles` tag
 beside the CSV (as many virtual-screening outputs provide) is used automatically; (b) pass
-**`--protonate`**, which runs the `prep`-env pkasolver on the top-N aligned ligands and overrides
+**`--pkasolver`**, which runs the `prep`-env pkasolver on the top-N aligned ligands and overrides
 their SMILES with the pH-7.4 microstate (off by default, since it is a no-op for base-only ligand
 sets and needs the isolated `prep` env); (c) the input SMILES as-is (the honest fallback). A crystal
 `*.mol2` build instead uses the `prep`-env pkasolver + weak-acid guard

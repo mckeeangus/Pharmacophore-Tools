@@ -1,5 +1,5 @@
 [project]
-name = "Pharmacophore Tools"
+name = "pharmpipe"
 version = "0.1.0"
 description = "A set of tools for the construction and analysis of Pharmacophores."
 authors = [{ name = "Angus McKee", email = "angus.mckee@anu.edu.au" }]

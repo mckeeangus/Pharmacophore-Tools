@@ -51,5 +51,8 @@ __pycache__/
 Thumbs.db
 
 # Local Claude Code settings & runtime locks (not project state)
-.claude/settings.local.json
-.claude/scheduled_tasks.lock
+.claude/
+CLAUDE.md
+
+
+.docs/

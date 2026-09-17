@@ -1,29 +1,7 @@
 # Protonation microstate selection at physiological pH (Stage-4 prep).
 #
-# pkasolver predicts a pKa for every ionizable site and the dominant microstate at the
-# target pH is chosen by a Henderson-Hasselbalch ladder walk (pharmpipe/prep/protonate.py).
-# pkasolver is accurate for ISOLATED ionizable centres but systematically OVER-DEPROTONATES
-# weak acids (O-H, N-H) that sit on complex, poly-ionizable scaffolds: adjacent-charge
-# electrostatics, intramolecular H-bonds, and second/third-ionization (macrostate) effects
-# are invisible to a molecular-graph GNN and under-represented in its training window. The
-# same blind spot affects every current graph pKa model (QupKake, MolGpKa, ...), so it is
-# not fixed by a heavier predictor. Observed across this set, pkasolver returned the
-# conjugate BASE at pH 7.4 for phenols (salicylate, gallate, tyrosine, estradiol),
-# aliphatic/sugar alcohols, amides, primary sulfonamides, and amino-heteroaromatics —
-# corrupting donor/acceptor/±ionizable perception. See catalogue/pharmacophore_method.md §2.1.
-#
-# Weak-acid guard (this file): the classes below have aqueous pKa well above 7.4 and are
-# therefore NEUTRAL (protonated) at physiological pH. After the ladder walk, any member
-# left as its conjugate base is re-protonated in the final microstate, UNLESS it matches a
-# genuinely-acidic structural exception (which keeps pkasolver's deprotonation). The guard
-# is purely ADDITIVE — it only ever adds a proton — so it cannot touch carboxylates,
-# phosphates, protonated amines, or any centre pkasolver handles correctly. It is a general
-# STRUCTURAL prior, not a per-compound literature pKa assignment.
-#
-# Deliberately NOT guarded (left to pkasolver): aromatic ring N-H (tetrazolate,
-# imidazolate) and enols / vinylogous acids (tropolones, tetramic/tetronic acids,
-# 4-hydroxycoumarins) are genuinely acidic; cofactor lactams (guanine/uracil) only occur
-# in review-track cofactors that never enter a built cell.
+# pkasolver tends to perform poorly on these groups, so we use SMARTS-based heuristics to re-protonate them. The `weak_acid_guard`.
+# Not essential for tool function.
 
 weak_acid_guard:
   enabled: true

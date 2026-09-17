@@ -1,8 +1,8 @@
 [project]
-name = "pharmpipe"
+name = "Pharmacophore Tools"
 version = "0.1.0"
-description = "Automated pharmacophore-model construction pipeline (PDB ligand scrape & catalogue stage)."
-authors = [{ name = "Angus McKee", email = "u7457676@anu.edu.au" }]
+description = "A set of tools for the construction and analysis of Pharmacophores."
+authors = [{ name = "Angus McKee", email = "angus.mckee@anu.edu.au" }]
 requires-python = ">=3.11"
 readme = "README.md"
 

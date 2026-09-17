@@ -1,24 +1,11 @@
 # config/pharmacophore.yaml
-# Stage 4 — ligand-based ensemble pharmacophore construction.
-#
-# All SCIENTIFIC choices live here, never in code: which feature families to use,
-# how to cluster their points into consensus positions, which clusters to keep, and
-# how the tolerance radius is derived. Swapping `clustering.method` (see
-# pharmpipe/clustering/registry.py) changes only the feature positions — the output
-# file format is identical, so methods are directly comparable.
 
 # --- Feature extraction (RDKit) ---------------------------------------------
 features:
   # `base` = RDKit's BaseFeatures.fdef (RDConfig.RDDataDir). A path to a custom
   # .fdef file may be given instead to change the chemistry definitions.
   fdef: base
-  # Pharmacophore feature families to extract and model. The TeachOpenCADD T009
-  # tutorial uses Donor/Acceptor/Hydrophobe; the others are included because our
-  # binding sites are more diverse (charged and aromatic contacts matter).
-  # We use RDKit's `LumpedHydrophobe` rather than the per-atom `Hydrophobe`: the
-  # lumped family collapses a contiguous hydrophobic group (e.g. a whole alkyl
-  # chain or ring face) into a single centroid feature, instead of emitting one
-  # point per carbon. That stops hydrophobes swamping the model.
+  # Pharmacophore feature families to extract and model.
   families: [Donor, Acceptor, LumpedHydrophobe, Aromatic, PosIonizable, NegIonizable]
   # Co-atom feature hierarchy. RDKit assigns some atoms to several families at once
   # (a protonated amine N is BOTH PosIonizable and Donor; a carboxylate O is BOTH
@@ -27,7 +14,7 @@ features:
   # can lose the downstream support/size vote to its redundant partner. Each group
   # below is ordered highest-priority first; when two families in the SAME group are
   # perceived on a SHARED atom, only the higher one is kept (purely to remove the
-  # redundant co-incident point — it never overrides a genuine count of distinct atoms).
+  # redundant co-incident point.
   # Genuine dual roles are deliberately absent and so preserved: a hydroxyl stays
   # Donor+Acceptor; an aromatic ring heteroatom (pyridine/pyrrole) stays
   # Aromatic+Acceptor/Donor; a lone aliphatic hydrophobe (no aromatic overlap) is kept.
@@ -36,11 +23,6 @@ features:
     - [PosIonizable, LumpedHydrophobe]
     - [NegIonizable, Acceptor]         # deprotonated acid: anion subsumes its acceptor
     - [NegIonizable, LumpedHydrophobe]
-  # NOTE: `[Aromatic, LumpedHydrophobe]` is deliberately NOT here. An aromatic ring is
-  # genuinely both aromatic and lipophilic, and literature models (Catalyst HydrophobicAromatic
-  # / HypoGen) report a hydrophobic feature on rings. Keeping both perceptions — and exempting
-  # the pair from the overlap merge (see `density.merge_exempt_pairs`) — lets a ring contribute
-  # to both families instead of vanishing from the hydrophobic count.
   # Display colours (RGB 0–1) shared by the PyMOL session/`.pml` and the
   # matplotlib raw-data plots, so a family looks the same everywhere.
   colors:
@@ -51,11 +33,6 @@ features:
     PosIonizable:     [1.00, 0.00, 0.00]   # red    — positive ionisable
     NegIonizable:     [1.00, 0.45, 0.00]   # orange — negative ionisable (uncoloured by request; kept distinct)
 
-# --- Consensus strategy -----------------------------------------------------
-# Consensus features come from a single strategy: a Gaussian occupancy field (KDE)
-# whose peaks become features (see `density` below and pharmacophore/density.py).
-# Deterministic (fixed grid, no seeding).
-
 # --- Density (consensus strategy) -------------------------------------------
 # The scientific knobs are the length scale (voxel/bandwidth), the occupancy floor, and
 # the membership radius (which defines support).
@@ -64,12 +41,7 @@ density:
   bandwidth: 1.5         # Gaussian smoothing sigma (A) of the field that sets feature
                          #   POSITIONS and tolerances (~ target feature tolerance).
   peak_bandwidth: null   # smoothing sigma (A) of the SEPARATE field the peaks are read off,
-                         #   and the min spacing between two kept peaks. Decoupled from
-                         #   `bandwidth` so genuine multi-lobe sub-sites could resolve as
-                         #   distinct peaks; keep <= bandwidth. null => use bandwidth (default).
-                         #   NOTE: a sharper value fragments genuinely-broad conserved sites
-                         #   (their basin mass splits below occupancy_floor), so it is off
-                         #   until the floor/merge are made split-robust — see method doc.
+                         #   and the min spacing between two kept peaks.
   occupancy_floor: 2.0   # keep a peak only if its basin's summed distinct-molecule
                          #   weight >= this (units: effective molecules)
   # A ligand SUPPORTS a peak only if it has a feature point within this radius (A) of the
@@ -84,11 +56,7 @@ density:
   # "Merged away ... in favour of" table.
   merge_overlapping: true
   merge_radius: 1.0
-  # Merge only acts WITHIN a family (false): a region can carry several pharmacophore types at
-  # once and they are all kept — a pyridine N is genuinely both Aromatic and Acceptor, a hydroxyl
-  # both Donor and Acceptor, an aromatic ring both Aromatic and hydrophobe; literature models keep
-  # these distinct. (Perception already assigns the dual roles; the merge no longer deletes one.)
-  # true restores the old cross-family "one feature per region" merge, honouring merge_exempt_pairs.
+  # Merge only acts WITHIN a family:
   merge_cross_family: false
   # Only used when merge_cross_family is true: cross-family pairs never merged into each other.
   merge_exempt_pairs:
@@ -97,15 +65,10 @@ density:
 
 # --- Peak -> kept feature selection -----------------------------------------
 selection:
-  # Minimum number of known actives (distinct loadable poses) a cell must have to build a
-  # model — below this the ensemble is too sparse to trust (a 0.5-support feature would rest
-  # on only a couple of ligands), so the cell is skipped and any stale output removed. Set
-  # from a coverage/quality review of the catalogue: n<10 cells produced notably weaker,
-  # noisier models. Raising it trades target coverage for per-model robustness.
+  # Warning provided if fewer than this many ligands are available
   min_ligands: 10
   # Keep a peak only if it draws support from at least this fraction of the ligands in
-  # the cell (the T009 "present in most molecules" idea, made relative; support uses the
-  # density.membership_radius). This 0.5 floor is the main feature-selection gate.
+  # the cell.  This 0.5 floor is the main feature-selection gate.
   min_support_fraction: 0.5
   min_cluster_size: 2          # minimum feature points behind a peak (sweep display floor)
 
@@ -120,21 +83,9 @@ tolerance:
   max: 3.0                     # and a diffuse cluster does not balloon
 
 # --- Alignment (align-molecules) ---------------------------------------------
-# Consumed by `align-molecules` (pharmacophore/align.py): aligns a ranked set of compounds by
-# feature-clique matching over a conformer ensemble, seedless by default or bootstrapped from
-# an optional `--seed` ligand. The correspondence graph matches features on their *relative
-# intra-molecular distances*, so the model captures the shared pharmacophoric geometry
-# independent of any single frame. See docs/molecule_alignment.md.
 alignment:
-  # Conformer ensemble per ligand (RDKit ETKDG v3 + MMFF). The bioactive conformer must be
-  # in the ensemble for the alignment to have anything correct to find, so sample generously
-  # and keep a low-energy window; for very flexible ligands raise n_conformers/energy_window.
+  # Conformer ensemble per ligand (RDKit ETKDG v3 + MMFF).
   n_conformers: 64             # embeds attempted per ligand
-  # keep conformers within this (kcal/mol) of the ensemble minimum. 10 sits in the standard
-  # bioactive-conformer range (Perola-Charifson; OMEGA-style windows): tight enough to drop
-  # genuinely strained conformers, loose enough to retain plausible bioactive ones and stay
-  # above MMFF's ~1-2 kcal/mol energy noise. Not ~1 (would miss bioactive conformers that bind
-  # a few kcal/mol above the minimum, and is inside the force-field error); not 15 (over-loose).
   energy_window: 10.0
   rmsd_prune: 0.5              # ETKDG pruneRmsThresh (A) — drop near-duplicate embeds
   max_confs: 40                # cap the kept ensemble (energy-sorted)
@@ -157,30 +108,18 @@ alignment:
   align_families: null         # families driving alignment; null => all features.families
   seed_k: 5                    # docked poses used to seed the model (the bioactive frame)
   # Accept a compound into the growing model only if its best clique superposition RMSD is
-  # <= this (A); poorer fits are dropped (aligned=False in the manifest), so one bad alignment
-  # cannot corrupt the running consensus. null disables the gate. Tuned on 5KXI (see method doc).
+  # <= this (A); poorer fits are dropped.
   max_align_rmsd: 1.5
   # Correspondence-graph size above which the clique search switches from exact Bron-Kerbosch
   # (exponential) to a bounded greedy search — keeps feature-rich ligands (many H-bond/aromatic
   # features) tractable. Small molecules stay under it and are solved exactly (unchanged).
   max_clique_nodes: 40
-  # EM refinement after the initial growing pass: re-align every compound's conformer ensemble to
-  # the current consensus (re-selecting its best conformer against the improved model) and rebuild,
-  # up to em_iterations times, stopping when the largest feature-centre shift < em_tol (A). Removes
-  # the effect of a sub-optimal discrete conformer chosen early and reduces seed/order dependence.
-  # em_iterations: 0 disables EM (single growing pass, the old behaviour).
+  # refinement after the initial growing pass. Stop when largest feature shift is < em_tol (A)
   em_iterations: 5
   em_tol: 0.1
   # Orientation-aware matching: also fit H-bond donor/acceptor PROJECTED points (feature centre +
-  # projected_length A along the perceived lone-pair / D-H vector) in the superposition, so a
-  # directional feature must agree in orientation as well as position. This resolves the
-  # ring-flipped acceptor that positional-only matching averages away. false = positional only.
+  # projected_length A along the perceived lone-pair / D-H vector) in the superposition.
   use_directions: true
   projected_length: 1.5
-  # Also fit the AROMATIC ring normal in the superposition, as an undirected AXIS: the probe normal's
-  # sign is resolved to the reference before it is used, so a ring normal's inherent sign-ambiguity
-  # (either face is equivalent) never injects a random flip into the fit. Lets ring-plane orientation
-  # constrain alignment, not just ring-centre position. Independent of this flag, aromatic orientation
-  # is ALWAYS pooled axially, so the output model carries a meaningful ring-normal direction instead of
-  # a sign-cancelled average. Only active when use_directions is true.
+  # Also fit the AROMATIC ring normal in the superposition.
   aromatic_axial: true

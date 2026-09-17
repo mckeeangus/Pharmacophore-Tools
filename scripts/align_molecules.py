@@ -38,16 +38,18 @@ def _index_from_sdf(sdf: Path, dest_dir: Path) -> Path:
     """Derive a rank-index CSV (mol_id,smiles) from a multi-molecule SDF, so the SDF path reuses
     the same alignment core as a ranked CSV. Molecule order = rank; id = title or ``mol<i>``."""
     index = dest_dir / "index_input.csv"
+    recs: list[tuple[str, str, str]] = []
+    for i, mol in enumerate(Chem.SDMolSupplier(str(sdf), removeHs=True)):
+        if mol is None:
+            continue
+        name = mol.GetProp("_Name").strip() if mol.HasProp("_Name") else ""
+        # score column left blank -> read_rank_index keeps input order (stable rank)
+        recs.append((name or f"mol{i}", Chem.MolToSmiles(mol), ""))
     with index.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(INDEX_COLUMNS)
-        for i, mol in enumerate(Chem.SDMolSupplier(str(sdf), removeHs=True)):
-            if mol is None:
-                continue
-            name = mol.GetProp("_Name").strip() if mol.HasProp("_Name") else ""
-            mol_id = name or f"mol{i}"
-            # score column left blank -> read_rank_index keeps input order (stable rank)
-            w.writerow(["", mol_id, "input", Chem.MolToSmiles(mol), "", ""])
+        for mol_id, smi, sc in _dedup_by_smiles(recs):
+            w.writerow(["", mol_id, "input", smi, sc, ""])
     return index
 
 
@@ -55,6 +57,38 @@ def _looks_like_header(fields: list[str]) -> bool:
     """True if a row looks like a header (names a smiles/mol_id column) rather than data."""
     low = {f.strip().lower() for f in fields}
     return bool(low & {"smiles", "smi", "mol_id"})
+
+
+def _dedup_by_smiles(recs: list[tuple[str, str, str]]) -> list[tuple[str, str, str]]:
+    """Drop duplicate molecules from ``(mol_id, smiles, score)`` records, keyed by canonical SMILES.
+
+    A screen merged across libraries repeats the same molecule under several vendor ids, which
+    would over-weight it in the consensus, so every SMILES is kept once. The retained copy is the
+    highest-scoring occurrence (blank score sorts last); order of first appearance is preserved for
+    the rest. SMILES RDKit cannot parse are keyed by their raw string, so nothing is silently lost.
+    """
+    def key(smi: str) -> str:
+        m = Chem.MolFromSmiles(smi)
+        return Chem.MolToSmiles(m) if m is not None else smi
+
+    def score(sc: str) -> float:
+        try:
+            return float(sc) if sc not in (None, "") else float("-inf")
+        except ValueError:
+            return float("-inf")
+
+    best: dict[str, tuple[str, str, str]] = {}
+    order: list[str] = []
+    for mid, smi, sc in recs:
+        if not smi:
+            continue
+        k = key(smi)
+        if k not in best:
+            order.append(k)
+            best[k] = (mid, smi, sc)
+        elif score(sc) > score(best[k][2]):
+            best[k] = (mid, smi, sc)
+    return [best[k] for k in order]
 
 
 def _normalise_csv_index(inp: Path, tmp: Path) -> Path:
@@ -91,9 +125,8 @@ def _normalise_csv_index(inp: Path, tmp: Path) -> Path:
     with out.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(INDEX_COLUMNS)
-        for mid, smi, sc in recs:
-            if smi:
-                w.writerow(["", mid, "input", smi, sc, ""])
+        for mid, smi, sc in _dedup_by_smiles(recs):
+            w.writerow(["", mid, "input", smi, sc, ""])
     return out
 
 

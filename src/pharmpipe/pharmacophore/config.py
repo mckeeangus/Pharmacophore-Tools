@@ -31,7 +31,6 @@ class DensityConfig:
     occupancy_floor: float = 2.0
     membership_radius: float = 1.5
     scaffold_weighting: bool = False
-    merge_overlapping: bool = True
     merge_radius: float | None = None
     merge_cross_family: bool = False
     merge_exempt_pairs: list[list[str]] = field(default_factory=list)

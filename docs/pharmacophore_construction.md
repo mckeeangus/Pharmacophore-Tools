@@ -79,14 +79,17 @@ features `(family, position, tolerance, optional direction)`.
    0.75 of the field mass, clamped `[1,3]` Å); direction = the mean of the aligned points'
    orientation vectors.
 
-### 4. Cross-family overlap merge
+### 4. Cross-family overlap merge (opt-in)
 
-To keep one feature per region, overlapping features from *different* families are merged — the
-dominant one (more points, then support) wins, at a fixed 1 Å centre-to-centre cutoff
+Same-family overlaps need no merge step: the grid collapses peaks closer than the smoothing
+`bandwidth` at detection, so two features of one family are never nearer than that. The optional
+`density.merge_cross_family` handles the *different*-family case — a region claimed by two families.
+On, the dominant feature (more points, then support) wins at a fixed 1 Å centre-to-centre cutoff
 (`density.merge_radius`) — **except `density.merge_exempt_pairs`**: `Donor`+`Acceptor` and
-`Aromatic`+`LumpedHydrophobe` are compatible co-located roles the literature keeps distinct, so
-a bidentate hydroxyl's acceptor is not deleted into its donor. `model_summary.md` records every
-above-floor removal ("Merged away … in favour of X") and every below-floor cluster.
+`Aromatic`+`LumpedHydrophobe` are compatible co-located roles the literature keeps distinct, so a
+bidentate hydroxyl's acceptor is not deleted into its donor. Off (the default), both co-located
+families are kept. `model_summary.md` records every above-floor removal ("Merged away … in favour
+of X") and every below-floor cluster.
 
 ### 5. Minimum-ligands warning
 

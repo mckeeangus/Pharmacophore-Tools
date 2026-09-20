@@ -135,11 +135,10 @@ def test_colocated_families_both_kept_by_default():
         if i < 5:                                   # acceptor slightly less populous
             pts.append(FeaturePoint("Acceptor", *rng.normal(scale=0.2, size=3), lig))
     table = FeatureTable(points=pts, ligand_ids=ligs)
-    default = build_density(table, DensityConfig(occupancy_floor=2.0,
-                                                 merge_overlapping=True), _tol(), "d")
+    default = build_density(table, DensityConfig(occupancy_floor=2.0), _tol(), "d")
     assert {f.family for f in default.pharmacophore.features} == {"Donor", "Acceptor"}
-    # ...but opting back into the cross-family merge keeps only the dominant one.
-    merged = build_density(table, DensityConfig(occupancy_floor=2.0, merge_overlapping=True,
+    # ...but opting into the cross-family merge keeps only the dominant one.
+    merged = build_density(table, DensityConfig(occupancy_floor=2.0,
                                                 merge_cross_family=True), _tol(), "m")
     assert len(merged.pharmacophore.features) == 1
     assert merged.pharmacophore.features[0].family == "Donor"

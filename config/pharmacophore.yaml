@@ -49,16 +49,15 @@ density:
   # floor gates on it). A hard-membership cutoff so a far basin outlier no longer counts.
   membership_radius: 1.5
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency
-  # Collapse overlapping features across families (a donor and an acceptor that land on
-  # the same spot are not double-counted), keeping the denser peak. 1.0 = fixed 1 A
-  # centre-to-centre cutoff (a small, predictable reach); null = geometric (larger tolerance
-  # radius, 1-3 A, which over-reaches). Removals are logged in model_summary.md's
-  # "Merged away ... in favour of" table.
-  merge_overlapping: true
-  merge_radius: 1.0
-  # Merge only acts WITHIN a family:
+  # Cross-family overlap merge (opt-in, default off). Same-family overlaps need no merge: the grid
+  # already collapses peaks closer than `bandwidth` at detection, so two features of one family are
+  # never nearer than that. This handles the DIFFERENT-family case — a region claimed by two families
+  # (a donor and an acceptor on the same spot). On, the dominant peak (more points, then support)
+  # wins and the other is dropped (logged in model_summary.md's "Merged away ... in favour of"
+  # table); off, both are kept, since one region can genuinely be several pharmacophore types.
   merge_cross_family: false
-  # Only used when merge_cross_family is true: cross-family pairs never merged into each other.
+  merge_radius: 1.0  # region cutoff (A), centre-to-centre; null => geometric (larger tolerance radius)
+  # Cross-family pairs never merged into each other (compatible co-located roles):
   merge_exempt_pairs:
     - [Donor, Acceptor]
     - [Aromatic, LumpedHydrophobe]

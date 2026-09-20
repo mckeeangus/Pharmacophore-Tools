@@ -14,6 +14,7 @@ from pharmpipe.pharmacophore.build import (
     _merge_overlapping,
     best_representative,
     feature_radius,
+    resolve_coincident,
 )
 from pharmpipe.pharmacophore.config import ToleranceConfig
 from pharmpipe.pharmacophore.io import read_model_csv, write_model_csv
@@ -93,6 +94,68 @@ def test_merge_cross_family_opt_in_restores_old_behaviour():
                                        merge_radius=1.0, cross_family=True)
     assert [f.family for f, _ in kept] == ["Donor"]
     assert dropped[0][0].family == "Acceptor" and dropped[0][3] == ("Donor", 0)
+
+
+# --- coincident-feature resolution -------------------------------------------
+
+def _coincident_pair():
+    """A pyridine-like Aromatic (x=0) + Acceptor (x=1.4) pair, both radius 1.0, within 2 A."""
+    return (_feat("Aromatic", 0.0, n_points=4, radius=1.0), ("Aromatic", 0)), \
+           (_feat("Acceptor", 1.4, n_points=7, radius=1.0), ("Acceptor", 0))
+
+
+def _pt(family, x, lig):
+    return FeaturePoint(family, x, 0.0, 0.0, lig)
+
+
+def test_resolve_coincident_drops_the_undecoupled_feature():
+    # 4 coupled ligands (aromatic@0 + acceptor@1.4); 3 more present the acceptor decoupled
+    # (acceptor@1.4, no aromatic) — like acetylcholine at the nAChR cation/acceptor locus.
+    aro, acc = _coincident_pair()
+    points = []
+    for i in range(4):
+        points += [_pt("Aromatic", 0.0, f"C{i}"), _pt("Acceptor", 1.4, f"C{i}")]
+    for i in range(3):
+        points += [_pt("Acceptor", 1.4, f"A{i}")]
+    kept, events = resolve_coincident([aro, acc], points, radius=2.0, min_support=2)
+    assert [f.family for f, _ in kept] == ["Acceptor"]        # aromatic dropped
+    assert len(events) == 1
+    *_, dec_w, dec_l, coup, resolved, both = events[0]
+    assert resolved and not both and dec_w == 3 and dec_l == 0 and coup == 4
+    assert events[0][0].family == "Acceptor"                  # winner
+
+
+def test_resolve_coincident_keeps_both_when_confounded():
+    # Only coupled ligands: neither feature is ever decoupled -> no evidence -> keep both.
+    aro, acc = _coincident_pair()
+    points = []
+    for i in range(5):
+        points += [_pt("Aromatic", 0.0, f"C{i}"), _pt("Acceptor", 1.4, f"C{i}")]
+    kept, events = resolve_coincident([aro, acc], points, radius=2.0, min_support=2)
+    assert sorted(f.family for f, _ in kept) == ["Acceptor", "Aromatic"]
+    assert len(events) == 1 and not events[0][-2] and not events[0][-1]  # not resolved, not both
+
+
+def test_resolve_coincident_keeps_both_when_each_stands_alone():
+    # Both features are decoupled in >= min_support ligands -> both critical -> keep both.
+    aro, acc = _coincident_pair()
+    points = []
+    for i in range(3):                                        # aromatic alone
+        points += [_pt("Aromatic", 0.0, f"R{i}")]
+    for i in range(3):                                        # acceptor alone
+        points += [_pt("Acceptor", 1.4, f"A{i}")]
+    kept, events = resolve_coincident([aro, acc], points, radius=2.0, min_support=2)
+    assert sorted(f.family for f, _ in kept) == ["Acceptor", "Aromatic"]
+    assert events[0][-1] is True                              # both_standalone
+
+
+def test_resolve_coincident_ignores_distant_pairs():
+    # Features farther apart than `radius` are not one locus -> never resolved.
+    aro = (_feat("Aromatic", 0.0, n_points=4, radius=1.0), ("Aromatic", 0))
+    acc = (_feat("Acceptor", 5.0, n_points=7, radius=1.0), ("Acceptor", 0))
+    points = [_pt("Acceptor", 5.0, f"A{i}") for i in range(3)]
+    kept, events = resolve_coincident([aro, acc], points, radius=2.0, min_support=2)
+    assert len(kept) == 2 and events == []
 
 
 def test_best_representative_prefers_the_fitting_ligand():

@@ -61,6 +61,17 @@ density:
   merge_exempt_pairs:
     - [Donor, Acceptor]
     - [Aromatic, LumpedHydrophobe]
+  # Coincident-feature resolution (opt-in, default off). A functional group can present two
+  # pharmacophore profiles at one locus (a pyridine is Aromatic + Acceptor, ~1.4 A apart); within
+  # that group they always co-occur, so co-occurrence alone cannot say which is critical for binding.
+  # This keeps a coincident feature only where the data DECOUPLES it: >= coincidence_min_support
+  # ligands present it with a same-family point at the locus but NO partner-family point there (e.g.
+  # acetylcholine gives the nAChR cation/acceptor with no aromatic). If exactly one of a coincident
+  # pair clears that bar it is kept and the other dropped; if both (each binds standalone) or neither
+  # (no decoupling evidence) clear it, both are kept. Resolutions are logged in model_summary.md.
+  resolve_coincident_features: false
+  coincidence_radius: 2.0        # centre-to-centre (A) for two cross-family features to be one locus
+  coincidence_min_support: 2     # distinct ligands presenting a feature decoupled to call it standalone
 
 # --- Peak -> kept feature selection -----------------------------------------
 selection:

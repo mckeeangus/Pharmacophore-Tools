@@ -190,6 +190,29 @@ def _write_summary(result, report: LoadReport, n_ligands: int,
             lines.append(
                 f"| {r.dropped_family} | {r.dropped_points} | {r.dropped_ligands} "
                 f"| {r.dropped_support:.2f} | {occ:.2f} | {r.winner_label} |")
+    coincidence = getattr(result, "coincidence", [])
+    if coincidence:
+        lines += [
+            "", "## Coincident features",
+            "", "Cross-family features sharing a locus (a functional group with two profiles, "
+            "e.g. a pyridine's Aromatic + Acceptor). *Decoupled* counts ligands presenting a "
+            "feature at the locus **without** its partner — the only evidence for which is "
+            "critical. A pair is **resolved** (loser dropped) when one feature is decoupled in "
+            "≥ the support threshold and the other is not; otherwise both are kept (each stands "
+            "alone, or the pair is confounded with no decoupling evidence).",
+            "", "| Kept | Other | Decoupled (kept) | Decoupled (other) | Coupled | Outcome |",
+            "|---|---|---:|---:|---:|---|",
+        ]
+        for c in coincidence:
+            if c.resolved:
+                other, outcome = f"{c.loser_family} (dropped)", "resolved"
+            elif c.both_standalone:
+                other, outcome = c.loser_label or c.loser_family, "both stand alone"
+            else:
+                other, outcome = c.loser_label or c.loser_family, "confounded (kept both)"
+            lines.append(
+                f"| {c.winner_label or c.winner_family} | {other} | {c.decoupled_winner} "
+                f"| {c.decoupled_loser} | {c.coupled} | {outcome} |")
     exclude = {(r.dropped_family, r.dropped_cluster_label) for r in merged_away}
     below = _below_floor_features(result, n_ligands, exclude, membership_radius)
     if below:

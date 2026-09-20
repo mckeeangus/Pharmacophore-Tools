@@ -52,10 +52,31 @@ class MergeRecord:
 
 
 @dataclass
+class CoincidenceRecord:
+    """One spatially-coincident cross-family pair examined by the decoupling resolver.
+
+    ``resolved`` = the loser was dropped (one feature had >= min_support decoupled ligands, the
+    other did not). ``both_standalone`` = both cleared the bar, so both were kept on positive
+    evidence. Neither flag set = confounded (no decoupling evidence either way), both kept.
+    """
+
+    winner_family: str
+    winner_label: str
+    loser_family: str
+    loser_label: str            # final label if the loser survived; "" if it was dropped
+    decoupled_winner: int
+    decoupled_loser: int
+    coupled: int
+    resolved: bool
+    both_standalone: bool
+
+
+@dataclass
 class BuildResult:
     pharmacophore: Pharmacophore
     assignments: list[ClusterAssignment] = field(default_factory=list)
     merged_away: list[MergeRecord] = field(default_factory=list)
+    coincidence: list[CoincidenceRecord] = field(default_factory=list)
 
 
 def _weighted_quantile(values: np.ndarray, weights: np.ndarray, q: float) -> float:
@@ -162,6 +183,82 @@ def _merge_records(
             dropped_ligands=dfeat.n_ligands, dropped_support=dfeat.support,
             dropped_cluster_label=dlabel, winner_family=wfam,
             winner_cluster_label=wlabel, winner_label=winner_label))
+    return records
+
+
+def resolve_coincident(
+    pooled: list[tuple[PharmacophoreFeature, _P]],
+    points: list,
+    radius: float,
+    min_support: int,
+) -> tuple[list[tuple[PharmacophoreFeature, _P]], list[tuple]]:
+    """Resolve spatially-coincident cross-family features by decoupling evidence.
+
+    Two kept features of *different* families whose centres lie within ``radius`` come, in the
+    ligands, from one functional group (e.g. a pyridine's Aromatic + Acceptor, ~1.4 Å apart). Such a
+    pair is confounded: within that group the two always co-occur, so co-occurrence alone cannot say
+    which is critical. The discriminator is **decoupling** — a ligand that presents one feature at
+    that locus *without* the other. A feature is judged to stand alone only if ``>= min_support``
+    ligands present it decoupled (a same-family point within its sphere, and no point of the
+    partner's family within the partner's sphere). If exactly one of a pair clears that bar it is
+    kept and the other dropped; if both clear it (each binds standalone) or neither does (no
+    decoupling evidence), both are kept. ``points`` are the pooled feature points (each with
+    ``.family``, ``.position``, ``.ligand_id``). Returns ``(kept_pooled, events)``; every examined
+    pair yields one event ``(winner, winner_payload, loser, loser_payload, dec_win, dec_lose,
+    coupled, resolved, both_standalone)`` for the report.
+    """
+    feats = list(pooled)
+
+    def present(feat: PharmacophoreFeature) -> set[str]:
+        c = np.array(feat.position)
+        return {p.ligand_id for p in points if p.family == feat.family
+                and float(np.linalg.norm(np.array(p.position) - c)) <= feat.radius}
+
+    presence = [present(f) for f, _ in feats]
+    pairs: list[tuple[float, int, int]] = []
+    for i in range(len(feats)):
+        for j in range(i + 1, len(feats)):
+            if feats[i][0].family == feats[j][0].family:
+                continue
+            d = float(np.linalg.norm(np.array(feats[i][0].position)
+                                     - np.array(feats[j][0].position)))
+            if d <= radius:
+                pairs.append((d, i, j))
+    pairs.sort()                                     # most coincident first
+    dropped: set[int] = set()
+    events: list[tuple] = []
+    for _d, i, j in pairs:
+        if i in dropped or j in dropped:
+            continue
+        li, lj = presence[i], presence[j]
+        dec_i, dec_j, coup = len(li - lj), len(lj - li), len(li & lj)
+        ki, kj = dec_i >= min_support, dec_j >= min_support
+        if ki and not kj:
+            dropped.add(j)
+            events.append((*feats[i], *feats[j], dec_i, dec_j, coup, True, False))
+        elif kj and not ki:
+            dropped.add(i)
+            events.append((*feats[j], *feats[i], dec_j, dec_i, coup, True, False))
+        else:
+            events.append((*feats[i], *feats[j], dec_i, dec_j, coup, False, ki and kj))
+    kept = [feats[k] for k in range(len(feats)) if k not in dropped]
+    return kept, events
+
+
+def _coincidence_records(
+    events: list[tuple],
+    label_index: dict[str, dict[int, tuple[str, float]]],
+) -> list[CoincidenceRecord]:
+    """Turn raw resolver events into ``CoincidenceRecord``s, resolving final feature labels."""
+    records: list[CoincidenceRecord] = []
+    for wfeat, (wfam, wlbl), lfeat, (lfam, llbl), dec_w, dec_l, coup, resolved, both in events:
+        winner_label = label_index.get(wfam, {}).get(wlbl, (wfam, 0.0))[0]
+        loser_label = "" if resolved else label_index.get(lfam, {}).get(llbl, (lfam, 0.0))[0]
+        records.append(CoincidenceRecord(
+            winner_family=wfeat.family, winner_label=winner_label,
+            loser_family=lfeat.family, loser_label=loser_label,
+            decoupled_winner=dec_w, decoupled_loser=dec_l, coupled=coup,
+            resolved=resolved, both_standalone=both))
     return records
 
 

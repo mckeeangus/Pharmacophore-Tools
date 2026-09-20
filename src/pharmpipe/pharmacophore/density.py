@@ -31,10 +31,12 @@ from ..features.extract import FeatureTable
 from .build import (
     BuildResult,
     ClusterAssignment,
+    _coincidence_records,
     _merge_overlapping,
     _merge_records,
     feature_radius,
     finalize_features,
+    resolve_coincident,
 )
 from .config import DensityConfig, ToleranceConfig
 from .model import Pharmacophore, PharmacophoreFeature
@@ -235,6 +237,16 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
         exempt = frozenset(frozenset(pair) for pair in dcfg.merge_exempt_pairs)
         pooled.sort(key=lambda fl: (fl[0].n_points, fl[0].support), reverse=True)
         pooled, dropped = _merge_overlapping(pooled, dcfg.merge_radius, exempt, cross_family=True)
+
+    # Coincident-feature resolution (opt-in): a functional group can give two profiles at one locus
+    # (a pyridine is Aromatic + Acceptor). Keep a coincident feature only where >= min_support
+    # ligands present it DECOUPLED from its partner; drop the one with no such standalone evidence,
+    # keep both when both (or neither) do. Confounded pairs are never guessed.
+    coin_events: list = []
+    if dcfg.resolve_coincident_features:
+        pooled, coin_events = resolve_coincident(
+            pooled, table.points, dcfg.coincidence_radius, dcfg.coincidence_min_support)
+
     features, kept_by_family, label_index = finalize_features(pooled)
     for assignment in assignments:
         assignment.kept_labels = kept_by_family.get(assignment.family, set())
@@ -245,4 +257,5 @@ def build_density(table: FeatureTable, dcfg: DensityConfig, tol: ToleranceConfig
     meta["n_features"] = len(features)
     ph = Pharmacophore(name=name, features=features, metadata=meta)
     return BuildResult(pharmacophore=ph, assignments=assignments,
-                       merged_away=_merge_records(dropped, label_index))
+                       merged_away=_merge_records(dropped, label_index),
+                       coincidence=_coincidence_records(coin_events, label_index))

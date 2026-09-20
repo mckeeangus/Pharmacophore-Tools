@@ -34,6 +34,9 @@ class DensityConfig:
     merge_radius: float | None = None
     merge_cross_family: bool = False
     merge_exempt_pairs: list[list[str]] = field(default_factory=list)
+    resolve_coincident_features: bool = False
+    coincidence_radius: float = 2.0
+    coincidence_min_support: int = 2
 
     @property
     def peak_sigma(self) -> float:

@@ -55,15 +55,15 @@ def _unit(v):
     return [c / n for c in v] if n > 1e-6 else None
 
 
-def _arrow_cgo(base, direction, rgb):
+def _arrow_cgo(base, direction, rgb, length=ARROW_LEN):
     """CGO list for one single-headed arrow: a shaft cylinder + a cone head, from ``base`` along
-    the unit ``direction`` for ``ARROW_LEN`` A. Colour ``rgb`` (0-1 triple). Every element is a
+    the unit ``direction`` for ``length`` A. Colour ``rgb`` (0-1 triple). Every element is a
     float — PyMOL's CGO parser silently rejects a buffer containing ints."""
     from pymol.cgo import CONE, CYLINDER
     r, g, b = (float(c) for c in rgb)
     base = [float(c) for c in base]
-    tip = [base[k] + ARROW_LEN * float(direction[k]) for k in range(3)]
-    neck = [base[k] + ARROW_LEN * (1.0 - ARROW_HEAD_FRAC) * float(direction[k]) for k in range(3)]
+    tip = [base[k] + length * float(direction[k]) for k in range(3)]
+    neck = [base[k] + length * (1.0 - ARROW_HEAD_FRAC) * float(direction[k]) for k in range(3)]
     return [
         CYLINDER, base[0], base[1], base[2], neck[0], neck[1], neck[2],
         ARROW_SHAFT_R, r, g, b, r, g, b,
@@ -72,18 +72,20 @@ def _arrow_cgo(base, direction, rgb):
     ]
 
 
-def _draw_direction(name, pos, direction, family, rgb):
+def _draw_direction(name, pos, direction, family, rgb, r=1.0):
     """Draw the orientation arrow(s) for one directional feature; returns True if drawn.
 
-    Aromatic is rendered as a symmetric double-headed axis (arrows both ways from the centre);
-    Donor/Acceptor as a single arrow along the true (signed) vector."""
+    The arrow length is scaled by ``r`` (the direction's concentration, 0-1), so a less certain
+    direction draws a visibly shorter arrow. Aromatic is a symmetric double-headed axis (arrows both
+    ways from the centre); Donor/Acceptor a single arrow along the true (signed) vector."""
     u = _unit(direction)
     if u is None:
         return False
+    length = ARROW_LEN * float(r)
     if family == "Aromatic":                       # undirected axis -> both directions
-        cgo = _arrow_cgo(pos, u, rgb) + _arrow_cgo(pos, [-c for c in u], rgb)
+        cgo = _arrow_cgo(pos, u, rgb, length) + _arrow_cgo(pos, [-c for c in u], rgb, length)
     else:                                           # signed lone-pair / D-H vector
-        cgo = _arrow_cgo(pos, u, rgb)
+        cgo = _arrow_cgo(pos, u, rgb, length)
     cmd.load_cgo(cgo, name)
     cmd.group("ph4_directions", name)
     return True
@@ -182,7 +184,8 @@ def load_features(json_path):
         direction = feat.get("direction")
         if direction:
             _draw_direction(f"{family}_dir_{i}", pos, direction,
-                            family, COLORS.get(family, _GREY))
+                            family, COLORS.get(family, _GREY),
+                            feat.get("direction_r") or 1.0)
         has_features = True
     if has_features:
         _show_mesh_spheres()

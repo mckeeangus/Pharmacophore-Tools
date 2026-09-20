@@ -289,7 +289,7 @@ def build_from_molecules(molecules: list[tuple[str, object]], report: LoadReport
         result.pharmacophore,
         _pooled_directions(molecules, factory, cfg.features.families,
                            cfg.features.feature_hierarchy),
-        cfg.density.membership_radius)
+        cfg.density.membership_radius, cfg.density.direction_min_r)
 
     rep_id = best_representative(table, result.pharmacophore)
     rep_mol = dict(molecules).get(rep_id) if rep_id else None
@@ -411,17 +411,38 @@ def _pooled_directions(molecules: list[tuple[str, object]], factory, families: l
     return pooled
 
 
-def _set_feature_directions(pharmacophore, pooled_points, membership_radius: float) -> None:
+def _consensus_direction(family: str, dirs: list) -> tuple[np.ndarray | None, float]:
+    """Mean unit direction and its concentration ``R = |mean of unit vectors|`` in [0, 1].
+
+    Aromatic normals are folded into one hemisphere before averaging (an undirected axis, so
+    opposite ring faces reinforce), matching ``_slot_direction``; signed families average directly.
+    ``R`` near 1 means the aligned points agree on one direction; near 0 means they scatter and no
+    direction is well defined (e.g. a freely-rotating hydroxyl O-H, whose vector averages to ~0).
+    """
+    from .align import AXIAL_FAMILIES
+    vs = [np.asarray(d, dtype=float) for d in dirs if d is not None]
+    if not vs:
+        return None, 0.0
+    if family in AXIAL_FAMILIES:
+        ref = vs[0]
+        vs = [v if float(np.dot(v, ref)) >= 0.0 else -v for v in vs]
+    mean = np.mean(vs, axis=0)
+    r = float(np.linalg.norm(mean))
+    return (mean / r if r > 1e-6 else None), r
+
+
+def _set_feature_directions(pharmacophore, pooled_points, membership_radius: float,
+                            min_r: float) -> None:
     """Populate each directional feature's `direction` from the consensus of nearby aligned points.
 
     For every kept directional feature (Donor/Acceptor/Aromatic), take the consensus of the aligned
     pooled points' directions of the same family within ``membership_radius`` of the feature centre.
-    Signed families (Donor/Acceptor) use a unit mean; the aromatic ring normal is combined *axially*
-    (``_slot_direction`` -> ``_axial_mean_direction``), so opposite ring faces reinforce one axis
-    rather than cancelling. Frozen dataclass, so features are rebuilt via ``replace``. Populates the
-    model's `direction` field with the orientation the alignment agreed on.
+    A direction is reported **only when the points agree** — their resultant concentration ``R``
+    (``_consensus_direction``) clears ``min_r``; otherwise the feature is left directionless (no
+    arrow), which is the honest representation of a scattered / rotamer-averaged vector. ``R`` is
+    stored on the feature so the viz can scale the arrow length by how certain the direction is.
+    Frozen dataclass, so features are rebuilt via ``replace``.
     """
-    from .align import _slot_direction
     directional = {"Donor", "Acceptor", "Aromatic"}
     new = []
     for f in pharmacophore.features:
@@ -430,9 +451,10 @@ def _set_feature_directions(pharmacophore, pooled_points, membership_radius: flo
             dirs = [d for fam, xyz, d, _ in pooled_points
                     if fam == f.family and d is not None
                     and np.linalg.norm(xyz - centre) <= membership_radius]
-            md = _slot_direction(f.family, dirs)
-            if md is not None:
-                f = replace(f, direction=(float(md[0]), float(md[1]), float(md[2])))
+            md, r = _consensus_direction(f.family, dirs)
+            if md is not None and r >= min_r:
+                f = replace(f, direction=(float(md[0]), float(md[1]), float(md[2])),
+                            direction_r=round(r, 4))
         new.append(f)
     pharmacophore.features = new
 
@@ -586,7 +608,7 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
                            min_support=cfg.selection.min_support_fraction)
     if acfg.use_directions:
         _set_feature_directions(result.pharmacophore, res.points,
-                                cfg.density.membership_radius)
+                                cfg.density.membership_radius, cfg.density.direction_min_r)
 
     rep_id, rep_mol = (seed_mols[0] if seed_mols else (aligned_ids[0], None))
     outputs = _write_model_artifacts(

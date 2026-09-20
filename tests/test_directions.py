@@ -14,7 +14,20 @@ from rdkit.Geometry import Point3D
 from pharmpipe.features.load import LoadReport
 from pharmpipe.pharmacophore.config import load_pharmacophore_config
 from pharmpipe.pharmacophore.io import read_model_csv
-from pharmpipe.pharmacophore.run import build_from_molecules
+from pharmpipe.pharmacophore.run import _consensus_direction, build_from_molecules
+
+
+def test_consensus_direction_concentration():
+    # agreeing vectors -> R ~ 1 (a direction is well defined); an isotropic scatter -> R ~ 0
+    # (no direction — the freely-rotating-hydroxyl case the threshold is meant to drop).
+    _, r_tight = _consensus_direction("Donor", [(0.0, 0.0, 1.0)] * 5)
+    assert r_tight > 0.99
+    iso = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
+    _, r_scatter = _consensus_direction("Donor", iso)
+    assert r_scatter < 0.01
+    # aromatic normals are folded to a hemisphere, so opposite faces reinforce rather than cancel
+    _, r_axis = _consensus_direction("Aromatic", [(0.0, 0.0, 1.0), (0.0, 0.0, -1.0)])
+    assert r_axis > 0.99
 
 
 def _pyridine(offset: float):
@@ -40,7 +53,9 @@ def test_build_from_molecules_populates_directions(tmp_path):
     assert with_dir, "no directional feature carried a direction"
     for f in with_dir:
         assert abs(sum(c * c for c in f.direction) - 1.0) < 1e-6  # unit vector
+        # a reported direction carries its concentration R in (0, 1] (aligned pyridines -> high)
+        assert f.direction_r is not None and 0.0 < f.direction_r <= 1.0
 
-    # the direction must survive into the interchange CSV (the viz reads dx,dy,dz from it)
+    # the direction AND its R must survive into the interchange CSV (the viz reads dx,dy,dz,dr)
     back = read_model_csv(tmp_path / "pharmacophore.csv")
-    assert any(f.direction is not None for f in back.features)
+    assert any(f.direction is not None and f.direction_r is not None for f in back.features)

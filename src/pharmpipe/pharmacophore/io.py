@@ -32,7 +32,7 @@ def read_json(path: Path) -> Pharmacophore:
 # The pharmacophore CSV is the tool-to-tool interchange (construction -> visualisation):
 # one row per consensus feature. The JSON stays the lossless canonical model.
 _MODEL_CSV_COLUMNS = ["family", "label", "x", "y", "z", "radius", "n_points", "n_ligands",
-                      "support", "dx", "dy", "dz"]
+                      "support", "dx", "dy", "dz", "dr"]
 
 
 def write_model_csv(ph: Pharmacophore, path: Path) -> Path:
@@ -46,9 +46,10 @@ def write_model_csv(ph: Pharmacophore, path: Path) -> Path:
         w.writerow(_MODEL_CSV_COLUMNS)
         for f in ph.features:
             d = f.direction if f.direction is not None else ("", "", "")
+            dr = round(f.direction_r, 4) if f.direction_r is not None else ""
             w.writerow([f.family, f.label, round(f.x, 4), round(f.y, 4), round(f.z, 4),
                         round(f.radius, 4), f.n_points, f.n_ligands, round(f.support, 4),
-                        *(round(c, 4) if c != "" else "" for c in d)])
+                        *(round(c, 4) if c != "" else "" for c in d), dr])
     return path
 
 
@@ -67,11 +68,13 @@ def read_model_csv(path: Path) -> Pharmacophore:
             dxyz = (row.get("dx"), row.get("dy"), row.get("dz"))
             direction = (tuple(float(c) for c in dxyz)
                          if all(c not in (None, "") for c in dxyz) else None)
+            dr = row.get("dr")
+            direction_r = float(dr) if dr not in (None, "") else None
             feats.append(PharmacophoreFeature(
                 family=row["family"], x=float(row["x"]), y=float(row["y"]), z=float(row["z"]),
                 radius=float(row["radius"]), n_points=int(row["n_points"]),
                 n_ligands=int(row["n_ligands"]), support=float(row["support"]),
-                direction=direction, label=row.get("label", "")))
+                direction=direction, direction_r=direction_r, label=row.get("label", "")))
     n_ligands = max((f.n_ligands for f in feats), default=0)
     metadata = {"source": {"n_ligands": n_ligands}} if n_ligands else {}
     return Pharmacophore(name=Path(path).stem, features=feats, metadata=metadata)

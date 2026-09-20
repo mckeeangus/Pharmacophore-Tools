@@ -33,6 +33,10 @@ class PharmacophoreFeature:
     n_ligands: int         # distinct ligands contributing
     support: float         # n_ligands / n_ligands_in_set
     direction: tuple[float, float, float] | None = None
+    # Concentration of the pooled per-point directions behind ``direction`` (resultant length of
+    # the unit vectors, in [0,1]): 1 = tightly agreed, ~0 = scattered. ``None`` when no direction is
+    # set. A direction is only reported above a threshold; the viz scales arrow length by this.
+    direction_r: float | None = None
     label: str = ""        # per-family ordinal, e.g. "Donor 1" (report/viz identity)
 
     @property

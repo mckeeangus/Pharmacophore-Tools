@@ -48,6 +48,11 @@ density:
   # peak centre; support = distinct supporting ligands / total ligands (the 0.5 selection
   # floor gates on it). A hard-membership cutoff so a far basin outlier no longer counts.
   membership_radius: 1.5
+  # A directional feature (Donor/Acceptor/Aromatic) reports an orientation vector ONLY when the
+  # aligned per-point directions agree: their resultant length R = |mean of unit vectors| (0 =
+  # scattered, 1 = tight) must clear this. Below it the direction is dropped (no arrow) — e.g. a
+  # freely-rotating hydroxyl O-H averages to no meaningful direction. The viz scales arrow length by R.
+  direction_min_r: 0.5
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency
   # Cross-family overlap merge (opt-in, default off). Same-family overlaps need no merge: the grid
   # already collapses peaks closer than `bandwidth` at detection, so two features of one family are

@@ -57,6 +57,8 @@ class ModelOutputs:
     pharmacophore: Pharmacophore | None  # None for an align-only run (no KDE model built)
     report: LoadReport
     files: list[Path] = field(default_factory=list)
+    n_aligned: int = 0    # ranked compounds that aligned into the consensus
+    n_dropped: int = 0    # ranked compounds that could not be aligned
 
 
 def _aggregate_resolutions(resolutions: list[FeatureResolution]) -> dict:
@@ -537,7 +539,8 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
         points_csv = write_aligned_points_csv(res.points, out_dir / "aligned_points.csv")
         log.info("[%s] align-only -> %s", name, out_dir)
         return ModelOutputs(name=name, model_dir=out_dir, pharmacophore=None, report=report,
-                            files=[aligned_sdf, manifest_file, points_csv])
+                            files=[aligned_sdf, manifest_file, points_csv],
+                            n_aligned=n_aligned, n_dropped=n_dropped)
 
     # 4. pooled aligned points -> FeatureTable -> density KDE model
     pts = [FeaturePoint(fam, float(x[0]), float(x[1]), float(x[2]), lig)
@@ -563,10 +566,12 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
                                 cfg.density.membership_radius)
 
     rep_id, rep_mol = (seed_mols[0] if seed_mols else (aligned_ids[0], None))
-    return _write_model_artifacts(
+    outputs = _write_model_artifacts(
         result, report, out_dir, cfg, name=name, rep_id=rep_id, rep_mol=rep_mol,
         resolutions=[], n_ligands=len(aligned_ids),
         extra_files=[manifest_file, aligned_sdf], directional_caveat=True)
+    outputs.n_aligned, outputs.n_dropped = n_aligned, n_dropped
+    return outputs
 
 
 def build_for_cell(cell_dir: Path, out_dir: Path, cfg: PharmacophoreConfig,

@@ -201,7 +201,9 @@ def main(argv=None) -> int:
         print("align-molecules: nothing aligned (no molecules loaded, or none shared enough "
               "features to align)")
         return 1
-    print(f"aligned {res.name} -> {args.out} "
+    attempted = res.n_aligned + res.n_dropped
+    print(f"aligned {res.n_aligned}/{attempted} molecules successfully "
+          f"({res.n_dropped} could not be aligned) -> {args.out} "
           f"(aligned_compounds.sdf, aligned_points.csv, alignment_manifest.csv)")
     return 0
 

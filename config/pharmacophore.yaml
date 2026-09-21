@@ -38,7 +38,7 @@ features:
 # the membership radius (which defines support).
 density:
   voxel: 1.0              # grid spacing (A) — spatial resolution of the field
-  bandwidth: 1.5         # Gaussian smoothing sigma (A) of the field that sets feature
+  bandwidth: 1.0         # Gaussian smoothing sigma (A) of the field that sets feature
                          #   POSITIONS and tolerances (~ target feature tolerance).
   peak_bandwidth: null   # smoothing sigma (A) of the SEPARATE field the peaks are read off,
                          #   and the min spacing between two kept peaks.
@@ -93,7 +93,7 @@ tolerance:
   #   from the centre, so the far points still assigned to the cluster do not inflate it.
   #   (rmsd — root-mean-square point-to-centre distance — is the tail-sensitive alternative.)
   method: density_quantile
-  quantile: 0.75               # fraction of density mass inside the sphere; lower = tighter
+  quantile: 0.5                # fraction of density mass inside the sphere; lower = tighter
   min: 1.0                     # clamp so a tight cluster still has a usable radius
   max: 3.0                     # and a diffuse cluster does not balloon
 
@@ -124,7 +124,7 @@ alignment:
   seed_k: 5                    # docked poses used to seed the model (the bioactive frame)
   # Accept a compound into the growing model only if its best clique superposition RMSD is
   # <= this (A); poorer fits are dropped.
-  max_align_rmsd: 1.5
+  max_align_rmsd: 1.0
   # Correspondence-graph size above which the clique search switches from exact Bron-Kerbosch
   # (exponential) to a bounded greedy search — keeps feature-rich ligands (many H-bond/aromatic
   # features) tractable. Small molecules stay under it and are solved exactly (unchanged).

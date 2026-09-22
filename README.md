@@ -81,6 +81,7 @@ Writes **`pharmacophore.csv`** (the interchange for tool 3), plus `pharmacophore
 |---|---|
 | `--smiles het_code,smiles.csv` | Bond orders for a heavy-atom mol2 directory (not needed for an SDF). |
 | `--pkasolver` | Protonate `--smiles` to pH 7.4 (pkasolver), writing `protonated_ligands.csv` beside it. **Off by default** |
+| `--support-floor 0-1` | Override `selection.min_support_fraction`: keep only features present in at least this fraction of ligands. Lower it for a chemically heterogeneous hit set where a real feature (e.g. a basic amine) sits in only a subset of ligands. (default: config, `0.5`) |
 | `--config PATH` | Override `config/pharmacophore.yaml` (`density:`/`selection:`/`tolerance:`). |
 
 Use `-h` or `help` for options.

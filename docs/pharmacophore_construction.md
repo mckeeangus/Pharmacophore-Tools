@@ -1,6 +1,6 @@
 # Pharmacophore construction — method
 
-**Tool:** `pixi run build-pharmacophore --input aligned.sdf|mol2_dir --out DIR [--smiles het.csv] [--pkasolver]`
+**Tool:** `pixi run build-pharmacophore --input aligned.sdf|mol2_dir --out DIR [--smiles het.csv] [--pkasolver] [--support-floor 0-1]`
 
 Build a **consensus pharmacophore** from a set of **already-aligned molecules** — the
 `aligned_compounds.sdf` from `align-molecules`, or a directory of aligned crystal `*.mol2`

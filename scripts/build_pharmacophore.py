@@ -100,10 +100,19 @@ def main(argv=None) -> int:
                     help="het_code,smiles CSV (required for a mol2 directory)")
     ap.add_argument("--pkasolver", action="store_true",
                     help="protonate --smiles to pH 7.4 (pkasolver, needs the 'prep' env)")
+    ap.add_argument("--support-floor", dest="support_floor", type=float, default=None,
+                    help="override selection.min_support_fraction (0-1): keep only features "
+                         "present in at least this fraction of ligands. Lower it for a "
+                         "chemically heterogeneous hit set where a real feature (e.g. a basic "
+                         "amine) sits in only a subset of ligands (default: config, 0.5)")
     ap.add_argument("--config", type=Path, default=None)
     args = ap.parse_args(argv)
 
     cfg = load_pharmacophore_config(args.config)
+    if args.support_floor is not None:
+        if not 0.0 <= args.support_floor <= 1.0:
+            ap.error("--support-floor must be between 0 and 1")
+        cfg.selection.min_support_fraction = args.support_floor
     inp = args.input.resolve()
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)

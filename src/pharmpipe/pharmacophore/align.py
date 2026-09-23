@@ -72,6 +72,94 @@ class SeedAlignResult:
     convergence: list[tuple[int, float, int]] = field(default_factory=list)
 
 
+@dataclass(frozen=True)
+class AlignmentQuality:
+    """How well one alignment run folded the ranked compounds into a shared frame.
+
+    Summarised from the ``"aligned"`` manifest rows only (the seed/bootstrap rows are the frame,
+    not folded content). ``coverage`` = fraction of attempted ranked compounds that aligned;
+    ``median_rmsd`` = median clique-superposition RMSD over the aligned ones (how tight the fit is).
+    ``mean_matched`` is carried for context but is deliberately **not** used to rank runs: a
+    pseudo-symmetric head/tail flip inflates the match count (symmetric features pile up at both
+    poles), so more matches is not more correct.
+    """
+
+    label: str
+    n_aligned: int
+    n_attempted: int
+    coverage: float
+    median_rmsd: float
+    mean_matched: float
+
+
+@dataclass(frozen=True)
+class AlignmentComparison:
+    """Verdict of a seeded run against its seedless control — see ``compare_alignments``."""
+
+    winner: str            # "seed" | "seedless" | "comparable"
+    reason: str
+    seeded: AlignmentQuality
+    seedless: AlignmentQuality
+
+
+def alignment_quality(label: str, manifest: list[AlignRecord]) -> AlignmentQuality:
+    """Summarise how well a run folded the ranked compounds in (see ``AlignmentQuality``)."""
+    attempted = [m for m in manifest if m.source == "aligned"]
+    aligned = [m for m in attempted if m.aligned]
+    rmsds = [m.rmsd for m in aligned if not np.isnan(m.rmsd)]
+    matched = [m.n_matched for m in aligned]
+    n_att = len(attempted)
+    return AlignmentQuality(
+        label=label,
+        n_aligned=len(aligned),
+        n_attempted=n_att,
+        coverage=(len(aligned) / n_att) if n_att else 0.0,
+        median_rmsd=float(np.median(rmsds)) if rmsds else float("nan"),
+        mean_matched=float(np.mean(matched)) if matched else 0.0,
+    )
+
+
+def compare_alignments(seeded: AlignmentQuality, seedless: AlignmentQuality, *,
+                       coverage_margin: int = 1,
+                       rmsd_margin: float = 0.1) -> AlignmentComparison:
+    """Decide whether a seed helped, hurt, or made no difference versus the seedless control.
+
+    **Coverage first** (how many ranked compounds folded into the shared frame), **tightness of
+    fit** (median clique RMSD) as the tie-break. A seed *hurts* when it drops compounds or loosens
+    the fit — the signature of an unrepresentative or over-constraining seed. Match count is
+    ignored on purpose: a pseudo-symmetric flip inflates it, so rewarding it would penalise a seed
+    that is correctly breaking that degeneracy. ``coverage_margin`` compounds of difference are
+    treated as a tie — this also absorbs the seedless bootstrap compound's own self-alignment (a
+    structural +1 to seedless coverage); ``rmsd_margin`` Å likewise gates the RMSD tie-break.
+    """
+    span = f"{seeded.n_aligned} vs {seedless.n_aligned}"
+    dcov = seedless.n_aligned - seeded.n_aligned
+    if dcov > coverage_margin:
+        return AlignmentComparison(
+            "seedless", f"seedless aligned more compounds ({span}, +{dcov}) — the seed dropped "
+            f"some", seeded, seedless)
+    if dcov < -coverage_margin:
+        return AlignmentComparison(
+            "seed", f"the seed aligned more compounds ({span}) — it folded in more",
+            seeded, seedless)
+    ms, ml = seeded.median_rmsd, seedless.median_rmsd
+    if np.isnan(ms) or np.isnan(ml):
+        return AlignmentComparison(
+            "comparable", f"coverage comparable ({span}); RMSD undefined", seeded, seedless)
+    drms = ms - ml  # > 0 => seedless is tighter
+    if drms > rmsd_margin:
+        return AlignmentComparison(
+            "seedless", f"coverage comparable ({span}); seedless fit is tighter "
+            f"(median RMSD {ml:.2f} vs {ms:.2f} Å)", seeded, seedless)
+    if drms < -rmsd_margin:
+        return AlignmentComparison(
+            "seed", f"coverage comparable ({span}); seeded fit is tighter "
+            f"(median RMSD {ms:.2f} vs {ml:.2f} Å)", seeded, seedless)
+    return AlignmentComparison(
+        "comparable", f"coverage comparable ({span}) and fit tightness within {rmsd_margin:.2f} Å "
+        f"(median RMSD {ms:.2f} vs {ml:.2f})", seeded, seedless)
+
+
 def _kabsch(P: np.ndarray, Q: np.ndarray) -> tuple[np.ndarray, np.ndarray, float]:
     """Rigid transform (proper rotation R, translation t) best mapping P onto Q, and RMSD."""
     Pc, Qc = P - P.mean(0), Q - Q.mean(0)

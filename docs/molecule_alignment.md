@@ -1,6 +1,6 @@
 # Molecule alignment — method
 
-**Tool:** `pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 50] [--seed ligand.sdf]`
+**Tool:** `pixi run align-molecules --input hits.csv|mols.sdf --out DIR [--top-n 50] [--seed ligand.sdf] [--no-seedless-control]`
 
 Align a set of molecules to each other **by their shared pharmacophoric features**, with no
 protein and no pre-existing common frame. The output is the set of molecules superposed into
@@ -195,6 +195,43 @@ bias the frame. On the ground-truth targets, seedless matches or beats a docked 
 (the lone exception being a metal-coordination target with few rigid multi-feature cores). A
 seed remains supported for cases where a trusted bioactive frame is available.
 
+#### A seed can hinder — the automatic seedless control
+
+A seed helps in one specific circumstance: when the shared feature skeleton is approximately
+internally symmetric, so its registration is **degenerate** (a pseudo-symmetric, elongated ligand
+can align to a self-generated consensus in two head↔tail orientations; the symmetric core features
+survive either way and pile up, while the asymmetric feature — e.g. a basic amine — splits into two
+mirror populations and is averaged away). An external asymmetric seed removes the ambiguity.
+
+But the seed is **only a frame prior** — it anchors the growing pass, then is dropped before EM
+(`bootstrap_seed`), so it contributes no points to the final consensus. A *bad* prior is therefore
+worse than the unbiased seedless bootstrap, and a user with a holo ligand will reach for `--seed`
+reflexively. A seed hinders when it is **unrepresentative** (an outlier chemotype / mis-posed /
+odd protomer — it anchors the frame to features the hit set does not share) or **over-constraining**
+(it forces a diverse set onto its own rigid inter-feature distances) — in both cases it drops
+compounds and/or worsens the fit relative to seedless. It also silently imposes *the wrong* one of
+two registrations when the ligand is pseudo-symmetric and the seed is itself mis-flipped.
+
+So whenever `--seed` is given, the tool **also runs the seedless alignment** (into a
+`seedless_control/` subdirectory) and compares them (`compare_alignments`), printing the verdict to
+the console:
+
+- **Coverage first** — fraction of ranked compounds folded into the shared frame; more is better.
+  A `compare_coverage_margin` (default 1 compound) counts small gaps as a tie, which also absorbs
+  the seedless bootstrap compound's own self-alignment (a structural +1 to seedless coverage).
+- **Median clique RMSD** as the tie-break (`compare_rmsd_margin`, default 0.1 Å) — tighter is
+  better.
+- **Match count is *not* used** to decide. A pseudo-symmetric flip inflates it (symmetric features
+  match at both poles), so rewarding it would penalise a seed that is correctly breaking that
+  degeneracy — the seeded run legitimately matches *fewer* features. It is reported for context.
+
+**Both alignments are always kept; the seed is never silently overridden.** If seedless won, the
+console points you at `seedless_control/aligned_compounds.sdf` to build from — so you can judge both
+for yourself. The check sees coverage/tightness, so it catches the unrepresentative /
+over-constraining seed; it does **not** by itself catch a *confident wrong flip* (a coherent
+mis-registration can align tightly) — judge that from the built model's features. Disable with
+`--no-seedless-control` or `alignment.compare_seedless: false`.
+
 ### 6. Directional (orientation-aware) matching
 
 With `alignment.use_directions` (default on), feature perception emits an **orientation vector**
@@ -224,13 +261,16 @@ consensus `direction` field is populated from the aligned points (axially for ar
 - **`aligned_points.csv`** — the pooled per-molecule feature points in the common frame.
 - **`alignment_manifest.csv`** — per-compound provenance: rank, whether it aligned, clique size,
   RMSD.
+- **`seedless_control/`** — written only with `--seed` (unless disabled): the seedless control
+  alignment, for comparison against the seeded result (the verdict is printed to the console; §5).
 
 ## Knobs
 
 All in `config/pharmacophore.yaml` under `alignment:` — `dist_tol`, `min_clique`,
 `two_feature_alignment`, `max_align_rmsd`, `energy_window`, `em_iterations`, `em_tol`, `seed_k`,
-`use_directions`, `aromatic_axial`, `projected_length`. These are scientific choices and live in
-config, never in code.
+`use_directions`, `aromatic_axial`, `projected_length`, and the seed-control knobs
+`compare_seedless`, `compare_coverage_margin`, `compare_rmsd_margin` (§5). These are scientific
+choices and live in config, never in code.
 
 ## Limits (honest)
 

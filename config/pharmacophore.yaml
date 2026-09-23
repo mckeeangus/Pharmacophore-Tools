@@ -138,3 +138,15 @@ alignment:
   projected_length: 1.5
   # Also fit the AROMATIC ring normal in the superposition.
   aromatic_axial: true
+  # Seed quality control. A user with a holo ligand will reach for --seed by default, but a seed
+  # can HINDER: an unrepresentative or over-constraining seed drops compounds or loosens the fit
+  # versus a seedless bootstrap (the seed is only a frame prior — a bad prior is worse than none).
+  # When on and --seed is given, align-molecules also runs the seedless alignment into a
+  # `seedless_control/` subdirectory, compares the two, and writes `seed_vs_seedless.md` with the
+  # verdict — coverage (compounds folded into the shared frame) first, then median clique RMSD.
+  # Both alignments are kept; the seed is never silently overridden. Match count is not used to
+  # decide (a pseudo-symmetric flip inflates it). --no-seedless-control skips the control.
+  compare_seedless: true
+  compare_coverage_margin: 1   # compounds: a difference this small is treated as a coverage tie
+                               #   (also absorbs the seedless bootstrap compound's own self-alignment)
+  compare_rmsd_margin: 0.1     # A: a median-RMSD gap this small is treated as a tightness tie

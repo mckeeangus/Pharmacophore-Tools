@@ -57,9 +57,19 @@ Writes `aligned_compounds.sdf` (feed to tool 2), `aligned_points.csv`, `alignmen
 | Option | Effect |
 |---|---|
 | `--top-n N` | Align the top *N* molecules (by the CSV's score column; without one, input order is the rank). **Default 50** |
-| `--seed ligand.sdf\|.mol2` | Optional holo co-crystal ligand. Default: seedless. |
+| `--seed ligand.sdf\|.mol2` | Optional holo co-crystal ligand to bootstrap the frame. Default: seedless. When given, a seedless control is **also** run and the two are compared — see below. |
+| `--no-seedless-control` | With `--seed`, skip the automatic seedless control run/comparison. |
 | `--pkasolver` | Protonate the top-*N* aligned ligands to their pH-7.4 dominant microstate (pkasolver) before conformers are built. **Off by default** |
 | `--config PATH` | Override `config/pharmacophore.yaml` (the `alignment:` block). |
+
+**A seed can hinder, not just help.** A seed is only a frame prior; an unrepresentative or
+over-constraining one drops compounds or loosens the fit versus a plain seedless bootstrap. So when
+you pass `--seed`, `align-molecules` also runs the seedless alignment into a `seedless_control/`
+subdirectory and compares the two on **coverage** (compounds folded into the shared frame) then
+**median clique RMSD**, printing the verdict to the console. **Both alignments are kept** — the
+seed is never silently overridden; if seedless won, the console points you at
+`seedless_control/aligned_compounds.sdf` to build from, so you can judge both for yourself.
+(Disable with `--no-seedless-control` or `alignment.compare_seedless: false`.)
 
 Use `-h` or `help` for options.
 

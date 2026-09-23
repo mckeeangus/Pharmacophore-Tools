@@ -81,6 +81,11 @@ class AlignmentConfig:
     use_directions: bool = True
     projected_length: float = 1.5
     aromatic_axial: bool = True
+    # Seed quality control (align-molecules). When --seed is given, also run the seedless
+    # alignment and report which fit the ranked set better (docs/molecule_alignment.md §5).
+    compare_seedless: bool = True
+    compare_coverage_margin: int = 1     # compounds; a difference this small counts as a tie
+    compare_rmsd_margin: float = 0.1     # A; median-RMSD gap this small counts as a tie
 
 
 @dataclass

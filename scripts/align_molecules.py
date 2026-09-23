@@ -25,8 +25,9 @@ from rdkit import Chem, RDLogger  # noqa: E402
 RDLogger.DisableLog("rdApp.*")
 
 from pharmpipe.features.dock_load import read_rank_index  # noqa: E402
+from pharmpipe.pharmacophore.align import compare_alignments  # noqa: E402
 from pharmpipe.pharmacophore.config import load_pharmacophore_config  # noqa: E402
-from pharmpipe.pharmacophore.run import build_from_seed_alignment  # noqa: E402
+from pharmpipe.pharmacophore.run import ModelOutputs, build_from_seed_alignment  # noqa: E402
 
 log = logging.getLogger("align_molecules")
 
@@ -172,6 +173,41 @@ def _protonate_smiles_map(index_csv: Path, top_n: int, tmp: Path) -> dict[str, s
     return smiles_map
 
 
+def _print_aligned(res: ModelOutputs, out: Path) -> None:
+    """The one-line summary of an alignment run's coverage and outputs."""
+    attempted = res.n_aligned + res.n_dropped
+    print(f"aligned {res.n_aligned}/{attempted} molecules successfully "
+          f"({res.n_dropped} could not be aligned) -> {out} "
+          f"(aligned_compounds.sdf, aligned_points.csv, alignment_manifest.csv)")
+
+
+def _report_comparison(seeded: ModelOutputs, control: ModelOutputs | None,
+                       out: Path, control_dir: Path, cfg) -> int:
+    """Compare the seeded run against its seedless control and print the verdict (console only).
+
+    Both alignments are left on disk (``out`` and ``control_dir``) for the user to judge and build
+    from; nothing is written silently. Match count is not used to decide (``compare_alignments``).
+    """
+    if control is None or control.quality is None or seeded.quality is None:
+        print(f"align-molecules: the seedless control produced no alignment to compare against; "
+              f"keeping your seeded result in {out}")
+        return 0
+    comp = compare_alignments(seeded.quality, control.quality,
+                              coverage_margin=cfg.alignment.compare_coverage_margin,
+                              rmsd_margin=cfg.alignment.compare_rmsd_margin)
+    print(f"\nseed vs seedless: {comp.reason}")
+    if comp.winner == "seedless":
+        print("  -> the UNSEEDED alignment performed better. Both are kept:")
+        print(f"     seeded  : {out / 'aligned_compounds.sdf'} (your choice)")
+        print(f"     seedless: {control_dir / 'aligned_compounds.sdf'}  "
+              f"<- build from this for the better model")
+    elif comp.winner == "seed":
+        print(f"  -> your seed helped. Build from {out / 'aligned_compounds.sdf'}")
+    else:
+        print(f"  -> comparable; either works (seeded in {out}, seedless in {control_dir})")
+    return 0
+
+
 def main(argv=None) -> int:
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s")
     ap = argparse.ArgumentParser(description=__doc__,
@@ -184,28 +220,48 @@ def main(argv=None) -> int:
                     help="optional 3D seed ligand (.sdf/.mol2); default seedless")
     ap.add_argument("--pkasolver", action="store_true",
                     help="protonate the top-N ligands to pH 7.4 (pkasolver, needs the 'prep' env)")
+    ap.add_argument("--no-seedless-control", dest="no_seedless_control", action="store_true",
+                    help="with --seed, skip the automatic seedless control run/comparison "
+                         "(by default a seed is checked against seedless; see seed_vs_seedless.md)")
     ap.add_argument("--config", type=Path, default=None)
     args = ap.parse_args(argv)
 
     cfg = load_pharmacophore_config(args.config)
     args.out.mkdir(parents=True, exist_ok=True)
+    out = args.out.resolve()
     with tempfile.TemporaryDirectory() as td:
         docked_dir, index = _resolve_input(args.input.resolve(), Path(td))
         smiles_map = _protonate_smiles_map(index, args.top_n, Path(td)) if args.pkasolver else None
-        res = build_from_seed_alignment(
-            docked_dir, index, args.out.resolve(), cfg, top_n_hits=args.top_n,
-            seed_k=cfg.alignment.seed_k, name=args.out.name, smiles_map=smiles_map,
-            seed_poses=args.seed.resolve() if args.seed else None,
-            seedless=args.seed is None, align_only=True)
-    if res is None:
-        print("align-molecules: nothing aligned (no molecules loaded, or none shared enough "
-              "features to align)")
-        return 1
-    attempted = res.n_aligned + res.n_dropped
-    print(f"aligned {res.n_aligned}/{attempted} molecules successfully "
-          f"({res.n_dropped} could not be aligned) -> {args.out} "
-          f"(aligned_compounds.sdf, aligned_points.csv, alignment_manifest.csv)")
-    return 0
+
+        def run(out_dir: Path, seed_poses: Path | None, seedless: bool) -> ModelOutputs | None:
+            return build_from_seed_alignment(
+                docked_dir, index, out_dir, cfg, top_n_hits=args.top_n,
+                seed_k=cfg.alignment.seed_k, name=out_dir.name, smiles_map=smiles_map,
+                seed_poses=seed_poses, seedless=seedless, align_only=True)
+
+        if args.seed is None:                                    # seedless: the plain default path
+            res = run(out, None, True)
+            if res is None:
+                print("align-molecules: nothing aligned (no molecules loaded, or none shared "
+                      "enough features to align)")
+                return 1
+            _print_aligned(res, out)
+            return 0
+
+        # --seed given: run the user's seeded alignment, then an automatic seedless control.
+        res = run(out, args.seed.resolve(), False)
+        if res is None:
+            print("align-molecules: nothing aligned with the seed (no molecules loaded, or none "
+                  "shared enough features to align)")
+            return 1
+        _print_aligned(res, out)
+        if not cfg.alignment.compare_seedless or args.no_seedless_control:
+            return 0
+        control_dir = out / "seedless_control"
+        control = run(control_dir, None, True)
+        if control is not None:
+            _print_aligned(control, control_dir)
+        return _report_comparison(res, control, out, control_dir, cfg)
 
 
 if __name__ == "__main__":

@@ -6,9 +6,12 @@ import numpy as np
 
 from pharmpipe.features.conformers import generate_conformers
 from pharmpipe.pharmacophore.align import (
+    AlignRecord,
     _axial_mean_direction,
     _slot_direction,
     align_features,
+    alignment_quality,
+    compare_alignments,
     consolidate,
     seed_align,
 )
@@ -316,3 +319,59 @@ def test_write_aligned_sdf_applies_transform_and_tags(tmp_path):
     orig_c = mol.GetConformer().GetPositions().mean(0)
     new_c = got[0].GetConformer().GetPositions().mean(0)
     assert abs((new_c - (orig_c @ _ROT.T + trans))[0]) < 1e-3
+
+
+# --- seed-vs-seedless quality comparison (pure) ------------------------------
+
+def _manifest(aligned_rmsds, n_dropped=0, n_matched=4, with_seed=True):
+    """A manifest: one seed row, ``len(aligned_rmsds)`` aligned rows, ``n_dropped`` dropped rows."""
+    rows = []
+    if with_seed:
+        rows.append(AlignRecord("seed0", "seed", 0, -1, 0, float("nan"), True))
+    for i, r in enumerate(aligned_rmsds):
+        rows.append(AlignRecord(f"h{i}", "aligned", 5, 0, n_matched, r, True))
+    for j in range(n_dropped):
+        rows.append(AlignRecord(f"d{j}", "aligned", 5, -1, 0, float("nan"), False))
+    return rows
+
+
+def test_alignment_quality_ignores_seed_rows_and_drops():
+    q = alignment_quality("seed", _manifest([0.5, 1.0, 1.5], n_dropped=1, n_matched=6))
+    assert q.n_attempted == 4 and q.n_aligned == 3      # seed row excluded; 1 drop counted
+    assert q.coverage == 0.75
+    assert q.median_rmsd == 1.0                          # median over aligned rmsds
+    assert q.mean_matched == 6.0
+
+
+def test_alignment_quality_empty_is_safe():
+    q = alignment_quality("seedless", _manifest([], n_dropped=0))
+    assert q.n_aligned == 0 and q.coverage == 0.0
+    assert q.median_rmsd != q.median_rmsd                # NaN when nothing aligned
+
+
+def test_compare_coverage_dominates_when_seed_drops_compounds():
+    seed = alignment_quality("seed", _manifest([0.8] * 20, n_dropped=10))    # 20/30
+    seedless = alignment_quality("seedless", _manifest([1.0] * 29, n_dropped=1))  # 29/30
+    assert compare_alignments(seed, seedless).winner == "seedless"
+
+
+def test_compare_rmsd_breaks_a_coverage_tie():
+    seed = alignment_quality("seed", _manifest([0.7] * 30))
+    seedless = alignment_quality("seedless", _manifest([1.3] * 30))
+    assert compare_alignments(seed, seedless).winner == "seed"          # equal coverage, tighter
+
+
+def test_compare_within_margins_is_comparable():
+    # seedless +1 (its bootstrap self-alignment) and a 0.05 A RMSD gap are both inside the margins.
+    seed = alignment_quality("seed", _manifest([1.00] * 29))
+    seedless = alignment_quality("seedless", _manifest([1.05] * 30))
+    assert compare_alignments(seed, seedless).winner == "comparable"
+
+
+def test_compare_ignores_match_count_inflation():
+    # The degenerate-flip case: seedless matches MORE features but folds in FEWER compounds.
+    # Coverage-first must still pick the seed (match count is deliberately not a tie-breaker).
+    seed = alignment_quality("seed", _manifest([0.6] * 12, n_dropped=0, n_matched=6))
+    seedless = alignment_quality("seedless", _manifest([0.6] * 8, n_dropped=4, n_matched=9))
+    assert seedless.mean_matched > seed.mean_matched
+    assert compare_alignments(seed, seedless).winner == "seed"

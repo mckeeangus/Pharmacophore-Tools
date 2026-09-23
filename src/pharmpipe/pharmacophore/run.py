@@ -31,7 +31,7 @@ from ..features.load import (
     read_smiles_map,
 )
 from ..util.paths import ensure_dir
-from .align import seed_align, write_alignment_manifest
+from .align import AlignmentQuality, alignment_quality, seed_align, write_alignment_manifest
 from .build import best_representative
 from .config import PharmacophoreConfig
 from .density import build_density
@@ -59,6 +59,7 @@ class ModelOutputs:
     files: list[Path] = field(default_factory=list)
     n_aligned: int = 0    # ranked compounds that aligned into the consensus
     n_dropped: int = 0    # ranked compounds that could not be aligned
+    quality: AlignmentQuality | None = None  # alignment fit summary (seed-alignment builds only)
 
 
 def _aggregate_resolutions(resolutions: list[FeatureResolution]) -> dict:
@@ -564,6 +565,7 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
     aligned_ids = sorted({lig for *_, lig in res.points})
     n_aligned = sum(1 for r in res.manifest if r.source == "aligned" and r.aligned)
     n_dropped = sum(1 for r in res.manifest if r.source == "aligned" and not r.aligned)
+    quality = alignment_quality(tag, res.manifest)
     if not aligned_ids:
         log.warning("[%s] no ligands aligned — nothing to build", name)
         return None
@@ -585,7 +587,7 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
         log.info("[%s] align-only -> %s", name, out_dir)
         return ModelOutputs(name=name, model_dir=out_dir, pharmacophore=None, report=report,
                             files=[aligned_sdf, manifest_file, points_csv],
-                            n_aligned=n_aligned, n_dropped=n_dropped)
+                            n_aligned=n_aligned, n_dropped=n_dropped, quality=quality)
 
     # 4. pooled aligned points -> FeatureTable -> density KDE model
     pts = [FeaturePoint(fam, float(x[0]), float(x[1]), float(x[2]), lig)
@@ -615,7 +617,7 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
         result, report, out_dir, cfg, name=name, rep_id=rep_id, rep_mol=rep_mol,
         resolutions=[], n_ligands=len(aligned_ids),
         extra_files=[manifest_file, aligned_sdf], directional_caveat=True)
-    outputs.n_aligned, outputs.n_dropped = n_aligned, n_dropped
+    outputs.n_aligned, outputs.n_dropped, outputs.quality = n_aligned, n_dropped, quality
     return outputs
 
 

@@ -3,8 +3,13 @@
 !.pixi/config.toml
 
 # Large / generated data (the downloaded structures and extracted ligands).
-# catalogue/ is intentionally NOT ignored — it is the tracked deliverable.
 data/
+
+# Built pharmacophore catalogue — per-target model outputs produced by running the tools over a
+# target's known actives. This repo is focused on the general tools; the catalogue is a
+# research/validation deliverable and belongs with the companion Crystal_Pharmacophores repo, so
+# it is not tracked here.
+catalogue/
 
 # DrugCLIP -> GNINA docked screening sets (bulk input for the --docked-dir one-shot:
 # a folder of <mol_id>_docked.sdf + a rank index_*.csv). Large, not a deliverable.

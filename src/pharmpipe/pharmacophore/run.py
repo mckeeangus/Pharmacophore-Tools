@@ -256,12 +256,20 @@ def _scaffold_frequencies(molecules: list[tuple[str, object]]) -> dict[str, int]
 def build_from_molecules(molecules: list[tuple[str, object]], report: LoadReport,
                          out_dir: Path, cfg: PharmacophoreConfig, *,
                          source: dict, name: str,
-                         extra_files: list[Path] | None = None) -> ModelOutputs | None:
+                         extra_files: list[Path] | None = None,
+                         direction_points: list | None = None) -> ModelOutputs | None:
     """Build + write one model from already-loaded aligned poses (the shared core).
 
     ``source`` is copied into the model metadata verbatim, so each entry point records its own
     provenance. ``extra_files`` are appended to the artifact list. Returns ``None`` (writing
     nothing) when fewer than ``selection.min_ligands`` poses loaded.
+
+    ``direction_points`` — when given (``(family, xyz, direction, ligand_id, rigid)`` from the
+    alignment step's ``aligned_points.csv``), directional orientation is set from **rigid**
+    contributors only (``_set_feature_directions_flex``), so a free-rotor group (e.g. a phenol O-H)
+    is not reported with false confidence. Absent (a hand-made SDF, or crystal poses that carry no
+    ensemble), directions are perceived from the single pose as before — those poses are taken as
+    having a determined conformation.
     """
     if not molecules:
         log.warning("[%s] no ligands loaded — nothing to build", name)
@@ -286,11 +294,16 @@ def build_from_molecules(molecules: list[tuple[str, object]], report: LoadReport
     result = build_density(table, cfg.density, cfg.tolerance, name, metadata,
                            min_support=cfg.selection.min_support_fraction,
                            scaffold_freq=scaffold_freq)
-    _set_feature_directions(
-        result.pharmacophore,
-        _pooled_directions(molecules, factory, cfg.features.families,
-                           cfg.features.feature_hierarchy),
-        cfg.density.membership_radius, cfg.density.direction_min_r)
+    if direction_points is not None:
+        _set_feature_directions_flex(
+            result.pharmacophore, direction_points, cfg.density.membership_radius,
+            cfg.density.direction_min_r, cfg.density.direction_min_rigid_ligands)
+    else:
+        _set_feature_directions(
+            result.pharmacophore,
+            _pooled_directions(molecules, factory, cfg.features.families,
+                               cfg.features.feature_hierarchy),
+            cfg.density.membership_radius, cfg.density.direction_min_r)
 
     rep_id = best_representative(table, result.pharmacophore)
     rep_mol = dict(molecules).get(rep_id) if rep_id else None
@@ -460,6 +473,50 @@ def _set_feature_directions(pharmacophore, pooled_points, membership_radius: flo
     pharmacophore.features = new
 
 
+_ORIENTED_FAMILIES = frozenset({"Donor", "Acceptor", "Aromatic"})
+
+
+def _set_feature_directions_flex(pharmacophore, dir_points, membership_radius: float,
+                                 min_r: float, min_rigid_ligands: int) -> None:
+    """Set directional orientation from **rigid contributors only** (alignment / DrugCLIP path).
+
+    ``dir_points`` are ``(family, xyz, direction, ligand_id, rigid)`` in the aligned frame, where
+    ``rigid`` (from ``align.direction_rigidity``) marks ligands whose feature direction is pinned by
+    their own conformational rigidity rather than an arbitrary rotamer the alignment happened to
+    pick. Only rigid ligands vote on direction, and the reported **confidence is their agreement
+    (molecule-weighted resultant ``R``) scaled by the fraction of the feature's contributors that
+    are rigid** — so a direction pinned in only a few of many ligands (e.g. a phenol O-H that is a
+    free rotor in all but two contributors) scores low and is dropped, while one determined across
+    most contributors (a ring acceptor's lone pair) scores high. A direction is reported only when
+    at least ``min_rigid_ligands`` distinct rigid ligands vote and the scaled confidence clears
+    ``min_r``; the confidence is stored as ``direction_r`` so the viz scales the arrow by it. This
+    is the guard against the false directional overconfidence a raw ``R`` gives (the alignment
+    rotates free rotors into spurious agreement). Frozen dataclass, so features are rebuilt via
+    ``replace``.
+    """
+    new = []
+    for f in pharmacophore.features:
+        if f.family in _ORIENTED_FAMILIES:
+            centre = np.array([f.x, f.y, f.z])
+            all_ligs: set = set()
+            rigid_by_lig: dict[str, list] = {}
+            for fam, xyz, d, lig, rigid in dir_points:
+                if d is not None and fam == f.family \
+                        and np.linalg.norm(np.asarray(xyz) - centre) <= membership_radius:
+                    all_ligs.add(lig)
+                    if rigid:
+                        rigid_by_lig.setdefault(lig, []).append(d)
+            if len(rigid_by_lig) >= min_rigid_ligands and all_ligs:
+                per_lig = [_consensus_direction(f.family, ds)[0] for ds in rigid_by_lig.values()]
+                md, r = _consensus_direction(f.family, [v for v in per_lig if v is not None])
+                confidence = r * (len(rigid_by_lig) / len(all_ligs))    # agreement × rigid fraction
+                if md is not None and confidence >= min_r:
+                    f = replace(f, direction=(float(md[0]), float(md[1]), float(md[2])),
+                                direction_r=round(confidence, 4))
+        new.append(f)
+    pharmacophore.features = new
+
+
 def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
                               cfg: PharmacophoreConfig, *, top_n_hits: int,
                               seed_k: int | None = None, name: str | None = None,
@@ -561,8 +618,9 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
                      em_iterations=acfg.em_iterations, em_tol=acfg.em_tol,
                      use_directions=acfg.use_directions, projected_length=acfg.projected_length,
                      two_feature=acfg.two_feature_alignment, aromatic_axial=acfg.aromatic_axial,
-                     bootstrap_seed=(seed_poses is not None))
-    aligned_ids = sorted({lig for *_, lig in res.points})
+                     bootstrap_seed=(seed_poses is not None),
+                     direction_rigid_r=cfg.density.direction_rigid_r)
+    aligned_ids = sorted({p[3] for p in res.points})
     n_aligned = sum(1 for r in res.manifest if r.source == "aligned" and r.aligned)
     n_dropped = sum(1 for r in res.manifest if r.source == "aligned" and not r.aligned)
     quality = alignment_quality(tag, res.manifest)
@@ -591,7 +649,7 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
 
     # 4. pooled aligned points -> FeatureTable -> density KDE model
     pts = [FeaturePoint(fam, float(x[0]), float(x[1]), float(x[2]), lig)
-           for fam, x, _d, lig in res.points]
+           for fam, x, _d, lig, _rigid in res.points]
     table = FeatureTable(points=pts, ligand_ids=aligned_ids)
     metadata = {
         "source": {"method": "seed_alignment", "init": tag, "docked_dir": str(docked_dir),
@@ -609,8 +667,9 @@ def build_from_seed_alignment(docked_dir: Path, index_csv: Path, out_dir: Path,
     result = build_density(table, cfg.density, cfg.tolerance, name, metadata,
                            min_support=cfg.selection.min_support_fraction)
     if acfg.use_directions:
-        _set_feature_directions(result.pharmacophore, res.points,
-                                cfg.density.membership_radius, cfg.density.direction_min_r)
+        _set_feature_directions_flex(result.pharmacophore, res.points,
+                                     cfg.density.membership_radius, cfg.density.direction_min_r,
+                                     cfg.density.direction_min_rigid_ligands)
 
     rep_id, rep_mol = (seed_mols[0] if seed_mols else (aligned_ids[0], None))
     outputs = _write_model_artifacts(

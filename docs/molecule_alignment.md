@@ -254,11 +254,37 @@ opposite faces reinforce one axis instead of cancelling toward a meaningless zer
 makes the consensus `direction` field **reliable for aromatics**, not just for donor/acceptor. The
 consensus `direction` field is populated from the aligned points (axially for aromatics).
 
+#### Direction confidence from conformational rigidity
+
+Because the superposition *fits* directions, it can rotate a **freely-rotating** group (a phenol
+O–H, an ether O, a phenyl on a single-bond linker) into spurious agreement — so the aligned vectors
+look unanimous and the consensus `R` (`density.direction_min_r`) reads high even though the
+chemistry does not determine that direction at all. `R` alone therefore cannot tell a genuinely
+pinned orientation from a manufactured one.
+
+The fix is a **per-ligand flexibility test that is independent of the alignment**
+(`align.direction_rigidity`): every conformer of a ligand perceives the same features, so for each
+directional feature its direction vector is measured across the ligand's own energy-window
+conformer ensemble (each conformer's feature centres Kabsch-superposed onto the first, holding the
+pharmacophore frame fixed). If the direction barely moves as the molecule flexes (resultant length
+≥ `density.direction_rigid_r`) the feature is **rigid** — its direction is trustworthy; a rotor
+scatters and is **flexible**. This is a property of the molecule, so it cannot be faked by the
+direction-aware fit. Each aligned point is tagged `rigid` in `aligned_points.csv`.
+
+`build-pharmacophore` then sets a consensus direction from **rigid contributors only**, and only
+when at least `density.direction_min_rigid_ligands` distinct rigid ligands agree; a feature all of
+whose contributors are flexible is left directionless (no arrow), however unanimous the aligned
+vectors happen to be. This applies to the alignment path (3-D built from screen hits); crystal
+`*.mol2` poses carry no ensemble and are taken as having a determined conformation, so their
+directions are perceived from the pose as before.
+
 ## Outputs (in `--out`)
 
 - **`aligned_compounds.sdf`** — the aligned molecules (best conformer each). Feed this straight
   to `build-pharmacophore`.
-- **`aligned_points.csv`** — the pooled per-molecule feature points in the common frame.
+- **`aligned_points.csv`** — the pooled per-molecule feature points in the common frame, each with
+  a `rigid` flag (is the direction conformation-determined for that ligand). `build-pharmacophore`
+  reuses this to weight directional confidence by rigidity (§6).
 - **`alignment_manifest.csv`** — per-compound provenance: rank, whether it aligned, clique size,
   RMSD.
 - **`seedless_control/`** — written only with `--seed` (unless disabled): the seedless control

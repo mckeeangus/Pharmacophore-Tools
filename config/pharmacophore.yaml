@@ -53,6 +53,16 @@ density:
   # scattered, 1 = tight) must clear this. Below it the direction is dropped (no arrow) — e.g. a
   # freely-rotating hydroxyl O-H averages to no meaningful direction. The viz scales arrow length by R.
   direction_min_r: 0.5
+  # Directional confidence from conformational rigidity (align/DrugCLIP path only; crystal poses are
+  # taken as having a determined conformation). Because the alignment fits directions, R can be
+  # spuriously high for a free rotor the aligner rotated into agreement. So a ligand's feature only
+  # VOTES on direction if that direction is conformation-determined: measured over its conformer
+  # ensemble, the resultant length of the feature's direction (holding the pharmacophore frame fixed)
+  # must clear direction_rigid_r. A consensus direction is then reported only if at least
+  # direction_min_rigid_ligands distinct rigid ligands agree — else no arrow (e.g. a phenol O-H,
+  # flexible in every contributor). direction_rigid_r near 1 = "barely moves as the molecule flexes".
+  direction_rigid_r: 0.9
+  direction_min_rigid_ligands: 2
   scaffold_weighting: false  # also weight points by inverse Murcko-scaffold frequency
   # Cross-family overlap merge (opt-in, default off). Same-family overlaps need no merge: the grid
   # already collapses peaks closer than `bandwidth` at detection, so two features of one family are

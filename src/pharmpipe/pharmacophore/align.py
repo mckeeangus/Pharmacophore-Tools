@@ -65,7 +65,9 @@ class AlignRecord:
 
 @dataclass
 class SeedAlignResult:
-    points: list[tuple[str, np.ndarray, str]] = field(default_factory=list)  # (family, xyz, lig)
+    # (family, xyz, direction|None, ligand_id, rigid): rigid = the direction is conformation-
+    # determined for that ligand (direction_rigidity); seed points are rigid=False.
+    points: list[tuple] = field(default_factory=list)
     transforms: dict[str, tuple[np.ndarray, np.ndarray, int]] = field(default_factory=dict)
     manifest: list[AlignRecord] = field(default_factory=list)
     # EM convergence trace: (iteration, max consensus feature-centre shift in A, n aligned).
@@ -375,6 +377,63 @@ def _slot_direction(family: str, dirs: list) -> np.ndarray | None:
     return _axial_mean_direction(dirs) if family in AXIAL_FAMILIES else _mean_direction(dirs)
 
 
+def _resultant_length(dirs: list, axial: bool) -> float:
+    """Mean-resultant length ``R = |mean of unit vectors|`` in [0, 1] for a set of directions.
+
+    ``R`` near 1 means the vectors agree; near 0 means they scatter. Axial families (aromatic ring
+    normals) are folded into a common hemisphere first, so opposite ring faces reinforce."""
+    vs = [np.asarray(d, dtype=float) for d in dirs if d is not None]
+    if not vs:
+        return 0.0
+    if axial:
+        ref = vs[0]
+        vs = [v if float(np.dot(v, ref)) >= 0.0 else -v for v in vs]
+    return float(np.linalg.norm(np.mean(vs, axis=0)))
+
+
+def direction_rigidity(conformer_clouds: list, rigid_r: float) -> list:
+    """Per feature INDEX, whether its direction is conformation-determined across the ensemble.
+
+    A feature's direction is only trustworthy if the group carrying it is rotationally restrained —
+    a ring acceptor or an amide donor keeps its direction as the molecule flexes, whereas a free
+    rotor (a phenol/alcohol O-H, an ether O, a phenyl on a single-bond linker) swings. This is a
+    property of the *molecule*, independent of the multi-molecule alignment, so it is not inflated
+    by the direction-aware superposition (which actively rotates flexible groups into spurious
+    agreement — the source of the false directional confidence this guards against).
+
+    Every conformer of one ligand perceives the SAME features in the same order (perception is
+    topological; only coordinates differ), so feature ``k`` corresponds across conformers. Each
+    conformer's feature centres are Kabsch-superposed onto the first conformer's (holding the shared
+    pharmacophore frame fixed) and its direction vectors rotated into that frame; the mean-resultant
+    length ``R`` of feature ``k``'s direction across conformers then measures how little it moves.
+    ``R >= rigid_r`` marks the feature rigid (direction trustworthy). Non-directional features, and
+    directional features that scatter, are ``False``. A single-conformer ligand has no sampled
+    rotational freedom, so its directional features are rigid by definition (``R = 1``).
+    """
+    if not conformer_clouds:
+        return []
+    ref = conformer_clouds[0]
+    n_feat = len(ref)
+    ref_centres = np.array([xyz for _, xyz, _ in ref], dtype=float)
+    per_feat: list[list] = [[] for _ in range(n_feat)]
+    for i, cloud in enumerate(conformer_clouds):
+        if len(cloud) != n_feat:                 # perception drift (should not happen for one mol)
+            continue
+        if i == 0:
+            rot = np.eye(3)
+        else:
+            centres = np.array([xyz for _, xyz, _ in cloud], dtype=float)
+            rot, _t, _r = _kabsch(centres, ref_centres)
+        for k, (_fam, _xyz, d) in enumerate(cloud):
+            if d is not None:
+                per_feat[k].append(np.asarray(d, dtype=float) @ rot.T)
+    rigid = []
+    for k, (fam, _xyz, d) in enumerate(ref):
+        rigid.append(d is not None
+                     and _resultant_length(per_feat[k], fam in AXIAL_FAMILIES) >= rigid_r)
+    return rigid
+
+
 def consolidate(points: FeatureCloud, radius: float) -> FeatureCloud:
     """Greedily merge same-family points within ``radius`` into one reference slot each.
 
@@ -442,7 +501,7 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
                em_iterations: int = 0, em_tol: float = 0.1,
                use_directions: bool = False, projected_length: float = 1.5,
                two_feature: bool = False, aromatic_axial: bool = False,
-               bootstrap_seed: bool = False) -> SeedAlignResult:
+               bootstrap_seed: bool = False, direction_rigid_r: float = 0.9) -> SeedAlignResult:
     """Align each ranked compound onto a consensus initialised from ``seed_points``.
 
     ``seed_points`` are the initial frame's ``(family, xyz, direction, ligand_id)`` — docked poses,
@@ -477,6 +536,17 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
               max_align_rmsd=max_align_rmsd, use_directions=use_directions,
               projected_length=projected_length, two_feature=two_feature,
               aromatic_axial=aromatic_axial)
+    # Per-ligand, per-feature-index direction rigidity from the conformer ensemble (a molecule
+    # property, so not inflated by the direction-aware alignment). Seed points get rigid=False.
+    rigidity = {lig: direction_rigidity(confs, direction_rigid_r) for lig, confs in compounds}
+
+    def _rigid(lig, k):
+        rig = rigidity.get(lig)
+        return bool(rig[k]) if rig is not None and k < len(rig) else False
+
+    def _seed5(pts):
+        return [(f, p, d, lig, False) for f, p, d, lig in pts]
+
     ref = consolidate([(f, p, d) for f, p, d, _ in seed_points], membership_radius)
     # fixed seed anchors per slot: (position, direction)
     seed_by_slot: list[list[tuple]] = [[] for _ in ref]
@@ -488,7 +558,7 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
     # --- growing pass: rank order, running-mean update -----------------------------
     result = SeedAlignResult()
     # A bootstrap seed anchors the reference (below) but is kept out of the pooled consensus.
-    result.points = [] if bootstrap_seed else list(seed_points)
+    result.points = [] if bootstrap_seed else _seed5(seed_points)
     accum: list[list[tuple]] = [list(s) for s in seed_by_slot]
     for lig in sorted({lid for _, _, _, lid in seed_points}):
         result.manifest.append(AlignRecord(lig, "seed", 0, -1, 0, float("nan"), True))
@@ -500,9 +570,9 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
             continue
         res, ci, cloud = best
         result.transforms[lig] = (res.rotation, res.translation, ci)
-        for fam, xyz, direction in cloud:
+        for k_feat, (fam, xyz, direction) in enumerate(cloud):
             axyz, adir = res.apply(xyz), _rotate(direction, res.rotation)
-            result.points.append((fam, axyz, adir, lig))
+            result.points.append((fam, axyz, adir, lig, _rigid(lig, k_feat)))
             k = _assign(fam, axyz, ref, membership_radius)
             if k is not None:
                 accum[k].append((axyz, adir))
@@ -515,7 +585,7 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
     for it in range(1, em_iterations + 1):
         prev = [c.copy() for _, c, _ in ref]
         # A bootstrap seed is gone by EM: re-align every compound to the seed-free consensus.
-        pooled: list[tuple] = [] if bootstrap_seed else list(seed_points)
+        pooled: list[tuple] = [] if bootstrap_seed else _seed5(seed_points)
         transforms: dict[str, tuple[np.ndarray, np.ndarray, int]] = {}
         slot_pts: list[list[tuple]] = [[] if bootstrap_seed else list(s) for s in seed_by_slot]
         manifest: list[AlignRecord] = [m for m in result.manifest if m.source == "seed"]
@@ -527,9 +597,9 @@ def seed_align(seed_points: list[tuple[str, np.ndarray, np.ndarray | None, str]]
                 continue
             res, ci, cloud = best
             transforms[lig] = (res.rotation, res.translation, ci)
-            for fam, xyz, direction in cloud:
+            for k_feat, (fam, xyz, direction) in enumerate(cloud):
                 axyz, adir = res.apply(xyz), _rotate(direction, res.rotation)
-                pooled.append((fam, axyz, adir, lig))
+                pooled.append((fam, axyz, adir, lig, _rigid(lig, k_feat)))
                 k = _assign(fam, axyz, ref, membership_radius)
                 if k is not None:
                     slot_pts[k].append((axyz, adir))

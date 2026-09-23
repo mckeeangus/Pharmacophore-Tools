@@ -31,6 +31,8 @@ class DensityConfig:
     occupancy_floor: float = 2.0
     membership_radius: float = 1.5
     direction_min_r: float = 0.5
+    direction_rigid_r: float = 0.9
+    direction_min_rigid_ligands: int = 2
     scaffold_weighting: bool = False
     merge_radius: float | None = None
     merge_cross_family: bool = False

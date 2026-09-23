@@ -29,6 +29,7 @@ from pharmpipe.features.load import (  # noqa: E402
     read_smiles_map,
 )
 from pharmpipe.pharmacophore.config import load_pharmacophore_config  # noqa: E402
+from pharmpipe.pharmacophore.io import read_aligned_points_csv  # noqa: E402
 from pharmpipe.pharmacophore.run import (  # noqa: E402
     build_from_directory,
     build_from_molecules,
@@ -74,6 +75,10 @@ def _from_sdf(sdf: Path, out: Path, cfg, name: str):
     """Build from an SDF of aligned molecules (bonds/coords intact — perceived directly).
 
     Hydrogens are kept (``removeHs=False``) so donor D->H orientation vectors can be perceived.
+    A sibling ``aligned_points.csv`` (written by ``align-molecules``) is used, when present, to set
+    directional orientation from conformationally **rigid** contributors only — so a free-rotor
+    group like a phenol O-H is not reported with false directional confidence. Without it (a
+    hand-made SDF) directions are perceived from the single pose as before.
     """
     molecules = []
     report = LoadReport()
@@ -84,9 +89,14 @@ def _from_sdf(sdf: Path, out: Path, cfg, name: str):
         lig = mol.GetProp("_Name").strip() if mol.HasProp("_Name") else f"mol{len(molecules)}"
         report.record("sdf")
         molecules.append((lig, mol))
+    points_csv = sdf.parent / "aligned_points.csv"
+    direction_points = read_aligned_points_csv(points_csv) if points_csv.is_file() else None
     source = {"input": str(sdf), "n_ligands": len(molecules), "load": report.by_method,
+              "direction_source": "aligned_points.csv (rigidity-weighted)"
+              if direction_points is not None else "perceived from pose",
               "created": date.today().isoformat()}
-    return build_from_molecules(molecules, report, out, cfg, source=source, name=name)
+    return build_from_molecules(molecules, report, out, cfg, source=source, name=name,
+                                direction_points=direction_points)
 
 
 def main(argv=None) -> int:

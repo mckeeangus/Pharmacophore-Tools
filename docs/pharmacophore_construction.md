@@ -77,7 +77,18 @@ features `(family, position, tolerance, optional direction)`.
    centroid** (basin voxels *within `membership_radius` of the peak*, so a diffuse tail can't drag
    the centre off the true maximum); tolerance = a **density-quantile core** (`tolerance.quantile`
    0.75 of the field mass, clamped `[1,3]` Å); direction = the mean of the aligned points'
-   orientation vectors.
+   orientation vectors (see the directional-confidence note below).
+
+**Directional confidence (alignment path).** A directional feature reports an orientation arrow only
+when it is *both* agreed and **not an artefact of a flexible group**. The alignment fits directions,
+so a free rotor (a phenol O–H, an ether O) can be rotated into false agreement — a high resultant
+`R` that means nothing. So for models built from screen-hit alignments, the direction is taken from
+**conformationally rigid contributors only** (`align.direction_rigidity`, carried in
+`aligned_points.csv`), and reported only if ≥ `density.direction_min_rigid_ligands` distinct rigid
+ligands agree (`R ≥ density.direction_min_r`). A feature whose contributors are all free rotors gets
+no arrow. Crystal `*.mol2` poses carry no ensemble and are taken as conformationally determined, so
+their directions are perceived from the pose as before. `visualise-pharmacophore` scales each arrow
+by `R`, so arrow length reflects genuine certainty.
 
 ### 4. Cross-family overlap merge (opt-in)
 

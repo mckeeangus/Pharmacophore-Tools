@@ -126,19 +126,40 @@ def write_aligned_sdf(entries, path: Path) -> Path:
 
 
 def write_aligned_points_csv(points, path: Path) -> Path:
-    """Write the pooled aligned feature points (family, ligand_id, x, y, z, direction) to CSV.
+    """Write pooled aligned feature points (family, ligand_id, x, y, z, direction, rigid) to CSV.
 
-    The align-only hand-off: consensus extraction (KDE) consumes these directly, so a model can
-    be built without re-perceiving features from the SDF. ``points`` are
-    ``(family, xyz, direction|None, ligand_id)``; the direction columns are blank when absent."""
+    The align-only hand-off: consensus extraction (KDE) consumes these directly, so a model can be
+    built without re-perceiving features from the SDF. ``points`` are
+    ``(family, xyz, direction|None, ligand_id, rigid)``; the direction columns are blank when
+    absent, and ``rigid`` records whether that ligand's feature direction is conformation-determined
+    (``align.direction_rigidity``) so ``build`` can weight directional confidence by it."""
     with path.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(["family", "ligand_id", "x", "y", "z", "dx", "dy", "dz"])
-        for fam, xyz, direction, lig in points:
+        w.writerow(["family", "ligand_id", "x", "y", "z", "dx", "dy", "dz", "rigid"])
+        for fam, xyz, direction, lig, rigid in points:
             d = ["", "", ""] if direction is None else [round(float(c), 3) for c in direction]
             w.writerow([fam, lig, round(float(xyz[0]), 3), round(float(xyz[1]), 3),
-                        round(float(xyz[2]), 3), *d])
+                        round(float(xyz[2]), 3), *d, int(bool(rigid))])
     return path
+
+
+def read_aligned_points_csv(path: Path) -> list:
+    """Read ``aligned_points.csv`` back to ``(family, xyz, direction|None, ligand_id, rigid)``.
+
+    The inverse of ``write_aligned_points_csv`` — lets ``build`` reuse the alignment step's
+    per-ligand feature directions and their rigidity flag (so directional confidence reflects
+    conformational rigidity) instead of re-perceiving from the single-pose SDF. A file without the
+    ``rigid`` column (older output) reads back ``rigid=False`` for every point."""
+    import numpy as np
+    out = []
+    with open(path, encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            dx, dy, dz = r.get("dx", ""), r.get("dy", ""), r.get("dz", "")
+            direction = None if dx == "" else np.array([float(dx), float(dy), float(dz)])
+            xyz = np.array([float(r["x"]), float(r["y"]), float(r["z"])])
+            out.append((r["family"], xyz, direction, r["ligand_id"],
+                        str(r.get("rigid", "")).strip() in ("1", "True", "true")))
+    return out
 
 
 def write_representative_sdf(mol, ligand_id: str, path: Path) -> Path:

@@ -13,6 +13,7 @@ from pharmpipe.pharmacophore.align import (
     alignment_quality,
     compare_alignments,
     consolidate,
+    direction_rigidity,
     seed_align,
 )
 from pharmpipe.pharmacophore.config import AlignmentConfig
@@ -210,7 +211,7 @@ def test_seed_align_pools_and_updates():
     assert by_lig["good"].aligned and by_lig["good"].n_matched == 4
     assert not by_lig["dropped"].aligned
     assert "good" in res.transforms and "dropped" not in res.transforms
-    good_pts = [xyz for fam, xyz, d, lig in res.points if lig == "good"]
+    good_pts = [xyz for fam, xyz, d, lig, rigid in res.points if lig == "good"]
     assert good_pts and all(np.linalg.norm(p) < 8.0 for p in good_pts)
 
 
@@ -235,8 +236,8 @@ def test_seed_align_is_deterministic():
     kw = dict(dist_tol=0.5, min_clique=3, membership_radius=1.5, max_align_rmsd=1.5)
     r1 = seed_align(seed, compounds, **kw)
     r2 = seed_align(seed, compounds, **kw)
-    assert [(f, tuple(np.round(x, 6)), lig) for f, x, d, lig in r1.points] == \
-           [(f, tuple(np.round(x, 6)), lig) for f, x, d, lig in r2.points]
+    assert [(f, tuple(np.round(x, 6)), lig) for f, x, d, lig, rg in r1.points] == \
+           [(f, tuple(np.round(x, 6)), lig) for f, x, d, lig, rg in r2.points]
     assert [(m.ligand_id, m.aligned, m.n_matched) for m in r1.manifest] == \
            [(m.ligand_id, m.aligned, m.n_matched) for m in r2.manifest]
 
@@ -267,7 +268,7 @@ def test_seedless_recovers_same_consensus_as_correct_seed():
 
     def internal(res):
         pts = {}
-        for fam, xyz, _d, _lig in res.points:
+        for fam, xyz, _d, _lig, _rigid in res.points:
             pts.setdefault(fam, []).append(xyz)
         c = {f: np.mean(v, axis=0) for f, v in pts.items()}
         return float(np.linalg.norm(c["Aromatic"] - c["PosIonizable"]))
@@ -375,3 +376,50 @@ def test_compare_ignores_match_count_inflation():
     seedless = alignment_quality("seedless", _manifest([0.6] * 8, n_dropped=4, n_matched=9))
     assert seedless.mean_matched > seed.mean_matched
     assert compare_alignments(seed, seedless).winner == "seed"
+
+
+# --- direction rigidity (conformer-ensemble flexibility) ---------------------
+
+def _conf(donor_dir, acc_dir=(0.0, 1.0, 0.0)):
+    """One conformer cloud: a fixed aromatic + acceptor, and a Donor whose vector we vary to
+    simulate a rotor (the O-H swinging between conformers)."""
+    return [("Aromatic", np.array([0.0, 0.0, 0.0]), np.array([0.0, 0.0, 1.0])),
+            ("Acceptor", np.array([2.0, 0.0, 0.0]), np.array(acc_dir, dtype=float)),
+            ("Donor", np.array([0.0, 2.0, 0.0]), np.array(donor_dir, dtype=float))]
+
+
+def test_direction_rigidity_flags_a_rotor_flexible_and_a_fixed_group_rigid():
+    # Same feature centres across conformers (so superposition is identity); the Donor direction
+    # swings widely (a free rotor) while the Acceptor/Aromatic directions are constant.
+    clouds = [_conf(donor_dir=d) for d in
+              [(0, 0, 1), (0, 1, 0), (1, 0, 0), (0, -1, 0), (-1, 0, 0)]]
+    rigid = direction_rigidity(clouds, rigid_r=0.9)
+    fams = [c[0] for c in clouds[0]]
+    assert rigid[fams.index("Aromatic")] is True      # constant normal
+    assert rigid[fams.index("Acceptor")] is True       # constant lone pair
+    assert rigid[fams.index("Donor")] is False         # scattered -> flexible
+
+
+def test_direction_rigidity_single_conformer_is_rigid():
+    # No sampled rotational freedom -> a lone conformer's directions are determined (R = 1).
+    rigid = direction_rigidity([_conf(donor_dir=(0, 0, 1))], rigid_r=0.9)
+    assert all(r for r, c in zip(rigid, _conf((0, 0, 1)), strict=True) if c[2] is not None)
+
+
+def test_direction_rigidity_marks_nondirectional_false():
+    clouds = [[("LumpedHydrophobe", np.array([0.0, 0.0, 0.0]), None)]]
+    assert direction_rigidity(clouds, rigid_r=0.9) == [False]
+
+
+def test_seed_align_tags_points_with_rigidity():
+    # A rigid probe (all directions constant across its 2 conformers) aligns and its emitted points
+    # carry rigid=True for directional features.
+    ref = _cloud(acc_dir=np.array([0.0, 1.0, 0.0]))
+    seed = _seed(ref, "seedA")
+    probe = _rigid_copy(ref)
+    res = seed_align(seed, [("p", [probe, probe])], dist_tol=0.5, min_clique=3,
+                     membership_radius=1.5, use_directions=True, direction_rigid_r=0.9)
+    pts = [(fam, rigid) for fam, _x, d, lig, rigid in res.points if lig == "p" and d is not None]
+    assert pts and all(rigid for _fam, rigid in pts)   # constant directions -> rigid
+    # seed points are always rigid=False
+    assert all(rigid is False for *_1, lig, rigid in res.points if lig == "seedA")
